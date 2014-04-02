@@ -1,6 +1,6 @@
 //
 //  AppDelegate.m
-//  HomebrewGUI
+//  Cakebrew
 //
 //  Created by Vincent Saluzzo on 06/12/11.
 //  Copyright (c) 2011 __MyCompanyName__. All rights reserved.

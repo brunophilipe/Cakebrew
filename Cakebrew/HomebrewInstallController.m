@@ -1,6 +1,6 @@
 //
 //  HomebrewInstallController.m
-//  HomebrewGUI
+//  Cakebrew
 //
 //  Created by Vincent Saluzzo on 08/12/11.
 //  Copyright (c) 2011 __MyCompanyName__. All rights reserved.
@@ -11,15 +11,15 @@
 @implementation HomebrewInstallController
 
 -(IBAction) showInstallWindow:(id)sender {
-    
+
     arrayOfApplicationToInstall = [[BrewInterface search:@""] retain];
-    
+
     if(self.view.window.isVisible) {
         [self.view.window orderBack:sender];
     } else {
         [self.view.window orderFront:sender];
     }
-    
+
     [listOfApplicationToInstall reloadData];
 }
 
@@ -31,7 +31,7 @@
 
 #pragma mark - NSTableView DataSource
 - (NSInteger)numberOfRowsInTableView:(NSTableView *)aTableView {
-    
+
     //    NSLog(@"%lu", );
     if(arrayOfApplicationToInstall) {
         return [arrayOfApplicationToInstall count];
@@ -42,22 +42,22 @@
     // the return value is typed as (id) because it will return a string in all cases with the exception of the
     if(arrayOfApplicationToInstall) {
         id returnValue=nil;
-        
+
         // The column identifier string is the easiest way to identify a table column. Much easier
         // than keeping a reference to the table column object.
         NSString *columnIdentifer = [tableColumn identifier];
         //NSLog(@"%@", columnIdentifer);
         // Get the name at the specified row in the namesArray
         NSString *theName = [arrayOfApplicationToInstall objectAtIndex:row];
-        
-        
+
+
         // Compare each column identifier and set the return value to
         // the Person field value appropriate for the column.
         if ([columnIdentifer isEqualToString:@"App Name"]) {
             returnValue = theName;
             //NSLog(@"kaka");
         }
-        
+
         return returnValue;
     } else return nil;
 }

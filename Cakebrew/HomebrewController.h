@@ -1,6 +1,6 @@
 //
 //  HomebrewController.h
-//  HomebrewGUI
+//  Cakebrew
 //
 //  Created by Vincent Saluzzo on 06/12/11.
 //  Copyright (c) 2011 __MyCompanyName__. All rights reserved.
@@ -12,17 +12,17 @@
     IBOutlet NSWindow* HUDAbout;
     IBOutlet NSTableView* listOfApplicationAlreadyInstalled;
     NSArray* arrayOfApplicationInstalled;
-    
+
     IBOutlet NSWindow* HUDMoreInfo;
     IBOutlet NSTextField* MoreInfoHUD_AppTitle;
     IBOutlet NSTextView* MoreInfoHUD_AppInfo;
-    
-    
+
+
     IBOutlet NSToolbar* MainToolbar;
     IBOutlet NSToolbarItem* MainToolbarItem_MoreInfo;
     IBOutlet NSToolbarItem* MainToolbarItem_Uninstall;
     IBOutlet NSToolbarItem* MainToolbarItem_About;
-    
+
     IBOutlet NSPopover* popoverAbout;
     IBOutlet NSPopover* popoverMoreInfo;
 }
