@@ -3,12 +3,12 @@
 //  Cakebrew
 //
 //  Created by Vincent Saluzzo on 06/12/11.
-//  Copyright (c) 2011 __MyCompanyName__. All rights reserved.
+//  Copyright (c) 2011 Bruno Philipe. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
 
-@interface HomebrewController : NSViewController<NSTableViewDataSource, NSTableViewDelegate> {
+@interface HomebrewController : NSViewController <NSTableViewDataSource, NSTableViewDelegate> {
     IBOutlet NSWindow* HUDAbout;
     IBOutlet NSTableView* listOfApplicationAlreadyInstalled;
     NSArray* arrayOfApplicationInstalled;
@@ -31,4 +31,5 @@
 -(IBAction) showHUDAbout:(id)sender;
 -(IBAction) showHUDMoreInfo:(id)sender;
 -(IBAction) uninstall:(id)sender;
+
 @end

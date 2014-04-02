@@ -3,7 +3,7 @@
 //  Cakebrew
 //
 //  Created by Vincent Saluzzo on 06/12/11.
-//  Copyright (c) 2011 __MyCompanyName__. All rights reserved.
+//  Copyright (c) 2011 Bruno Philipe. All rights reserved.
 //
 
 #import "BrewInterface.h"
@@ -43,7 +43,7 @@
     string = [[NSString alloc] initWithData: data encoding: NSUTF8StringEncoding];
     //NSLog (@"script returned:\n%@", string);
 
-    NSMutableArray* array = [string componentsSeparatedByString:@"\n"];
+    NSMutableArray* array = [[string componentsSeparatedByString:@"\n"] mutableCopy];
     [array removeLastObject];
     return array;
 }
@@ -81,7 +81,7 @@
     string = [[NSString alloc] initWithData: data encoding: NSUTF8StringEncoding];
     //NSLog (@"script returned:\n%@", string);
 
-    NSMutableArray* array = [string componentsSeparatedByString:@"\n"];
+    NSMutableArray* array = [[string componentsSeparatedByString:@"\n"] mutableCopy];
     [array removeLastObject];
     return array;
 }

@@ -3,7 +3,7 @@
 //  Cakebrew
 //
 //  Created by Vincent Saluzzo on 08/12/11.
-//  Copyright (c) 2011 __MyCompanyName__. All rights reserved.
+//  Copyright (c) 2011 Bruno Philipe. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>

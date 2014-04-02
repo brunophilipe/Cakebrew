@@ -3,7 +3,7 @@
 //  Cakebrew
 //
 //  Created by Vincent Saluzzo on 06/12/11.
-//  Copyright (c) 2011 __MyCompanyName__. All rights reserved.
+//  Copyright (c) 2011 Bruno Philipe. All rights reserved.
 //
 
 #import "HomebrewController.h"
@@ -11,7 +11,7 @@
 @implementation HomebrewController
 
 
--(IBAction) refreshListOfApplicationAlreadyInstalled:(id)sender {
+-(IBAction)refreshListOfApplicationAlreadyInstalled:(id)sender {
 
     if(arrayOfApplicationInstalled) {
         [arrayOfApplicationInstalled release];
@@ -72,7 +72,7 @@
     if([listOfApplicationAlreadyInstalled selectedRow] != -1) {
         NSString* resultOfUninstall = [[BrewInterface uninstall:[arrayOfApplicationInstalled objectAtIndex:[listOfApplicationAlreadyInstalled selectedRow]]] retain];
 
-        NSAlert* alert = [NSAlert alertWithMessageText:resultOfUninstall defaultButton:nil alternateButton:nil otherButton:nil informativeTextWithFormat:@"",nil];
+        NSAlert* alert = [NSAlert alertWithMessageText:resultOfUninstall defaultButton:nil alternateButton:nil otherButton:nil informativeTextWithFormat:@""];
         [alert runModal];
         [self performSelector:@selector(refreshListOfApplicationAlreadyInstalled:)];
     }
@@ -112,7 +112,9 @@
 
 
         return returnValue;
-    }
+    } else {
+		return @"";
+	}
 }
 
 #pragma mark - NSTableView Delegate

@@ -1,0 +1,362 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		1536BFF718EBA92400B67C5C /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1536BFF618EBA92400B67C5C /* Images.xcassets */; };
+		15D5BEF118EBB3FB001DDED7 /* delete.icns in Resources */ = {isa = PBXBuildFile; fileRef = 15D5BEEE18EBB3FB001DDED7 /* delete.icns */; };
+		15D5BEF218EBB3FB001DDED7 /* label.icns in Resources */ = {isa = PBXBuildFile; fileRef = 15D5BEEF18EBB3FB001DDED7 /* label.icns */; };
+		15D5BEF318EBB3FB001DDED7 /* plus.icns in Resources */ = {isa = PBXBuildFile; fileRef = 15D5BEF018EBB3FB001DDED7 /* plus.icns */; };
+		15D5BEF518EBB430001DDED7 /* search.icns in Resources */ = {isa = PBXBuildFile; fileRef = 15D5BEF418EBB430001DDED7 /* search.icns */; };
+		1FE4FE59148E4CDD008EDE8B /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1FE4FE58148E4CDD008EDE8B /* Cocoa.framework */; };
+		1FE4FE63148E4CDD008EDE8B /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 1FE4FE61148E4CDD008EDE8B /* InfoPlist.strings */; };
+		1FE4FE65148E4CDD008EDE8B /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FE4FE64148E4CDD008EDE8B /* main.m */; };
+		1FE4FE69148E4CDD008EDE8B /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 1FE4FE67148E4CDD008EDE8B /* Credits.rtf */; };
+		1FE4FE6C148E4CDD008EDE8B /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FE4FE6B148E4CDD008EDE8B /* AppDelegate.m */; };
+		1FE4FE6F148E4CDD008EDE8B /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1FE4FE6D148E4CDD008EDE8B /* MainMenu.xib */; };
+		1FE4FE77148E4D43008EDE8B /* BrewInterface.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FE4FE76148E4D43008EDE8B /* BrewInterface.m */; };
+		1FE4FE7A148E5FEB008EDE8B /* HomebrewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FE4FE79148E5FEB008EDE8B /* HomebrewController.m */; };
+		1FE4FECA1490B067008EDE8B /* HomebrewInstallController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FE4FEC91490B066008EDE8B /* HomebrewInstallController.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		1536BFF618EBA92400B67C5C /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		15D5BEEE18EBB3FB001DDED7 /* delete.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = delete.icns; sourceTree = "<group>"; };
+		15D5BEEF18EBB3FB001DDED7 /* label.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = label.icns; sourceTree = "<group>"; };
+		15D5BEF018EBB3FB001DDED7 /* plus.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = plus.icns; sourceTree = "<group>"; };
+		15D5BEF418EBB430001DDED7 /* search.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = search.icns; sourceTree = "<group>"; };
+		1FE4FE54148E4CDD008EDE8B /* Cakebrew.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Cakebrew.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		1FE4FE58148E4CDD008EDE8B /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
+		1FE4FE5B148E4CDD008EDE8B /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
+		1FE4FE5C148E4CDD008EDE8B /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		1FE4FE5D148E4CDD008EDE8B /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		1FE4FE60148E4CDD008EDE8B /* Cakebrew-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Cakebrew-Info.plist"; sourceTree = "<group>"; };
+		1FE4FE62148E4CDD008EDE8B /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		1FE4FE64148E4CDD008EDE8B /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		1FE4FE66148E4CDD008EDE8B /* Cakebrew-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Cakebrew-Prefix.pch"; sourceTree = "<group>"; };
+		1FE4FE68148E4CDD008EDE8B /* en */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; name = en; path = en.lproj/Credits.rtf; sourceTree = "<group>"; };
+		1FE4FE6A148E4CDD008EDE8B /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		1FE4FE6B148E4CDD008EDE8B /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		1FE4FE6E148E4CDD008EDE8B /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainMenu.xib; sourceTree = "<group>"; };
+		1FE4FE75148E4D43008EDE8B /* BrewInterface.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BrewInterface.h; sourceTree = "<group>"; };
+		1FE4FE76148E4D43008EDE8B /* BrewInterface.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BrewInterface.m; sourceTree = "<group>"; };
+		1FE4FE78148E5FEB008EDE8B /* HomebrewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomebrewController.h; sourceTree = "<group>"; };
+		1FE4FE79148E5FEB008EDE8B /* HomebrewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomebrewController.m; sourceTree = "<group>"; };
+		1FE4FEC81490B066008EDE8B /* HomebrewInstallController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomebrewInstallController.h; sourceTree = "<group>"; };
+		1FE4FEC91490B066008EDE8B /* HomebrewInstallController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomebrewInstallController.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		1FE4FE51148E4CDD008EDE8B /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1FE4FE59148E4CDD008EDE8B /* Cocoa.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		15D5BEED18EBB3D9001DDED7 /* Icons */ = {
+			isa = PBXGroup;
+			children = (
+				15D5BEEE18EBB3FB001DDED7 /* delete.icns */,
+				15D5BEEF18EBB3FB001DDED7 /* label.icns */,
+				15D5BEF018EBB3FB001DDED7 /* plus.icns */,
+				15D5BEF418EBB430001DDED7 /* search.icns */,
+			);
+			path = Icons;
+			sourceTree = "<group>";
+		};
+		1FE4FE49148E4CDD008EDE8B = {
+			isa = PBXGroup;
+			children = (
+				1FE4FE5E148E4CDD008EDE8B /* Cakebrew */,
+				1FE4FE57148E4CDD008EDE8B /* Frameworks */,
+				1FE4FE55148E4CDD008EDE8B /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		1FE4FE55148E4CDD008EDE8B /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				1FE4FE54148E4CDD008EDE8B /* Cakebrew.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		1FE4FE57148E4CDD008EDE8B /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				1FE4FE58148E4CDD008EDE8B /* Cocoa.framework */,
+				1FE4FE5A148E4CDD008EDE8B /* Other Frameworks */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		1FE4FE5A148E4CDD008EDE8B /* Other Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				1FE4FE5B148E4CDD008EDE8B /* AppKit.framework */,
+				1FE4FE5C148E4CDD008EDE8B /* CoreData.framework */,
+				1FE4FE5D148E4CDD008EDE8B /* Foundation.framework */,
+			);
+			name = "Other Frameworks";
+			sourceTree = "<group>";
+		};
+		1FE4FE5E148E4CDD008EDE8B /* Cakebrew */ = {
+			isa = PBXGroup;
+			children = (
+				15D5BEED18EBB3D9001DDED7 /* Icons */,
+				1FE4FE6A148E4CDD008EDE8B /* AppDelegate.h */,
+				1FE4FE6B148E4CDD008EDE8B /* AppDelegate.m */,
+				1FE4FE6D148E4CDD008EDE8B /* MainMenu.xib */,
+				1FE4FE75148E4D43008EDE8B /* BrewInterface.h */,
+				1FE4FE76148E4D43008EDE8B /* BrewInterface.m */,
+				1FE4FE78148E5FEB008EDE8B /* HomebrewController.h */,
+				1FE4FE79148E5FEB008EDE8B /* HomebrewController.m */,
+				1FE4FEC81490B066008EDE8B /* HomebrewInstallController.h */,
+				1FE4FEC91490B066008EDE8B /* HomebrewInstallController.m */,
+				1FE4FE5F148E4CDD008EDE8B /* Supporting Files */,
+				1536BFF618EBA92400B67C5C /* Images.xcassets */,
+			);
+			path = Cakebrew;
+			sourceTree = "<group>";
+		};
+		1FE4FE5F148E4CDD008EDE8B /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				1FE4FE60148E4CDD008EDE8B /* Cakebrew-Info.plist */,
+				1FE4FE61148E4CDD008EDE8B /* InfoPlist.strings */,
+				1FE4FE64148E4CDD008EDE8B /* main.m */,
+				1FE4FE66148E4CDD008EDE8B /* Cakebrew-Prefix.pch */,
+				1FE4FE67148E4CDD008EDE8B /* Credits.rtf */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		1FE4FE53148E4CDD008EDE8B /* Cakebrew */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 1FE4FE72148E4CDD008EDE8B /* Build configuration list for PBXNativeTarget "Cakebrew" */;
+			buildPhases = (
+				1FE4FE50148E4CDD008EDE8B /* Sources */,
+				1FE4FE51148E4CDD008EDE8B /* Frameworks */,
+				1FE4FE52148E4CDD008EDE8B /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Cakebrew;
+			productName = Cakebrew;
+			productReference = 1FE4FE54148E4CDD008EDE8B /* Cakebrew.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		1FE4FE4B148E4CDD008EDE8B /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0510;
+			};
+			buildConfigurationList = 1FE4FE4E148E4CDD008EDE8B /* Build configuration list for PBXProject "Cakebrew" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 1FE4FE49148E4CDD008EDE8B;
+			productRefGroup = 1FE4FE55148E4CDD008EDE8B /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				1FE4FE53148E4CDD008EDE8B /* Cakebrew */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		1FE4FE52148E4CDD008EDE8B /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				15D5BEF318EBB3FB001DDED7 /* plus.icns in Resources */,
+				1FE4FE63148E4CDD008EDE8B /* InfoPlist.strings in Resources */,
+				1FE4FE69148E4CDD008EDE8B /* Credits.rtf in Resources */,
+				1FE4FE6F148E4CDD008EDE8B /* MainMenu.xib in Resources */,
+				15D5BEF518EBB430001DDED7 /* search.icns in Resources */,
+				15D5BEF118EBB3FB001DDED7 /* delete.icns in Resources */,
+				1536BFF718EBA92400B67C5C /* Images.xcassets in Resources */,
+				15D5BEF218EBB3FB001DDED7 /* label.icns in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		1FE4FE50148E4CDD008EDE8B /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1FE4FE65148E4CDD008EDE8B /* main.m in Sources */,
+				1FE4FE6C148E4CDD008EDE8B /* AppDelegate.m in Sources */,
+				1FE4FE77148E4D43008EDE8B /* BrewInterface.m in Sources */,
+				1FE4FE7A148E5FEB008EDE8B /* HomebrewController.m in Sources */,
+				1FE4FECA1490B067008EDE8B /* HomebrewInstallController.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		1FE4FE61148E4CDD008EDE8B /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				1FE4FE62148E4CDD008EDE8B /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		1FE4FE67148E4CDD008EDE8B /* Credits.rtf */ = {
+			isa = PBXVariantGroup;
+			children = (
+				1FE4FE68148E4CDD008EDE8B /* en */,
+			);
+			name = Credits.rtf;
+			sourceTree = "<group>";
+		};
+		1FE4FE6D148E4CDD008EDE8B /* MainMenu.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				1FE4FE6E148E4CDD008EDE8B /* en */,
+			);
+			name = MainMenu.xib;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		1FE4FE70148E4CDD008EDE8B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.7;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		1FE4FE71148E4CDD008EDE8B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.7;
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		1FE4FE73148E4CDD008EDE8B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				COMBINE_HIDPI_IMAGES = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Cakebrew/Cakebrew-Prefix.pch";
+				INFOPLIST_FILE = "Cakebrew/Cakebrew-Info.plist";
+				MACOSX_DEPLOYMENT_TARGET = 10.7;
+				PRODUCT_NAME = Cakebrew;
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		1FE4FE74148E4CDD008EDE8B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				COMBINE_HIDPI_IMAGES = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Cakebrew/Cakebrew-Prefix.pch";
+				INFOPLIST_FILE = "Cakebrew/Cakebrew-Info.plist";
+				MACOSX_DEPLOYMENT_TARGET = 10.7;
+				PRODUCT_NAME = Cakebrew;
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		1FE4FE4E148E4CDD008EDE8B /* Build configuration list for PBXProject "Cakebrew" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1FE4FE70148E4CDD008EDE8B /* Debug */,
+				1FE4FE71148E4CDD008EDE8B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		1FE4FE72148E4CDD008EDE8B /* Build configuration list for PBXNativeTarget "Cakebrew" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1FE4FE73148E4CDD008EDE8B /* Debug */,
+				1FE4FE74148E4CDD008EDE8B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 1FE4FE4B148E4CDD008EDE8B /* Project object */;
+}
