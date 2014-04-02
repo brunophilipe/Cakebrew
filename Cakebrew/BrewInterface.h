@@ -8,12 +8,16 @@
 
 #import <Foundation/Foundation.h>
 
-@interface BrewInterface : NSObject
-+(NSArray*) list;
-+(NSArray*) search:(NSString*)formula;
-+(NSString*) info:(NSString*)formula;
-+(NSString*) update;
-+(NSString*) upgrade:(NSString*)formula;
-+(NSString*) install:(NSString*)formula;
-+(NSString*) uninstall:(NSString*)formula;
+#define kBP_EXCEPTION_HOMEBREW_NOT_INSTALLED @"BP_EXCEPTION_HOMEBREW_NOT_INSTALLED"
+
+@interface BrewInterface :NSObject
+
++ (NSArray*) list;
++ (NSArray*) search:(NSString*)formula;
++ (NSString*) info:(NSString*)formula;
++ (NSString*) update;
++ (NSString*) upgrade:(NSString*)formula;
++ (NSString*) install:(NSString*)formula;
++ (NSString*) uninstall:(NSString*)formula;
+
 @end
