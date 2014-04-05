@@ -7,29 +7,31 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "DMSplitView.h"
 
-@interface HomebrewController : NSViewController <NSTableViewDataSource, NSTableViewDelegate> {
-    IBOutlet NSWindow* HUDAbout;
-    IBOutlet NSTableView* listOfApplicationAlreadyInstalled;
-    NSArray* arrayOfApplicationInstalled;
+@class DMSplitView;
 
-    IBOutlet NSWindow* HUDMoreInfo;
-    IBOutlet NSTextField* MoreInfoHUD_AppTitle;
-    IBOutlet NSTextView* MoreInfoHUD_AppInfo;
+@interface HomebrewController : NSViewController
 
+@property IBOutlet NSWindow *HUDAbout;
+@property IBOutlet NSWindow *HUDMoreInfo;
 
-    IBOutlet NSToolbar* MainToolbar;
-    IBOutlet NSToolbarItem* MainToolbarItem_MoreInfo;
-    IBOutlet NSToolbarItem* MainToolbarItem_Uninstall;
-    IBOutlet NSToolbarItem* MainToolbarItem_About;
+@property IBOutlet NSTableView *tableView_formulas;
+@property IBOutlet NSOutlineView *outlineView_sidebar;
+@property IBOutlet NSTextField *MoreInfoHUD_AppTitle;
+@property IBOutlet NSTextView *MoreInfoHUD_AppInfo;
+@property IBOutlet NSToolbar *MainToolbar;
+@property IBOutlet NSPopover *popoverAbout;
+@property IBOutlet NSPopover *popoverMoreInfo;
+@property IBOutlet DMSplitView *splitView;
 
-    IBOutlet NSPopover* popoverAbout;
-    IBOutlet NSPopover* popoverMoreInfo;
-}
+@property IBOutlet NSToolbarItem *MainToolbarItem_MoreInfo;
+@property IBOutlet NSToolbarItem *MainToolbarItem_Uninstall;
+@property IBOutlet NSToolbarItem *MainToolbarItem_About;
 
--(IBAction) refreshListOfApplicationAlreadyInstalled:(id)sender;
--(IBAction) showHUDAbout:(id)sender;
--(IBAction) showHUDMoreInfo:(id)sender;
--(IBAction) uninstall:(id)sender;
+- (IBAction)refreshListOfApplicationAlreadyInstalled:(id)sender;
+- (IBAction)showHUDAbout:(id)sender;
+- (IBAction)showHUDMoreInfo:(id)sender;
+- (IBAction)uninstall:(id)sender;
 
 @end

@@ -10,9 +10,9 @@
 #import "BrewInterface.h"
 @implementation HomebrewInstallController
 
--(IBAction) showInstallWindow:(id)sender {
+- (IBAction) showInstallWindow:(id)sender {
 
-    arrayOfApplicationToInstall = [[BrewInterface search:@""] retain];
+    arrayOfApplicationToInstall = [BrewInterface search:@""];
 
     if(self.view.window.isVisible) {
         [self.view.window orderBack:sender];
@@ -23,7 +23,7 @@
     [listOfApplicationToInstall reloadData];
 }
 
--(IBAction) install:(id)sender {
+- (IBAction) install:(id)sender {
     if([listOfApplicationToInstall selectedRow] != -1) {
         [BrewInterface install:[arrayOfApplicationToInstall objectAtIndex:[listOfApplicationToInstall selectedRow]]];
     }
@@ -38,7 +38,7 @@
     } else return 0;
 }
 
--(id)tableView:(NSTableView *)tableView objectValueForTableColumn:(NSTableColumn *)tableColumn row:(NSInteger)row {
+- (id)tableView:(NSTableView *)tableView objectValueForTableColumn:(NSTableColumn *)tableColumn row:(NSInteger)row {
     // the return value is typed as (id) because it will return a string in all cases with the exception of the
     if(arrayOfApplicationToInstall) {
         id returnValue=nil;
@@ -63,7 +63,7 @@
 }
 
 #pragma mark - NSTableView Delegate
--(void) tableViewSelectionDidChange:(NSNotification *)notification {
+- (void) tableViewSelectionDidChange:(NSNotification *)notification {
     if([listOfApplicationToInstall selectedRow] == -1) {
         [InstallToolbarItem_Install setAction:nil];
     } else {

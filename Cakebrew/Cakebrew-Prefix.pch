@@ -5,3 +5,19 @@
 #ifdef __OBJC__
     #import <Cocoa/Cocoa.h>
 #endif
+
+#ifndef __BP_CAKEBREW__
+	#import "BPAppDelegate.h"
+
+	#define __BP_CAKEBREW__
+	#define NSColorFromRGB(rgbValue) [NSColor colorWithRed:((float)((rgbValue & 0xFF0000) >> 16))/255.0 green:((float)((rgbValue & 0xFF00) >> 8))/255.0 blue:((float)(rgbValue & 0xFF))/255.0 alpha:1.0]
+
+	#define kBPSidebarHeaderColor NSColorFromRGB(0x707e8b)
+	#define kBPSidebarItemColor NSColorFromRGB(0x262626)
+	#define kBPSidebarDividerColor NSColorFromRGB(0xEAECF2)
+	#define kBPViewBorderColor NSColorFromRGB(0x999999)
+	#define kBPViewBackgroundColor NSColorFromRGB(0xc6c6c6)
+	#define kBPDetailBackgroundColor NSColorFromRGB(0x97aac6)
+
+	#define BPAppDelegateRef ((BPAppDelegate*)[[NSApplication sharedApplication] delegate])
+#endif

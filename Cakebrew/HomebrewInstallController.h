@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface HomebrewInstallController : NSViewController<NSTableViewDataSource, NSTableViewDelegate, NSWindowDelegate> {
+@interface HomebrewInstallController :NSViewController <NSTableViewDataSource, NSTableViewDelegate, NSWindowDelegate, NSOutlineViewDataSource, NSOutlineViewDelegate> {
     IBOutlet NSTableView* listOfApplicationToInstall;
 
     IBOutlet NSToolbar* InstallToolbar;
@@ -19,6 +19,6 @@
     IBOutlet NSWindow* window;
 
 }
--(IBAction) showInstallWindow:(id)sender;
--(IBAction) install:(id)sender;
+- (IBAction)showInstallWindow:(id)sender;
+- (IBAction)install:(id)sender;
 @end

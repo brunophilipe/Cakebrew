@@ -7,6 +7,7 @@
 //
 
 #import "BrewInterface.h"
+#import "BPFormula.h"
 
 #define kBP_HOMEBREW_PATH @"/usr/local/bin/brew"
 
@@ -44,11 +45,57 @@
 	return string;
 }
 
-+ (NSArray*)list {
-    NSString *string = [BrewInterface performBrewCommandWithArguments:@[@"list"]];
-    NSMutableArray* array = [[string componentsSeparatedByString:@"\n"] mutableCopy];
-    [array removeLastObject];
-    return array;
++ (NSArray*)list
+{
+	return [BrewInterface listMode:kBP_LIST_INSTALLED];
+}
+
++ (NSArray*)listMode:(BP_LIST_MODE)mode {
+	NSArray *arguments = nil;
+	BOOL displaysVersions = NO;
+
+	switch (mode) {
+		case kBP_LIST_INSTALLED:
+			arguments = @[@"list", @"--versions"];
+			displaysVersions = YES;
+			break;
+
+		case kBP_LIST_ALL:
+			arguments = @[@"search"];
+			break;
+
+		case kBP_LIST_LEAVES:
+			arguments = @[@"leaves"];
+			break;
+
+		case kBP_LIST_UPGRADEABLE:
+			arguments = @[@"outdated"];
+			displaysVersions = YES;
+			break;
+
+		default:
+			return nil;
+	}
+
+    NSString *string = [BrewInterface performBrewCommandWithArguments:arguments];
+	NSArray *aux = nil;
+    NSMutableArray *array = [[string componentsSeparatedByString:@"\n"] mutableCopy];
+	NSMutableArray *formulas = [NSMutableArray arrayWithCapacity:array.count-1];
+	BPFormula *formula = nil;
+
+	[array removeLastObject];
+
+	for (NSString *item in array) {
+		if (displaysVersions) {
+			aux = [item componentsSeparatedByString:@" "];
+			formula = [BPFormula formulaWithName:[aux firstObject] andVersion:[aux lastObject]];
+		} else {
+			formula = [BPFormula formulaWithName:item];
+		}
+		[formulas addObject:formula];
+	}
+
+    return formulas;
 }
 
 + (NSArray*)search:(NSString*)formula {

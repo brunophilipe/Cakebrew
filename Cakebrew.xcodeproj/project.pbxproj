@@ -8,27 +8,63 @@
 
 /* Begin PBXBuildFile section */
 		1536BFF718EBA92400B67C5C /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1536BFF618EBA92400B67C5C /* Images.xcassets */; };
+		1540FA3518ECF66B00334A5C /* download.icns in Resources */ = {isa = PBXBuildFile; fileRef = 1540FA3418ECF66B00334A5C /* download.icns */; };
+		1540FA3918ED09BB00334A5C /* BPInsetShadowView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1540FA3818ED09BB00334A5C /* BPInsetShadowView.m */; };
+		1540FA3D18EDDA1600334A5C /* BPTopBorderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1540FA3B18EDD8CE00334A5C /* BPTopBorderView.m */; };
+		1570BA3618EE0A66001C3C5C /* BPHomebrewManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 1570BA3518EE0A66001C3C5C /* BPHomebrewManager.m */; };
+		1570BA3918EE24F1001C3C5C /* BPSidebarDetailFieldView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1570BA3818EE24F1001C3C5C /* BPSidebarDetailFieldView.m */; };
+		1570BA5618EE50BD001C3C5C /* BPFormula.m in Sources */ = {isa = PBXBuildFile; fileRef = 1570BA5518EE50BD001C3C5C /* BPFormula.m */; };
+		1570BA5F18EF9481001C3C5C /* PXSourceList.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1570BA5E18EF9481001C3C5C /* PXSourceList.framework */; };
+		1570BA6118EF9B18001C3C5C /* PXSourceList.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 1570BA5E18EF9481001C3C5C /* PXSourceList.framework */; };
 		15D5BEF118EBB3FB001DDED7 /* delete.icns in Resources */ = {isa = PBXBuildFile; fileRef = 15D5BEEE18EBB3FB001DDED7 /* delete.icns */; };
 		15D5BEF218EBB3FB001DDED7 /* label.icns in Resources */ = {isa = PBXBuildFile; fileRef = 15D5BEEF18EBB3FB001DDED7 /* label.icns */; };
 		15D5BEF318EBB3FB001DDED7 /* plus.icns in Resources */ = {isa = PBXBuildFile; fileRef = 15D5BEF018EBB3FB001DDED7 /* plus.icns */; };
 		15D5BEF518EBB430001DDED7 /* search.icns in Resources */ = {isa = PBXBuildFile; fileRef = 15D5BEF418EBB430001DDED7 /* search.icns */; };
+		15D5BEFA18EBC56E001DDED7 /* DMSplitView.m in Sources */ = {isa = PBXBuildFile; fileRef = 15D5BEF918EBC56E001DDED7 /* DMSplitView.m */; };
 		1FE4FE59148E4CDD008EDE8B /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1FE4FE58148E4CDD008EDE8B /* Cocoa.framework */; };
 		1FE4FE63148E4CDD008EDE8B /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 1FE4FE61148E4CDD008EDE8B /* InfoPlist.strings */; };
 		1FE4FE65148E4CDD008EDE8B /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FE4FE64148E4CDD008EDE8B /* main.m */; };
 		1FE4FE69148E4CDD008EDE8B /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 1FE4FE67148E4CDD008EDE8B /* Credits.rtf */; };
-		1FE4FE6C148E4CDD008EDE8B /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FE4FE6B148E4CDD008EDE8B /* AppDelegate.m */; };
+		1FE4FE6C148E4CDD008EDE8B /* BPAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FE4FE6B148E4CDD008EDE8B /* BPAppDelegate.m */; };
 		1FE4FE6F148E4CDD008EDE8B /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1FE4FE6D148E4CDD008EDE8B /* MainMenu.xib */; };
 		1FE4FE77148E4D43008EDE8B /* BrewInterface.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FE4FE76148E4D43008EDE8B /* BrewInterface.m */; };
 		1FE4FE7A148E5FEB008EDE8B /* HomebrewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FE4FE79148E5FEB008EDE8B /* HomebrewController.m */; };
 		1FE4FECA1490B067008EDE8B /* HomebrewInstallController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FE4FEC91490B066008EDE8B /* HomebrewInstallController.m */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		1570BA6018EF9B0F001C3C5C /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				1570BA6118EF9B18001C3C5C /* PXSourceList.framework in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
 		1536BFF618EBA92400B67C5C /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		1540FA3418ECF66B00334A5C /* download.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = download.icns; sourceTree = "<group>"; };
+		1540FA3718ED09BB00334A5C /* BPInsetShadowView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BPInsetShadowView.h; path = Views/BPInsetShadowView.h; sourceTree = "<group>"; };
+		1540FA3818ED09BB00334A5C /* BPInsetShadowView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BPInsetShadowView.m; path = Views/BPInsetShadowView.m; sourceTree = "<group>"; };
+		1540FA3A18EDD8CE00334A5C /* BPTopBorderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BPTopBorderView.h; path = Views/BPTopBorderView.h; sourceTree = "<group>"; };
+		1540FA3B18EDD8CE00334A5C /* BPTopBorderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BPTopBorderView.m; path = Views/BPTopBorderView.m; sourceTree = "<group>"; };
+		1570BA3418EE0A66001C3C5C /* BPHomebrewManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BPHomebrewManager.h; sourceTree = "<group>"; };
+		1570BA3518EE0A66001C3C5C /* BPHomebrewManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BPHomebrewManager.m; sourceTree = "<group>"; };
+		1570BA3718EE24F1001C3C5C /* BPSidebarDetailFieldView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BPSidebarDetailFieldView.h; path = Views/BPSidebarDetailFieldView.h; sourceTree = "<group>"; };
+		1570BA3818EE24F1001C3C5C /* BPSidebarDetailFieldView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BPSidebarDetailFieldView.m; path = Views/BPSidebarDetailFieldView.m; sourceTree = "<group>"; };
+		1570BA5418EE50BD001C3C5C /* BPFormula.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BPFormula.h; path = Models/BPFormula.h; sourceTree = "<group>"; };
+		1570BA5518EE50BD001C3C5C /* BPFormula.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BPFormula.m; path = Models/BPFormula.m; sourceTree = "<group>"; };
+		1570BA5E18EF9481001C3C5C /* PXSourceList.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PXSourceList.framework; path = Cakebrew/Frameworks/PXSourceList.framework; sourceTree = "<group>"; };
 		15D5BEEE18EBB3FB001DDED7 /* delete.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = delete.icns; sourceTree = "<group>"; };
 		15D5BEEF18EBB3FB001DDED7 /* label.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = label.icns; sourceTree = "<group>"; };
 		15D5BEF018EBB3FB001DDED7 /* plus.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = plus.icns; sourceTree = "<group>"; };
 		15D5BEF418EBB430001DDED7 /* search.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = search.icns; sourceTree = "<group>"; };
+		15D5BEF818EBC56E001DDED7 /* DMSplitView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DMSplitView.h; sourceTree = "<group>"; };
+		15D5BEF918EBC56E001DDED7 /* DMSplitView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DMSplitView.m; sourceTree = "<group>"; };
 		1FE4FE54148E4CDD008EDE8B /* Cakebrew.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Cakebrew.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1FE4FE58148E4CDD008EDE8B /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		1FE4FE5B148E4CDD008EDE8B /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
@@ -39,8 +75,8 @@
 		1FE4FE64148E4CDD008EDE8B /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		1FE4FE66148E4CDD008EDE8B /* Cakebrew-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Cakebrew-Prefix.pch"; sourceTree = "<group>"; };
 		1FE4FE68148E4CDD008EDE8B /* en */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; name = en; path = en.lproj/Credits.rtf; sourceTree = "<group>"; };
-		1FE4FE6A148E4CDD008EDE8B /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
-		1FE4FE6B148E4CDD008EDE8B /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		1FE4FE6A148E4CDD008EDE8B /* BPAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BPAppDelegate.h; sourceTree = "<group>"; };
+		1FE4FE6B148E4CDD008EDE8B /* BPAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BPAppDelegate.m; sourceTree = "<group>"; };
 		1FE4FE6E148E4CDD008EDE8B /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainMenu.xib; sourceTree = "<group>"; };
 		1FE4FE75148E4D43008EDE8B /* BrewInterface.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BrewInterface.h; sourceTree = "<group>"; };
 		1FE4FE76148E4D43008EDE8B /* BrewInterface.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BrewInterface.m; sourceTree = "<group>"; };
@@ -56,21 +92,62 @@
 			buildActionMask = 2147483647;
 			files = (
 				1FE4FE59148E4CDD008EDE8B /* Cocoa.framework in Frameworks */,
+				1570BA5F18EF9481001C3C5C /* PXSourceList.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1540FA3618ED099F00334A5C /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				1540FA3718ED09BB00334A5C /* BPInsetShadowView.h */,
+				1540FA3818ED09BB00334A5C /* BPInsetShadowView.m */,
+				1540FA3A18EDD8CE00334A5C /* BPTopBorderView.h */,
+				1540FA3B18EDD8CE00334A5C /* BPTopBorderView.m */,
+				1570BA3718EE24F1001C3C5C /* BPSidebarDetailFieldView.h */,
+				1570BA3818EE24F1001C3C5C /* BPSidebarDetailFieldView.m */,
+			);
+			name = Views;
+			sourceTree = "<group>";
+		};
 		15D5BEED18EBB3D9001DDED7 /* Icons */ = {
 			isa = PBXGroup;
 			children = (
 				15D5BEEE18EBB3FB001DDED7 /* delete.icns */,
 				15D5BEEF18EBB3FB001DDED7 /* label.icns */,
 				15D5BEF018EBB3FB001DDED7 /* plus.icns */,
+				1540FA3418ECF66B00334A5C /* download.icns */,
 				15D5BEF418EBB430001DDED7 /* search.icns */,
 			);
 			path = Icons;
+			sourceTree = "<group>";
+		};
+		15D5BEF618EBC56E001DDED7 /* Libraries */ = {
+			isa = PBXGroup;
+			children = (
+				15D5BEF718EBC56E001DDED7 /* DMSplitView */,
+			);
+			path = Libraries;
+			sourceTree = "<group>";
+		};
+		15D5BEF718EBC56E001DDED7 /* DMSplitView */ = {
+			isa = PBXGroup;
+			children = (
+				15D5BEF818EBC56E001DDED7 /* DMSplitView.h */,
+				15D5BEF918EBC56E001DDED7 /* DMSplitView.m */,
+			);
+			path = DMSplitView;
+			sourceTree = "<group>";
+		};
+		15D5BEFB18EBD006001DDED7 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				1570BA5418EE50BD001C3C5C /* BPFormula.h */,
+				1570BA5518EE50BD001C3C5C /* BPFormula.m */,
+			);
+			name = Models;
 			sourceTree = "<group>";
 		};
 		1FE4FE49148E4CDD008EDE8B = {
@@ -102,6 +179,7 @@
 		1FE4FE5A148E4CDD008EDE8B /* Other Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				1570BA5E18EF9481001C3C5C /* PXSourceList.framework */,
 				1FE4FE5B148E4CDD008EDE8B /* AppKit.framework */,
 				1FE4FE5C148E4CDD008EDE8B /* CoreData.framework */,
 				1FE4FE5D148E4CDD008EDE8B /* Foundation.framework */,
@@ -112,9 +190,11 @@
 		1FE4FE5E148E4CDD008EDE8B /* Cakebrew */ = {
 			isa = PBXGroup;
 			children = (
+				1540FA3618ED099F00334A5C /* Views */,
+				15D5BEFB18EBD006001DDED7 /* Models */,
 				15D5BEED18EBB3D9001DDED7 /* Icons */,
-				1FE4FE6A148E4CDD008EDE8B /* AppDelegate.h */,
-				1FE4FE6B148E4CDD008EDE8B /* AppDelegate.m */,
+				1FE4FE6A148E4CDD008EDE8B /* BPAppDelegate.h */,
+				1FE4FE6B148E4CDD008EDE8B /* BPAppDelegate.m */,
 				1FE4FE6D148E4CDD008EDE8B /* MainMenu.xib */,
 				1FE4FE75148E4D43008EDE8B /* BrewInterface.h */,
 				1FE4FE76148E4D43008EDE8B /* BrewInterface.m */,
@@ -122,7 +202,10 @@
 				1FE4FE79148E5FEB008EDE8B /* HomebrewController.m */,
 				1FE4FEC81490B066008EDE8B /* HomebrewInstallController.h */,
 				1FE4FEC91490B066008EDE8B /* HomebrewInstallController.m */,
+				1570BA3418EE0A66001C3C5C /* BPHomebrewManager.h */,
+				1570BA3518EE0A66001C3C5C /* BPHomebrewManager.m */,
 				1FE4FE5F148E4CDD008EDE8B /* Supporting Files */,
+				15D5BEF618EBC56E001DDED7 /* Libraries */,
 				1536BFF618EBA92400B67C5C /* Images.xcassets */,
 			);
 			path = Cakebrew;
@@ -150,6 +233,7 @@
 				1FE4FE50148E4CDD008EDE8B /* Sources */,
 				1FE4FE51148E4CDD008EDE8B /* Frameworks */,
 				1FE4FE52148E4CDD008EDE8B /* Resources */,
+				1570BA6018EF9B0F001C3C5C /* CopyFiles */,
 			);
 			buildRules = (
 			);
@@ -195,6 +279,7 @@
 				1FE4FE69148E4CDD008EDE8B /* Credits.rtf in Resources */,
 				1FE4FE6F148E4CDD008EDE8B /* MainMenu.xib in Resources */,
 				15D5BEF518EBB430001DDED7 /* search.icns in Resources */,
+				1540FA3518ECF66B00334A5C /* download.icns in Resources */,
 				15D5BEF118EBB3FB001DDED7 /* delete.icns in Resources */,
 				1536BFF718EBA92400B67C5C /* Images.xcassets in Resources */,
 				15D5BEF218EBB3FB001DDED7 /* label.icns in Resources */,
@@ -208,11 +293,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				15D5BEFA18EBC56E001DDED7 /* DMSplitView.m in Sources */,
+				1570BA5618EE50BD001C3C5C /* BPFormula.m in Sources */,
+				1570BA3918EE24F1001C3C5C /* BPSidebarDetailFieldView.m in Sources */,
 				1FE4FE65148E4CDD008EDE8B /* main.m in Sources */,
-				1FE4FE6C148E4CDD008EDE8B /* AppDelegate.m in Sources */,
+				1570BA3618EE0A66001C3C5C /* BPHomebrewManager.m in Sources */,
+				1FE4FE6C148E4CDD008EDE8B /* BPAppDelegate.m in Sources */,
 				1FE4FE77148E4D43008EDE8B /* BrewInterface.m in Sources */,
+				1540FA3918ED09BB00334A5C /* BPInsetShadowView.m in Sources */,
 				1FE4FE7A148E5FEB008EDE8B /* HomebrewController.m in Sources */,
 				1FE4FECA1490B067008EDE8B /* HomebrewInstallController.m in Sources */,
+				1540FA3D18EDDA1600334A5C /* BPTopBorderView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -311,7 +402,12 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_OBJC_ARC = YES;
 				COMBINE_HIDPI_IMAGES = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Cakebrew/Frameworks",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Cakebrew/Cakebrew-Prefix.pch";
 				INFOPLIST_FILE = "Cakebrew/Cakebrew-Info.plist";
@@ -325,7 +421,12 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_OBJC_ARC = YES;
 				COMBINE_HIDPI_IMAGES = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Cakebrew/Frameworks",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Cakebrew/Cakebrew-Prefix.pch";
 				INFOPLIST_FILE = "Cakebrew/Cakebrew-Info.plist";
