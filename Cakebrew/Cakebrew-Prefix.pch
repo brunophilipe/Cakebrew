@@ -14,7 +14,7 @@
 
 	#define kBPSidebarHeaderColor NSColorFromRGB(0x707e8b)
 	#define kBPSidebarItemColor NSColorFromRGB(0x262626)
-	#define kBPSidebarDividerColor NSColorFromRGB(0xEAECF2)
+	#define kBPSidebarDividerColor NSColorFromRGB(0xd5dbe3)
 	#define kBPViewBorderColor NSColorFromRGB(0x999999)
 	#define kBPViewBackgroundColor NSColorFromRGB(0xc6c6c6)
 	#define kBPDetailBackgroundColor NSColorFromRGB(0x97aac6)

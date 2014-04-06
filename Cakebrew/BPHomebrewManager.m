@@ -1,13 +1,26 @@
 //
 //  BPHomebrewManager.m
-//  Cakebrew
+//  Cakebrew – The Homebrew GUI App for OS X 
 //
 //  Created by Bruno Philipe on 4/3/14.
+//  Copyright (c) 2011 Bruno Philipe. All rights reserved.
 //
+//	This program is free software: you can redistribute it and/or modify
+//	it under the terms of the GNU General Public License as published by
+//	the Free Software Foundation, either version 3 of the License, or
+//	(at your option) any later version.
+//
+//	This program is distributed in the hope that it will be useful,
+//	but WITHOUT ANY WARRANTY; without even the implied warranty of
+//	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+//	GNU General Public License for more details.
+//
+//	You should have received a copy of the GNU General Public License
+//	along with this program.  If not, see <http://www.gnu.org/licenses/>.
 //
 
 #import "BPHomebrewManager.h"
-#import "BrewInterface.h"
+#import "BPHomebrewInterface.h"
 
 #define kBP_CACHE_DICT_DATE_KEY @"BP_CACHE_DICT_DATE_KEY"
 #define kBP_CACHE_DICT_DATA_KEY @"BP_CACHE_DICT_DATA_KEY"
@@ -37,13 +50,13 @@
 
 - (void)update
 {
-	[self setFormulas_installed:[BrewInterface listMode:kBP_LIST_INSTALLED]];
-	[self setFormulas_leaves:[BrewInterface listMode:kBP_LIST_LEAVES]];
-	[self setFormulas_outdated:[BrewInterface listMode:kBP_LIST_UPGRADEABLE]];
+	[self setFormulas_installed:[BPHomebrewInterface listMode:kBP_LIST_INSTALLED]];
+	[self setFormulas_leaves:[BPHomebrewInterface listMode:kBP_LIST_LEAVES]];
+	[self setFormulas_outdated:[BPHomebrewInterface listMode:kBP_LIST_UPGRADEABLE]];
 
 	if (![self loadAllFormulasCaches]) {
 		dispatch_async(dispatch_get_main_queue(), ^{
-			[self setFormulas_all:[BrewInterface listMode:kBP_LIST_ALL]];
+			[self setFormulas_all:[BPHomebrewInterface listMode:kBP_LIST_ALL]];
 			[self.delegate homebrewManagerFinishedUpdating:self];
 			[self storeAllFormulasCaches];
 		});
@@ -114,7 +127,7 @@
 {
 	if ([self searchForFormula:formula inArray:self.formulas_installed] >= 0)
 	{
-		if ([self searchForFormula:formula inArray:self.formulas_outdated]) {
+		if ([self searchForFormula:formula inArray:self.formulas_outdated] >= 0) {
 			return kBP_FORMULA_OUTDATED;
 		} else {
 			return kBP_FORMULA_INSTALLED;

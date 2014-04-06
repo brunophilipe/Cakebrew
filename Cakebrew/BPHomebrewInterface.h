@@ -1,5 +1,5 @@
 //
-//  main.m
+//  BrewInterface.h
 //  Cakebrew – The Homebrew GUI App for OS X 
 //
 //  Created by Vincent Saluzzo on 06/12/11.
@@ -19,9 +19,26 @@
 //	along with this program.  If not, see <http://www.gnu.org/licenses/>.
 //
 
-#import <Cocoa/Cocoa.h>
+#import <Foundation/Foundation.h>
 
-int main(int argc, char *argv[])
-{
-    return NSApplicationMain(argc, (const char **)argv);
-}
+typedef enum : NSUInteger {
+	kBP_LIST_ALL,
+    kBP_LIST_INSTALLED,
+    kBP_LIST_LEAVES,
+	kBP_LIST_UPGRADEABLE
+} BP_LIST_MODE;
+
+#define kBP_EXCEPTION_HOMEBREW_NOT_INSTALLED @"BP_EXCEPTION_HOMEBREW_NOT_INSTALLED"
+
+@interface BPHomebrewInterface :NSObject
+
++ (NSArray*)list;
++ (NSArray*)listMode:(BP_LIST_MODE)mode;
++ (NSArray*)search:(NSString*)formula;
++ (NSString*)info:(NSString*)formula;
++ (NSString*)update;
++ (NSString*)upgrade:(NSString*)formula;
++ (NSString*)install:(NSString*)formula;
++ (NSString*)uninstall:(NSString*)formula;
+
+@end

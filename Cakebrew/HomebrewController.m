@@ -1,14 +1,28 @@
 //
 //  HomebrewController.m
-//  Cakebrew
+//  Cakebrew – The Homebrew GUI App for OS X 
 //
 //  Created by Vincent Saluzzo on 06/12/11.
 //  Copyright (c) 2011 Bruno Philipe. All rights reserved.
+//
+//	This program is free software: you can redistribute it and/or modify
+//	it under the terms of the GNU General Public License as published by
+//	the Free Software Foundation, either version 3 of the License, or
+//	(at your option) any later version.
+//
+//	This program is distributed in the hope that it will be useful,
+//	but WITHOUT ANY WARRANTY; without even the implied warranty of
+//	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+//	GNU General Public License for more details.
+//
+//	You should have received a copy of the GNU General Public License
+//	along with this program.  If not, see <http://www.gnu.org/licenses/>.
 //
 
 #import "HomebrewController.h"
 #import "BPFormula.h"
 #import "BPHomebrewManager.h"
+#import "BPHomebrewInterface.h"
 #import "Frameworks/PXSourceList.framework/Headers/PXSourceList.h"
 
 @interface HomebrewController () <NSTableViewDataSource, NSTableViewDelegate, PXSourceListDataSource, PXSourceListDelegate, BPHomebrewManagerDelegate>
@@ -32,8 +46,6 @@
 	if (self) {
 		_homebrewManager = [BPHomebrewManager sharedManager];
 		[_homebrewManager setDelegate:self];
-		[self refreshListOfApplicationAlreadyInstalled:nil];
-		[self buildSidebarTree];
 	}
 	return self;
 }
@@ -42,36 +54,44 @@
 
 - (void)homebrewManagerFinishedUpdating:(BPHomebrewManager *)manager
 {
-//	[self buildSidebarTree];
+	[self buildSidebarTree];
 	[self.outlineView_sidebar reloadData];
 }
 
 - (void)buildSidebarTree
 {
 	NSArray *categoriesTitles = @[@"Installed", @"Outdated", @"All Formulas", @"Leaves"];
+	NSArray *categoriesIcons = @[@"installedTemplate", @"outdatedTemplate", @"allFormulasTemplate", @"pinTemplate"];
 	NSArray *categoriesValues = @[[NSNumber numberWithInteger:[[[BPHomebrewManager sharedManager] formulas_installed] count]],
 								  [NSNumber numberWithInteger:[[[BPHomebrewManager sharedManager] formulas_outdated] count]],
 								  [NSNumber numberWithInteger:[[[BPHomebrewManager sharedManager] formulas_all] count]],
 								  [NSNumber numberWithInteger:[[[BPHomebrewManager sharedManager] formulas_leaves] count]]];
 
-	PXSourceListItem *item;
+	PXSourceListItem *item, *parent;
 	_rootSidebarCategory = [PXSourceListItem itemWithTitle:@"" identifier:@"root"];
 
-	item = [PXSourceListItem itemWithTitle:@"Formulas" identifier:@"group"];
-	[_rootSidebarCategory addChildItem:item];
+	parent = [PXSourceListItem itemWithTitle:@"Formulas" identifier:@"group"];
+	[_rootSidebarCategory addChildItem:parent];
 
-	PXSourceListItem *aux;
 	for (NSUInteger i=0; i<4; i++) {
-		aux = [PXSourceListItem itemWithTitle:[categoriesTitles objectAtIndex:i] identifier:@"item"];
-		[aux setBadgeValue:[categoriesValues objectAtIndex:i]];
-		[_rootSidebarCategory addChildItem:aux];
+		item = [PXSourceListItem itemWithTitle:[categoriesTitles objectAtIndex:i] identifier:@"item"];
+		[item setBadgeValue:[categoriesValues objectAtIndex:i]];
+		[item setIcon:[NSImage imageNamed:[categoriesIcons objectAtIndex:i]]];
+		[parent addChildItem:item];
 	}
 
-	item = [PXSourceListItem itemWithTitle:@"Tools" identifier:@"group"];
-	[_rootSidebarCategory addChildItem:item];
+	parent = [PXSourceListItem itemWithTitle:@"Tools" identifier:@"group"];
+	[_rootSidebarCategory addChildItem:parent];
 
 	item = [PXSourceListItem itemWithTitle:@"Doctor" identifier:@"item"];
-	[_rootSidebarCategory addChildItem:item];
+	[item setBadgeValue:@-1];
+	[item setIcon:[NSImage imageNamed:@"wrenchTemplate"]];
+	[parent addChildItem:item];
+
+	item = [PXSourceListItem itemWithTitle:@"Update" identifier:@"item"];
+	[item setBadgeValue:@-1];
+	[item setIcon:[NSImage imageNamed:@"downloadTemplate"]];
+	[parent addChildItem:item];
 }
 
 #pragma mark - Getters and Setters
@@ -93,7 +113,7 @@
 {
 	_outlineView_sidebar = outlineView_sidebar;
 
-	dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+	dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.6 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
 		[_outlineView_sidebar selectRowIndexes:[NSIndexSet indexSetWithIndex:1] byExtendingSelection:NO];
 	});
 }
@@ -124,7 +144,7 @@
 			} else {
 				return element;
 			}
-        } else if ([columnIdentifer isEqualToString:@"Description"]) {
+        } else if ([columnIdentifer isEqualToString:@"Version"]) {
 			if ([element isKindOfClass:[BPFormula class]]) {
 				return [(BPFormula*)element version];
 			} else {
@@ -138,56 +158,32 @@
 
 #pragma mark - NSTableView Delegate
 
-/*
-- (NSView*) tableView:(NSTableView *)tableView viewForTableColumn:(NSTableColumn *)tableColumn row:(NSInteger)row {
-
-    NSTableCellView* cell = [tableView makeViewWithIdentifier:[tableColumn.identifier stringByAppendingFormat:@"_row_%d",row] owner:self];
-    if(!cell) {
-        if([[tableColumn.headerCell stringValue] isEqualToString:@"Name"]) {
-            cell = [[[NSTextField alloc] init] autorelease];
-            cell.identifier = [tableColumn.identifier stringByAppendingFormat:@"_row_%d",row];
-            [(NSTextField*)cell setBordered:NO];
-            [(NSTextField*)cell setEditable:NO];
-
-        } else if([[tableColumn.headerCell stringValue] isEqualToString:@"Description"]) {
-            cell = [[[NSTextField alloc] init] autorelease];
-            cell.identifier = [tableColumn.identifier stringByAppendingFormat:@"_row_%d",row];
-            [(NSTextField*)cell setBordered:NO];
-            [(NSTextField*)cell setEditable:NO];
-        } else if([[tableColumn.headerCell stringValue] isEqualToString:@"Delete"]) {
-            cell = [[[NSButton alloc] init] autorelease];
-            cell.identifier = [tableColumn.identifier stringByAppendingFormat:@"_row_%d",row];
-
-        }
-    }
-
-
-    NSLog(@"kaka %@", tableColumn.identifier);
-    if([[tableColumn.headerCell stringValue] isEqualToString:@"Name"]) {
-        cell.textField.stringValue = [[BrewInterface list] objectAtIndex:row];
-        //((NSTextField*)cell).stringValue = [[BrewInterface list] objectAtIndex:row];
-    } else if([[tableColumn.headerCell stringValue] isEqualToString:@"Description"]) {
-        cell.textField.stringValue = [[NSString alloc] initWithFormat:@"aaa"];
-    } else if([[tableColumn.headerCell stringValue] isEqualToString:@"Delete"]) {
-        //((NSButton*)cell).title = @"Delete";
-        //cell.
-    }
-
-    return cell;
-}*/
-/*
-- (NSTableRowView*) tableView:(NSTableView *)tableView rowViewForRow:(NSInteger)row {
-    return [tableView rowViewAtRow:row makeIfNecessary:YES];
-}
- */
-
 - (void)tableViewSelectionDidChange:(NSNotification *)notification {
-    if([self.tableView_formulas selectedRow] == -1) {
-        [self.MainToolbarItem_MoreInfo setAction:nil];
-        [self.MainToolbarItem_Uninstall setAction:nil];
+	NSUInteger selectedIndex = [self.tableView_formulas selectedRow];
+    if(selectedIndex == -1) {
+		[self.toolbarButton_installUninstall setEnabled:NO];
+		[self.toolbarButton_formulaInfo setEnabled:NO];
     } else {
-        [self.MainToolbarItem_MoreInfo setAction:@selector(showHUDMoreInfo:)];
-        [self.MainToolbarItem_Uninstall setAction:@selector(uninstall:)];
+		[self.toolbarButton_installUninstall setEnabled:YES];
+		[self.toolbarButton_formulaInfo setEnabled:YES];
+		BPFormula *formula = [_formulasArray objectAtIndex:selectedIndex];
+
+		switch ([[BPHomebrewManager sharedManager] statusForFormula:formula]) {
+			case kBP_FORMULA_INSTALLED:
+				[self.toolbarButton_installUninstall setImage:[NSImage imageNamed:@"delete.icns"]];
+				[self.toolbarButton_installUninstall setLabel:@"Uninstall Formula"];
+				break;
+
+			case kBP_FORMULA_OUTDATED:
+				[self.toolbarButton_installUninstall setImage:[NSImage imageNamed:@"reload.icns"]];
+				[self.toolbarButton_installUninstall setLabel:@"Update Formula"];
+				break;
+
+			case kBP_FORMULA_NOT_INSTALLED:
+				[self.toolbarButton_installUninstall setImage:[NSImage imageNamed:@"download.icns"]];
+				[self.toolbarButton_installUninstall setLabel:@"Install Formula"];
+				break;
+		}
     }
 }
 
@@ -195,10 +191,6 @@
 
 - (NSUInteger)sourceList:(PXSourceList*)sourceList numberOfChildrenOfItem:(id)item
 {
-	if (!_rootSidebarCategory) {
-		[self buildSidebarTree];
-	}
-
 	if (!item) { //Is root
 		return [[_rootSidebarCategory children] count];
 	} else {
@@ -209,10 +201,8 @@
 - (id)sourceList:(PXSourceList*)aSourceList child:(NSUInteger)index ofItem:(id)item
 {
 	if (!item) {
-		NSLog(@"%@",[[_rootSidebarCategory children] objectAtIndex:index]);
 		return [[_rootSidebarCategory children] objectAtIndex:index];
 	} else {
-		NSLog(@"%@", [[(PXSourceListItem*)item children] objectAtIndex:index]);
 		return [[(PXSourceListItem*)item children] objectAtIndex:index];
 	}
 }
@@ -228,114 +218,57 @@
 
 #pragma mark - PXSourceList Delegate
 
+- (BOOL)sourceList:(PXSourceList *)aSourceList isGroupAlwaysExpanded:(id)group
+{
+    return YES;
+}
+
 - (NSView *)sourceList:(PXSourceList *)aSourceList viewForItem:(id)item
 {
 	PXSourceListTableCellView *cellView = nil;
+	
     if ([[(PXSourceListItem*)item identifier] isEqualToString:@"group"])
         cellView = [aSourceList makeViewWithIdentifier:@"HeaderCell" owner:nil];
     else
-        cellView = [aSourceList makeViewWithIdentifier:@"DataCell" owner:nil];
+        cellView = [aSourceList makeViewWithIdentifier:@"MainCell" owner:nil];
 
     PXSourceListItem *sourceListItem = item;
-
     cellView.textField.stringValue = sourceListItem.title;
-    cellView.badgeView.badgeValue = sourceListItem.badgeValue.integerValue;
+
+	if (sourceListItem.badgeValue.integerValue >= 0)
+		cellView.badgeView.badgeValue = sourceListItem.badgeValue.integerValue;
+	else
+		[cellView.badgeView setHidden:YES];
+
+	if (sourceListItem.icon)
+		[cellView.imageView setImage:sourceListItem.icon];
+
+	[cellView.badgeView calcSize];
 
     return cellView;
 }
 
-#pragma mark - Outline View Data Source
-/*
-- (NSInteger)outlineView:(NSOutlineView *)outlineView numberOfChildrenOfItem:(id)item
-{
-	if (!_rootSidebarCategory) {
-		[self buildSidebarTree];
-	}
-
-	if (!item) { //Is root
-		return [[_rootSidebarCategory children] count];
-	} else {
-		return [[(PXSourceListItem*)item children] count];
-	}
-}
-
-- (id)outlineView:(NSOutlineView *)outlineView child:(NSInteger)index ofItem:(id)item
-{
-	if (!item) {
-		return [[_rootSidebarCategory children] objectAtIndex:index];
-	} else {
-		return [[(PXSourceListItem*)item children] objectAtIndex:index];
-	}
-}
-
-- (id)outlineView:(NSOutlineView *)outlineView viewForTableColumn:(NSTableColumn *)tableColumn item:(id)item
-{
-	NSTableCellView *view = nil;
-	if (!item) {
-		view = [outlineView makeViewWithIdentifier:@"item_view" owner:self];
-	} else {
-		if ([(PXSourceListItem*)item isLabel]) {
-			view = [outlineView makeViewWithIdentifier:@"item_view" owner:self];
-			[view.textField setStringValue:[[(PXSourceListItem*)item title] uppercaseString]];
-		} else {
-			if ([tableColumn.identifier isEqualToString:@"title"]) {
-				view = [outlineView makeViewWithIdentifier:@"item_view" owner:self];
-				[view.textField setStringValue:[(PXSourceListItem*)item title]];
-			} else if (![[(PXSourceListItem*)item title] isEqualToString:@"Doctor"]) {
-				view = [outlineView makeViewWithIdentifier:@"detail_view" owner:self];
-				[view.textField setIntegerValue:[[(PXSourceListItem*)item value] integerValue]];
-				[view.textField calcSize];
-				[view.textField sizeToFit];
-			} else {
-				return nil;
-			}
-		}
-	}
-
-	return view;
-}
-
-- (BOOL)outlineView:(NSOutlineView *)outlineView isItemExpandable:(id)item
-{
-	if (!item) {
-		return YES;
-	} else {
-		return [item hasChildren];
-	}
-}
-
-- (BOOL)outlineView:(NSOutlineView *)outlineView shouldSelectItem:(id)item
-{
-	return (item && ![(PXSourceListItem*)item isLabel]);
-}
-
-- (BOOL)outlineView:(NSOutlineView *)outlineView isGroupItem:(id)item
-{
-	return (item && [(PXSourceListItem*)item isLabel]);
-}
-
-- (CGFloat)outlineView:(NSOutlineView *)outlineView heightOfRowByItem:(id)item
-{
-	return 22;
-}
-
-- (void)outlineViewSelectionDidChange:(NSNotification *)notification
+- (void)sourceListSelectionDidChange:(NSNotification *)notification
 {
 	switch ([self.outlineView_sidebar selectedRow]) {
 		case 1: // Installed Formulas
 			_formulasArray = [[BPHomebrewManager sharedManager] formulas_installed];
+			[[self.tableView_formulas tableColumnWithIdentifier:@"Version"] setHidden:NO];
 			break;
 
 		case 2: // Upgradeable Formulas
-			_formulasArray = [[BPHomebrewManager sharedManager] formulas_upgradeable];
+			_formulasArray = [[BPHomebrewManager sharedManager] formulas_outdated];
+			[[self.tableView_formulas tableColumnWithIdentifier:@"Version"] setHidden:NO];
 			break;
 
 		case 3: // All Formulas
 			_formulasArray = [[BPHomebrewManager sharedManager] formulas_all];
+			[[self.tableView_formulas tableColumnWithIdentifier:@"Version"] setHidden:YES];
 			break;
 
 		case 4:	// Leaves
 			_formulasArray = [[BPHomebrewManager sharedManager] formulas_leaves];
+			[[self.tableView_formulas tableColumnWithIdentifier:@"Version"] setHidden:YES];
 			break;
 
 		case 6: // Doctor
@@ -348,7 +281,7 @@
 
 	[self.tableView_formulas reloadData];
 }
-*/
+
 #pragma mark - IBActions
 
 - (IBAction)refreshListOfApplicationAlreadyInstalled:(id)sender {
@@ -372,7 +305,7 @@
     }
 }
 
-- (IBAction)showHUDMoreInfo:(id)sender {
+- (IBAction)showFormulaInfo:(id)sender {
     /*if([self.tableView_formulas selectedRow] != -1) {
 		NSToolbarItem *toolbarItem = sender;
 
@@ -401,16 +334,58 @@
     }*/
 }
 
-- (IBAction)uninstall:(id)sender {
-	/*
-    if([self.tableView_formulas selectedRow] != -1) {
-        NSString* resultOfUninstall = [BrewInterface uninstall:[self.formulasArray objectAtIndex:[self.tableView_formulas selectedRow]]];
+- (IBAction)installOrUninstall:(id)sender {
+	NSInteger selectedIndex = [self.tableView_formulas selectedRow];
 
-        NSAlert* alert = [NSAlert alertWithMessageText:resultOfUninstall defaultButton:nil alternateButton:nil otherButton:nil informativeTextWithFormat:@""];
-        [alert runModal];
-        [self performSelector:@selector(refreshListOfApplicationAlreadyInstalled:)];
-    }
-	 */
+	if (selectedIndex >= 0) {
+		BPFormula *formula = [_formulasArray objectAtIndex:selectedIndex];
+		NSString *message;
+		void (^operationBlock)(void);
+
+		switch ([[BPHomebrewManager sharedManager] statusForFormula:formula]) {
+			case kBP_FORMULA_INSTALLED:
+			{
+				message = @"Are you sure you want to uninstall the formula '%@'?";
+				operationBlock = ^{
+					[BPHomebrewInterface uninstall:formula.name];
+				};
+			}
+				break;
+
+			case kBP_FORMULA_NOT_INSTALLED:
+			{
+				message = @"Are you sure you want to install the formula '%@'?";
+				operationBlock = ^{
+					[BPHomebrewInterface install:formula.name];
+				};
+			}
+				break;
+
+			case kBP_FORMULA_OUTDATED:
+			{
+				message = nil;
+				operationBlock = ^{
+					[BPHomebrewInterface uninstall:formula.name];
+				};
+			}
+				break;
+		}
+
+		if (message) {
+			NSAlert *alert = [NSAlert alertWithMessageText:@"Attention!" defaultButton:@"Yes" alternateButton:@"Cancel" otherButton:nil informativeTextWithFormat:message, formula.name];
+			[alert.window setTitle:@"Cakebrew"];
+			if ([alert runModal] == NSAlertDefaultReturn) {
+				operationBlock();
+			}
+		} else {
+			operationBlock();
+		}
+	}
+}
+
+- (IBAction)updateHomebrew:(id)sender
+{
+//	[self.tableView_formulas show]
 }
 
 @end

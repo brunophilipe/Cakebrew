@@ -1,17 +1,30 @@
 //
 //  BrewInterface.m
-//  Cakebrew
+//  Cakebrew – The Homebrew GUI App for OS X 
 //
 //  Created by Vincent Saluzzo on 06/12/11.
 //  Copyright (c) 2011 Bruno Philipe. All rights reserved.
 //
+//	This program is free software: you can redistribute it and/or modify
+//	it under the terms of the GNU General Public License as published by
+//	the Free Software Foundation, either version 3 of the License, or
+//	(at your option) any later version.
+//
+//	This program is distributed in the hope that it will be useful,
+//	but WITHOUT ANY WARRANTY; without even the implied warranty of
+//	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+//	GNU General Public License for more details.
+//
+//	You should have received a copy of the GNU General Public License
+//	along with this program.  If not, see <http://www.gnu.org/licenses/>.
+//
 
-#import "BrewInterface.h"
+#import "BPHomebrewInterface.h"
 #import "BPFormula.h"
 
 #define kBP_HOMEBREW_PATH @"/usr/local/bin/brew"
 
-@implementation BrewInterface
+@implementation BPHomebrewInterface
 
 + (NSString*)performBrewCommandWithArguments:(NSArray*)arguments
 {
@@ -47,7 +60,7 @@
 
 + (NSArray*)list
 {
-	return [BrewInterface listMode:kBP_LIST_INSTALLED];
+	return [BPHomebrewInterface listMode:kBP_LIST_INSTALLED];
 }
 
 + (NSArray*)listMode:(BP_LIST_MODE)mode {
@@ -77,7 +90,7 @@
 			return nil;
 	}
 
-    NSString *string = [BrewInterface performBrewCommandWithArguments:arguments];
+    NSString *string = [BPHomebrewInterface performBrewCommandWithArguments:arguments];
 	NSArray *aux = nil;
     NSMutableArray *array = [[string componentsSeparatedByString:@"\n"] mutableCopy];
 	NSMutableArray *formulas = [NSMutableArray arrayWithCapacity:array.count-1];
@@ -99,37 +112,37 @@
 }
 
 + (NSArray*)search:(NSString*)formula {
-    NSString *string = [BrewInterface performBrewCommandWithArguments:@[@"search", formula]];
+    NSString *string = [BPHomebrewInterface performBrewCommandWithArguments:@[@"search", formula]];
     NSMutableArray* array = [[string componentsSeparatedByString:@"\n"] mutableCopy];
     [array removeLastObject];
     return array;
 }
 
 + (NSString*)info:(NSString*)formula {
-	NSString *string = [BrewInterface performBrewCommandWithArguments:@[@"info", formula]];
+	NSString *string = [BPHomebrewInterface performBrewCommandWithArguments:@[@"info", formula]];
 	return string;
 }
 
 + (NSString*)update {
-	NSString *string = [BrewInterface performBrewCommandWithArguments:@[@"update"]];
+	NSString *string = [BPHomebrewInterface performBrewCommandWithArguments:@[@"update"]];
     NSLog (@"script returned:\n%@", string);
     return string;
 }
 
 + (NSString*)upgrade:(NSString*)formula {
-	NSString *string = [BrewInterface performBrewCommandWithArguments:@[@"upgrade", formula]];
+	NSString *string = [BPHomebrewInterface performBrewCommandWithArguments:@[@"upgrade", formula]];
     NSLog (@"script returned:\n%@", string);
     return string;
 }
 
 + (NSString*)install:(NSString*)formula {
-	NSString *string = [BrewInterface performBrewCommandWithArguments:@[@"install", formula]];
+	NSString *string = [BPHomebrewInterface performBrewCommandWithArguments:@[@"install", formula]];
     NSLog (@"script returned:\n%@", string);
     return string;
 }
 
 + (NSString*)uninstall:(NSString*)formula {
-    NSString *string = [BrewInterface performBrewCommandWithArguments:@[@"uninstall", formula]];
+    NSString *string = [BPHomebrewInterface performBrewCommandWithArguments:@[@"uninstall", formula]];
     NSLog (@"script returned:\n%@", string);
     return string;
 }
