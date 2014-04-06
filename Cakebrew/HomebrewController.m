@@ -1,9 +1,9 @@
 //
-//  HomebrewController.m
-//  Cakebrew – The Homebrew GUI App for OS X 
+//	HomebrewController.m
+//	Cakebrew – The Homebrew GUI App for OS X 
 //
-//  Created by Vincent Saluzzo on 06/12/11.
-//  Copyright (c) 2011 Bruno Philipe. All rights reserved.
+//	Created by Vincent Saluzzo on 06/12/11.
+//	Copyright (c) 2011 Bruno Philipe. All rights reserved.
 //
 //	This program is free software: you can redistribute it and/or modify
 //	it under the terms of the GNU General Public License as published by
@@ -311,7 +311,7 @@
 
         NSString* appName = [self.formulasArray objectAtIndex:[self.tableView_formulas selectedRow]];
         NSString* appInfo = [BrewInterface info:appName];
-		//      [MoreInfoHUD_AppInfo setStringValue:[appInfo retain]];
+		//	    [MoreInfoHUD_AppInfo setStringValue:[appInfo retain]];
         [self.MoreInfoHUD_AppInfo.textContainer.textView setString:appInfo];
         [self.MoreInfoHUD_AppTitle setStringValue:[NSString stringWithFormat:@"More information on %@",appName]];
         [self.MoreInfoHUD_AppInfo.textContainer.textView setTextColor:[NSColor whiteColor]];

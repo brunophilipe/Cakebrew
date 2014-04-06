@@ -1,9 +1,9 @@
 //
-//  HomebrewInstallController.m
-//  Cakebrew – The Homebrew GUI App for OS X 
+//	HomebrewInstallController.m
+//	Cakebrew – The Homebrew GUI App for OS X 
 //
-//  Created by Vincent Saluzzo on 08/12/11.
-//  Copyright (c) 2011 Bruno Philipe. All rights reserved.
+//	Created by Vincent Saluzzo on 08/12/11.
+//	Copyright (c) 2011 Bruno Philipe. All rights reserved.
 //
 //	This program is free software: you can redistribute it and/or modify
 //	it under the terms of the GNU General Public License as published by
@@ -45,7 +45,7 @@
 #pragma mark - NSTableView DataSource
 - (NSInteger)numberOfRowsInTableView:(NSTableView *)aTableView {
 
-    //    NSLog(@"%lu", );
+    //	  NSLog(@"%lu", );
     if(arrayOfApplicationToInstall) {
         return [arrayOfApplicationToInstall count];
     } else return 0;

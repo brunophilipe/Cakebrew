@@ -1,9 +1,9 @@
 //
-//  BPHomebrewManager.h
-//  Cakebrew – The Homebrew GUI App for OS X 
+//	BPHomebrewManager.h
+//	Cakebrew – The Homebrew GUI App for OS X 
 //
-//  Created by Bruno Philipe on 4/3/14.
-//  Copyright (c) 2011 Bruno Philipe. All rights reserved.
+//	Created by Bruno Philipe on 4/3/14.
+//	Copyright (c) 2011 Bruno Philipe. All rights reserved.
 //
 //	This program is free software: you can redistribute it and/or modify
 //	it under the terms of the GNU General Public License as published by

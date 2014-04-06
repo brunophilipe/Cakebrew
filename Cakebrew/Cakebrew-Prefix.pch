@@ -20,4 +20,6 @@
 	#define kBPDetailBackgroundColor NSColorFromRGB(0x97aac6)
 
 	#define BPAppDelegateRef ((BPAppDelegate*)[[NSApplication sharedApplication] delegate])
+
+	#define kBP_CAKEBREW_URL [NSURL URLWithString:@"http://www.cakebrew.com"]
 #endif

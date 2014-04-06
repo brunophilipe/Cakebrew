@@ -38,6 +38,7 @@
 		15D2CFB518F2065200B6D9F1 /* downloadTemplate.png in Resources */ = {isa = PBXBuildFile; fileRef = 15D2CFB318F2065200B6D9F1 /* downloadTemplate.png */; };
 		15D2CFB618F2065200B6D9F1 /* downloadTemplate@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 15D2CFB418F2065200B6D9F1 /* downloadTemplate@2x.png */; };
 		15D2CFB818F206DF00B6D9F1 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 15D2CFB718F206DF00B6D9F1 /* README.md */; };
+		15D2CFBA18F20A8200B6D9F1 /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = 15D2CFB918F20A8200B6D9F1 /* LICENSE */; };
 		15D5BEF118EBB3FB001DDED7 /* delete.icns in Resources */ = {isa = PBXBuildFile; fileRef = 15D5BEEE18EBB3FB001DDED7 /* delete.icns */; };
 		15D5BEF218EBB3FB001DDED7 /* label.icns in Resources */ = {isa = PBXBuildFile; fileRef = 15D5BEEF18EBB3FB001DDED7 /* label.icns */; };
 		15D5BEF318EBB3FB001DDED7 /* plus.icns in Resources */ = {isa = PBXBuildFile; fileRef = 15D5BEF018EBB3FB001DDED7 /* plus.icns */; };
@@ -104,6 +105,7 @@
 		15D2CFB318F2065200B6D9F1 /* downloadTemplate.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = downloadTemplate.png; sourceTree = "<group>"; };
 		15D2CFB418F2065200B6D9F1 /* downloadTemplate@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "downloadTemplate@2x.png"; sourceTree = "<group>"; };
 		15D2CFB718F206DF00B6D9F1 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.md; sourceTree = SOURCE_ROOT; };
+		15D2CFB918F20A8200B6D9F1 /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = SOURCE_ROOT; };
 		15D5BEEE18EBB3FB001DDED7 /* delete.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = delete.icns; sourceTree = "<group>"; };
 		15D5BEEF18EBB3FB001DDED7 /* label.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = label.icns; sourceTree = "<group>"; };
 		15D5BEF018EBB3FB001DDED7 /* plus.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = plus.icns; sourceTree = "<group>"; };
@@ -181,13 +183,6 @@
 			path = "Icon Templates";
 			sourceTree = "<group>";
 		};
-		15D2CFA518F202AE00B6D9F1 /* PXSourceList */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = PXSourceList;
-			sourceTree = "<group>";
-		};
 		15D2CFA618F202B300B6D9F1 /* DCOAboutWindow */ = {
 			isa = PBXGroup;
 			children = (
@@ -217,7 +212,6 @@
 			isa = PBXGroup;
 			children = (
 				15D2CFA618F202B300B6D9F1 /* DCOAboutWindow */,
-				15D2CFA518F202AE00B6D9F1 /* PXSourceList */,
 				15D5BEF718EBC56E001DDED7 /* DMSplitView */,
 			);
 			path = Libraries;
@@ -306,6 +300,7 @@
 		1FE4FE5F148E4CDD008EDE8B /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				15D2CFB918F20A8200B6D9F1 /* LICENSE */,
 				15D2CFB718F206DF00B6D9F1 /* README.md */,
 				1FE4FE60148E4CDD008EDE8B /* Cakebrew-Info.plist */,
 				1FE4FE61148E4CDD008EDE8B /* InfoPlist.strings */,
@@ -393,6 +388,7 @@
 				15D2CFA418F1EAD200B6D9F1 /* globe.icns in Resources */,
 				15D2CFB818F206DF00B6D9F1 /* README.md in Resources */,
 				15D2CF9818F1D66400B6D9F1 /* installedTemplate@2x.png in Resources */,
+				15D2CFBA18F20A8200B6D9F1 /* LICENSE in Resources */,
 				15D2CF9518F1D66400B6D9F1 /* checkmarkTemplate.png in Resources */,
 				15D2CF9918F1D66400B6D9F1 /* outdatedTemplate.png in Resources */,
 				15D2CF9318F1D66400B6D9F1 /* allFormulasTemplate.png in Resources */,

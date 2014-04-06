@@ -1,9 +1,9 @@
 //
-//  DCOAboutWindowController.h
-//  Tapetrap
+//	DCOAboutWindowController.h
+//	Tapetrap
 //
-//  Created by Boy van Amstel on 20-01-14.
-//  Copyright (c) 2014 Danger Cove. All rights reserved.
+//	Created by Boy van Amstel on 20-01-14.
+//	Copyright (c) 2014 Danger Cove. All rights reserved.
 //
 
 #import <Cocoa/Cocoa.h>

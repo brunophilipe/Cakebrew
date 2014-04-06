@@ -1,9 +1,9 @@
 //
-//  AppDelegate.h
-//  Cakebrew – The Homebrew GUI App for OS X 
+//	AppDelegate.h
+//	Cakebrew – The Homebrew GUI App for OS X 
 //
-//  Created by Vincent Saluzzo on 06/12/11.
-//  Copyright (c) 2011 Bruno Philipe. All rights reserved.
+//	Created by Vincent Saluzzo on 06/12/11.
+//	Copyright (c) 2011 Bruno Philipe. All rights reserved.
 //
 //	This program is free software: you can redistribute it and/or modify
 //	it under the terms of the GNU General Public License as published by
@@ -24,9 +24,10 @@
 @interface BPAppDelegate : NSObject <NSApplicationDelegate>
 
 @property (weak) IBOutlet NSWindow *window;
-@property (weak) IBOutlet NSTextField *aboutDesc;
 
 - (NSURL*)urlForApplicationSupportFolder;
 - (NSURL*)urlForApplicationCachesFolder;
+
+- (IBAction)showAboutWindow:(id)sender;
 
 @end

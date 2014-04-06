@@ -1,9 +1,9 @@
 //
-//  DCOAboutWindowController.m
-//  Tapetrap
+//	DCOAboutWindowController.m
+//	Tapetrap
 //
-//  Created by Boy van Amstel on 20-01-14.
-//  Copyright (c) 2014 Danger Cove. All rights reserved.
+//	Created by Boy van Amstel on 20-01-14.
+//	Copyright (c) 2014 Danger Cove. All rights reserved.
 //
 
 #import "DCOAboutWindowController.h"
@@ -79,7 +79,7 @@
 
     // Disable editing
     [self.creditsTextView setEditable:NO]; // Somehow IB checkboxes are not working
-//    [self.creditsTextView setSelectable:NO]; // Somehow IB checkboxes are not working
+//	  [self.creditsTextView setSelectable:NO]; // Somehow IB checkboxes are not working
     
     // Draw info view
     self.infoView.wantsLayer = YES;

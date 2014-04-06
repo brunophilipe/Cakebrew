@@ -1,9 +1,9 @@
 //
-//  AppDelegate.m
-//  Cakebrew – The Homebrew GUI App for OS X 
+//	AppDelegate.m
+//	Cakebrew – The Homebrew GUI App for OS X
 //
-//  Created by Vincent Saluzzo on 06/12/11.
-//  Copyright (c) 2011 Bruno Philipe. All rights reserved.
+//	Created by Vincent Saluzzo on 06/12/11.
+//	Copyright (c) 2011 Bruno Philipe. All rights reserved.
 //
 //	This program is free software: you can redistribute it and/or modify
 //	it under the terms of the GNU General Public License as published by
@@ -21,12 +21,22 @@
 
 #import "BPAppDelegate.h"
 #import "BPHomebrewManager.h"
+#import "DCOAboutWindowController.h"
+
+@class DCOAboutWindowController;
+
+@interface BPAppDelegate ()
+
+@property (strong) DCOAboutWindowController *aboutWindowController;
+
+@end
 
 @implementation BPAppDelegate
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification
 {
-    [self.aboutDesc setStringValue:@"Homebrew is a UNIX package manager for OS X like MacPorts (OS X), Yum (Fedora), Apt (Ubuntu/Debian), etc.\nHomebrew GUI is a user interface for Homebrew command-line tool, to simplify its use (and also for person who detest command-line ;) )"];
+	self.aboutWindowController = [[DCOAboutWindowController alloc] init];
+	[self.aboutWindowController setAppWebsiteURL:kBP_CAKEBREW_URL];
 	[[BPHomebrewManager sharedManager] update];
 }
 
@@ -64,6 +74,11 @@
 	error = nil;
 
 	return path;
+}
+
+- (IBAction)showAboutWindow:(id)sender
+{
+	[self.aboutWindowController showWindow:nil];
 }
 
 @end
