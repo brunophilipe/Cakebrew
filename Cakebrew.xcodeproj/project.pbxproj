@@ -14,7 +14,8 @@
 		1570BA3618EE0A66001C3C5C /* BPHomebrewManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 1570BA3518EE0A66001C3C5C /* BPHomebrewManager.m */; };
 		1570BA3918EE24F1001C3C5C /* BPSidebarDetailFieldView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1570BA3818EE24F1001C3C5C /* BPSidebarDetailFieldView.m */; };
 		1570BA5618EE50BD001C3C5C /* BPFormula.m in Sources */ = {isa = PBXBuildFile; fileRef = 1570BA5518EE50BD001C3C5C /* BPFormula.m */; };
-		1570BA6118EF9B18001C3C5C /* PXSourceList.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 1570BA5E18EF9481001C3C5C /* PXSourceList.framework */; };
+		158370B918F2471500176C9C /* PXSourceList.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 158370B818F2471500176C9C /* PXSourceList.framework */; };
+		158370BA18F2472100176C9C /* PXSourceList.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 158370B818F2471500176C9C /* PXSourceList.framework */; };
 		15D2CF9318F1D66400B6D9F1 /* allFormulasTemplate.png in Resources */ = {isa = PBXBuildFile; fileRef = 15D2CF8918F1D66400B6D9F1 /* allFormulasTemplate.png */; };
 		15D2CF9418F1D66400B6D9F1 /* allFormulasTemplate@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 15D2CF8A18F1D66400B6D9F1 /* allFormulasTemplate@2x.png */; };
 		15D2CF9518F1D66400B6D9F1 /* checkmarkTemplate.png in Resources */ = {isa = PBXBuildFile; fileRef = 15D2CF8B18F1D66400B6D9F1 /* checkmarkTemplate.png */; };
@@ -32,7 +33,6 @@
 		15D2CFAA18F202B300B6D9F1 /* DCOAboutWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 15D2CFA718F202B300B6D9F1 /* DCOAboutWindow.xib */; };
 		15D2CFAB18F202B300B6D9F1 /* DCOAboutWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 15D2CFA918F202B300B6D9F1 /* DCOAboutWindowController.m */; };
 		15D2CFAD18F202D000B6D9F1 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 15D2CFAC18F202D000B6D9F1 /* QuartzCore.framework */; };
-		15D2CFAE18F2050000B6D9F1 /* PXSourceList.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1570BA5E18EF9481001C3C5C /* PXSourceList.framework */; };
 		15D2CFB118F205F200B6D9F1 /* shellTemplate.png in Resources */ = {isa = PBXBuildFile; fileRef = 15D2CFAF18F205F200B6D9F1 /* shellTemplate.png */; };
 		15D2CFB218F205F200B6D9F1 /* shellTemplate@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 15D2CFB018F205F200B6D9F1 /* shellTemplate@2x.png */; };
 		15D2CFB518F2065200B6D9F1 /* downloadTemplate.png in Resources */ = {isa = PBXBuildFile; fileRef = 15D2CFB318F2065200B6D9F1 /* downloadTemplate.png */; };
@@ -62,7 +62,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				1570BA6118EF9B18001C3C5C /* PXSourceList.framework in CopyFiles */,
+				158370BA18F2472100176C9C /* PXSourceList.framework in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -81,7 +81,7 @@
 		1570BA3818EE24F1001C3C5C /* BPSidebarDetailFieldView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BPSidebarDetailFieldView.m; path = Views/BPSidebarDetailFieldView.m; sourceTree = "<group>"; };
 		1570BA5418EE50BD001C3C5C /* BPFormula.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BPFormula.h; path = Models/BPFormula.h; sourceTree = "<group>"; };
 		1570BA5518EE50BD001C3C5C /* BPFormula.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BPFormula.m; path = Models/BPFormula.m; sourceTree = "<group>"; };
-		1570BA5E18EF9481001C3C5C /* PXSourceList.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PXSourceList.framework; path = Cakebrew/Frameworks/PXSourceList.framework; sourceTree = "<group>"; };
+		158370B818F2471500176C9C /* PXSourceList.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PXSourceList.framework; path = Cakebrew/Frameworks/PXSourceList.framework; sourceTree = "<group>"; };
 		15D2CF8918F1D66400B6D9F1 /* allFormulasTemplate.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = allFormulasTemplate.png; sourceTree = "<group>"; };
 		15D2CF8A18F1D66400B6D9F1 /* allFormulasTemplate@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "allFormulasTemplate@2x.png"; sourceTree = "<group>"; };
 		15D2CF8B18F1D66400B6D9F1 /* checkmarkTemplate.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = checkmarkTemplate.png; sourceTree = "<group>"; };
@@ -140,7 +140,7 @@
 			files = (
 				15D2CFAD18F202D000B6D9F1 /* QuartzCore.framework in Frameworks */,
 				1FE4FE59148E4CDD008EDE8B /* Cocoa.framework in Frameworks */,
-				15D2CFAE18F2050000B6D9F1 /* PXSourceList.framework in Frameworks */,
+				158370B918F2471500176C9C /* PXSourceList.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -255,7 +255,7 @@
 		1FE4FE57148E4CDD008EDE8B /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				1570BA5E18EF9481001C3C5C /* PXSourceList.framework */,
+				158370B818F2471500176C9C /* PXSourceList.framework */,
 				15D2CFAC18F202D000B6D9F1 /* QuartzCore.framework */,
 				1FE4FE58148E4CDD008EDE8B /* Cocoa.framework */,
 				1FE4FE5A148E4CDD008EDE8B /* Other Frameworks */,

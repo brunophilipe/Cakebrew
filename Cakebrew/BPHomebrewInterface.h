@@ -34,11 +34,11 @@ typedef enum : NSUInteger {
 
 + (NSArray*)list;
 + (NSArray*)listMode:(BP_LIST_MODE)mode;
-+ (NSArray*)search:(NSString*)formula;
-+ (NSString*)info:(NSString*)formula;
++ (NSArray*)searchForFormulaName:(NSString*)formula;
++ (NSString*)informationForFormula:(NSString*)formula;
 + (NSString*)update;
-+ (NSString*)upgrade:(NSString*)formula;
-+ (NSString*)install:(NSString*)formula;
-+ (NSString*)uninstall:(NSString*)formula;
++ (NSString*)upgradeFormula:(NSString*)formula;
++ (NSString*)installFormula:(NSString*)formula;
++ (NSString*)uninstallFormula:(NSString*)formula;
 
 @end

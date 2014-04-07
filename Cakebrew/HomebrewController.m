@@ -50,6 +50,29 @@
 	return self;
 }
 
+- (void)displayInformationForFormula:(BPFormula*)formula
+{
+	if (formula) {
+		if (formula.isInstalled) {
+			[self.label_formulaPath setStringValue:formula.installPath];
+		} else {
+			[self.label_formulaPath setStringValue:@"Formula Not Installed"];
+		}
+
+		[self.label_formulaVersion setStringValue:formula.latestVersion];
+
+		if (formula.dependencies) {
+			[self.label_formulaDependencies setStringValue:formula.dependencies];
+		} else {
+			[self.label_formulaDependencies setStringValue:@"This formula has no dependencies!"];
+		}
+	} else {
+		[self.label_formulaPath setStringValue:@"--"];
+		[self.label_formulaVersion setStringValue:@"--"];
+		[self.label_formulaDependencies setStringValue:@"--"];
+	}
+}
+
 #pragma mark - Homebrew Manager Delegate
 
 - (void)homebrewManagerFinishedUpdating:(BPHomebrewManager *)manager
@@ -89,9 +112,11 @@
 	[parent addChildItem:item];
 
 	item = [PXSourceListItem itemWithTitle:@"Update" identifier:@"item"];
-	[item setBadgeValue:@-1];
+	[item setBadgeValue:@-2];
 	[item setIcon:[NSImage imageNamed:@"downloadTemplate"]];
 	[parent addChildItem:item];
+
+	[self displayInformationForFormula:nil];
 }
 
 #pragma mark - Getters and Setters
@@ -102,6 +127,7 @@
 	[_splitView setMinSize:150.f ofSubviewAtIndex:0];
 	[_splitView setMinSize:400.f ofSubviewAtIndex:1];
 	[_splitView setDividerColor:kBPSidebarDividerColor];
+	[_splitView setDividerThickness:0];
 }
 
 - (DMSplitView*)splitView
@@ -184,6 +210,9 @@
 				[self.toolbarButton_installUninstall setLabel:@"Install Formula"];
 				break;
 		}
+
+		[formula getInformation];
+		[self displayInformationForFormula:formula];
     }
 }
 
@@ -236,9 +265,16 @@
     cellView.textField.stringValue = sourceListItem.title;
 
 	if (sourceListItem.badgeValue.integerValue >= 0)
+	{
 		cellView.badgeView.badgeValue = sourceListItem.badgeValue.integerValue;
+	}
 	else
-		[cellView.badgeView setHidden:YES];
+	{
+		if (sourceListItem.badgeValue.integerValue == -2)
+			[cellView.badgeView setBadgeText:@"!"];
+		else
+			[cellView.badgeView setHidden:YES];
+	}
 
 	if (sourceListItem.icon)
 		[cellView.imageView setImage:sourceListItem.icon];
@@ -250,25 +286,31 @@
 
 - (void)sourceListSelectionDidChange:(NSNotification *)notification
 {
+	NSString *message;
+
 	switch ([self.outlineView_sidebar selectedRow]) {
 		case 1: // Installed Formulas
 			_formulasArray = [[BPHomebrewManager sharedManager] formulas_installed];
 			[[self.tableView_formulas tableColumnWithIdentifier:@"Version"] setHidden:NO];
+			message = @"These are the formulas already installed in your system.";
 			break;
 
 		case 2: // Upgradeable Formulas
 			_formulasArray = [[BPHomebrewManager sharedManager] formulas_outdated];
 			[[self.tableView_formulas tableColumnWithIdentifier:@"Version"] setHidden:NO];
+			message = @"These formulas are already installed, but have an update available.";
 			break;
 
 		case 3: // All Formulas
 			_formulasArray = [[BPHomebrewManager sharedManager] formulas_all];
 			[[self.tableView_formulas tableColumnWithIdentifier:@"Version"] setHidden:YES];
+			message = @"These are all the formulas available for instalation with Homebrew.";
 			break;
 
 		case 4:	// Leaves
 			_formulasArray = [[BPHomebrewManager sharedManager] formulas_leaves];
 			[[self.tableView_formulas tableColumnWithIdentifier:@"Version"] setHidden:YES];
+			message = @"These formulas are not dependencies of any other formulas.";
 			break;
 
 		case 6: // Doctor
@@ -279,6 +321,8 @@
 			break;
 	}
 
+	[self.label_formulasCount setStringValue:message];
+	[self.tableView_formulas deselectAll:nil];
 	[self.tableView_formulas reloadData];
 }
 
@@ -288,21 +332,7 @@
 }
 
 - (IBAction)showHUDAbout:(id)sender {
-    /*
-     if([HUDAbout isVisible]) {
-	 [HUDAbout orderOut:self];
-	 //NSLog(@"isVisible :=> GoBack");
-	 } else {
-	 [HUDAbout orderFront:self];
-	 //NSLog(@"isNotVisible :=> GoFront");
-	 }
-	 */
 
-    if([self.popoverAbout isShown]) {
-        [self.popoverAbout close];
-    } else {
-        [self.popoverAbout showRelativeToRect:[sender bounds] ofView:sender preferredEdge:NSMaxXEdge];
-    }
 }
 
 - (IBAction)showFormulaInfo:(id)sender {
@@ -347,7 +377,7 @@
 			{
 				message = @"Are you sure you want to uninstall the formula '%@'?";
 				operationBlock = ^{
-					[BPHomebrewInterface uninstall:formula.name];
+					[BPHomebrewInterface uninstallFormula:formula.name];
 				};
 			}
 				break;
@@ -356,7 +386,7 @@
 			{
 				message = @"Are you sure you want to install the formula '%@'?";
 				operationBlock = ^{
-					[BPHomebrewInterface install:formula.name];
+					[BPHomebrewInterface installFormula:formula.name];
 				};
 			}
 				break;
@@ -365,7 +395,7 @@
 			{
 				message = nil;
 				operationBlock = ^{
-					[BPHomebrewInterface uninstall:formula.name];
+					[BPHomebrewInterface uninstallFormula:formula.name];
 				};
 			}
 				break;
@@ -386,6 +416,9 @@
 - (IBAction)updateHomebrew:(id)sender
 {
 //	[self.tableView_formulas show]
+}
+
+- (IBAction)openSelectedFormulaWebsite:(id)sender {
 }
 
 @end

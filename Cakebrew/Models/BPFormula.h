@@ -28,8 +28,12 @@
 @property (strong) NSString *latestVersion;
 @property (strong) NSString *installPath;
 @property (strong) NSURL *website;
+@property (strong) NSString *dependencies;
+@property (getter = isInstalled) BOOL installed;
 
 + (BPFormula*)formulaWithName:(NSString*)name andVersion:(NSString*)version;
 + (BPFormula*)formulaWithName:(NSString*)name;
+
+- (BOOL)getInformation;
 
 @end

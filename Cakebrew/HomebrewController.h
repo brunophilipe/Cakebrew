@@ -29,14 +29,13 @@
 @property IBOutlet NSWindow *HUDAbout;
 @property IBOutlet NSWindow *HUDMoreInfo;
 
-@property IBOutlet NSTableView *tableView_formulas;
-@property IBOutlet NSOutlineView *outlineView_sidebar;
-@property IBOutlet NSTextField *MoreInfoHUD_AppTitle;
-@property IBOutlet NSTextView *MoreInfoHUD_AppInfo;
-@property IBOutlet NSToolbar *MainToolbar;
-@property IBOutlet NSPopover *popoverAbout;
-@property IBOutlet NSPopover *popoverMoreInfo;
-@property IBOutlet DMSplitView *splitView;
+@property (weak) IBOutlet NSTableView *tableView_formulas;
+@property (weak) IBOutlet NSOutlineView *outlineView_sidebar;
+@property (weak) IBOutlet DMSplitView *splitView;
+@property (weak) IBOutlet NSTextField *label_formulasCount;
+@property (weak) IBOutlet NSTextField *label_formulaPath;
+@property (weak) IBOutlet NSTextField *label_formulaVersion;
+@property (weak) IBOutlet NSTextField *label_formulaDependencies;
 
 @property IBOutlet NSToolbarItem *toolbarButton_formulaInfo;
 @property IBOutlet NSToolbarItem *toolbarButton_installUninstall;
@@ -44,5 +43,6 @@
 - (IBAction)showFormulaInfo:(id)sender;
 - (IBAction)installOrUninstall:(id)sender;
 - (IBAction)updateHomebrew:(id)sender;
+- (IBAction)openSelectedFormulaWebsite:(id)sender;
 
 @end

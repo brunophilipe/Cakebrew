@@ -25,7 +25,7 @@
 
 - (IBAction) showInstallWindow:(id)sender {
 
-    arrayOfApplicationToInstall = [BPHomebrewInterface search:@""];
+    arrayOfApplicationToInstall = [BPHomebrewInterface searchForFormulaName:@""];
 
     if(self.view.window.isVisible) {
         [self.view.window orderBack:sender];
@@ -38,7 +38,7 @@
 
 - (IBAction) install:(id)sender {
     if([listOfApplicationToInstall selectedRow] != -1) {
-        [BPHomebrewInterface install:[arrayOfApplicationToInstall objectAtIndex:[listOfApplicationToInstall selectedRow]]];
+        [BPHomebrewInterface installFormula:[arrayOfApplicationToInstall objectAtIndex:[listOfApplicationToInstall selectedRow]]];
     }
 }
 

@@ -111,14 +111,14 @@
     return formulas;
 }
 
-+ (NSArray*)search:(NSString*)formula {
-    NSString *string = [BPHomebrewInterface performBrewCommandWithArguments:@[@"search", formula]];
++ (NSArray*)searchForFormulaName:(NSString*)name {
+    NSString *string = [BPHomebrewInterface performBrewCommandWithArguments:@[@"search", name]];
     NSMutableArray* array = [[string componentsSeparatedByString:@"\n"] mutableCopy];
     [array removeLastObject];
     return array;
 }
 
-+ (NSString*)info:(NSString*)formula {
++ (NSString*)informationForFormula:(NSString*)formula {
 	NSString *string = [BPHomebrewInterface performBrewCommandWithArguments:@[@"info", formula]];
 	return string;
 }
@@ -129,19 +129,19 @@
     return string;
 }
 
-+ (NSString*)upgrade:(NSString*)formula {
++ (NSString*)upgradeFormula:(NSString*)formula {
 	NSString *string = [BPHomebrewInterface performBrewCommandWithArguments:@[@"upgrade", formula]];
     NSLog (@"script returned:\n%@", string);
     return string;
 }
 
-+ (NSString*)install:(NSString*)formula {
++ (NSString*)installFormula:(NSString*)formula {
 	NSString *string = [BPHomebrewInterface performBrewCommandWithArguments:@[@"install", formula]];
     NSLog (@"script returned:\n%@", string);
     return string;
 }
 
-+ (NSString*)uninstall:(NSString*)formula {
++ (NSString*)uninstallFormula:(NSString*)formula {
     NSString *string = [BPHomebrewInterface performBrewCommandWithArguments:@[@"uninstall", formula]];
     NSLog (@"script returned:\n%@", string);
     return string;
