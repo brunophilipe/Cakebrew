@@ -41,4 +41,6 @@ typedef enum : NSUInteger {
 + (NSString*)installFormula:(NSString*)formula;
 + (NSString*)uninstallFormula:(NSString*)formula;
 
++ (void)runDoctorWithOutput:(id)output;
+
 @end

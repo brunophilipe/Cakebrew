@@ -22,26 +22,24 @@
 #import "BPHomebrewInterface.h"
 #import "BPFormula.h"
 
-#define kBP_HOMEBREW_PATH @"/usr/local/bin/brew"
-
 @implementation BPHomebrewInterface
 
 + (NSString*)performBrewCommandWithArguments:(NSArray*)arguments
 {
-	NSTask *listTask;
-    listTask = [[NSTask alloc] init];
-    [listTask setLaunchPath:kBP_HOMEBREW_PATH];
-    [listTask setArguments:arguments];
+	NSTask *task;
+    task = [[NSTask alloc] init];
+    [task setLaunchPath:kBP_HOMEBREW_PATH];
+    [task setArguments:arguments];
 
 	NSPipe *pipe;
     pipe = [NSPipe pipe];
-    [listTask setStandardOutput:pipe];
-    [listTask setStandardInput:[NSPipe pipe]];
+    [task setStandardOutput:pipe];
+    [task setStandardInput:[NSPipe pipe]];
 
     NSFileHandle *file;
     file = [pipe fileHandleForReading];
 
-    [listTask launch];
+    [task launch];
 
     NSData *data;
     data = [file readDataToEndOfFile];
@@ -52,7 +50,7 @@
 	 NSLog (@"script returned:\n%@", string);
 	 */
 
-    [listTask waitUntilExit];
+    [task waitUntilExit];
 
     string = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
 	return string;
@@ -145,5 +143,25 @@
     NSString *string = [BPHomebrewInterface performBrewCommandWithArguments:@[@"uninstall", formula]];
     NSLog (@"script returned:\n%@", string);
     return string;
+}
+
++ (void)runDoctorWithOutput:(id)output
+{
+	NSTask *task;
+    task = [[NSTask alloc] init];
+    [task setLaunchPath:kBP_HOMEBREW_PATH];
+#ifdef DEBUG
+	[task setArguments:@[@"leaves"]];
+#else
+	[task setArguments:@[@"doctor"]];
+#endif
+
+    [task setStandardOutput:output];
+    [task setStandardInput:[NSPipe pipe]];
+
+    [task launch];
+    [task waitUntilExit];
+
+	NSLog(@"Finished task!");
 }
 @end

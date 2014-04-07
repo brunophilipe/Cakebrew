@@ -19,13 +19,13 @@
 //	along with this program.  If not, see <http://www.gnu.org/licenses/>.
 //
 
-#import "HomebrewController.h"
+#import "BPHomebrewController.h"
 #import "BPFormula.h"
 #import "BPHomebrewManager.h"
 #import "BPHomebrewInterface.h"
 #import "Frameworks/PXSourceList.framework/Headers/PXSourceList.h"
 
-@interface HomebrewController () <NSTableViewDataSource, NSTableViewDelegate, PXSourceListDataSource, PXSourceListDelegate, BPHomebrewManagerDelegate>
+@interface BPHomebrewController () <NSTableViewDataSource, NSTableViewDelegate, PXSourceListDataSource, PXSourceListDelegate, BPHomebrewManagerDelegate>
 
 @property (strong, readonly) PXSourceListItem *rootSidebarCategory;
 
@@ -33,7 +33,7 @@
 
 @end
 
-@implementation HomebrewController
+@implementation BPHomebrewController
 {
 	NSOutlineView *_outlineView_sidebar;
 	DMSplitView *_splitView;
@@ -287,6 +287,7 @@
 - (void)sourceListSelectionDidChange:(NSNotification *)notification
 {
 	NSString *message;
+	NSUInteger tabIndex = 0;
 
 	switch ([self.outlineView_sidebar selectedRow]) {
 		case 1: // Installed Formulas
@@ -314,16 +315,25 @@
 			break;
 
 		case 6: // Doctor
+			message = @"The doctor is a Homebrew feature that detects the most common causes of errors.";
+			tabIndex = 1;
+			break;
 
+		case 7: // Update Tool
+			message = @"Updating Homebrew means fetching the latest info about the available formulas.";
+			tabIndex = 2;
 			break;
 
 		default:
 			break;
 	}
 
-	[self.label_formulasCount setStringValue:message];
-	[self.tableView_formulas deselectAll:nil];
-	[self.tableView_formulas reloadData];
+	if (message) [self.label_formulasCount setStringValue:message];
+	if (tabIndex == 1) {
+		[self.tableView_formulas deselectAll:nil];
+		[self.tableView_formulas reloadData];
+	}
+	[self.tabView selectTabViewItemAtIndex:tabIndex];
 }
 
 #pragma mark - IBActions

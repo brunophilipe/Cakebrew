@@ -7,9 +7,12 @@
 #endif
 
 #ifndef __BP_CAKEBREW__
+	#define __BP_CAKEBREW__
+
 	#import "BPAppDelegate.h"
 
-	#define __BP_CAKEBREW__
+	#define kBP_HOMEBREW_PATH @"/usr/local/bin/brew"
+
 	#define NSColorFromRGB(rgbValue) [NSColor colorWithRed:((float)((rgbValue & 0xFF0000) >> 16))/255.0 green:((float)((rgbValue & 0xFF00) >> 8))/255.0 blue:((float)(rgbValue & 0xFF))/255.0 alpha:1.0]
 
 	#define kBPSidebarHeaderColor NSColorFromRGB(0x707e8b)

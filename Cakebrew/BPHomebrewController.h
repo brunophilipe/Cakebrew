@@ -24,14 +24,12 @@
 
 @class DMSplitView;
 
-@interface HomebrewController : NSViewController
-
-@property IBOutlet NSWindow *HUDAbout;
-@property IBOutlet NSWindow *HUDMoreInfo;
+@interface BPHomebrewController : NSViewController
 
 @property (weak) IBOutlet NSTableView *tableView_formulas;
 @property (weak) IBOutlet NSOutlineView *outlineView_sidebar;
 @property (weak) IBOutlet DMSplitView *splitView;
+@property (weak) IBOutlet NSTabView *tabView;
 @property (weak) IBOutlet NSTextField *label_formulasCount;
 @property (weak) IBOutlet NSTextField *label_formulaPath;
 @property (weak) IBOutlet NSTextField *label_formulaVersion;
