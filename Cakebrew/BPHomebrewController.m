@@ -66,10 +66,20 @@
 		} else {
 			[self.label_formulaDependencies setStringValue:@"This formula has no dependencies!"];
 		}
+
+		if (formula.conflicts) {
+			[self.label_formulaConflicts setStringValue:formula.conflicts];
+		} else {
+			[self.label_formulaConflicts setStringValue:@"This formula has no known conflicts."];
+		}
+
+		[self.button_formulaWebsite setEnabled:YES];
 	} else {
 		[self.label_formulaPath setStringValue:@"--"];
 		[self.label_formulaVersion setStringValue:@"--"];
 		[self.label_formulaDependencies setStringValue:@"--"];
+		[self.label_formulaConflicts setStringValue:@"--"];
+		[self.button_formulaWebsite setEnabled:NO];
 	}
 }
 
@@ -189,6 +199,7 @@
     if(selectedIndex == -1) {
 		[self.toolbarButton_installUninstall setEnabled:NO];
 		[self.toolbarButton_formulaInfo setEnabled:NO];
+		[self displayInformationForFormula:nil];
     } else {
 		[self.toolbarButton_installUninstall setEnabled:YES];
 		[self.toolbarButton_formulaInfo setEnabled:YES];
@@ -328,8 +339,8 @@
 			break;
 	}
 
-	if (message) [self.label_formulasCount setStringValue:message];
-	if (tabIndex == 1) {
+	if (message) [self.label_information setStringValue:message];
+	if (tabIndex == 0) {
 		[self.tableView_formulas deselectAll:nil];
 		[self.tableView_formulas reloadData];
 	}
@@ -429,6 +440,11 @@
 }
 
 - (IBAction)openSelectedFormulaWebsite:(id)sender {
+	NSInteger selectedIndex = [self.tableView_formulas selectedRow];
+	if (selectedIndex >= 0) {
+		BPFormula *formula = [_formulasArray objectAtIndex:selectedIndex];
+		[[NSWorkspace sharedWorkspace] openURL:formula.website];
+	}
 }
 
 @end

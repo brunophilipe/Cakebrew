@@ -29,6 +29,7 @@
 @property (strong) NSString *installPath;
 @property (strong) NSURL *website;
 @property (strong) NSString *dependencies;
+@property (strong) NSString *conflicts;
 @property (getter = isInstalled) BOOL installed;
 
 + (BPFormula*)formulaWithName:(NSString*)name andVersion:(NSString*)version;

@@ -29,6 +29,7 @@
 #define kBP_ENCODE_FORMULA_WURL @"BP_ENCODE_FORMULA_WURL"
 #define kBP_ENCODE_FORMULA_DEPS @"BP_ENCODE_FORMULA_DEPS"
 #define kBP_ENCODE_FORMULA_INST @"BP_ENCODE_FORMULA_INST"
+#define kBP_ENCODE_FORMULA_CNFL @"BP_ENCODE_FORMULA_CNFL"
 
 @implementation BPFormula
 
@@ -58,6 +59,7 @@
 	if (self.installPath)		[aCoder encodeObject:self.installPath	forKey:kBP_ENCODE_FORMULA_PATH];
 	if (self.website)			[aCoder encodeObject:self.website		forKey:kBP_ENCODE_FORMULA_WURL];
 	if (self.dependencies)		[aCoder encodeObject:self.dependencies	forKey:kBP_ENCODE_FORMULA_DEPS];
+	if (self.conflicts)			[aCoder encodeObject:self.conflicts		forKey:kBP_ENCODE_FORMULA_CNFL];
 
 	[aCoder encodeObject:[NSNumber numberWithBool:self.installed]		forKey:kBP_ENCODE_FORMULA_INST];
 }
@@ -72,6 +74,7 @@
 		self.installPath	= [aDecoder decodeObjectForKey:kBP_ENCODE_FORMULA_PATH];
 		self.website		= [aDecoder decodeObjectForKey:kBP_ENCODE_FORMULA_WURL];
 		self.dependencies	= [aDecoder decodeObjectForKey:kBP_ENCODE_FORMULA_DEPS];
+		self.conflicts		= [aDecoder decodeObjectForKey:kBP_ENCODE_FORMULA_CNFL];
 
 		self.installed = [[aDecoder decodeObjectForKey:kBP_ENCODE_FORMULA_INST] boolValue];
 	}
@@ -85,25 +88,38 @@
 	NSUInteger lineIndex = 0;
 	NSLog(@"%@", lines);
 
-	line = [lines objectAtIndex:0];
+	lineIndex = 0;
+	line = [lines objectAtIndex:lineIndex];
 	[self setLatestVersion:[line substringFromIndex:[self.name length]+2]];
 
-	line = [lines objectAtIndex:1];
+	lineIndex = 1;
+	line = [lines objectAtIndex:lineIndex];
 	[self setWebsite:[NSURL URLWithString:line]];
 
-	line = [lines objectAtIndex:2];
+	lineIndex = 2;
+	line = [lines objectAtIndex:lineIndex];
+	if ([line rangeOfString:@"Conflicts with:"].location != NSNotFound) {
+		[self setConflicts:[line substringFromIndex:15]];
+		lineIndex = 3;
+		line = [lines objectAtIndex:lineIndex];
+	}
+
 	if ([line isEqualToString:@"Not installed"]) {
 		[self setInstalled:NO];
 	} else {
 		[self setInstalled:YES];
-		if ([line isEqualToString:@""]) {
-			[self setInstallPath:[lines objectAtIndex:3]];
+		if ([line isEqualToString:@""]) { //keg-only formual has no path
+			lineIndex += 1;
+			[self setInstallPath:[lines objectAtIndex:lineIndex]];
 		} else {
 			[self setInstallPath:line];
 		}
 	}
 
-	for (NSUInteger i=3; i<lines.count; i++)
+	NSUInteger i=lineIndex;
+	lineIndex = 0;
+
+	for ( ; i<lines.count; i++)
 	{
 		line = [lines objectAtIndex:i];
 		if ([line isEqualToString:@"==> Dependencies"]) {
@@ -116,7 +132,7 @@
 		return YES;
 	}
 
-	for (NSUInteger i=0; i<lines.count; i++) {
+	for (i=0; i<lines.count; i++) {
 		line = [lines objectAtIndex:lineIndex+i];
 
 		if (![line isEqualToString:@""] && ![line isEqualToString:@"==> Options"]) {

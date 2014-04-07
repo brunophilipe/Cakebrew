@@ -98,8 +98,6 @@
 		NSDictionary *cacheDict = @{kBP_CACHE_DICT_DATE_KEY: [NSDate date], kBP_CACHE_DICT_DATA_KEY: self.formulas_all};
 		NSData *cacheData = [NSKeyedArchiver archivedDataWithRootObject:cacheDict];
 
-		NSLog(@"\n%@\n%@\n%@", allFormulasFile.relativePath, allFormulasFile.relativeString, allFormulasFile.absoluteString);
-
 		if ([[NSFileManager defaultManager] fileExistsAtPath:allFormulasFile.relativePath]) {
 			[cacheData writeToURL:allFormulasFile atomically:YES];
 		} else {

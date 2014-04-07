@@ -30,10 +30,12 @@
 @property (weak) IBOutlet NSOutlineView *outlineView_sidebar;
 @property (weak) IBOutlet DMSplitView *splitView;
 @property (weak) IBOutlet NSTabView *tabView;
-@property (weak) IBOutlet NSTextField *label_formulasCount;
+@property (weak) IBOutlet NSTextField *label_information;
 @property (weak) IBOutlet NSTextField *label_formulaPath;
 @property (weak) IBOutlet NSTextField *label_formulaVersion;
 @property (weak) IBOutlet NSTextField *label_formulaDependencies;
+@property (weak) IBOutlet NSTextField *label_formulaConflicts;
+@property (weak) IBOutlet NSButton *button_formulaWebsite;
 
 @property IBOutlet NSToolbarItem *toolbarButton_formulaInfo;
 @property IBOutlet NSToolbarItem *toolbarButton_installUninstall;
