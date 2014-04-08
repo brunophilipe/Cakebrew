@@ -21,12 +21,15 @@
 
 #import <Foundation/Foundation.h>
 #import "DMSplitView.h"
+#import "BPGenericTextPopoverView.h"
 
 @class DMSplitView;
+@class BPGenericTextPopoverView;
 
-@interface BPHomebrewController : NSViewController
+@interface BPHomebrewViewController : NSViewController
 
 @property (weak) IBOutlet NSTableView *tableView_formulas;
+@property (weak) IBOutlet NSScrollView *scrollView_formulas;
 @property (weak) IBOutlet NSOutlineView *outlineView_sidebar;
 @property (weak) IBOutlet DMSplitView *splitView;
 @property (weak) IBOutlet NSTabView *tabView;
@@ -36,6 +39,7 @@
 @property (weak) IBOutlet NSTextField *label_formulaDependencies;
 @property (weak) IBOutlet NSTextField *label_formulaConflicts;
 @property (weak) IBOutlet NSButton *button_formulaWebsite;
+@property (weak) IBOutlet BPGenericTextPopoverView *formulaPopoverView;
 
 @property IBOutlet NSToolbarItem *toolbarButton_formulaInfo;
 @property IBOutlet NSToolbarItem *toolbarButton_installUninstall;

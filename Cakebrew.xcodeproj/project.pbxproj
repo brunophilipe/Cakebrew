@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		1536BFF718EBA92400B67C5C /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1536BFF618EBA92400B67C5C /* Images.xcassets */; };
+		153AD45418F468F2000D6FB5 /* BPGenericTextPopoverView.m in Sources */ = {isa = PBXBuildFile; fileRef = 153AD45318F468F2000D6FB5 /* BPGenericTextPopoverView.m */; };
 		1540FA3518ECF66B00334A5C /* download.icns in Resources */ = {isa = PBXBuildFile; fileRef = 1540FA3418ECF66B00334A5C /* download.icns */; };
 		1540FA3918ED09BB00334A5C /* BPInsetShadowView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1540FA3818ED09BB00334A5C /* BPInsetShadowView.m */; };
 		1540FA3D18EDDA1600334A5C /* BPTopBorderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1540FA3B18EDD8CE00334A5C /* BPTopBorderView.m */; };
@@ -54,7 +55,7 @@
 		1FE4FE6C148E4CDD008EDE8B /* BPAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FE4FE6B148E4CDD008EDE8B /* BPAppDelegate.m */; };
 		1FE4FE6F148E4CDD008EDE8B /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1FE4FE6D148E4CDD008EDE8B /* MainMenu.xib */; };
 		1FE4FE77148E4D43008EDE8B /* BPHomebrewInterface.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FE4FE76148E4D43008EDE8B /* BPHomebrewInterface.m */; };
-		1FE4FE7A148E5FEB008EDE8B /* BPHomebrewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FE4FE79148E5FEB008EDE8B /* BPHomebrewController.m */; };
+		1FE4FE7A148E5FEB008EDE8B /* BPHomebrewViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FE4FE79148E5FEB008EDE8B /* BPHomebrewViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -72,6 +73,8 @@
 
 /* Begin PBXFileReference section */
 		1536BFF618EBA92400B67C5C /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		153AD45218F468F2000D6FB5 /* BPGenericTextPopoverView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BPGenericTextPopoverView.h; path = Views/BPGenericTextPopoverView.h; sourceTree = "<group>"; };
+		153AD45318F468F2000D6FB5 /* BPGenericTextPopoverView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BPGenericTextPopoverView.m; path = Views/BPGenericTextPopoverView.m; sourceTree = "<group>"; };
 		1540FA3418ECF66B00334A5C /* download.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = download.icns; sourceTree = "<group>"; };
 		1540FA3718ED09BB00334A5C /* BPInsetShadowView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BPInsetShadowView.h; path = Views/BPInsetShadowView.h; sourceTree = "<group>"; };
 		1540FA3818ED09BB00334A5C /* BPInsetShadowView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BPInsetShadowView.m; path = Views/BPInsetShadowView.m; sourceTree = "<group>"; };
@@ -134,8 +137,8 @@
 		1FE4FE6E148E4CDD008EDE8B /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainMenu.xib; sourceTree = "<group>"; };
 		1FE4FE75148E4D43008EDE8B /* BPHomebrewInterface.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BPHomebrewInterface.h; sourceTree = "<group>"; };
 		1FE4FE76148E4D43008EDE8B /* BPHomebrewInterface.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BPHomebrewInterface.m; sourceTree = "<group>"; };
-		1FE4FE78148E5FEB008EDE8B /* BPHomebrewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BPHomebrewController.h; sourceTree = "<group>"; };
-		1FE4FE79148E5FEB008EDE8B /* BPHomebrewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BPHomebrewController.m; sourceTree = "<group>"; };
+		1FE4FE78148E5FEB008EDE8B /* BPHomebrewViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BPHomebrewViewController.h; sourceTree = "<group>"; };
+		1FE4FE79148E5FEB008EDE8B /* BPHomebrewViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BPHomebrewViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -161,6 +164,8 @@
 				1540FA3B18EDD8CE00334A5C /* BPTopBorderView.m */,
 				1570BA3718EE24F1001C3C5C /* BPSidebarDetailFieldView.h */,
 				1570BA3818EE24F1001C3C5C /* BPSidebarDetailFieldView.m */,
+				153AD45218F468F2000D6FB5 /* BPGenericTextPopoverView.h */,
+				153AD45318F468F2000D6FB5 /* BPGenericTextPopoverView.m */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -286,8 +291,8 @@
 				1FE4FE6B148E4CDD008EDE8B /* BPAppDelegate.m */,
 				1FE4FE75148E4D43008EDE8B /* BPHomebrewInterface.h */,
 				1FE4FE76148E4D43008EDE8B /* BPHomebrewInterface.m */,
-				1FE4FE78148E5FEB008EDE8B /* BPHomebrewController.h */,
-				1FE4FE79148E5FEB008EDE8B /* BPHomebrewController.m */,
+				1FE4FE78148E5FEB008EDE8B /* BPHomebrewViewController.h */,
+				1FE4FE79148E5FEB008EDE8B /* BPHomebrewViewController.m */,
 				157270D718F2598A00CA8C9C /* BPUpdateDoctorController.h */,
 				157270D818F2598A00CA8C9C /* BPUpdateDoctorController.m */,
 				1570BA3418EE0A66001C3C5C /* BPHomebrewManager.h */,
@@ -418,12 +423,13 @@
 				1570BA3918EE24F1001C3C5C /* BPSidebarDetailFieldView.m in Sources */,
 				157270DF18F34CF900CA8C9C /* BPInstallationViewController.m in Sources */,
 				1FE4FE65148E4CDD008EDE8B /* main.m in Sources */,
+				153AD45418F468F2000D6FB5 /* BPGenericTextPopoverView.m in Sources */,
 				1570BA3618EE0A66001C3C5C /* BPHomebrewManager.m in Sources */,
 				1FE4FE6C148E4CDD008EDE8B /* BPAppDelegate.m in Sources */,
 				1FE4FE77148E4D43008EDE8B /* BPHomebrewInterface.m in Sources */,
 				1540FA3918ED09BB00334A5C /* BPInsetShadowView.m in Sources */,
 				157270DA18F2598A00CA8C9C /* BPUpdateDoctorController.m in Sources */,
-				1FE4FE7A148E5FEB008EDE8B /* BPHomebrewController.m in Sources */,
+				1FE4FE7A148E5FEB008EDE8B /* BPHomebrewViewController.m in Sources */,
 				15D2CFAB18F202B300B6D9F1 /* DCOAboutWindowController.m in Sources */,
 				1540FA3D18EDDA1600334A5C /* BPTopBorderView.m in Sources */,
 			);

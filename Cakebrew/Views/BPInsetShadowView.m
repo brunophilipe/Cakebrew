@@ -53,8 +53,8 @@
 
 	NSShadow * shadow = [[NSShadow alloc] init];
 	[shadow setShadowColor:[NSColor colorWithCalibratedWhite:0.0f
-													   alpha:0.7f]];
-	[shadow setShadowBlurRadius:5.0f];
+													   alpha:0.4f]];
+	[shadow setShadowBlurRadius:2.5f];
 	[shadow set];
 
 	[path stroke];

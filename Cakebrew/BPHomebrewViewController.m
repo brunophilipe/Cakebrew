@@ -19,22 +19,23 @@
 //	along with this program.  If not, see <http://www.gnu.org/licenses/>.
 //
 
-#import "BPHomebrewController.h"
+#import "BPHomebrewViewController.h"
 #import "BPFormula.h"
 #import "BPHomebrewManager.h"
 #import "BPHomebrewInterface.h"
 #import "BPInstallationViewController.h"
 #import "Frameworks/PXSourceList.framework/Headers/PXSourceList.h"
 
-@interface BPHomebrewController () <NSTableViewDataSource, NSTableViewDelegate, PXSourceListDataSource, PXSourceListDelegate, BPHomebrewManagerDelegate>
+@interface BPHomebrewViewController () <NSTableViewDataSource, NSTableViewDelegate, PXSourceListDataSource, PXSourceListDelegate, BPHomebrewManagerDelegate>
 
 @property (strong, readonly) PXSourceListItem *rootSidebarCategory;
+@property (strong) NSPopover *formulaPopover;
 
 @property NSArray *formulasArray;
 
 @end
 
-@implementation BPHomebrewController
+@implementation BPHomebrewViewController
 {
 	NSOutlineView *_outlineView_sidebar;
 	DMSplitView *_splitView;
@@ -370,40 +371,34 @@
 
 #pragma mark - IBActions
 
-- (IBAction)refreshListOfApplicationAlreadyInstalled:(id)sender {
-}
-
-- (IBAction)showHUDAbout:(id)sender {
-
-}
-
 - (IBAction)showFormulaInfo:(id)sender {
-    /*if([self.tableView_formulas selectedRow] != -1) {
-		NSToolbarItem *toolbarItem = sender;
+	NSInteger selectedIndex;
 
-        NSString* appName = [self.formulasArray objectAtIndex:[self.tableView_formulas selectedRow]];
-        NSString* appInfo = [BrewInterface info:appName];
-		//	    [MoreInfoHUD_AppInfo setStringValue:[appInfo retain]];
-        [self.MoreInfoHUD_AppInfo.textContainer.textView setString:appInfo];
-        [self.MoreInfoHUD_AppTitle setStringValue:[NSString stringWithFormat:@"More information on %@",appName]];
-        [self.MoreInfoHUD_AppInfo.textContainer.textView setTextColor:[NSColor whiteColor]];
+	selectedIndex = [self.tableView_formulas selectedRow];
 
-        / *
-		 if([HUDMoreInfo isVisible]) {
-		 [HUDMoreInfo orderOut:self];
-		 //NSLog(@"isVisible :=> GoBack");
-		 } else {
-		 [HUDMoreInfo orderFront:self];
-		 //NSLog(@"isNotVisible :=> GoFront");
-		 }
-         * /
-        if([self.popoverMoreInfo isShown]) {
-            [self.popoverMoreInfo close];
-        } else {
-            [self.popoverMoreInfo showRelativeToRect:[toolbarItem.view frame] ofView:toolbarItem.view preferredEdge:NSMaxYEdge];
-        }
+	if (selectedIndex >= 0) {
+		if ([self.formulaPopover isShown]) {
+				[self.formulaPopover close];
+		}
 
-    }*/
+		[self.formulaPopoverView setDataObject:[_formulasArray objectAtIndex:selectedIndex]];
+
+		if (!self.formulaPopover) {
+			self.formulaPopover = [[NSPopover alloc] init];
+			[self.formulaPopover setBehavior:NSPopoverBehaviorSemitransient];
+			[self.formulaPopover setAppearance:NSPopoverAppearanceHUD];
+		}
+
+		NSViewController *controller = [[NSViewController alloc] init];
+		[controller setView:self.formulaPopoverView];
+
+		[self.formulaPopover setContentViewController:controller];
+
+		NSRect anchorRect = [self.tableView_formulas rectOfRow:selectedIndex];
+		anchorRect.origin = [self.scrollView_formulas convertPoint:anchorRect.origin fromView:self.tableView_formulas];
+
+		[self.formulaPopover showRelativeToRect:anchorRect ofView:self.scrollView_formulas preferredEdge:NSMaxXEdge];
+	}
 }
 
 - (IBAction)installUninstallUpdate:(id)sender {
