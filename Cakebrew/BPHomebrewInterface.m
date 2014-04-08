@@ -124,24 +124,28 @@
 + (NSString*)update {
 	NSString *string = [BPHomebrewInterface performBrewCommandWithArguments:@[@"update"]];
     NSLog (@"script returned:\n%@", string);
+	[[NSNotificationCenter defaultCenter] postNotificationName:kBP_NOTIFICATION_FORMULAS_CHANGED object:nil];
     return string;
 }
 
 + (NSString*)upgradeFormula:(NSString*)formula {
 	NSString *string = [BPHomebrewInterface performBrewCommandWithArguments:@[@"upgrade", formula]];
     NSLog (@"script returned:\n%@", string);
+	[[NSNotificationCenter defaultCenter] postNotificationName:kBP_NOTIFICATION_FORMULAS_CHANGED object:nil];
     return string;
 }
 
 + (NSString*)installFormula:(NSString*)formula {
 	NSString *string = [BPHomebrewInterface performBrewCommandWithArguments:@[@"install", formula]];
     NSLog (@"script returned:\n%@", string);
+	[[NSNotificationCenter defaultCenter] postNotificationName:kBP_NOTIFICATION_FORMULAS_CHANGED object:nil];
     return string;
 }
 
 + (NSString*)uninstallFormula:(NSString*)formula {
     NSString *string = [BPHomebrewInterface performBrewCommandWithArguments:@[@"uninstall", formula]];
     NSLog (@"script returned:\n%@", string);
+	[[NSNotificationCenter defaultCenter] postNotificationName:kBP_NOTIFICATION_FORMULAS_CHANGED object:nil];
     return string;
 }
 

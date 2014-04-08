@@ -30,7 +30,9 @@ typedef enum : NSUInteger {
 
 #define kBP_EXCEPTION_HOMEBREW_NOT_INSTALLED @"BP_EXCEPTION_HOMEBREW_NOT_INSTALLED"
 
-@interface BPHomebrewInterface :NSObject
+#define kBP_NOTIFICATION_FORMULAS_CHANGED @"BP_NOTIFICATION_FORMULAS_CHANGED"
+
+@interface BPHomebrewInterface : NSObject
 
 + (NSArray*)list;
 + (NSArray*)listMode:(BP_LIST_MODE)mode;

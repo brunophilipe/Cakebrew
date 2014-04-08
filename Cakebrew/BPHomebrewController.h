@@ -41,7 +41,7 @@
 @property IBOutlet NSToolbarItem *toolbarButton_installUninstall;
 
 - (IBAction)showFormulaInfo:(id)sender;
-- (IBAction)installOrUninstall:(id)sender;
+- (IBAction)installUninstallUpdate:(id)sender;
 - (IBAction)updateHomebrew:(id)sender;
 - (IBAction)openSelectedFormulaWebsite:(id)sender;
 

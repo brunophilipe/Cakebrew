@@ -24,5 +24,7 @@
 
 	#define BPAppDelegateRef ((BPAppDelegate*)[[NSApplication sharedApplication] delegate])
 
+	#define kBP_UPGRADE_ALL_FORMULAS @""
+
 	#define kBP_CAKEBREW_URL [NSURL URLWithString:@"http://www.cakebrew.com"]
 #endif

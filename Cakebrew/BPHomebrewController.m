@@ -23,6 +23,7 @@
 #import "BPFormula.h"
 #import "BPHomebrewManager.h"
 #import "BPHomebrewInterface.h"
+#import "BPInstallationViewController.h"
 #import "Frameworks/PXSourceList.framework/Headers/PXSourceList.h"
 
 @interface BPHomebrewController () <NSTableViewDataSource, NSTableViewDelegate, PXSourceListDataSource, PXSourceListDelegate, BPHomebrewManagerDelegate>
@@ -38,6 +39,9 @@
 	NSOutlineView *_outlineView_sidebar;
 	DMSplitView *_splitView;
 	BPHomebrewManager *_homebrewManager;
+
+	NSWindow *_operationWindow;
+	BPInstallationViewController *_operationViewController;
 }
 
 - (id)initWithCoder:(NSCoder *)aDecoder
@@ -81,6 +85,23 @@
 		[self.label_formulaConflicts setStringValue:@"--"];
 		[self.button_formulaWebsite setEnabled:NO];
 	}
+}
+
+- (void)prepareFormula:(BPFormula*)formula forOperation:(BP_WINDOW_OPERATION)operation
+{
+	_operationViewController = [[BPInstallationViewController alloc] initWithNibName:@"BPInstallationViewController" bundle:nil];
+	_operationWindow = [[NSWindow alloc] initWithContentRect:_operationViewController.view.frame styleMask:NSTitledWindowMask|NSResizableWindowMask backing:NSBackingStoreBuffered defer:NO];
+	[_operationWindow setContentView:_operationViewController.view];
+	[_operationViewController setWindow:_operationWindow];
+	[_operationViewController setFormula:formula];
+	[_operationViewController setWindowOperation:operation];
+
+	[BPAppDelegateRef.window beginSheet:_operationWindow completionHandler:^(NSModalResponse returnCode) {
+		_operationWindow = nil;
+		_operationViewController = nil;
+	}];
+
+	[_operationViewController windowDidAppear];
 }
 
 #pragma mark - Homebrew Manager Delegate
@@ -385,7 +406,7 @@
     }*/
 }
 
-- (IBAction)installOrUninstall:(id)sender {
+- (IBAction)installUninstallUpdate:(id)sender {
 	NSInteger selectedIndex = [self.tableView_formulas selectedRow];
 
 	if (selectedIndex >= 0) {
@@ -398,7 +419,7 @@
 			{
 				message = @"Are you sure you want to uninstall the formula '%@'?";
 				operationBlock = ^{
-					[BPHomebrewInterface uninstallFormula:formula.name];
+					[self prepareFormula:formula forOperation:kBP_WINDOW_OPERATION_UNINSTALL];
 				};
 			}
 				break;
@@ -407,7 +428,7 @@
 			{
 				message = @"Are you sure you want to install the formula '%@'?";
 				operationBlock = ^{
-					[BPHomebrewInterface installFormula:formula.name];
+					[self prepareFormula:formula forOperation:kBP_WINDOW_OPERATION_INSTALL];
 				};
 			}
 				break;
@@ -416,7 +437,7 @@
 			{
 				message = nil;
 				operationBlock = ^{
-					[BPHomebrewInterface uninstallFormula:formula.name];
+					[self prepareFormula:formula forOperation:kBP_WINDOW_OPERATION_INSTALL];
 				};
 			}
 				break;

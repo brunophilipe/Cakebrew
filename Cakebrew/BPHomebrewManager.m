@@ -43,7 +43,7 @@
 {
 	self = [super init];
 	if (self) {
-
+		[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(update) name:kBP_NOTIFICATION_FORMULAS_CHANGED object:nil];
 	}
 	return self;
 }
@@ -57,10 +57,11 @@
 	if (![self loadAllFormulasCaches]) {
 		dispatch_async(dispatch_get_main_queue(), ^{
 			[self setFormulas_all:[BPHomebrewInterface listMode:kBP_LIST_ALL]];
-			[self.delegate homebrewManagerFinishedUpdating:self];
 			[self storeAllFormulasCaches];
 		});
 	}
+	
+	[self.delegate homebrewManagerFinishedUpdating:self];
 }
 
 /**

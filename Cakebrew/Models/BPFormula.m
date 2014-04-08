@@ -86,7 +86,7 @@
 	NSString *line = nil, *output = [BPHomebrewInterface informationForFormula:self.name];
 	NSArray *lines = [output componentsSeparatedByString:@"\n"];
 	NSUInteger lineIndex = 0;
-	NSLog(@"%@", lines);
+//	NSLog(@"%@", lines);
 
 	lineIndex = 0;
 	line = [lines objectAtIndex:lineIndex];
