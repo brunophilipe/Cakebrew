@@ -25,8 +25,6 @@
 		15B23A2C18F5003600714212 /* dsa_pub.pem in Resources */ = {isa = PBXBuildFile; fileRef = 15B23A2B18F5003600714212 /* dsa_pub.pem */; };
 		15D2CF9318F1D66400B6D9F1 /* allFormulasTemplate.png in Resources */ = {isa = PBXBuildFile; fileRef = 15D2CF8918F1D66400B6D9F1 /* allFormulasTemplate.png */; };
 		15D2CF9418F1D66400B6D9F1 /* allFormulasTemplate@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 15D2CF8A18F1D66400B6D9F1 /* allFormulasTemplate@2x.png */; };
-		15D2CF9518F1D66400B6D9F1 /* checkmarkTemplate.png in Resources */ = {isa = PBXBuildFile; fileRef = 15D2CF8B18F1D66400B6D9F1 /* checkmarkTemplate.png */; };
-		15D2CF9618F1D66400B6D9F1 /* checkmarkTemplate@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 15D2CF8C18F1D66400B6D9F1 /* checkmarkTemplate@2x.png */; };
 		15D2CF9718F1D66400B6D9F1 /* installedTemplate.png in Resources */ = {isa = PBXBuildFile; fileRef = 15D2CF8D18F1D66400B6D9F1 /* installedTemplate.png */; };
 		15D2CF9818F1D66400B6D9F1 /* installedTemplate@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 15D2CF8E18F1D66400B6D9F1 /* installedTemplate@2x.png */; };
 		15D2CF9918F1D66400B6D9F1 /* outdatedTemplate.png in Resources */ = {isa = PBXBuildFile; fileRef = 15D2CF8F18F1D66400B6D9F1 /* outdatedTemplate.png */; };
@@ -40,8 +38,6 @@
 		15D2CFAA18F202B300B6D9F1 /* DCOAboutWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 15D2CFA718F202B300B6D9F1 /* DCOAboutWindow.xib */; };
 		15D2CFAB18F202B300B6D9F1 /* DCOAboutWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 15D2CFA918F202B300B6D9F1 /* DCOAboutWindowController.m */; };
 		15D2CFAD18F202D000B6D9F1 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 15D2CFAC18F202D000B6D9F1 /* QuartzCore.framework */; };
-		15D2CFB118F205F200B6D9F1 /* shellTemplate.png in Resources */ = {isa = PBXBuildFile; fileRef = 15D2CFAF18F205F200B6D9F1 /* shellTemplate.png */; };
-		15D2CFB218F205F200B6D9F1 /* shellTemplate@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 15D2CFB018F205F200B6D9F1 /* shellTemplate@2x.png */; };
 		15D2CFB518F2065200B6D9F1 /* downloadTemplate.png in Resources */ = {isa = PBXBuildFile; fileRef = 15D2CFB318F2065200B6D9F1 /* downloadTemplate.png */; };
 		15D2CFB618F2065200B6D9F1 /* downloadTemplate@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 15D2CFB418F2065200B6D9F1 /* downloadTemplate@2x.png */; };
 		15D2CFB818F206DF00B6D9F1 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 15D2CFB718F206DF00B6D9F1 /* README.md */; };
@@ -101,8 +97,6 @@
 		15B23A2B18F5003600714212 /* dsa_pub.pem */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = dsa_pub.pem; sourceTree = "<group>"; };
 		15D2CF8918F1D66400B6D9F1 /* allFormulasTemplate.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = allFormulasTemplate.png; sourceTree = "<group>"; };
 		15D2CF8A18F1D66400B6D9F1 /* allFormulasTemplate@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "allFormulasTemplate@2x.png"; sourceTree = "<group>"; };
-		15D2CF8B18F1D66400B6D9F1 /* checkmarkTemplate.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = checkmarkTemplate.png; sourceTree = "<group>"; };
-		15D2CF8C18F1D66400B6D9F1 /* checkmarkTemplate@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "checkmarkTemplate@2x.png"; sourceTree = "<group>"; };
 		15D2CF8D18F1D66400B6D9F1 /* installedTemplate.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = installedTemplate.png; sourceTree = "<group>"; };
 		15D2CF8E18F1D66400B6D9F1 /* installedTemplate@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "installedTemplate@2x.png"; sourceTree = "<group>"; };
 		15D2CF8F18F1D66400B6D9F1 /* outdatedTemplate.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = outdatedTemplate.png; sourceTree = "<group>"; };
@@ -117,8 +111,6 @@
 		15D2CFA818F202B300B6D9F1 /* DCOAboutWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DCOAboutWindowController.h; sourceTree = "<group>"; };
 		15D2CFA918F202B300B6D9F1 /* DCOAboutWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DCOAboutWindowController.m; sourceTree = "<group>"; };
 		15D2CFAC18F202D000B6D9F1 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
-		15D2CFAF18F205F200B6D9F1 /* shellTemplate.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = shellTemplate.png; sourceTree = "<group>"; };
-		15D2CFB018F205F200B6D9F1 /* shellTemplate@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "shellTemplate@2x.png"; sourceTree = "<group>"; };
 		15D2CFB318F2065200B6D9F1 /* downloadTemplate.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = downloadTemplate.png; sourceTree = "<group>"; };
 		15D2CFB418F2065200B6D9F1 /* downloadTemplate@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "downloadTemplate@2x.png"; sourceTree = "<group>"; };
 		15D2CFB718F206DF00B6D9F1 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.md; sourceTree = SOURCE_ROOT; };
@@ -183,12 +175,8 @@
 			children = (
 				15D2CFB318F2065200B6D9F1 /* downloadTemplate.png */,
 				15D2CFB418F2065200B6D9F1 /* downloadTemplate@2x.png */,
-				15D2CFAF18F205F200B6D9F1 /* shellTemplate.png */,
-				15D2CFB018F205F200B6D9F1 /* shellTemplate@2x.png */,
 				15D2CF8918F1D66400B6D9F1 /* allFormulasTemplate.png */,
 				15D2CF8A18F1D66400B6D9F1 /* allFormulasTemplate@2x.png */,
-				15D2CF8B18F1D66400B6D9F1 /* checkmarkTemplate.png */,
-				15D2CF8C18F1D66400B6D9F1 /* checkmarkTemplate@2x.png */,
 				15D2CF8D18F1D66400B6D9F1 /* installedTemplate.png */,
 				15D2CF8E18F1D66400B6D9F1 /* installedTemplate@2x.png */,
 				15D2CF8F18F1D66400B6D9F1 /* outdatedTemplate.png */,
@@ -392,11 +380,9 @@
 				15D5BEF318EBB3FB001DDED7 /* plus.icns in Resources */,
 				1FE4FE63148E4CDD008EDE8B /* InfoPlist.strings in Resources */,
 				1FE4FE69148E4CDD008EDE8B /* Credits.rtf in Resources */,
-				15D2CF9618F1D66400B6D9F1 /* checkmarkTemplate@2x.png in Resources */,
 				15D2CFAA18F202B300B6D9F1 /* DCOAboutWindow.xib in Resources */,
 				15D2CF9A18F1D66400B6D9F1 /* outdatedTemplate@2x.png in Resources */,
 				15D2CF9718F1D66400B6D9F1 /* installedTemplate.png in Resources */,
-				15D2CFB218F205F200B6D9F1 /* shellTemplate@2x.png in Resources */,
 				15D2CFB618F2065200B6D9F1 /* downloadTemplate@2x.png in Resources */,
 				15D2CFB518F2065200B6D9F1 /* downloadTemplate.png in Resources */,
 				1FE4FE6F148E4CDD008EDE8B /* MainMenu.xib in Resources */,
@@ -410,13 +396,11 @@
 				15D5BEF118EBB3FB001DDED7 /* delete.icns in Resources */,
 				15D2CF9F18F1D6F700B6D9F1 /* wrenchTemplate.png in Resources */,
 				1536BFF718EBA92400B67C5C /* Images.xcassets in Resources */,
-				15D2CFB118F205F200B6D9F1 /* shellTemplate.png in Resources */,
 				15D2CFA418F1EAD200B6D9F1 /* globe.icns in Resources */,
 				15D2CFB818F206DF00B6D9F1 /* README.md in Resources */,
 				15D2CF9818F1D66400B6D9F1 /* installedTemplate@2x.png in Resources */,
 				15B23A2C18F5003600714212 /* dsa_pub.pem in Resources */,
 				15D2CFBA18F20A8200B6D9F1 /* LICENSE in Resources */,
-				15D2CF9518F1D66400B6D9F1 /* checkmarkTemplate.png in Resources */,
 				15D2CF9918F1D66400B6D9F1 /* outdatedTemplate.png in Resources */,
 				15D2CF9318F1D66400B6D9F1 /* allFormulasTemplate.png in Resources */,
 				15D5BEF218EBB3FB001DDED7 /* label.icns in Resources */,
