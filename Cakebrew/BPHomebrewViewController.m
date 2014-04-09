@@ -144,7 +144,7 @@
 	[parent addChildItem:item];
 
 	item = [PXSourceListItem itemWithTitle:@"Update" identifier:@"item"];
-	[item setBadgeValue:@-2];
+	[item setBadgeValue:@-1];
 	[item setIcon:[NSImage imageNamed:@"downloadTemplate"]];
 	[parent addChildItem:item];
 
