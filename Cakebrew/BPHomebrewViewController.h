@@ -22,9 +22,11 @@
 #import <Foundation/Foundation.h>
 #import "DMSplitView.h"
 #import "BPGenericTextPopoverView.h"
+#import "BPUpdateDoctorController.h"
 
 @class DMSplitView;
 @class BPGenericTextPopoverView;
+@class BPUpdateDoctorController;
 
 @interface BPHomebrewViewController : NSViewController
 
@@ -40,6 +42,8 @@
 @property (weak) IBOutlet NSTextField *label_formulaConflicts;
 @property (weak) IBOutlet NSButton *button_formulaWebsite;
 @property (weak) IBOutlet BPGenericTextPopoverView *formulaPopoverView;
+
+@property (assign) IBOutlet BPUpdateDoctorController *updateDoctorViewController;
 
 @property IBOutlet NSToolbarItem *toolbarButton_formulaInfo;
 @property IBOutlet NSToolbarItem *toolbarButton_installUninstall;

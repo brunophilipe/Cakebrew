@@ -14,8 +14,6 @@
 @property (strong) NSMutableString *logString;
 @property (strong) NSFileHandle *outputHandle;
 
-@property BOOL isRunning;
-
 @end
 
 @implementation BPUpdateDoctorController
@@ -42,7 +40,7 @@
 
 - (IBAction)runStopDoctor:(id)sender {
 	if (!self.isRunning) {
-		self.isRunning = YES;
+		self.running = YES;
 
 		NSPipe *pipe;
 		pipe = [NSPipe pipe];
@@ -56,7 +54,7 @@
 
 //		[timer invalidate];
 	} else {
-		self.isRunning = NO;
+		self.running = NO;
 	}
 }
 
@@ -65,7 +63,14 @@
 }
 
 - (IBAction)runStopUpdate:(id)sender {
-	NSString *output = [BPHomebrewInterface update];
-	[self.textView_update setString:output];
+	[self.button_update_runStop setEnabled:NO];
+	[self.progress_update startAnimation:nil];
+	NSBlockOperation *block = [NSBlockOperation blockOperationWithBlock:^{
+		NSString *output = [BPHomebrewInterface update];
+		[self.textView_update setString:output];
+		[self.progress_update stopAnimation:nil];
+		[self.button_update_runStop setEnabled:YES];
+	}];
+	[block performSelector:@selector(start) withObject:nil afterDelay:0.1];
 }
 @end

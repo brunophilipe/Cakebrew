@@ -17,6 +17,8 @@
 @property (weak) IBOutlet NSButton *button_update_runStop;
 @property (weak) IBOutlet NSProgressIndicator *progress_update;
 
+@property (getter = isRunning) BOOL running;
+
 - (IBAction)runStopDoctor:(id)sender;
 - (IBAction)clearLogDoctor:(id)sender;
 

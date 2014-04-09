@@ -81,4 +81,9 @@
 	[self.aboutWindowController showWindow:nil];
 }
 
+- (IBAction)openWebsite:(id)sender
+{
+	[[NSWorkspace sharedWorkspace] openURL:kBP_CAKEBREW_URL];
+}
+
 @end

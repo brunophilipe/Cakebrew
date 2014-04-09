@@ -20,6 +20,9 @@
 		157270E018F34CF900CA8C9C /* BPInstallationViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 157270DE18F34CF900CA8C9C /* BPInstallationViewController.xib */; };
 		158370B918F2471500176C9C /* PXSourceList.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 158370B818F2471500176C9C /* PXSourceList.framework */; };
 		158370BA18F2472100176C9C /* PXSourceList.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 158370B818F2471500176C9C /* PXSourceList.framework */; };
+		15B23A2918F4F21E00714212 /* Sparkle.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 15B23A2818F4F21E00714212 /* Sparkle.framework */; };
+		15B23A2A18F4F22400714212 /* Sparkle.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 15B23A2818F4F21E00714212 /* Sparkle.framework */; };
+		15B23A2C18F5003600714212 /* dsa_pub.pem in Resources */ = {isa = PBXBuildFile; fileRef = 15B23A2B18F5003600714212 /* dsa_pub.pem */; };
 		15D2CF9318F1D66400B6D9F1 /* allFormulasTemplate.png in Resources */ = {isa = PBXBuildFile; fileRef = 15D2CF8918F1D66400B6D9F1 /* allFormulasTemplate.png */; };
 		15D2CF9418F1D66400B6D9F1 /* allFormulasTemplate@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 15D2CF8A18F1D66400B6D9F1 /* allFormulasTemplate@2x.png */; };
 		15D2CF9518F1D66400B6D9F1 /* checkmarkTemplate.png in Resources */ = {isa = PBXBuildFile; fileRef = 15D2CF8B18F1D66400B6D9F1 /* checkmarkTemplate.png */; };
@@ -66,6 +69,7 @@
 			dstSubfolderSpec = 10;
 			files = (
 				158370BA18F2472100176C9C /* PXSourceList.framework in CopyFiles */,
+				15B23A2A18F4F22400714212 /* Sparkle.framework in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -93,6 +97,8 @@
 		157270DD18F34CF900CA8C9C /* BPInstallationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BPInstallationViewController.m; sourceTree = "<group>"; };
 		157270DE18F34CF900CA8C9C /* BPInstallationViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BPInstallationViewController.xib; sourceTree = "<group>"; };
 		158370B818F2471500176C9C /* PXSourceList.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PXSourceList.framework; path = Cakebrew/Frameworks/PXSourceList.framework; sourceTree = "<group>"; };
+		15B23A2818F4F21E00714212 /* Sparkle.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Sparkle.framework; path = Cakebrew/Frameworks/Sparkle.framework; sourceTree = "<group>"; };
+		15B23A2B18F5003600714212 /* dsa_pub.pem */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = dsa_pub.pem; sourceTree = "<group>"; };
 		15D2CF8918F1D66400B6D9F1 /* allFormulasTemplate.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = allFormulasTemplate.png; sourceTree = "<group>"; };
 		15D2CF8A18F1D66400B6D9F1 /* allFormulasTemplate@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "allFormulasTemplate@2x.png"; sourceTree = "<group>"; };
 		15D2CF8B18F1D66400B6D9F1 /* checkmarkTemplate.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = checkmarkTemplate.png; sourceTree = "<group>"; };
@@ -150,6 +156,7 @@
 				15D2CFAD18F202D000B6D9F1 /* QuartzCore.framework in Frameworks */,
 				1FE4FE59148E4CDD008EDE8B /* Cocoa.framework in Frameworks */,
 				158370B918F2471500176C9C /* PXSourceList.framework in Frameworks */,
+				15B23A2918F4F21E00714212 /* Sparkle.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -266,6 +273,7 @@
 		1FE4FE57148E4CDD008EDE8B /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				15B23A2818F4F21E00714212 /* Sparkle.framework */,
 				158370B818F2471500176C9C /* PXSourceList.framework */,
 				15D2CFAC18F202D000B6D9F1 /* QuartzCore.framework */,
 				1FE4FE58148E4CDD008EDE8B /* Cocoa.framework */,
@@ -314,6 +322,7 @@
 		1FE4FE5F148E4CDD008EDE8B /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				15B23A2B18F5003600714212 /* dsa_pub.pem */,
 				153AD45718F4A44A000D6FB5 /* BumpBuild.sh */,
 				15D2CFB918F20A8200B6D9F1 /* LICENSE */,
 				15D2CFB718F206DF00B6D9F1 /* README.md */,
@@ -405,6 +414,7 @@
 				15D2CFA418F1EAD200B6D9F1 /* globe.icns in Resources */,
 				15D2CFB818F206DF00B6D9F1 /* README.md in Resources */,
 				15D2CF9818F1D66400B6D9F1 /* installedTemplate@2x.png in Resources */,
+				15B23A2C18F5003600714212 /* dsa_pub.pem in Resources */,
 				15D2CFBA18F20A8200B6D9F1 /* LICENSE in Resources */,
 				15D2CF9518F1D66400B6D9F1 /* checkmarkTemplate.png in Resources */,
 				15D2CF9918F1D66400B6D9F1 /* outdatedTemplate.png in Resources */,

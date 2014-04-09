@@ -28,6 +28,6 @@
 - (NSURL*)urlForApplicationSupportFolder;
 - (NSURL*)urlForApplicationCachesFolder;
 
-- (IBAction)showAboutWindow:(id)sender;
+- (IBAction)openWebsite:(id)sender;
 
 @end

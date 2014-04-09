@@ -452,7 +452,10 @@
 
 - (IBAction)updateHomebrew:(id)sender
 {
-//	[self.tableView_formulas show]
+	[self.outlineView_sidebar selectRowIndexes:[NSIndexSet indexSetWithIndex:7] byExtendingSelection:NO];
+	if (![self.updateDoctorViewController isRunning]) {
+		[self.updateDoctorViewController runStopUpdate:nil];
+	}
 }
 
 - (IBAction)openSelectedFormulaWebsite:(id)sender {
