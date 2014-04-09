@@ -23,4 +23,6 @@
 
 @interface BPInsetShadowView : NSView
 
+@property BOOL shouldDrawBackground;
+
 @end

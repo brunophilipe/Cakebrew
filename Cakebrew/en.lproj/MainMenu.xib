@@ -679,6 +679,39 @@
                             <real value="250"/>
                         </holdingPriorities>
                     </splitView>
+                    <customView hidden="YES" translatesAutoresizingMaskIntoConstraints="NO" id="SfC-W7-8MF" customClass="BPInsetShadowView">
+                        <rect key="frame" x="0.0" y="22" width="570" height="320"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                        <subviews>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="maG-dP-mXL">
+                                <rect key="frame" x="181" y="167" width="209" height="19"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Homebrew is not installed" id="Jfc-d9-61S">
+                                    <font key="font" metaFont="systemBold" size="15"/>
+                                    <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="YjH-tX-oXi">
+                                <rect key="frame" x="157" y="142" width="256" height="17"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Please visit brew.sh to install Homebrew" id="kRZ-JR-SH6">
+                                    <font key="font" metaFont="system"/>
+                                    <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                        </subviews>
+                        <constraints>
+                            <constraint firstItem="maG-dP-mXL" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="SfC-W7-8MF" secondAttribute="leading" constant="183" id="2O9-NB-ysc"/>
+                            <constraint firstItem="YjH-tX-oXi" firstAttribute="top" secondItem="maG-dP-mXL" secondAttribute="bottom" constant="8" id="6Lh-R0-tdr"/>
+                            <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="YjH-tX-oXi" secondAttribute="bottom" constant="142" id="euy-lR-ak7"/>
+                            <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="YjH-tX-oXi" secondAttribute="trailing" constant="159" id="jXL-k2-QwT"/>
+                            <constraint firstItem="YjH-tX-oXi" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="SfC-W7-8MF" secondAttribute="leading" constant="159" id="kfB-qd-0di"/>
+                            <constraint firstItem="maG-dP-mXL" firstAttribute="top" relation="greaterThanOrEqual" secondItem="SfC-W7-8MF" secondAttribute="top" constant="134" id="qVz-k6-gay"/>
+                            <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="maG-dP-mXL" secondAttribute="trailing" constant="182" id="wjf-ab-itf"/>
+                        </constraints>
+                    </customView>
                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="tiK-fW-tE7">
                         <rect key="frame" x="444" y="3" width="119" height="14"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
@@ -694,11 +727,15 @@
                 </subviews>
                 <constraints>
                     <constraint firstItem="Exu-Zx-Kij" firstAttribute="top" secondItem="372" secondAttribute="top" id="2Ut-ma-pgj"/>
+                    <constraint firstItem="SfC-W7-8MF" firstAttribute="leading" secondItem="372" secondAttribute="leading" id="3Hd-Lp-NLJ"/>
                     <constraint firstItem="Exu-Zx-Kij" firstAttribute="leading" secondItem="372" secondAttribute="leading" id="47Q-t9-f4a"/>
                     <constraint firstAttribute="trailing" secondItem="Exu-Zx-Kij" secondAttribute="trailing" id="Rif-uJ-q5G"/>
+                    <constraint firstAttribute="trailing" secondItem="SfC-W7-8MF" secondAttribute="trailing" id="SRE-2S-Kvi"/>
+                    <constraint firstItem="SfC-W7-8MF" firstAttribute="top" secondItem="372" secondAttribute="top" id="YFZ-5C-nQp"/>
                     <constraint firstItem="tiK-fW-tE7" firstAttribute="top" secondItem="Exu-Zx-Kij" secondAttribute="bottom" constant="5" id="q34-YU-n3B"/>
                     <constraint firstAttribute="bottom" secondItem="Exu-Zx-Kij" secondAttribute="bottom" constant="22" id="xDp-2K-z7j"/>
                     <constraint firstAttribute="trailing" secondItem="tiK-fW-tE7" secondAttribute="trailing" constant="9" id="xmK-vF-ZX8"/>
+                    <constraint firstItem="tiK-fW-tE7" firstAttribute="top" secondItem="SfC-W7-8MF" secondAttribute="bottom" constant="5" id="zGL-js-3Tn"/>
                 </constraints>
             </view>
             <toolbar key="toolbar" implicitIdentifier="CE02E434-3FDB-4366-AA48-F261AF27DFA5" autosavesConfiguration="NO" allowsUserCustomization="NO" displayMode="iconAndLabel" sizeMode="small" id="646">
@@ -754,10 +791,12 @@
                 <outlet property="splitView" destination="Exu-Zx-Kij" id="Bt8-rO-7vE"/>
                 <outlet property="tabView" destination="79A-lZ-LEo" id="ZHE-dc-ztv"/>
                 <outlet property="tableView_formulas" destination="nOF-Ra-wlA" id="78b-5b-rWb"/>
+                <outlet property="toolbar" destination="646" id="8AI-ea-oZp"/>
                 <outlet property="toolbarButton_formulaInfo" destination="UyW-JC-mM2" id="4vY-ln-Est"/>
                 <outlet property="toolbarButton_installUninstall" destination="0v7-EY-eoL" id="PLe-Dn-jmR"/>
                 <outlet property="updateDoctorViewController" destination="zdP-Oo-zVH" id="mmz-1y-BMv"/>
                 <outlet property="view" destination="372" id="773"/>
+                <outlet property="view_disablerLock" destination="SfC-W7-8MF" id="uGc-Al-iak"/>
             </connections>
         </viewController>
         <viewController title="HomebrewDoctorController" nibName="MainMenu" id="zdP-Oo-zVH" customClass="BPUpdateDoctorController">

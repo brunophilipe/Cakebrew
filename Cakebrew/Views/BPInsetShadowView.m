@@ -39,6 +39,11 @@
 
 - (void)drawRect:(NSRect)dirtyRect
 {
+	if (_shouldDrawBackground) {
+		[[[NSColor controlBackgroundColor] colorWithAlphaComponent:0.5] setFill];
+		NSRectFill(dirtyRect);
+	}
+
 	NSGraphicsContext *context = [NSGraphicsContext currentContext];
 	[context saveGraphicsState];
 

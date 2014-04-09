@@ -40,6 +40,7 @@
 	NSOutlineView *_outlineView_sidebar;
 	DMSplitView *_splitView;
 	BPHomebrewManager *_homebrewManager;
+	BPInsetShadowView *_view_disablerLock;
 
 	NSWindow *_operationWindow;
 	BPInstallationViewController *_operationViewController;
@@ -51,6 +52,8 @@
 	if (self) {
 		_homebrewManager = [BPHomebrewManager sharedManager];
 		[_homebrewManager setDelegate:self];
+
+		[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(lockWindow) name:kBP_NOTIFICATION_LOCK_WINDOW object:nil];
 	}
 	return self;
 }
@@ -103,6 +106,25 @@
 	}];
 
 	[_operationViewController windowDidAppear];
+}
+
+- (void)lockWindow
+{
+	[self.view_disablerLock setHidden:NO];
+	[self.label_information setHidden:YES];
+	[self.toolbar.items enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+		if ([obj respondsToSelector:@selector(setEnabled:)]) {
+			[obj performSelector:@selector(setEnabled:) withObject:@NO];
+		}
+	}];
+
+	NSAlert *alert = [NSAlert alertWithMessageText:@"Error!" defaultButton:@"Homebrew Website" alternateButton:@"OK" otherButton:nil informativeTextWithFormat:@"Homebrew was not found in your system. Please install Homebrew before using Cakebrew. You can click the button below to open Homebrew's website."];
+	[alert.window setTitle:@"Cakebrew"];
+	[alert beginSheetModalForWindow:BPAppDelegateRef.window completionHandler:^(NSModalResponse returnCode) {
+		if (returnCode == NSAlertDefaultReturn) {
+			[[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:@"http://brew.sh"]];
+		}
+	}];
 }
 
 #pragma mark - Homebrew Manager Delegate
@@ -179,6 +201,17 @@
 - (NSOutlineView*)outlineView_sidebar
 {
 	return _outlineView_sidebar;
+}
+
+- (void)setView_disablerLock:(BPInsetShadowView *)view_disablerLock
+{
+	_view_disablerLock = view_disablerLock;
+	[_view_disablerLock setShouldDrawBackground:YES];
+}
+
+- (BPInsetShadowView*)view_disablerLock
+{
+	return _view_disablerLock;
 }
 
 #pragma mark - NSTableView DataSource

@@ -22,10 +22,28 @@
 #import "BPHomebrewInterface.h"
 #import "BPFormula.h"
 
+#define kBP_EXEC_FILE_NOT_FOUND 32512
+
 @implementation BPHomebrewInterface
+
++ (void)showHomebrewNotInstalledMessage
+{
+	static BOOL isShowing = NO;
+	if (!isShowing) {
+		isShowing = YES;
+		[[NSNotificationCenter defaultCenter] postNotificationName:kBP_NOTIFICATION_LOCK_WINDOW object:self];
+	}
+}
 
 + (NSString*)performBrewCommandWithArguments:(NSArray*)arguments
 {
+	// Test if homebrew is installed
+	NSInteger retval = system("sdjh");//[kBP_HOMEBREW_PATH UTF8String]);
+	if (retval == kBP_EXEC_FILE_NOT_FOUND) {
+		[BPHomebrewInterface showHomebrewNotInstalledMessage];
+		return nil;
+	}
+
 	NSTask *task;
     task = [[NSTask alloc] init];
     [task setLaunchPath:kBP_HOMEBREW_PATH];
@@ -90,35 +108,42 @@
 
     NSString *string = [BPHomebrewInterface performBrewCommandWithArguments:arguments];
 	NSArray *aux = nil;
-    NSMutableArray *array = [[string componentsSeparatedByString:@"\n"] mutableCopy];
-	NSMutableArray *formulas = [NSMutableArray arrayWithCapacity:array.count-1];
-	BPFormula *formula = nil;
+    if (string) {
+		NSMutableArray *array = [[string componentsSeparatedByString:@"\n"] mutableCopy];
+		NSMutableArray *formulas = [NSMutableArray arrayWithCapacity:array.count-1];
+		BPFormula *formula = nil;
 
-	[array removeLastObject];
+		[array removeLastObject];
 
-	for (NSString *item in array) {
-		if (displaysVersions) {
-			aux = [item componentsSeparatedByString:@" "];
-			formula = [BPFormula formulaWithName:[aux firstObject] andVersion:[aux lastObject]];
-		} else {
-			formula = [BPFormula formulaWithName:item];
+		for (NSString *item in array) {
+			if (displaysVersions) {
+				aux = [item componentsSeparatedByString:@" "];
+				formula = [BPFormula formulaWithName:[aux firstObject] andVersion:[aux lastObject]];
+			} else {
+				formula = [BPFormula formulaWithName:item];
+			}
+			[formulas addObject:formula];
 		}
-		[formulas addObject:formula];
-	}
 
-    return formulas;
+		return formulas;
+	} else {
+		return nil;
+	}
 }
 
 + (NSArray*)searchForFormulaName:(NSString*)name {
     NSString *string = [BPHomebrewInterface performBrewCommandWithArguments:@[@"search", name]];
-    NSMutableArray* array = [[string componentsSeparatedByString:@"\n"] mutableCopy];
-    [array removeLastObject];
-    return array;
+    if (string) {
+		NSMutableArray* array = [[string componentsSeparatedByString:@"\n"] mutableCopy];
+		[array removeLastObject];
+		return array;
+	} else {
+		return nil;
+	}
 }
 
 + (NSString*)informationForFormula:(NSString*)formula {
-	NSString *string = [BPHomebrewInterface performBrewCommandWithArguments:@[@"info", formula]];
-	return string;
+	return [BPHomebrewInterface performBrewCommandWithArguments:@[@"info", formula]];
 }
 
 + (NSString*)update {
@@ -151,6 +176,14 @@
 
 + (void)runDoctorWithOutput:(id)output
 {
+	// Test if homebrew is installed
+	NSInteger retval = system("sdjh");//[kBP_HOMEBREW_PATH UTF8String]);
+	if (retval == kBP_EXEC_FILE_NOT_FOUND) {
+		[BPHomebrewInterface showHomebrewNotInstalledMessage];
+		output = nil;
+		return;
+	}
+
 	NSTask *task;
     task = [[NSTask alloc] init];
     [task setLaunchPath:kBP_HOMEBREW_PATH];
