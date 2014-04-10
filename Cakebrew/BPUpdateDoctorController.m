@@ -63,6 +63,7 @@
 }
 
 - (IBAction)runStopUpdate:(id)sender {
+	[self.textView_update setString:@""];
 	[self.button_update_runStop setEnabled:NO];
 	[self.progress_update startAnimation:nil];
 	NSBlockOperation *block = [NSBlockOperation blockOperationWithBlock:^{
