@@ -97,7 +97,11 @@
 	_operationWindow = [[NSWindow alloc] initWithContentRect:_operationViewController.view.frame styleMask:NSTitledWindowMask|NSResizableWindowMask backing:NSBackingStoreBuffered defer:NO];
 	[_operationWindow setContentView:_operationViewController.view];
 	[_operationViewController setWindow:_operationWindow];
-	[_operationViewController setFormula:formula];
+	if (formula) {
+		[_operationViewController setFormula:formula];
+	} else {
+		[_operationViewController setFormulas:[_formulasArray copy]];
+	}
 	[_operationViewController setWindowOperation:operation];
 
 	[BPAppDelegateRef.window beginSheet:_operationWindow completionHandler:^(NSModalResponse returnCode) {
@@ -125,6 +129,40 @@
 			[[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:@"http://brew.sh"]];
 		}
 	}];
+}
+
+- (void)updateToolbarItemsState
+{
+	NSUInteger selectedIndex = [self.tableView_formulas selectedRow];
+    if(selectedIndex == -1) {
+		[self.toolbarButton_installUninstall setEnabled:NO];
+		[self.toolbarButton_formulaInfo setEnabled:NO];
+		[self displayInformationForFormula:nil];
+    } else {
+		[self.toolbarButton_installUninstall setEnabled:YES];
+		[self.toolbarButton_formulaInfo setEnabled:YES];
+		BPFormula *formula = [_formulasArray objectAtIndex:selectedIndex];
+
+		switch ([[BPHomebrewManager sharedManager] statusForFormula:formula]) {
+			case kBP_FORMULA_INSTALLED:
+				[self.toolbarButton_installUninstall setImage:[NSImage imageNamed:@"delete.icns"]];
+				[self.toolbarButton_installUninstall setLabel:@"Uninstall Formula"];
+				break;
+
+			case kBP_FORMULA_OUTDATED:
+				[self.toolbarButton_installUninstall setImage:[NSImage imageNamed:@"reload.icns"]];
+				[self.toolbarButton_installUninstall setLabel:@"Update Formula"];
+				break;
+
+			case kBP_FORMULA_NOT_INSTALLED:
+				[self.toolbarButton_installUninstall setImage:[NSImage imageNamed:@"download.icns"]];
+				[self.toolbarButton_installUninstall setLabel:@"Install Formula"];
+				break;
+		}
+
+		[formula getInformation];
+		[self displayInformationForFormula:formula];
+    }
 }
 
 #pragma mark - Homebrew Manager Delegate
@@ -250,36 +288,7 @@
 #pragma mark - NSTableView Delegate
 
 - (void)tableViewSelectionDidChange:(NSNotification *)notification {
-	NSUInteger selectedIndex = [self.tableView_formulas selectedRow];
-    if(selectedIndex == -1) {
-		[self.toolbarButton_installUninstall setEnabled:NO];
-		[self.toolbarButton_formulaInfo setEnabled:NO];
-		[self displayInformationForFormula:nil];
-    } else {
-		[self.toolbarButton_installUninstall setEnabled:YES];
-		[self.toolbarButton_formulaInfo setEnabled:YES];
-		BPFormula *formula = [_formulasArray objectAtIndex:selectedIndex];
-
-		switch ([[BPHomebrewManager sharedManager] statusForFormula:formula]) {
-			case kBP_FORMULA_INSTALLED:
-				[self.toolbarButton_installUninstall setImage:[NSImage imageNamed:@"delete.icns"]];
-				[self.toolbarButton_installUninstall setLabel:@"Uninstall Formula"];
-				break;
-
-			case kBP_FORMULA_OUTDATED:
-				[self.toolbarButton_installUninstall setImage:[NSImage imageNamed:@"reload.icns"]];
-				[self.toolbarButton_installUninstall setLabel:@"Update Formula"];
-				break;
-
-			case kBP_FORMULA_NOT_INSTALLED:
-				[self.toolbarButton_installUninstall setImage:[NSImage imageNamed:@"download.icns"]];
-				[self.toolbarButton_installUninstall setLabel:@"Install Formula"];
-				break;
-		}
-
-		[formula getInformation];
-		[self displayInformationForFormula:formula];
-    }
+	[self updateToolbarItemsState];
 }
 
 #pragma mark - PXSourceList Data Source
@@ -359,24 +368,29 @@
 		case 1: // Installed Formulas
 			_formulasArray = [[BPHomebrewManager sharedManager] formulas_installed];
 			[[self.tableView_formulas tableColumnWithIdentifier:@"Version"] setHidden:NO];
+			[self.button_upgradeAll setHidden:YES];
 			message = @"These are the formulas already installed in your system.";
 			break;
 
-		case 2: // Upgradeable Formulas
+		case 2: // Outdated Formulas
 			_formulasArray = [[BPHomebrewManager sharedManager] formulas_outdated];
 			[[self.tableView_formulas tableColumnWithIdentifier:@"Version"] setHidden:NO];
+			[self.button_upgradeAll setHidden:NO];
+			[self.button_upgradeAll setEnabled:(_formulasArray.count > 0)];
 			message = @"These formulas are already installed, but have an update available.";
 			break;
 
 		case 3: // All Formulas
 			_formulasArray = [[BPHomebrewManager sharedManager] formulas_all];
 			[[self.tableView_formulas tableColumnWithIdentifier:@"Version"] setHidden:YES];
+			[self.button_upgradeAll setHidden:YES];
 			message = @"These are all the formulas available for instalation with Homebrew.";
 			break;
 
 		case 4:	// Leaves
 			_formulasArray = [[BPHomebrewManager sharedManager] formulas_leaves];
 			[[self.tableView_formulas tableColumnWithIdentifier:@"Version"] setHidden:YES];
+			[self.button_upgradeAll setHidden:YES];
 			message = @"These formulas are not dependencies of any other formulas.";
 			break;
 
@@ -398,6 +412,7 @@
 	if (tabIndex == 0) {
 		[self.tableView_formulas deselectAll:nil];
 		[self.tableView_formulas reloadData];
+		[self updateToolbarItemsState];
 	}
 	[self.tabView selectTabViewItemAtIndex:tabIndex];
 }
@@ -465,7 +480,7 @@
 			{
 				message = nil;
 				operationBlock = ^{
-					[self prepareFormula:formula forOperation:kBP_WINDOW_OPERATION_INSTALL];
+					[self prepareFormula:formula forOperation:kBP_WINDOW_OPERATION_UPGRADE];
 				};
 			}
 				break;
@@ -480,6 +495,14 @@
 		} else {
 			operationBlock();
 		}
+	}
+}
+
+- (IBAction)upgradeAllOutdatedFormulas:(id)sender {
+	NSAlert *alert = [NSAlert alertWithMessageText:@"Attention!" defaultButton:@"Yes" alternateButton:@"Cancel" otherButton:nil informativeTextWithFormat:@"Are you sure you want to upgrade all outdated formulas?"];
+	[alert.window setTitle:@"Cakebrew"];
+	if ([alert runModal] == NSAlertDefaultReturn) {
+		[self prepareFormula:nil forOperation:kBP_WINDOW_OPERATION_UPGRADE];
 	}
 }
 

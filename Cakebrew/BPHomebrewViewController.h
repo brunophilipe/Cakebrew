@@ -42,6 +42,7 @@
 @property (weak) IBOutlet NSTextField *label_formulaVersion;
 @property (weak) IBOutlet NSTextField *label_formulaDependencies;
 @property (weak) IBOutlet NSTextField *label_formulaConflicts;
+@property (weak) IBOutlet NSButton *button_upgradeAll;
 @property (weak) IBOutlet NSButton *button_formulaWebsite;
 @property (weak) IBOutlet BPGenericTextPopoverView *formulaPopoverView;
 @property (weak) IBOutlet BPInsetShadowView *view_disablerLock;
@@ -54,6 +55,7 @@
 
 - (IBAction)showFormulaInfo:(id)sender;
 - (IBAction)installUninstallUpdate:(id)sender;
+- (IBAction)upgradeAllOutdatedFormulas:(id)sender;
 - (IBAction)updateHomebrew:(id)sender;
 - (IBAction)openSelectedFormulaWebsite:(id)sender;
 

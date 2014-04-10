@@ -26,6 +26,8 @@
 
 @implementation BPHomebrewInterface
 
+BOOL testedForInstallation;
+
 + (void)showHomebrewNotInstalledMessage
 {
 	static BOOL isShowing = NO;
@@ -36,12 +38,15 @@
 }
 
 + (NSString*)performBrewCommandWithArguments:(NSArray*)arguments
-{
+{	
 	// Test if homebrew is installed
-	NSInteger retval = system("sdjh");//[kBP_HOMEBREW_PATH UTF8String]);
-	if (retval == kBP_EXEC_FILE_NOT_FOUND) {
-		[BPHomebrewInterface showHomebrewNotInstalledMessage];
-		return nil;
+	if (!testedForInstallation) {
+		NSInteger retval = system([kBP_HOMEBREW_PATH UTF8String]);
+		if (retval == kBP_EXEC_FILE_NOT_FOUND) {
+			[BPHomebrewInterface showHomebrewNotInstalledMessage];
+			return nil;
+		}
+		testedForInstallation = YES;
 	}
 
 	NSTask *task;
@@ -160,6 +165,14 @@
     return string;
 }
 
++ (NSString*)upgradeFormulas:(NSArray*)formulas
+{
+	NSString *string = [BPHomebrewInterface performBrewCommandWithArguments:[@[@"upgrade"] arrayByAddingObjectsFromArray:formulas]];
+	NSLog (@"script returned:\n%@", string);
+	[[NSNotificationCenter defaultCenter] postNotificationName:kBP_NOTIFICATION_FORMULAS_CHANGED object:nil];
+    return string;
+}
+
 + (NSString*)installFormula:(NSString*)formula {
 	NSString *string = [BPHomebrewInterface performBrewCommandWithArguments:@[@"install", formula]];
     NSLog (@"script returned:\n%@", string);
@@ -177,11 +190,13 @@
 + (void)runDoctorWithOutput:(id)output
 {
 	// Test if homebrew is installed
-	NSInteger retval = system("sdjh");//[kBP_HOMEBREW_PATH UTF8String]);
-	if (retval == kBP_EXEC_FILE_NOT_FOUND) {
-		[BPHomebrewInterface showHomebrewNotInstalledMessage];
-		output = nil;
-		return;
+	if (!testedForInstallation) {
+		NSInteger retval = system([kBP_HOMEBREW_PATH UTF8String]);
+		if (retval == kBP_EXEC_FILE_NOT_FOUND) {
+			[BPHomebrewInterface showHomebrewNotInstalledMessage];
+			output = nil;
+		}
+		testedForInstallation = YES;
 	}
 
 	NSTask *task;

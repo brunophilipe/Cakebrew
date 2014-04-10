@@ -36,6 +36,7 @@ typedef enum : NSUInteger {
 + (NSString*)informationForFormula:(NSString*)formula;
 + (NSString*)update;
 + (NSString*)upgradeFormula:(NSString*)formula;
++ (NSString*)upgradeFormulas:(NSArray*)formulas;
 + (NSString*)installFormula:(NSString*)formula;
 + (NSString*)uninstallFormula:(NSString*)formula;
 

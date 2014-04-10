@@ -24,6 +24,7 @@ typedef enum : NSUInteger {
 @property (strong) IBOutlet NSProgressIndicator *progressIndicator;
 
 @property (weak, nonatomic) BPFormula *formula;
+@property (strong, nonatomic) NSArray *formulas;
 @property (weak) NSWindow *window;
 
 @property (nonatomic) BP_WINDOW_OPERATION windowOperation;

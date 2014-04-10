@@ -44,6 +44,12 @@
 	[self.label_formulaName setStringValue:formula.name];
 }
 
+- (void)setFormulas:(NSArray *)formulas
+{
+	_formulas = formulas;
+	[self.label_formulaName setStringValue:@"All outdated formulas"];
+}
+
 - (void)setWindowOperation:(BP_WINDOW_OPERATION)windowOperation
 {
 	_windowOperation = windowOperation;
@@ -79,7 +85,11 @@
 				break;
 
 			case kBP_WINDOW_OPERATION_UPGRADE:
-				output = [BPHomebrewInterface upgradeFormula:self.formula.name];
+				if (self.formula) {
+					output = [BPHomebrewInterface upgradeFormula:self.formula.name];
+				} else {
+					output = [BPHomebrewInterface upgradeFormulas:self.formulas];
+				}
 				break;
 		}
 
