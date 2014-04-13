@@ -88,7 +88,11 @@
 				if (self.formula) {
 					output = [BPHomebrewInterface upgradeFormula:self.formula.name];
 				} else {
-					output = [BPHomebrewInterface upgradeFormulas:self.formulas];
+					NSMutableArray *names = [NSMutableArray arrayWithCapacity:self.formulas.count];
+					for (BPFormula *formula in self.formulas) {
+						[names addObject:formula.name];
+					}
+					output = [BPHomebrewInterface upgradeFormulas:names];
 				}
 				break;
 		}
