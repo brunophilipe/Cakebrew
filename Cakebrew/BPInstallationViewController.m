@@ -39,6 +39,7 @@
 		font = [NSFont systemFontOfSize:12];
 
 	[_textView setFont:font];
+	[_textView setSelectable:YES];
 }
 
 - (NSTextView*)textView
