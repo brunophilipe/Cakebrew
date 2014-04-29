@@ -75,7 +75,6 @@
 		1536BFF618EBA92400B67C5C /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		153AD45218F468F2000D6FB5 /* BPGenericTextPopoverView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BPGenericTextPopoverView.h; path = Views/BPGenericTextPopoverView.h; sourceTree = "<group>"; };
 		153AD45318F468F2000D6FB5 /* BPGenericTextPopoverView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BPGenericTextPopoverView.m; path = Views/BPGenericTextPopoverView.m; sourceTree = "<group>"; };
-		153AD45718F4A44A000D6FB5 /* BumpBuild.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = BumpBuild.sh; sourceTree = "<group>"; };
 		1540FA3418ECF66B00334A5C /* download.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = download.icns; sourceTree = "<group>"; };
 		1540FA3718ED09BB00334A5C /* BPInsetShadowView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BPInsetShadowView.h; path = Views/BPInsetShadowView.h; sourceTree = "<group>"; };
 		1540FA3818ED09BB00334A5C /* BPInsetShadowView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BPInsetShadowView.m; path = Views/BPInsetShadowView.m; sourceTree = "<group>"; };
@@ -311,7 +310,6 @@
 			isa = PBXGroup;
 			children = (
 				15B23A2B18F5003600714212 /* dsa_pub.pem */,
-				153AD45718F4A44A000D6FB5 /* BumpBuild.sh */,
 				15D2CFB918F20A8200B6D9F1 /* LICENSE */,
 				15D2CFB718F206DF00B6D9F1 /* README.md */,
 				1FE4FE60148E4CDD008EDE8B /* Cakebrew-Info.plist */,
@@ -422,7 +420,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"/Users/bruno/Workspace/Release Apps/Cakebrew/Cakebrew/BumpBuild.sh\" \"${PROJECT_DIR}/${INFOPLIST_FILE}\"";
+			shellScript = "\"/Users/bruno/Workspace/Release Apps/Cakebrew/Cakebrew/BumpBuildScript.sh\" \"${PROJECT_DIR}/${INFOPLIST_FILE}\"";
 		};
 /* End PBXShellScriptBuildPhase section */
 
