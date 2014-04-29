@@ -24,13 +24,29 @@
 - (void)setTextView_doctor:(NSTextView *)textView
 {
 	_textView_doctor = textView;
-	[_textView_doctor setFont:[NSFont fontWithName:@"Andale Mono" size:12]];
+
+	NSFont *font;
+	font = [NSFont fontWithName:@"Andale Mono" size:12];
+	if (!font)
+		font = [NSFont fontWithName:@"Menlo" size:12];
+	if (!font)
+		font = [NSFont systemFontOfSize:12];
+
+	[_textView_doctor setFont:font];
 }
 
 - (void)setTextView_update:(NSTextView *)textView
 {
 	_textView_update = textView;
-	[_textView_update setFont:[NSFont fontWithName:@"Andale Mono" size:12]];
+
+	NSFont *font;
+	font = [NSFont fontWithName:@"Andale Mono" size:12];
+	if (!font)
+		font = [NSFont fontWithName:@"Menlo" size:12];
+	if (!font)
+		font = [NSFont systemFontOfSize:12];
+
+	[_textView_update setFont:font];
 }
 
 - (void)updateLog

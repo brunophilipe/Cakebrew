@@ -30,7 +30,15 @@
 - (void)setTextView:(NSTextView *)textView
 {
 	_textView = textView;
-	[_textView setFont:[NSFont fontWithName:@"Andale Mono" size:12]];
+
+	NSFont *font;
+	font = [NSFont fontWithName:@"Andale Mono" size:12];
+	if (!font)
+		font = [NSFont fontWithName:@"Menlo" size:12];
+	if (!font)
+		font = [NSFont systemFontOfSize:12];
+
+	[_textView setFont:font];
 }
 
 - (NSTextView*)textView
