@@ -73,7 +73,7 @@
 	NSURL *cachesFolder = [BPAppDelegateRef urlForApplicationCachesFolder];
 	if (cachesFolder) {
 		NSURL *allFormulasFile = [cachesFolder URLByAppendingPathComponent:@"allFormulas.cache.bin"];
-		NSDictionary *cacheDict;// = @{kBP_CACHE_DICT_DATE_KEY: [NSDate date], kBP_CACHE_DICT_DATA_KEY: self.formulas_all};
+		NSDictionary *cacheDict = nil;// = @{kBP_CACHE_DICT_DATE_KEY: [NSDate date], kBP_CACHE_DICT_DATA_KEY: self.formulas_all};
 
 		if ([[NSFileManager defaultManager] fileExistsAtPath:allFormulasFile.relativePath]) {
 			cacheDict = [NSKeyedUnarchiver unarchiveObjectWithFile:allFormulasFile.relativePath];
@@ -94,19 +94,21 @@
 
 - (void)storeAllFormulasCaches
 {
-	NSURL *cachesFolder = [BPAppDelegateRef urlForApplicationCachesFolder];
-	if (cachesFolder) {
-		NSURL *allFormulasFile = [cachesFolder URLByAppendingPathComponent:@"allFormulas.cache.bin"];
-		NSDictionary *cacheDict = @{kBP_CACHE_DICT_DATE_KEY: [NSDate date], kBP_CACHE_DICT_DATA_KEY: self.formulas_all};
-		NSData *cacheData = [NSKeyedArchiver archivedDataWithRootObject:cacheDict];
+	if (self.formulas_all) {
+		NSURL *cachesFolder = [BPAppDelegateRef urlForApplicationCachesFolder];
+		if (cachesFolder) {
+			NSURL *allFormulasFile = [cachesFolder URLByAppendingPathComponent:@"allFormulas.cache.bin"];
+			NSDictionary *cacheDict = @{kBP_CACHE_DICT_DATE_KEY: [NSDate date], kBP_CACHE_DICT_DATA_KEY: self.formulas_all};
+			NSData *cacheData = [NSKeyedArchiver archivedDataWithRootObject:cacheDict];
 
-		if ([[NSFileManager defaultManager] fileExistsAtPath:allFormulasFile.relativePath]) {
-			[cacheData writeToURL:allFormulasFile atomically:YES];
+			if ([[NSFileManager defaultManager] fileExistsAtPath:allFormulasFile.relativePath]) {
+				[cacheData writeToURL:allFormulasFile atomically:YES];
+			} else {
+				[[NSFileManager defaultManager] createFileAtPath:allFormulasFile.relativePath contents:cacheData attributes:nil];
+			}
 		} else {
-			[[NSFileManager defaultManager] createFileAtPath:allFormulasFile.relativePath contents:cacheData attributes:nil];
+			NSLog(@"Could not store cache file. BPAppDelegate function returned nil!");
 		}
-	} else {
-		NSLog(@"Could not store cache file. BPAppDelegate function returned nil!");
 	}
 }
 
