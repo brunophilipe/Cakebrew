@@ -12,10 +12,10 @@
 
 @property (assign, nonatomic) IBOutlet NSTextView *textView_doctor;
 @property (assign, nonatomic) IBOutlet NSTextView *textView_update;
-@property (weak) IBOutlet NSButton *button_doctor_runStop;
-@property (weak) IBOutlet NSButton *button_doctor_clearLog;
-@property (weak) IBOutlet NSButton *button_update_runStop;
-@property (weak) IBOutlet NSProgressIndicator *progress_update;
+@property (assign) IBOutlet NSButton *button_doctor_runStop;
+@property (assign) IBOutlet NSButton *button_doctor_clearLog;
+@property (assign) IBOutlet NSButton *button_update_runStop;
+@property (assign) IBOutlet NSProgressIndicator *progress_update;
 
 @property (getter = isRunning) BOOL running;
 

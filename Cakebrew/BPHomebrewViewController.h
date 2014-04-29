@@ -32,21 +32,21 @@
 
 @interface BPHomebrewViewController : NSViewController
 
-@property (weak) IBOutlet NSTableView *tableView_formulas;
-@property (weak) IBOutlet NSScrollView *scrollView_formulas;
-@property (weak) IBOutlet NSOutlineView *outlineView_sidebar;
-@property (weak) IBOutlet DMSplitView *splitView;
-@property (weak) IBOutlet NSTabView *tabView;
-@property (weak) IBOutlet NSTextField *label_information;
-@property (weak) IBOutlet NSTextField *label_formulaPath;
-@property (weak) IBOutlet NSTextField *label_formulaVersion;
-@property (weak) IBOutlet NSTextField *label_formulaDependencies;
-@property (weak) IBOutlet NSTextField *label_formulaConflicts;
-@property (weak) IBOutlet NSButton *button_upgradeAll;
-@property (weak) IBOutlet NSButton *button_formulaWebsite;
-@property (weak) IBOutlet BPGenericTextPopoverView *formulaPopoverView;
-@property (weak) IBOutlet BPInsetShadowView *view_disablerLock;
-@property (weak) IBOutlet NSToolbar *toolbar;
+@property (assign) IBOutlet NSTableView *tableView_formulas;
+@property (assign) IBOutlet NSScrollView *scrollView_formulas;
+@property (assign) IBOutlet NSOutlineView *outlineView_sidebar;
+@property (assign) IBOutlet DMSplitView *splitView;
+@property (assign) IBOutlet NSTabView *tabView;
+@property (assign) IBOutlet NSTextField *label_information;
+@property (assign) IBOutlet NSTextField *label_formulaPath;
+@property (assign) IBOutlet NSTextField *label_formulaVersion;
+@property (assign) IBOutlet NSTextField *label_formulaDependencies;
+@property (assign) IBOutlet NSTextField *label_formulaConflicts;
+@property (assign) IBOutlet NSButton *button_upgradeAll;
+@property (assign) IBOutlet NSButton *button_formulaWebsite;
+@property (assign) IBOutlet BPGenericTextPopoverView *formulaPopoverView;
+@property (assign) IBOutlet BPInsetShadowView *view_disablerLock;
+@property (assign) IBOutlet NSToolbar *toolbar;
 
 @property (assign) IBOutlet BPUpdateDoctorController *updateDoctorViewController;
 

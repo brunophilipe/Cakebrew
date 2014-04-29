@@ -13,6 +13,6 @@
 @property (strong, nonatomic) IBOutlet NSTextView *textView;
 @property (strong, nonatomic) IBOutlet NSTextField *label_title;
 
-@property (weak, nonatomic) id dataObject;
+@property (assign, nonatomic) id dataObject;
 
 @end

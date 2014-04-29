@@ -14,16 +14,16 @@
 + (NSString *)nibName;
 
 /** The info view. */
-@property (weak) IBOutlet NSView *infoView;
+@property (assign) IBOutlet NSView *infoView;
 
 /** The credits text view. */
 @property (assign) IBOutlet NSTextView *creditsTextView;
 
 /** The button that opens the app's website. */
-@property (weak) IBOutlet NSButton *visitWebsiteButton;
+@property (assign) IBOutlet NSButton *visitWebsiteButton;
 
 /** The button that opens the acknowledgements. */
-@property (weak) IBOutlet NSButton *acknowledgementsButton;
+@property (assign) IBOutlet NSButton *acknowledgementsButton;
 
 @end
 
