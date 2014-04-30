@@ -159,8 +159,9 @@
 
 - (void)updateToolbarItemsState
 {
+	NSUInteger selectedTab = [self.outlineView_sidebar selectedRow];
 	NSUInteger selectedIndex = [self.tableView_formulas selectedRow];
-    if(selectedIndex == -1) {
+    if(selectedIndex == -1 || selectedTab > 4) {
 		[self.toolbarButton_installUninstall setEnabled:NO];
 		[self.toolbarButton_formulaInfo setEnabled:NO];
 		[self displayInformationForFormula:nil];
@@ -402,6 +403,8 @@
 {
 	NSString *message;
 	NSUInteger tabIndex = 0;
+
+	[self updateToolbarItemsState];
 
 	switch ([self.outlineView_sidebar selectedRow]) {
 		case 1: // Installed Formulas
