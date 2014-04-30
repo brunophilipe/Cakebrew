@@ -59,6 +59,11 @@
 	return self;
 }
 
+- (void)dealloc
+{
+	[_homebrewManager setDelegate:nil];
+}
+
 - (void)displayInformationForFormula:(BPFormula*)formula
 {
 	if (formula) {
