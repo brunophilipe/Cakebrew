@@ -12,6 +12,10 @@ Do you need to use Homebrew but are afraid to use the terminal? Cakebrew is the 
 
 ![Screenshot as of April 8th](http://cakebrew.com/Cakebrew-screen-1.jpg)
 
+## Website Source
+
+The source for the Cakebrew website is also present on GitHub! Visit the [repository](https://github.com/brunophilipe/Cakebrew-website/).
+
 ## License
 
 This program is free software: you can redistribute it and/or modify
