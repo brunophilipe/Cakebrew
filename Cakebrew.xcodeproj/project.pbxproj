@@ -425,7 +425,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"/Users/bruno/Workspace/Release Apps/Cakebrew/Cakebrew/BumpBuildScript.sh\" \"${PROJECT_DIR}/${INFOPLIST_FILE}\"";
+			shellScript = "/bin/sh \"Cakebrew/BumpBuild.sh\" \"${PROJECT_DIR}/${INFOPLIST_FILE}\"";
 		};
 /* End PBXShellScriptBuildPhase section */
 
