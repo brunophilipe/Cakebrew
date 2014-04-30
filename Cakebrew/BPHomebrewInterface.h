@@ -30,17 +30,19 @@ typedef enum : NSUInteger {
 
 @interface BPHomebrewInterface : NSObject
 
-+ (NSArray*)list;
-+ (NSArray*)listMode:(BP_LIST_MODE)mode;
-+ (NSArray*)searchForFormulaName:(NSString*)formula;
-+ (NSString*)informationForFormula:(NSString*)formula;
-+ (NSString*)update;
-+ (NSString*)upgradeFormula:(NSString*)formula;
-+ (NSString*)upgradeFormulas:(NSArray*)formulas;
-+ (NSString*)installFormula:(NSString*)formula;
-+ (NSString*)uninstallFormula:(NSString*)formula;
-+ (NSString*)runDoctor;
++ (BPHomebrewInterface *)sharedInterface;
 
-+ (void)hideHomebrewNotInstalledMessage;
+- (NSArray*)list;
+- (NSArray*)listMode:(BP_LIST_MODE)mode;
+- (NSArray*)searchForFormulaName:(NSString*)formula;
+- (NSString*)informationForFormula:(NSString*)formula;
+- (NSString*)update;
+- (NSString*)upgradeFormula:(NSString*)formula;
+- (NSString*)upgradeFormulas:(NSArray*)formulas;
+- (NSString*)installFormula:(NSString*)formula;
+- (NSString*)uninstallFormula:(NSString*)formula;
+- (NSString*)runDoctor;
+
+- (void)hideHomebrewNotInstalledMessage;
 
 @end

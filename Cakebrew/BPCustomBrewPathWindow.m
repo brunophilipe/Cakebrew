@@ -22,7 +22,7 @@
 		[self.imageView_invalidPath setHidden:YES];
 		[[NSUserDefaults standardUserDefaults] setObject:path forKey:kBP_HOMEBREW_PATH_KEY];
 		[BPAppDelegateRef.window endSheet:self];
-		[BPHomebrewInterface hideHomebrewNotInstalledMessage];
+		[[BPHomebrewInterface sharedInterface] hideHomebrewNotInstalledMessage];
 	} else {
 		[self.imageView_invalidPath setHidden:NO];
 	}

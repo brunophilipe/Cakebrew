@@ -48,7 +48,7 @@
 	_dataObject = dataObject;
 
 	if ([dataObject isMemberOfClass:[BPFormula class]]) {
-		NSString *string = [BPHomebrewInterface informationForFormula:[dataObject performSelector:@selector(name)]];
+		NSString *string = [[BPHomebrewInterface sharedInterface] informationForFormula:[dataObject performSelector:@selector(name)]];
 		if (string) {
 			[_textView setString:string];
 			[_label_title setStringValue:[NSString stringWithFormat:@"Information for Formula: %@", [dataObject performSelector:@selector(name)]]];

@@ -86,22 +86,22 @@
 	dispatch_async(dispatch_get_main_queue(), ^{
 		switch (self.windowOperation) {
 			case kBP_WINDOW_OPERATION_INSTALL:
-				output = [BPHomebrewInterface installFormula:self.formula.name];
+				output = [[BPHomebrewInterface sharedInterface] installFormula:self.formula.name];
 				break;
 
 			case kBP_WINDOW_OPERATION_UNINSTALL:
-				output = [BPHomebrewInterface uninstallFormula:self.formula.name];
+				output = [[BPHomebrewInterface sharedInterface] uninstallFormula:self.formula.name];
 				break;
 
 			case kBP_WINDOW_OPERATION_UPGRADE:
 				if (self.formula) {
-					output = [BPHomebrewInterface upgradeFormula:self.formula.name];
+					output = [[BPHomebrewInterface sharedInterface] upgradeFormula:self.formula.name];
 				} else {
 					NSMutableArray *names = [NSMutableArray arrayWithCapacity:self.formulas.count];
 					for (BPFormula *formula in self.formulas) {
 						[names addObject:formula.name];
 					}
-					output = [BPHomebrewInterface upgradeFormulas:names];
+					output = [[BPHomebrewInterface sharedInterface] upgradeFormulas:names];
 				}
 				break;
 		}

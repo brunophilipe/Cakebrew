@@ -27,9 +27,19 @@
 @implementation BPHomebrewInterface
 
 BOOL testedForInstallation;
-dispatch_queue_t queue;
 
-+ (void)showHomebrewNotInstalledMessage
++ (BPHomebrewInterface *)sharedInterface
+{
+    @synchronized(self)
+	{
+        static dispatch_once_t once;
+        static BPHomebrewInterface *instance;
+        dispatch_once(&once, ^ { instance = [[BPHomebrewInterface alloc] init]; });
+        return instance;
+	}
+}
+
+- (void)showHomebrewNotInstalledMessage
 {
 	static BOOL isShowing = NO;
 	if (!isShowing) {
@@ -38,13 +48,13 @@ dispatch_queue_t queue;
 	}
 }
 
-+ (void)hideHomebrewNotInstalledMessage
+- (void)hideHomebrewNotInstalledMessage
 {
 	[[NSNotificationCenter defaultCenter] postNotificationName:kBP_NOTIFICATION_UNLOCK_WINDOW object:self];
 }
 
 //This method returns nil because brew is never in the default $PATH used by NSTask
-+ (NSString*)getHomebrewPath __deprecated
+- (NSString*)getHomebrewPath __deprecated
 {
 	NSTask *task;
     task = [[NSTask alloc] init];
@@ -67,12 +77,12 @@ dispatch_queue_t queue;
 	}
 }
 
-+ (NSString*)performBrewCommandWithArguments:(NSArray*)arguments
+- (NSString*)performBrewCommandWithArguments:(NSArray*)arguments
 {
-	return [BPHomebrewInterface performBrewCommandWithArguments:arguments captureError:NO];
+	return [self performBrewCommandWithArguments:arguments captureError:NO];
 }
 
-+ (NSString*)performBrewCommandWithArguments:(NSArray*)arguments captureError:(BOOL)captureError
+- (NSString*)performBrewCommandWithArguments:(NSArray*)arguments captureError:(BOOL)captureError
 {
 	// Test if homebrew is installed
 	static NSString *pathString;
@@ -84,7 +94,7 @@ dispatch_queue_t queue;
 		
 		NSInteger retval = system([pathString UTF8String]);
 		if (retval == kBP_EXEC_FILE_NOT_FOUND) {
-			[BPHomebrewInterface showHomebrewNotInstalledMessage];
+			[self showHomebrewNotInstalledMessage];
 			return nil;
 		}
 		testedForInstallation = YES;
@@ -101,13 +111,7 @@ dispatch_queue_t queue;
     [task setStandardInput:[NSPipe pipe]];
 	[task setStandardError:pipe_error];
 
-	if (!queue) {
-		queue = dispatch_queue_create("com.brunophilipe.Cakebrew", 0);
-	}
-
-	dispatch_async(queue, ^{
-		[task launch];
-	});
+	[task launch];
 
     [task waitUntilExit];
 
@@ -122,12 +126,12 @@ dispatch_queue_t queue;
 	}
 }
 
-+ (NSArray*)list
+- (NSArray*)list
 {
-	return [BPHomebrewInterface listMode:kBP_LIST_INSTALLED];
+	return [self listMode:kBP_LIST_INSTALLED];
 }
 
-+ (NSArray*)listMode:(BP_LIST_MODE)mode {
+- (NSArray*)listMode:(BP_LIST_MODE)mode {
 	NSArray *arguments = nil;
 	BOOL displaysVersions = NO;
 
@@ -154,7 +158,7 @@ dispatch_queue_t queue;
 			return nil;
 	}
 
-    NSString *string = [BPHomebrewInterface performBrewCommandWithArguments:arguments];
+    NSString *string = [self performBrewCommandWithArguments:arguments];
 	NSArray *aux = nil;
     if (string) {
 		NSMutableArray *array = [[string componentsSeparatedByString:@"\n"] mutableCopy];
@@ -179,8 +183,8 @@ dispatch_queue_t queue;
 	}
 }
 
-+ (NSArray*)searchForFormulaName:(NSString*)name {
-    NSString *string = [BPHomebrewInterface performBrewCommandWithArguments:@[@"search", name]];
+- (NSArray*)searchForFormulaName:(NSString*)name {
+    NSString *string = [self performBrewCommandWithArguments:@[@"search", name]];
     if (string) {
 		NSMutableArray* array = [[string componentsSeparatedByString:@"\n"] mutableCopy];
 		[array removeLastObject];
@@ -190,49 +194,49 @@ dispatch_queue_t queue;
 	}
 }
 
-+ (NSString*)informationForFormula:(NSString*)formula {
-	return [BPHomebrewInterface performBrewCommandWithArguments:@[@"info", formula]];
+- (NSString*)informationForFormula:(NSString*)formula {
+	return [self performBrewCommandWithArguments:@[@"info", formula]];
 }
 
-+ (NSString*)update {
-	NSString *string = [BPHomebrewInterface performBrewCommandWithArguments:@[@"update"]];
+- (NSString*)update {
+	NSString *string = [self performBrewCommandWithArguments:@[@"update"]];
     NSLog (@"script returned:\n%@", string);
 	[[NSNotificationCenter defaultCenter] postNotificationName:kBP_NOTIFICATION_FORMULAS_CHANGED object:nil];
     return string;
 }
 
-+ (NSString*)upgradeFormula:(NSString*)formula {
-	NSString *string = [BPHomebrewInterface performBrewCommandWithArguments:@[@"upgrade", formula]];
+- (NSString*)upgradeFormula:(NSString*)formula {
+	NSString *string = [self performBrewCommandWithArguments:@[@"upgrade", formula]];
     NSLog (@"script returned:\n%@", string);
 	[[NSNotificationCenter defaultCenter] postNotificationName:kBP_NOTIFICATION_FORMULAS_CHANGED object:nil];
     return string;
 }
 
-+ (NSString*)upgradeFormulas:(NSArray*)formulas
+- (NSString*)upgradeFormulas:(NSArray*)formulas
 {
-	NSString *string = [BPHomebrewInterface performBrewCommandWithArguments:[@[@"upgrade"] arrayByAddingObjectsFromArray:formulas]];
+	NSString *string = [self performBrewCommandWithArguments:[@[@"upgrade"] arrayByAddingObjectsFromArray:formulas]];
 	NSLog (@"script returned:\n%@", string);
 	[[NSNotificationCenter defaultCenter] postNotificationName:kBP_NOTIFICATION_FORMULAS_CHANGED object:nil];
     return string;
 }
 
-+ (NSString*)installFormula:(NSString*)formula {
-	NSString *string = [BPHomebrewInterface performBrewCommandWithArguments:@[@"install", formula]];
+- (NSString*)installFormula:(NSString*)formula {
+	NSString *string = [self performBrewCommandWithArguments:@[@"install", formula]];
     NSLog (@"script returned:\n%@", string);
 	[[NSNotificationCenter defaultCenter] postNotificationName:kBP_NOTIFICATION_FORMULAS_CHANGED object:nil];
     return string;
 }
 
-+ (NSString*)uninstallFormula:(NSString*)formula {
-    NSString *string = [BPHomebrewInterface performBrewCommandWithArguments:@[@"uninstall", formula]];
+- (NSString*)uninstallFormula:(NSString*)formula {
+    NSString *string = [self performBrewCommandWithArguments:@[@"uninstall", formula]];
     NSLog (@"script returned:\n%@", string);
 	[[NSNotificationCenter defaultCenter] postNotificationName:kBP_NOTIFICATION_FORMULAS_CHANGED object:nil];
     return string;
 }
 
-+ (NSString*)runDoctor
+- (NSString*)runDoctor
 {
-	NSString *string = [BPHomebrewInterface performBrewCommandWithArguments:@[@"doctor"] captureError:YES];
+	NSString *string = [self performBrewCommandWithArguments:@[@"doctor"] captureError:YES];
     NSLog (@"script returned:\n%@", string);
     return string;
 }
