@@ -416,14 +416,14 @@
 /* Begin PBXShellScriptBuildPhase section */
 		153AD45918F4A45E000D6FB5 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
+			buildActionMask = 8;
 			files = (
 			);
 			inputPaths = (
 			);
 			outputPaths = (
 			);
-			runOnlyForDeploymentPostprocessing = 0;
+			runOnlyForDeploymentPostprocessing = 1;
 			shellPath = /bin/sh;
 			shellScript = "/bin/sh \"Cakebrew/BumpBuild.sh\" \"${PROJECT_DIR}/${INFOPLIST_FILE}\"";
 		};

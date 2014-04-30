@@ -59,8 +59,12 @@
 	[self.button_doctor_runStop setEnabled:NO];
 	[self.progress_doctor startAnimation:sender];
 	NSBlockOperation *block = [NSBlockOperation blockOperationWithBlock:^{
-		NSString *output = [[BPHomebrewInterface sharedInterface] runDoctor];
-		[self.textView_doctor setString:output];
+		NSString __block *outputVal;
+		[[BPHomebrewInterface sharedInterface] runDoctorWithReturnBlock:^(NSString *output) {
+			if (outputVal) outputVal = [outputVal stringByAppendingString:output];
+			else outputVal = output;
+			[self.textView_doctor setString:outputVal];
+		}];
 		[self.progress_doctor stopAnimation:sender];
 		[self.button_doctor_runStop setEnabled:YES];
 	}];
@@ -76,8 +80,12 @@
 	[self.button_update_runStop setEnabled:NO];
 	[self.progress_update startAnimation:sender];
 	NSBlockOperation *block = [NSBlockOperation blockOperationWithBlock:^{
-		NSString *output = [[BPHomebrewInterface sharedInterface] update];
-		[self.textView_update setString:output];
+		NSString __block *outputVal;
+		[[BPHomebrewInterface sharedInterface] updateWithReturnBlock:^(NSString *output) {
+			if (outputVal) outputVal = [outputVal stringByAppendingString:output];
+			else outputVal = output;
+			[self.textView_update setString:outputVal];
+		}];
 		[self.progress_update stopAnimation:sender];
 		[self.button_update_runStop setEnabled:YES];
 	}];

@@ -82,38 +82,49 @@
 - (void)windowDidAppear
 {
 	[self.progressIndicator startAnimation:nil];
-	NSString __block *output;
-	dispatch_async(dispatch_get_main_queue(), ^{
-		switch (self.windowOperation) {
-			case kBP_WINDOW_OPERATION_INSTALL:
-				output = [[BPHomebrewInterface sharedInterface] installFormula:self.formula.name];
-				break;
-
-			case kBP_WINDOW_OPERATION_UNINSTALL:
-				output = [[BPHomebrewInterface sharedInterface] uninstallFormula:self.formula.name];
-				break;
-
-			case kBP_WINDOW_OPERATION_UPGRADE:
-				if (self.formula) {
-					output = [[BPHomebrewInterface sharedInterface] upgradeFormula:self.formula.name];
-				} else {
-					NSMutableArray *names = [NSMutableArray arrayWithCapacity:self.formulas.count];
-					for (BPFormula *formula in self.formulas) {
-						[names addObject:formula.name];
-					}
-					output = [[BPHomebrewInterface sharedInterface] upgradeFormulas:names];
+	NSBlockOperation *blockOperation = [NSBlockOperation blockOperationWithBlock:^{
+		NSString __block *outputValue;
+		if (self.windowOperation == kBP_WINDOW_OPERATION_INSTALL) {
+			[[BPHomebrewInterface sharedInterface] installFormula:self.formula.name withReturnBlock:^(NSString *output) {
+				if (outputValue) outputValue = [outputValue stringByAppendingString:output];
+				else outputValue = output;
+				[self.textView setString:outputValue];
+			}];
+		} else if (self.windowOperation == kBP_WINDOW_OPERATION_UNINSTALL) {
+			[[BPHomebrewInterface sharedInterface] uninstallFormula:self.formula.name withReturnBlock:^(NSString *output) {
+				if (outputValue) outputValue = [outputValue stringByAppendingString:output];
+				else outputValue = output;
+				[self.textView setString:outputValue];
+			}];
+		} else if (self.windowOperation == kBP_WINDOW_OPERATION_UPGRADE) {
+			if (self.formula) {
+				[[BPHomebrewInterface sharedInterface] upgradeFormula:self.formula.name withReturnBlock:^(NSString *output) {
+					if (outputValue) outputValue = [outputValue stringByAppendingString:output];
+					else outputValue = output;
+					[self.textView setString:outputValue];
+				}];
+			} else {
+				NSMutableArray *names = [NSMutableArray arrayWithCapacity:self.formulas.count];
+				for (BPFormula *formula in self.formulas) {
+					[names addObject:formula.name];
 				}
-				break;
+				[[BPHomebrewInterface sharedInterface] upgradeFormulas:names withReturnBlock:^(NSString *output) {
+					if (outputValue) outputValue = [outputValue stringByAppendingString:output];
+					else outputValue = output;
+					[self.textView setString:outputValue];
+				}];
+			}
 		}
 
-		[self.textView setString:output];
 		[self.progressIndicator stopAnimation:nil];
 		[self.button_ok setEnabled:YES];
-	});
+	}];
+	[blockOperation performSelector:@selector(start) withObject:nil afterDelay:0.1];
 }
 
 - (IBAction)ok:(id)sender {
 	NSWindow *mainWindow = BPAppDelegateRef.window;
 	[mainWindow endSheet:self.window];
+	[[NSNotificationCenter defaultCenter] postNotificationName:kBP_NOTIFICATION_FORMULAS_CHANGED object:nil];
 }
 @end

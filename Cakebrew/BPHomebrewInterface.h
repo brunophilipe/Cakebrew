@@ -32,17 +32,26 @@ typedef enum : NSUInteger {
 
 + (BPHomebrewInterface *)sharedInterface;
 
+- (void)hideHomebrewNotInstalledMessage;
+
+// Operations that return on finish
 - (NSArray*)list;
 - (NSArray*)listMode:(BP_LIST_MODE)mode;
 - (NSArray*)searchForFormulaName:(NSString*)formula;
 - (NSString*)informationForFormula:(NSString*)formula;
-- (NSString*)update;
-- (NSString*)upgradeFormula:(NSString*)formula;
-- (NSString*)upgradeFormulas:(NSArray*)formulas;
-- (NSString*)installFormula:(NSString*)formula;
-- (NSString*)uninstallFormula:(NSString*)formula;
-- (NSString*)runDoctor;
+- (NSString*)update __deprecated;
+- (NSString*)upgradeFormula:(NSString*)formula __deprecated;
+- (NSString*)upgradeFormulas:(NSArray*)formulas __deprecated;
+- (NSString*)installFormula:(NSString*)formula __deprecated;
+- (NSString*)uninstallFormula:(NSString*)formula __deprecated;
+- (NSString*)runDoctor __deprecated;
 
-- (void)hideHomebrewNotInstalledMessage;
+// Operations with live data callback block
+- (BOOL)updateWithReturnBlock:(void (^)(NSString*))block;
+- (BOOL)upgradeFormula:(NSString*)formula withReturnBlock:(void (^)(NSString*))block;
+- (BOOL)upgradeFormulas:(NSArray*)formulas withReturnBlock:(void (^)(NSString*))block;
+- (BOOL)installFormula:(NSString*)formula withReturnBlock:(void (^)(NSString*))block;
+- (BOOL)uninstallFormula:(NSString*)formula withReturnBlock:(void (^)(NSString*))block;
+- (BOOL)runDoctorWithReturnBlock:(void (^)(NSString*))block;
 
 @end

@@ -24,9 +24,16 @@
 
 #define kBP_EXEC_FILE_NOT_FOUND 32512
 
-@implementation BPHomebrewInterface
+@interface BPHomebrewInterface ()
+{
+	BOOL testedForInstallation;
 
-BOOL testedForInstallation;
+	void (^operationUpdateBlock)(NSString*);
+}
+
+@end
+
+@implementation BPHomebrewInterface
 
 + (BPHomebrewInterface *)sharedInterface
 {
@@ -37,6 +44,15 @@ BOOL testedForInstallation;
         dispatch_once(&once, ^ { instance = [[BPHomebrewInterface alloc] init]; });
         return instance;
 	}
+}
+
+- (id)init
+{
+	self = [super init];
+	if (self) {
+		[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updatedFileHandle:) name:NSFileHandleDataAvailableNotification object:nil];
+	}
+	return self;
 }
 
 - (void)showHomebrewNotInstalledMessage
@@ -75,6 +91,58 @@ BOOL testedForInstallation;
 	} else {
 		return nil;
 	}
+}
+
+- (BOOL)performBrewCommandWithArguments:(NSArray*)arguments dataReturnBlock:(void (^)(NSString*))block
+{
+	// Test if homebrew is installed
+	static NSString *pathString;
+
+	if (!testedForInstallation || !pathString) {
+		pathString = [[NSUserDefaults standardUserDefaults] objectForKey:kBP_HOMEBREW_PATH_KEY];
+		if (!pathString)
+			pathString = kBP_HOMEBREW_PATH;
+
+		NSInteger retval = system([pathString UTF8String]);
+		if (retval == kBP_EXEC_FILE_NOT_FOUND) {
+			[self showHomebrewNotInstalledMessage];
+			return NO;
+		}
+		testedForInstallation = YES;
+	}
+
+	operationUpdateBlock = block;
+
+	NSTask *task;
+    task = [[NSTask alloc] init];
+    [task setLaunchPath:pathString];
+    [task setArguments:arguments];
+
+	NSPipe *pipe_output = [NSPipe pipe];
+	NSPipe *pipe_error = [NSPipe pipe];
+    [task setStandardOutput:pipe_output];
+    [task setStandardInput:[NSPipe pipe]];
+	[task setStandardError:pipe_error];
+
+	NSFileHandle *handle_output = [pipe_output fileHandleForReading];
+	[handle_output waitForDataInBackgroundAndNotify];
+
+	NSFileHandle *handle_error = [pipe_error fileHandleForReading];
+	[handle_error waitForDataInBackgroundAndNotify];
+
+	[task launch];
+    [task waitUntilExit];
+
+	return YES;
+}
+
+- (void)updatedFileHandle:(NSNotification*)n
+{
+	NSFileHandle *fh = [n object];
+    NSData *data = [fh availableData];
+	dispatch_async(dispatch_get_main_queue(), ^{
+		operationUpdateBlock([[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding]);
+	});
 }
 
 - (NSString*)performBrewCommandWithArguments:(NSArray*)arguments
@@ -198,47 +266,93 @@ BOOL testedForInstallation;
 	return [self performBrewCommandWithArguments:@[@"info", formula]];
 }
 
-- (NSString*)update {
+- (NSString*)update __deprecated
+{
 	NSString *string = [self performBrewCommandWithArguments:@[@"update"]];
-    NSLog (@"script returned:\n%@", string);
+//	NSLog (@"script returned:\n%@", string);
 	[[NSNotificationCenter defaultCenter] postNotificationName:kBP_NOTIFICATION_FORMULAS_CHANGED object:nil];
     return string;
 }
 
-- (NSString*)upgradeFormula:(NSString*)formula {
+- (NSString*)upgradeFormula:(NSString*)formula __deprecated
+{
 	NSString *string = [self performBrewCommandWithArguments:@[@"upgrade", formula]];
-    NSLog (@"script returned:\n%@", string);
+//	NSLog (@"script returned:\n%@", string);
 	[[NSNotificationCenter defaultCenter] postNotificationName:kBP_NOTIFICATION_FORMULAS_CHANGED object:nil];
     return string;
 }
 
-- (NSString*)upgradeFormulas:(NSArray*)formulas
+- (NSString*)upgradeFormulas:(NSArray*)formulas __deprecated
 {
 	NSString *string = [self performBrewCommandWithArguments:[@[@"upgrade"] arrayByAddingObjectsFromArray:formulas]];
-	NSLog (@"script returned:\n%@", string);
+//	NSLog (@"script returned:\n%@", string);
 	[[NSNotificationCenter defaultCenter] postNotificationName:kBP_NOTIFICATION_FORMULAS_CHANGED object:nil];
     return string;
 }
 
-- (NSString*)installFormula:(NSString*)formula {
+- (NSString*)installFormula:(NSString*)formula __deprecated
+{
 	NSString *string = [self performBrewCommandWithArguments:@[@"install", formula]];
-    NSLog (@"script returned:\n%@", string);
+//	NSLog (@"script returned:\n%@", string);
 	[[NSNotificationCenter defaultCenter] postNotificationName:kBP_NOTIFICATION_FORMULAS_CHANGED object:nil];
     return string;
 }
 
-- (NSString*)uninstallFormula:(NSString*)formula {
+- (NSString*)uninstallFormula:(NSString*)formula __deprecated
+{
     NSString *string = [self performBrewCommandWithArguments:@[@"uninstall", formula]];
-    NSLog (@"script returned:\n%@", string);
+//	NSLog (@"script returned:\n%@", string);
 	[[NSNotificationCenter defaultCenter] postNotificationName:kBP_NOTIFICATION_FORMULAS_CHANGED object:nil];
     return string;
 }
 
-- (NSString*)runDoctor
+- (NSString*)runDoctor __deprecated
 {
 	NSString *string = [self performBrewCommandWithArguments:@[@"doctor"] captureError:YES];
-    NSLog (@"script returned:\n%@", string);
+//	NSLog (@"script returned:\n%@", string);
     return string;
+}
+
+- (BOOL)updateWithReturnBlock:(void (^)(NSString*output))block
+{
+	BOOL val = [self performBrewCommandWithArguments:@[@"update"] dataReturnBlock:block];
+	[[NSNotificationCenter defaultCenter] postNotificationName:kBP_NOTIFICATION_FORMULAS_CHANGED object:nil];
+	return val;
+}
+
+- (BOOL)upgradeFormula:(NSString*)formula withReturnBlock:(void (^)(NSString*output))block
+{
+	BOOL val = [self performBrewCommandWithArguments:@[@"upgrade", formula] dataReturnBlock:block];
+	[[NSNotificationCenter defaultCenter] postNotificationName:kBP_NOTIFICATION_FORMULAS_CHANGED object:nil];
+	return val;
+}
+
+- (BOOL)upgradeFormulas:(NSArray*)formulas withReturnBlock:(void (^)(NSString*output))block
+{
+	BOOL val = [self performBrewCommandWithArguments:[@[@"upgrade"] arrayByAddingObjectsFromArray:formulas] dataReturnBlock:block];
+	[[NSNotificationCenter defaultCenter] postNotificationName:kBP_NOTIFICATION_FORMULAS_CHANGED object:nil];
+	return val;
+}
+
+- (BOOL)installFormula:(NSString*)formula withReturnBlock:(void (^)(NSString*output))block
+{
+	BOOL val = [self performBrewCommandWithArguments:@[@"install", formula] dataReturnBlock:block];
+	[[NSNotificationCenter defaultCenter] postNotificationName:kBP_NOTIFICATION_FORMULAS_CHANGED object:nil];
+	return val;
+}
+
+- (BOOL)uninstallFormula:(NSString*)formula withReturnBlock:(void (^)(NSString*output))block
+{
+	BOOL val = [self performBrewCommandWithArguments:@[@"uninstall", formula] dataReturnBlock:block];
+	[[NSNotificationCenter defaultCenter] postNotificationName:kBP_NOTIFICATION_FORMULAS_CHANGED object:nil];
+	return val;
+}
+
+- (BOOL)runDoctorWithReturnBlock:(void (^)(NSString*output))block
+{
+	BOOL val = [self performBrewCommandWithArguments:@[@"doctor"] dataReturnBlock:block];
+	[[NSNotificationCenter defaultCenter] postNotificationName:kBP_NOTIFICATION_FORMULAS_CHANGED object:nil];
+	return val;
 }
 
 @end
