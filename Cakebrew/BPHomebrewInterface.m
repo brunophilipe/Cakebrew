@@ -27,6 +27,7 @@
 @implementation BPHomebrewInterface
 
 BOOL testedForInstallation;
+dispatch_queue_t queue;
 
 + (void)showHomebrewNotInstalledMessage
 {
@@ -37,11 +38,51 @@ BOOL testedForInstallation;
 	}
 }
 
++ (void)hideHomebrewNotInstalledMessage
+{
+	[[NSNotificationCenter defaultCenter] postNotificationName:kBP_NOTIFICATION_UNLOCK_WINDOW object:self];
+}
+
+//This method returns nil because brew is never in the default $PATH used by NSTask
++ (NSString*)getHomebrewPath __deprecated
+{
+	NSTask *task;
+    task = [[NSTask alloc] init];
+
+	[task setLaunchPath:@"/usr/bin/which"];
+	[task setArguments:@[@"which"]];
+
+	NSPipe *output = [NSPipe pipe];
+	[task setStandardOutput:output];
+
+	[task launch];
+
+	[task waitUntilExit];
+	NSString *string = [[NSString alloc] initWithData:[[output fileHandleForReading] readDataToEndOfFile] encoding:NSUTF8StringEncoding];
+
+	if (string && ![string isEqualToString:@""] && [[NSFileManager defaultManager] fileExistsAtPath:[string stringByReplacingOccurrencesOfString:@"\n" withString:@""]]) {
+		return string;
+	} else {
+		return nil;
+	}
+}
+
 + (NSString*)performBrewCommandWithArguments:(NSArray*)arguments
-{	
+{
+	return [BPHomebrewInterface performBrewCommandWithArguments:arguments captureError:NO];
+}
+
++ (NSString*)performBrewCommandWithArguments:(NSArray*)arguments captureError:(BOOL)captureError
+{
 	// Test if homebrew is installed
-	if (!testedForInstallation) {
-		NSInteger retval = system([kBP_HOMEBREW_PATH UTF8String]);
+	NSString *pathString;
+
+	if (!testedForInstallation || !pathString) {
+		pathString = [[NSUserDefaults standardUserDefaults] objectForKey:kBP_HOMEBREW_PATH_KEY];
+		if (!pathString)
+			pathString = kBP_HOMEBREW_PATH;
+		
+		NSInteger retval = system([pathString UTF8String]);
 		if (retval == kBP_EXEC_FILE_NOT_FOUND) {
 			[BPHomebrewInterface showHomebrewNotInstalledMessage];
 			return nil;
@@ -51,32 +92,34 @@ BOOL testedForInstallation;
 
 	NSTask *task;
     task = [[NSTask alloc] init];
-    [task setLaunchPath:kBP_HOMEBREW_PATH];
+    [task setLaunchPath:pathString];
     [task setArguments:arguments];
 
-	NSPipe *pipe;
-    pipe = [NSPipe pipe];
-    [task setStandardOutput:pipe];
+	NSPipe *pipe_output = [NSPipe pipe];
+	NSPipe *pipe_error = [NSPipe pipe];
+    [task setStandardOutput:pipe_output];
     [task setStandardInput:[NSPipe pipe]];
+	[task setStandardError:pipe_error];
 
-    NSFileHandle *file;
-    file = [pipe fileHandleForReading];
+	if (!queue) {
+		queue = dispatch_queue_create("com.brunophilipe.Cakebrew", 0);
+	}
 
-    [task launch];
-
-    NSData *data;
-    data = [file readDataToEndOfFile];
-
-    NSString *string;
-    /*
-	 string = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-	 NSLog (@"script returned:\n%@", string);
-	 */
+	dispatch_async(queue, ^{
+		[task launch];
+	});
 
     [task waitUntilExit];
 
-    string = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-	return string;
+	NSString *string_output, *string_error;
+    string_output = [[NSString alloc] initWithData:[[pipe_output fileHandleForReading] readDataToEndOfFile] encoding:NSUTF8StringEncoding];
+
+	if (!captureError) {
+		return string_output;
+	} else {
+		string_error = [[NSString alloc] initWithData:[[pipe_error fileHandleForReading] readDataToEndOfFile] encoding:NSUTF8StringEncoding];
+		return [NSString stringWithFormat:@"%@\n%@", string_output, string_error];
+	}
 }
 
 + (NSArray*)list
@@ -187,33 +230,11 @@ BOOL testedForInstallation;
     return string;
 }
 
-+ (void)runDoctorWithOutput:(id)output
++ (NSString*)runDoctor
 {
-	// Test if homebrew is installed
-	if (!testedForInstallation) {
-		NSInteger retval = system([kBP_HOMEBREW_PATH UTF8String]);
-		if (retval == kBP_EXEC_FILE_NOT_FOUND) {
-			[BPHomebrewInterface showHomebrewNotInstalledMessage];
-			output = nil;
-		}
-		testedForInstallation = YES;
-	}
-
-	NSTask *task;
-    task = [[NSTask alloc] init];
-    [task setLaunchPath:kBP_HOMEBREW_PATH];
-#ifdef DEBUG
-	[task setArguments:@[@"leaves"]];
-#else
-	[task setArguments:@[@"doctor"]];
-#endif
-
-    [task setStandardOutput:output];
-    [task setStandardInput:[NSPipe pipe]];
-
-    [task launch];
-    [task waitUntilExit];
-
-	NSLog(@"Finished task!");
+	NSString *string = [BPHomebrewInterface performBrewCommandWithArguments:@[@"doctor"] captureError:YES];
+    NSLog (@"script returned:\n%@", string);
+    return string;
 }
+
 @end

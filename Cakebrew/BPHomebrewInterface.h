@@ -39,7 +39,8 @@ typedef enum : NSUInteger {
 + (NSString*)upgradeFormulas:(NSArray*)formulas;
 + (NSString*)installFormula:(NSString*)formula;
 + (NSString*)uninstallFormula:(NSString*)formula;
++ (NSString*)runDoctor;
 
-+ (void)runDoctorWithOutput:(id)output;
++ (void)hideHomebrewNotInstalledMessage;
 
 @end

@@ -54,6 +54,7 @@
 		[_homebrewManager setDelegate:self];
 
 		[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(lockWindow) name:kBP_NOTIFICATION_LOCK_WINDOW object:nil];
+		[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(unlockWindow) name:kBP_NOTIFICATION_UNLOCK_WINDOW object:nil];
 	}
 	return self;
 }
@@ -131,6 +132,19 @@
 	}];
 }
 
+- (void)unlockWindow
+{
+	[self.view_disablerLock setHidden:YES];
+	[self.label_information setHidden:NO];
+	[self.toolbar.items enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+		if ([obj respondsToSelector:@selector(setEnabled:)]) {
+			[obj performSelector:@selector(setEnabled:) withObject:@YES];
+		}
+	}];
+
+	[[BPHomebrewManager sharedManager] update];
+}
+
 - (void)updateToolbarItemsState
 {
 	NSUInteger selectedIndex = [self.tableView_formulas selectedRow];
@@ -171,6 +185,10 @@
 {
 	[self buildSidebarTree];
 	[self.outlineView_sidebar reloadData];
+
+	if ([_outlineView_sidebar selectedRow] < 0) {
+		[_outlineView_sidebar selectRowIndexes:[NSIndexSet indexSetWithIndex:1] byExtendingSelection:NO];
+	}
 }
 
 - (void)buildSidebarTree

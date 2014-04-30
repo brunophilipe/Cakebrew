@@ -86,4 +86,8 @@
 	[[NSWorkspace sharedWorkspace] openURL:kBP_CAKEBREW_URL];
 }
 
+- (IBAction)showCustomBrewPathWindow:(id)sender {
+	[self.window beginSheet:self.customBrewPathWindow completionHandler:nil];
+}
+
 @end

@@ -12,6 +12,7 @@
 	#import "BPAppDelegate.h"
 
 	#define kBP_HOMEBREW_PATH @"/usr/local/bin/brew"
+	#define kBP_HOMEBREW_PATH_KEY @"BP_CAKEBREW_PATH_KEY"
 
 	#define NSColorFromRGB(rgbValue) [NSColor colorWithCalibratedRed:((float)((rgbValue & 0xFF0000) >> 16))/255.0 green:((float)((rgbValue & 0xFF00) >> 8))/255.0 blue:((float)(rgbValue & 0xFF))/255.0 alpha:1.0]
 
@@ -30,6 +31,7 @@
 
 	#define kBP_NOTIFICATION_FORMULAS_CHANGED @"BP_NOTIFICATION_FORMULAS_CHANGED"
 	#define kBP_NOTIFICATION_LOCK_WINDOW @"BP_NOTIFICATION_LOCK_WINDOW"
+	#define kBP_NOTIFICATION_UNLOCK_WINDOW @"BP_NOTIFICATION_UNLOCK_WINDOW"
 
-	#define kBP_CAKEBREW_URL [NSURL URLWithString:@"http://www.cakebrew.com"]
+	#define kBP_CAKEBREW_URL [NSURL URLWithString:@"http://www.cakebrew.com/"]
 #endif

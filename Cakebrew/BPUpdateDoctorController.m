@@ -55,23 +55,16 @@
 }
 
 - (IBAction)runStopDoctor:(id)sender {
-	if (!self.isRunning) {
-		self.running = YES;
-
-		NSPipe *pipe;
-		pipe = [NSPipe pipe];
-		self.outputHandle = [pipe fileHandleForReading];
-
-//		timer = [NSTimer scheduledTimerWithTimeInterval:0.2 target:self selector:@selector(updateLog) userInfo:nil repeats:YES];
-
-		[BPHomebrewInterface runDoctorWithOutput:pipe];
-
-		[self.textView_doctor setString:[[NSString alloc] initWithData:[self.outputHandle availableData] encoding:NSUTF8StringEncoding]];
-
-//		[timer invalidate];
-	} else {
-		self.running = NO;
-	}
+	[self.textView_doctor setString:@""];
+	[self.button_doctor_runStop setEnabled:NO];
+	[self.progress_doctor startAnimation:sender];
+	NSBlockOperation *block = [NSBlockOperation blockOperationWithBlock:^{
+		NSString *output = [BPHomebrewInterface runDoctor];
+		[self.textView_doctor setString:output];
+		[self.progress_doctor stopAnimation:sender];
+		[self.button_doctor_runStop setEnabled:YES];
+	}];
+	[block performSelector:@selector(start) withObject:nil afterDelay:0.1];
 }
 
 - (IBAction)clearLogDoctor:(id)sender {
@@ -81,11 +74,11 @@
 - (IBAction)runStopUpdate:(id)sender {
 	[self.textView_update setString:@""];
 	[self.button_update_runStop setEnabled:NO];
-	[self.progress_update startAnimation:nil];
+	[self.progress_update startAnimation:sender];
 	NSBlockOperation *block = [NSBlockOperation blockOperationWithBlock:^{
 		NSString *output = [BPHomebrewInterface update];
 		[self.textView_update setString:output];
-		[self.progress_update stopAnimation:nil];
+		[self.progress_update stopAnimation:sender];
 		[self.button_update_runStop setEnabled:YES];
 	}];
 	[block performSelector:@selector(start) withObject:nil afterDelay:0.1];

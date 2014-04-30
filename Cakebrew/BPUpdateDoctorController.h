@@ -16,6 +16,7 @@
 @property (assign) IBOutlet NSButton *button_doctor_clearLog;
 @property (assign) IBOutlet NSButton *button_update_runStop;
 @property (assign) IBOutlet NSProgressIndicator *progress_update;
+@property (assign) IBOutlet NSProgressIndicator *progress_doctor;
 
 @property (getter = isRunning) BOOL running;
 

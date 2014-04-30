@@ -20,14 +20,17 @@
 //
 
 #import <Cocoa/Cocoa.h>
+#import "BPCustomBrewPathWindow.h"
 
 @interface BPAppDelegate : NSObject <NSApplicationDelegate>
 
 @property (assign) IBOutlet NSWindow *window;
+@property (assign) IBOutlet BPCustomBrewPathWindow *customBrewPathWindow;
 
 - (NSURL*)urlForApplicationSupportFolder;
 - (NSURL*)urlForApplicationCachesFolder;
 
 - (IBAction)openWebsite:(id)sender;
+- (IBAction)showCustomBrewPathWindow:(id)sender;
 
 @end
