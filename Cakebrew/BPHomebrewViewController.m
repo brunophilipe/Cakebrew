@@ -189,6 +189,7 @@
 - (void)homebrewManagerFinishedUpdating:(BPHomebrewManager *)manager
 {
 	[self buildSidebarTree];
+	[self.tableView_formulas reloadData];
 
 	// Used after unlocking the app when inserting custom homebrew installation path
 	BOOL shouldReselectFirstRow = ([_outlineView_sidebar selectedRow] < 0);
