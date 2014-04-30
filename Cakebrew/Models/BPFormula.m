@@ -83,12 +83,18 @@
 
 - (BOOL)getInformation
 {
-    NSString *line       = nil;
-    NSString *output     = nil;
-    NSArray *lines       = nil;
-    NSUInteger lineIndex = 0;
+    NSString *line         = nil;
+    NSString *output       = nil;
+    NSArray *lines         = nil;
+    NSUInteger lineIndex   = 0;
 
 	output = [[BPHomebrewInterface sharedInterface] informationForFormula:self.name];
+
+	if ([output isEqualToString:@""]) {
+		[self setDeprecated:YES];
+		return YES;
+	}
+
 	lines = [output componentsSeparatedByString:@"\n"];
 
 	lineIndex = 0;
@@ -134,6 +140,8 @@
 	if (lineIndex == 0) {
 		return YES;
 	}
+
+	[self setDependencies:nil];
 
 	for (i=0; i<lines.count; i++) {
 		line = [lines objectAtIndex:lineIndex+i];

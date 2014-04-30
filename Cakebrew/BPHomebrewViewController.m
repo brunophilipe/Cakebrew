@@ -67,27 +67,34 @@
 - (void)displayInformationForFormula:(BPFormula*)formula
 {
 	if (formula) {
-		if (formula.isInstalled) {
-			[self.label_formulaPath setStringValue:formula.installPath];
+		if (!formula.isDeprecated) {
+			if (formula.isInstalled) {
+				[self.label_formulaPath setStringValue:formula.installPath];
+			} else {
+				[self.label_formulaPath setStringValue:@"Formula Not Installed"];
+			}
+
+			[self.label_formulaVersion setStringValue:formula.latestVersion];
+
+			if (formula.dependencies) {
+				[self.label_formulaDependencies setStringValue:formula.dependencies];
+			} else {
+				[self.label_formulaDependencies setStringValue:@"This formula has no dependencies!"];
+			}
+
+			if (formula.conflicts) {
+				[self.label_formulaConflicts setStringValue:formula.conflicts];
+			} else {
+				[self.label_formulaConflicts setStringValue:@"This formula has no known conflicts."];
+			}
+
+			[self.button_formulaWebsite setEnabled:YES];
 		} else {
-			[self.label_formulaPath setStringValue:@"Formula Not Installed"];
+			static NSString *depString = @"Deprecated Formula";
+			[self.label_formulaPath setStringValue:depString];
+			[self.label_formulaDependencies setStringValue:depString];
+			[self.label_formulaConflicts setStringValue:depString];
 		}
-
-		[self.label_formulaVersion setStringValue:formula.latestVersion];
-
-		if (formula.dependencies) {
-			[self.label_formulaDependencies setStringValue:formula.dependencies];
-		} else {
-			[self.label_formulaDependencies setStringValue:@"This formula has no dependencies!"];
-		}
-
-		if (formula.conflicts) {
-			[self.label_formulaConflicts setStringValue:formula.conflicts];
-		} else {
-			[self.label_formulaConflicts setStringValue:@"This formula has no known conflicts."];
-		}
-
-		[self.button_formulaWebsite setEnabled:YES];
 	} else {
 		[self.label_formulaPath setStringValue:@"--"];
 		[self.label_formulaVersion setStringValue:@"--"];
