@@ -60,8 +60,6 @@
 			[self storeAllFormulasCaches];
 			[self.delegate homebrewManagerFinishedUpdating:self];
 		});
-	} else {
-		[self.delegate homebrewManagerFinishedUpdating:self];
 	}
 }
 
@@ -77,13 +75,9 @@
 
 		if ([[NSFileManager defaultManager] fileExistsAtPath:allFormulasFile.relativePath]) {
 			cacheDict = [NSKeyedUnarchiver unarchiveObjectWithFile:allFormulasFile.relativePath];
-//			NSDate *encodingDate = [cacheDict objectForKey:kBP_CACHE_DICT_DATE_KEY];
-//			if (encodingDate && [(NSDate*)[encodingDate dateByAddingTimeInterval:kBP_SECONDS_IN_A_DAY] compare:[NSDate date]] == NSOrderedDescending) {
-				// Cache was created less than 24 hours ago, should load!
-				self.formulas_all = [cacheDict objectForKey:kBP_CACHE_DICT_DATA_KEY];
-				[self.delegate homebrewManagerFinishedUpdating:self];
-				return self.formulas_all != nil;
-//			}
+			self.formulas_all = [cacheDict objectForKey:kBP_CACHE_DICT_DATA_KEY];
+			[self.delegate homebrewManagerFinishedUpdating:self];
+			return self.formulas_all != nil;
 		}
 	} else {
 		NSLog(@"Could not load cache file. BPAppDelegate function returned nil!");

@@ -83,10 +83,13 @@
 
 - (BOOL)getInformation
 {
-	NSString *line = nil, *output = [BPHomebrewInterface informationForFormula:self.name];
-	NSArray *lines = [output componentsSeparatedByString:@"\n"];
-	NSUInteger lineIndex = 0;
-//	NSLog(@"%@", lines);
+    NSString *line       = nil;
+    NSString *output     = nil;
+    NSArray *lines       = nil;
+    NSUInteger lineIndex = 0;
+
+	output = [BPHomebrewInterface informationForFormula:self.name];
+	lines = [output componentsSeparatedByString:@"\n"];
 
 	lineIndex = 0;
 	line = [lines objectAtIndex:lineIndex];

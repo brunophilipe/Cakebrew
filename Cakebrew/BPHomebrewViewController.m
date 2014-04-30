@@ -184,11 +184,14 @@
 - (void)homebrewManagerFinishedUpdating:(BPHomebrewManager *)manager
 {
 	[self buildSidebarTree];
+
+	// Used after unlocking the app when inserting custom homebrew installation path
+	BOOL shouldReselectFirstRow = ([_outlineView_sidebar selectedRow] < 0);
+
 	[self.outlineView_sidebar reloadData];
 
-	if ([_outlineView_sidebar selectedRow] < 0) {
+	if (shouldReselectFirstRow)
 		[_outlineView_sidebar selectRowIndexes:[NSIndexSet indexSetWithIndex:1] byExtendingSelection:NO];
-	}
 }
 
 - (void)buildSidebarTree

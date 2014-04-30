@@ -75,7 +75,7 @@ dispatch_queue_t queue;
 + (NSString*)performBrewCommandWithArguments:(NSArray*)arguments captureError:(BOOL)captureError
 {
 	// Test if homebrew is installed
-	NSString *pathString;
+	static NSString *pathString;
 
 	if (!testedForInstallation || !pathString) {
 		pathString = [[NSUserDefaults standardUserDefaults] objectForKey:kBP_HOMEBREW_PATH_KEY];
