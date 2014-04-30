@@ -14,7 +14,7 @@ Do you need to use Homebrew but are afraid to use the terminal? Cakebrew is the 
 
 ## Website Source
 
-The source for the Cakebrew website is also present on GitHub! Visit the [repository](https://github.com/brunophilipe/Cakebrew-website/).
+The source for the Cakebrew website is also present on GitHub! Visit the [repository](https://github.com/brunophilipe/Cakebrew-site/).
 
 ## License
 
