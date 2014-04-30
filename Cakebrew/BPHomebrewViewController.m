@@ -164,8 +164,13 @@
 				break;
 
 			case kBP_FORMULA_OUTDATED:
-				[self.toolbarButton_installUninstall setImage:[NSImage imageNamed:@"reload.icns"]];
-				[self.toolbarButton_installUninstall setLabel:@"Update Formula"];
+				if ([self.outlineView_sidebar selectedRow] == 2) {
+					[self.toolbarButton_installUninstall setImage:[NSImage imageNamed:@"reload.icns"]];
+					[self.toolbarButton_installUninstall setLabel:@"Update Formula"];
+				} else {
+					[self.toolbarButton_installUninstall setImage:[NSImage imageNamed:@"delete.icns"]];
+					[self.toolbarButton_installUninstall setLabel:@"Uninstall Formula"];
+				}
 				break;
 
 			case kBP_FORMULA_NOT_INSTALLED:
