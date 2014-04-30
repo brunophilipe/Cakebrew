@@ -40,6 +40,15 @@
 	[[BPHomebrewManager sharedManager] update];
 }
 
+- (BOOL)applicationShouldHandleReopen:(NSApplication *)sender hasVisibleWindows:(BOOL)flag
+{
+    if (!flag) {
+        [self.window makeKeyAndOrderFront:self];
+    }
+    
+    return YES;
+}
+
 - (NSURL*)urlForApplicationSupportFolder
 {
 	NSError *error = nil;
