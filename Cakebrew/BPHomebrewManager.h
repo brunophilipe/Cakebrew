@@ -43,7 +43,7 @@ typedef enum : NSUInteger {
 @property (strong) NSArray *formulas_all;
 @property (strong) NSArray *formulas_leaves;
 
-@property (assign) id<BPHomebrewManagerDelegate> delegate;
+@property (unsafe_unretained) id<BPHomebrewManagerDelegate> delegate;
 
 + (BPHomebrewManager *)sharedManager;
 
