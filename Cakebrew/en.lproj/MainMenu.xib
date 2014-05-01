@@ -1205,7 +1205,7 @@ Gw
                         </connections>
                     </button>
                     <imageView hidden="YES" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ge2-1c-IJx">
-                        <rect key="frame" x="413" y="109" width="10" height="10"/>
+                        <rect key="frame" x="413" y="54" width="10" height="10"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="10" id="K5V-bO-1JL"/>
@@ -1223,7 +1223,7 @@ Gw
                     <constraint firstAttribute="trailing" secondItem="brg-kD-65W" secondAttribute="trailing" constant="125" id="Gsd-if-wOK"/>
                     <constraint firstAttribute="trailing" secondItem="Sxk-Dn-SZf" secondAttribute="trailing" constant="20" id="M07-0I-VOi"/>
                     <constraint firstItem="brg-kD-65W" firstAttribute="top" secondItem="eEu-fN-W70" secondAttribute="bottom" constant="8" id="Q1C-Qv-sQs"/>
-                    <constraint firstItem="ge2-1c-IJx" firstAttribute="top" secondItem="yYK-L1-D8h" secondAttribute="top" constant="51" id="Tlh-w9-qqI"/>
+                    <constraint firstItem="ge2-1c-IJx" firstAttribute="top" secondItem="yYK-L1-D8h" secondAttribute="top" constant="106" id="Tlh-w9-qqI"/>
                     <constraint firstItem="brg-kD-65W" firstAttribute="leading" secondItem="yYK-L1-D8h" secondAttribute="leading" constant="20" id="YOS-0M-8lu"/>
                     <constraint firstAttribute="trailing" secondItem="eEu-fN-W70" secondAttribute="trailing" constant="20" id="bmI-nH-1jU"/>
                     <constraint firstAttribute="bottom" secondItem="c0y-8x-DKo" secondAttribute="bottom" constant="19" id="cRP-MJ-hX9"/>
