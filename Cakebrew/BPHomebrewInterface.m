@@ -100,17 +100,29 @@ BOOL testedForInstallation;
 		testedForInstallation = YES;
 	}
 
+	BOOL enableProxy = [[NSUserDefaults standardUserDefaults] boolForKey:kBP_HOMEBREW_PROXY_ENABLE_KEY];
+	NSString *proxyURL = [[NSUserDefaults standardUserDefaults] objectForKey:kBP_HOMEBREW_PROXY_KEY];
+
 	NSTask *task;
     task = [[NSTask alloc] init];
     [task setLaunchPath:pathString];
     [task setArguments:arguments];
 
-	NSPipe *pipe_output = [NSPipe pipe];
-	NSPipe *pipe_error = [NSPipe pipe];
-    [task setStandardOutput:pipe_output];
-    [task setStandardInput:[NSPipe pipe]];
-	[task setStandardError:pipe_error];
+	if (enableProxy && proxyURL) {
+		[task setEnvironment:@{@"http_proxy": proxyURL}];
+	}
 
+	NSPipe *pipe_output, *pipe_error;
+
+	pipe_output = [NSPipe pipe];
+    [task setStandardOutput:pipe_output];
+
+	if (captureError) {
+		pipe_error = [NSPipe pipe];
+		[task setStandardError:pipe_error];
+	}
+
+    [task setStandardInput:[NSPipe pipe]];
 	[task launch];
 
     [task waitUntilExit];
@@ -134,6 +146,7 @@ BOOL testedForInstallation;
 - (NSArray*)listMode:(BP_LIST_MODE)mode {
 	NSArray *arguments = nil;
 	BOOL displaysVersions = NO;
+	BOOL loadErrorPipe = YES;
 
 	switch (mode) {
 		case kBP_LIST_INSTALLED:
@@ -152,6 +165,7 @@ BOOL testedForInstallation;
 		case kBP_LIST_UPGRADEABLE:
 			arguments = @[@"outdated"];
 			displaysVersions = YES;
+			loadErrorPipe = NO;
 			break;
 
 		default:

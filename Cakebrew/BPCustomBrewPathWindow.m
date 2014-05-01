@@ -29,6 +29,7 @@
 }
 
 - (IBAction)cancel:(id)sender {
-	[BPAppDelegateRef.window endSheet:self];
+	[self.sheetParent endSheet:self];
 }
+
 @end
