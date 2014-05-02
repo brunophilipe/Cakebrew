@@ -123,7 +123,7 @@
         return [BPFormula formulaWithName:item];
     }
 
-    NSString *name = [item substringWithRange:NSMakeRange(0, nameEnd.location - 1)];
+    NSString *name = [item substringWithRange:NSMakeRange(0, nameEnd.location)];
     NSString *version = [item substringWithRange:NSMakeRange(openBracket.location + 1, upgradeArrow.location - openBracket.location - 1)];
     NSString *latestVersion = [item substringWithRange:NSMakeRange(upgradeArrow.location + upgradeArrow.length, closeBracket.location - upgradeArrow.location - upgradeArrow.length)];
 
