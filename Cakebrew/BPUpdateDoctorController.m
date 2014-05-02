@@ -75,12 +75,15 @@
 	[self.textView_update setString:@""];
 	[self.button_update_runStop setEnabled:NO];
 	[self.progress_update startAnimation:sender];
-	NSBlockOperation *block = [NSBlockOperation blockOperationWithBlock:^{
-		NSString *output = [[BPHomebrewInterface sharedInterface] update];
-		[self.textView_update setString:output];
-		[self.progress_update stopAnimation:sender];
-		[self.button_update_runStop setEnabled:YES];
-	}];
-	[block performSelector:@selector(start) withObject:nil afterDelay:0.1];
+
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
+        __block NSString *output = [[BPHomebrewInterface sharedInterface] update];
+
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self.textView_update setString:output];
+            [self.progress_update stopAnimation:sender];
+            [self.button_update_runStop setEnabled:YES];
+        });
+    });
 }
 @end

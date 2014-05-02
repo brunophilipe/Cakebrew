@@ -50,17 +50,19 @@
 
 - (void)update
 {
-	[self setFormulas_installed:[[BPHomebrewInterface sharedInterface] listMode:kBP_LIST_INSTALLED]];
-	[self setFormulas_leaves:[[BPHomebrewInterface sharedInterface] listMode:kBP_LIST_LEAVES]];
-	[self setFormulas_outdated:[[BPHomebrewInterface sharedInterface] listMode:kBP_LIST_UPGRADEABLE]];
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self setFormulas_installed:[[BPHomebrewInterface sharedInterface] listMode:kBP_LIST_INSTALLED]];
+        [self setFormulas_leaves:[[BPHomebrewInterface sharedInterface] listMode:kBP_LIST_LEAVES]];
+        [self setFormulas_outdated:[[BPHomebrewInterface sharedInterface] listMode:kBP_LIST_UPGRADEABLE]];
 
-	if (![self loadAllFormulasCaches]) {
-		dispatch_async(dispatch_get_main_queue(), ^{
+        if (![self loadAllFormulasCaches]) {
+
 			[self setFormulas_all:[[BPHomebrewInterface sharedInterface] listMode:kBP_LIST_ALL]];
 			[self storeAllFormulasCaches];
 			[self.delegate homebrewManagerFinishedUpdating:self];
-		});
-	}
+            
+        }
+    });
 }
 
 /**
