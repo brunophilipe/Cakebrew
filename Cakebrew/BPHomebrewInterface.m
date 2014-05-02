@@ -109,7 +109,7 @@ BOOL testedForInstallation;
     [task setArguments:arguments];
 
 	if (enableProxy && proxyURL) {
-		[task setEnvironment:@{@"http_proxy": proxyURL}];
+		[task setEnvironment:@{@"http_proxy": proxyURL, @"https_proxy": proxyURL}];
 	}
 
 	NSPipe *pipe_output, *pipe_error;

@@ -459,8 +459,8 @@
                                                                             </constraints>
                                                                             <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="NSActionTemplate" id="As7-Xw-rr0"/>
                                                                         </imageView>
-                                                                        <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="UGv-FF-mH4">
-                                                                            <rect key="frame" x="25" y="0.0" width="104" height="17"/>
+                                                                        <textField verticalHuggingPriority="750" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="UGv-FF-mH4">
+                                                                            <rect key="frame" x="25" y="0.0" width="101" height="17"/>
                                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                                                                             <constraints>
                                                                                 <constraint firstAttribute="width" relation="greaterThanOrEqual" priority="750" constant="100" id="nTu-IB-1td"/>
@@ -1071,7 +1071,7 @@
             </connections>
         </viewController>
         <viewController id="UFb-dW-5rr"/>
-        <customView appearanceType="lightContent" id="WTy-A8-Ym9" customClass="BPGenericTextPopoverView">
+        <customView id="WTy-A8-Ym9" customClass="BPGenericTextPopoverView">
             <rect key="frame" x="0.0" y="0.0" width="450" height="250"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
             <subviews>
