@@ -24,6 +24,114 @@
 
 #define kBP_EXEC_FILE_NOT_FOUND 32512
 
+@interface BPHomebrewInterfaceListCall : NSObject
+@property (readonly) NSArray *arguments;
+- (instancetype)initWithArguments:(NSArray *)arguments;
+- (NSArray *)parseData:(NSString *)data;
+- (BPFormula *)parseFormulaItem:(NSString *)item;
+@end
+
+@implementation BPHomebrewInterfaceListCall
+- (instancetype)initWithArguments:(NSArray *)arguments
+{
+    self = [super init];
+    if (self) {
+        _arguments = arguments;
+    }
+    return self;
+}
+
+- (NSArray *)parseData:(NSString *)data
+{
+    NSMutableArray *array = [[data componentsSeparatedByString:@"\n"] mutableCopy];
+    [array removeLastObject];
+
+    NSMutableArray *formulas = [NSMutableArray arrayWithCapacity:array.count];
+
+    for (NSString *item in array) {
+        BPFormula *formula = [self parseFormulaItem:item];
+        if (formula) {
+            [formulas addObject:formula];
+        }
+    }
+    return formulas;
+}
+
+- (BPFormula *)parseFormulaItem:(NSString *)item
+{
+    return [BPFormula formulaWithName:item];
+}
+@end
+
+@interface BPHomebrewInterfaceListCallInstalled : BPHomebrewInterfaceListCall
+@end
+
+@implementation BPHomebrewInterfaceListCallInstalled
+- (instancetype)init
+{
+    return [super initWithArguments:@[@"list", @"--versions"]];
+}
+
+- (BPFormula *)parseFormulaItem:(NSString *)item
+{
+    NSArray *aux = [item componentsSeparatedByString:@" "];
+    return [BPFormula formulaWithName:[aux firstObject] andVersion:[aux lastObject]];
+}
+@end
+
+@interface BPHomebrewInterfaceListCallAll : BPHomebrewInterfaceListCall
+@end
+
+@implementation BPHomebrewInterfaceListCallAll
+- (instancetype)init
+{
+    return [super initWithArguments:@[@"search"]];
+}
+@end
+
+@interface BPHomebrewInterfaceListCallLeaves : BPHomebrewInterfaceListCall
+@end
+
+@implementation BPHomebrewInterfaceListCallLeaves
+- (instancetype)init
+{
+    return [super initWithArguments:@[@"leaves"]];
+}
+@end
+
+@interface BPHomebrewInterfaceListCallUpgradeable : BPHomebrewInterfaceListCall
+@end
+
+@implementation BPHomebrewInterfaceListCallUpgradeable
+- (instancetype)init
+{
+    return [super initWithArguments:@[@"outdated", @"--verbose"]];
+}
+
+- (BPFormula *)parseFormulaItem:(NSString *)item
+{
+    NSRange nameEnd = [item rangeOfString:@" "];
+    NSRange openBracket = [item rangeOfString:@"("];
+    NSRange upgradeArrow = [item rangeOfString:@" < "];
+    NSRange closeBracket = [item rangeOfString:@")"];
+
+    if (nameEnd.location == NSNotFound ||
+        openBracket.location == NSNotFound ||
+        upgradeArrow.location == NSNotFound ||
+        closeBracket.location == NSNotFound)
+    {
+        return [BPFormula formulaWithName:item];
+    }
+
+    NSString *name = [item substringWithRange:NSMakeRange(0, nameEnd.location)];
+    NSString *version = [item substringWithRange:NSMakeRange(openBracket.location + 1, upgradeArrow.location - openBracket.location - 1)];
+    NSString *latestVersion = [item substringWithRange:NSMakeRange(upgradeArrow.location + upgradeArrow.length, closeBracket.location - upgradeArrow.location - upgradeArrow.length)];
+
+    return [BPFormula formulaWithName:name andVersion:version andLatestVersion:latestVersion];
+}
+@end
+
+
 @implementation BPHomebrewInterface
 
 BOOL testedForInstallation;
@@ -144,54 +252,32 @@ BOOL testedForInstallation;
 }
 
 - (NSArray*)listMode:(BP_LIST_MODE)mode {
-	NSArray *arguments = nil;
-	BOOL displaysVersions = NO;
-	BOOL loadErrorPipe = YES;
+    BPHomebrewInterfaceListCall *listCall = nil;
 
 	switch (mode) {
 		case kBP_LIST_INSTALLED:
-			arguments = @[@"list", @"--versions"];
-			displaysVersions = YES;
+            listCall = [[BPHomebrewInterfaceListCallInstalled alloc] init];
 			break;
 
 		case kBP_LIST_ALL:
-			arguments = @[@"search"];
+            listCall = [[BPHomebrewInterfaceListCallAll alloc] init];
 			break;
 
 		case kBP_LIST_LEAVES:
-			arguments = @[@"leaves"];
+            listCall = [[BPHomebrewInterfaceListCallLeaves alloc] init];
 			break;
 
 		case kBP_LIST_UPGRADEABLE:
-			arguments = @[@"outdated"];
-			displaysVersions = YES;
-			loadErrorPipe = NO;
+            listCall = [[BPHomebrewInterfaceListCallUpgradeable alloc] init];
 			break;
 
 		default:
 			return nil;
 	}
 
-    NSString *string = [self performBrewCommandWithArguments:arguments];
-	NSArray *aux = nil;
+    NSString *string = [self performBrewCommandWithArguments:listCall.arguments];
     if (string) {
-		NSMutableArray *array = [[string componentsSeparatedByString:@"\n"] mutableCopy];
-		NSMutableArray *formulas = [NSMutableArray arrayWithCapacity:array.count-1];
-		BPFormula *formula = nil;
-
-		[array removeLastObject];
-
-		for (NSString *item in array) {
-			if (displaysVersions) {
-				aux = [item componentsSeparatedByString:@" "];
-				formula = [BPFormula formulaWithName:[aux firstObject] andVersion:[aux lastObject]];
-			} else {
-				formula = [BPFormula formulaWithName:item];
-			}
-			[formulas addObject:formula];
-		}
-
-		return formulas;
+        return [listCall parseData:string];
 	} else {
 		return nil;
 	}
