@@ -31,7 +31,9 @@
 @property (strong) NSString *dependencies;
 @property (strong) NSString *conflicts;
 @property (getter = isInstalled) BOOL installed;
+@property (getter = isDeprecated) BOOL deprecated;
 
++ (BPFormula*)formulaWithName:(NSString*)name version:(NSString*)version andLatestVersion:(NSString*)latestVersion;
 + (BPFormula*)formulaWithName:(NSString*)name andVersion:(NSString*)version;
 + (BPFormula*)formulaWithName:(NSString*)name;
 

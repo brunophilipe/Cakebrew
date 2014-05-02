@@ -13,6 +13,8 @@
 @property (strong) IBOutlet NSTextField *textField_brewPath;
 @property (strong) IBOutlet NSImageView *imageView_invalidPath;
 
+@property (assign) NSWindow *sheetParent;
+
 - (IBAction)showInformation:(id)sender;
 - (IBAction)storeCustomBrewPath:(id)sender;
 - (IBAction)cancel:(id)sender;

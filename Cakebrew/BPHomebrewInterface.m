@@ -168,17 +168,29 @@
 		testedForInstallation = YES;
 	}
 
+	BOOL enableProxy = [[NSUserDefaults standardUserDefaults] boolForKey:kBP_HOMEBREW_PROXY_ENABLE_KEY];
+	NSString *proxyURL = [[NSUserDefaults standardUserDefaults] objectForKey:kBP_HOMEBREW_PROXY_KEY];
+
 	NSTask *task;
     task = [[NSTask alloc] init];
     [task setLaunchPath:pathString];
     [task setArguments:arguments];
 
-	NSPipe *pipe_output = [NSPipe pipe];
-	NSPipe *pipe_error = [NSPipe pipe];
-    [task setStandardOutput:pipe_output];
-    [task setStandardInput:[NSPipe pipe]];
-	[task setStandardError:pipe_error];
+	if (enableProxy && proxyURL) {
+		[task setEnvironment:@{@"http_proxy": proxyURL, @"https_proxy": proxyURL}];
+	}
 
+	NSPipe *pipe_output, *pipe_error;
+
+	pipe_output = [NSPipe pipe];
+    [task setStandardOutput:pipe_output];
+
+	if (captureError) {
+		pipe_error = [NSPipe pipe];
+		[task setStandardError:pipe_error];
+	}
+
+    [task setStandardInput:[NSPipe pipe]];
 	[task launch];
 
     [task waitUntilExit];
@@ -200,52 +212,32 @@
 }
 
 - (NSArray*)listMode:(BP_LIST_MODE)mode {
-	NSArray *arguments = nil;
-	BOOL displaysVersions = NO;
+    BPHomebrewInterfaceListCall *listCall = nil;
 
 	switch (mode) {
 		case kBP_LIST_INSTALLED:
-			arguments = @[@"list", @"--versions"];
-			displaysVersions = YES;
+            listCall = [[BPHomebrewInterfaceListCallInstalled alloc] init];
 			break;
 
 		case kBP_LIST_ALL:
-			arguments = @[@"search"];
+            listCall = [[BPHomebrewInterfaceListCallAll alloc] init];
 			break;
 
 		case kBP_LIST_LEAVES:
-			arguments = @[@"leaves"];
+            listCall = [[BPHomebrewInterfaceListCallLeaves alloc] init];
 			break;
 
 		case kBP_LIST_UPGRADEABLE:
-			arguments = @[@"outdated"];
-			displaysVersions = YES;
+            listCall = [[BPHomebrewInterfaceListCallUpgradeable alloc] init];
 			break;
 
 		default:
 			return nil;
 	}
 
-    NSString *string = [self performBrewCommandWithArguments:arguments];
-	NSArray *aux = nil;
+    NSString *string = [self performBrewCommandWithArguments:listCall.arguments];
     if (string) {
-		NSMutableArray *array = [[string componentsSeparatedByString:@"\n"] mutableCopy];
-		NSMutableArray *formulas = [NSMutableArray arrayWithCapacity:array.count-1];
-		BPFormula *formula = nil;
-
-		[array removeLastObject];
-
-		for (NSString *item in array) {
-			if (displaysVersions) {
-				aux = [item componentsSeparatedByString:@" "];
-				formula = [BPFormula formulaWithName:[aux firstObject] andVersion:[aux lastObject]];
-			} else {
-				formula = [BPFormula formulaWithName:item];
-			}
-			[formulas addObject:formula];
-		}
-
-		return formulas;
+        return [listCall parseData:string];
 	} else {
 		return nil;
 	}

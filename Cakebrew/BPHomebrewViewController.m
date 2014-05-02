@@ -59,30 +59,42 @@
 	return self;
 }
 
+- (void)dealloc
+{
+	[_homebrewManager setDelegate:nil];
+}
+
 - (void)displayInformationForFormula:(BPFormula*)formula
 {
 	if (formula) {
-		if (formula.isInstalled) {
-			[self.label_formulaPath setStringValue:formula.installPath];
+		if (!formula.isDeprecated) {
+			if (formula.isInstalled) {
+				[self.label_formulaPath setStringValue:formula.installPath];
+			} else {
+				[self.label_formulaPath setStringValue:@"Formula Not Installed"];
+			}
+
+			[self.label_formulaVersion setStringValue:formula.latestVersion];
+
+			if (formula.dependencies) {
+				[self.label_formulaDependencies setStringValue:formula.dependencies];
+			} else {
+				[self.label_formulaDependencies setStringValue:@"This formula has no dependencies!"];
+			}
+
+			if (formula.conflicts) {
+				[self.label_formulaConflicts setStringValue:formula.conflicts];
+			} else {
+				[self.label_formulaConflicts setStringValue:@"This formula has no known conflicts."];
+			}
+
+			[self.button_formulaWebsite setEnabled:YES];
 		} else {
-			[self.label_formulaPath setStringValue:@"Formula Not Installed"];
+			static NSString *depString = @"Deprecated Formula";
+			[self.label_formulaPath setStringValue:depString];
+			[self.label_formulaDependencies setStringValue:depString];
+			[self.label_formulaConflicts setStringValue:depString];
 		}
-
-		[self.label_formulaVersion setStringValue:formula.latestVersion];
-
-		if (formula.dependencies) {
-			[self.label_formulaDependencies setStringValue:formula.dependencies];
-		} else {
-			[self.label_formulaDependencies setStringValue:@"This formula has no dependencies!"];
-		}
-
-		if (formula.conflicts) {
-			[self.label_formulaConflicts setStringValue:formula.conflicts];
-		} else {
-			[self.label_formulaConflicts setStringValue:@"This formula has no known conflicts."];
-		}
-
-		[self.button_formulaWebsite setEnabled:YES];
 	} else {
 		[self.label_formulaPath setStringValue:@"--"];
 		[self.label_formulaVersion setStringValue:@"--"];
@@ -147,8 +159,9 @@
 
 - (void)updateToolbarItemsState
 {
+	NSUInteger selectedTab = [self.outlineView_sidebar selectedRow];
 	NSUInteger selectedIndex = [self.tableView_formulas selectedRow];
-    if(selectedIndex == -1) {
+    if(selectedIndex == -1 || selectedTab > 4) {
 		[self.toolbarButton_installUninstall setEnabled:NO];
 		[self.toolbarButton_formulaInfo setEnabled:NO];
 		[self displayInformationForFormula:nil];
@@ -305,7 +318,13 @@
 			} else {
 				return element;
 			}
-		}
+		} else if ([columnIdentifer isEqualToString:@"LatestVersion"]) {
+			if ([element isKindOfClass:[BPFormula class]]) {
+				return [(BPFormula*)element latestVersion];
+			} else {
+				return element;
+			}
+        }
     }
 
 	return @"";
@@ -389,33 +408,50 @@
 {
 	NSString *message;
 	NSUInteger tabIndex = 0;
+	CGFloat totalWidth;
+	NSInteger titleWidth;
+
+	[self updateToolbarItemsState];
+
+	totalWidth = [self.clippingView_formulas frame].size.width;
 
 	switch ([self.outlineView_sidebar selectedRow]) {
 		case 1: // Installed Formulas
+			titleWidth = (NSInteger)(totalWidth * 0.4);
 			_formulasArray = [[BPHomebrewManager sharedManager] formulas_installed];
 			[[self.tableView_formulas tableColumnWithIdentifier:@"Version"] setHidden:NO];
+			[[self.tableView_formulas tableColumnWithIdentifier:@"Version"] setWidth:(totalWidth-titleWidth)];
+			[[self.tableView_formulas tableColumnWithIdentifier:@"LatestVersion"] setHidden:YES];
 			[self.button_upgradeAll setHidden:YES];
 			message = @"These are the formulas already installed in your system.";
 			break;
 
 		case 2: // Outdated Formulas
+			titleWidth = (NSInteger)(totalWidth * 0.4);
 			_formulasArray = [[BPHomebrewManager sharedManager] formulas_outdated];
 			[[self.tableView_formulas tableColumnWithIdentifier:@"Version"] setHidden:NO];
+			[[self.tableView_formulas tableColumnWithIdentifier:@"Version"] setWidth:(totalWidth-titleWidth)*0.5];
+			[[self.tableView_formulas tableColumnWithIdentifier:@"LatestVersion"] setHidden:NO];
+			[[self.tableView_formulas tableColumnWithIdentifier:@"LatestVersion"] setWidth:(totalWidth-titleWidth)*0.5];
 			[self.button_upgradeAll setHidden:NO];
 			[self.button_upgradeAll setEnabled:(_formulasArray.count > 0)];
 			message = @"These formulas are already installed, but have an update available.";
 			break;
 
 		case 3: // All Formulas
+			titleWidth = (NSInteger)totalWidth;
 			_formulasArray = [[BPHomebrewManager sharedManager] formulas_all];
 			[[self.tableView_formulas tableColumnWithIdentifier:@"Version"] setHidden:YES];
+			[[self.tableView_formulas tableColumnWithIdentifier:@"LatestVersion"] setHidden:YES];
 			[self.button_upgradeAll setHidden:YES];
 			message = @"These are all the formulas available for instalation with Homebrew.";
 			break;
 
 		case 4:	// Leaves
+			titleWidth = (NSInteger)totalWidth;
 			_formulasArray = [[BPHomebrewManager sharedManager] formulas_leaves];
 			[[self.tableView_formulas tableColumnWithIdentifier:@"Version"] setHidden:YES];
+			[[self.tableView_formulas tableColumnWithIdentifier:@"LatestVersion"] setHidden:YES];
 			[self.button_upgradeAll setHidden:YES];
 			message = @"These formulas are not dependencies of any other formulas.";
 			break;
@@ -439,6 +475,8 @@
 		[self.tableView_formulas deselectAll:nil];
 		[self.tableView_formulas reloadData];
 		[self updateToolbarItemsState];
+
+		[[self.tableView_formulas tableColumnWithIdentifier:@"Name"] setWidth:titleWidth];
 	}
 	[self.tabView selectTabViewItemAtIndex:tabIndex];
 }
