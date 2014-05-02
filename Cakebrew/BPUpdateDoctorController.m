@@ -58,13 +58,14 @@
 	[self.textView_doctor setString:@""];
 	[self.button_doctor_runStop setEnabled:NO];
 	[self.progress_doctor startAnimation:sender];
-	NSBlockOperation *block = [NSBlockOperation blockOperationWithBlock:^{
-		NSString *output = [[BPHomebrewInterface sharedInterface] runDoctor];
-		[self.textView_doctor setString:output];
-		[self.progress_doctor stopAnimation:sender];
-		[self.button_doctor_runStop setEnabled:YES];
-	}];
-	[block performSelector:@selector(start) withObject:nil afterDelay:0.1];
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
+		__block NSString *output = [[BPHomebrewInterface sharedInterface] runDoctor];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self.textView_doctor setString:output];
+            [self.progress_doctor stopAnimation:sender];
+            [self.button_doctor_runStop setEnabled:YES];
+        });
+	});
 }
 
 - (IBAction)clearLogDoctor:(id)sender {
