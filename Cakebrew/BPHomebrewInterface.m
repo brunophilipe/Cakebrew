@@ -127,7 +127,7 @@
     NSString *version = [item substringWithRange:NSMakeRange(openBracket.location + 1, upgradeArrow.location - openBracket.location - 1)];
     NSString *latestVersion = [item substringWithRange:NSMakeRange(upgradeArrow.location + upgradeArrow.length, closeBracket.location - upgradeArrow.location - upgradeArrow.length)];
 
-    return [BPFormula formulaWithName:name andVersion:version andLatestVersion:latestVersion];
+    return [BPFormula formulaWithName:name version:version andLatestVersion:latestVersion];
 }
 @end
 

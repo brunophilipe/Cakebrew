@@ -33,7 +33,7 @@
 
 @implementation BPFormula
 
-+ (BPFormula*)formulaWithName:(NSString*)name andVersion:(NSString*)version andLatestVersion:(NSString*)latestVersion
++ (BPFormula*)formulaWithName:(NSString*)name version:(NSString*)version andLatestVersion:(NSString*)latestVersion
 {
 	BPFormula *formula = [[BPFormula alloc] init];
 

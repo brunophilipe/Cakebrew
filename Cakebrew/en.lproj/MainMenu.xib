@@ -347,53 +347,6 @@
                 <rect key="frame" x="0.0" y="0.0" width="570" height="342"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <customView hidden="YES" translatesAutoresizingMaskIntoConstraints="NO" id="SfC-W7-8MF" customClass="BPInsetShadowView">
-                        <rect key="frame" x="0.0" y="22" width="570" height="320"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                        <subviews>
-                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="maG-dP-mXL">
-                                <rect key="frame" x="181" y="167" width="209" height="19"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Homebrew is not installed" id="Jfc-d9-61S">
-                                    <font key="font" metaFont="systemBold" size="15"/>
-                                    <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
-                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
-                                </textFieldCell>
-                            </textField>
-                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="YjH-tX-oXi">
-                                <rect key="frame" x="157" y="142" width="256" height="17"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Please visit brew.sh to install Homebrew" id="kRZ-JR-SH6">
-                                    <font key="font" metaFont="system"/>
-                                    <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
-                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
-                                </textFieldCell>
-                            </textField>
-                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="jzg-1y-uK7">
-                                <rect key="frame" x="125" y="99" width="320" height="25"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="22" id="22h-OS-UAK"/>
-                                    <constraint firstAttribute="width" constant="320" id="Ukp-iO-jZV"/>
-                                </constraints>
-                                <buttonCell key="cell" type="roundTextured" title="I installed homebrew on a non-default path" bezelStyle="texturedRounded" alignment="center" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="7fn-T2-gaa">
-                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                    <font key="font" metaFont="system"/>
-                                </buttonCell>
-                                <connections>
-                                    <action selector="showCustomBrewPathWindow:" target="494" id="a9c-PF-NQC"/>
-                                </connections>
-                            </button>
-                        </subviews>
-                        <constraints>
-                            <constraint firstAttribute="centerX" secondItem="YjH-tX-oXi" secondAttribute="centerX" id="4za-CP-gNT"/>
-                            <constraint firstItem="maG-dP-mXL" firstAttribute="top" secondItem="SfC-W7-8MF" secondAttribute="top" constant="134" id="ccs-rg-GbT"/>
-                            <constraint firstAttribute="centerX" secondItem="jzg-1y-uK7" secondAttribute="centerX" id="cg2-gl-SfQ"/>
-                            <constraint firstItem="jzg-1y-uK7" firstAttribute="top" secondItem="YjH-tX-oXi" secondAttribute="bottom" constant="19" id="dON-Fc-1jb"/>
-                            <constraint firstAttribute="centerX" secondItem="maG-dP-mXL" secondAttribute="centerX" id="i4M-xe-V2i"/>
-                            <constraint firstItem="YjH-tX-oXi" firstAttribute="top" secondItem="maG-dP-mXL" secondAttribute="bottom" constant="8" id="x7w-ZX-54Y"/>
-                        </constraints>
-                    </customView>
                     <splitView dividerStyle="thin" vertical="YES" id="Exu-Zx-Kij" customClass="DMSplitView">
                         <rect key="frame" x="0.0" y="22" width="570" height="320"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -448,7 +401,7 @@
                                                                     </connections>
                                                                 </tableCellView>
                                                                 <tableCellView identifier="MainCell" id="NjY-GN-l2W" customClass="PXSourceListTableCellView">
-                                                                    <rect key="frame" x="1" y="17" width="169" height="17"/>
+                                                                    <rect key="frame" x="1" y="17" width="166" height="17"/>
                                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                     <subviews>
                                                                         <imageView translatesAutoresizingMaskIntoConstraints="NO" id="rod-fH-u2L">
@@ -459,8 +412,8 @@
                                                                             </constraints>
                                                                             <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="NSActionTemplate" id="As7-Xw-rr0"/>
                                                                         </imageView>
-                                                                        <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="UGv-FF-mH4">
-                                                                            <rect key="frame" x="25" y="0.0" width="104" height="17"/>
+                                                                        <textField verticalHuggingPriority="750" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="UGv-FF-mH4">
+                                                                            <rect key="frame" x="25" y="0.0" width="101" height="17"/>
                                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                                                                             <constraints>
                                                                                 <constraint firstAttribute="width" relation="greaterThanOrEqual" priority="750" constant="100" id="nTu-IB-1td"/>
@@ -545,7 +498,7 @@
                                                         <scrollView focusRingType="none" borderType="none" autohidesScrollers="YES" horizontalLineScroll="19" horizontalPageScroll="10" verticalLineScroll="19" verticalPageScroll="10" usesPredominantAxisScrolling="NO" scrollerKnobStyle="dark" translatesAutoresizingMaskIntoConstraints="NO" id="ZTf-N0-ClA">
                                                             <rect key="frame" x="0.0" y="121" width="400" height="200"/>
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                                            <clipView key="contentView" focusRingType="none" copiesOnScroll="NO" id="imx-IN-SCs">
+                                                            <clipView key="contentView" toolTip="Test" focusRingType="none" copiesOnScroll="NO" id="imx-IN-SCs">
                                                                 <rect key="frame" x="0.0" y="17" width="400" height="183"/>
                                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                 <subviews>
@@ -556,7 +509,7 @@
                                                                         <color key="backgroundColor" white="1" alpha="0.0" colorSpace="calibratedWhite"/>
                                                                         <color key="gridColor" name="gridColor" catalog="System" colorSpace="catalog"/>
                                                                         <tableColumns>
-                                                                            <tableColumn identifier="Name" width="171" minWidth="40" maxWidth="1000" id="BLT-uq-K14">
+                                                                            <tableColumn identifier="Name" width="160" minWidth="40" maxWidth="1000" id="BLT-uq-K14">
                                                                                 <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left" title="Name">
                                                                                     <font key="font" metaFont="smallSystem"/>
                                                                                     <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
@@ -567,9 +520,9 @@
                                                                                     <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                                                                     <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                                                 </textFieldCell>
-                                                                                <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
+                                                                                <tableColumnResizingMask key="resizingMask" userResizable="YES"/>
                                                                             </tableColumn>
-                                                                            <tableColumn identifier="Version" width="223" minWidth="40" maxWidth="1000" id="gXj-lv-NY8">
+                                                                            <tableColumn identifier="Version" width="115" minWidth="40" maxWidth="1000" id="gXj-lv-NY8">
                                                                                 <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left" title="Version">
                                                                                     <font key="font" metaFont="smallSystem"/>
                                                                                     <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
@@ -580,9 +533,9 @@
                                                                                     <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                                                                     <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                                                 </textFieldCell>
-                                                                                <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
+                                                                                <tableColumnResizingMask key="resizingMask" userResizable="YES"/>
                                                                             </tableColumn>
-                                                                            <tableColumn identifier="LatestVersion" width="223" minWidth="40" maxWidth="1000" id="gXj-lv-NY9">
+                                                                            <tableColumn identifier="LatestVersion" width="115" minWidth="40" maxWidth="1000" id="gXj-lv-NY9">
                                                                                 <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left" title="Latest Version">
                                                                                     <font key="font" metaFont="smallSystem"/>
                                                                                     <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
@@ -593,7 +546,7 @@
                                                                                     <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                                                                     <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                                                 </textFieldCell>
-                                                                                <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
+                                                                                <tableColumnResizingMask key="resizingMask" userResizable="YES"/>
                                                                             </tableColumn>
                                                                         </tableColumns>
                                                                         <connections>
@@ -605,7 +558,7 @@
                                                                 <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                             </clipView>
                                                             <scroller key="horizontalScroller" hidden="YES" verticalHuggingPriority="750" horizontal="YES" id="bOJ-GJ-xqV">
-                                                                <rect key="frame" x="0.0" y="1" width="0.0" height="16"/>
+                                                                <rect key="frame" x="0.0" y="184" width="400" height="16"/>
                                                                 <autoresizingMask key="autoresizingMask"/>
                                                             </scroller>
                                                             <scroller key="verticalScroller" hidden="YES" verticalHuggingPriority="750" horizontal="NO" id="sUd-TD-Dl6">
@@ -982,6 +935,53 @@
                             <real value="250"/>
                         </holdingPriorities>
                     </splitView>
+                    <customView hidden="YES" translatesAutoresizingMaskIntoConstraints="NO" id="SfC-W7-8MF" customClass="BPInsetShadowView">
+                        <rect key="frame" x="0.0" y="22" width="570" height="320"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                        <subviews>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="maG-dP-mXL">
+                                <rect key="frame" x="181" y="167" width="209" height="19"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Homebrew is not installed" id="Jfc-d9-61S">
+                                    <font key="font" metaFont="systemBold" size="15"/>
+                                    <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="YjH-tX-oXi">
+                                <rect key="frame" x="157" y="142" width="256" height="17"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Please visit brew.sh to install Homebrew" id="kRZ-JR-SH6">
+                                    <font key="font" metaFont="system"/>
+                                    <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="jzg-1y-uK7">
+                                <rect key="frame" x="125" y="99" width="320" height="25"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="22" id="22h-OS-UAK"/>
+                                    <constraint firstAttribute="width" constant="320" id="Ukp-iO-jZV"/>
+                                </constraints>
+                                <buttonCell key="cell" type="roundTextured" title="I installed homebrew on a non-default path" bezelStyle="texturedRounded" alignment="center" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="7fn-T2-gaa">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                                <connections>
+                                    <action selector="showCustomBrewPathWindow:" target="494" id="a9c-PF-NQC"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <constraints>
+                            <constraint firstAttribute="centerX" secondItem="YjH-tX-oXi" secondAttribute="centerX" id="4za-CP-gNT"/>
+                            <constraint firstItem="maG-dP-mXL" firstAttribute="top" secondItem="SfC-W7-8MF" secondAttribute="top" constant="134" id="ccs-rg-GbT"/>
+                            <constraint firstAttribute="centerX" secondItem="jzg-1y-uK7" secondAttribute="centerX" id="cg2-gl-SfQ"/>
+                            <constraint firstItem="jzg-1y-uK7" firstAttribute="top" secondItem="YjH-tX-oXi" secondAttribute="bottom" constant="19" id="dON-Fc-1jb"/>
+                            <constraint firstAttribute="centerX" secondItem="maG-dP-mXL" secondAttribute="centerX" id="i4M-xe-V2i"/>
+                            <constraint firstItem="YjH-tX-oXi" firstAttribute="top" secondItem="maG-dP-mXL" secondAttribute="bottom" constant="8" id="x7w-ZX-54Y"/>
+                        </constraints>
+                    </customView>
                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="tiK-fW-tE7">
                         <rect key="frame" x="444" y="3" width="119" height="14"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
@@ -1053,6 +1053,7 @@
                 <outlet property="MainToolbar" destination="646" id="678"/>
                 <outlet property="button_formulaWebsite" destination="aaD-oS-25h" id="FzE-vI-bWi"/>
                 <outlet property="button_upgradeAll" destination="kwM-Cz-P4a" id="0PA-F4-A0B"/>
+                <outlet property="clippingView_formulas" destination="imx-IN-SCs" id="Sku-zQ-Ocj"/>
                 <outlet property="formulaPopoverView" destination="WTy-A8-Ym9" id="VNG-lu-3ZX"/>
                 <outlet property="label_formulaConflicts" destination="tfH-bj-woo" id="Ge8-BU-wE3"/>
                 <outlet property="label_formulaDependencies" destination="jmd-cV-6fD" id="hEm-zJ-tHd"/>

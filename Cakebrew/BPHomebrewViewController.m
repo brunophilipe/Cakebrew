@@ -409,28 +409,38 @@
 {
 	NSString *message;
 	NSUInteger tabIndex = 0;
+	CGFloat totalWidth;
+	NSInteger titleWidth;
 
 	[self updateToolbarItemsState];
 
+	totalWidth = [self.clippingView_formulas frame].size.width;
+
 	switch ([self.outlineView_sidebar selectedRow]) {
 		case 1: // Installed Formulas
+			titleWidth = (NSInteger)(totalWidth * 0.4);
 			_formulasArray = [[BPHomebrewManager sharedManager] formulas_installed];
 			[[self.tableView_formulas tableColumnWithIdentifier:@"Version"] setHidden:NO];
+			[[self.tableView_formulas tableColumnWithIdentifier:@"Version"] setWidth:(totalWidth-titleWidth)];
 			[[self.tableView_formulas tableColumnWithIdentifier:@"LatestVersion"] setHidden:YES];
 			[self.button_upgradeAll setHidden:YES];
 			message = @"These are the formulas already installed in your system.";
 			break;
 
 		case 2: // Outdated Formulas
+			titleWidth = (NSInteger)(totalWidth * 0.4);
 			_formulasArray = [[BPHomebrewManager sharedManager] formulas_outdated];
 			[[self.tableView_formulas tableColumnWithIdentifier:@"Version"] setHidden:NO];
+			[[self.tableView_formulas tableColumnWithIdentifier:@"Version"] setWidth:(totalWidth-titleWidth)*0.5];
 			[[self.tableView_formulas tableColumnWithIdentifier:@"LatestVersion"] setHidden:NO];
+			[[self.tableView_formulas tableColumnWithIdentifier:@"LatestVersion"] setWidth:(totalWidth-titleWidth)*0.5];
 			[self.button_upgradeAll setHidden:NO];
 			[self.button_upgradeAll setEnabled:(_formulasArray.count > 0)];
 			message = @"These formulas are already installed, but have an update available.";
 			break;
 
 		case 3: // All Formulas
+			titleWidth = (NSInteger)totalWidth;
 			_formulasArray = [[BPHomebrewManager sharedManager] formulas_all];
 			[[self.tableView_formulas tableColumnWithIdentifier:@"Version"] setHidden:YES];
 			[[self.tableView_formulas tableColumnWithIdentifier:@"LatestVersion"] setHidden:YES];
@@ -439,6 +449,7 @@
 			break;
 
 		case 4:	// Leaves
+			titleWidth = (NSInteger)totalWidth;
 			_formulasArray = [[BPHomebrewManager sharedManager] formulas_leaves];
 			[[self.tableView_formulas tableColumnWithIdentifier:@"Version"] setHidden:YES];
 			[[self.tableView_formulas tableColumnWithIdentifier:@"LatestVersion"] setHidden:YES];
@@ -465,6 +476,8 @@
 		[self.tableView_formulas deselectAll:nil];
 		[self.tableView_formulas reloadData];
 		[self updateToolbarItemsState];
+
+		[[self.tableView_formulas tableColumnWithIdentifier:@"Name"] setWidth:titleWidth];
 	}
 	[self.tabView selectTabViewItemAtIndex:tabIndex];
 }
