@@ -319,7 +319,13 @@
 			} else {
 				return element;
 			}
-		}
+		} else if ([columnIdentifer isEqualToString:@"LatestVersion"]) {
+			if ([element isKindOfClass:[BPFormula class]]) {
+				return [(BPFormula*)element latestVersion];
+			} else {
+				return element;
+			}
+        }
     }
 
 	return @"";
@@ -410,6 +416,7 @@
 		case 1: // Installed Formulas
 			_formulasArray = [[BPHomebrewManager sharedManager] formulas_installed];
 			[[self.tableView_formulas tableColumnWithIdentifier:@"Version"] setHidden:NO];
+			[[self.tableView_formulas tableColumnWithIdentifier:@"LatestVersion"] setHidden:YES];
 			[self.button_upgradeAll setHidden:YES];
 			message = @"These are the formulas already installed in your system.";
 			break;
@@ -417,6 +424,7 @@
 		case 2: // Outdated Formulas
 			_formulasArray = [[BPHomebrewManager sharedManager] formulas_outdated];
 			[[self.tableView_formulas tableColumnWithIdentifier:@"Version"] setHidden:NO];
+			[[self.tableView_formulas tableColumnWithIdentifier:@"LatestVersion"] setHidden:NO];
 			[self.button_upgradeAll setHidden:NO];
 			[self.button_upgradeAll setEnabled:(_formulasArray.count > 0)];
 			message = @"These formulas are already installed, but have an update available.";
@@ -425,6 +433,7 @@
 		case 3: // All Formulas
 			_formulasArray = [[BPHomebrewManager sharedManager] formulas_all];
 			[[self.tableView_formulas tableColumnWithIdentifier:@"Version"] setHidden:YES];
+			[[self.tableView_formulas tableColumnWithIdentifier:@"LatestVersion"] setHidden:YES];
 			[self.button_upgradeAll setHidden:YES];
 			message = @"These are all the formulas available for instalation with Homebrew.";
 			break;
@@ -432,6 +441,7 @@
 		case 4:	// Leaves
 			_formulasArray = [[BPHomebrewManager sharedManager] formulas_leaves];
 			[[self.tableView_formulas tableColumnWithIdentifier:@"Version"] setHidden:YES];
+			[[self.tableView_formulas tableColumnWithIdentifier:@"LatestVersion"] setHidden:YES];
 			[self.button_upgradeAll setHidden:YES];
 			message = @"These formulas are not dependencies of any other formulas.";
 			break;

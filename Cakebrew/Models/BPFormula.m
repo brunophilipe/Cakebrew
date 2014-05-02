@@ -33,6 +33,20 @@
 
 @implementation BPFormula
 
++ (BPFormula*)formulaWithName:(NSString*)name andVersion:(NSString*)version andLatestVersion:(NSString*)latestVersion
+{
+	BPFormula *formula = [[BPFormula alloc] init];
+
+	if (formula) {
+		formula.name = name;
+		formula.version = version;
+        formula.latestVersion = latestVersion;
+		formula.installed = NO;
+	}
+
+	return formula;
+}
+
 + (BPFormula*)formulaWithName:(NSString*)name andVersion:(NSString*)version
 {
 	BPFormula *formula = [[BPFormula alloc] init];
