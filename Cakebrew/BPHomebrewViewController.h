@@ -32,9 +32,9 @@
 
 @interface BPHomebrewViewController : NSViewController
 
-@property (weak) IBOutlet NSTableView *tableView_formulas;
-@property (weak) IBOutlet NSClipView *clippingView_formulas;
-@property (weak) IBOutlet NSScrollView *scrollView_formulas;
+@property (weak) IBOutlet NSTableView *tableView_formulae;
+@property (weak) IBOutlet NSClipView *clippingView_formulae;
+@property (weak) IBOutlet NSScrollView *scrollView_formulae;
 @property (weak) IBOutlet NSOutlineView *outlineView_sidebar;
 @property (weak) IBOutlet DMSplitView *splitView;
 @property (weak) IBOutlet NSTabView *tabView;
@@ -56,7 +56,7 @@
 
 - (IBAction)showFormulaInfo:(id)sender;
 - (IBAction)installUninstallUpdate:(id)sender;
-- (IBAction)upgradeAllOutdatedFormulas:(id)sender;
+- (IBAction)upgradeAllOutdatedFormulae:(id)sender;
 - (IBAction)updateHomebrew:(id)sender;
 - (IBAction)openSelectedFormulaWebsite:(id)sender;
 

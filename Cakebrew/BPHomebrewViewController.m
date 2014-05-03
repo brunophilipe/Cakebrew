@@ -31,7 +31,7 @@
 @property (strong, readonly) PXSourceListItem *rootSidebarCategory;
 @property (strong)           NSPopover        *formulaPopover;
 
-@property NSArray   *formulasArray;
+@property NSArray   *formulaeArray;
 @property NSInteger lastSelectedSidebarIndex;
 
 @end
@@ -113,7 +113,7 @@
 	if (formula) {
 		[_operationViewController setFormula:formula];
 	} else {
-		[_operationViewController setFormulas:[_formulasArray copy]];
+		[_operationViewController setFormulae:[_formulaeArray copy]];
 	}
 	[_operationViewController setWindowOperation:operation];
 
@@ -160,7 +160,7 @@
 - (void)updateToolbarItemsState
 {
 	NSUInteger selectedTab = [self.outlineView_sidebar selectedRow];
-	NSUInteger selectedIndex = [self.tableView_formulas selectedRow];
+	NSUInteger selectedIndex = [self.tableView_formulae selectedRow];
     if(selectedIndex == -1 || selectedTab > 4) {
 		[self.toolbarButton_installUninstall setEnabled:NO];
 		[self.toolbarButton_formulaInfo setEnabled:NO];
@@ -168,7 +168,7 @@
     } else {
 		[self.toolbarButton_installUninstall setEnabled:YES];
 		[self.toolbarButton_formulaInfo setEnabled:YES];
-		BPFormula *formula = [_formulasArray objectAtIndex:selectedIndex];
+		BPFormula *formula = [_formulaeArray objectAtIndex:selectedIndex];
 
 		switch ([[BPHomebrewManager sharedManager] statusForFormula:formula]) {
 			case kBP_FORMULA_INSTALLED:
@@ -216,17 +216,17 @@
 
 - (void)buildSidebarTree
 {
-	NSArray *categoriesTitles = @[@"Installed", @"Outdated", @"All Formulas", @"Leaves"];
-	NSArray *categoriesIcons = @[@"installedTemplate", @"outdatedTemplate", @"allFormulasTemplate", @"pinTemplate"];
-	NSArray *categoriesValues = @[[NSNumber numberWithInteger:[[[BPHomebrewManager sharedManager] formulas_installed] count]],
-								  [NSNumber numberWithInteger:[[[BPHomebrewManager sharedManager] formulas_outdated] count]],
-								  [NSNumber numberWithInteger:[[[BPHomebrewManager sharedManager] formulas_all] count]],
-								  [NSNumber numberWithInteger:[[[BPHomebrewManager sharedManager] formulas_leaves] count]]];
+	NSArray *categoriesTitles = @[@"Installed", @"Outdated", @"All Formulae", @"Leaves"];
+	NSArray *categoriesIcons = @[@"installedTemplate", @"outdatedTemplate", @"allFormulaeTemplate", @"pinTemplate"];
+	NSArray *categoriesValues = @[[NSNumber numberWithInteger:[[[BPHomebrewManager sharedManager] formulae_installed] count]],
+								  [NSNumber numberWithInteger:[[[BPHomebrewManager sharedManager] formulae_outdated] count]],
+								  [NSNumber numberWithInteger:[[[BPHomebrewManager sharedManager] formulae_all] count]],
+								  [NSNumber numberWithInteger:[[[BPHomebrewManager sharedManager] formulae_leaves] count]]];
 
 	PXSourceListItem *item, *parent;
 	_rootSidebarCategory = [PXSourceListItem itemWithTitle:@"" identifier:@"root"];
 
-	parent = [PXSourceListItem itemWithTitle:@"Formulas" identifier:@"group"];
+	parent = [PXSourceListItem itemWithTitle:@"Formulae" identifier:@"group"];
 	[_rootSidebarCategory addChildItem:parent];
 
 	for (NSUInteger i=0; i<4; i++) {
@@ -297,14 +297,14 @@
 
 - (NSInteger)numberOfRowsInTableView:(NSTableView *)aTableView
 {
-    return [self.formulasArray count];
+    return [self.formulaeArray count];
 }
 
 - (id)tableView:(NSTableView *)tableView objectValueForTableColumn:(NSTableColumn *)tableColumn row:(NSInteger)row {
     // the return value is typed as (id) because it will return a string in all cases with the exception of the
-    if(self.formulasArray) {
+    if(self.formulaeArray) {
         NSString *columnIdentifer = [tableColumn identifier];
-        id element = [self.formulasArray objectAtIndex:row];
+        id element = [self.formulaeArray objectAtIndex:row];
 
         // Compare each column identifier and set the return value to
         // the Person field value appropriate for the column.
@@ -418,47 +418,47 @@
 
 	[self updateToolbarItemsState];
 
-	totalWidth = [self.clippingView_formulas frame].size.width;
+	totalWidth = [self.clippingView_formulae frame].size.width;
 
 	switch ([self.outlineView_sidebar selectedRow]) {
-		case 1: // Installed Formulas
+		case 1: // Installed Formulae
 			titleWidth = (NSInteger)(totalWidth * 0.4);
-			_formulasArray = [[BPHomebrewManager sharedManager] formulas_installed];
-			[[self.tableView_formulas tableColumnWithIdentifier:@"Version"] setHidden:NO];
-			[[self.tableView_formulas tableColumnWithIdentifier:@"Version"] setWidth:(totalWidth-titleWidth)];
-			[[self.tableView_formulas tableColumnWithIdentifier:@"LatestVersion"] setHidden:YES];
+			_formulaeArray = [[BPHomebrewManager sharedManager] formulae_installed];
+			[[self.tableView_formulae tableColumnWithIdentifier:@"Version"] setHidden:NO];
+			[[self.tableView_formulae tableColumnWithIdentifier:@"Version"] setWidth:(totalWidth-titleWidth)];
+			[[self.tableView_formulae tableColumnWithIdentifier:@"LatestVersion"] setHidden:YES];
 			[self.button_upgradeAll setHidden:YES];
-			message = @"These are the formulas already installed in your system.";
+			message = @"These are the formulae already installed in your system.";
 			break;
 
-		case 2: // Outdated Formulas
+		case 2: // Outdated Formulae
 			titleWidth = (NSInteger)(totalWidth * 0.4);
-			_formulasArray = [[BPHomebrewManager sharedManager] formulas_outdated];
-			[[self.tableView_formulas tableColumnWithIdentifier:@"Version"] setHidden:NO];
-			[[self.tableView_formulas tableColumnWithIdentifier:@"Version"] setWidth:(totalWidth-titleWidth)*0.5];
-			[[self.tableView_formulas tableColumnWithIdentifier:@"LatestVersion"] setHidden:NO];
-			[[self.tableView_formulas tableColumnWithIdentifier:@"LatestVersion"] setWidth:(totalWidth-titleWidth)*0.5];
+			_formulaeArray = [[BPHomebrewManager sharedManager] formulae_outdated];
+			[[self.tableView_formulae tableColumnWithIdentifier:@"Version"] setHidden:NO];
+			[[self.tableView_formulae tableColumnWithIdentifier:@"Version"] setWidth:(totalWidth-titleWidth)*0.5];
+			[[self.tableView_formulae tableColumnWithIdentifier:@"LatestVersion"] setHidden:NO];
+			[[self.tableView_formulae tableColumnWithIdentifier:@"LatestVersion"] setWidth:(totalWidth-titleWidth)*0.5];
 			[self.button_upgradeAll setHidden:NO];
-			[self.button_upgradeAll setEnabled:(_formulasArray.count > 0)];
-			message = @"These formulas are already installed, but have an update available.";
+			[self.button_upgradeAll setEnabled:(_formulaeArray.count > 0)];
+			message = @"These formulae are already installed, but have an update available.";
 			break;
 
-		case 3: // All Formulas
+		case 3: // All Formulae
 			titleWidth = (NSInteger)totalWidth;
-			_formulasArray = [[BPHomebrewManager sharedManager] formulas_all];
-			[[self.tableView_formulas tableColumnWithIdentifier:@"Version"] setHidden:YES];
-			[[self.tableView_formulas tableColumnWithIdentifier:@"LatestVersion"] setHidden:YES];
+			_formulaeArray = [[BPHomebrewManager sharedManager] formulae_all];
+			[[self.tableView_formulae tableColumnWithIdentifier:@"Version"] setHidden:YES];
+			[[self.tableView_formulae tableColumnWithIdentifier:@"LatestVersion"] setHidden:YES];
 			[self.button_upgradeAll setHidden:YES];
-			message = @"These are all the formulas available for instalation with Homebrew.";
+			message = @"These are all the formulae available for instalation with Homebrew.";
 			break;
 
 		case 4:	// Leaves
 			titleWidth = (NSInteger)totalWidth;
-			_formulasArray = [[BPHomebrewManager sharedManager] formulas_leaves];
-			[[self.tableView_formulas tableColumnWithIdentifier:@"Version"] setHidden:YES];
-			[[self.tableView_formulas tableColumnWithIdentifier:@"LatestVersion"] setHidden:YES];
+			_formulaeArray = [[BPHomebrewManager sharedManager] formulae_leaves];
+			[[self.tableView_formulae tableColumnWithIdentifier:@"Version"] setHidden:YES];
+			[[self.tableView_formulae tableColumnWithIdentifier:@"LatestVersion"] setHidden:YES];
 			[self.button_upgradeAll setHidden:YES];
-			message = @"These formulas are not dependencies of any other formulas.";
+			message = @"These formulae are not dependencies of any other formulae.";
 			break;
 
 		case 6: // Doctor
@@ -467,7 +467,7 @@
 			break;
 
 		case 7: // Update Tool
-			message = @"Updating Homebrew means fetching the latest info about the available formulas.";
+			message = @"Updating Homebrew means fetching the latest info about the available formulae.";
 			tabIndex = 2;
 			break;
 
@@ -477,11 +477,11 @@
 
 	if (message) [self.label_information setStringValue:message];
 	if (tabIndex == 0) {
-		[self.tableView_formulas deselectAll:nil];
-		[self.tableView_formulas reloadData];
+		[self.tableView_formulae deselectAll:nil];
+		[self.tableView_formulae reloadData];
 		[self updateToolbarItemsState];
 
-		[[self.tableView_formulas tableColumnWithIdentifier:@"Name"] setWidth:titleWidth];
+		[[self.tableView_formulae tableColumnWithIdentifier:@"Name"] setWidth:titleWidth];
 	}
 	[self.tabView selectTabViewItemAtIndex:tabIndex];
 }
@@ -491,14 +491,14 @@
 - (IBAction)showFormulaInfo:(id)sender {
 	NSInteger selectedIndex;
 
-	selectedIndex = [self.tableView_formulas selectedRow];
+	selectedIndex = [self.tableView_formulae selectedRow];
 
 	if (selectedIndex >= 0) {
 		if ([self.formulaPopover isShown]) {
 				[self.formulaPopover close];
 		}
 
-		[self.formulaPopoverView setDataObject:[_formulasArray objectAtIndex:selectedIndex]];
+		[self.formulaPopoverView setDataObject:[_formulaeArray objectAtIndex:selectedIndex]];
 
 		if (!self.formulaPopover) {
 			self.formulaPopover = [[NSPopover alloc] init];
@@ -511,18 +511,18 @@
 
 		[self.formulaPopover setContentViewController:controller];
 
-		NSRect anchorRect = [self.tableView_formulas rectOfRow:selectedIndex];
-		anchorRect.origin = [self.scrollView_formulas convertPoint:anchorRect.origin fromView:self.tableView_formulas];
+		NSRect anchorRect = [self.tableView_formulae rectOfRow:selectedIndex];
+		anchorRect.origin = [self.scrollView_formulae convertPoint:anchorRect.origin fromView:self.tableView_formulae];
 
-		[self.formulaPopover showRelativeToRect:anchorRect ofView:self.scrollView_formulas preferredEdge:NSMaxXEdge];
+		[self.formulaPopover showRelativeToRect:anchorRect ofView:self.scrollView_formulae preferredEdge:NSMaxXEdge];
 	}
 }
 
 - (IBAction)installUninstallUpdate:(id)sender {
-	NSInteger selectedIndex = [self.tableView_formulas selectedRow];
+	NSInteger selectedIndex = [self.tableView_formulae selectedRow];
 
 	if (selectedIndex >= 0) {
-		BPFormula *formula = [_formulasArray objectAtIndex:selectedIndex];
+		BPFormula *formula = [_formulaeArray objectAtIndex:selectedIndex];
 		NSString *message;
 		void (^operationBlock)(void);
 
@@ -567,8 +567,8 @@
 	}
 }
 
-- (IBAction)upgradeAllOutdatedFormulas:(id)sender {
-	NSAlert *alert = [NSAlert alertWithMessageText:@"Attention!" defaultButton:@"Yes" alternateButton:@"Cancel" otherButton:nil informativeTextWithFormat:@"Are you sure you want to upgrade all outdated formulas?"];
+- (IBAction)upgradeAllOutdatedFormulae:(id)sender {
+	NSAlert *alert = [NSAlert alertWithMessageText:@"Attention!" defaultButton:@"Yes" alternateButton:@"Cancel" otherButton:nil informativeTextWithFormat:@"Are you sure you want to upgrade all outdated formulae?"];
 	[alert.window setTitle:@"Cakebrew"];
 	if ([alert runModal] == NSAlertDefaultReturn) {
 		[self prepareFormula:nil forOperation:kBP_WINDOW_OPERATION_UPGRADE];
@@ -584,9 +584,9 @@
 }
 
 - (IBAction)openSelectedFormulaWebsite:(id)sender {
-	NSInteger selectedIndex = [self.tableView_formulas selectedRow];
+	NSInteger selectedIndex = [self.tableView_formulae selectedRow];
 	if (selectedIndex >= 0) {
-		BPFormula *formula = [_formulasArray objectAtIndex:selectedIndex];
+		BPFormula *formula = [_formulaeArray objectAtIndex:selectedIndex];
 		[[NSWorkspace sharedWorkspace] openURL:formula.website];
 	}
 }

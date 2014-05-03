@@ -50,15 +50,15 @@
     NSMutableArray *array = [[data componentsSeparatedByString:@"\n"] mutableCopy];
     [array removeLastObject];
 
-    NSMutableArray *formulas = [NSMutableArray arrayWithCapacity:array.count];
+    NSMutableArray *formulae = [NSMutableArray arrayWithCapacity:array.count];
 
     for (NSString *item in array) {
         BPFormula *formula = [self parseFormulaItem:item];
         if (formula) {
-            [formulas addObject:formula];
+            [formulae addObject:formula];
         }
     }
-    return formulas;
+    return formulae;
 }
 
 - (BPFormula *)parseFormulaItem:(NSString *)item
@@ -438,9 +438,9 @@
     return string;
 }
 
-- (NSString*)upgradeFormulas:(NSArray*)formulas __deprecated
+- (NSString*)upgradeFormulae:(NSArray*)formulae __deprecated
 {
-	NSString *string = [self performBrewCommandWithArguments:[@[@"upgrade"] arrayByAddingObjectsFromArray:formulas]];
+	NSString *string = [self performBrewCommandWithArguments:[@[@"upgrade"] arrayByAddingObjectsFromArray:formulae]];
 //	NSLog (@"script returned:\n%@", string);
 	[[NSNotificationCenter defaultCenter] postNotificationName:kBP_NOTIFICATION_FORMULAS_CHANGED object:nil];
     return string;
@@ -483,9 +483,9 @@
 	return val;
 }
 
-- (BOOL)upgradeFormulas:(NSArray*)formulas withReturnBlock:(void (^)(NSString*output))block
+- (BOOL)upgradeFormulae:(NSArray*)formulae withReturnBlock:(void (^)(NSString*output))block
 {
-	BOOL val = [self performBrewCommandWithArguments:[@[@"upgrade"] arrayByAddingObjectsFromArray:formulas] dataReturnBlock:block];
+	BOOL val = [self performBrewCommandWithArguments:[@[@"upgrade"] arrayByAddingObjectsFromArray:formulae] dataReturnBlock:block];
 	[[NSNotificationCenter defaultCenter] postNotificationName:kBP_NOTIFICATION_FORMULAS_CHANGED object:nil];
 	return val;
 }

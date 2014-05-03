@@ -53,10 +53,10 @@
 	[self.label_formulaName setStringValue:formula.name];
 }
 
-- (void)setFormulas:(NSArray *)formulas
+- (void)setFormulae:(NSArray *)formulae
 {
-	_formulas = formulas;
-	[self.label_formulaName setStringValue:@"All outdated formulas"];
+	_formulae = formulae;
+	[self.label_formulaName setStringValue:@"All outdated formulae"];
 }
 
 - (void)setWindowOperation:(BP_WINDOW_OPERATION)windowOperation
@@ -104,11 +104,11 @@
 					[self.textView setString:outputValue];
 				}];
 			} else {
-				NSMutableArray *names = [NSMutableArray arrayWithCapacity:self.formulas.count];
-				for (BPFormula *formula in self.formulas) {
+				NSMutableArray *names = [NSMutableArray arrayWithCapacity:self.formulae.count];
+				for (BPFormula *formula in self.formulae) {
 					[names addObject:formula.name];
 				}
-				[[BPHomebrewInterface sharedInterface] upgradeFormulas:names withReturnBlock:^(NSString *output) {
+				[[BPHomebrewInterface sharedInterface] upgradeFormulae:names withReturnBlock:^(NSString *output) {
 					if (outputValue) outputValue = [outputValue stringByAppendingString:output];
 					else outputValue = output;
 					[self.textView setString:outputValue];

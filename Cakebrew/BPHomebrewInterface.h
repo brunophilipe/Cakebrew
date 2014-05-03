@@ -41,7 +41,7 @@ typedef enum : NSUInteger {
 - (NSString*)informationForFormula:(NSString*)formula;
 - (NSString*)update __deprecated;
 - (NSString*)upgradeFormula:(NSString*)formula __deprecated;
-- (NSString*)upgradeFormulas:(NSArray*)formulas __deprecated;
+- (NSString*)upgradeFormulae:(NSArray*)formulae __deprecated;
 - (NSString*)installFormula:(NSString*)formula __deprecated;
 - (NSString*)uninstallFormula:(NSString*)formula __deprecated;
 - (NSString*)runDoctor __deprecated;
@@ -49,7 +49,7 @@ typedef enum : NSUInteger {
 // Operations with live data callback block
 - (BOOL)updateWithReturnBlock:(void (^)(NSString*))block;
 - (BOOL)upgradeFormula:(NSString*)formula withReturnBlock:(void (^)(NSString*))block;
-- (BOOL)upgradeFormulas:(NSArray*)formulas withReturnBlock:(void (^)(NSString*))block;
+- (BOOL)upgradeFormulae:(NSArray*)formulae withReturnBlock:(void (^)(NSString*))block;
 - (BOOL)installFormula:(NSString*)formula withReturnBlock:(void (^)(NSString*))block;
 - (BOOL)uninstallFormula:(NSString*)formula withReturnBlock:(void (^)(NSString*))block;
 - (BOOL)runDoctorWithReturnBlock:(void (^)(NSString*))block;

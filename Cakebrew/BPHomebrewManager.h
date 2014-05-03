@@ -38,10 +38,10 @@ typedef enum : NSUInteger {
 
 @interface BPHomebrewManager : NSObject
 
-@property (strong) NSArray *formulas_installed;
-@property (strong) NSArray *formulas_outdated;
-@property (strong) NSArray *formulas_all;
-@property (strong) NSArray *formulas_leaves;
+@property (strong) NSArray *formulae_installed;
+@property (strong) NSArray *formulae_outdated;
+@property (strong) NSArray *formulae_all;
+@property (strong) NSArray *formulae_leaves;
 
 @property (unsafe_unretained) id<BPHomebrewManagerDelegate> delegate;
 

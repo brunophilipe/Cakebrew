@@ -51,14 +51,14 @@
 - (void)update
 {
     dispatch_async(dispatch_get_main_queue(), ^{
-        [self setFormulas_installed:[[BPHomebrewInterface sharedInterface] listMode:kBP_LIST_INSTALLED]];
-        [self setFormulas_leaves:[[BPHomebrewInterface sharedInterface] listMode:kBP_LIST_LEAVES]];
-        [self setFormulas_outdated:[[BPHomebrewInterface sharedInterface] listMode:kBP_LIST_UPGRADEABLE]];
+        [self setFormulae_installed:[[BPHomebrewInterface sharedInterface] listMode:kBP_LIST_INSTALLED]];
+        [self setFormulae_leaves:[[BPHomebrewInterface sharedInterface] listMode:kBP_LIST_LEAVES]];
+        [self setFormulae_outdated:[[BPHomebrewInterface sharedInterface] listMode:kBP_LIST_UPGRADEABLE]];
 
-        if (![self loadAllFormulasCaches]) {
+        if (![self loadAllFormulaeCaches]) {
 
-			[self setFormulas_all:[[BPHomebrewInterface sharedInterface] listMode:kBP_LIST_ALL]];
-			[self storeAllFormulasCaches];
+			[self setFormulae_all:[[BPHomebrewInterface sharedInterface] listMode:kBP_LIST_ALL]];
+			[self storeAllFormulaeCaches];
 			[self.delegate homebrewManagerFinishedUpdating:self];
             
         }
@@ -68,18 +68,18 @@
 /**
  Returns `YES` if cache exists, was created less than 24 hours ago and was loaded successfully. Otherwise returns `NO`.
  */
-- (BOOL)loadAllFormulasCaches
+- (BOOL)loadAllFormulaeCaches
 {
 	NSURL *cachesFolder = [BPAppDelegateRef urlForApplicationCachesFolder];
 	if (cachesFolder) {
-		NSURL *allFormulasFile = [cachesFolder URLByAppendingPathComponent:@"allFormulas.cache.bin"];
-		NSDictionary *cacheDict = nil;// = @{kBP_CACHE_DICT_DATE_KEY: [NSDate date], kBP_CACHE_DICT_DATA_KEY: self.formulas_all};
+		NSURL *allFormulaeFile = [cachesFolder URLByAppendingPathComponent:@"allFormulae.cache.bin"];
+		NSDictionary *cacheDict = nil;// = @{kBP_CACHE_DICT_DATE_KEY: [NSDate date], kBP_CACHE_DICT_DATA_KEY: self.formulae_all};
 
-		if ([[NSFileManager defaultManager] fileExistsAtPath:allFormulasFile.relativePath]) {
-			cacheDict = [NSKeyedUnarchiver unarchiveObjectWithFile:allFormulasFile.relativePath];
-			self.formulas_all = [cacheDict objectForKey:kBP_CACHE_DICT_DATA_KEY];
+		if ([[NSFileManager defaultManager] fileExistsAtPath:allFormulaeFile.relativePath]) {
+			cacheDict = [NSKeyedUnarchiver unarchiveObjectWithFile:allFormulaeFile.relativePath];
+			self.formulae_all = [cacheDict objectForKey:kBP_CACHE_DICT_DATA_KEY];
 			[self.delegate homebrewManagerFinishedUpdating:self];
-			return self.formulas_all != nil;
+			return self.formulae_all != nil;
 		}
 	} else {
 		NSLog(@"Could not load cache file. BPAppDelegate function returned nil!");
@@ -88,19 +88,19 @@
 	return NO;
 }
 
-- (void)storeAllFormulasCaches
+- (void)storeAllFormulaeCaches
 {
-	if (self.formulas_all) {
+	if (self.formulae_all) {
 		NSURL *cachesFolder = [BPAppDelegateRef urlForApplicationCachesFolder];
 		if (cachesFolder) {
-			NSURL *allFormulasFile = [cachesFolder URLByAppendingPathComponent:@"allFormulas.cache.bin"];
-			NSDictionary *cacheDict = @{kBP_CACHE_DICT_DATE_KEY: [NSDate date], kBP_CACHE_DICT_DATA_KEY: self.formulas_all};
+			NSURL *allFormulaeFile = [cachesFolder URLByAppendingPathComponent:@"allFormulae.cache.bin"];
+			NSDictionary *cacheDict = @{kBP_CACHE_DICT_DATE_KEY: [NSDate date], kBP_CACHE_DICT_DATA_KEY: self.formulae_all};
 			NSData *cacheData = [NSKeyedArchiver archivedDataWithRootObject:cacheDict];
 
-			if ([[NSFileManager defaultManager] fileExistsAtPath:allFormulasFile.relativePath]) {
-				[cacheData writeToURL:allFormulasFile atomically:YES];
+			if ([[NSFileManager defaultManager] fileExistsAtPath:allFormulaeFile.relativePath]) {
+				[cacheData writeToURL:allFormulaeFile atomically:YES];
 			} else {
-				[[NSFileManager defaultManager] createFileAtPath:allFormulasFile.relativePath contents:cacheData attributes:nil];
+				[[NSFileManager defaultManager] createFileAtPath:allFormulaeFile.relativePath contents:cacheData attributes:nil];
 			}
 		} else {
 			NSLog(@"Could not store cache file. BPAppDelegate function returned nil!");
@@ -123,9 +123,9 @@
 
 - (BP_FORMULA_STATUS)statusForFormula:(BPFormula*)formula
 {
-	if ([self searchForFormula:formula inArray:self.formulas_installed] >= 0)
+	if ([self searchForFormula:formula inArray:self.formulae_installed] >= 0)
 	{
-		if ([self searchForFormula:formula inArray:self.formulas_outdated] >= 0) {
+		if ([self searchForFormula:formula inArray:self.formulae_outdated] >= 0) {
 			return kBP_FORMULA_OUTDATED;
 		} else {
 			return kBP_FORMULA_INSTALLED;
