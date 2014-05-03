@@ -401,7 +401,7 @@
                                                                     </connections>
                                                                 </tableCellView>
                                                                 <tableCellView identifier="MainCell" id="NjY-GN-l2W" customClass="PXSourceListTableCellView">
-                                                                    <rect key="frame" x="1" y="17" width="166" height="17"/>
+                                                                    <rect key="frame" x="1" y="17" width="169" height="17"/>
                                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                     <subviews>
                                                                         <imageView translatesAutoresizingMaskIntoConstraints="NO" id="rod-fH-u2L">
@@ -486,7 +486,7 @@
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                         <font key="font" metaFont="system"/>
                                         <tabViewItems>
-                                            <tabViewItem label="Formulas" identifier="1" id="aFR-nx-bHM">
+                                            <tabViewItem label="Formulae" identifier="1" id="aFR-nx-bHM">
                                                 <view key="view" id="JkQ-ZQ-ugA">
                                                     <rect key="frame" x="0.0" y="0.0" width="400" height="320"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -694,7 +694,7 @@
                                                                         <font key="font" metaFont="smallSystem"/>
                                                                     </buttonCell>
                                                                     <connections>
-                                                                        <action selector="upgradeAllOutdatedFormulas:" target="547" id="ceE-yB-Sed"/>
+                                                                        <action selector="upgradeAllOutdatedFormulae:" target="547" id="ceE-yB-Sed"/>
                                                                     </connections>
                                                                 </button>
                                                             </subviews>
@@ -890,7 +890,7 @@
                                                             </constraints>
                                                             <buttonCell key="cell" type="roundRect" title="Clear Log" bezelStyle="roundedRect" alignment="center" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="fcJ-bh-e4e">
                                                                 <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                                                <font key="font" metaFont="titleBar" size="12"/>
+                                                                <font key="font" metaFont="cellTitle"/>
                                                             </buttonCell>
                                                             <connections>
                                                                 <action selector="clearLogUpdate:" target="zdP-Oo-zVH" id="ss1-mh-Ujs"/>
@@ -1070,7 +1070,7 @@
                 <outlet property="MainToolbar" destination="646" id="678"/>
                 <outlet property="button_formulaWebsite" destination="aaD-oS-25h" id="FzE-vI-bWi"/>
                 <outlet property="button_upgradeAll" destination="kwM-Cz-P4a" id="0PA-F4-A0B"/>
-                <outlet property="clippingView_formulas" destination="imx-IN-SCs" id="Sku-zQ-Ocj"/>
+                <outlet property="clippingView_formulae" destination="imx-IN-SCs" id="Sku-zQ-Ocj"/>
                 <outlet property="formulaPopoverView" destination="WTy-A8-Ym9" id="VNG-lu-3ZX"/>
                 <outlet property="label_formulaConflicts" destination="tfH-bj-woo" id="Ge8-BU-wE3"/>
                 <outlet property="label_formulaDependencies" destination="jmd-cV-6fD" id="hEm-zJ-tHd"/>
@@ -1078,10 +1078,10 @@
                 <outlet property="label_formulaVersion" destination="AJi-jy-Vvh" id="bfU-fl-8eX"/>
                 <outlet property="label_information" destination="tiK-fW-tE7" id="K14-X1-4bF"/>
                 <outlet property="outlineView_sidebar" destination="h1z-c9-U0s" id="PZy-Oz-lSv"/>
-                <outlet property="scrollView_formulas" destination="ZTf-N0-ClA" id="2Yf-0I-qyg"/>
+                <outlet property="scrollView_formulae" destination="ZTf-N0-ClA" id="2Yf-0I-qyg"/>
                 <outlet property="splitView" destination="Exu-Zx-Kij" id="Bt8-rO-7vE"/>
                 <outlet property="tabView" destination="79A-lZ-LEo" id="ZHE-dc-ztv"/>
-                <outlet property="tableView_formulas" destination="nOF-Ra-wlA" id="78b-5b-rWb"/>
+                <outlet property="tableView_formulae" destination="nOF-Ra-wlA" id="78b-5b-rWb"/>
                 <outlet property="toolbar" destination="646" id="8AI-ea-oZp"/>
                 <outlet property="toolbarButton_formulaInfo" destination="UyW-JC-mM2" id="4vY-ln-Est"/>
                 <outlet property="toolbarButton_installUninstall" destination="0v7-EY-eoL" id="PLe-Dn-jmR"/>
