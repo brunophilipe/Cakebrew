@@ -252,11 +252,22 @@
 	if (!userEnvironment)
 		userEnvironment = [BPHomebrewInterface findUserEnvironmentVariables:@[@"PATH", @"HOME"]];
 
+	BOOL enableProxy = [[NSUserDefaults standardUserDefaults] boolForKey:kBP_HOMEBREW_PROXY_ENABLE_KEY];
+	NSString *proxyURL = [[NSUserDefaults standardUserDefaults] objectForKey:kBP_HOMEBREW_PROXY_KEY];
+
 	NSTask *task;
     task = [[NSTask alloc] init];
     [task setLaunchPath:brewPathString];
     [task setArguments:arguments];
-	[task setEnvironment:userEnvironment];
+
+	if (enableProxy && proxyURL) {
+		NSMutableDictionary *env = [userEnvironment mutableCopy];
+		[env setObject:proxyURL forKey:@"http_proxy"];
+		[env setObject:proxyURL forKey:@"https_proxy"];
+		[task setEnvironment:env];
+	} else {
+		[task setEnvironment:userEnvironment];
+	}
 
 	NSPipe *pipe_output = [NSPipe pipe];
 	NSPipe *pipe_error = [NSPipe pipe];
@@ -298,6 +309,7 @@
 {
 	// Test if homebrew is installed
 	static NSString *pathString;
+	static NSDictionary *userEnvironment;
 
 	if (!testedForInstallation || !pathString) {
 		pathString = [[NSUserDefaults standardUserDefaults] objectForKey:kBP_HOMEBREW_PATH_KEY];
@@ -312,6 +324,9 @@
 		testedForInstallation = YES;
 	}
 
+	if (!userEnvironment)
+		userEnvironment = [BPHomebrewInterface findUserEnvironmentVariables:@[@"PATH", @"HOME"]];
+
 	BOOL enableProxy = [[NSUserDefaults standardUserDefaults] boolForKey:kBP_HOMEBREW_PROXY_ENABLE_KEY];
 	NSString *proxyURL = [[NSUserDefaults standardUserDefaults] objectForKey:kBP_HOMEBREW_PROXY_KEY];
 
@@ -321,7 +336,12 @@
     [task setArguments:arguments];
 
 	if (enableProxy && proxyURL) {
-		[task setEnvironment:@{@"http_proxy": proxyURL, @"https_proxy": proxyURL}];
+		NSMutableDictionary *env = [userEnvironment mutableCopy];
+		[env setObject:proxyURL forKey:@"http_proxy"];
+		[env setObject:proxyURL forKey:@"https_proxy"];
+		[task setEnvironment:env];
+	} else {
+		[task setEnvironment:userEnvironment];
 	}
 
 	NSPipe *pipe_output, *pipe_error;
