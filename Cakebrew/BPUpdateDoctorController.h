@@ -24,5 +24,6 @@
 - (IBAction)clearLogDoctor:(id)sender;
 
 - (IBAction)runStopUpdate:(id)sender;
+- (IBAction)clearLogUpdate:(id)sender;
 
 @end

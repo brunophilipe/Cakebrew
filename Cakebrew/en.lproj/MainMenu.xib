@@ -412,8 +412,8 @@
                                                                             </constraints>
                                                                             <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="NSActionTemplate" id="As7-Xw-rr0"/>
                                                                         </imageView>
-                                                                        <textField verticalHuggingPriority="750" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="UGv-FF-mH4">
-                                                                            <rect key="frame" x="25" y="0.0" width="101" height="17"/>
+                                                                        <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="UGv-FF-mH4">
+                                                                            <rect key="frame" x="25" y="0.0" width="104" height="17"/>
                                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                                                                             <constraints>
                                                                                 <constraint firstAttribute="width" relation="greaterThanOrEqual" priority="750" constant="100" id="nTu-IB-1td"/>
@@ -481,10 +481,6 @@
                                 <rect key="frame" x="170" y="0.0" width="400" height="320"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <subviews>
-                                    <customView translatesAutoresizingMaskIntoConstraints="NO" id="N8K-3a-hgb" customClass="BPInsetShadowView">
-                                        <rect key="frame" x="0.0" y="0.0" width="400" height="320"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                    </customView>
                                     <tabView drawsBackground="NO" type="noTabsNoBorder" initialItem="aFR-nx-bHM" translatesAutoresizingMaskIntoConstraints="NO" id="79A-lZ-LEo">
                                         <rect key="frame" x="0.0" y="0.0" width="400" height="320"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
@@ -885,6 +881,21 @@
                                                                 <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                                             </textFieldCell>
                                                         </textField>
+                                                        <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="RTo-rg-mQf">
+                                                            <rect key="frame" x="189" y="291" width="69" height="19"/>
+                                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="69" id="IdI-jd-4DF"/>
+                                                                <constraint firstAttribute="width" constant="69" id="N1n-iq-1MY"/>
+                                                            </constraints>
+                                                            <buttonCell key="cell" type="roundRect" title="Clear Log" bezelStyle="roundedRect" alignment="center" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="fcJ-bh-e4e">
+                                                                <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                                                <font key="font" metaFont="titleBar" size="12"/>
+                                                            </buttonCell>
+                                                            <connections>
+                                                                <action selector="clearLogUpdate:" target="zdP-Oo-zVH" id="ss1-mh-Ujs"/>
+                                                            </connections>
+                                                        </button>
                                                         <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="3aw-8I-EVx">
                                                             <rect key="frame" x="266" y="292" width="122" height="19"/>
                                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
@@ -897,26 +908,32 @@
                                                             </connections>
                                                         </button>
                                                         <progressIndicator horizontalHuggingPriority="750" verticalHuggingPriority="750" maxValue="100" displayedWhenStopped="NO" bezeled="NO" indeterminate="YES" controlSize="small" style="spinning" translatesAutoresizingMaskIntoConstraints="NO" id="su7-jp-AEh">
-                                                            <rect key="frame" x="242" y="294" width="16" height="16"/>
+                                                            <rect key="frame" x="165" y="293" width="16" height="16"/>
                                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                         </progressIndicator>
                                                     </subviews>
                                                     <constraints>
                                                         <constraint firstAttribute="trailing" secondItem="UBC-qD-VOA" secondAttribute="trailing" constant="-1" id="1Rf-ao-D1b"/>
+                                                        <constraint firstItem="RTo-rg-mQf" firstAttribute="top" secondItem="p04-F1-40m" secondAttribute="top" constant="10" id="8je-6j-S6h"/>
                                                         <constraint firstItem="UBC-qD-VOA" firstAttribute="top" secondItem="CbV-C7-Qte" secondAttribute="bottom" constant="6" id="ArQ-2R-2Ck"/>
                                                         <constraint firstItem="UBC-qD-VOA" firstAttribute="leading" secondItem="p04-F1-40m" secondAttribute="leading" constant="-1" id="D6S-l1-v4j"/>
                                                         <constraint firstAttribute="trailing" secondItem="3aw-8I-EVx" secondAttribute="trailing" constant="12" id="H2s-hX-JqD"/>
-                                                        <constraint firstItem="su7-jp-AEh" firstAttribute="top" secondItem="p04-F1-40m" secondAttribute="top" constant="10" id="Rdl-hz-8ia"/>
                                                         <constraint firstAttribute="bottom" secondItem="UBC-qD-VOA" secondAttribute="bottom" constant="-1" id="TWL-IO-Oh7"/>
-                                                        <constraint firstItem="3aw-8I-EVx" firstAttribute="leading" secondItem="su7-jp-AEh" secondAttribute="trailing" constant="8" id="YOJ-fM-Gxm"/>
                                                         <constraint firstItem="CbV-C7-Qte" firstAttribute="top" secondItem="p04-F1-40m" secondAttribute="top" constant="7" id="bwl-eL-Xch"/>
                                                         <constraint firstItem="3aw-8I-EVx" firstAttribute="top" secondItem="p04-F1-40m" secondAttribute="top" constant="9" id="fVq-9V-xo7"/>
+                                                        <constraint firstItem="3aw-8I-EVx" firstAttribute="leading" secondItem="RTo-rg-mQf" secondAttribute="trailing" constant="8" id="fip-Ib-eR4"/>
                                                         <constraint firstItem="CbV-C7-Qte" firstAttribute="leading" secondItem="p04-F1-40m" secondAttribute="leading" constant="10" id="fw8-Zb-dSV"/>
+                                                        <constraint firstItem="RTo-rg-mQf" firstAttribute="leading" secondItem="su7-jp-AEh" secondAttribute="trailing" constant="8" id="hd0-WL-LCm"/>
+                                                        <constraint firstItem="su7-jp-AEh" firstAttribute="top" secondItem="p04-F1-40m" secondAttribute="top" constant="11" id="jcs-nA-Co4"/>
                                                     </constraints>
                                                 </view>
                                             </tabViewItem>
                                         </tabViewItems>
                                     </tabView>
+                                    <customView translatesAutoresizingMaskIntoConstraints="NO" id="N8K-3a-hgb" customClass="BPInsetShadowView">
+                                        <rect key="frame" x="0.0" y="0.0" width="400" height="320"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                    </customView>
                                 </subviews>
                                 <constraints>
                                     <constraint firstAttribute="bottom" secondItem="N8K-3a-hgb" secondAttribute="bottom" id="1aW-yp-Q98"/>

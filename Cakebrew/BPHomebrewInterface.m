@@ -270,7 +270,9 @@
 	NSFileHandle *handle_error = [pipe_error fileHandleForReading];
 	[handle_error waitForDataInBackgroundAndNotify];
 
-	block([NSString stringWithFormat:@"%@\n", [userEnvironment description]]);
+	#ifdef DEBUG
+	block([NSString stringWithFormat:@"Environment Variables (DEBUG Only):\n%@\n", [userEnvironment description]]);
+	#endif
 
 	[task launch];
     [task waitUntilExit];

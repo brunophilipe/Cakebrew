@@ -88,4 +88,8 @@
         });
     });
 }
+
+- (IBAction)clearLogUpdate:(id)sender {
+	[self.textView_update setString:@""];
+}
 @end

@@ -29,20 +29,20 @@
 @interface BPHomebrewViewController () <NSTableViewDataSource, NSTableViewDelegate, PXSourceListDataSource, PXSourceListDelegate, BPHomebrewManagerDelegate>
 
 @property (strong, readonly) PXSourceListItem *rootSidebarCategory;
-@property (strong) NSPopover *formulaPopover;
+@property (strong)           NSPopover        *formulaPopover;
 
-@property NSArray *formulasArray;
+@property NSArray   *formulasArray;
+@property NSInteger lastSelectedSidebarIndex;
 
 @end
 
 @implementation BPHomebrewViewController
 {
-	NSOutlineView *_outlineView_sidebar;
-	DMSplitView *_splitView;
-	BPHomebrewManager *_homebrewManager;
-	BPInsetShadowView *_view_disablerLock;
-
-	NSWindow *_operationWindow;
+	NSWindow					 *_operationWindow;
+	NSOutlineView				 *_outlineView_sidebar;
+	DMSplitView					 *_splitView;
+	BPHomebrewManager			 *_homebrewManager;
+	BPInsetShadowView			 *_view_disablerLock;
 	BPInstallationViewController *_operationViewController;
 }
 
@@ -210,6 +210,8 @@
 
 	if (shouldReselectFirstRow)
 		[_outlineView_sidebar selectRowIndexes:[NSIndexSet indexSetWithIndex:1] byExtendingSelection:NO];
+	else
+		[_outlineView_sidebar selectRowIndexes:[NSIndexSet indexSetWithIndex:_lastSelectedSidebarIndex] byExtendingSelection:NO];
 }
 
 - (void)buildSidebarTree
@@ -410,6 +412,9 @@
 	NSUInteger tabIndex = 0;
 	CGFloat totalWidth;
 	NSInteger titleWidth;
+
+	if ([self.outlineView_sidebar selectedRow] >= 0)
+		_lastSelectedSidebarIndex = [self.outlineView_sidebar selectedRow];
 
 	[self updateToolbarItemsState];
 
