@@ -58,17 +58,15 @@
 	[self.textView_doctor setString:@""];
 	[self.button_doctor_runStop setEnabled:NO];
 	[self.progress_doctor startAnimation:sender];
-	NSBlockOperation *block = [NSBlockOperation blockOperationWithBlock:^{
-		NSString __block *outputVal;
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
 		[[BPHomebrewInterface sharedInterface] runDoctorWithReturnBlock:^(NSString *output) {
-			if (outputVal) outputVal = [outputVal stringByAppendingString:output];
-			else outputVal = output;
-			[self.textView_doctor setString:outputVal];
+			[_textView_doctor setString:[_textView_doctor.string stringByAppendingString:output]];
 		}];
-		[self.progress_doctor stopAnimation:sender];
-		[self.button_doctor_runStop setEnabled:YES];
-	}];
-	[block performSelector:@selector(start) withObject:nil afterDelay:0.1];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self.progress_doctor stopAnimation:sender];
+            [self.button_doctor_runStop setEnabled:YES];
+        });
+	});
 }
 
 - (IBAction)clearLogDoctor:(id)sender {
@@ -79,16 +77,15 @@
 	[self.textView_update setString:@""];
 	[self.button_update_runStop setEnabled:NO];
 	[self.progress_update startAnimation:sender];
-	NSBlockOperation *block = [NSBlockOperation blockOperationWithBlock:^{
-		NSString __block *outputVal;
+
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
 		[[BPHomebrewInterface sharedInterface] updateWithReturnBlock:^(NSString *output) {
-			if (outputVal) outputVal = [outputVal stringByAppendingString:output];
-			else outputVal = output;
-			[self.textView_update setString:outputVal];
+			[_textView_update setString:[_textView_update.string stringByAppendingString:output]];
 		}];
-		[self.progress_update stopAnimation:sender];
-		[self.button_update_runStop setEnabled:YES];
-	}];
-	[block performSelector:@selector(start) withObject:nil afterDelay:0.1];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self.progress_update stopAnimation:sender];
+            [self.button_update_runStop setEnabled:YES];
+        });
+    });
 }
 @end

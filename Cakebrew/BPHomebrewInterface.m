@@ -24,16 +24,136 @@
 
 #define kBP_EXEC_FILE_NOT_FOUND 32512
 
-@interface BPHomebrewInterface ()
-{
-	BOOL testedForInstallation;
+@interface BPHomebrewInterfaceListCall : NSObject
 
-	void (^operationUpdateBlock)(NSString*);
+@property (readonly) NSArray *arguments;
+
+- (instancetype)initWithArguments:(NSArray *)arguments;
+- (NSArray *)parseData:(NSString *)data;
+- (BPFormula *)parseFormulaItem:(NSString *)item;
+
+@end
+
+@implementation BPHomebrewInterfaceListCall
+
+- (instancetype)initWithArguments:(NSArray *)arguments
+{
+    self = [super init];
+    if (self) {
+        _arguments = arguments;
+    }
+    return self;
+}
+
+- (NSArray *)parseData:(NSString *)data
+{
+    NSMutableArray *array = [[data componentsSeparatedByString:@"\n"] mutableCopy];
+    [array removeLastObject];
+
+    NSMutableArray *formulas = [NSMutableArray arrayWithCapacity:array.count];
+
+    for (NSString *item in array) {
+        BPFormula *formula = [self parseFormulaItem:item];
+        if (formula) {
+            [formulas addObject:formula];
+        }
+    }
+    return formulas;
+}
+
+- (BPFormula *)parseFormulaItem:(NSString *)item
+{
+    return [BPFormula formulaWithName:item];
 }
 
 @end
 
+@interface BPHomebrewInterfaceListCallInstalled : BPHomebrewInterfaceListCall
+
+@end
+
+@implementation BPHomebrewInterfaceListCallInstalled
+
+- (instancetype)init
+{
+    return [super initWithArguments:@[@"list", @"--versions"]];
+}
+
+- (BPFormula *)parseFormulaItem:(NSString *)item
+{
+    NSArray *aux = [item componentsSeparatedByString:@" "];
+    return [BPFormula formulaWithName:[aux firstObject] andVersion:[aux lastObject]];
+}
+
+@end
+
+@interface BPHomebrewInterfaceListCallAll : BPHomebrewInterfaceListCall
+
+@end
+
+@implementation BPHomebrewInterfaceListCallAll
+
+- (instancetype)init
+{
+    return [super initWithArguments:@[@"search"]];
+}
+
+@end
+
+@interface BPHomebrewInterfaceListCallLeaves : BPHomebrewInterfaceListCall
+
+@end
+
+@implementation BPHomebrewInterfaceListCallLeaves
+
+- (instancetype)init
+{
+    return [super initWithArguments:@[@"leaves"]];
+}
+
+@end
+
+@interface BPHomebrewInterfaceListCallUpgradeable : BPHomebrewInterfaceListCall
+
+@end
+
+@implementation BPHomebrewInterfaceListCallUpgradeable
+
+- (instancetype)init
+{
+    return [super initWithArguments:@[@"outdated", @"--verbose"]];
+}
+
+- (BPFormula *)parseFormulaItem:(NSString *)item
+{
+    NSRange nameEnd = [item rangeOfString:@" "];
+    NSRange openBracket = [item rangeOfString:@"("];
+    NSRange upgradeArrow = [item rangeOfString:@" < "];
+    NSRange closeBracket = [item rangeOfString:@")"];
+
+    if (nameEnd.location == NSNotFound ||
+        openBracket.location == NSNotFound ||
+        upgradeArrow.location == NSNotFound ||
+        closeBracket.location == NSNotFound)
+    {
+        return [BPFormula formulaWithName:item];
+    }
+
+    NSString *name = [item substringWithRange:NSMakeRange(0, nameEnd.location)];
+    NSString *version = [item substringWithRange:NSMakeRange(openBracket.location + 1, upgradeArrow.location - openBracket.location - 1)];
+    NSString *latestVersion = [item substringWithRange:NSMakeRange(upgradeArrow.location + upgradeArrow.length, closeBracket.location - upgradeArrow.location - upgradeArrow.length)];
+
+    return [BPFormula formulaWithName:name version:version andLatestVersion:latestVersion];
+}
+
+@end
+
+
 @implementation BPHomebrewInterface
+{
+	BOOL testedForInstallation;
+	void (^operationUpdateBlock)(NSString*);
+}
 
 + (BPHomebrewInterface *)sharedInterface
 {
@@ -44,6 +164,45 @@
         dispatch_once(&once, ^ { instance = [[BPHomebrewInterface alloc] init]; });
         return instance;
 	}
+}
+
++ (NSDictionary *)findUserEnvironmentVariables:(NSArray *)variables
+{
+	NSString *userShell = [[[NSProcessInfo processInfo] environment] objectForKey:@"SHELL"];
+
+	// avoid executing stuff like /sbin/nologin as a shell
+	BOOL isValidShell = NO;
+	for (NSString *validShell in [[NSString stringWithContentsOfFile:@"/etc/shells" encoding:NSUTF8StringEncoding error:nil] componentsSeparatedByCharactersInSet:[NSCharacterSet newlineCharacterSet]]) {
+		if ([[validShell stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]] isEqualToString:userShell]) {
+			isValidShell = YES;
+			break;
+		}
+	}
+
+	if (!isValidShell) return nil;
+
+	NSMutableString *instruction = [NSMutableString string];
+
+	for (NSString *variable in variables) {
+		[instruction appendFormat:@"echo $%@; ", variable];
+	}
+
+	NSTask *task;
+    task = [[NSTask alloc] init];
+
+	[task setLaunchPath:userShell];
+	[task setArguments:@[@"-l", @"-c", instruction]];
+
+	NSPipe *output = [NSPipe pipe];
+	[task setStandardOutput:output];
+
+	[task launch];
+	[task waitUntilExit];
+
+	NSString *results = [[NSString alloc] initWithData:[output.fileHandleForReading readDataToEndOfFile] encoding:NSUTF8StringEncoding];
+	NSDictionary *environment = [NSDictionary dictionaryWithObjects:[results componentsSeparatedByCharactersInSet:[NSCharacterSet newlineCharacterSet]] forKeys:[variables arrayByAddingObject:@""]];
+
+	return [environment dictionaryWithValuesForKeys:variables];
 }
 
 - (id)init
@@ -69,41 +228,18 @@
 	[[NSNotificationCenter defaultCenter] postNotificationName:kBP_NOTIFICATION_UNLOCK_WINDOW object:self];
 }
 
-//This method returns nil because brew is never in the default $PATH used by NSTask
-- (NSString*)getHomebrewPath __deprecated
-{
-	NSTask *task;
-    task = [[NSTask alloc] init];
-
-	[task setLaunchPath:@"/usr/bin/which"];
-	[task setArguments:@[@"which"]];
-
-	NSPipe *output = [NSPipe pipe];
-	[task setStandardOutput:output];
-
-	[task launch];
-
-	[task waitUntilExit];
-	NSString *string = [[NSString alloc] initWithData:[[output fileHandleForReading] readDataToEndOfFile] encoding:NSUTF8StringEncoding];
-
-	if (string && ![string isEqualToString:@""] && [[NSFileManager defaultManager] fileExistsAtPath:[string stringByReplacingOccurrencesOfString:@"\n" withString:@""]]) {
-		return string;
-	} else {
-		return nil;
-	}
-}
-
 - (BOOL)performBrewCommandWithArguments:(NSArray*)arguments dataReturnBlock:(void (^)(NSString*))block
 {
 	// Test if homebrew is installed
-	static NSString *pathString;
+	static NSString *brewPathString;
+	static NSDictionary *userEnvironment;
 
-	if (!testedForInstallation || !pathString) {
-		pathString = [[NSUserDefaults standardUserDefaults] objectForKey:kBP_HOMEBREW_PATH_KEY];
-		if (!pathString)
-			pathString = kBP_HOMEBREW_PATH;
+	if (!testedForInstallation || !brewPathString) {
+		brewPathString = [[NSUserDefaults standardUserDefaults] objectForKey:kBP_HOMEBREW_PATH_KEY];
+		if (!brewPathString)
+			brewPathString = kBP_HOMEBREW_PATH;
 
-		NSInteger retval = system([pathString UTF8String]);
+		NSInteger retval = system([brewPathString UTF8String]);
 		if (retval == kBP_EXEC_FILE_NOT_FOUND) {
 			[self showHomebrewNotInstalledMessage];
 			return NO;
@@ -113,10 +249,14 @@
 
 	operationUpdateBlock = block;
 
+	if (!userEnvironment)
+		userEnvironment = [BPHomebrewInterface findUserEnvironmentVariables:@[@"PATH", @"HOME"]];
+
 	NSTask *task;
     task = [[NSTask alloc] init];
-    [task setLaunchPath:pathString];
+    [task setLaunchPath:brewPathString];
     [task setArguments:arguments];
+	[task setEnvironment:userEnvironment];
 
 	NSPipe *pipe_output = [NSPipe pipe];
 	NSPipe *pipe_error = [NSPipe pipe];
@@ -129,6 +269,8 @@
 
 	NSFileHandle *handle_error = [pipe_error fileHandleForReading];
 	[handle_error waitForDataInBackgroundAndNotify];
+
+	block([NSString stringWithFormat:@"%@\n", [userEnvironment description]]);
 
 	[task launch];
     [task waitUntilExit];
