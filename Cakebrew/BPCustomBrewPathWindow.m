@@ -29,11 +29,11 @@
 	if ([[NSFileManager defaultManager] fileExistsAtPath:path]) {
 		[self.imageView_invalidPath setHidden:YES];
 		[[NSUserDefaults standardUserDefaults] setObject:path forKey:kBP_HOMEBREW_PATH_KEY];
-		[BPAppDelegateRef.window endSheet:self];
+		[self.sheetParent endSheet:self];
 		[[BPHomebrewInterface sharedInterface] hideHomebrewNotInstalledMessage];
 	} else if ([path isEqualToString:@""]) {
 		[[NSUserDefaults standardUserDefaults] removeObjectForKey:kBP_HOMEBREW_PATH_KEY];
-		[BPAppDelegateRef.window endSheet:self];
+		[self.sheetParent endSheet:self];
 		[[BPHomebrewInterface sharedInterface] hideHomebrewNotInstalledMessage];
 	} else {
 		[self.imageView_invalidPath setHidden:NO];

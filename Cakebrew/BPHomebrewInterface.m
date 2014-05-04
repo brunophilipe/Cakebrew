@@ -169,6 +169,7 @@
 - (NSDictionary *)findUserEnvironmentVariables:(NSArray *)variables
 {
 	NSString *userShell = [[[NSProcessInfo processInfo] environment] objectForKey:@"SHELL"];
+	NSLog(@"User shell: %@", userShell);
 
 	// avoid executing stuff like /sbin/nologin as a shell
 	BOOL isValidShell = NO;
@@ -193,6 +194,8 @@
 	[task setLaunchPath:userShell];
 	[task setArguments:@[@"-l", @"-c", instruction]];
 
+	NSLog(@"Sending instruction: %@ -l -c %@", userShell, instruction);
+
 	NSPipe *output = [NSPipe pipe];
 	[task setStandardOutput:output];
 
@@ -214,33 +217,32 @@
 		return pathString;
 
 	NSDictionary *environment = [self findUserEnvironmentVariables:@[@"PATH", @"HOME"]];
-	NSTask *task;
+	if (environment) {
+		NSTask *task;
 
-	task = [[NSTask alloc] init];
+		task = [[NSTask alloc] init];
 
-	[task setLaunchPath:@"/usr/bin/which"];
-	[task setArguments:@[@"brew"]];
-	[task setEnvironment:environment];
+		[task setLaunchPath:@"/usr/bin/which"];
+		[task setArguments:@[@"brew"]];
+		[task setEnvironment:environment];
 
-	NSPipe *output = [NSPipe pipe];
-	[task setStandardOutput:output];
+		NSPipe *output = [NSPipe pipe];
+		[task setStandardOutput:output];
 
-	[task launch];
+		[task launch];
+		[task waitUntilExit];
 
-	[task waitUntilExit];
-	pathString = [[[NSString alloc] initWithData:[[output fileHandleForReading] readDataToEndOfFile] encoding:NSUTF8StringEncoding] stringByTrimmingCharactersInSet:[NSCharacterSet newlineCharacterSet]];
+		pathString = [[[NSString alloc] initWithData:[[output fileHandleForReading] readDataToEndOfFile] encoding:NSUTF8StringEncoding] stringByTrimmingCharactersInSet:[NSCharacterSet newlineCharacterSet]];
 
-	if (pathString && ![pathString isEqualToString:@""] && [[NSFileManager defaultManager] fileExistsAtPath:pathString]) {
-		NSInteger retval = system([[pathString stringByAppendingString:@" -v"] UTF8String]);
-		if (retval == kBP_EXEC_FILE_NOT_FOUND) {
-			[self showHomebrewNotInstalledMessage];
-			return nil;
-		} else {
-			return pathString;
+		if (pathString && ![pathString isEqualToString:@""] && [[NSFileManager defaultManager] fileExistsAtPath:pathString]) {
+			NSInteger retval = system([[pathString stringByAppendingString:@" -v"] UTF8String]);
+			if (retval != kBP_EXEC_FILE_NOT_FOUND) {
+				return pathString;
+			}
 		}
-	} else {
-		return nil;
 	}
+	[self showHomebrewNotInstalledMessage];
+	return nil;
 }
 
 - (id)init
@@ -279,6 +281,9 @@
 
 	if (!userEnvironment)
 		userEnvironment = [self findUserEnvironmentVariables:@[@"PATH", @"HOME"]];
+
+	if (!brewPathString || !userEnvironment)
+		return NO;
 
 	BOOL enableProxy = [[NSUserDefaults standardUserDefaults] boolForKey:kBP_HOMEBREW_PROXY_ENABLE_KEY];
 	NSString *proxyURL = [[NSUserDefaults standardUserDefaults] objectForKey:kBP_HOMEBREW_PROXY_KEY];
@@ -344,6 +349,9 @@
 
 	if (!userEnvironment)
 		userEnvironment = [self findUserEnvironmentVariables:@[@"PATH", @"HOME"]];
+
+	if (!brewPathString || !userEnvironment)
+		return NO;
 
 	BOOL enableProxy = [[NSUserDefaults standardUserDefaults] boolForKey:kBP_HOMEBREW_PROXY_ENABLE_KEY];
 	NSString *proxyURL = [[NSUserDefaults standardUserDefaults] objectForKey:kBP_HOMEBREW_PROXY_KEY];
