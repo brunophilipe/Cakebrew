@@ -180,7 +180,11 @@
 		}
 	}
 
-	if (!isValidShell) return nil;
+	if (!isValidShell)
+	{
+		NSLog(@"No valid shell found...");
+		return nil;
+	}
 
 	NSMutableString *instruction = [NSMutableString string];
 
@@ -273,17 +277,16 @@
 	// Test if homebrew is installed
 	static NSDictionary *userEnvironment;
 
-	if (!brewPathString) {
+	if (!brewPathString)
 		brewPathString = [self findHomebrewPath];
-	}
-
-	operationUpdateBlock = block;
 
 	if (!userEnvironment)
 		userEnvironment = [self findUserEnvironmentVariables:@[@"PATH", @"HOME"]];
 
 	if (!brewPathString || !userEnvironment)
 		return NO;
+
+	operationUpdateBlock = block;
 
 	BOOL enableProxy = [[NSUserDefaults standardUserDefaults] boolForKey:kBP_HOMEBREW_PROXY_ENABLE_KEY];
 	NSString *proxyURL = [[NSUserDefaults standardUserDefaults] objectForKey:kBP_HOMEBREW_PROXY_KEY];
@@ -343,9 +346,8 @@
 	// Test if homebrew is installed
 	static NSDictionary *userEnvironment;
 
-	if (!brewPathString) {
+	if (!brewPathString)
 		brewPathString = [self findHomebrewPath];
-	}
 
 	if (!userEnvironment)
 		userEnvironment = [self findUserEnvironmentVariables:@[@"PATH", @"HOME"]];
