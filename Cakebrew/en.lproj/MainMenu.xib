@@ -401,7 +401,7 @@
                                                                     </connections>
                                                                 </tableCellView>
                                                                 <tableCellView identifier="MainCell" id="NjY-GN-l2W" customClass="PXSourceListTableCellView">
-                                                                    <rect key="frame" x="1" y="17" width="169" height="17"/>
+                                                                    <rect key="frame" x="1" y="17" width="166" height="17"/>
                                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                     <subviews>
                                                                         <imageView translatesAutoresizingMaskIntoConstraints="NO" id="rod-fH-u2L">
@@ -1331,21 +1331,6 @@ Gw
                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                         </textFieldCell>
                     </textField>
-                    <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="8F2-Rf-Ds2">
-                        <rect key="frame" x="32" y="167" width="408" height="22"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                        <constraints>
-                            <constraint firstAttribute="height" constant="22" id="N8r-bo-P3V"/>
-                        </constraints>
-                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" placeholderString="http://&lt;user>:&lt;password>@&lt;proxyhost>:&lt;proxyport>" drawsBackground="YES" id="TGd-JR-AE3">
-                            <font key="font" metaFont="cellTitle"/>
-                            <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
-                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                        </textFieldCell>
-                        <connections>
-                            <action selector="didUpdateTextField_proxyURL:" target="rZc-YO-rOa" id="Iga-Uz-51p"/>
-                        </connections>
-                    </textField>
                     <button translatesAutoresizingMaskIntoConstraints="NO" id="9jw-QC-tE7">
                         <rect key="frame" x="30" y="143" width="103" height="18"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
@@ -1391,38 +1376,53 @@ Gw
                             <action selector="done:" target="rZc-YO-rOa" id="79e-hF-9DO"/>
                         </connections>
                     </button>
+                    <secureTextField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Ai3-UD-6dB">
+                        <rect key="frame" x="32" y="167" width="408" height="22"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                        <secureTextFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" placeholderString="http://&lt;user>:&lt;password>@&lt;proxyhost>:&lt;proxyport>" drawsBackground="YES" usesSingleLineMode="YES" id="sRg-Yi-NqY">
+                            <font key="font" metaFont="system"/>
+                            <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                            <allowedInputSourceLocales>
+                                <string>NSAllRomanInputSourcesLocaleIdentifier</string>
+                            </allowedInputSourceLocales>
+                        </secureTextFieldCell>
+                        <connections>
+                            <action selector="didUpdateTextField_proxyURL:" target="rZc-YO-rOa" id="EBs-42-eMC"/>
+                        </connections>
+                    </secureTextField>
                 </subviews>
                 <constraints>
                     <constraint firstItem="cSY-O5-nz3" firstAttribute="top" secondItem="ZrJ-vA-X2a" secondAttribute="bottom" constant="51" id="0gL-gF-MfL"/>
                     <constraint firstAttribute="trailing" secondItem="YnR-fI-PsC" secondAttribute="trailing" constant="12" id="2zX-SU-5Ru"/>
                     <constraint firstItem="YnR-fI-PsC" firstAttribute="leading" secondItem="bWK-YV-rB8" secondAttribute="leading" constant="20" id="343-aj-Dbh"/>
                     <constraint firstAttribute="trailing" secondItem="7tM-FC-RnD" secondAttribute="trailing" constant="20" id="5He-lS-sd5"/>
+                    <constraint firstItem="9jw-QC-tE7" firstAttribute="top" secondItem="Ai3-UD-6dB" secondAttribute="bottom" constant="8" id="AoO-mM-PH6"/>
                     <constraint firstItem="ZrJ-vA-X2a" firstAttribute="leading" secondItem="bWK-YV-rB8" secondAttribute="leading" constant="20" id="BcU-ZY-6zd"/>
                     <constraint firstAttribute="bottom" secondItem="sIb-mH-kNC" secondAttribute="bottom" constant="20" id="Gza-YR-h4e"/>
                     <constraint firstItem="9jw-QC-tE7" firstAttribute="leading" secondItem="bWK-YV-rB8" secondAttribute="leading" constant="32" id="H4A-n1-DAI"/>
                     <constraint firstItem="P6M-Eo-dzo" firstAttribute="leading" secondItem="bWK-YV-rB8" secondAttribute="leading" constant="20" id="K2S-3Q-Trq"/>
+                    <constraint firstItem="cSY-O5-nz3" firstAttribute="leading" secondItem="Ai3-UD-6dB" secondAttribute="trailing" constant="3" id="KxL-cq-Tzm"/>
                     <constraint firstItem="ZrJ-vA-X2a" firstAttribute="top" secondItem="P6M-Eo-dzo" secondAttribute="bottom" constant="1" id="Mq0-Cc-l69"/>
-                    <constraint firstItem="8F2-Rf-Ds2" firstAttribute="leading" secondItem="bWK-YV-rB8" secondAttribute="leading" constant="32" id="RhL-Ab-kQs"/>
                     <constraint firstItem="P6M-Eo-dzo" firstAttribute="top" secondItem="bWK-YV-rB8" secondAttribute="top" constant="17" id="SZt-D2-NLk"/>
-                    <constraint firstItem="8F2-Rf-Ds2" firstAttribute="top" secondItem="7tM-FC-RnD" secondAttribute="bottom" constant="8" id="YAN-ca-9AV"/>
                     <constraint firstItem="aMB-aq-YWZ" firstAttribute="top" secondItem="9jw-QC-tE7" secondAttribute="bottom" constant="20" id="ZmY-8N-XUu"/>
                     <constraint firstAttribute="trailing" secondItem="cSY-O5-nz3" secondAttribute="trailing" constant="7" id="dgj-bd-u3k"/>
+                    <constraint firstItem="Ai3-UD-6dB" firstAttribute="top" secondItem="7tM-FC-RnD" secondAttribute="bottom" constant="8" id="kls-qP-BMZ"/>
                     <constraint firstAttribute="trailing" secondItem="ZrJ-vA-X2a" secondAttribute="trailing" constant="12" id="lgL-YA-FVp"/>
                     <constraint firstAttribute="trailing" secondItem="sIb-mH-kNC" secondAttribute="trailing" constant="20" id="mek-Rd-cA1"/>
                     <constraint firstAttribute="centerX" secondItem="BFc-Wg-8EY" secondAttribute="centerX" id="naR-pc-VNu"/>
+                    <constraint firstItem="Ai3-UD-6dB" firstAttribute="leading" secondItem="bWK-YV-rB8" secondAttribute="leading" constant="32" id="ncs-Hd-vki"/>
                     <constraint firstItem="7tM-FC-RnD" firstAttribute="top" secondItem="ZrJ-vA-X2a" secondAttribute="bottom" constant="9" id="qWl-vQ-7uL"/>
                     <constraint firstItem="YnR-fI-PsC" firstAttribute="top" secondItem="aMB-aq-YWZ" secondAttribute="bottom" constant="1" id="r1V-1y-kOb"/>
                     <constraint firstItem="7tM-FC-RnD" firstAttribute="leading" secondItem="bWK-YV-rB8" secondAttribute="leading" constant="32" id="s9R-vd-TMK"/>
                     <constraint firstItem="aMB-aq-YWZ" firstAttribute="leading" secondItem="bWK-YV-rB8" secondAttribute="leading" constant="20" id="tPv-Ts-t6h"/>
                     <constraint firstItem="BFc-Wg-8EY" firstAttribute="top" secondItem="YnR-fI-PsC" secondAttribute="bottom" constant="12" id="uBt-MG-YBY"/>
-                    <constraint firstItem="9jw-QC-tE7" firstAttribute="top" secondItem="8F2-Rf-Ds2" secondAttribute="bottom" constant="8" id="vFw-4F-LBW"/>
-                    <constraint firstAttribute="trailing" secondItem="8F2-Rf-Ds2" secondAttribute="trailing" constant="20" id="wdv-IB-Duh"/>
                 </constraints>
             </view>
             <connections>
                 <outlet property="checkBox_enableProxy" destination="9jw-QC-tE7" id="lHJ-BX-TrM"/>
                 <outlet property="imageView_validURL" destination="cSY-O5-nz3" id="HNB-YV-Qo3"/>
-                <outlet property="textField_proxyURL" destination="8F2-Rf-Ds2" id="RTw-Xa-qsb"/>
+                <outlet property="textField_proxyURL" destination="Ai3-UD-6dB" id="cag-wh-HHz"/>
             </connections>
         </window>
     </objects>

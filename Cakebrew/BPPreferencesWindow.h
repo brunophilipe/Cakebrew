@@ -10,7 +10,7 @@
 
 @interface BPPreferencesWindow : NSWindow
 
-@property (strong) IBOutlet NSTextField *textField_proxyURL;
+@property (strong) IBOutlet NSSecureTextField *textField_proxyURL;
 @property (strong) IBOutlet NSButton *checkBox_enableProxy;
 @property (strong) IBOutlet NSImageView *imageView_validURL;
 
