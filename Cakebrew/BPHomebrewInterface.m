@@ -184,7 +184,7 @@
 	{
 		static NSAlert *alert = nil;
 		if (!alert)
-			alert = [NSAlert alertWithMessageText:[NSString stringWithFormat:@"Please add your shell \"%@\" to the valid shells file at \"/etc/shells\" before trying again.", userShell] defaultButton:@"OK" alternateButton:nil otherButton:nil informativeTextWithFormat:@"No Valid shell was found!"];
+			alert = [NSAlert alertWithMessageText:@"No Valid shell was found!" defaultButton:@"OK" alternateButton:nil otherButton:nil informativeTextWithFormat:@"Please add your shell \"%@\" to the valid shells file at \"/etc/shells\" before trying again.", userShell];
 		[alert performSelectorOnMainThread:@selector(runModal) withObject:nil waitUntilDone:YES];
 
 		NSLog(@"No valid shell found...");
@@ -211,8 +211,17 @@
 	[task launch];
 	[task waitUntilExit];
 
-	NSString *results = [[NSString alloc] initWithData:[output.fileHandleForReading readDataToEndOfFile] encoding:NSUTF8StringEncoding];
-	NSDictionary *environment = [NSDictionary dictionaryWithObjects:[results componentsSeparatedByCharactersInSet:[NSCharacterSet newlineCharacterSet]] forKeys:[variables arrayByAddingObject:@""]];
+	NSString *resultsString = [[NSString alloc] initWithData:[output.fileHandleForReading readDataToEndOfFile] encoding:NSUTF8StringEncoding];
+	NSArray *results = [resultsString componentsSeparatedByCharactersInSet:[NSCharacterSet newlineCharacterSet]];
+	if (results.count != variables.count + 1) {
+		static NSAlert *alert = nil;
+		if (!alert)
+			alert = [NSAlert alertWithMessageText:@"Malformed Environment Variables" defaultButton:@"OK" alternateButton:nil otherButton:nil informativeTextWithFormat:@"Please check your PATH and HOME environment variables."];
+		[alert performSelectorOnMainThread:@selector(runModal) withObject:nil waitUntilDone:YES];
+		NSLog(@"\nRequested variables: %@\nReturned Strings: %@",variables, results);
+		return nil;
+	}
+	NSDictionary *environment = [NSDictionary dictionaryWithObjects:results forKeys:[variables arrayByAddingObject:@""]];
 
 	return [environment dictionaryWithValuesForKeys:variables];
 }
