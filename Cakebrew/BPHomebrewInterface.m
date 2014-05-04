@@ -182,6 +182,11 @@
 
 	if (!isValidShell)
 	{
+		static NSAlert *alert = nil;
+		if (!alert)
+			alert = [NSAlert alertWithMessageText:[NSString stringWithFormat:@"Please add your shell \"%@\" to the valid shells file at \"/etc/shells\" before trying again.", userShell] defaultButton:@"OK" alternateButton:nil otherButton:nil informativeTextWithFormat:@"No Valid shell was found!"];
+		[alert performSelectorOnMainThread:@selector(runModal) withObject:nil waitUntilDone:YES];
+
 		NSLog(@"No valid shell found...");
 		return nil;
 	}
@@ -280,10 +285,13 @@
 	if (!brewPathString)
 		brewPathString = [self findHomebrewPath];
 
+	if (!brewPathString)
+		return NO;
+
 	if (!userEnvironment)
 		userEnvironment = [self findUserEnvironmentVariables:@[@"PATH", @"HOME"]];
 
-	if (!brewPathString || !userEnvironment)
+	if (!userEnvironment)
 		return NO;
 
 	operationUpdateBlock = block;
@@ -349,11 +357,14 @@
 	if (!brewPathString)
 		brewPathString = [self findHomebrewPath];
 
+	if (!brewPathString)
+		return @"";
+
 	if (!userEnvironment)
 		userEnvironment = [self findUserEnvironmentVariables:@[@"PATH", @"HOME"]];
 
-	if (!brewPathString || !userEnvironment)
-		return NO;
+	if (!userEnvironment)
+		return @"";
 
 	BOOL enableProxy = [[NSUserDefaults standardUserDefaults] boolForKey:kBP_HOMEBREW_PROXY_ENABLE_KEY];
 	NSString *proxyURL = [[NSUserDefaults standardUserDefaults] objectForKey:kBP_HOMEBREW_PROXY_KEY];
