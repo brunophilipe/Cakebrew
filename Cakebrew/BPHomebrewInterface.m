@@ -239,7 +239,7 @@
 		if (!brewPathString)
 			brewPathString = kBP_HOMEBREW_PATH;
 
-		NSInteger retval = system([brewPathString UTF8String]);
+		NSInteger retval = system([[brewPathString stringByAppendingString:@" -v"] UTF8String]);
 		if (retval == kBP_EXEC_FILE_NOT_FOUND) {
 			[self showHomebrewNotInstalledMessage];
 			return NO;
@@ -316,7 +316,7 @@
 		if (!pathString)
 			pathString = kBP_HOMEBREW_PATH;
 		
-		NSInteger retval = system([pathString UTF8String]);
+		NSInteger retval = system([[pathString stringByAppendingString:@" -v"] UTF8String]);
 		if (retval == kBP_EXEC_FILE_NOT_FOUND) {
 			[self showHomebrewNotInstalledMessage];
 			return nil;

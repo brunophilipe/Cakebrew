@@ -118,6 +118,7 @@
 
 		[self.progressIndicator stopAnimation:nil];
 		[self.button_ok setEnabled:YES];
+		[BPAppDelegateRef setRunningBackgroundTask:NO];
 	}];
 	[blockOperation performSelector:@selector(start) withObject:nil afterDelay:0.1];
 }

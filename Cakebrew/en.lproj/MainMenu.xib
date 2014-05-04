@@ -425,7 +425,7 @@
                                                                             </textFieldCell>
                                                                         </textField>
                                                                         <customView translatesAutoresizingMaskIntoConstraints="NO" id="NPs-Sj-pMf" customClass="PXSourceListBadgeView">
-                                                                            <rect key="frame" x="144" y="2" width="22" height="14"/>
+                                                                            <rect key="frame" x="142" y="2" width="22" height="14"/>
                                                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                                             <constraints>
                                                                                 <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="22" id="XiR-8P-eJq"/>
@@ -437,7 +437,7 @@
                                                                         <constraint firstItem="UGv-FF-mH4" firstAttribute="centerY" secondItem="NjY-GN-l2W" secondAttribute="centerY" id="HDo-6S-nEU"/>
                                                                         <constraint firstAttribute="centerY" secondItem="NPs-Sj-pMf" secondAttribute="centerY" id="Rfb-RX-XBI"/>
                                                                         <constraint firstItem="UGv-FF-mH4" firstAttribute="bottom" secondItem="rod-fH-u2L" secondAttribute="bottom" id="esB-n4-tea"/>
-                                                                        <constraint firstItem="NPs-Sj-pMf" firstAttribute="leading" secondItem="UGv-FF-mH4" secondAttribute="trailing" constant="17" id="fjt-41-SRd"/>
+                                                                        <constraint firstItem="NPs-Sj-pMf" firstAttribute="leading" secondItem="UGv-FF-mH4" secondAttribute="trailing" constant="15" id="fjt-41-SRd"/>
                                                                         <constraint firstItem="UGv-FF-mH4" firstAttribute="leading" secondItem="rod-fH-u2L" secondAttribute="trailing" constant="7" id="nvX-qK-xNx"/>
                                                                         <constraint firstItem="rod-fH-u2L" firstAttribute="leading" secondItem="NjY-GN-l2W" secondAttribute="leading" constant="3" id="psC-pY-A2P"/>
                                                                         <constraint firstItem="rod-fH-u2L" firstAttribute="top" secondItem="UGv-FF-mH4" secondAttribute="top" id="s2B-gv-OLx"/>

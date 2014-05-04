@@ -12,7 +12,7 @@
 @interface BPUpdateDoctorController ()
 
 @property (strong) NSMutableString *logString;
-@property (strong) NSFileHandle *outputHandle;
+@property (strong) NSFileHandle    *outputHandle;
 
 @end
 
@@ -55,6 +55,15 @@
 }
 
 - (IBAction)runStopDoctor:(id)sender {
+	BPAppDelegate *appDelegate = BPAppDelegateRef;
+
+	if (appDelegate.isRunningBackgroundTask)
+	{
+		[appDelegate displayBackgroundWarning];
+		return;
+	}
+	[appDelegate setRunningBackgroundTask:YES];
+
 	[self.textView_doctor setString:@""];
 	[self.button_doctor_runStop setEnabled:NO];
 	[self.progress_doctor startAnimation:sender];
@@ -65,6 +74,7 @@
         dispatch_async(dispatch_get_main_queue(), ^{
             [self.progress_doctor stopAnimation:sender];
             [self.button_doctor_runStop setEnabled:YES];
+			[appDelegate setRunningBackgroundTask:NO];
         });
 	});
 }
@@ -74,6 +84,15 @@
 }
 
 - (IBAction)runStopUpdate:(id)sender {
+	BPAppDelegate *appDelegate = BPAppDelegateRef;
+
+	if (appDelegate.isRunningBackgroundTask)
+	{
+		[appDelegate displayBackgroundWarning];
+		return;
+	}
+	[appDelegate setRunningBackgroundTask:YES];
+
 	[self.textView_update setString:@""];
 	[self.button_update_runStop setEnabled:NO];
 	[self.progress_update startAnimation:sender];
@@ -85,6 +104,7 @@
         dispatch_async(dispatch_get_main_queue(), ^{
             [self.progress_update stopAnimation:sender];
             [self.button_update_runStop setEnabled:YES];
+			[appDelegate setRunningBackgroundTask:NO];
         });
     });
 }

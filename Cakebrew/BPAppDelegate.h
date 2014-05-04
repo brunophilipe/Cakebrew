@@ -29,11 +29,15 @@
 @property (assign) IBOutlet BPCustomBrewPathWindow *customBrewPathWindow;
 @property (assign) IBOutlet BPPreferencesWindow *preferencesWindow;
 
+@property (getter=isRunningBackgroundTask) BOOL runningBackgroundTask;
+
 - (NSURL*)urlForApplicationSupportFolder;
 - (NSURL*)urlForApplicationCachesFolder;
 
 - (IBAction)openWebsite:(id)sender;
 - (IBAction)showCustomBrewPathWindow:(id)sender;
 - (IBAction)showPreferencesWindow:(id)sender;
+
+- (void)displayBackgroundWarning;
 
 @end

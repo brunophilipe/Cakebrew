@@ -85,6 +85,15 @@
 	return path;
 }
 
+- (void)displayBackgroundWarning
+{
+	static NSAlert *alert= nil;
+	if (!alert)
+		alert = [NSAlert alertWithMessageText:@"Active background task!" defaultButton:@"OK" alternateButton:nil otherButton:nil informativeTextWithFormat:@"Sorry, a background task is already running. You can't perform two tasks at the same time."];
+
+	[alert runModal];
+}
+
 - (IBAction)showAboutWindow:(id)sender
 {
 	[self.aboutWindowController showWindow:nil];

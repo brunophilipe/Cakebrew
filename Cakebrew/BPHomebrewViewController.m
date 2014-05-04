@@ -30,6 +30,7 @@
 
 @property (strong, readonly) PXSourceListItem *rootSidebarCategory;
 @property (strong)           NSPopover        *formulaPopover;
+@property (weak)			 BPAppDelegate	  *appDelegate;
 
 @property NSArray   *formulaeArray;
 @property NSInteger lastSelectedSidebarIndex;
@@ -117,7 +118,7 @@
 	}
 	[_operationViewController setWindowOperation:operation];
 
-	[BPAppDelegateRef.window beginSheet:_operationWindow completionHandler:^(NSModalResponse returnCode) {
+	[_appDelegate.window beginSheet:_operationWindow completionHandler:^(NSModalResponse returnCode) {
 		_operationWindow = nil;
 		_operationViewController = nil;
 	}];
@@ -137,7 +138,7 @@
 
 	NSAlert *alert = [NSAlert alertWithMessageText:@"Error!" defaultButton:@"Homebrew Website" alternateButton:@"OK" otherButton:nil informativeTextWithFormat:@"Homebrew was not found in your system. Please install Homebrew before using Cakebrew. You can click the button below to open Homebrew's website."];
 	[alert.window setTitle:@"Cakebrew"];
-	[alert beginSheetModalForWindow:BPAppDelegateRef.window completionHandler:^(NSModalResponse returnCode) {
+	[alert beginSheetModalForWindow:_appDelegate.window completionHandler:^(NSModalResponse returnCode) {
 		if (returnCode == NSAlertDefaultReturn) {
 			[[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:@"http://brew.sh"]];
 		}
@@ -261,6 +262,8 @@
 	[_splitView setMinSize:400.f ofSubviewAtIndex:1];
 	[_splitView setDividerColor:kBPSidebarDividerColor];
 	[_splitView setDividerThickness:0];
+
+	_appDelegate = BPAppDelegateRef;
 }
 
 - (DMSplitView*)splitView
@@ -519,6 +522,14 @@
 }
 
 - (IBAction)installUninstallUpdate:(id)sender {
+	// Check if there is a background task running. It is not smart to run two different Homebrew tasks at the same time!
+	if (_appDelegate.isRunningBackgroundTask)
+	{
+		[_appDelegate displayBackgroundWarning];
+		return;
+	}
+	[_appDelegate setRunningBackgroundTask:YES];
+
 	NSInteger selectedIndex = [self.tableView_formulae selectedRow];
 
 	if (selectedIndex >= 0) {
