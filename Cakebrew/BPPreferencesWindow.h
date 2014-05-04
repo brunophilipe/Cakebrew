@@ -14,6 +14,9 @@
 @property (strong) IBOutlet NSButton *checkBox_enableProxy;
 @property (strong) IBOutlet NSImageView *imageView_validURL;
 
+// Must be called in order to setup content
+- (void)didBecomeVisible;
+
 - (IBAction)didUpdateTextField_proxyURL:(id)sender;
 - (IBAction)didChangeCheckBox_enableProxy:(id)sender;
 - (IBAction)showCustomBrewPathWindow:(id)sender;

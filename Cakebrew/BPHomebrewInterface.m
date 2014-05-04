@@ -151,7 +151,7 @@
 
 @implementation BPHomebrewInterface
 {
-	BOOL testedForInstallation;
+	NSString *brewPathString;
 	void (^operationUpdateBlock)(NSString*);
 }
 
@@ -166,7 +166,7 @@
 	}
 }
 
-+ (NSDictionary *)findUserEnvironmentVariables:(NSArray *)variables
+- (NSDictionary *)findUserEnvironmentVariables:(NSArray *)variables
 {
 	NSString *userShell = [[[NSProcessInfo processInfo] environment] objectForKey:@"SHELL"];
 
@@ -205,6 +205,44 @@
 	return [environment dictionaryWithValuesForKeys:variables];
 }
 
+- (NSString *)findHomebrewPath
+{
+	NSString *pathString = [[NSUserDefaults standardUserDefaults] objectForKey:kBP_HOMEBREW_PATH_KEY];
+
+	// User has set custom path string
+	if (pathString)
+		return pathString;
+
+	NSDictionary *environment = [self findUserEnvironmentVariables:@[@"PATH", @"HOME"]];
+	NSTask *task;
+
+	task = [[NSTask alloc] init];
+
+	[task setLaunchPath:@"/usr/bin/which"];
+	[task setArguments:@[@"brew"]];
+	[task setEnvironment:environment];
+
+	NSPipe *output = [NSPipe pipe];
+	[task setStandardOutput:output];
+
+	[task launch];
+
+	[task waitUntilExit];
+	pathString = [[[NSString alloc] initWithData:[[output fileHandleForReading] readDataToEndOfFile] encoding:NSUTF8StringEncoding] stringByTrimmingCharactersInSet:[NSCharacterSet newlineCharacterSet]];
+
+	if (pathString && ![pathString isEqualToString:@""] && [[NSFileManager defaultManager] fileExistsAtPath:pathString]) {
+		NSInteger retval = system([[pathString stringByAppendingString:@" -v"] UTF8String]);
+		if (retval == kBP_EXEC_FILE_NOT_FOUND) {
+			[self showHomebrewNotInstalledMessage];
+			return nil;
+		} else {
+			return pathString;
+		}
+	} else {
+		return nil;
+	}
+}
+
 - (id)init
 {
 	self = [super init];
@@ -231,26 +269,16 @@
 - (BOOL)performBrewCommandWithArguments:(NSArray*)arguments dataReturnBlock:(void (^)(NSString*))block
 {
 	// Test if homebrew is installed
-	static NSString *brewPathString;
 	static NSDictionary *userEnvironment;
 
-	if (!testedForInstallation || !brewPathString) {
-		brewPathString = [[NSUserDefaults standardUserDefaults] objectForKey:kBP_HOMEBREW_PATH_KEY];
-		if (!brewPathString)
-			brewPathString = kBP_HOMEBREW_PATH;
-
-		NSInteger retval = system([[brewPathString stringByAppendingString:@" -v"] UTF8String]);
-		if (retval == kBP_EXEC_FILE_NOT_FOUND) {
-			[self showHomebrewNotInstalledMessage];
-			return NO;
-		}
-		testedForInstallation = YES;
+	if (!brewPathString) {
+		brewPathString = [self findHomebrewPath];
 	}
 
 	operationUpdateBlock = block;
 
 	if (!userEnvironment)
-		userEnvironment = [BPHomebrewInterface findUserEnvironmentVariables:@[@"PATH", @"HOME"]];
+		userEnvironment = [self findUserEnvironmentVariables:@[@"PATH", @"HOME"]];
 
 	BOOL enableProxy = [[NSUserDefaults standardUserDefaults] boolForKey:kBP_HOMEBREW_PROXY_ENABLE_KEY];
 	NSString *proxyURL = [[NSUserDefaults standardUserDefaults] objectForKey:kBP_HOMEBREW_PROXY_KEY];
@@ -308,31 +336,21 @@
 - (NSString*)performBrewCommandWithArguments:(NSArray*)arguments captureError:(BOOL)captureError
 {
 	// Test if homebrew is installed
-	static NSString *pathString;
 	static NSDictionary *userEnvironment;
 
-	if (!testedForInstallation || !pathString) {
-		pathString = [[NSUserDefaults standardUserDefaults] objectForKey:kBP_HOMEBREW_PATH_KEY];
-		if (!pathString)
-			pathString = kBP_HOMEBREW_PATH;
-		
-		NSInteger retval = system([[pathString stringByAppendingString:@" -v"] UTF8String]);
-		if (retval == kBP_EXEC_FILE_NOT_FOUND) {
-			[self showHomebrewNotInstalledMessage];
-			return nil;
-		}
-		testedForInstallation = YES;
+	if (!brewPathString) {
+		brewPathString = [self findHomebrewPath];
 	}
 
 	if (!userEnvironment)
-		userEnvironment = [BPHomebrewInterface findUserEnvironmentVariables:@[@"PATH", @"HOME"]];
+		userEnvironment = [self findUserEnvironmentVariables:@[@"PATH", @"HOME"]];
 
 	BOOL enableProxy = [[NSUserDefaults standardUserDefaults] boolForKey:kBP_HOMEBREW_PROXY_ENABLE_KEY];
 	NSString *proxyURL = [[NSUserDefaults standardUserDefaults] objectForKey:kBP_HOMEBREW_PROXY_KEY];
 
 	NSTask *task;
     task = [[NSTask alloc] init];
-    [task setLaunchPath:pathString];
+    [task setLaunchPath:brewPathString];
     [task setArguments:arguments];
 
 	if (enableProxy && proxyURL) {

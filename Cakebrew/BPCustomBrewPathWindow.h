@@ -15,6 +15,9 @@
 
 @property (assign) NSWindow *sheetParent;
 
+// Must be called in order to setup content
+- (void)didBecomeVisible;
+
 - (IBAction)showInformation:(id)sender;
 - (IBAction)storeCustomBrewPath:(id)sender;
 - (IBAction)cancel:(id)sender;

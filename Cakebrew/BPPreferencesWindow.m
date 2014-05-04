@@ -10,6 +10,17 @@
 
 @implementation BPPreferencesWindow
 
+- (void)didBecomeVisible
+{
+	NSString *proxyString = [[NSUserDefaults standardUserDefaults] objectForKey:kBP_HOMEBREW_PROXY_KEY];
+	if (proxyString) {
+		[self.textField_proxyURL setStringValue:proxyString];
+	}
+
+	BOOL proxyEnabled =	[[NSUserDefaults standardUserDefaults] boolForKey:kBP_HOMEBREW_PROXY_ENABLE_KEY];
+	[self.checkBox_enableProxy setState:(proxyEnabled ? NSOnState : NSOffState)];
+}
+
 - (IBAction)didUpdateTextField_proxyURL:(id)sender {
 	NSString *proxyString = [(NSTextField*)sender stringValue];
 	NSURL *proxyURL = nil;
@@ -43,6 +54,7 @@
 	BPCustomBrewPathWindow *pathWindow = BPAppDelegateRef.customBrewPathWindow;
 	[self beginSheet:pathWindow completionHandler:nil];
 	[pathWindow setSheetParent:self];
+	[pathWindow didBecomeVisible];
 }
 
 - (IBAction)done:(id)sender {

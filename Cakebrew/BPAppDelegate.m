@@ -107,9 +107,11 @@
 - (IBAction)showCustomBrewPathWindow:(id)sender {
 	[self.window beginSheet:self.customBrewPathWindow completionHandler:nil];
 	[self.customBrewPathWindow setSheetParent:self.window];
+	[self.customBrewPathWindow didBecomeVisible];
 }
 
 - (IBAction)showPreferencesWindow:(id)sender {
 	[self.window beginSheet:self.preferencesWindow completionHandler:nil];
+	[self.preferencesWindow didBecomeVisible];
 }
 @end
