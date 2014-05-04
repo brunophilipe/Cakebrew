@@ -82,7 +82,7 @@
 - (void)windowDidAppear
 {
 	[self.progressIndicator startAnimation:nil];
-	NSBlockOperation *blockOperation = [NSBlockOperation blockOperationWithBlock:^{
+	dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
 		NSString __block *outputValue;
 		if (self.windowOperation == kBP_WINDOW_OPERATION_INSTALL) {
 			[[BPHomebrewInterface sharedInterface] installFormula:self.formula.name withReturnBlock:^(NSString *output) {
@@ -119,8 +119,7 @@
 		[self.progressIndicator stopAnimation:nil];
 		[self.button_ok setEnabled:YES];
 		[BPAppDelegateRef setRunningBackgroundTask:NO];
-	}];
-	[blockOperation performSelector:@selector(start) withObject:nil afterDelay:0.1];
+	});
 }
 
 - (IBAction)ok:(id)sender {
