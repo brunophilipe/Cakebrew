@@ -318,7 +318,7 @@
 	[handle_error waitForDataInBackgroundAndNotify];
 
 	#ifdef DEBUG
-	block([NSString stringWithFormat:@"Environment Variables (DEBUG Only):\n%@\n", [userEnvironment description]]);
+	block([NSString stringWithFormat:@"Environment Variables (DEBUG Only):\n%@\n\nShell: %@\n", [userEnvironment description], (NSString*)[[[NSProcessInfo processInfo] environment] objectForKey:@"SHELL"]]);
 	#endif
 
 	[task launch];
