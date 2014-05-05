@@ -61,11 +61,9 @@
         [self setFormulae_outdated:[[BPHomebrewInterface sharedInterface] listMode:kBPListOutdated]];
 
         if (![self loadAllFormulaeCaches]) {
-
 			[self setFormulae_all:[[BPHomebrewInterface sharedInterface] listMode:kBPListAll]];
 			[self storeAllFormulaeCaches];
 			[self.delegate homebrewManagerFinishedUpdating:self];
-            
         }
     });
 }
@@ -96,11 +94,20 @@
 	if (cachesFolder) {
 		NSURL *allFormulaeFile = [cachesFolder URLByAppendingPathComponent:@"allFormulae.cache.bin"];
 		NSDictionary *cacheDict = nil;// = @{kBP_CACHE_DICT_DATE_KEY: [NSDate date], kBP_CACHE_DICT_DATA_KEY: self.formulae_all};
+		NSDate *modificationDate = nil;
 
-		if ([[NSFileManager defaultManager] fileExistsAtPath:allFormulaeFile.relativePath]) {
+		[allFormulaeFile getResourceValue:&modificationDate forKey:NSURLContentModificationDateKey error:nil];
+
+		if (
+			[[NSFileManager defaultManager] fileExistsAtPath:allFormulaeFile.relativePath] &&
+			modificationDate &&
+			[(NSDate*)[modificationDate dateByAddingTimeInterval:3600*24] compare:[NSDate date]] == NSOrderedAscending
+			)
+		{
 			cacheDict = [NSKeyedUnarchiver unarchiveObjectWithFile:allFormulaeFile.relativePath];
 			self.formulae_all = [cacheDict objectForKey:kBP_CACHE_DICT_DATA_KEY];
 			[self.delegate homebrewManagerFinishedUpdating:self];
+
 			return self.formulae_all != nil;
 		}
 	} else {

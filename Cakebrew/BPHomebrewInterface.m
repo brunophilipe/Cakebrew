@@ -203,17 +203,33 @@
 		return nil;
 	}
 
-	NSMutableString *instruction = [NSMutableString string];
+	id instruction = [NSMutableString string];
 
 	for (NSString *variable in variables) {
-		[instruction appendFormat:@"echo $%@; ", variable];
+		[instruction appendFormat:@"echo \"%@=\"$%@; ", variable, variable];
 	}
 
+	NSArray *arguments;
+	NSString *shellName = [userShell lastPathComponent];
 	NSTask *task;
     task = [[NSTask alloc] init];
 
+	if (
+		[shellName isEqualToString:@"bash"] ||
+		[shellName isEqualToString:@"zsh"] ||
+		[shellName isEqualToString:@"ksh"] ||
+		[shellName isEqualToString:@"ksh"])
+	{
+		arguments = @[@"-l", @"-c", instruction];
+	}
+	else if (
+		[shellName isEqualToString:@"csh"])
+	{
+		arguments = @[@"-c", [NSString stringWithFormat:@"\"%@\"", instruction]];
+	}
+
 	[task setLaunchPath:userShell];
-	[task setArguments:@[@"-c", instruction]];
+	[task setArguments:arguments];
 
 	NSPipe *output = [NSPipe pipe];
 	[task setStandardOutput:output];
@@ -223,17 +239,28 @@
 
 	NSString *resultsString = [[NSString alloc] initWithData:[output.fileHandleForReading readDataToEndOfFile] encoding:NSUTF8StringEncoding];
 	NSArray *results = [resultsString componentsSeparatedByCharactersInSet:[NSCharacterSet newlineCharacterSet]];
+
+	NSLog(@"%@", results);
+
 	if (results.count != variables.count + 1) {
-		static NSAlert *alert = nil;
-		if (!alert)
-			alert = [NSAlert alertWithMessageText:@"Malformed Environment Variables" defaultButton:@"OK" alternateButton:nil otherButton:nil informativeTextWithFormat:@"Please check your PATH and HOME environment variables."];
-		[alert performSelectorOnMainThread:@selector(runModal) withObject:nil waitUntilDone:YES];
+		static dispatch_once_t onceToken;
+		dispatch_once(&onceToken, ^{
+			NSAlert *alert = [NSAlert alertWithMessageText:@"Malformed Environment Variables" defaultButton:@"OK" alternateButton:nil otherButton:nil informativeTextWithFormat:@"Please check your PATH and HOME environment variables."];
+			[alert performSelectorOnMainThread:@selector(runModal) withObject:nil waitUntilDone:YES];
+		});
 		NSLog(@"\nRequested variables: %@\nReturned Strings: %@",variables, results);
 		return nil;
 	}
-	NSDictionary *environment = [NSDictionary dictionaryWithObjects:results forKeys:[variables arrayByAddingObject:@""]];
 
-	return [environment dictionaryWithValuesForKeys:variables];
+	NSMutableDictionary *environment = [NSMutableDictionary dictionaryWithCapacity:results.count-1];
+
+	for (NSString *result in results) {
+		NSArray *pair = [result componentsSeparatedByString:@"="];
+		if (![[pair firstObject] isEqualToString:@""])
+			[environment setObject:[pair lastObject] forKey:[pair firstObject]];
+	}
+
+	return [environment copy];
 }
 
 - (NSString *)findHomebrewPath

@@ -412,8 +412,8 @@
                                                                             </constraints>
                                                                             <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="NSActionTemplate" id="As7-Xw-rr0"/>
                                                                         </imageView>
-                                                                        <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="UGv-FF-mH4">
-                                                                            <rect key="frame" x="25" y="0.0" width="104" height="17"/>
+                                                                        <textField verticalHuggingPriority="750" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="UGv-FF-mH4">
+                                                                            <rect key="frame" x="25" y="0.0" width="103" height="17"/>
                                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                                                                             <constraints>
                                                                                 <constraint firstAttribute="width" relation="greaterThanOrEqual" priority="750" constant="100" id="nTu-IB-1td"/>
@@ -424,7 +424,7 @@
                                                                                 <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                                                             </textFieldCell>
                                                                         </textField>
-                                                                        <customView translatesAutoresizingMaskIntoConstraints="NO" id="NPs-Sj-pMf" customClass="PXSourceListBadgeView">
+                                                                        <customView ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="NPs-Sj-pMf" customClass="PXSourceListBadgeView">
                                                                             <rect key="frame" x="142" y="2" width="22" height="14"/>
                                                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                                             <constraints>
@@ -437,7 +437,6 @@
                                                                         <constraint firstItem="UGv-FF-mH4" firstAttribute="centerY" secondItem="NjY-GN-l2W" secondAttribute="centerY" id="HDo-6S-nEU"/>
                                                                         <constraint firstAttribute="centerY" secondItem="NPs-Sj-pMf" secondAttribute="centerY" id="Rfb-RX-XBI"/>
                                                                         <constraint firstItem="UGv-FF-mH4" firstAttribute="bottom" secondItem="rod-fH-u2L" secondAttribute="bottom" id="esB-n4-tea"/>
-                                                                        <constraint firstItem="NPs-Sj-pMf" firstAttribute="leading" secondItem="UGv-FF-mH4" secondAttribute="trailing" constant="15" id="fjt-41-SRd"/>
                                                                         <constraint firstItem="UGv-FF-mH4" firstAttribute="leading" secondItem="rod-fH-u2L" secondAttribute="trailing" constant="7" id="nvX-qK-xNx"/>
                                                                         <constraint firstItem="rod-fH-u2L" firstAttribute="leading" secondItem="NjY-GN-l2W" secondAttribute="leading" constant="3" id="psC-pY-A2P"/>
                                                                         <constraint firstItem="rod-fH-u2L" firstAttribute="top" secondItem="UGv-FF-mH4" secondAttribute="top" id="s2B-gv-OLx"/>
