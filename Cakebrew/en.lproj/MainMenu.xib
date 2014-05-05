@@ -1045,7 +1045,7 @@
                             <action selector="showFormulaInfo:" target="547" id="gBY-KU-E7X"/>
                         </connections>
                     </toolbarItem>
-                    <toolbarItem implicitItemIdentifier="5F1B8DF2-E0AA-4377-B27C-BBECB85973C0" label="Search Formulas" paletteLabel="Search Formulas" id="hjv-gb-fjC">
+                    <toolbarItem implicitItemIdentifier="5F1B8DF2-E0AA-4377-B27C-BBECB85973C0" label="Search Formulae" paletteLabel="Search Formulae" id="hjv-gb-fjC">
                         <nil key="toolTip"/>
                         <size key="minSize" width="96" height="22"/>
                         <size key="maxSize" width="96" height="22"/>
