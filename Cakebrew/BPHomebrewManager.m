@@ -48,21 +48,43 @@
 	return self;
 }
 
+- (void)dealloc
+{
+	[[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
 - (void)update
 {
     dispatch_async(dispatch_get_main_queue(), ^{
-        [self setFormulae_installed:[[BPHomebrewInterface sharedInterface] listMode:kBP_LIST_INSTALLED]];
-        [self setFormulae_leaves:[[BPHomebrewInterface sharedInterface] listMode:kBP_LIST_LEAVES]];
-        [self setFormulae_outdated:[[BPHomebrewInterface sharedInterface] listMode:kBP_LIST_UPGRADEABLE]];
+        [self setFormulae_installed:[[BPHomebrewInterface sharedInterface] listMode:kBPListInstalled]];
+        [self setFormulae_leaves:[[BPHomebrewInterface sharedInterface] listMode:kBPListLeaves]];
+        [self setFormulae_outdated:[[BPHomebrewInterface sharedInterface] listMode:kBPListOutdated]];
 
         if (![self loadAllFormulaeCaches]) {
 
-			[self setFormulae_all:[[BPHomebrewInterface sharedInterface] listMode:kBP_LIST_ALL]];
+			[self setFormulae_all:[[BPHomebrewInterface sharedInterface] listMode:kBPListAll]];
 			[self storeAllFormulaeCaches];
 			[self.delegate homebrewManagerFinishedUpdating:self];
             
         }
     });
+}
+
+- (void)updateSearchWithName:(NSString *)name
+{
+	NSMutableArray *array = [NSMutableArray array];
+	NSRange range;
+
+	for (BPFormula *formula in _formulae_all) {
+		range = [[formula name] rangeOfString:name options:NSCaseInsensitiveSearch];
+		if (range.location != NSNotFound) {
+			[array addObject:formula];
+		}
+	}
+
+	_formulae_search = [array copy];
+
+	[[NSNotificationCenter defaultCenter] postNotificationName:kBP_NOTIFICATION_SEARCH_UPDATED object:nil];
 }
 
 /**
@@ -121,17 +143,17 @@
 	return -1;
 }
 
-- (BP_FORMULA_STATUS)statusForFormula:(BPFormula*)formula
+- (BPFormulaStatus)statusForFormula:(BPFormula*)formula
 {
 	if ([self searchForFormula:formula inArray:self.formulae_installed] >= 0)
 	{
 		if ([self searchForFormula:formula inArray:self.formulae_outdated] >= 0) {
-			return kBP_FORMULA_OUTDATED;
+			return kBPFormulaOutdated;
 		} else {
-			return kBP_FORMULA_INSTALLED;
+			return kBPFormulaInstalled;
 		}
 	} else {
-		return kBP_FORMULA_NOT_INSTALLED;
+		return kBPFormulaNotInstalled;
 	}
 }
 

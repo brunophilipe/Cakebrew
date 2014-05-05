@@ -148,6 +148,18 @@
 
 @end
 
+@interface BPHomebrewInterfaceListCallSearch : BPHomebrewInterfaceListCall
+
+@end
+
+@implementation BPHomebrewInterfaceListCallSearch
+
+- (instancetype)initWithSearchParameter:(NSString*)param
+{
+    return [super initWithArguments:@[@"search", param]];
+}
+
+@end
 
 @implementation BPHomebrewInterface
 {
@@ -202,8 +214,6 @@
 
 	[task setLaunchPath:userShell];
 	[task setArguments:@[@"-l", @"-c", instruction]];
-
-	NSLog(@"Sending instruction: %@ -l -c %@", userShell, instruction);
 
 	NSPipe *output = [NSPipe pipe];
 	[task setStandardOutput:output];
@@ -270,6 +280,11 @@
 		[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updatedFileHandle:) name:NSFileHandleDataAvailableNotification object:nil];
 	}
 	return self;
+}
+
+- (void)dealloc
+{
+	[[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 - (void)showHomebrewNotInstalledMessage
@@ -421,26 +436,26 @@
 
 - (NSArray*)list
 {
-	return [self listMode:kBP_LIST_INSTALLED];
+	return [self listMode:kBPListInstalled];
 }
 
-- (NSArray*)listMode:(BP_LIST_MODE)mode {
+- (NSArray*)listMode:(BPListMode)mode {
     BPHomebrewInterfaceListCall *listCall = nil;
 
 	switch (mode) {
-		case kBP_LIST_INSTALLED:
+		case kBPListInstalled:
             listCall = [[BPHomebrewInterfaceListCallInstalled alloc] init];
 			break;
 
-		case kBP_LIST_ALL:
+		case kBPListAll:
             listCall = [[BPHomebrewInterfaceListCallAll alloc] init];
 			break;
 
-		case kBP_LIST_LEAVES:
+		case kBPListLeaves:
             listCall = [[BPHomebrewInterfaceListCallLeaves alloc] init];
 			break;
 
-		case kBP_LIST_UPGRADEABLE:
+		case kBPListOutdated:
             listCall = [[BPHomebrewInterfaceListCallUpgradeable alloc] init];
 			break;
 
@@ -457,11 +472,10 @@
 }
 
 - (NSArray*)searchForFormulaName:(NSString*)name {
-    NSString *string = [self performBrewCommandWithArguments:@[@"search", name]];
-    if (string) {
-		NSMutableArray* array = [[string componentsSeparatedByString:@"\n"] mutableCopy];
-		[array removeLastObject];
-		return array;
+    BPHomebrewInterfaceListCall *listCall = [[BPHomebrewInterfaceListCallSearch alloc] initWithSearchParameter:name];
+	NSString *string = [self performBrewCommandWithArguments:listCall.arguments];
+	if (string) {
+		return [listCall parseData:string];
 	} else {
 		return nil;
 	}

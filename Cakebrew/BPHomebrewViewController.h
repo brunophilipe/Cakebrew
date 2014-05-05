@@ -59,5 +59,6 @@
 - (IBAction)upgradeAllOutdatedFormulae:(id)sender;
 - (IBAction)updateHomebrew:(id)sender;
 - (IBAction)openSelectedFormulaWebsite:(id)sender;
+- (IBAction)searchFormulasFieldDidChange:(id)sender;
 
 @end

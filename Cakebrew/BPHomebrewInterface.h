@@ -21,12 +21,13 @@
 
 #import <Foundation/Foundation.h>
 
-typedef enum : NSUInteger {
-	kBP_LIST_ALL,
-    kBP_LIST_INSTALLED,
-    kBP_LIST_LEAVES,
-	kBP_LIST_UPGRADEABLE
-} BP_LIST_MODE;
+typedef NS_ENUM(NSInteger, BPListMode) {
+	kBPListAll,
+    kBPListInstalled,
+    kBPListLeaves,
+	kBPListOutdated,
+	kBPListSearch /* Don't call -[BPHomebrewInterface listMode:] with this parameter. */
+};
 
 @interface BPHomebrewInterface : NSObject
 
@@ -36,7 +37,7 @@ typedef enum : NSUInteger {
 
 // Operations that return on finish
 - (NSArray*)list;
-- (NSArray*)listMode:(BP_LIST_MODE)mode;
+- (NSArray*)listMode:(BPListMode)mode;
 - (NSArray*)searchForFormulaName:(NSString*)formula;
 - (NSString*)informationForFormula:(NSString*)formula;
 - (NSString*)update __deprecated;

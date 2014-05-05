@@ -10,10 +10,10 @@
 #import "BPFormula.h"
 
 typedef enum : NSUInteger {
-    kBP_WINDOW_OPERATION_INSTALL,
-    kBP_WINDOW_OPERATION_UNINSTALL,
-	kBP_WINDOW_OPERATION_UPGRADE
-} BP_WINDOW_OPERATION;
+    kBPWindowOperationInstall,
+    kBPWindowOperationUninstall,
+	kBPWindowOperationUpgrade
+} BPWindowOperation;
 
 @interface BPInstallationViewController : NSViewController
 
@@ -27,7 +27,7 @@ typedef enum : NSUInteger {
 @property (strong, nonatomic) NSArray *formulae;
 @property (assign) NSWindow *window;
 
-@property (nonatomic) BP_WINDOW_OPERATION windowOperation;
+@property (nonatomic) BPWindowOperation windowOperation;
 
 - (void)windowDidAppear;
 

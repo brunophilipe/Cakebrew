@@ -1045,12 +1045,30 @@
                             <action selector="showFormulaInfo:" target="547" id="gBY-KU-E7X"/>
                         </connections>
                     </toolbarItem>
+                    <toolbarItem implicitItemIdentifier="5F1B8DF2-E0AA-4377-B27C-BBECB85973C0" label="Search Formulas" paletteLabel="Search Formulas" id="hjv-gb-fjC">
+                        <nil key="toolTip"/>
+                        <size key="minSize" width="96" height="22"/>
+                        <size key="maxSize" width="96" height="22"/>
+                        <searchField key="view" verticalHuggingPriority="750" id="zLQ-g9-dpv">
+                            <rect key="frame" x="0.0" y="14" width="96" height="22"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                            <searchFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" borderStyle="bezel" placeholderString="" usesSingleLineMode="YES" bezelStyle="round" sendsWholeSearchString="YES" id="5Qx-kF-IcB">
+                                <font key="font" metaFont="system"/>
+                                <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                <connections>
+                                    <action selector="searchFormulasFieldDidChange:" target="547" id="X2R-f4-6Us"/>
+                                </connections>
+                            </searchFieldCell>
+                        </searchField>
+                    </toolbarItem>
                 </allowedToolbarItems>
                 <defaultToolbarItems>
                     <toolbarItem reference="Lvc-bU-Nmh"/>
                     <toolbarItem reference="651"/>
                     <toolbarItem reference="0v7-EY-eoL"/>
                     <toolbarItem reference="UyW-JC-mM2"/>
+                    <toolbarItem reference="hjv-gb-fjC"/>
                 </defaultToolbarItems>
             </toolbar>
             <contentBorderThickness minY="22"/>

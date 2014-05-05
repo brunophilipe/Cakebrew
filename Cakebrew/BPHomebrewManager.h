@@ -24,11 +24,11 @@
 
 @class BPHomebrewManager;
 
-typedef enum : NSUInteger {
-    kBP_FORMULA_NOT_INSTALLED,
-    kBP_FORMULA_INSTALLED,
-    kBP_FORMULA_OUTDATED,
-} BP_FORMULA_STATUS;
+typedef NS_ENUM(NSInteger, BPFormulaStatus) {
+    kBPFormulaNotInstalled,
+    kBPFormulaInstalled,
+    kBPFormulaOutdated,
+};
 
 @protocol BPHomebrewManagerDelegate <NSObject>
 
@@ -42,13 +42,15 @@ typedef enum : NSUInteger {
 @property (strong) NSArray *formulae_outdated;
 @property (strong) NSArray *formulae_all;
 @property (strong) NSArray *formulae_leaves;
+@property (strong) NSArray *formulae_search;
 
 @property (unsafe_unretained) id<BPHomebrewManagerDelegate> delegate;
 
 + (BPHomebrewManager *)sharedManager;
 
 - (void)update;
+- (void)updateSearchWithName:(NSString *)name;
 
-- (BP_FORMULA_STATUS)statusForFormula:(BPFormula*)formula;
+- (BPFormulaStatus)statusForFormula:(BPFormula*)formula;
 
 @end

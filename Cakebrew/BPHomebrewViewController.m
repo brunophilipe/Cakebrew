@@ -35,6 +35,8 @@
 @property NSArray   *formulaeArray;
 @property NSInteger lastSelectedSidebarIndex;
 
+@property BOOL isSearching;
+
 @end
 
 @implementation BPHomebrewViewController
@@ -56,12 +58,14 @@
 
 		[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(lockWindow) name:kBP_NOTIFICATION_LOCK_WINDOW object:nil];
 		[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(unlockWindow) name:kBP_NOTIFICATION_UNLOCK_WINDOW object:nil];
+		[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(searchUpdatedNotification:) name:kBP_NOTIFICATION_SEARCH_UPDATED object:nil];
 	}
 	return self;
 }
 
 - (void)dealloc
 {
+	[[NSNotificationCenter defaultCenter] removeObserver:self];
 	[_homebrewManager setDelegate:nil];
 }
 
@@ -105,7 +109,7 @@
 	}
 }
 
-- (void)prepareFormula:(BPFormula*)formula forOperation:(BP_WINDOW_OPERATION)operation
+- (void)prepareFormula:(BPFormula*)formula forOperation:(BPWindowOperation)operation
 {
 	_operationViewController = [[BPInstallationViewController alloc] initWithNibName:@"BPInstallationViewController" bundle:nil];
 	_operationWindow = [[NSWindow alloc] initWithContentRect:_operationViewController.view.frame styleMask:NSTitledWindowMask|NSResizableWindowMask backing:NSBackingStoreBuffered defer:NO];
@@ -172,12 +176,12 @@
 		BPFormula *formula = [_formulaeArray objectAtIndex:selectedIndex];
 
 		switch ([[BPHomebrewManager sharedManager] statusForFormula:formula]) {
-			case kBP_FORMULA_INSTALLED:
+			case kBPFormulaInstalled:
 				[self.toolbarButton_installUninstall setImage:[NSImage imageNamed:@"delete.icns"]];
 				[self.toolbarButton_installUninstall setLabel:@"Uninstall Formula"];
 				break;
 
-			case kBP_FORMULA_OUTDATED:
+			case kBPFormulaOutdated:
 				if ([self.outlineView_sidebar selectedRow] == 2) {
 					[self.toolbarButton_installUninstall setImage:[NSImage imageNamed:@"reload.icns"]];
 					[self.toolbarButton_installUninstall setLabel:@"Update Formula"];
@@ -187,7 +191,7 @@
 				}
 				break;
 
-			case kBP_FORMULA_NOT_INSTALLED:
+			case kBPFormulaNotInstalled:
 				[self.toolbarButton_installUninstall setImage:[NSImage imageNamed:@"download.icns"]];
 				[self.toolbarButton_installUninstall setLabel:@"Install Formula"];
 				break;
@@ -198,21 +202,13 @@
     }
 }
 
-#pragma mark - Homebrew Manager Delegate
-
-- (void)homebrewManagerFinishedUpdating:(BPHomebrewManager *)manager
+- (void)searchUpdatedNotification:(NSNotification*)notification
 {
-	[self buildSidebarTree];
+	_isSearching = YES;
+	if ([self.outlineView_sidebar selectedRow] != 2)
+		[self.outlineView_sidebar selectRowIndexes:[NSIndexSet indexSetWithIndex:3] byExtendingSelection:NO];
 
-	// Used after unlocking the app when inserting custom homebrew installation path
-	BOOL shouldReselectFirstRow = ([_outlineView_sidebar selectedRow] < 0);
-
-	[self.outlineView_sidebar reloadData];
-
-	if (shouldReselectFirstRow)
-		[_outlineView_sidebar selectRowIndexes:[NSIndexSet indexSetWithIndex:1] byExtendingSelection:NO];
-	else
-		[_outlineView_sidebar selectRowIndexes:[NSIndexSet indexSetWithIndex:_lastSelectedSidebarIndex] byExtendingSelection:NO];
+	[self configureTableForListing:kBPListSearch];
 }
 
 - (void)buildSidebarTree
@@ -251,6 +247,85 @@
 	[parent addChildItem:item];
 
 	[self displayInformationForFormula:nil];
+}
+
+- (void)configureTableForListing:(BPListMode)mode
+{
+	CGFloat totalWidth;
+	NSInteger titleWidth;
+
+	totalWidth = [self.clippingView_formulae frame].size.width;
+
+	switch (mode) {
+		case kBPListAll:
+			titleWidth = (NSInteger)totalWidth;
+			_formulaeArray = [[BPHomebrewManager sharedManager] formulae_all];
+			[[self.tableView_formulae tableColumnWithIdentifier:@"Version"] setHidden:YES];
+			[[self.tableView_formulae tableColumnWithIdentifier:@"LatestVersion"] setHidden:YES];
+			[self.button_upgradeAll setHidden:YES];
+			break;
+
+		case kBPListInstalled:
+			titleWidth = (NSInteger)(totalWidth * 0.4);
+			_formulaeArray = [[BPHomebrewManager sharedManager] formulae_installed];
+			[[self.tableView_formulae tableColumnWithIdentifier:@"Version"] setHidden:NO];
+			[[self.tableView_formulae tableColumnWithIdentifier:@"Version"] setWidth:(totalWidth-titleWidth)];
+			[[self.tableView_formulae tableColumnWithIdentifier:@"LatestVersion"] setHidden:YES];
+			[self.button_upgradeAll setHidden:YES];
+			break;
+
+		case kBPListLeaves:
+			titleWidth = (NSInteger)totalWidth;
+			_formulaeArray = [[BPHomebrewManager sharedManager] formulae_leaves];
+			[[self.tableView_formulae tableColumnWithIdentifier:@"Version"] setHidden:YES];
+			[[self.tableView_formulae tableColumnWithIdentifier:@"LatestVersion"] setHidden:YES];
+			[self.button_upgradeAll setHidden:YES];
+			break;
+
+		case kBPListOutdated:
+			titleWidth = (NSInteger)(totalWidth * 0.4);
+			_formulaeArray = [[BPHomebrewManager sharedManager] formulae_outdated];
+			[[self.tableView_formulae tableColumnWithIdentifier:@"Version"] setHidden:NO];
+			[[self.tableView_formulae tableColumnWithIdentifier:@"Version"] setWidth:(totalWidth-titleWidth)*0.5];
+			[[self.tableView_formulae tableColumnWithIdentifier:@"LatestVersion"] setHidden:NO];
+			[[self.tableView_formulae tableColumnWithIdentifier:@"LatestVersion"] setWidth:(totalWidth-titleWidth)*0.5];
+			[self.button_upgradeAll setHidden:NO];
+			[self.button_upgradeAll setEnabled:(_formulaeArray.count > 0)];
+			break;
+
+		case kBPListSearch:
+			titleWidth = (NSInteger)totalWidth;
+			_formulaeArray = [[BPHomebrewManager sharedManager] formulae_search];
+			[[self.tableView_formulae tableColumnWithIdentifier:@"Version"] setHidden:YES];
+			[[self.tableView_formulae tableColumnWithIdentifier:@"LatestVersion"] setHidden:YES];
+			[self.button_upgradeAll setHidden:YES];
+			break;
+
+		default:
+			break;
+	}
+
+	[[self.tableView_formulae tableColumnWithIdentifier:@"Name"] setWidth:titleWidth];
+	[self.tableView_formulae deselectAll:nil];
+	[self.tableView_formulae reloadData];
+	[self updateToolbarItemsState];
+}
+
+#pragma mark - Homebrew Manager Delegate
+
+- (void)homebrewManagerFinishedUpdating:(BPHomebrewManager *)manager
+{
+	[self buildSidebarTree];
+
+	// Used after unlocking the app when inserting custom homebrew installation path
+	BOOL shouldReselectFirstRow = ([_outlineView_sidebar selectedRow] < 0);
+
+	[self.outlineView_sidebar reloadData];
+
+	if (shouldReselectFirstRow)
+		[_outlineView_sidebar selectRowIndexes:[NSIndexSet indexSetWithIndex:1] byExtendingSelection:NO];
+	else
+		[_outlineView_sidebar selectRowIndexes:[NSIndexSet indexSetWithIndex:_lastSelectedSidebarIndex] byExtendingSelection:NO];
 }
 
 #pragma mark - Getters and Setters
@@ -413,54 +488,30 @@
 {
 	NSString *message;
 	NSUInteger tabIndex = 0;
-	CGFloat totalWidth;
-	NSInteger titleWidth;
 
 	if ([self.outlineView_sidebar selectedRow] >= 0)
 		_lastSelectedSidebarIndex = [self.outlineView_sidebar selectedRow];
 
 	[self updateToolbarItemsState];
 
-	totalWidth = [self.clippingView_formulae frame].size.width;
-
 	switch ([self.outlineView_sidebar selectedRow]) {
 		case 1: // Installed Formulae
-			titleWidth = (NSInteger)(totalWidth * 0.4);
-			_formulaeArray = [[BPHomebrewManager sharedManager] formulae_installed];
-			[[self.tableView_formulae tableColumnWithIdentifier:@"Version"] setHidden:NO];
-			[[self.tableView_formulae tableColumnWithIdentifier:@"Version"] setWidth:(totalWidth-titleWidth)];
-			[[self.tableView_formulae tableColumnWithIdentifier:@"LatestVersion"] setHidden:YES];
-			[self.button_upgradeAll setHidden:YES];
+			[self configureTableForListing:kBPListInstalled];
 			message = @"These are the formulae already installed in your system.";
 			break;
 
 		case 2: // Outdated Formulae
-			titleWidth = (NSInteger)(totalWidth * 0.4);
-			_formulaeArray = [[BPHomebrewManager sharedManager] formulae_outdated];
-			[[self.tableView_formulae tableColumnWithIdentifier:@"Version"] setHidden:NO];
-			[[self.tableView_formulae tableColumnWithIdentifier:@"Version"] setWidth:(totalWidth-titleWidth)*0.5];
-			[[self.tableView_formulae tableColumnWithIdentifier:@"LatestVersion"] setHidden:NO];
-			[[self.tableView_formulae tableColumnWithIdentifier:@"LatestVersion"] setWidth:(totalWidth-titleWidth)*0.5];
-			[self.button_upgradeAll setHidden:NO];
-			[self.button_upgradeAll setEnabled:(_formulaeArray.count > 0)];
+			[self configureTableForListing:kBPListOutdated];
 			message = @"These formulae are already installed, but have an update available.";
 			break;
 
 		case 3: // All Formulae
-			titleWidth = (NSInteger)totalWidth;
-			_formulaeArray = [[BPHomebrewManager sharedManager] formulae_all];
-			[[self.tableView_formulae tableColumnWithIdentifier:@"Version"] setHidden:YES];
-			[[self.tableView_formulae tableColumnWithIdentifier:@"LatestVersion"] setHidden:YES];
-			[self.button_upgradeAll setHidden:YES];
+			[self configureTableForListing:kBPListAll];
 			message = @"These are all the formulae available for instalation with Homebrew.";
 			break;
 
 		case 4:	// Leaves
-			titleWidth = (NSInteger)totalWidth;
-			_formulaeArray = [[BPHomebrewManager sharedManager] formulae_leaves];
-			[[self.tableView_formulae tableColumnWithIdentifier:@"Version"] setHidden:YES];
-			[[self.tableView_formulae tableColumnWithIdentifier:@"LatestVersion"] setHidden:YES];
-			[self.button_upgradeAll setHidden:YES];
+			[self configureTableForListing:kBPListLeaves];
 			message = @"These formulae are not dependencies of any other formulae.";
 			break;
 
@@ -479,13 +530,6 @@
 	}
 
 	if (message) [self.label_information setStringValue:message];
-	if (tabIndex == 0) {
-		[self.tableView_formulae deselectAll:nil];
-		[self.tableView_formulae reloadData];
-		[self updateToolbarItemsState];
-
-		[[self.tableView_formulae tableColumnWithIdentifier:@"Name"] setWidth:titleWidth];
-	}
 	[self.tabView selectTabViewItemAtIndex:tabIndex];
 }
 
@@ -538,29 +582,29 @@
 		void (^operationBlock)(void);
 
 		switch ([[BPHomebrewManager sharedManager] statusForFormula:formula]) {
-			case kBP_FORMULA_INSTALLED:
+			case kBPFormulaInstalled:
 			{
 				message = @"Are you sure you want to uninstall the formula '%@'?";
 				operationBlock = ^{
-					[self prepareFormula:formula forOperation:kBP_WINDOW_OPERATION_UNINSTALL];
+					[self prepareFormula:formula forOperation:kBPWindowOperationUninstall];
 				};
 			}
 				break;
 
-			case kBP_FORMULA_NOT_INSTALLED:
+			case kBPFormulaNotInstalled:
 			{
 				message = @"Are you sure you want to install the formula '%@'?";
 				operationBlock = ^{
-					[self prepareFormula:formula forOperation:kBP_WINDOW_OPERATION_INSTALL];
+					[self prepareFormula:formula forOperation:kBPWindowOperationInstall];
 				};
 			}
 				break;
 
-			case kBP_FORMULA_OUTDATED:
+			case kBPFormulaOutdated:
 			{
 				message = nil;
 				operationBlock = ^{
-					[self prepareFormula:formula forOperation:kBP_WINDOW_OPERATION_UPGRADE];
+					[self prepareFormula:formula forOperation:kBPWindowOperationUpgrade];
 				};
 			}
 				break;
@@ -582,7 +626,7 @@
 	NSAlert *alert = [NSAlert alertWithMessageText:@"Attention!" defaultButton:@"Yes" alternateButton:@"Cancel" otherButton:nil informativeTextWithFormat:@"Are you sure you want to upgrade all outdated formulae?"];
 	[alert.window setTitle:@"Cakebrew"];
 	if ([alert runModal] == NSAlertDefaultReturn) {
-		[self prepareFormula:nil forOperation:kBP_WINDOW_OPERATION_UPGRADE];
+		[self prepareFormula:nil forOperation:kBPWindowOperationUpgrade];
 	}
 }
 
@@ -599,6 +643,17 @@
 	if (selectedIndex >= 0) {
 		BPFormula *formula = [_formulaeArray objectAtIndex:selectedIndex];
 		[[NSWorkspace sharedWorkspace] openURL:formula.website];
+	}
+}
+
+- (IBAction)searchFormulasFieldDidChange:(id)sender {
+	NSSearchField *searchField = sender;
+	NSString *searchPhrase = searchField.stringValue;
+	if ([searchPhrase isEqualToString:@""]) {
+		_isSearching = NO;
+		[self configureTableForListing:kBPListAll];
+	} else {
+		[[BPHomebrewManager sharedManager] updateSearchWithName:searchPhrase];
 	}
 }
 

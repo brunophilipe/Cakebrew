@@ -59,20 +59,20 @@
 	[self.label_formulaName setStringValue:@"All outdated formulae"];
 }
 
-- (void)setWindowOperation:(BP_WINDOW_OPERATION)windowOperation
+- (void)setWindowOperation:(BPWindowOperation)windowOperation
 {
 	_windowOperation = windowOperation;
 	NSString *message;
 	switch (windowOperation) {
-		case kBP_WINDOW_OPERATION_INSTALL:
+		case kBPWindowOperationInstall:
 			message = @"Installing Formula:";
 			break;
 
-		case kBP_WINDOW_OPERATION_UNINSTALL:
+		case kBPWindowOperationUninstall:
 			message = @"Uninstalling Formula:";
 			break;
 
-		case kBP_WINDOW_OPERATION_UPGRADE:
+		case kBPWindowOperationUpgrade:
 			message = @"Upgrading Formula:";
 			break;
 	}
@@ -84,19 +84,19 @@
 	[self.progressIndicator startAnimation:nil];
 	dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
 		NSString __block *outputValue;
-		if (self.windowOperation == kBP_WINDOW_OPERATION_INSTALL) {
+		if (self.windowOperation == kBPWindowOperationInstall) {
 			[[BPHomebrewInterface sharedInterface] installFormula:self.formula.name withReturnBlock:^(NSString *output) {
 				if (outputValue) outputValue = [outputValue stringByAppendingString:output];
 				else outputValue = output;
 				[self.textView setString:outputValue];
 			}];
-		} else if (self.windowOperation == kBP_WINDOW_OPERATION_UNINSTALL) {
+		} else if (self.windowOperation == kBPWindowOperationUninstall) {
 			[[BPHomebrewInterface sharedInterface] uninstallFormula:self.formula.name withReturnBlock:^(NSString *output) {
 				if (outputValue) outputValue = [outputValue stringByAppendingString:output];
 				else outputValue = output;
 				[self.textView setString:outputValue];
 			}];
-		} else if (self.windowOperation == kBP_WINDOW_OPERATION_UPGRADE) {
+		} else if (self.windowOperation == kBPWindowOperationUpgrade) {
 			if (self.formula) {
 				[[BPHomebrewInterface sharedInterface] upgradeFormula:self.formula.name withReturnBlock:^(NSString *output) {
 					if (outputValue) outputValue = [outputValue stringByAppendingString:output];
