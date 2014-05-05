@@ -75,7 +75,7 @@
 	if (self.dependencies)		[aCoder encodeObject:self.dependencies	forKey:kBP_ENCODE_FORMULA_DEPS];
 	if (self.conflicts)			[aCoder encodeObject:self.conflicts		forKey:kBP_ENCODE_FORMULA_CNFL];
 
-	[aCoder encodeObject:[NSNumber numberWithBool:self.installed]		forKey:kBP_ENCODE_FORMULA_INST];
+	[aCoder encodeObject:@(self.installed) forKey:kBP_ENCODE_FORMULA_INST];
 }
 
 - (id)initWithCoder:(NSCoder *)aDecoder

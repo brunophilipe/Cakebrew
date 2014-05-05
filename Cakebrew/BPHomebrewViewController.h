@@ -49,7 +49,7 @@
 @property (weak) IBOutlet BPInsetShadowView *view_disablerLock;
 @property (weak) IBOutlet NSToolbar *toolbar;
 
-@property (weak) IBOutlet BPUpdateDoctorController *updateDoctorViewController;
+@property (unsafe_unretained) IBOutlet BPUpdateDoctorController *updateDoctorViewController;
 
 @property IBOutlet NSToolbarItem *toolbarButton_formulaInfo;
 @property IBOutlet NSToolbarItem *toolbarButton_installUninstall;
