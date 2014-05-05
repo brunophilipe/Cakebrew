@@ -213,7 +213,7 @@
     task = [[NSTask alloc] init];
 
 	[task setLaunchPath:userShell];
-	[task setArguments:@[@"-l", @"-c", instruction]];
+	[task setArguments:@[@"-c", instruction]];
 
 	NSPipe *output = [NSPipe pipe];
 	[task setStandardOutput:output];
