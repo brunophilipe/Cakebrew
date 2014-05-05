@@ -27,26 +27,35 @@
 
 @interface BPAppDelegate ()
 
-@property (strong) DCOAboutWindowController *aboutWindowController;
+@property (nonatomic, strong) DCOAboutWindowController *aboutWindowController;
 
 @end
 
 @implementation BPAppDelegate
 
+- (DCOAboutWindowController *)aboutWindowController
+{
+  if(!_aboutWindowController){
+    _aboutWindowController = [[DCOAboutWindowController alloc] init];
+    [_aboutWindowController setAppWebsiteURL:kBP_CAKEBREW_URL];
+  }
+  return _aboutWindowController;
+}
+
+#pragma mark - NSApplicationDelegate
+
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification
 {
-	self.aboutWindowController = [[DCOAboutWindowController alloc] init];
-	[self.aboutWindowController setAppWebsiteURL:kBP_CAKEBREW_URL];
 	[[BPHomebrewManager sharedManager] update];
 }
 
 - (BOOL)applicationShouldHandleReopen:(NSApplication *)sender hasVisibleWindows:(BOOL)flag
 {
-    if (!flag) {
-        [self.window makeKeyAndOrderFront:self];
-    }
+  if (!flag) {
+    [self.window makeKeyAndOrderFront:self];
+  }
     
-    return YES;
+  return YES;
 }
 
 - (NSURL*)urlForApplicationSupportFolder
