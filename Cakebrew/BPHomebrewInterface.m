@@ -240,8 +240,6 @@
 	NSString *resultsString = [[NSString alloc] initWithData:[output.fileHandleForReading readDataToEndOfFile] encoding:NSUTF8StringEncoding];
 	NSArray *results = [resultsString componentsSeparatedByCharactersInSet:[NSCharacterSet newlineCharacterSet]];
 
-	NSLog(@"%@", results);
-
 	if (results.count != variables.count + 1) {
 		static dispatch_once_t onceToken;
 		dispatch_once(&onceToken, ^{
@@ -259,6 +257,8 @@
 		if (![[pair firstObject] isEqualToString:@""])
 			[environment setObject:[pair lastObject] forKey:[pair firstObject]];
 	}
+
+	NSLog(@"%@", environment);
 
 	return [environment copy];
 }
