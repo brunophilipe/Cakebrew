@@ -186,6 +186,7 @@
 	self = [super init];
 	if (self) {
 		[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updatedFileHandle:) name:NSFileHandleDataAvailableNotification object:nil];
+        self.task = nil;
 	}
 	return self;
 }
