@@ -25,6 +25,12 @@
 #import "BPGenericTextPopoverView.h"
 #import "BPUpdateDoctorController.h"
 
+typedef NS_ENUM(NSUInteger, BPWindowOperation) {
+    kBPWindowOperationInstall,
+    kBPWindowOperationUninstall,
+	kBPWindowOperationUpgrade
+};
+
 @class DMSplitView;
 @class BPInsetShadowView;
 @class BPGenericTextPopoverView;

@@ -8,12 +8,7 @@
 
 #import <Cocoa/Cocoa.h>
 #import "BPFormula.h"
-
-typedef enum : NSUInteger {
-    kBPWindowOperationInstall,
-    kBPWindowOperationUninstall,
-	kBPWindowOperationUpgrade
-} BPWindowOperation;
+#import "BPHomebrewViewController.h"
 
 @interface BPInstallationViewController : NSViewController
 

@@ -36,6 +36,7 @@
 @property NSInteger lastSelectedSidebarIndex;
 
 @property BOOL isSearching;
+@property BPWindowOperation toolbarButtonOperation;
 
 @end
 
@@ -181,21 +182,25 @@
 			case kBPFormulaInstalled:
 				[self.toolbarButton_installUninstall setImage:[NSImage imageNamed:@"delete.icns"]];
 				[self.toolbarButton_installUninstall setLabel:@"Uninstall Formula"];
+				[self setToolbarButtonOperation:kBPWindowOperationUninstall];
 				break;
 
 			case kBPFormulaOutdated:
 				if ([self.outlineView_sidebar selectedRow] == 2) {
 					[self.toolbarButton_installUninstall setImage:[NSImage imageNamed:@"reload.icns"]];
 					[self.toolbarButton_installUninstall setLabel:@"Update Formula"];
+					[self setToolbarButtonOperation:kBPWindowOperationUpgrade];
 				} else {
 					[self.toolbarButton_installUninstall setImage:[NSImage imageNamed:@"delete.icns"]];
 					[self.toolbarButton_installUninstall setLabel:@"Uninstall Formula"];
+					[self setToolbarButtonOperation:kBPWindowOperationUninstall];
 				}
 				break;
 
 			case kBPFormulaNotInstalled:
 				[self.toolbarButton_installUninstall setImage:[NSImage imageNamed:@"download.icns"]];
 				[self.toolbarButton_installUninstall setLabel:@"Install Formula"];
+				[self setToolbarButtonOperation:kBPWindowOperationInstall];
 				break;
 		}
 
@@ -577,23 +582,15 @@
 	[_appDelegate setRunningBackgroundTask:YES];
 
 	NSInteger selectedIndex = [self.tableView_formulae selectedRow];
+	NSToolbarItem *toolbarItem = sender;
 
 	if (selectedIndex >= 0) {
 		BPFormula *formula = [_formulaeArray objectAtIndex:selectedIndex];
 		NSString *message;
 		void (^operationBlock)(void);
 
-		switch ([[BPHomebrewManager sharedManager] statusForFormula:formula]) {
-			case kBPFormulaInstalled:
-			{
-				message = @"Are you sure you want to uninstall the formula '%@'?";
-				operationBlock = ^{
-					[self prepareFormula:formula forOperation:kBPWindowOperationUninstall];
-				};
-			}
-				break;
-
-			case kBPFormulaNotInstalled:
+		switch (_toolbarButtonOperation) {
+			case kBPWindowOperationInstall:
 			{
 				message = @"Are you sure you want to install the formula '%@'?";
 				operationBlock = ^{
@@ -602,7 +599,16 @@
 			}
 				break;
 
-			case kBPFormulaOutdated:
+			case kBPWindowOperationUninstall:
+			{
+				message = @"Are you sure you want to uninstall the formula '%@'?";
+				operationBlock = ^{
+					[self prepareFormula:formula forOperation:kBPWindowOperationUninstall];
+				};
+			}
+				break;
+
+			case kBPWindowOperationUpgrade:
 			{
 				message = nil;
 				operationBlock = ^{
@@ -621,7 +627,7 @@
 				operationBlock();
 			}
             else {
-                [_appDelegate setRunningBackgroundTask: NO];
+                [_appDelegate setRunningBackgroundTask:NO];
             }
 		} else {
 			operationBlock();
