@@ -31,6 +31,10 @@
 
 @end
 
+@interface BPAppDelegate (SignalHandler)
+- (void)setupSignalHandler;
+@end
+
 @implementation BPAppDelegate
 
 - (DCOAboutWindowController *)aboutWindowController
@@ -46,6 +50,7 @@
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification
 {
+	[self setupSignalHandler];
 	[[BPHomebrewManager sharedManager] update];
 }
 
@@ -56,6 +61,12 @@
   }
     
   return YES;
+}
+
+- (NSApplicationTerminateReply)applicationShouldTerminate:(NSApplication *)sender
+{
+	[[BPHomebrewManager sharedManager] cleanUp];
+	return NSTerminateNow;
 }
 
 - (NSURL*)urlForApplicationSupportFolder
@@ -117,4 +128,24 @@
 	[self.window beginSheet:self.preferencesWindow completionHandler:nil];
 	[self.preferencesWindow didBecomeVisible];
 }
+
+@end
+
+@implementation BPAppDelegate (SignalHandler)
+void signalHandler(int sig);
+
+- (void)setupSignalHandler
+{
+	signal(SIGTERM, signalHandler);
+}
+
+void signalHandler(int sig) {
+	if (sig == SIGTERM) {
+		// Force Quit
+		[[BPHomebrewManager sharedManager] cleanUp];
+	}
+
+	signal(sig, SIG_DFL);
+}
+
 @end

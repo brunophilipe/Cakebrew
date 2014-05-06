@@ -260,19 +260,19 @@
 	operationUpdateBlock = block;
 
 	NSString *shellName = [userShell lastPathComponent];
-	NSTask *task;
-    task = [[NSTask alloc] init];
+
+    self.task = [[NSTask alloc] init];
 
 	arguments = [self formatArgumentsForShell:shellName withExtraArguments:arguments];
 
-	[task setLaunchPath:userShell];
-	[task setArguments:arguments];
+	[self.task setLaunchPath:userShell];
+	[self.task setArguments:arguments];
 
 	NSPipe *pipe_output = [NSPipe pipe];
 	NSPipe *pipe_error = [NSPipe pipe];
-    [task setStandardOutput:pipe_output];
-    [task setStandardInput:[NSPipe pipe]];
-	[task setStandardError:pipe_error];
+    [self.task setStandardOutput:pipe_output];
+    [self.task setStandardInput:[NSPipe pipe]];
+	[self.task setStandardError:pipe_error];
 
 	NSFileHandle *handle_output = [pipe_output fileHandleForReading];
 	[handle_output waitForDataInBackgroundAndNotify];
@@ -284,8 +284,8 @@
 	block([NSString stringWithFormat:@"User Shell: %@\nCommand: %@ %@\nThe Doctor output is going to be different if run from Xcode!!\n\n", userShell, userShell, [arguments componentsJoinedByString:@" "]]);
 	#endif
 
-	[task launch];
-    [task waitUntilExit];
+	[self.task launch];
+    [self.task waitUntilExit];
 
 	return YES;
 }
@@ -311,23 +311,23 @@
 	if (!userShell) return NO;
 
 	NSString *shellName = [userShell lastPathComponent];
-	NSTask *task;
-    task = [[NSTask alloc] init];
+
+    self.task = [[NSTask alloc] init];
 
 	arguments = [self formatArgumentsForShell:shellName withExtraArguments:arguments];
 
-	[task setLaunchPath:userShell];
-	[task setArguments:arguments];
+	[self.task setLaunchPath:userShell];
+	[self.task setArguments:arguments];
 
 	NSPipe *pipe_output = [NSPipe pipe];
 	NSPipe *pipe_error = [NSPipe pipe];
-    [task setStandardOutput:pipe_output];
-    [task setStandardInput:[NSPipe pipe]];
-	[task setStandardError:pipe_error];
+    [self.task setStandardOutput:pipe_output];
+    [self.task setStandardInput:[NSPipe pipe]];
+	[self.task setStandardError:pipe_error];
 
-	[task launch];
-    [task waitUntilExit];
-
+	[self.task launch];
+    [self.task waitUntilExit];
+    
 	NSString *string_output, *string_error;
     string_output = [[NSString alloc] initWithData:[[pipe_output fileHandleForReading] readDataToEndOfFile] encoding:NSUTF8StringEncoding];
 	string_error = [[NSString alloc] initWithData:[[pipe_error fileHandleForReading] readDataToEndOfFile] encoding:NSUTF8StringEncoding];
