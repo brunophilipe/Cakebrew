@@ -426,6 +426,12 @@
 	[self updateToolbarItemsState];
 }
 
+#pragma mark - NSTextField Delegate
+- (void)controlTextDidChange:(NSNotification *)notification
+{
+    [self searchFormulasFieldDidChange:notification.object];
+}
+
 #pragma mark - PXSourceList Data Source
 
 - (NSUInteger)sourceList:(PXSourceList*)sourceList numberOfChildrenOfItem:(id)item

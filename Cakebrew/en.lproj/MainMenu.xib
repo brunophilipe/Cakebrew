@@ -1037,6 +1037,9 @@
                                     <action selector="searchFormulasFieldDidChange:" target="547" id="X2R-f4-6Us"/>
                                 </connections>
                             </searchFieldCell>
+                            <connections>
+                                <outlet property="delegate" destination="547" id="9Vz-lW-uqd"/>
+                            </connections>
                         </searchField>
                     </toolbarItem>
                 </allowedToolbarItems>
