@@ -615,9 +615,14 @@
 		if (message) {
 			NSAlert *alert = [NSAlert alertWithMessageText:@"Attention!" defaultButton:@"Yes" alternateButton:@"Cancel" otherButton:nil informativeTextWithFormat:message, formula.name];
 			[alert.window setTitle:@"Cakebrew"];
-			if ([alert runModal] == NSAlertDefaultReturn) {
+            
+            NSInteger returnValue = [alert runModal];
+			if (returnValue == NSAlertDefaultReturn) {
 				operationBlock();
 			}
+            else {
+                [_appDelegate setRunningBackgroundTask: NO];
+            }
 		} else {
 			operationBlock();
 		}
