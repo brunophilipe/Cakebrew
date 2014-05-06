@@ -281,7 +281,7 @@
 	[handle_error waitForDataInBackgroundAndNotify];
 
 	#ifdef DEBUG
-	block([NSString stringWithFormat:@"User Shell: %@\nCommand: %@ %@\nThe Doctor output is going to be different if run in DEBUG mode!!\n\n", userShell, userShell, [arguments componentsJoinedByString:@" "]]);
+	block([NSString stringWithFormat:@"User Shell: %@\nCommand: %@ %@\nThe Doctor output is going to be different if run from Xcode!!\n\n", userShell, userShell, [arguments componentsJoinedByString:@" "]]);
 	#endif
 
 	[task launch];
