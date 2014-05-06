@@ -349,14 +349,14 @@
                                 <rect key="frame" x="0.0" y="0.0" width="169" height="320"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <subviews>
-                                    <scrollView borderType="none" autohidesScrollers="YES" horizontalLineScroll="20" horizontalPageScroll="10" verticalLineScroll="20" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kTq-kk-rF0">
+                                    <scrollView borderType="none" autohidesScrollers="YES" horizontalLineScroll="24" horizontalPageScroll="10" verticalLineScroll="24" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kTq-kk-rF0">
                                         <rect key="frame" x="0.0" y="0.0" width="169" height="320"/>
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                         <clipView key="contentView" id="RhN-kh-4Xx">
                                             <rect key="frame" x="0.0" y="0.0" width="169" height="320"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <subviews>
-                                                <outlineView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" selectionHighlightStyle="sourceList" columnReordering="NO" multipleSelection="NO" autosaveColumns="NO" rowHeight="20" rowSizeStyle="systemDefault" viewBased="YES" indentationPerLevel="14" outlineTableColumn="LEF-be-VWM" id="h1z-c9-U0s" customClass="PXSourceList">
+                                                <outlineView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" selectionHighlightStyle="sourceList" columnReordering="NO" multipleSelection="NO" autosaveColumns="NO" rowHeight="24" rowSizeStyle="systemDefault" viewBased="YES" indentationPerLevel="14" outlineTableColumn="LEF-be-VWM" id="h1z-c9-U0s" customClass="PXSourceList">
                                                     <rect key="frame" x="0.0" y="0.0" width="169" height="320"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <size key="intercellSpacing" width="3" height="0.0"/>
@@ -1052,7 +1052,6 @@
         </window>
         <customObject id="494" customClass="BPAppDelegate">
             <connections>
-                <outlet property="preferencesWindow" destination="rZc-YO-rOa" id="oQc-Jl-C3v"/>
                 <outlet property="window" destination="371" id="532"/>
             </connections>
         </customObject>
@@ -1154,121 +1153,9 @@
                 <outlet property="textView" destination="3lu-vb-qC5" id="v9z-1T-evy"/>
             </connections>
         </customView>
-        <window title="Preferences" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" oneShot="NO" releasedWhenClosed="NO" showsToolbarButton="NO" visibleAtLaunch="NO" animationBehavior="default" id="rZc-YO-rOa" customClass="BPPreferencesWindow">
-            <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
-            <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
-            <rect key="contentRect" x="131" y="159" width="460" height="270"/>
-            <rect key="screenRect" x="0.0" y="0.0" width="1440" height="878"/>
-            <value key="minSize" type="size" width="460" height="220"/>
-            <view key="contentView" id="bWK-YV-rB8">
-                <rect key="frame" x="0.0" y="0.0" width="460" height="270"/>
-                <autoresizingMask key="autoresizingMask"/>
-                <subviews>
-                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="P6M-Eo-dzo">
-                        <rect key="frame" x="18" y="236" width="93" height="17"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Proxy Settings" id="Pwb-HL-0C8">
-                            <font key="font" metaFont="system"/>
-                            <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
-                            <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
-                        </textFieldCell>
-                    </textField>
-                    <box autoresizesSubviews="NO" verticalHuggingPriority="750" title="Box" boxType="separator" titlePosition="noTitle" translatesAutoresizingMaskIntoConstraints="NO" id="ZrJ-vA-X2a">
-                        <rect key="frame" x="20" y="232" width="428" height="5"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                        <color key="borderColor" white="0.0" alpha="0.41999999999999998" colorSpace="calibratedWhite"/>
-                        <color key="fillColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                        <font key="titleFont" metaFont="system"/>
-                    </box>
-                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="7tM-FC-RnD">
-                        <rect key="frame" x="30" y="197" width="412" height="28"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                        <textFieldCell key="cell" controlSize="small" sendsActionOnEndEditing="YES" title="Please insert your proxy URL below. You should get this information from your network manager." id="y9h-QG-GoH">
-                            <font key="font" metaFont="smallSystem"/>
-                            <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
-                            <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
-                        </textFieldCell>
-                    </textField>
-                    <button translatesAutoresizingMaskIntoConstraints="NO" id="9jw-QC-tE7">
-                        <rect key="frame" x="30" y="143" width="103" height="18"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                        <buttonCell key="cell" type="check" title="Enable Proxy" bezelStyle="regularSquare" imagePosition="left" inset="2" id="m1X-JE-Pgx">
-                            <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
-                            <font key="font" metaFont="system"/>
-                        </buttonCell>
-                        <connections>
-                            <action selector="didChangeCheckBox_enableProxy:" target="rZc-YO-rOa" id="or8-5d-ct2"/>
-                        </connections>
-                    </button>
-                    <imageView hidden="YES" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="cSY-O5-nz3">
-                        <rect key="frame" x="443" y="173" width="10" height="10"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                        <constraints>
-                            <constraint firstAttribute="width" constant="10" id="7Hw-LH-U90"/>
-                            <constraint firstAttribute="height" constant="10" id="gAJ-iz-MuS"/>
-                        </constraints>
-                        <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="NSInvalidDataFreestandingTemplate" id="B8b-Bo-ud2"/>
-                    </imageView>
-                    <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="sIb-mH-kNC">
-                        <rect key="frame" x="372" y="13" width="74" height="32"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                        <constraints>
-                            <constraint firstAttribute="width" constant="62" id="SGT-JS-9ag"/>
-                        </constraints>
-                        <buttonCell key="cell" type="push" title="Done" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="z9y-Ii-dvJ">
-                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                            <font key="font" metaFont="system"/>
-                        </buttonCell>
-                        <connections>
-                            <action selector="done:" target="rZc-YO-rOa" id="79e-hF-9DO"/>
-                        </connections>
-                    </button>
-                    <secureTextField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Ai3-UD-6dB">
-                        <rect key="frame" x="32" y="167" width="408" height="22"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                        <secureTextFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" placeholderString="http://&lt;user>:&lt;password>@&lt;proxyhost>:&lt;proxyport>" drawsBackground="YES" usesSingleLineMode="YES" id="sRg-Yi-NqY">
-                            <font key="font" metaFont="system"/>
-                            <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
-                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                            <allowedInputSourceLocales>
-                                <string>NSAllRomanInputSourcesLocaleIdentifier</string>
-                            </allowedInputSourceLocales>
-                        </secureTextFieldCell>
-                        <connections>
-                            <action selector="didUpdateTextField_proxyURL:" target="rZc-YO-rOa" id="EBs-42-eMC"/>
-                        </connections>
-                    </secureTextField>
-                </subviews>
-                <constraints>
-                    <constraint firstItem="cSY-O5-nz3" firstAttribute="top" secondItem="ZrJ-vA-X2a" secondAttribute="bottom" constant="51" id="0gL-gF-MfL"/>
-                    <constraint firstAttribute="trailing" secondItem="7tM-FC-RnD" secondAttribute="trailing" constant="20" id="5He-lS-sd5"/>
-                    <constraint firstItem="9jw-QC-tE7" firstAttribute="top" secondItem="Ai3-UD-6dB" secondAttribute="bottom" constant="8" id="AoO-mM-PH6"/>
-                    <constraint firstItem="ZrJ-vA-X2a" firstAttribute="leading" secondItem="bWK-YV-rB8" secondAttribute="leading" constant="20" id="BcU-ZY-6zd"/>
-                    <constraint firstAttribute="bottom" secondItem="sIb-mH-kNC" secondAttribute="bottom" constant="20" id="Gza-YR-h4e"/>
-                    <constraint firstItem="9jw-QC-tE7" firstAttribute="leading" secondItem="bWK-YV-rB8" secondAttribute="leading" constant="32" id="H4A-n1-DAI"/>
-                    <constraint firstItem="P6M-Eo-dzo" firstAttribute="leading" secondItem="bWK-YV-rB8" secondAttribute="leading" constant="20" id="K2S-3Q-Trq"/>
-                    <constraint firstItem="cSY-O5-nz3" firstAttribute="leading" secondItem="Ai3-UD-6dB" secondAttribute="trailing" constant="3" id="KxL-cq-Tzm"/>
-                    <constraint firstItem="ZrJ-vA-X2a" firstAttribute="top" secondItem="P6M-Eo-dzo" secondAttribute="bottom" constant="1" id="Mq0-Cc-l69"/>
-                    <constraint firstItem="P6M-Eo-dzo" firstAttribute="top" secondItem="bWK-YV-rB8" secondAttribute="top" constant="17" id="SZt-D2-NLk"/>
-                    <constraint firstAttribute="trailing" secondItem="cSY-O5-nz3" secondAttribute="trailing" constant="7" id="dgj-bd-u3k"/>
-                    <constraint firstItem="Ai3-UD-6dB" firstAttribute="top" secondItem="7tM-FC-RnD" secondAttribute="bottom" constant="8" id="kls-qP-BMZ"/>
-                    <constraint firstAttribute="trailing" secondItem="ZrJ-vA-X2a" secondAttribute="trailing" constant="12" id="lgL-YA-FVp"/>
-                    <constraint firstAttribute="trailing" secondItem="sIb-mH-kNC" secondAttribute="trailing" constant="20" id="mek-Rd-cA1"/>
-                    <constraint firstItem="Ai3-UD-6dB" firstAttribute="leading" secondItem="bWK-YV-rB8" secondAttribute="leading" constant="32" id="ncs-Hd-vki"/>
-                    <constraint firstItem="7tM-FC-RnD" firstAttribute="top" secondItem="ZrJ-vA-X2a" secondAttribute="bottom" constant="9" id="qWl-vQ-7uL"/>
-                    <constraint firstItem="7tM-FC-RnD" firstAttribute="leading" secondItem="bWK-YV-rB8" secondAttribute="leading" constant="32" id="s9R-vd-TMK"/>
-                </constraints>
-            </view>
-            <connections>
-                <outlet property="checkBox_enableProxy" destination="9jw-QC-tE7" id="lHJ-BX-TrM"/>
-                <outlet property="imageView_validURL" destination="cSY-O5-nz3" id="HNB-YV-Qo3"/>
-                <outlet property="textField_proxyURL" destination="Ai3-UD-6dB" id="cag-wh-HHz"/>
-            </connections>
-        </window>
     </objects>
     <resources>
         <image name="NSActionTemplate" width="14" height="14"/>
-        <image name="NSInvalidDataFreestandingTemplate" width="18" height="18"/>
         <image name="download" width="48" height="48"/>
         <image name="globe" width="48" height="48"/>
         <image name="label" width="48" height="48"/>
