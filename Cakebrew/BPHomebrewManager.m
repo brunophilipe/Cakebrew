@@ -164,4 +164,12 @@
 	}
 }
 
+- (void)cleanUp
+{
+    NSTask *brewTask = [BPHomebrewInterface sharedInterface].task;
+    if (brewTask && [brewTask isRunning]) {
+        [[BPHomebrewInterface sharedInterface].task terminate];
+    }
+}
+
 @end

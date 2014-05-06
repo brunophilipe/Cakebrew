@@ -53,4 +53,5 @@ typedef NS_ENUM(NSInteger, BPFormulaStatus) {
 
 - (BPFormulaStatus)statusForFormula:(BPFormula*)formula;
 
+- (void)cleanUp;
 @end

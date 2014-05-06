@@ -30,6 +30,7 @@ typedef NS_ENUM(NSInteger, BPListMode) {
 };
 
 @interface BPHomebrewInterface : NSObject
+@property (nonatomic) NSTask *task; // default nil;
 
 + (BPHomebrewInterface *)sharedInterface;
 
