@@ -20,12 +20,10 @@
 //
 
 #import <Cocoa/Cocoa.h>
-#import "BPPreferencesWindow.h"
 
 @interface BPAppDelegate : NSObject <NSApplicationDelegate>
 
 @property (assign) IBOutlet NSWindow *window;
-@property (assign) IBOutlet BPPreferencesWindow *preferencesWindow;
 
 @property (getter=isRunningBackgroundTask) BOOL runningBackgroundTask;
 

@@ -22,16 +22,26 @@
 #import "BPAppDelegate.h"
 #import "BPHomebrewManager.h"
 #import "DCOAboutWindowController.h"
+#import "BPPreferencesWindowController.h"
 
 @class DCOAboutWindowController;
 
 @interface BPAppDelegate ()
 
 @property (nonatomic, strong) DCOAboutWindowController *aboutWindowController;
+@property (nonatomic, strong) BPPreferencesWindowController *preferencesWindowController;
 
 @end
 
 @implementation BPAppDelegate
+
+- (BPPreferencesWindowController *)preferencesWindowController
+{
+  if (!_preferencesWindowController) {
+    _preferencesWindowController = [[BPPreferencesWindowController alloc] init];
+  }
+  return _preferencesWindowController;
+}
 
 - (DCOAboutWindowController *)aboutWindowController
 {
@@ -114,7 +124,6 @@
 }
 
 - (IBAction)showPreferencesWindow:(id)sender {
-	[self.window beginSheet:self.preferencesWindow completionHandler:nil];
-	[self.preferencesWindow didBecomeVisible];
+  [self.preferencesWindowController showWindow:nil];
 }
 @end
