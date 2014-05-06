@@ -19,7 +19,6 @@
 
 - (IBAction)didUpdateTextField_proxyURL:(id)sender;
 - (IBAction)didChangeCheckBox_enableProxy:(id)sender;
-- (IBAction)showCustomBrewPathWindow:(id)sender;
 - (IBAction)done:(id)sender;
 
 @end

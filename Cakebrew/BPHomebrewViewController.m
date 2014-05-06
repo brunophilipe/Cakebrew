@@ -260,7 +260,7 @@
 
 	switch (mode) {
 		case kBPListAll:
-			titleWidth = (NSInteger)totalWidth;
+			titleWidth = (NSInteger)totalWidth*0.99;
 			_formulaeArray = [[BPHomebrewManager sharedManager] formulae_all];
 			[[self.tableView_formulae tableColumnWithIdentifier:@"Version"] setHidden:YES];
 			[[self.tableView_formulae tableColumnWithIdentifier:@"LatestVersion"] setHidden:YES];
@@ -271,13 +271,13 @@
 			titleWidth = (NSInteger)(totalWidth * 0.4);
 			_formulaeArray = [[BPHomebrewManager sharedManager] formulae_installed];
 			[[self.tableView_formulae tableColumnWithIdentifier:@"Version"] setHidden:NO];
-			[[self.tableView_formulae tableColumnWithIdentifier:@"Version"] setWidth:(totalWidth-titleWidth)];
+			[[self.tableView_formulae tableColumnWithIdentifier:@"Version"] setWidth:(totalWidth-titleWidth)*0.95];
 			[[self.tableView_formulae tableColumnWithIdentifier:@"LatestVersion"] setHidden:YES];
 			[self.button_upgradeAll setHidden:YES];
 			break;
 
 		case kBPListLeaves:
-			titleWidth = (NSInteger)totalWidth;
+			titleWidth = (NSInteger)totalWidth*0.99;
 			_formulaeArray = [[BPHomebrewManager sharedManager] formulae_leaves];
 			[[self.tableView_formulae tableColumnWithIdentifier:@"Version"] setHidden:YES];
 			[[self.tableView_formulae tableColumnWithIdentifier:@"LatestVersion"] setHidden:YES];
@@ -288,15 +288,15 @@
 			titleWidth = (NSInteger)(totalWidth * 0.4);
 			_formulaeArray = [[BPHomebrewManager sharedManager] formulae_outdated];
 			[[self.tableView_formulae tableColumnWithIdentifier:@"Version"] setHidden:NO];
-			[[self.tableView_formulae tableColumnWithIdentifier:@"Version"] setWidth:(totalWidth-titleWidth)*0.5];
+			[[self.tableView_formulae tableColumnWithIdentifier:@"Version"] setWidth:(totalWidth-titleWidth)*0.48];
 			[[self.tableView_formulae tableColumnWithIdentifier:@"LatestVersion"] setHidden:NO];
-			[[self.tableView_formulae tableColumnWithIdentifier:@"LatestVersion"] setWidth:(totalWidth-titleWidth)*0.5];
+			[[self.tableView_formulae tableColumnWithIdentifier:@"LatestVersion"] setWidth:(totalWidth-titleWidth)*0.48];
 			[self.button_upgradeAll setHidden:NO];
 			[self.button_upgradeAll setEnabled:(_formulaeArray.count > 0)];
 			break;
 
 		case kBPListSearch:
-			titleWidth = (NSInteger)totalWidth;
+			titleWidth = (NSInteger)totalWidth*0.99;
 			_formulaeArray = [[BPHomebrewManager sharedManager] formulae_search];
 			[[self.tableView_formulae tableColumnWithIdentifier:@"Version"] setHidden:YES];
 			[[self.tableView_formulae tableColumnWithIdentifier:@"LatestVersion"] setHidden:YES];
@@ -335,7 +335,7 @@
 - (void)setSplitView:(DMSplitView *)splitView
 {
 	_splitView = splitView;
-	[_splitView setMinSize:150.f ofSubviewAtIndex:0];
+	[_splitView setMinSize:165.f ofSubviewAtIndex:0];
 	[_splitView setMinSize:400.f ofSubviewAtIndex:1];
 	[_splitView setDividerColor:kBPSidebarDividerColor];
 	[_splitView setDividerThickness:0];
