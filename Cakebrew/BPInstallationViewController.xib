@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="5056" systemVersion="13C64" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="5056" systemVersion="13C1021" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <deployment defaultVersion="1070" identifier="macosx"/>
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="5056"/>
@@ -24,6 +24,10 @@
                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="VBp-AF-MWH">
                     <rect key="frame" x="18" y="233" width="159" height="19"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="155" id="YbD-P2-Ix0"/>
+                        <constraint firstAttribute="height" constant="19" id="t0n-M5-9EY"/>
+                    </constraints>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Uninstalling Formula:" id="QVe-Nf-ijc">
                         <font key="font" metaFont="system" size="15"/>
                         <color key="textColor" white="0.3455748175182482" alpha="1" colorSpace="calibratedWhite"/>
@@ -34,7 +38,7 @@
                     <rect key="frame" x="181" y="233" width="281" height="19"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <constraints>
-                        <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="277" id="kYF-vK-1Wo"/>
+                        <constraint firstAttribute="height" constant="19" id="QLC-a6-oxt"/>
                     </constraints>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="formula" id="6CL-mr-Q3z">
                         <font key="font" metaFont="system" size="15"/>
@@ -62,16 +66,12 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </clipView>
-                    <constraints>
-                        <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="164" id="3ZS-4L-8W0"/>
-                        <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="440" id="kr8-vW-KgZ"/>
-                    </constraints>
                     <scroller key="horizontalScroller" verticalHuggingPriority="750" doubleValue="1" horizontal="YES" id="p1x-GG-KxO">
                         <rect key="frame" x="1" y="147" width="438" height="16"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </scroller>
                     <scroller key="verticalScroller" verticalHuggingPriority="750" doubleValue="1" horizontal="NO" id="gM6-l7-I6y">
-                        <rect key="frame" x="423" y="1" width="16" height="162"/>
+                        <rect key="frame" x="424" y="1" width="15" height="162"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </scroller>
                 </scrollView>
@@ -98,18 +98,19 @@ DQ
                 </progressIndicator>
             </subviews>
             <constraints>
-                <constraint firstItem="NCA-Rx-Dhe" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" constant="20" id="6B9-ZC-nc0"/>
-                <constraint firstItem="Ecd-Vg-2YL" firstAttribute="top" secondItem="NCA-Rx-Dhe" secondAttribute="bottom" constant="20" id="8Fo-Np-saz"/>
-                <constraint firstAttribute="trailing" secondItem="TCm-Ww-IGs" secondAttribute="trailing" constant="20" id="JnS-md-ovr"/>
-                <constraint firstItem="VBp-AF-MWH" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" constant="20" id="bqN-0Z-ykv"/>
+                <constraint firstItem="VBp-AF-MWH" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" constant="20" id="5pO-VC-Mfm"/>
+                <constraint firstItem="VBp-AF-MWH" firstAttribute="top" secondItem="Hz6-mo-xeY" secondAttribute="top" constant="20" id="8g2-og-f0c"/>
+                <constraint firstAttribute="trailing" secondItem="TCm-Ww-IGs" secondAttribute="trailing" constant="20" id="Wbg-G6-6lt"/>
+                <constraint firstAttribute="trailing" secondItem="NCA-Rx-Dhe" secondAttribute="trailing" constant="20" id="YmD-zL-EtJ"/>
+                <constraint firstItem="TCm-Ww-IGs" firstAttribute="top" secondItem="Hz6-mo-xeY" secondAttribute="top" constant="20" id="byV-nc-PNo"/>
                 <constraint firstAttribute="trailing" secondItem="Ecd-Vg-2YL" secondAttribute="trailing" constant="20" id="cte-9X-U6J"/>
-                <constraint firstItem="TCm-Ww-IGs" firstAttribute="top" secondItem="Hz6-mo-xeY" secondAttribute="top" constant="20" id="e4H-uA-dh5"/>
                 <constraint firstAttribute="bottom" secondItem="b9i-CI-Tyt" secondAttribute="bottom" constant="22" id="eBk-jT-Xwx"/>
-                <constraint firstItem="NCA-Rx-Dhe" firstAttribute="top" secondItem="TCm-Ww-IGs" secondAttribute="bottom" constant="8" id="iyU-Gr-slu"/>
+                <constraint firstItem="Ecd-Vg-2YL" firstAttribute="top" secondItem="NCA-Rx-Dhe" secondAttribute="bottom" constant="20" id="fTJ-Li-hhY"/>
                 <constraint firstAttribute="bottom" secondItem="Ecd-Vg-2YL" secondAttribute="bottom" constant="20" id="mr7-ww-5dv"/>
-                <constraint firstItem="VBp-AF-MWH" firstAttribute="top" secondItem="Hz6-mo-xeY" secondAttribute="top" constant="20" id="x1I-9l-DBN"/>
+                <constraint firstItem="TCm-Ww-IGs" firstAttribute="leading" secondItem="VBp-AF-MWH" secondAttribute="trailing" constant="8" id="nMo-PF-VQO"/>
+                <constraint firstItem="NCA-Rx-Dhe" firstAttribute="top" secondItem="TCm-Ww-IGs" secondAttribute="bottom" constant="8" id="rYq-lJ-dx7"/>
+                <constraint firstItem="NCA-Rx-Dhe" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" constant="20" id="vNy-Hv-J3B"/>
                 <constraint firstItem="b9i-CI-Tyt" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" constant="20" id="xP7-pe-efx"/>
-                <constraint firstAttribute="trailing" secondItem="NCA-Rx-Dhe" secondAttribute="trailing" constant="20" id="zCg-Qq-L0p"/>
             </constraints>
         </customView>
     </objects>

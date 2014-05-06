@@ -493,7 +493,7 @@
                                                         <scrollView focusRingType="none" borderType="none" autohidesScrollers="YES" horizontalLineScroll="19" horizontalPageScroll="10" verticalLineScroll="19" verticalPageScroll="10" usesPredominantAxisScrolling="NO" scrollerKnobStyle="dark" translatesAutoresizingMaskIntoConstraints="NO" id="ZTf-N0-ClA">
                                                             <rect key="frame" x="0.0" y="121" width="400" height="200"/>
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                                            <clipView key="contentView" toolTip="Test" focusRingType="none" copiesOnScroll="NO" id="imx-IN-SCs">
+                                                            <clipView key="contentView" focusRingType="none" copiesOnScroll="NO" id="imx-IN-SCs">
                                                                 <rect key="frame" x="0.0" y="17" width="400" height="183"/>
                                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                 <subviews>

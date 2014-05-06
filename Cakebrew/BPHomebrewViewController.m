@@ -71,12 +71,15 @@
 
 - (void)displayInformationForFormula:(BPFormula*)formula
 {
+	static NSString *depString = @"Formula no longer available.";
+	static NSString *emptyString = @"--";
+
 	if (formula) {
 		if (!formula.isDeprecated) {
 			if (formula.isInstalled) {
 				[self.label_formulaPath setStringValue:formula.installPath];
 			} else {
-				[self.label_formulaPath setStringValue:@"Formula Not Installed"];
+				[self.label_formulaPath setStringValue:@"Formula Not Installed."];
 			}
 
 			[self.label_formulaVersion setStringValue:formula.latestVersion];
@@ -95,16 +98,15 @@
 
 			[self.button_formulaWebsite setEnabled:YES];
 		} else {
-			static NSString *depString = @"Deprecated Formula";
 			[self.label_formulaPath setStringValue:depString];
-			[self.label_formulaDependencies setStringValue:depString];
-			[self.label_formulaConflicts setStringValue:depString];
+			[self.label_formulaDependencies setStringValue:emptyString];
+			[self.label_formulaConflicts setStringValue:emptyString];
 		}
 	} else {
-		[self.label_formulaPath setStringValue:@"--"];
-		[self.label_formulaVersion setStringValue:@"--"];
-		[self.label_formulaDependencies setStringValue:@"--"];
-		[self.label_formulaConflicts setStringValue:@"--"];
+		[self.label_formulaPath setStringValue:emptyString];
+		[self.label_formulaVersion setStringValue:emptyString];
+		[self.label_formulaDependencies setStringValue:emptyString];
+		[self.label_formulaConflicts setStringValue:emptyString];
 		[self.button_formulaWebsite setEnabled:NO];
 	}
 }

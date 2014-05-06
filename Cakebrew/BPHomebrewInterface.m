@@ -126,6 +126,9 @@
 
 - (BPFormula *)parseFormulaItem:(NSString *)item
 {
+//	TO-DO: Replace this algorythim for a NSRegularExpression
+//	NSString *regexString = @"(\\S*)\\s\\((\\S*) \\< (\\S*)\\)";
+
     NSRange nameEnd = [item rangeOfString:@" "];
     NSRange openBracket = [item rangeOfString:@"("];
     NSRange upgradeArrow = [item rangeOfString:@" < "];
@@ -178,7 +181,21 @@
 	}
 }
 
-- (NSDictionary *)findUserEnvironmentVariables:(NSArray *)variables
+- (id)init
+{
+	self = [super init];
+	if (self) {
+		[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updatedFileHandle:) name:NSFileHandleDataAvailableNotification object:nil];
+	}
+	return self;
+}
+
+- (void)dealloc
+{
+	[[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
+- (NSString *)getValidUserShell
 {
 	NSString *userShell = [[[NSProcessInfo processInfo] environment] objectForKey:@"SHELL"];
 	NSLog(@"User shell: %@", userShell);
@@ -203,115 +220,22 @@
 		return nil;
 	}
 
-	id instruction = [NSMutableString string];
+	return userShell;
+}
 
-	for (NSString *variable in variables) {
-		[instruction appendFormat:@"echo \"%@=\"$%@; ", variable, variable];
-	}
-
-	NSArray *arguments;
-	NSString *shellName = [userShell lastPathComponent];
-	NSTask *task;
-    task = [[NSTask alloc] init];
-
+- (NSArray *)formatArgumentsForShell:(NSString *)shellName withExtraArguments:(NSArray *)extraArguments
+{
+	NSArray *arguments = nil;
+	NSString *command = [NSString stringWithFormat:@"brew %@", [extraArguments componentsJoinedByString:@" "]];
 	if (
-		[shellName isEqualToString:@"bash"] ||
-		[shellName isEqualToString:@"zsh"] ||
-		[shellName isEqualToString:@"ksh"] ||
-		[shellName isEqualToString:@"ksh"])
-	{
-		arguments = @[@"-l", @"-c", instruction];
-	}
-	else if (
+		[shellName isEqualToString:@"tcsh"] ||
 		[shellName isEqualToString:@"csh"])
 	{
-		arguments = @[@"-c", [NSString stringWithFormat:@"\"%@\"", instruction]];
+		arguments = @[@"-c", [NSString stringWithFormat:@"\"%@\"", command]];
+	} else {
+		arguments = @[@"-l", @"-c", command];
 	}
-
-	[task setLaunchPath:userShell];
-	[task setArguments:arguments];
-
-	NSPipe *output = [NSPipe pipe];
-	[task setStandardOutput:output];
-
-	[task launch];
-	[task waitUntilExit];
-
-	NSString *resultsString = [[NSString alloc] initWithData:[output.fileHandleForReading readDataToEndOfFile] encoding:NSUTF8StringEncoding];
-	NSArray *results = [resultsString componentsSeparatedByCharactersInSet:[NSCharacterSet newlineCharacterSet]];
-
-	if (results.count != variables.count + 1) {
-		static dispatch_once_t onceToken;
-		dispatch_once(&onceToken, ^{
-			NSAlert *alert = [NSAlert alertWithMessageText:@"Malformed Environment Variables" defaultButton:@"OK" alternateButton:nil otherButton:nil informativeTextWithFormat:@"Please check your PATH and HOME environment variables."];
-			[alert performSelectorOnMainThread:@selector(runModal) withObject:nil waitUntilDone:YES];
-		});
-		NSLog(@"\nRequested variables: %@\nReturned Strings: %@",variables, results);
-		return nil;
-	}
-
-	NSMutableDictionary *environment = [NSMutableDictionary dictionaryWithCapacity:results.count-1];
-
-	for (NSString *result in results) {
-		NSArray *pair = [result componentsSeparatedByString:@"="];
-		if (![[pair firstObject] isEqualToString:@""])
-			[environment setObject:[pair lastObject] forKey:[pair firstObject]];
-	}
-
-	NSLog(@"%@", environment);
-
-	return [environment copy];
-}
-
-- (NSString *)findHomebrewPath
-{
-	NSString *pathString = [[NSUserDefaults standardUserDefaults] objectForKey:kBP_HOMEBREW_PATH_KEY];
-
-	// User has set custom path string
-	if (pathString)
-		return pathString;
-
-	NSDictionary *environment = [self findUserEnvironmentVariables:@[@"PATH", @"HOME"]];
-	if (environment) {
-		NSTask *task;
-
-		task = [[NSTask alloc] init];
-
-		[task setLaunchPath:@"/usr/bin/which"];
-		[task setArguments:@[@"brew"]];
-		[task setEnvironment:environment];
-
-		NSPipe *output = [NSPipe pipe];
-		[task setStandardOutput:output];
-
-		[task launch];
-		[task waitUntilExit];
-
-		pathString = [[[NSString alloc] initWithData:[[output fileHandleForReading] readDataToEndOfFile] encoding:NSUTF8StringEncoding] stringByTrimmingCharactersInSet:[NSCharacterSet newlineCharacterSet]];
-
-		if (pathString && ![pathString isEqualToString:@""] && [[NSFileManager defaultManager] fileExistsAtPath:pathString]) {
-			NSInteger retval = system([[pathString stringByAppendingString:@" -v"] UTF8String]);
-			if (retval != kBP_EXEC_FILE_NOT_FOUND) {
-				return pathString;
-			}
-		}
-	}
-	[self showHomebrewNotInstalledMessage];
-	return nil;
-}
-
-- (id)init
-{
-	self = [super init];
-	if (self) {
-		[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updatedFileHandle:) name:NSFileHandleDataAvailableNotification object:nil];
-	}
-	return self;
-}
-
-- (void)dealloc
-{
-	[[NSNotificationCenter defaultCenter] removeObserver:self];
+	return arguments;
 }
 
 - (void)showHomebrewNotInstalledMessage
@@ -330,39 +254,19 @@
 
 - (BOOL)performBrewCommandWithArguments:(NSArray*)arguments dataReturnBlock:(void (^)(NSString*))block
 {
-	// Test if homebrew is installed
-	static NSDictionary *userEnvironment;
-
-	if (!brewPathString)
-		brewPathString = [self findHomebrewPath];
-
-	if (!brewPathString)
-		return NO;
-
-	if (!userEnvironment)
-		userEnvironment = [self findUserEnvironmentVariables:@[@"PATH", @"HOME"]];
-
-	if (!userEnvironment)
-		return NO;
+	NSString *userShell = [self getValidUserShell];
+	if (!userShell) return NO;
 
 	operationUpdateBlock = block;
 
-	BOOL enableProxy = [[NSUserDefaults standardUserDefaults] boolForKey:kBP_HOMEBREW_PROXY_ENABLE_KEY];
-	NSString *proxyURL = [[NSUserDefaults standardUserDefaults] objectForKey:kBP_HOMEBREW_PROXY_KEY];
-
+	NSString *shellName = [userShell lastPathComponent];
 	NSTask *task;
     task = [[NSTask alloc] init];
-    [task setLaunchPath:brewPathString];
-    [task setArguments:arguments];
 
-	if (enableProxy && proxyURL) {
-		NSMutableDictionary *env = [userEnvironment mutableCopy];
-		[env setObject:proxyURL forKey:@"http_proxy"];
-		[env setObject:proxyURL forKey:@"https_proxy"];
-		[task setEnvironment:env];
-	} else {
-		[task setEnvironment:userEnvironment];
-	}
+	arguments = [self formatArgumentsForShell:shellName withExtraArguments:arguments];
+
+	[task setLaunchPath:userShell];
+	[task setArguments:arguments];
 
 	NSPipe *pipe_output = [NSPipe pipe];
 	NSPipe *pipe_error = [NSPipe pipe];
@@ -377,7 +281,7 @@
 	[handle_error waitForDataInBackgroundAndNotify];
 
 	#ifdef DEBUG
-	block([NSString stringWithFormat:@"Environment Variables (DEBUG Only):\n%@\n\nShell: %@\n", [userEnvironment description], (NSString*)[[[NSProcessInfo processInfo] environment] objectForKey:@"SHELL"]]);
+	block([NSString stringWithFormat:@"User Shell: %@\nCommand: %@ %@\nThe Doctor output is going to be different if run in DEBUG mode!!\n\n", userShell, userShell, [arguments componentsJoinedByString:@" "]]);
 	#endif
 
 	[task launch];
@@ -403,60 +307,34 @@
 
 - (NSString*)performBrewCommandWithArguments:(NSArray*)arguments captureError:(BOOL)captureError
 {
-	// Test if homebrew is installed
-	static NSDictionary *userEnvironment;
+	NSString *userShell = [self getValidUserShell];
+	if (!userShell) return NO;
 
-	if (!brewPathString)
-		brewPathString = [self findHomebrewPath];
-
-	if (!brewPathString)
-		return @"";
-
-	if (!userEnvironment)
-		userEnvironment = [self findUserEnvironmentVariables:@[@"PATH", @"HOME"]];
-
-	if (!userEnvironment)
-		return @"";
-
-	BOOL enableProxy = [[NSUserDefaults standardUserDefaults] boolForKey:kBP_HOMEBREW_PROXY_ENABLE_KEY];
-	NSString *proxyURL = [[NSUserDefaults standardUserDefaults] objectForKey:kBP_HOMEBREW_PROXY_KEY];
-
+	NSString *shellName = [userShell lastPathComponent];
 	NSTask *task;
     task = [[NSTask alloc] init];
-    [task setLaunchPath:brewPathString];
-    [task setArguments:arguments];
 
-	if (enableProxy && proxyURL) {
-		NSMutableDictionary *env = [userEnvironment mutableCopy];
-		[env setObject:proxyURL forKey:@"http_proxy"];
-		[env setObject:proxyURL forKey:@"https_proxy"];
-		[task setEnvironment:env];
-	} else {
-		[task setEnvironment:userEnvironment];
-	}
+	arguments = [self formatArgumentsForShell:shellName withExtraArguments:arguments];
 
-	NSPipe *pipe_output, *pipe_error;
+	[task setLaunchPath:userShell];
+	[task setArguments:arguments];
 
-	pipe_output = [NSPipe pipe];
+	NSPipe *pipe_output = [NSPipe pipe];
+	NSPipe *pipe_error = [NSPipe pipe];
     [task setStandardOutput:pipe_output];
-
-	if (captureError) {
-		pipe_error = [NSPipe pipe];
-		[task setStandardError:pipe_error];
-	}
-
     [task setStandardInput:[NSPipe pipe]];
-	[task launch];
+	[task setStandardError:pipe_error];
 
+	[task launch];
     [task waitUntilExit];
 
 	NSString *string_output, *string_error;
     string_output = [[NSString alloc] initWithData:[[pipe_output fileHandleForReading] readDataToEndOfFile] encoding:NSUTF8StringEncoding];
+	string_error = [[NSString alloc] initWithData:[[pipe_error fileHandleForReading] readDataToEndOfFile] encoding:NSUTF8StringEncoding];
 
 	if (!captureError) {
 		return string_output;
 	} else {
-		string_error = [[NSString alloc] initWithData:[[pipe_error fileHandleForReading] readDataToEndOfFile] encoding:NSUTF8StringEncoding];
 		return [NSString stringWithFormat:@"%@\n%@", string_output, string_error];
 	}
 }
