@@ -22,7 +22,6 @@
 #import <Foundation/Foundation.h>
 #import "DMSplitView.h"
 #import "BPInsetShadowView.h"
-#import "BPGenericTextPopoverView.h"
 #import "BPUpdateDoctorController.h"
 
 @class DMSplitView;
@@ -45,7 +44,6 @@
 @property (weak) IBOutlet NSTextField *label_formulaConflicts;
 @property (weak) IBOutlet NSButton *button_upgradeAll;
 @property (weak) IBOutlet NSButton *button_formulaWebsite;
-@property (weak) IBOutlet BPGenericTextPopoverView *formulaPopoverView;
 @property (weak) IBOutlet BPInsetShadowView *view_disablerLock;
 @property (weak) IBOutlet NSToolbar *toolbar;
 

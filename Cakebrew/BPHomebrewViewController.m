@@ -25,12 +25,15 @@
 #import "BPHomebrewInterface.h"
 #import "BPInstallationViewController.h"
 #import "Frameworks/PXSourceList.framework/Headers/PXSourceList.h"
+#import "BPFormulaViewController.h"
 
 @interface BPHomebrewViewController () <NSTableViewDataSource, NSTableViewDelegate, PXSourceListDataSource, PXSourceListDelegate, BPHomebrewManagerDelegate>
 
 @property (strong, readonly) PXSourceListItem *rootSidebarCategory;
-@property (strong)           NSPopover        *formulaPopover;
 @property (weak)			 BPAppDelegate	  *appDelegate;
+
+@property (nonatomic, strong) NSPopover *formulaPopover;
+@property (nonatomic, strong) BPFormulaViewController *formulaViewController;
 
 @property NSArray   *formulaeArray;
 @property NSInteger lastSelectedSidebarIndex;
@@ -547,18 +550,18 @@
 				[self.formulaPopover close];
 		}
 
-		[self.formulaPopoverView setDataObject:[_formulaeArray objectAtIndex:selectedIndex]];
-
 		if (!self.formulaPopover) {
 			self.formulaPopover = [[NSPopover alloc] init];
 			[self.formulaPopover setBehavior:NSPopoverBehaviorSemitransient];
 			[self.formulaPopover setAppearance:NSPopoverAppearanceHUD];
 		}
-
-		NSViewController *controller = [[NSViewController alloc] init];
-		[controller setView:self.formulaPopoverView];
-
-		[self.formulaPopover setContentViewController:controller];
+    
+    if (!self.formulaViewController) {
+      self.formulaViewController = [[BPFormulaViewController alloc] init];
+      [self.formulaPopover setContentViewController:self.formulaViewController];
+    }
+    
+		[self.formulaViewController setDataObject:[_formulaeArray objectAtIndex:selectedIndex]];
 
 		NSRect anchorRect = [self.tableView_formulae rectOfRow:selectedIndex];
 		anchorRect.origin = [self.scrollView_formulae convertPoint:anchorRect.origin fromView:self.tableView_formulae];
