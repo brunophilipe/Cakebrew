@@ -36,7 +36,8 @@ typedef NS_ENUM(NSInteger, BPListMode) {
 
 - (void)hideHomebrewNotInstalledMessage;
 
-// Operations that return on finish
+#pragma mark - Operations that return on finish
+
 - (NSArray*)list;
 - (NSArray*)listMode:(BPListMode)mode;
 - (NSArray*)searchForFormulaName:(NSString*)formula;
@@ -48,7 +49,8 @@ typedef NS_ENUM(NSInteger, BPListMode) {
 - (NSString*)uninstallFormula:(NSString*)formula __deprecated;
 - (NSString*)runDoctor __deprecated;
 
-// Operations with live data callback block
+#pragma mark - Operations with live data callback block
+
 - (BOOL)updateWithReturnBlock:(void (^)(NSString*))block;
 - (BOOL)upgradeFormula:(NSString*)formula withReturnBlock:(void (^)(NSString*))block;
 - (BOOL)upgradeFormulae:(NSArray*)formulae withReturnBlock:(void (^)(NSString*))block;

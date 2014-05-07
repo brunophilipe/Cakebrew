@@ -80,6 +80,109 @@
                         </items>
                     </menu>
                 </menuItem>
+                <menuItem title="Formula" id="NmF-5a-a6b">
+                    <modifierMask key="keyEquivalentModifierMask"/>
+                    <menu key="submenu" title="Formula" id="sBH-Ta-Jft">
+                        <items>
+                            <menuItem title="Install Formula" id="fhF-VX-squ">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                                <connections>
+                                    <action selector="installUninstallUpdate:" target="547" id="Fr2-ua-RsK"/>
+                                    <binding destination="547" name="enabled2" keyPath="self.currentFormula.installed" previousBinding="J1D-i3-vrU" id="n2g-Zg-ofq">
+                                        <dictionary key="options">
+                                            <integer key="NSMultipleValuesPlaceholder" value="-1"/>
+                                            <integer key="NSNoSelectionPlaceholder" value="-1"/>
+                                            <integer key="NSNotApplicablePlaceholder" value="-1"/>
+                                            <integer key="NSNullPlaceholder" value="-1"/>
+                                            <string key="NSValueTransformerName">NSNegateBoolean</string>
+                                        </dictionary>
+                                    </binding>
+                                    <binding destination="547" name="enabled" keyPath="self.currentFormula" id="J1D-i3-vrU">
+                                        <dictionary key="options">
+                                            <string key="NSValueTransformerName">NSIsNotNil</string>
+                                        </dictionary>
+                                    </binding>
+                                </connections>
+                            </menuItem>
+                            <menuItem title="Uninstall Formula" id="Tzv-5t-RhL">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                                <connections>
+                                    <binding destination="547" name="enabled2" keyPath="self.currentFormula.installed" previousBinding="eUR-qe-OOt" id="l7K-sn-ffa">
+                                        <dictionary key="options">
+                                            <integer key="NSMultipleValuesPlaceholder" value="-1"/>
+                                            <integer key="NSNoSelectionPlaceholder" value="-1"/>
+                                            <integer key="NSNotApplicablePlaceholder" value="-1"/>
+                                            <integer key="NSNullPlaceholder" value="-1"/>
+                                        </dictionary>
+                                    </binding>
+                                    <binding destination="547" name="enabled" keyPath="self.currentFormula" id="eUR-qe-OOt">
+                                        <dictionary key="options">
+                                            <string key="NSValueTransformerName">NSIsNotNil</string>
+                                        </dictionary>
+                                    </binding>
+                                </connections>
+                            </menuItem>
+                            <menuItem title="Update Formula" id="4ab-Ns-Wry">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                                <connections>
+                                    <binding destination="547" name="enabled2" keyPath="self.currentFormula.outdated" previousBinding="x7H-Zr-6Sf" id="Psf-5c-rgh">
+                                        <dictionary key="options">
+                                            <integer key="NSMultipleValuesPlaceholder" value="-1"/>
+                                            <integer key="NSNoSelectionPlaceholder" value="-1"/>
+                                            <integer key="NSNotApplicablePlaceholder" value="-1"/>
+                                            <integer key="NSNullPlaceholder" value="-1"/>
+                                        </dictionary>
+                                    </binding>
+                                    <binding destination="547" name="enabled" keyPath="self.currentFormula" id="x7H-Zr-6Sf">
+                                        <dictionary key="options">
+                                            <string key="NSValueTransformerName">NSIsNotNil</string>
+                                        </dictionary>
+                                    </binding>
+                                </connections>
+                            </menuItem>
+                            <menuItem title="More Information" id="eus-Jb-JjS">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                                <connections>
+                                    <action selector="showFormulaInfo:" target="547" id="O1K-Cz-TGd"/>
+                                    <binding destination="547" name="enabled" keyPath="self.currentFormula" id="kNw-uF-DZ5">
+                                        <dictionary key="options">
+                                            <string key="NSValueTransformerName">NSIsNotNil</string>
+                                        </dictionary>
+                                    </binding>
+                                </connections>
+                            </menuItem>
+                            <menuItem isSeparatorItem="YES" id="woh-IT-iqR"/>
+                            <menuItem title="Formula Website " id="9Fv-tF-1qy">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                                <connections>
+                                    <action selector="openSelectedFormulaWebsite:" target="547" id="qHf-8O-KSv"/>
+                                    <binding destination="547" name="enabled2" keyPath="self.currentFormula.website" previousBinding="3xX-Lt-mbC" id="Pme-IU-5kq">
+                                        <dictionary key="options">
+                                            <integer key="NSMultipleValuesPlaceholder" value="-1"/>
+                                            <integer key="NSNoSelectionPlaceholder" value="-1"/>
+                                            <integer key="NSNotApplicablePlaceholder" value="-1"/>
+                                            <integer key="NSNullPlaceholder" value="-1"/>
+                                            <string key="NSValueTransformerName">NSIsNotNil</string>
+                                        </dictionary>
+                                    </binding>
+                                    <binding destination="547" name="enabled" keyPath="self.currentFormula" id="3xX-Lt-mbC">
+                                        <dictionary key="options">
+                                            <string key="NSValueTransformerName">NSIsNotNil</string>
+                                        </dictionary>
+                                    </binding>
+                                </connections>
+                            </menuItem>
+                            <menuItem isSeparatorItem="YES" id="eQo-BV-sa5"/>
+                            <menuItem title="Upgrade All Formulas" id="Ep8-j6-m5Q">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                                <connections>
+                                    <action selector="upgradeAllOutdatedFormulae:" target="547" id="KiX-eE-Z7L"/>
+                                    <binding destination="547" name="enabled" keyPath="self.enableUpgradeFormulasMenu" id="ngn-Rt-iDY"/>
+                                </connections>
+                            </menuItem>
+                        </items>
+                    </menu>
+                </menuItem>
                 <menuItem title="Edit" id="9Xg-s6-Icq">
                     <modifierMask key="keyEquivalentModifierMask"/>
                     <menu key="submenu" title="Edit" id="LYP-iZ-WcV">
@@ -335,7 +438,7 @@
             <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
             <windowCollectionBehavior key="collectionBehavior" fullScreenPrimary="YES"/>
             <rect key="contentRect" x="629" y="349" width="570" height="342"/>
-            <rect key="screenRect" x="0.0" y="0.0" width="1920" height="1058"/>
+            <rect key="screenRect" x="0.0" y="0.0" width="1440" height="878"/>
             <value key="minSize" type="size" width="570" height="342"/>
             <view key="contentView" id="372">
                 <rect key="frame" x="0.0" y="0.0" width="570" height="342"/>
@@ -669,28 +772,6 @@
                                                                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                                                     </textFieldCell>
                                                                 </textField>
-                                                                <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="aaD-oS-25h">
-                                                                    <rect key="frame" x="298" y="96" width="94" height="20"/>
-                                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                                                    <buttonCell key="cell" type="smallSquare" title="Formula Website" bezelStyle="smallSquare" imagePosition="overlaps" alignment="center" controlSize="small" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="MYF-u4-1Sz">
-                                                                        <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                                                        <font key="font" metaFont="smallSystem"/>
-                                                                    </buttonCell>
-                                                                    <connections>
-                                                                        <action selector="openSelectedFormulaWebsite:" target="547" id="9zp-cq-LSG"/>
-                                                                    </connections>
-                                                                </button>
-                                                                <button hidden="YES" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="kwM-Cz-P4a">
-                                                                    <rect key="frame" x="221" y="96" width="69" height="20"/>
-                                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                                                    <buttonCell key="cell" type="smallSquare" title="Upgrade All" bezelStyle="smallSquare" imagePosition="overlaps" alignment="center" controlSize="small" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="uPZ-LL-3p7">
-                                                                        <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                                                        <font key="font" metaFont="smallSystem"/>
-                                                                    </buttonCell>
-                                                                    <connections>
-                                                                        <action selector="upgradeAllOutdatedFormulae:" target="547" id="ceE-yB-Sed"/>
-                                                                    </connections>
-                                                                </button>
                                                             </subviews>
                                                             <constraints>
                                                                 <constraint firstItem="9ef-7X-hov" firstAttribute="leading" secondItem="X3G-aV-OOA" secondAttribute="leading" constant="8" id="164-HC-ezS"/>
@@ -701,16 +782,11 @@
                                                                 <constraint firstItem="AJi-jy-Vvh" firstAttribute="leading" secondItem="9ef-7X-hov" secondAttribute="trailing" constant="8" id="FVc-eP-na5"/>
                                                                 <constraint firstItem="Cvc-Bk-c4F" firstAttribute="top" secondItem="X3G-aV-OOA" secondAttribute="top" constant="7" id="Fa4-KR-N5e"/>
                                                                 <constraint firstAttribute="trailing" secondItem="jmd-cV-6fD" secondAttribute="trailing" constant="8" id="IOI-dQ-kcY"/>
-                                                                <constraint firstItem="aaD-oS-25h" firstAttribute="top" secondItem="X3G-aV-OOA" secondAttribute="top" constant="5" id="K4n-Bt-lhk"/>
                                                                 <constraint firstItem="tfH-bj-woo" firstAttribute="top" secondItem="J9Q-en-2DR" secondAttribute="bottom" constant="8" id="Rrp-ea-krY"/>
-                                                                <constraint firstAttribute="trailing" secondItem="aaD-oS-25h" secondAttribute="trailing" constant="8" id="SL4-za-rxB"/>
                                                                 <constraint firstAttribute="trailing" secondItem="tfH-bj-woo" secondAttribute="trailing" constant="8" id="T7t-SR-I36"/>
-                                                                <constraint firstItem="kwM-Cz-P4a" firstAttribute="top" secondItem="X3G-aV-OOA" secondAttribute="top" constant="5" id="ULT-kL-WWc"/>
-                                                                <constraint firstItem="aaD-oS-25h" firstAttribute="leading" secondItem="kwM-Cz-P4a" secondAttribute="trailing" constant="8" id="XIO-Ug-xrF"/>
                                                                 <constraint firstItem="J9Q-en-2DR" firstAttribute="leading" secondItem="X3G-aV-OOA" secondAttribute="leading" constant="8" id="XcF-9A-p6P"/>
                                                                 <constraint firstItem="tfH-bj-woo" firstAttribute="leading" secondItem="frT-4E-gjj" secondAttribute="trailing" id="XhE-30-bzx"/>
                                                                 <constraint firstItem="kPZ-Xj-wve" firstAttribute="top" secondItem="Cvc-Bk-c4F" secondAttribute="bottom" constant="10" id="a6O-xx-1Hq"/>
-                                                                <constraint firstItem="xnc-bd-zft" firstAttribute="top" secondItem="aaD-oS-25h" secondAttribute="bottom" constant="8" id="gmh-fi-U2V"/>
                                                                 <constraint firstItem="jmd-cV-6fD" firstAttribute="leading" secondItem="J9Q-en-2DR" secondAttribute="trailing" constant="8" id="l2U-ej-z6w"/>
                                                                 <constraint firstItem="frT-4E-gjj" firstAttribute="top" secondItem="J9Q-en-2DR" secondAttribute="bottom" constant="8" id="lBo-wI-qgP"/>
                                                                 <constraint firstItem="jmd-cV-6fD" firstAttribute="top" secondItem="AJi-jy-Vvh" secondAttribute="bottom" constant="8" id="liP-FV-tyN"/>
@@ -720,6 +796,7 @@
                                                                 <constraint firstItem="Cvc-Bk-c4F" firstAttribute="leading" secondItem="X3G-aV-OOA" secondAttribute="leading" constant="8" id="usR-fg-8HQ"/>
                                                                 <constraint firstItem="frT-4E-gjj" firstAttribute="leading" secondItem="X3G-aV-OOA" secondAttribute="leading" constant="8" id="vzR-gI-KQR"/>
                                                                 <constraint firstAttribute="trailing" secondItem="AJi-jy-Vvh" secondAttribute="trailing" constant="8" id="wne-2D-AVt"/>
+                                                                <constraint firstItem="xnc-bd-zft" firstAttribute="top" secondItem="Cvc-Bk-c4F" secondAttribute="bottom" constant="10" id="yIR-mR-1Cj"/>
                                                             </constraints>
                                                         </customView>
                                                     </subviews>
@@ -1045,6 +1122,7 @@
                     <toolbarItem reference="651"/>
                     <toolbarItem reference="0v7-EY-eoL"/>
                     <toolbarItem reference="UyW-JC-mM2"/>
+                    <toolbarItem reference="652"/>
                     <toolbarItem reference="hjv-gb-fjC"/>
                 </defaultToolbarItems>
             </toolbar>
@@ -1062,8 +1140,6 @@
         <viewController title="HomebrewController" nibName="MainMenu" id="547" customClass="BPHomebrewViewController">
             <connections>
                 <outlet property="MainToolbar" destination="646" id="678"/>
-                <outlet property="button_formulaWebsite" destination="aaD-oS-25h" id="FzE-vI-bWi"/>
-                <outlet property="button_upgradeAll" destination="kwM-Cz-P4a" id="0PA-F4-A0B"/>
                 <outlet property="clippingView_formulae" destination="imx-IN-SCs" id="Sku-zQ-Ocj"/>
                 <outlet property="label_formulaConflicts" destination="tfH-bj-woo" id="Ge8-BU-wE3"/>
                 <outlet property="label_formulaDependencies" destination="jmd-cV-6fD" id="hEm-zJ-tHd"/>
@@ -1098,7 +1174,7 @@
             <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
             <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
             <rect key="contentRect" x="131" y="159" width="460" height="270"/>
-            <rect key="screenRect" x="0.0" y="0.0" width="1920" height="1058"/>
+            <rect key="screenRect" x="0.0" y="0.0" width="1440" height="878"/>
             <value key="minSize" type="size" width="460" height="220"/>
             <view key="contentView" id="bWK-YV-rB8">
                 <rect key="frame" x="0.0" y="0.0" width="460" height="270"/>

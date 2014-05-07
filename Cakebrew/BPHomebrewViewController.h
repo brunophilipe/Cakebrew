@@ -20,6 +20,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "BPFormula.h"
 #import "DMSplitView.h"
 #import "BPInsetShadowView.h"
 #import "BPUpdateDoctorController.h"
@@ -48,8 +49,6 @@ typedef NS_ENUM(NSUInteger, BPWindowOperation) {
 @property (weak) IBOutlet NSTextField *label_formulaVersion;
 @property (weak) IBOutlet NSTextField *label_formulaDependencies;
 @property (weak) IBOutlet NSTextField *label_formulaConflicts;
-@property (weak) IBOutlet NSButton *button_upgradeAll;
-@property (weak) IBOutlet NSButton *button_formulaWebsite;
 @property (weak) IBOutlet BPInsetShadowView *view_disablerLock;
 @property (weak) IBOutlet NSToolbar *toolbar;
 
@@ -57,6 +56,13 @@ typedef NS_ENUM(NSUInteger, BPWindowOperation) {
 
 @property IBOutlet NSToolbarItem *toolbarButton_formulaInfo;
 @property IBOutlet NSToolbarItem *toolbarButton_installUninstall;
+
+// Cocoa bindings
+@property (strong, nonatomic) NSString *formulaMenuTitle;
+@property BOOL enableUpgradeFormulasMenu;
+
+@property (weak) BPFormula *currentFormula;
+
 
 - (IBAction)showFormulaInfo:(id)sender;
 - (IBAction)installUninstallUpdate:(id)sender;

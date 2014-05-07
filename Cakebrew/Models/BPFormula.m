@@ -21,6 +21,7 @@
 
 #import "BPFormula.h"
 #import "BPHomebrewInterface.h"
+#import "BPHomebrewManager.h"
 
 #define kBP_ENCODE_FORMULA_NAME @"BP_ENCODE_FORMULA_NAME"
 #define kBP_ENCODE_FORMULA_IVER @"BP_ENCODE_FORMULA_IVER"
@@ -172,6 +173,11 @@
 	}
 
 	return YES;
+}
+
+- (BOOL)isOutdated
+{
+	return [[BPHomebrewManager sharedManager] statusForFormula:self] == kBPFormulaOutdated;
 }
 
 @end

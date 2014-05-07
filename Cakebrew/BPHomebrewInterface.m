@@ -196,6 +196,15 @@
 	[[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
+#pragma mark - Public Methods
+
+- (void)hideHomebrewNotInstalledMessage
+{
+	[[NSNotificationCenter defaultCenter] postNotificationName:kBP_NOTIFICATION_UNLOCK_WINDOW object:self];
+}
+
+#pragma mark - Private Methods
+
 - (NSString *)getValidUserShell
 {
 	NSString *userShell = [[[NSProcessInfo processInfo] environment] objectForKey:@"SHELL"];
@@ -226,16 +235,9 @@
 
 - (NSArray *)formatArgumentsForShell:(NSString *)shellName withExtraArguments:(NSArray *)extraArguments
 {
-	NSArray *arguments = nil;
 	NSString *command = [NSString stringWithFormat:@"brew %@", [extraArguments componentsJoinedByString:@" "]];
-	if (
-		[shellName isEqualToString:@"tcsh"] ||
-		[shellName isEqualToString:@"csh"])
-	{
-		arguments = @[@"-c", [NSString stringWithFormat:@"\"%@\"", command]];
-	} else {
-		arguments = @[@"-l", @"-c", command];
-	}
+	NSArray *arguments = @[@"-l", @"-c", command];
+
 	return arguments;
 }
 
@@ -248,23 +250,18 @@
 	}
 }
 
-- (void)hideHomebrewNotInstalledMessage
-{
-	[[NSNotificationCenter defaultCenter] postNotificationName:kBP_NOTIFICATION_UNLOCK_WINDOW object:self];
-}
-
 - (BOOL)performBrewCommandWithArguments:(NSArray*)arguments dataReturnBlock:(void (^)(NSString*))block
 {
 	NSString *userShell = [self getValidUserShell];
-	if (!userShell) return NO;
+	NSString *shellName = [userShell lastPathComponent];
+
+	arguments = [self formatArgumentsForShell:shellName withExtraArguments:arguments];
+
+	if (!userShell || !arguments) return NO;
 
 	operationUpdateBlock = block;
 
-	NSString *shellName = [userShell lastPathComponent];
-
     self.task = [[NSTask alloc] init];
-
-	arguments = [self formatArgumentsForShell:shellName withExtraArguments:arguments];
 
 	[self.task setLaunchPath:userShell];
 	[self.task setArguments:arguments];
@@ -309,13 +306,13 @@
 - (NSString*)performBrewCommandWithArguments:(NSArray*)arguments captureError:(BOOL)captureError
 {
 	NSString *userShell = [self getValidUserShell];
-	if (!userShell) return NO;
-
 	NSString *shellName = [userShell lastPathComponent];
 
-    self.task = [[NSTask alloc] init];
-
 	arguments = [self formatArgumentsForShell:shellName withExtraArguments:arguments];
+
+	if (!userShell || !arguments) return NO;
+
+    self.task = [[NSTask alloc] init];
 
 	[self.task setLaunchPath:userShell];
 	[self.task setArguments:arguments];
@@ -339,6 +336,8 @@
 		return [NSString stringWithFormat:@"%@\n%@", string_output, string_error];
 	}
 }
+
+#pragma mark - Operations that return on finish
 
 - (NSArray*)list
 {
@@ -437,6 +436,8 @@
 //	NSLog (@"script returned:\n%@", string);
     return string;
 }
+
+#pragma mark - Operations with live data callback block
 
 - (BOOL)updateWithReturnBlock:(void (^)(NSString*output))block
 {

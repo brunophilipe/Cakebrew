@@ -78,6 +78,8 @@
 	static NSString *depString = @"Formula no longer available.";
 	static NSString *emptyString = @"--";
 
+	[self setCurrentFormula:formula];
+
 	if (formula) {
 		if (!formula.isDeprecated) {
 			if (formula.isInstalled) {
@@ -99,8 +101,6 @@
 			} else {
 				[self.label_formulaConflicts setStringValue:@"This formula has no known conflicts."];
 			}
-
-			[self.button_formulaWebsite setEnabled:YES];
 		} else {
 			[self.label_formulaPath setStringValue:depString];
 			[self.label_formulaDependencies setStringValue:emptyString];
@@ -111,7 +111,6 @@
 		[self.label_formulaVersion setStringValue:emptyString];
 		[self.label_formulaDependencies setStringValue:emptyString];
 		[self.label_formulaConflicts setStringValue:emptyString];
-		[self.button_formulaWebsite setEnabled:NO];
 	}
 }
 
@@ -168,18 +167,22 @@
 	[[BPHomebrewManager sharedManager] update];
 }
 
-- (void)updateToolbarItemsState
+- (void)updateInterfaceItems
 {
 	NSUInteger selectedTab = [self.outlineView_sidebar selectedRow];
 	NSUInteger selectedIndex = [self.tableView_formulae selectedRow];
-    if(selectedIndex == -1 || selectedTab > 4) {
+    if(selectedIndex == -1 || selectedTab > 4)
+	{
 		[self.toolbarButton_installUninstall setEnabled:NO];
 		[self.toolbarButton_formulaInfo setEnabled:NO];
 		[self displayInformationForFormula:nil];
-    } else {
+    }
+	else
+	{
+		BPFormula *formula = [_formulaeArray objectAtIndex:selectedIndex];
+
 		[self.toolbarButton_installUninstall setEnabled:YES];
 		[self.toolbarButton_formulaInfo setEnabled:YES];
-		BPFormula *formula = [_formulaeArray objectAtIndex:selectedIndex];
 
 		switch ([[BPHomebrewManager sharedManager] statusForFormula:formula]) {
 			case kBPFormulaInstalled:
@@ -257,6 +260,7 @@
 	[parent addChildItem:item];
 
 	[self displayInformationForFormula:nil];
+	[self setEnableUpgradeFormulasMenu:([[BPHomebrewManager sharedManager] formulae_outdated].count > 0)];
 }
 
 - (void)configureTableForListing:(BPListMode)mode
@@ -272,7 +276,6 @@
 			_formulaeArray = [[BPHomebrewManager sharedManager] formulae_all];
 			[[self.tableView_formulae tableColumnWithIdentifier:@"Version"] setHidden:YES];
 			[[self.tableView_formulae tableColumnWithIdentifier:@"LatestVersion"] setHidden:YES];
-			[self.button_upgradeAll setHidden:YES];
 			break;
 
 		case kBPListInstalled:
@@ -281,7 +284,6 @@
 			[[self.tableView_formulae tableColumnWithIdentifier:@"Version"] setHidden:NO];
 			[[self.tableView_formulae tableColumnWithIdentifier:@"Version"] setWidth:(totalWidth-titleWidth)*0.95];
 			[[self.tableView_formulae tableColumnWithIdentifier:@"LatestVersion"] setHidden:YES];
-			[self.button_upgradeAll setHidden:YES];
 			break;
 
 		case kBPListLeaves:
@@ -289,7 +291,6 @@
 			_formulaeArray = [[BPHomebrewManager sharedManager] formulae_leaves];
 			[[self.tableView_formulae tableColumnWithIdentifier:@"Version"] setHidden:YES];
 			[[self.tableView_formulae tableColumnWithIdentifier:@"LatestVersion"] setHidden:YES];
-			[self.button_upgradeAll setHidden:YES];
 			break;
 
 		case kBPListOutdated:
@@ -299,8 +300,6 @@
 			[[self.tableView_formulae tableColumnWithIdentifier:@"Version"] setWidth:(totalWidth-titleWidth)*0.48];
 			[[self.tableView_formulae tableColumnWithIdentifier:@"LatestVersion"] setHidden:NO];
 			[[self.tableView_formulae tableColumnWithIdentifier:@"LatestVersion"] setWidth:(totalWidth-titleWidth)*0.48];
-			[self.button_upgradeAll setHidden:NO];
-			[self.button_upgradeAll setEnabled:(_formulaeArray.count > 0)];
 			break;
 
 		case kBPListSearch:
@@ -308,7 +307,6 @@
 			_formulaeArray = [[BPHomebrewManager sharedManager] formulae_search];
 			[[self.tableView_formulae tableColumnWithIdentifier:@"Version"] setHidden:YES];
 			[[self.tableView_formulae tableColumnWithIdentifier:@"LatestVersion"] setHidden:YES];
-			[self.button_upgradeAll setHidden:YES];
 			break;
 
 		default:
@@ -318,7 +316,7 @@
 	[[self.tableView_formulae tableColumnWithIdentifier:@"Name"] setWidth:titleWidth];
 	[self.tableView_formulae deselectAll:nil];
 	[self.tableView_formulae reloadData];
-	[self updateToolbarItemsState];
+	[self updateInterfaceItems];
 }
 
 #pragma mark - Homebrew Manager Delegate
@@ -423,7 +421,7 @@
 #pragma mark - NSTableView Delegate
 
 - (void)tableViewSelectionDidChange:(NSNotification *)notification {
-	[self updateToolbarItemsState];
+	[self updateInterfaceItems];
 }
 
 #pragma mark - PXSourceList Data Source
@@ -502,7 +500,7 @@
 	if ([self.outlineView_sidebar selectedRow] >= 0)
 		_lastSelectedSidebarIndex = [self.outlineView_sidebar selectedRow];
 
-	[self updateToolbarItemsState];
+	[self updateInterfaceItems];
 
 	switch ([self.outlineView_sidebar selectedRow]) {
 		case 1: // Installed Formulae
@@ -585,7 +583,6 @@
 	[_appDelegate setRunningBackgroundTask:YES];
 
 	NSInteger selectedIndex = [self.tableView_formulae selectedRow];
-	NSToolbarItem *toolbarItem = sender;
 
 	if (selectedIndex >= 0) {
 		BPFormula *formula = [_formulaeArray objectAtIndex:selectedIndex];
