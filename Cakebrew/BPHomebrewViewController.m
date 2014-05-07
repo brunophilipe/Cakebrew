@@ -1,6 +1,6 @@
 //
 //	HomebrewController.m
-//	Cakebrew – The Homebrew GUI App for OS X 
+//	Cakebrew – The Homebrew GUI App for OS X
 //
 //	Created by Vincent Saluzzo on 06/12/11.
 //	Copyright (c) 2011 Bruno Philipe. All rights reserved.
@@ -25,15 +25,12 @@
 #import "BPHomebrewInterface.h"
 #import "BPInstallationViewController.h"
 #import "Frameworks/PXSourceList.framework/Headers/PXSourceList.h"
-#import "BPFormulaViewController.h"
 
 @interface BPHomebrewViewController () <NSTableViewDataSource, NSTableViewDelegate, PXSourceListDataSource, PXSourceListDelegate, BPHomebrewManagerDelegate>
 
 @property (strong, readonly) PXSourceListItem *rootSidebarCategory;
+@property (strong)           NSPopover        *formulaPopover;
 @property (weak)			 BPAppDelegate	  *appDelegate;
-
-@property (nonatomic, strong) NSPopover *formulaPopover;
-@property (nonatomic, strong) BPFormulaViewController *formulaViewController;
 
 @property NSArray   *formulaeArray;
 @property NSInteger lastSelectedSidebarIndex;
@@ -463,7 +460,7 @@
 - (NSView *)sourceList:(PXSourceList *)aSourceList viewForItem:(id)item
 {
 	PXSourceListTableCellView *cellView = nil;
-	
+
     if ([[(PXSourceListItem*)item identifier] isEqualToString:@"group"])
         cellView = [aSourceList makeViewWithIdentifier:@"HeaderCell" owner:nil];
     else
@@ -550,21 +547,21 @@
 
 	if (selectedIndex >= 0) {
 		if ([self.formulaPopover isShown]) {
-				[self.formulaPopover close];
+			[self.formulaPopover close];
 		}
+
+		[self.formulaPopoverView setDataObject:[_formulaeArray objectAtIndex:selectedIndex]];
 
 		if (!self.formulaPopover) {
 			self.formulaPopover = [[NSPopover alloc] init];
 			[self.formulaPopover setBehavior:NSPopoverBehaviorSemitransient];
 			[self.formulaPopover setAppearance:NSPopoverAppearanceHUD];
 		}
-    
-    if (!self.formulaViewController) {
-      self.formulaViewController = [[BPFormulaViewController alloc] init];
-      [self.formulaPopover setContentViewController:self.formulaViewController];
-    }
-    
-		[self.formulaViewController setDataObject:[_formulaeArray objectAtIndex:selectedIndex]];
+
+		NSViewController *controller = [[NSViewController alloc] init];
+		[controller setView:self.formulaPopoverView];
+
+		[self.formulaPopover setContentViewController:controller];
 
 		NSRect anchorRect = [self.tableView_formulae rectOfRow:selectedIndex];
 		anchorRect.origin = [self.scrollView_formulae convertPoint:anchorRect.origin fromView:self.tableView_formulae];
@@ -621,7 +618,7 @@
 		if (message) {
 			NSAlert *alert = [NSAlert alertWithMessageText:@"Attention!" defaultButton:@"Yes" alternateButton:@"Cancel" otherButton:nil informativeTextWithFormat:message, formula.name];
 			[alert.window setTitle:@"Cakebrew"];
-            
+
             NSInteger returnValue = [alert runModal];
 			if (returnValue == NSAlertDefaultReturn) {
 				operationBlock();

@@ -1,6 +1,6 @@
 //
 //	HomebrewController.h
-//	Cakebrew – The Homebrew GUI App for OS X 
+//	Cakebrew – The Homebrew GUI App for OS X
 //
 //	Created by Vincent Saluzzo on 06/12/11.
 //	Copyright (c) 2011 Bruno Philipe. All rights reserved.
@@ -24,6 +24,7 @@
 #import "DMSplitView.h"
 #import "BPInsetShadowView.h"
 #import "BPUpdateDoctorController.h"
+#import "BPGenericTextPopoverView.h"
 
 typedef NS_ENUM(NSUInteger, BPWindowOperation) {
     kBPWindowOperationInstall,
@@ -33,7 +34,6 @@ typedef NS_ENUM(NSUInteger, BPWindowOperation) {
 
 @class DMSplitView;
 @class BPInsetShadowView;
-@class BPGenericTextPopoverView;
 @class BPUpdateDoctorController;
 
 @interface BPHomebrewViewController : NSViewController
@@ -49,6 +49,7 @@ typedef NS_ENUM(NSUInteger, BPWindowOperation) {
 @property (weak) IBOutlet NSTextField *label_formulaVersion;
 @property (weak) IBOutlet NSTextField *label_formulaDependencies;
 @property (weak) IBOutlet NSTextField *label_formulaConflicts;
+@property (weak) IBOutlet BPGenericTextPopoverView *formulaPopoverView;
 @property (weak) IBOutlet BPInsetShadowView *view_disablerLock;
 @property (weak) IBOutlet NSToolbar *toolbar;
 
