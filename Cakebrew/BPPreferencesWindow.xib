@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="5056" systemVersion="13C1021" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+    <dependencies>
+        <deployment defaultVersion="1070" identifier="macosx"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="5056"/>
+    </dependencies>
+    <objects>
+        <customObject id="-2" userLabel="File's Owner" customClass="BPPreferencesWindowController">
+            <connections>
+                <outlet property="window" destination="x9D-0i-ikH" id="okW-MV-TFz"/>
+            </connections>
+        </customObject>
+        <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
+        <customObject id="-3" userLabel="Application"/>
+        <window title="Preferences" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" oneShot="NO" releasedWhenClosed="NO" showsToolbarButton="NO" visibleAtLaunch="NO" animationBehavior="default" id="x9D-0i-ikH">
+            <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
+            <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
+            <rect key="contentRect" x="131" y="159" width="460" height="180"/>
+            <rect key="screenRect" x="0.0" y="0.0" width="1440" height="878"/>
+            <value key="minSize" type="size" width="460" height="220"/>
+            <view key="contentView" id="ghP-Qf-sYl">
+                <rect key="frame" x="0.0" y="0.0" width="460" height="180"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="OxS-Oo-N62">
+                        <rect key="frame" x="18" y="146" width="93" height="17"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Proxy Settings" id="u9T-va-Rk7">
+                            <font key="font" metaFont="system"/>
+                            <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                            <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                        </textFieldCell>
+                    </textField>
+                    <box autoresizesSubviews="NO" verticalHuggingPriority="750" title="Box" boxType="separator" titlePosition="noTitle" translatesAutoresizingMaskIntoConstraints="NO" id="1S6-SI-uPn">
+                        <rect key="frame" x="20" y="142" width="428" height="5"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                        <color key="borderColor" white="0.0" alpha="0.41999999999999998" colorSpace="calibratedWhite"/>
+                        <color key="fillColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        <font key="titleFont" metaFont="system"/>
+                    </box>
+                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="7cx-UZ-Ag8">
+                        <rect key="frame" x="30" y="107" width="412" height="28"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                        <textFieldCell key="cell" controlSize="small" sendsActionOnEndEditing="YES" title="Please insert your proxy URL below. You should get this information from your network manager." id="dfE-IM-SSk">
+                            <font key="font" metaFont="smallSystem"/>
+                            <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                            <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                        </textFieldCell>
+                    </textField>
+                    <button translatesAutoresizingMaskIntoConstraints="NO" id="F7o-tT-ZvP">
+                        <rect key="frame" x="30" y="53" width="103" height="18"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                        <buttonCell key="cell" type="check" title="Enable Proxy" bezelStyle="regularSquare" imagePosition="left" inset="2" id="1fd-WJ-NfP">
+                            <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                            <font key="font" metaFont="system"/>
+                        </buttonCell>
+                        <connections>
+                            <binding destination="-2" name="value" keyPath="proxyEnabled" id="nx4-Lp-kir"/>
+                        </connections>
+                    </button>
+                    <imageView hidden="YES" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="cEF-SM-msL">
+                        <rect key="frame" x="443" y="83" width="10" height="10"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="10" id="Rec-ly-WLQ"/>
+                            <constraint firstAttribute="width" constant="10" id="agq-g0-XdR"/>
+                        </constraints>
+                        <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="NSInvalidDataFreestandingTemplate" id="PpG-3K-3TW"/>
+                        <connections>
+                            <binding destination="-2" name="hidden" keyPath="containsValidProxyString" id="i9P-7g-mcT"/>
+                        </connections>
+                    </imageView>
+                    <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="HKA-rP-iRf">
+                        <rect key="frame" x="372" y="13" width="74" height="32"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="62" id="f7g-Z0-LdF"/>
+                        </constraints>
+                        <buttonCell key="cell" type="push" title="Save" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="1tf-08-6hw">
+                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                            <font key="font" metaFont="system"/>
+                        </buttonCell>
+                        <connections>
+                            <action selector="save:" target="-2" id="KMs-Co-jzU"/>
+                        </connections>
+                    </button>
+                    <secureTextField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="H2K-bm-aOS">
+                        <rect key="frame" x="32" y="77" width="408" height="22"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                        <secureTextFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" placeholderString="http://&lt;user>:&lt;password>@&lt;proxyhost>:&lt;proxyport>" drawsBackground="YES" usesSingleLineMode="YES" id="Znf-tJ-UWY">
+                            <font key="font" metaFont="system"/>
+                            <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                            <allowedInputSourceLocales>
+                                <string>NSAllRomanInputSourcesLocaleIdentifier</string>
+                            </allowedInputSourceLocales>
+                        </secureTextFieldCell>
+                        <connections>
+                            <binding destination="-2" name="value" keyPath="proxyString" id="YP5-Jo-XSN">
+                                <dictionary key="options">
+                                    <bool key="NSContinuouslyUpdatesValue" value="YES"/>
+                                    <string key="NSNullPlaceholder">http://&lt;user&gt;:&lt;password&gt;@&lt;proxyhost&gt;:&lt;proxyport&gt;</string>
+                                </dictionary>
+                            </binding>
+                            <outlet property="delegate" destination="-2" id="TzV-PF-dHE"/>
+                        </connections>
+                    </secureTextField>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="F7o-tT-ZvP" firstAttribute="leading" secondItem="ghP-Qf-sYl" secondAttribute="leading" constant="32" id="0Ip-Rd-e7f"/>
+                    <constraint firstItem="7cx-UZ-Ag8" firstAttribute="leading" secondItem="ghP-Qf-sYl" secondAttribute="leading" constant="32" id="0Ma-zX-N6r"/>
+                    <constraint firstAttribute="trailing" secondItem="7cx-UZ-Ag8" secondAttribute="trailing" constant="20" id="4WY-cB-Vv1"/>
+                    <constraint firstAttribute="bottom" secondItem="HKA-rP-iRf" secondAttribute="bottom" constant="20" id="662-u4-yxH"/>
+                    <constraint firstItem="cEF-SM-msL" firstAttribute="leading" secondItem="H2K-bm-aOS" secondAttribute="trailing" constant="3" id="IFD-7s-Wae"/>
+                    <constraint firstAttribute="trailing" secondItem="cEF-SM-msL" secondAttribute="trailing" constant="7" id="RQJ-q4-csM"/>
+                    <constraint firstItem="1S6-SI-uPn" firstAttribute="leading" secondItem="ghP-Qf-sYl" secondAttribute="leading" constant="20" id="Rav-qB-Tog"/>
+                    <constraint firstItem="7cx-UZ-Ag8" firstAttribute="top" secondItem="1S6-SI-uPn" secondAttribute="bottom" constant="9" id="cLw-Mh-obU"/>
+                    <constraint firstItem="1S6-SI-uPn" firstAttribute="top" secondItem="OxS-Oo-N62" secondAttribute="bottom" constant="1" id="d7X-Cm-IZN"/>
+                    <constraint firstItem="OxS-Oo-N62" firstAttribute="leading" secondItem="ghP-Qf-sYl" secondAttribute="leading" constant="20" id="dRM-zc-NsF"/>
+                    <constraint firstItem="OxS-Oo-N62" firstAttribute="top" secondItem="ghP-Qf-sYl" secondAttribute="top" constant="17" id="dgJ-aS-Jl6"/>
+                    <constraint firstItem="H2K-bm-aOS" firstAttribute="top" secondItem="7cx-UZ-Ag8" secondAttribute="bottom" constant="8" id="gD8-Xn-V7r"/>
+                    <constraint firstAttribute="trailing" secondItem="1S6-SI-uPn" secondAttribute="trailing" constant="12" id="h6X-FB-Mlc"/>
+                    <constraint firstItem="F7o-tT-ZvP" firstAttribute="top" secondItem="H2K-bm-aOS" secondAttribute="bottom" constant="8" id="haE-7V-SW5"/>
+                    <constraint firstItem="cEF-SM-msL" firstAttribute="top" secondItem="1S6-SI-uPn" secondAttribute="bottom" constant="51" id="hd7-HU-ZdG"/>
+                    <constraint firstItem="H2K-bm-aOS" firstAttribute="leading" secondItem="ghP-Qf-sYl" secondAttribute="leading" constant="32" id="rXy-vd-rt2"/>
+                    <constraint firstAttribute="trailing" secondItem="HKA-rP-iRf" secondAttribute="trailing" constant="20" id="woR-yF-RYG"/>
+                </constraints>
+            </view>
+        </window>
+    </objects>
+    <resources>
+        <image name="NSInvalidDataFreestandingTemplate" width="18" height="18"/>
+    </resources>
+</document>
