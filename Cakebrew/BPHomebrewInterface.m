@@ -293,7 +293,7 @@
 	NSFileHandle *fh = [n object];
     NSData *data = [fh availableData];
 	[fh waitForDataInBackgroundAndNotify];
-	dispatch_async(dispatch_get_main_queue(), ^{
+	dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
 		operationUpdateBlock([[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding]);
 	});
 }
