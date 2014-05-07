@@ -675,6 +675,7 @@
         }];
 	} else {
         NSRect newRect[numberOfSubviews];
+        memset(newRect, 0, sizeof(newRect));
         [self getNewSubviewsRects:newRect withIndexes:indexes andPositions:newPositions];
         
         for (NSUInteger i = 0; i < numberOfSubviews; i++) {
