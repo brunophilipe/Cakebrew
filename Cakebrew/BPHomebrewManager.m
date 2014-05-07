@@ -63,8 +63,9 @@
         if (![self loadAllFormulaeCaches]) {
 			[self setFormulae_all:[[BPHomebrewInterface sharedInterface] listMode:kBPListAll]];
 			[self storeAllFormulaeCaches];
-			[self.delegate homebrewManagerFinishedUpdating:self];
         }
+		
+		[self.delegate homebrewManagerFinishedUpdating:self];
     });
 }
 
@@ -91,29 +92,23 @@
 - (BOOL)loadAllFormulaeCaches
 {
 	NSURL *cachesFolder = [BPAppDelegateRef urlForApplicationCachesFolder];
+
 	if (cachesFolder) {
 		NSURL *allFormulaeFile = [cachesFolder URLByAppendingPathComponent:@"allFormulae.cache.bin"];
 		NSDictionary *cacheDict = nil;// = @{kBP_CACHE_DICT_DATE_KEY: [NSDate date], kBP_CACHE_DICT_DATA_KEY: self.formulae_all};
-		NSDate *modificationDate = nil;
 
-		[allFormulaeFile getResourceValue:&modificationDate forKey:NSURLContentModificationDateKey error:nil];
-
-		if (
-			[[NSFileManager defaultManager] fileExistsAtPath:allFormulaeFile.relativePath] &&
-			modificationDate &&
-			[(NSDate*)[modificationDate dateByAddingTimeInterval:3600*24] compare:[NSDate date]] == NSOrderedAscending
-			)
+		if ([[NSFileManager defaultManager] fileExistsAtPath:allFormulaeFile.relativePath])
 		{
 			cacheDict = [NSKeyedUnarchiver unarchiveObjectWithFile:allFormulaeFile.relativePath];
-			self.formulae_all = [cacheDict objectForKey:kBP_CACHE_DICT_DATA_KEY];
-			[self.delegate homebrewManagerFinishedUpdating:self];
-
+			NSDate *storageDate = [cacheDict objectForKey:kBP_CACHE_DICT_DATE_KEY];
+			if ([(NSDate*)[storageDate dateByAddingTimeInterval:3600*24] compare:[NSDate date]] == NSOrderedDescending) {
+				self.formulae_all = [cacheDict objectForKey:kBP_CACHE_DICT_DATA_KEY];
+			}
 			return self.formulae_all != nil;
 		}
-	} else {
-		NSLog(@"Could not load cache file. BPAppDelegate function returned nil!");
 	}
 
+	NSLog(@"Could not load cache file. -[BPAppDelegate urlForApplicationCachesFolder] returned nil!");
 	return NO;
 }
 
