@@ -12,11 +12,11 @@
 //
 //	This program is distributed in the hope that it will be useful,
 //	but WITHOUT ANY WARRANTY; without even the implied warranty of
-//	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+//	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.	See the
 //	GNU General Public License for more details.
 //
 //	You should have received a copy of the GNU General Public License
-//	along with this program.  If not, see <http://www.gnu.org/licenses/>.
+//	along with this program.	If not, see <http://www.gnu.org/licenses/>.
 //
 
 #import "BPAppDelegate.h"
@@ -41,19 +41,19 @@
 
 - (BPPreferencesWindowController *)preferencesWindowController
 {
-  if (!_preferencesWindowController) {
-    _preferencesWindowController = [[BPPreferencesWindowController alloc] init];
-  }
-  return _preferencesWindowController;
+	if (!_preferencesWindowController) {
+		_preferencesWindowController = [[BPPreferencesWindowController alloc] init];
+	}
+	return _preferencesWindowController;
 }
 
 - (DCOAboutWindowController *)aboutWindowController
 {
-  if(!_aboutWindowController){
-    _aboutWindowController = [[DCOAboutWindowController alloc] init];
-    [_aboutWindowController setAppWebsiteURL:kBP_CAKEBREW_URL];
-  }
-  return _aboutWindowController;
+	if (!_aboutWindowController){
+		_aboutWindowController = [[DCOAboutWindowController alloc] init];
+		[_aboutWindowController setAppWebsiteURL:kBP_CAKEBREW_URL];
+	}
+	return _aboutWindowController;
 }
 
 #pragma mark - NSApplicationDelegate
@@ -66,11 +66,11 @@
 
 - (BOOL)applicationShouldHandleReopen:(NSApplication *)sender hasVisibleWindows:(BOOL)flag
 {
-  if (!flag) {
-    [self.window makeKeyAndOrderFront:self];
-  }
-    
-  return YES;
+	if (!flag) {
+		[self.window makeKeyAndOrderFront:self];
+	}
+
+	return YES;
 }
 
 - (NSApplicationTerminateReply)applicationShouldTerminate:(NSApplication *)sender
@@ -135,7 +135,7 @@
 }
 
 - (IBAction)showPreferencesWindow:(id)sender {
-  [self.preferencesWindowController showWindow:nil];
+	[self.preferencesWindowController showWindow:nil];
 }
 
 @end

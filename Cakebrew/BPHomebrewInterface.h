@@ -36,6 +36,15 @@ typedef NS_ENUM(NSInteger, BPListMode) {
 
 - (void)hideHomebrewNotInstalledMessage;
 
+#pragma mark - Operations with live data callback block
+
+- (BOOL)updateWithReturnBlock:(void (^)(NSString*))block;
+- (BOOL)upgradeFormula:(NSString*)formula withReturnBlock:(void (^)(NSString*))block;
+- (BOOL)upgradeFormulae:(NSArray*)formulae withReturnBlock:(void (^)(NSString*))block;
+- (BOOL)installFormula:(NSString*)formula withReturnBlock:(void (^)(NSString*))block;
+- (BOOL)uninstallFormula:(NSString*)formula withReturnBlock:(void (^)(NSString*))block;
+- (BOOL)runDoctorWithReturnBlock:(void (^)(NSString*))block;
+
 #pragma mark - Operations that return on finish
 
 - (NSArray*)list;
@@ -48,14 +57,5 @@ typedef NS_ENUM(NSInteger, BPListMode) {
 - (NSString*)installFormula:(NSString*)formula __deprecated;
 - (NSString*)uninstallFormula:(NSString*)formula __deprecated;
 - (NSString*)runDoctor __deprecated;
-
-#pragma mark - Operations with live data callback block
-
-- (BOOL)updateWithReturnBlock:(void (^)(NSString*))block;
-- (BOOL)upgradeFormula:(NSString*)formula withReturnBlock:(void (^)(NSString*))block;
-- (BOOL)upgradeFormulae:(NSArray*)formulae withReturnBlock:(void (^)(NSString*))block;
-- (BOOL)installFormula:(NSString*)formula withReturnBlock:(void (^)(NSString*))block;
-- (BOOL)uninstallFormula:(NSString*)formula withReturnBlock:(void (^)(NSString*))block;
-- (BOOL)runDoctorWithReturnBlock:(void (^)(NSString*))block;
 
 @end
