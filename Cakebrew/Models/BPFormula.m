@@ -161,7 +161,7 @@
 	for (i=0; i<lines.count; i++) {
 		line = [lines objectAtIndex:lineIndex+i];
 
-		if (![line isEqualToString:@""] && ![line isEqualToString:@"==> Options"]) {
+		if (![line isEqualToString:@""] && ![line isEqualToString:@"==> Options"] && ![line isEqualToString:@"==> Caveats"]) {
 			if (self.dependencies) {
 				self.dependencies = [self.dependencies stringByAppendingFormat:@"; %@", line];
 			} else {
