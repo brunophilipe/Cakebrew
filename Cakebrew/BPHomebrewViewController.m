@@ -269,10 +269,12 @@
 
 	switch (mode) {
 		case kBPListAll:
-			titleWidth = (NSInteger)totalWidth*0.99;
+			titleWidth = (NSInteger)(totalWidth - 90);
 			_formulaeArray = [[BPHomebrewManager sharedManager] formulae_all];
 			[[self.tableView_formulae tableColumnWithIdentifier:@"Version"] setHidden:YES];
 			[[self.tableView_formulae tableColumnWithIdentifier:@"LatestVersion"] setHidden:YES];
+			[[self.tableView_formulae tableColumnWithIdentifier:@"Status"] setHidden:NO];
+			[[self.tableView_formulae tableColumnWithIdentifier:@"Status"] setWidth:(totalWidth-titleWidth)*0.90];
 			break;
 
 		case kBPListInstalled:
@@ -281,13 +283,15 @@
 			[[self.tableView_formulae tableColumnWithIdentifier:@"Version"] setHidden:NO];
 			[[self.tableView_formulae tableColumnWithIdentifier:@"Version"] setWidth:(totalWidth-titleWidth)*0.95];
 			[[self.tableView_formulae tableColumnWithIdentifier:@"LatestVersion"] setHidden:YES];
+			[[self.tableView_formulae tableColumnWithIdentifier:@"Status"] setHidden:YES];
 			break;
 
 		case kBPListLeaves:
-			titleWidth = (NSInteger)totalWidth*0.99;
+			titleWidth = (NSInteger)(totalWidth * 0.99);
 			_formulaeArray = [[BPHomebrewManager sharedManager] formulae_leaves];
 			[[self.tableView_formulae tableColumnWithIdentifier:@"Version"] setHidden:YES];
 			[[self.tableView_formulae tableColumnWithIdentifier:@"LatestVersion"] setHidden:YES];
+			[[self.tableView_formulae tableColumnWithIdentifier:@"Status"] setHidden:YES];
 			break;
 
 		case kBPListOutdated:
@@ -297,13 +301,16 @@
 			[[self.tableView_formulae tableColumnWithIdentifier:@"Version"] setWidth:(totalWidth-titleWidth)*0.48];
 			[[self.tableView_formulae tableColumnWithIdentifier:@"LatestVersion"] setHidden:NO];
 			[[self.tableView_formulae tableColumnWithIdentifier:@"LatestVersion"] setWidth:(totalWidth-titleWidth)*0.48];
+			[[self.tableView_formulae tableColumnWithIdentifier:@"Status"] setHidden:YES];
 			break;
 
 		case kBPListSearch:
-			titleWidth = (NSInteger)totalWidth*0.99;
+			titleWidth = (NSInteger)(totalWidth - 90);
 			_formulaeArray = [[BPHomebrewManager sharedManager] formulae_search];
 			[[self.tableView_formulae tableColumnWithIdentifier:@"Version"] setHidden:YES];
 			[[self.tableView_formulae tableColumnWithIdentifier:@"LatestVersion"] setHidden:YES];
+			[[self.tableView_formulae tableColumnWithIdentifier:@"Status"] setHidden:NO];
+			[[self.tableView_formulae tableColumnWithIdentifier:@"Status"] setWidth:(totalWidth-titleWidth)*0.90];
 			break;
 
 		default:
@@ -409,7 +416,21 @@
 			} else {
 				return element;
 			}
-        }
+        } else if ([columnIdentifer isEqualToString:@"Status"]) {
+			if ([element isKindOfClass:[BPFormula class]]) {
+				if (![(BPFormula*)element isInstalled]) {
+					return @"Not Installed";
+				} else {
+					if ([[BPHomebrewManager sharedManager] statusForFormula:element] == kBPFormulaOutdated) {
+						return @"Outdated";
+					} else {
+						return @"Installed";
+					}
+				}
+			} else {
+				return element;
+			}
+		}
     }
 
 	return @"";

@@ -27,11 +27,12 @@
 @property (strong) NSString *version;
 @property (strong) NSString *latestVersion;
 @property (strong) NSString *installPath;
-@property (strong) NSURL *website;
 @property (strong) NSString *dependencies;
 @property (strong) NSString *conflicts;
-@property (getter = isInstalled) BOOL installed;
-@property (getter = isDeprecated) BOOL deprecated;
+@property (strong) NSURL    *website;
+
+@property (getter = isInstalled)		   BOOL installed;
+@property (getter = isDeprecated)		   BOOL deprecated;
 @property (getter = isOutdated, nonatomic) BOOL outdated;
 
 + (BPFormula*)formulaWithName:(NSString*)name version:(NSString*)version andLatestVersion:(NSString*)latestVersion;
