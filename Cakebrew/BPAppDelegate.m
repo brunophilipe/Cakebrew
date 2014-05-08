@@ -3,7 +3,7 @@
 //	Cakebrew – The Homebrew GUI App for OS X
 //
 //	Created by Vincent Saluzzo on 06/12/11.
-//	Copyright (c) 2011 Bruno Philipe. All rights reserved.
+//	Copyright (c) 2014 Bruno Philipe. All rights reserved.
 //
 //	This program is free software: you can redistribute it and/or modify
 //	it under the terms of the GNU General Public License as published by
@@ -122,6 +122,21 @@
 		alert = [NSAlert alertWithMessageText:@"Active background task!" defaultButton:@"OK" alternateButton:nil otherButton:nil informativeTextWithFormat:@"Sorry, a background task is already running. You can't perform two tasks at the same time."];
 
 	[alert runModal];
+}
+
+- (NSFont*)defaultFixedWidthFont
+{
+	static NSFont *font = nil;
+
+	if (!font) {
+		font = [NSFont fontWithName:@"Andale Mono" size:12];
+		if (!font)
+			font = [NSFont fontWithName:@"Menlo" size:12];
+		if (!font)
+			font = [NSFont systemFontOfSize:12];
+	}
+
+	return font;
 }
 
 - (IBAction)showAboutWindow:(id)sender
