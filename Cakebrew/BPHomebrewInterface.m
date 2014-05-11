@@ -257,6 +257,8 @@ static NSString *cakebrewOutputIdentifier = @"+++++Cakebrew+++++";
 
 - (BOOL)performBrewCommandWithArguments:(NSArray*)arguments dataReturnBlock:(void (^)(NSString*))block
 {
+	static NSString *taskDoneString = @"Task finished at %@!";
+
 	NSString *userShell = [self getValidUserShell];
 	NSString *shellName = [userShell lastPathComponent];
 
@@ -290,6 +292,8 @@ static NSString *cakebrewOutputIdentifier = @"+++++Cakebrew+++++";
 	[self.task launch];
     [self.task waitUntilExit];
 
+	block([NSString stringWithFormat:taskDoneString, [NSDateFormatter localizedStringFromDate:[NSDate date] dateStyle:NSDateFormatterShortStyle timeStyle:NSDateFormatterShortStyle]]);
+
 	return YES;
 }
 
@@ -298,9 +302,11 @@ static NSString *cakebrewOutputIdentifier = @"+++++Cakebrew+++++";
 	NSFileHandle *fh = [n object];
     NSData *data = [fh availableData];
 	[fh waitForDataInBackgroundAndNotify];
-	dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
-		operationUpdateBlock([[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding]);
-	});
+	if (data && data.length > 0) {
+		dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
+			operationUpdateBlock([[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding]);
+		});
+	}
 }
 
 - (NSString*)performBrewCommandWithArguments:(NSArray*)arguments
