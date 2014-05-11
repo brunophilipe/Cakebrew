@@ -126,27 +126,25 @@
 
 - (BPFormula *)parseFormulaItem:(NSString *)item
 {
-//	TO-DO: Replace this algorythim for a NSRegularExpression
-//	NSString *regexString = @"(\\S*)\\s\\((\\S*) \\< (\\S*)\\)";
+	static NSString *regexString = @"(\\S*)\\s\\((\\S*) < (\\S*)\\)";
 
-    NSRange nameEnd = [item rangeOfString:@" "];
-    NSRange openBracket = [item rangeOfString:@"("];
-    NSRange upgradeArrow = [item rangeOfString:@" < "];
-    NSRange closeBracket = [item rangeOfString:@")"];
+	BPFormula __block *formula = nil;
+	NSError *error = nil;
+	NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:regexString options:NSRegularExpressionCaseInsensitive error:&error];
 
-    if (nameEnd.location == NSNotFound ||
-        openBracket.location == NSNotFound ||
-        upgradeArrow.location == NSNotFound ||
-        closeBracket.location == NSNotFound)
-    {
-        return [BPFormula formulaWithName:item];
-    }
+	[regex enumerateMatchesInString:item options:0 range:NSMakeRange(0, [item length]) usingBlock:^(NSTextCheckingResult *result, NSMatchingFlags flags, BOOL *stop) {
+		if (result.resultType == NSTextCheckingTypeRegularExpression) {
+			formula = [BPFormula formulaWithName:[item substringWithRange:[result rangeAtIndex:1]]
+										 version:[item substringWithRange:[result rangeAtIndex:2]]
+								andLatestVersion:[item substringWithRange:[result rangeAtIndex:3]]];
+		}
+	}];
 
-    NSString *name = [item substringWithRange:NSMakeRange(0, nameEnd.location)];
-    NSString *version = [item substringWithRange:NSMakeRange(openBracket.location + 1, upgradeArrow.location - openBracket.location - 1)];
-    NSString *latestVersion = [item substringWithRange:NSMakeRange(upgradeArrow.location + upgradeArrow.length, closeBracket.location - upgradeArrow.location - upgradeArrow.length)];
+	if (!formula) {
+		formula = [BPFormula formulaWithName:item];
+	}
 
-    return [BPFormula formulaWithName:name version:version andLatestVersion:latestVersion];
+	return formula;
 }
 
 @end
