@@ -23,7 +23,8 @@
 #import "BPFormula.h"
 
 #define kBP_EXEC_FILE_NOT_FOUND 32512
-NSString *const cakebrewOutputIdentifier = @"+++++Cakebrew+++++";
+
+static NSString *cakebrewOutputIdentifier = @"+++++Cakebrew+++++";
 
 @interface BPHomebrewInterfaceListCall : NSObject
 
@@ -232,9 +233,14 @@ NSString *const cakebrewOutputIdentifier = @"+++++Cakebrew+++++";
 	return userShell;
 }
 
-- (NSArray *)formatArgumentsForShell:(NSString *)shellName withExtraArguments:(NSArray *)extraArguments
+- (NSArray *)formatArgumentsForShell:(NSString *)shellName withExtraArguments:(NSArray *)extraArguments sendOutputId:(BOOL)sendOutputID
 {
-	NSString *command = [NSString stringWithFormat:@"echo \"%@\";brew %@", cakebrewOutputIdentifier, [extraArguments componentsJoinedByString:@" "]];
+	NSString *command = nil;
+	if (sendOutputID) {
+		command = [NSString stringWithFormat:@"echo \"%@\";brew %@", cakebrewOutputIdentifier, [extraArguments componentsJoinedByString:@" "]];
+	} else {
+		command = [NSString stringWithFormat:@"brew %@", [extraArguments componentsJoinedByString:@" "]];
+	}
 	NSArray *arguments = @[@"-l", @"-c", command];
 
 	return arguments;
@@ -254,7 +260,7 @@ NSString *const cakebrewOutputIdentifier = @"+++++Cakebrew+++++";
 	NSString *userShell = [self getValidUserShell];
 	NSString *shellName = [userShell lastPathComponent];
 
-	arguments = [self formatArgumentsForShell:shellName withExtraArguments:arguments];
+	arguments = [self formatArgumentsForShell:shellName withExtraArguments:arguments sendOutputId:NO];
 
 	if (!userShell || !arguments) return NO;
 
@@ -307,7 +313,7 @@ NSString *const cakebrewOutputIdentifier = @"+++++Cakebrew+++++";
 	NSString *userShell = [self getValidUserShell];
 	NSString *shellName = [userShell lastPathComponent];
 
-	arguments = [self formatArgumentsForShell:shellName withExtraArguments:arguments];
+	arguments = [self formatArgumentsForShell:shellName withExtraArguments:arguments sendOutputId:YES];
 
 	if (!userShell || !arguments) return NO;
 
@@ -329,9 +335,12 @@ NSString *const cakebrewOutputIdentifier = @"+++++Cakebrew+++++";
     string_output = [[NSString alloc] initWithData:[[pipe_output fileHandleForReading] readDataToEndOfFile] encoding:NSUTF8StringEncoding];
 	string_error = [[NSString alloc] initWithData:[[pipe_error fileHandleForReading] readDataToEndOfFile] encoding:NSUTF8StringEncoding];
 
+	string_output = [self removeLoginShellOutputFromString:string_output];
+
 	if (!captureError) {
 		return string_output;
 	} else {
+		string_error = [self removeLoginShellOutputFromString:string_error];
 		return [NSString stringWithFormat:@"%@\n%@", string_output, string_error];
 	}
 }
@@ -368,7 +377,6 @@ NSString *const cakebrewOutputIdentifier = @"+++++Cakebrew+++++";
 	}
 
     NSString *string = [self performBrewCommandWithArguments:listCall.arguments];
-    string = [self removeLoginShellOutputFromResults:string];
 
     if (string) {
         return [listCall parseData:string];
@@ -388,15 +396,17 @@ NSString *const cakebrewOutputIdentifier = @"+++++Cakebrew+++++";
 }
 
 - (NSString*)informationForFormula:(NSString*)formula {
-	NSString *string = [self performBrewCommandWithArguments:@[@"info", formula]];
-    return [self removeLoginShellOutputFromResults:string];
+	return [self performBrewCommandWithArguments:@[@"info", formula]];
 }
 
-- (NSString*)removeLoginShellOutputFromResults:(NSString*)results {
-    if (results) {
-        NSString *identifierWithEOL = [NSString stringWithFormat:@"%@\n", cakebrewOutputIdentifier];
-        NSRange range = [results rangeOfString:identifierWithEOL];
-        return [results substringFromIndex:range.location + identifierWithEOL.length];
+- (NSString*)removeLoginShellOutputFromString:(NSString*)string {
+    if (string) {
+        NSRange range = [string rangeOfString:cakebrewOutputIdentifier];
+		if (range.location != NSNotFound) {
+			return [string substringFromIndex:range.location + range.length+1];
+		} else {
+			return string;
+		}
     }
     //If all else fails...
     return nil;
