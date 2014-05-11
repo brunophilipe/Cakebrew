@@ -23,6 +23,7 @@
 #import "BPFormula.h"
 
 #define kBP_EXEC_FILE_NOT_FOUND 32512
+NSString *const cakebrewOutputIdentifier = @"+++++Cakebrew+++++";
 
 @interface BPHomebrewInterfaceListCall : NSObject
 
@@ -233,7 +234,7 @@
 
 - (NSArray *)formatArgumentsForShell:(NSString *)shellName withExtraArguments:(NSArray *)extraArguments
 {
-	NSString *command = [NSString stringWithFormat:@"brew %@", [extraArguments componentsJoinedByString:@" "]];
+	NSString *command = [NSString stringWithFormat:@"echo \"%@\";brew %@", cakebrewOutputIdentifier, [extraArguments componentsJoinedByString:@" "]];
 	NSArray *arguments = @[@"-l", @"-c", command];
 
 	return arguments;
@@ -367,6 +368,8 @@
 	}
 
     NSString *string = [self performBrewCommandWithArguments:listCall.arguments];
+    string = [self removeLoginShellOutputFromResults:string];
+
     if (string) {
         return [listCall parseData:string];
 	} else {
@@ -385,7 +388,18 @@
 }
 
 - (NSString*)informationForFormula:(NSString*)formula {
-	return [self performBrewCommandWithArguments:@[@"info", formula]];
+	NSString *string = [self performBrewCommandWithArguments:@[@"info", formula]];
+    return [self removeLoginShellOutputFromResults:string];
+}
+
+- (NSString*)removeLoginShellOutputFromResults:(NSString*)results {
+    if (results) {
+        NSString *identifierWithEOL = [NSString stringWithFormat:@"%@\n", cakebrewOutputIdentifier];
+        NSRange range = [results rangeOfString:identifierWithEOL];
+        return [results substringFromIndex:range.location + identifierWithEOL.length];
+    }
+    //If all else fails...
+    return nil;
 }
 
 - (NSString*)update __deprecated
