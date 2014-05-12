@@ -30,9 +30,6 @@
 @end
 
 @implementation BPUpdateDoctorController
-{
-	NSTimer *timer;
-}
 
 - (void)setTextView_doctor:(NSTextView *)textView
 {
