@@ -2,6 +2,8 @@
 
 The Homebrew GUI App for OS X
 
+[![Build Status](https://travis-ci.org/brunophilipe/Cakebrew.svg?branch=master)](https://travis-ci.org/brunophilipe/Cakebrew)
+
 ## About
 
 Cakebrew does for [Homebrew](http://brew.sh) what Synaptics does to Linux package managers. With Cakebrew you can search, install, uninstall and update formulae and the Homebrew repository, all from within the app.
