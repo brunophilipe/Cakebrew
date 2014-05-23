@@ -79,7 +79,7 @@
 @implementation DMSplitView
 
 @synthesize eventsDelegate;
-@synthesize shouldDrawDivider,shouldDrawDividerHandle,dividerThickness,dividerColor,dividerRectEdge;
+@synthesize shouldDrawDivider,shouldDrawDividerHandle,dividerColor,dividerRectEdge;
 
 - (id)init {
     self = [self initWithFrame:NSZeroRect];

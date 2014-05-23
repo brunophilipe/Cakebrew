@@ -65,7 +65,7 @@ NSString *const BPProxyStringDidChangeNotification = @"BPProxyStringDidChangeNot
   id proxyString = [defaults objectForKey:kBP_HOMEBREW_PROXY_KEY];
   
   if ([proxyString isKindOfClass:[NSString class]]) {
-    _proxyString = [proxyString copy];
+    _proxyString = [(NSString *)proxyString copy];
     
     if([_proxyString bp_containsValidURL]) {
       _containsValidProxyString = YES;
@@ -101,11 +101,7 @@ NSString *const BPProxyStringDidChangeNotification = @"BPProxyStringDidChangeNot
 
 -(void)controlTextDidChange:(NSNotification *)aNotification
 {
-  if([self.proxyString bp_containsValidURL]) {
-    self.containsValidProxyString = YES;
-  } else {
-    self.containsValidProxyString = NO;
-  }
+    self.containsValidProxyString = [self.proxyString bp_containsValidURL];
 }
 
 #pragma mark - IBActions

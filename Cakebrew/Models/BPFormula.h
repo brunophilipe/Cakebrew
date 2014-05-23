@@ -33,7 +33,6 @@
 
 @property (getter = isInstalled)		   BOOL installed;
 @property (getter = isDeprecated)		   BOOL deprecated;
-@property (getter = isOutdated, nonatomic) BOOL outdated;
 
 + (BPFormula*)formulaWithName:(NSString*)name version:(NSString*)version andLatestVersion:(NSString*)latestVersion;
 + (BPFormula*)formulaWithName:(NSString*)name andVersion:(NSString*)version;

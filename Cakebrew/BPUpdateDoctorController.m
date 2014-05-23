@@ -24,9 +24,6 @@
 
 @interface BPUpdateDoctorController ()
 
-@property (strong) NSMutableString *logString;
-@property (strong) NSFileHandle    *outputHandle;
-
 @end
 
 @implementation BPUpdateDoctorController
@@ -45,11 +42,6 @@
 	
 	_textView_update = textView;
 	[_textView_update setFont:font];
-}
-
-- (void)updateLog
-{
-	[self.textView_doctor setString:[[NSString alloc] initWithData:[self.outputHandle availableData] encoding:NSUTF8StringEncoding]];
 }
 
 - (IBAction)runStopDoctor:(id)sender {

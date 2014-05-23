@@ -88,7 +88,7 @@
     // Add border
     CALayer *bottomBorder = [CALayer layer];
     bottomBorder.borderColor = [NSColor grayColor].CGColor;
-    bottomBorder.borderWidth = 1;
+    [bottomBorder setBorderWidth:1];
     bottomBorder.frame = CGRectMake(-1.f, .0f, CGRectGetWidth(self.infoView.frame) + 2.f, CGRectGetHeight(self.infoView.frame) + 1.f);
     [self.infoView.layer addSublayer:bottomBorder];
 }

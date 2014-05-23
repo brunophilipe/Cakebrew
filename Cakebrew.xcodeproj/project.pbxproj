@@ -14,7 +14,6 @@
 		1540FA3D18EDDA1600334A5C /* BPTopBorderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1540FA3B18EDD8CE00334A5C /* BPTopBorderView.m */; };
 		15705464191A887E0003E60F /* BPGenericTextPopoverView.m in Sources */ = {isa = PBXBuildFile; fileRef = 15705463191A887E0003E60F /* BPGenericTextPopoverView.m */; };
 		1570BA3618EE0A66001C3C5C /* BPHomebrewManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 1570BA3518EE0A66001C3C5C /* BPHomebrewManager.m */; };
-		1570BA3918EE24F1001C3C5C /* BPSidebarDetailFieldView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1570BA3818EE24F1001C3C5C /* BPSidebarDetailFieldView.m */; };
 		1570BA5618EE50BD001C3C5C /* BPFormula.m in Sources */ = {isa = PBXBuildFile; fileRef = 1570BA5518EE50BD001C3C5C /* BPFormula.m */; };
 		157270DA18F2598A00CA8C9C /* BPUpdateDoctorController.m in Sources */ = {isa = PBXBuildFile; fileRef = 157270D818F2598A00CA8C9C /* BPUpdateDoctorController.m */; };
 		157270DF18F34CF900CA8C9C /* BPInstallationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 157270DD18F34CF900CA8C9C /* BPInstallationViewController.m */; };
@@ -87,8 +86,6 @@
 		15705463191A887E0003E60F /* BPGenericTextPopoverView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BPGenericTextPopoverView.m; path = Views/BPGenericTextPopoverView.m; sourceTree = "<group>"; };
 		1570BA3418EE0A66001C3C5C /* BPHomebrewManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BPHomebrewManager.h; sourceTree = "<group>"; };
 		1570BA3518EE0A66001C3C5C /* BPHomebrewManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BPHomebrewManager.m; sourceTree = "<group>"; };
-		1570BA3718EE24F1001C3C5C /* BPSidebarDetailFieldView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BPSidebarDetailFieldView.h; path = Views/BPSidebarDetailFieldView.h; sourceTree = "<group>"; };
-		1570BA3818EE24F1001C3C5C /* BPSidebarDetailFieldView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BPSidebarDetailFieldView.m; path = Views/BPSidebarDetailFieldView.m; sourceTree = "<group>"; };
 		1570BA5418EE50BD001C3C5C /* BPFormula.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BPFormula.h; path = Models/BPFormula.h; sourceTree = "<group>"; };
 		1570BA5518EE50BD001C3C5C /* BPFormula.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BPFormula.m; path = Models/BPFormula.m; sourceTree = "<group>"; };
 		157270D718F2598A00CA8C9C /* BPUpdateDoctorController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BPUpdateDoctorController.h; sourceTree = "<group>"; };
@@ -171,8 +168,6 @@
 				1540FA3818ED09BB00334A5C /* BPInsetShadowView.m */,
 				1540FA3A18EDD8CE00334A5C /* BPTopBorderView.h */,
 				1540FA3B18EDD8CE00334A5C /* BPTopBorderView.m */,
-				1570BA3718EE24F1001C3C5C /* BPSidebarDetailFieldView.h */,
-				1570BA3818EE24F1001C3C5C /* BPSidebarDetailFieldView.m */,
 				15705462191A887E0003E60F /* BPGenericTextPopoverView.h */,
 				15705463191A887E0003E60F /* BPGenericTextPopoverView.m */,
 			);
@@ -457,7 +452,6 @@
 			files = (
 				15D5BEFA18EBC56E001DDED7 /* DMSplitView.m in Sources */,
 				1570BA5618EE50BD001C3C5C /* BPFormula.m in Sources */,
-				1570BA3918EE24F1001C3C5C /* BPSidebarDetailFieldView.m in Sources */,
 				157270DF18F34CF900CA8C9C /* BPInstallationViewController.m in Sources */,
 				1FE4FE65148E4CDD008EDE8B /* main.m in Sources */,
 				1570BA3618EE0A66001C3C5C /* BPHomebrewManager.m in Sources */,

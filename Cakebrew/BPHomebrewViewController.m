@@ -124,17 +124,19 @@
 	}
 	[_operationViewController setWindowOperation:operation];
 
-//	[_appDelegate.window beginSheet:_operationWindow completionHandler:^(NSModalResponse returnCode) {
-//		_operationWindow = nil;
-//		_operationViewController = nil;
-//	}];
-
-    [[NSApplication sharedApplication] beginSheet:_operationWindow modalForWindow:_appDelegate.window modalDelegate:self didEndSelector:@selector(clearWindowOperation) contextInfo:nil];
+    if ([_appDelegate.window respondsToSelector:@selector(beginSheet:completionHandler:)]) {
+        [_appDelegate.window beginSheet:_operationWindow completionHandler:^(NSModalResponse returnCode) {
+            _operationWindow = nil;
+            _operationViewController = nil;
+        }];
+    } else {
+        [[NSApplication sharedApplication] beginSheet:_operationWindow modalForWindow:_appDelegate.window modalDelegate:self didEndSelector:@selector(windowOperationSheetDidEnd:returnCode:contextInfo:) contextInfo:nil];
+    }
 
 	[_operationViewController windowDidAppear];
 }
 
-- (void)clearWindowOperation
+- (void)windowOperationSheetDidEnd:(NSWindow *)sheet returnCode:(NSInteger)returnCode contextInfo:(void *)contextInfo;
 {
     _operationWindow = nil;
     _operationViewController = nil;
@@ -152,11 +154,23 @@
 
 	NSAlert *alert = [NSAlert alertWithMessageText:@"Error!" defaultButton:@"Homebrew Website" alternateButton:@"OK" otherButton:nil informativeTextWithFormat:@"Homebrew was not found in your system. Please install Homebrew before using Cakebrew. You can click the button below to open Homebrew's website."];
 	[alert.window setTitle:@"Cakebrew"];
-	[alert beginSheetModalForWindow:_appDelegate.window completionHandler:^(NSModalResponse returnCode) {
-		if (returnCode == NSAlertDefaultReturn) {
-			[[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:@"http://brew.sh"]];
-		}
-	}];
+
+    if ([alert respondsToSelector:@selector(beginSheet:completionHandler:)]) {
+        [alert beginSheetModalForWindow:_appDelegate.window completionHandler:^(NSModalResponse returnCode) {
+            if (returnCode == NSAlertDefaultReturn) {
+                [[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:@"http://brew.sh"]];
+            }
+        }];
+    } else {
+        [[NSApplication sharedApplication] beginSheet:alert.window modalForWindow:_appDelegate.window modalDelegate:self didEndSelector:@selector(openBrewWebsiteSheetDidEnd:returnCode:contextInfo:) contextInfo:nil];
+    }
+}
+
+- (void)openBrewWebsiteSheetDidEnd:(NSWindow *)sheet returnCode:(NSInteger)returnCode contextInfo:(void *)contextInfo;
+{
+    if (returnCode == NSAlertDefaultReturn) {
+        [[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:@"http://brew.sh"]];
+    }
 }
 
 - (void)unlockWindow
@@ -174,8 +188,8 @@
 
 - (void)updateInterfaceItems
 {
-	NSUInteger selectedTab = [self.outlineView_sidebar selectedRow];
-	NSUInteger selectedIndex = [self.tableView_formulae selectedRow];
+	NSUInteger selectedTab = (NSUInteger)[self.outlineView_sidebar selectedRow];
+	NSUInteger selectedIndex = (NSUInteger)[self.tableView_formulae selectedRow];
     if(selectedIndex == -1 || selectedTab > 4)
 	{
 		[self.toolbarButton_installUninstall setEnabled:NO];
@@ -270,8 +284,8 @@
 
 - (void)configureTableForListing:(BPListMode)mode
 {
-	CGFloat totalWidth;
-	NSInteger titleWidth;
+	CGFloat totalWidth = 0;
+	NSInteger titleWidth = 0;
 
 	totalWidth = [self.clippingView_formulae frame].size.width;
 
@@ -345,7 +359,7 @@
 	if (shouldReselectFirstRow)
 		[_outlineView_sidebar selectRowIndexes:[NSIndexSet indexSetWithIndex:1] byExtendingSelection:NO];
 	else
-		[_outlineView_sidebar selectRowIndexes:[NSIndexSet indexSetWithIndex:_lastSelectedSidebarIndex] byExtendingSelection:NO];
+		[_outlineView_sidebar selectRowIndexes:[NSIndexSet indexSetWithIndex:(NSUInteger)_lastSelectedSidebarIndex] byExtendingSelection:NO];
 }
 
 #pragma mark - Getters and Setters
@@ -402,7 +416,7 @@
     // the return value is typed as (id) because it will return a string in all cases with the exception of the
     if(self.formulaeArray) {
         NSString *columnIdentifer = [tableColumn identifier];
-        id element = [self.formulaeArray objectAtIndex:row];
+        id element = [self.formulaeArray objectAtIndex:(NSUInteger)row];
 
         // Compare each column identifier and set the return value to
         // the Person field value appropriate for the column.
@@ -500,7 +514,7 @@
 
 	if (sourceListItem.badgeValue.integerValue >= 0)
 	{
-		cellView.badgeView.badgeValue = sourceListItem.badgeValue.integerValue;
+		cellView.badgeView.badgeValue = (NSUInteger) sourceListItem.badgeValue.integerValue;
 	}
 	else
 	{
@@ -579,7 +593,7 @@
 			[self.formulaPopover close];
 		}
 
-		[self.formulaPopoverView setDataObject:[_formulaeArray objectAtIndex:selectedIndex]];
+		[self.formulaPopoverView setDataObject:[_formulaeArray objectAtIndex:(NSUInteger)selectedIndex]];
 
 		if (!self.formulaPopover) {
 			self.formulaPopover = [[NSPopover alloc] init];
@@ -611,7 +625,7 @@
 	NSInteger selectedIndex = [self.tableView_formulae selectedRow];
 
 	if (selectedIndex >= 0) {
-		BPFormula *formula = [_formulaeArray objectAtIndex:selectedIndex];
+		BPFormula *formula = [_formulaeArray objectAtIndex:(NSUInteger)selectedIndex];
 		NSString *message;
 		void (^operationBlock)(void);
 
@@ -680,7 +694,7 @@
 - (IBAction)openSelectedFormulaWebsite:(id)sender {
 	NSInteger selectedIndex = [self.tableView_formulae selectedRow];
 	if (selectedIndex >= 0) {
-		BPFormula *formula = [_formulaeArray objectAtIndex:selectedIndex];
+		BPFormula *formula = [_formulaeArray objectAtIndex:(NSUInteger)selectedIndex];
 		[[NSWorkspace sharedWorkspace] openURL:formula.website];
 	}
 }
