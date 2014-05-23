@@ -350,11 +350,6 @@ static NSString *cakebrewOutputIdentifier = @"+++++Cakebrew+++++";
 
 #pragma mark - Operations that return on finish
 
-- (NSArray*)list
-{
-	return [self listMode:kBPListInstalled];
-}
-
 - (NSArray*)listMode:(BPListMode)mode {
     BPHomebrewInterfaceListCall *listCall = nil;
 
@@ -388,16 +383,6 @@ static NSString *cakebrewOutputIdentifier = @"+++++Cakebrew+++++";
 	}
 }
 
-- (NSArray*)searchForFormulaName:(NSString*)name {
-    BPHomebrewInterfaceListCall *listCall = [[BPHomebrewInterfaceListCallSearch alloc] initWithSearchParameter:name];
-	NSString *string = [self performBrewCommandWithArguments:listCall.arguments];
-	if (string) {
-		return [listCall parseData:string];
-	} else {
-		return nil;
-	}
-}
-
 - (NSString*)informationForFormula:(NSString*)formula {
 	return [self performBrewCommandWithArguments:@[@"info", formula]];
 }
@@ -413,53 +398,6 @@ static NSString *cakebrewOutputIdentifier = @"+++++Cakebrew+++++";
     }
     //If all else fails...
     return nil;
-}
-
-- (NSString*)update __deprecated
-{
-	NSString *string = [self performBrewCommandWithArguments:@[@"update"]];
-//	NSLog (@"script returned:\n%@", string);
-	[[NSNotificationCenter defaultCenter] postNotificationName:kBP_NOTIFICATION_FORMULAS_CHANGED object:nil];
-    return string;
-}
-
-- (NSString*)upgradeFormula:(NSString*)formula __deprecated
-{
-	NSString *string = [self performBrewCommandWithArguments:@[@"upgrade", formula]];
-//	NSLog (@"script returned:\n%@", string);
-	[[NSNotificationCenter defaultCenter] postNotificationName:kBP_NOTIFICATION_FORMULAS_CHANGED object:nil];
-    return string;
-}
-
-- (NSString*)upgradeFormulae:(NSArray*)formulae __deprecated
-{
-	NSString *string = [self performBrewCommandWithArguments:[@[@"upgrade"] arrayByAddingObjectsFromArray:formulae]];
-//	NSLog (@"script returned:\n%@", string);
-	[[NSNotificationCenter defaultCenter] postNotificationName:kBP_NOTIFICATION_FORMULAS_CHANGED object:nil];
-    return string;
-}
-
-- (NSString*)installFormula:(NSString*)formula __deprecated
-{
-	NSString *string = [self performBrewCommandWithArguments:@[@"install", formula]];
-//	NSLog (@"script returned:\n%@", string);
-	[[NSNotificationCenter defaultCenter] postNotificationName:kBP_NOTIFICATION_FORMULAS_CHANGED object:nil];
-    return string;
-}
-
-- (NSString*)uninstallFormula:(NSString*)formula __deprecated
-{
-    NSString *string = [self performBrewCommandWithArguments:@[@"uninstall", formula]];
-//	NSLog (@"script returned:\n%@", string);
-	[[NSNotificationCenter defaultCenter] postNotificationName:kBP_NOTIFICATION_FORMULAS_CHANGED object:nil];
-    return string;
-}
-
-- (NSString*)runDoctor __deprecated
-{
-	NSString *string = [self performBrewCommandWithArguments:@[@"doctor"] captureError:YES];
-//	NSLog (@"script returned:\n%@", string);
-    return string;
 }
 
 #pragma mark - Operations with live data callback block

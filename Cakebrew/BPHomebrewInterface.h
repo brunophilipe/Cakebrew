@@ -47,15 +47,7 @@ typedef NS_ENUM(NSInteger, BPListMode) {
 
 #pragma mark - Operations that return on finish
 
-- (NSArray*)list;
 - (NSArray*)listMode:(BPListMode)mode;
-- (NSArray*)searchForFormulaName:(NSString*)formula;
 - (NSString*)informationForFormula:(NSString*)formula;
-- (NSString*)update __deprecated;
-- (NSString*)upgradeFormula:(NSString*)formula __deprecated;
-- (NSString*)upgradeFormulae:(NSArray*)formulae __deprecated;
-- (NSString*)installFormula:(NSString*)formula __deprecated;
-- (NSString*)uninstallFormula:(NSString*)formula __deprecated;
-- (NSString*)runDoctor __deprecated;
 
 @end

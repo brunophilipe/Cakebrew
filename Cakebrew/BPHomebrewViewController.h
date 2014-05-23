@@ -52,6 +52,7 @@ typedef NS_ENUM(NSUInteger, BPWindowOperation) {
 @property (weak) IBOutlet BPGenericTextPopoverView *formulaPopoverView;
 @property (weak) IBOutlet BPInsetShadowView *view_disablerLock;
 @property (weak) IBOutlet NSToolbar *toolbar;
+@property (weak) IBOutlet NSSearchField *searchField;
 
 @property (unsafe_unretained) IBOutlet BPUpdateDoctorController *updateDoctorViewController;
 
@@ -71,5 +72,6 @@ typedef NS_ENUM(NSUInteger, BPWindowOperation) {
 - (IBAction)updateHomebrew:(id)sender;
 - (IBAction)openSelectedFormulaWebsite:(id)sender;
 - (IBAction)searchFormulasFieldDidChange:(id)sender;
+- (IBAction)beginFormulaSearch:(id)sender;
 
 @end

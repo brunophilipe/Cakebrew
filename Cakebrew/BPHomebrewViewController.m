@@ -696,4 +696,8 @@
 	}
 }
 
+- (IBAction)beginFormulaSearch:(id)sender {
+	[self.searchField becomeFirstResponder];
+}
+
 @end
