@@ -19,7 +19,6 @@
 //	along with this program.	If not, see <http://www.gnu.org/licenses/>.
 //
 
-#import "BPAppDelegate.h"
 #import "BPHomebrewManager.h"
 #import "DCOAboutWindowController.h"
 #import "BPPreferencesWindowController.h"

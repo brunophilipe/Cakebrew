@@ -40,6 +40,8 @@
     return self;
 }
 
+#pragma clang diagnostic push
+#pragma ide diagnostic ignored "OCUnusedMethodInspection"
 - (void)setTextView:(NSTextView *)textView
 {
 	NSFont *font = [BPAppDelegateRef defaultFixedWidthFont];
@@ -48,6 +50,7 @@
 	[_textView setFont:font];
 	[_textView setSelectable:YES];
 }
+#pragma clang diagnostic pop
 
 - (NSTextView*)textView
 {
@@ -130,8 +133,9 @@
 }
 
 - (IBAction)ok:(id)sender {
-	NSWindow *mainWindow = BPAppDelegateRef.window;
-	[mainWindow endSheet:self.window];
+//	NSWindow *mainWindow = BPAppDelegateRef.window;
+//	[mainWindow endSheet:self.window];
+    [[NSApplication sharedApplication] endSheet:self.window];
 	[[NSNotificationCenter defaultCenter] postNotificationName:kBP_NOTIFICATION_FORMULAS_CHANGED object:nil];
 }
 @end

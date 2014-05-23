@@ -22,8 +22,6 @@
 #import "BPHomebrewInterface.h"
 #import "BPFormula.h"
 
-#define kBP_EXEC_FILE_NOT_FOUND 32512
-
 static NSString *cakebrewOutputIdentifier = @"+++++Cakebrew+++++";
 
 @interface BPHomebrewInterfaceListCall : NSObject
@@ -78,7 +76,7 @@ static NSString *cakebrewOutputIdentifier = @"+++++Cakebrew+++++";
 
 - (instancetype)init
 {
-    return [super initWithArguments:@[@"list", @"--versions"]];
+    return (BPHomebrewInterfaceListCallInstalled *)[super initWithArguments:@[@"list", @"--versions"]];
 }
 
 - (BPFormula *)parseFormulaItem:(NSString *)item
@@ -97,7 +95,7 @@ static NSString *cakebrewOutputIdentifier = @"+++++Cakebrew+++++";
 
 - (instancetype)init
 {
-    return [super initWithArguments:@[@"search"]];
+    return (BPHomebrewInterfaceListCallAll *)[super initWithArguments:@[@"search"]];
 }
 
 @end
@@ -110,7 +108,7 @@ static NSString *cakebrewOutputIdentifier = @"+++++Cakebrew+++++";
 
 - (instancetype)init
 {
-    return [super initWithArguments:@[@"leaves"]];
+    return (BPHomebrewInterfaceListCallLeaves *)[super initWithArguments:@[@"leaves"]];
 }
 
 @end
@@ -123,7 +121,7 @@ static NSString *cakebrewOutputIdentifier = @"+++++Cakebrew+++++";
 
 - (instancetype)init
 {
-    return [super initWithArguments:@[@"outdated", @"--verbose"]];
+    return (BPHomebrewInterfaceListCallUpgradeable *)[super initWithArguments:@[@"outdated", @"--verbose"]];
 }
 
 - (BPFormula *)parseFormulaItem:(NSString *)item
@@ -159,14 +157,13 @@ static NSString *cakebrewOutputIdentifier = @"+++++Cakebrew+++++";
 
 - (instancetype)initWithSearchParameter:(NSString*)param
 {
-    return [super initWithArguments:@[@"search", param]];
+    return (BPHomebrewInterfaceListCallSearch *)[super initWithArguments:@[@"search", param]];
 }
 
 @end
 
 @implementation BPHomebrewInterface
 {
-	NSString *brewPathString;
 	void (^operationUpdateBlock)(NSString*);
 }
 
@@ -321,7 +318,7 @@ static NSString *cakebrewOutputIdentifier = @"+++++Cakebrew+++++";
 
 	arguments = [self formatArgumentsForShell:shellName withExtraArguments:arguments sendOutputId:YES];
 
-	if (!userShell || !arguments) return NO;
+	if (!userShell || !arguments) return nil;
 
     self.task = [[NSTask alloc] init];
 

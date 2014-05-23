@@ -43,10 +43,10 @@
 @implementation BPHomebrewViewController
 {
 	NSWindow					 *_operationWindow;
-	NSOutlineView				 *_outlineView_sidebar;
-	DMSplitView					 *_splitView;
+	NSOutlineView __weak		 *_outlineView_sidebar;
+	DMSplitView __weak			 *_splitView;
 	BPHomebrewManager			 *_homebrewManager;
-	BPInsetShadowView			 *_view_disablerLock;
+	BPInsetShadowView __weak	 *_view_disablerLock;
 	BPInstallationViewController *_operationViewController;
 }
 
@@ -124,12 +124,20 @@
 	}
 	[_operationViewController setWindowOperation:operation];
 
-	[_appDelegate.window beginSheet:_operationWindow completionHandler:^(NSModalResponse returnCode) {
-		_operationWindow = nil;
-		_operationViewController = nil;
-	}];
+//	[_appDelegate.window beginSheet:_operationWindow completionHandler:^(NSModalResponse returnCode) {
+//		_operationWindow = nil;
+//		_operationViewController = nil;
+//	}];
+
+    [[NSApplication sharedApplication] beginSheet:_operationWindow modalForWindow:_appDelegate.window modalDelegate:self didEndSelector:@selector(clearWindowOperation) contextInfo:nil];
 
 	[_operationViewController windowDidAppear];
+}
+
+- (void)clearWindowOperation
+{
+    _operationWindow = nil;
+    _operationViewController = nil;
 }
 
 - (void)lockWindow
