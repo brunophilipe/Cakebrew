@@ -12,7 +12,7 @@ Do you need to use Homebrew but are afraid to use the terminal? Cakebrew is the 
 
 ## Screenshots
 
-![Screenshot as of April 8th](http://cakebrew.com/Cakebrew-screen-1.jpg)
+![Screenshot as of May 27th](https://www.cakebrew.com/assets/img/app-bg.png)
 
 ## Website Source
 
