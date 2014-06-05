@@ -133,9 +133,12 @@
 }
 
 - (IBAction)ok:(id)sender {
-//	NSWindow *mainWindow = BPAppDelegateRef.window;
-//	[mainWindow endSheet:self.window];
-    [[NSApplication sharedApplication] endSheet:self.window];
+    NSWindow *mainWindow = BPAppDelegateRef.window;
+	if ([mainWindow respondsToSelector:@selector(endSheet:)]) {
+		[mainWindow endSheet:self.window];
+	} else {
+		[[NSApplication sharedApplication] endSheet:self.window];
+	}
 	[[NSNotificationCenter defaultCenter] postNotificationName:kBP_NOTIFICATION_FORMULAS_CHANGED object:nil];
 }
 @end
