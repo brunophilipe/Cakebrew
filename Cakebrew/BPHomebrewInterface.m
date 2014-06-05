@@ -33,132 +33,19 @@ static NSString *cakebrewOutputIdentifier = @"+++++Cakebrew+++++";
 - (BPFormula *)parseFormulaItem:(NSString *)item;
 
 @end
-
-@implementation BPHomebrewInterfaceListCall
-
-- (instancetype)initWithArguments:(NSArray *)arguments
-{
-    self = [super init];
-    if (self) {
-        _arguments = arguments;
-    }
-    return self;
-}
-
-- (NSArray *)parseData:(NSString *)data
-{
-    NSMutableArray *array = [[data componentsSeparatedByString:@"\n"] mutableCopy];
-    [array removeLastObject];
-
-    NSMutableArray *formulae = [NSMutableArray arrayWithCapacity:array.count];
-
-    for (NSString *item in array) {
-        BPFormula *formula = [self parseFormulaItem:item];
-        if (formula) {
-            [formulae addObject:formula];
-        }
-    }
-    return formulae;
-}
-
-- (BPFormula *)parseFormulaItem:(NSString *)item
-{
-    return [BPFormula formulaWithName:item];
-}
-
-@end
-
 @interface BPHomebrewInterfaceListCallInstalled : BPHomebrewInterfaceListCall
 
 @end
-
-@implementation BPHomebrewInterfaceListCallInstalled
-
-- (instancetype)init
-{
-    return (BPHomebrewInterfaceListCallInstalled *)[super initWithArguments:@[@"list", @"--versions"]];
-}
-
-- (BPFormula *)parseFormulaItem:(NSString *)item
-{
-    NSArray *aux = [item componentsSeparatedByString:@" "];
-    return [BPFormula formulaWithName:[aux firstObject] andVersion:[aux lastObject]];
-}
-
-@end
-
 @interface BPHomebrewInterfaceListCallAll : BPHomebrewInterfaceListCall
 
 @end
-
-@implementation BPHomebrewInterfaceListCallAll
-
-- (instancetype)init
-{
-    return (BPHomebrewInterfaceListCallAll *)[super initWithArguments:@[@"search"]];
-}
-
-@end
-
 @interface BPHomebrewInterfaceListCallLeaves : BPHomebrewInterfaceListCall
 
 @end
-
-@implementation BPHomebrewInterfaceListCallLeaves
-
-- (instancetype)init
-{
-    return (BPHomebrewInterfaceListCallLeaves *)[super initWithArguments:@[@"leaves"]];
-}
-
-@end
-
 @interface BPHomebrewInterfaceListCallUpgradeable : BPHomebrewInterfaceListCall
 
 @end
-
-@implementation BPHomebrewInterfaceListCallUpgradeable
-
-- (instancetype)init
-{
-    return (BPHomebrewInterfaceListCallUpgradeable *)[super initWithArguments:@[@"outdated", @"--verbose"]];
-}
-
-- (BPFormula *)parseFormulaItem:(NSString *)item
-{
-	static NSString *regexString = @"(\\S*)\\s\\((\\S*) < (\\S*)\\)";
-
-	BPFormula __block *formula = nil;
-	NSError *error = nil;
-	NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:regexString options:NSRegularExpressionCaseInsensitive error:&error];
-
-	[regex enumerateMatchesInString:item options:0 range:NSMakeRange(0, [item length]) usingBlock:^(NSTextCheckingResult *result, NSMatchingFlags flags, BOOL *stop) {
-		if (result.resultType == NSTextCheckingTypeRegularExpression) {
-			formula = [BPFormula formulaWithName:[item substringWithRange:[result rangeAtIndex:1]]
-										 version:[item substringWithRange:[result rangeAtIndex:2]]
-								andLatestVersion:[item substringWithRange:[result rangeAtIndex:3]]];
-		}
-	}];
-
-	if (!formula) {
-		formula = [BPFormula formulaWithName:item];
-	}
-
-	return formula;
-}
-
-@end
-
 @interface BPHomebrewInterfaceListCallSearch : BPHomebrewInterfaceListCall
-
-@end
-
-@implementation BPHomebrewInterfaceListCallSearch
-
-- (instancetype)initWithSearchParameter:(NSString*)param
-{
-    return (BPHomebrewInterfaceListCallSearch *)[super initWithArguments:@[@"search", param]];
-}
 
 @end
 
@@ -442,6 +329,116 @@ static NSString *cakebrewOutputIdentifier = @"+++++Cakebrew+++++";
 	BOOL val = [self performBrewCommandWithArguments:@[@"doctor"] dataReturnBlock:block];
 	[[NSNotificationCenter defaultCenter] postNotificationName:kBP_NOTIFICATION_FORMULAS_CHANGED object:nil];
 	return val;
+}
+
+@end
+
+#pragma mark - Homebrew Interface List Calls
+
+@implementation BPHomebrewInterfaceListCall
+
+- (instancetype)initWithArguments:(NSArray *)arguments
+{
+    self = [super init];
+    if (self) {
+        _arguments = arguments;
+    }
+    return self;
+}
+
+- (NSArray *)parseData:(NSString *)data
+{
+    NSMutableArray *array = [[data componentsSeparatedByString:@"\n"] mutableCopy];
+    [array removeLastObject];
+
+    NSMutableArray *formulae = [NSMutableArray arrayWithCapacity:array.count];
+
+    for (NSString *item in array) {
+        BPFormula *formula = [self parseFormulaItem:item];
+        if (formula) {
+            [formulae addObject:formula];
+        }
+    }
+    return formulae;
+}
+
+- (BPFormula *)parseFormulaItem:(NSString *)item
+{
+    return [BPFormula formulaWithName:item];
+}
+
+@end
+
+@implementation BPHomebrewInterfaceListCallInstalled
+
+- (instancetype)init
+{
+    return (BPHomebrewInterfaceListCallInstalled *)[super initWithArguments:@[@"list", @"--versions"]];
+}
+
+- (BPFormula *)parseFormulaItem:(NSString *)item
+{
+    NSArray *aux = [item componentsSeparatedByString:@" "];
+    return [BPFormula formulaWithName:[aux firstObject] andVersion:[aux lastObject]];
+}
+
+@end
+
+@implementation BPHomebrewInterfaceListCallAll
+
+- (instancetype)init
+{
+    return (BPHomebrewInterfaceListCallAll *)[super initWithArguments:@[@"search"]];
+}
+
+@end
+
+@implementation BPHomebrewInterfaceListCallLeaves
+
+- (instancetype)init
+{
+    return (BPHomebrewInterfaceListCallLeaves *)[super initWithArguments:@[@"leaves"]];
+}
+
+@end
+
+@implementation BPHomebrewInterfaceListCallUpgradeable
+
+- (instancetype)init
+{
+    return (BPHomebrewInterfaceListCallUpgradeable *)[super initWithArguments:@[@"outdated", @"--verbose"]];
+}
+
+- (BPFormula *)parseFormulaItem:(NSString *)item
+{
+	static NSString *regexString = @"(\\S*)\\s\\((\\S*) < (\\S*)\\)";
+
+	BPFormula __block *formula = nil;
+	NSError *error = nil;
+	NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:regexString options:NSRegularExpressionCaseInsensitive error:&error];
+
+	[regex enumerateMatchesInString:item options:0 range:NSMakeRange(0, [item length]) usingBlock:^(NSTextCheckingResult *result, NSMatchingFlags flags, BOOL *stop) {
+		if (result.resultType == NSTextCheckingTypeRegularExpression) {
+			formula = [BPFormula formulaWithName:[item substringWithRange:[result rangeAtIndex:1]]
+										 version:[item substringWithRange:[result rangeAtIndex:2]]
+								andLatestVersion:[item substringWithRange:[result rangeAtIndex:3]]];
+		}
+	}];
+
+	if (!formula) {
+		formula = [BPFormula formulaWithName:item];
+	}
+
+	return formula;
+}
+
+@end
+
+@implementation BPHomebrewInterfaceListCallSearch
+
+- (instancetype)initWithSearchParameter:(NSString*)param
+{
+    return (BPHomebrewInterfaceListCallSearch *)[super initWithArguments:@[@"search", param]];
 }
 
 @end

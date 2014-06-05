@@ -175,4 +175,9 @@
 	return YES;
 }
 
+- (BOOL)isOutdated
+{
+	return [[BPHomebrewManager sharedManager] statusForFormula:self] == kBPFormulaOutdated;
+}
+
 @end

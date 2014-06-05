@@ -88,11 +88,11 @@ enum {
 #pragma mark - NSSplitView appearance
 
 /** set divider thickness value */
-@property (nonatomic,assign)    CGFloat                     dividerThickness;
+@property (assign)    CGFloat                     dividerThickness;
 /** should draw splitview divider. NO to use default NSSplitView behavior */
 @property (nonatomic,assign)    BOOL                        shouldDrawDivider;
 /** set divider's color */
-@property (nonatomic,strong)    NSColor*                    dividerColor;
+@property (copy)    NSColor*                    dividerColor;
 /** set divider draw rect edge */
 @property (nonatomic,assign)    NSRectEdge                  dividerRectEdge;
 /** should draw divider handle */
