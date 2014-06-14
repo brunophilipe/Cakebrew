@@ -59,7 +59,7 @@
 	[self.progress_doctor startAnimation:sender];
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
 		[[BPHomebrewInterface sharedInterface] runDoctorWithReturnBlock:^(NSString *output) {
-			[_textView_doctor setString:[_textView_doctor.string stringByAppendingString:output]];
+			[_textView_doctor performSelectorOnMainThread:@selector(setString:) withObject:[_textView_doctor.string stringByAppendingString:output] waitUntilDone:YES];
 		}];
         dispatch_async(dispatch_get_main_queue(), ^{
             [self.progress_doctor stopAnimation:sender];
@@ -89,7 +89,7 @@
 
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
 		[[BPHomebrewInterface sharedInterface] updateWithReturnBlock:^(NSString *output) {
-			[_textView_update setString:[_textView_update.string stringByAppendingString:output]];
+			[_textView_update performSelectorOnMainThread:@selector(setString:) withObject:[_textView_update.string stringByAppendingString:output] waitUntilDone:YES];
 		}];
         dispatch_async(dispatch_get_main_queue(), ^{
             [self.progress_update stopAnimation:sender];

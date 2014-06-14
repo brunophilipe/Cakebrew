@@ -98,20 +98,20 @@
 			[[BPHomebrewInterface sharedInterface] installFormula:self.formula.name withReturnBlock:^(NSString *output) {
 				if (outputValue) outputValue = [outputValue stringByAppendingString:output];
 				else outputValue = output;
-				[self.textView setString:outputValue];
+				[self.textView performSelectorOnMainThread:@selector(setString:) withObject:outputValue waitUntilDone:YES];
 			}];
 		} else if (self.windowOperation == kBPWindowOperationUninstall) {
 			[[BPHomebrewInterface sharedInterface] uninstallFormula:self.formula.name withReturnBlock:^(NSString *output) {
 				if (outputValue) outputValue = [outputValue stringByAppendingString:output];
 				else outputValue = output;
-				[self.textView setString:outputValue];
+				[self.textView performSelectorOnMainThread:@selector(setString:) withObject:outputValue waitUntilDone:YES];
 			}];
 		} else if (self.windowOperation == kBPWindowOperationUpgrade) {
 			if (self.formula) {
 				[[BPHomebrewInterface sharedInterface] upgradeFormula:self.formula.name withReturnBlock:^(NSString *output) {
 					if (outputValue) outputValue = [outputValue stringByAppendingString:output];
 					else outputValue = output;
-					[self.textView setString:outputValue];
+					[self.textView performSelectorOnMainThread:@selector(setString:) withObject:outputValue waitUntilDone:YES];
 				}];
 			} else {
 				NSMutableArray *names = [NSMutableArray arrayWithCapacity:self.formulae.count];
@@ -121,7 +121,7 @@
 				[[BPHomebrewInterface sharedInterface] upgradeFormulae:names withReturnBlock:^(NSString *output) {
 					if (outputValue) outputValue = [outputValue stringByAppendingString:output];
 					else outputValue = output;
-					[self.textView setString:outputValue];
+					[self.textView performSelectorOnMainThread:@selector(setString:) withObject:outputValue waitUntilDone:YES];
 				}];
 			}
 		}

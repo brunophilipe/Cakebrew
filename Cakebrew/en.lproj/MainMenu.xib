@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="5056" systemVersion="13D65" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="5056" systemVersion="14A238x" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <deployment defaultVersion="1070" identifier="macosx"/>
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="5056"/>
@@ -152,8 +152,8 @@
                                 </connections>
                             </menuItem>
                             <menuItem isSeparatorItem="YES" id="woh-IT-iqR"/>
-                            <menuItem title="Formula Website " id="9Fv-tF-1qy">
-                                <modifierMask key="keyEquivalentModifierMask"/>
+                            <menuItem title="Formula Website " keyEquivalent="w" id="9Fv-tF-1qy">
+                                <modifierMask key="keyEquivalentModifierMask" option="YES" command="YES"/>
                                 <connections>
                                     <action selector="openSelectedFormulaWebsite:" target="547" id="qHf-8O-KSv"/>
                                     <binding destination="547" name="enabled" keyPath="self.currentFormula" id="3xX-Lt-mbC">
@@ -443,12 +443,42 @@
             <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
             <windowCollectionBehavior key="collectionBehavior" fullScreenPrimary="YES"/>
             <rect key="contentRect" x="629" y="349" width="570" height="342"/>
-            <rect key="screenRect" x="0.0" y="0.0" width="1920" height="1058"/>
+            <rect key="screenRect" x="0.0" y="0.0" width="1440" height="878"/>
             <value key="minSize" type="size" width="570" height="342"/>
             <view key="contentView" id="372">
                 <rect key="frame" x="0.0" y="0.0" width="570" height="342"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
+                    <customView hidden="YES" translatesAutoresizingMaskIntoConstraints="NO" id="SfC-W7-8MF" customClass="BPInsetShadowView">
+                        <rect key="frame" x="0.0" y="22" width="570" height="320"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                        <subviews>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="maG-dP-mXL">
+                                <rect key="frame" x="187" y="168" width="197" height="18"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Homebrew is not installed" id="Jfc-d9-61S">
+                                    <font key="font" metaFont="systemBold" size="15"/>
+                                    <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="YjH-tX-oXi">
+                                <rect key="frame" x="159" y="143" width="252" height="17"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Please visit brew.sh to install Homebrew" id="kRZ-JR-SH6">
+                                    <font key="font" metaFont="system"/>
+                                    <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                        </subviews>
+                        <constraints>
+                            <constraint firstAttribute="centerX" secondItem="YjH-tX-oXi" secondAttribute="centerX" id="4za-CP-gNT"/>
+                            <constraint firstItem="maG-dP-mXL" firstAttribute="top" secondItem="SfC-W7-8MF" secondAttribute="top" constant="134" id="ccs-rg-GbT"/>
+                            <constraint firstAttribute="centerX" secondItem="maG-dP-mXL" secondAttribute="centerX" id="i4M-xe-V2i"/>
+                            <constraint firstItem="YjH-tX-oXi" firstAttribute="top" secondItem="maG-dP-mXL" secondAttribute="bottom" constant="8" id="x7w-ZX-54Y"/>
+                        </constraints>
+                    </customView>
                     <splitView dividerStyle="thin" vertical="YES" id="Exu-Zx-Kij" customClass="DMSplitView">
                         <rect key="frame" x="0.0" y="22" width="570" height="320"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -457,14 +487,14 @@
                                 <rect key="frame" x="0.0" y="0.0" width="169" height="320"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <subviews>
-                                    <scrollView borderType="none" autohidesScrollers="YES" horizontalLineScroll="20" horizontalPageScroll="10" verticalLineScroll="20" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kTq-kk-rF0">
+                                    <scrollView borderType="none" autohidesScrollers="YES" horizontalLineScroll="22" horizontalPageScroll="10" verticalLineScroll="22" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kTq-kk-rF0">
                                         <rect key="frame" x="0.0" y="0.0" width="169" height="320"/>
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                        <clipView key="contentView" id="RhN-kh-4Xx">
+                                        <clipView key="contentView" drawsBackground="NO" id="RhN-kh-4Xx">
                                             <rect key="frame" x="0.0" y="0.0" width="169" height="320"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <subviews>
-                                                <outlineView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" selectionHighlightStyle="sourceList" columnReordering="NO" multipleSelection="NO" autosaveColumns="NO" rowHeight="20" rowSizeStyle="systemDefault" viewBased="YES" indentationPerLevel="14" outlineTableColumn="LEF-be-VWM" id="h1z-c9-U0s" customClass="PXSourceList">
+                                                <outlineView appearanceType="userCustom" verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" selectionHighlightStyle="sourceList" columnReordering="NO" multipleSelection="NO" autosaveColumns="NO" rowHeight="22" rowSizeStyle="systemDefault" viewBased="YES" indentationPerLevel="14" outlineTableColumn="LEF-be-VWM" id="h1z-c9-U0s" customClass="PXSourceList">
                                                     <rect key="frame" x="0.0" y="0.0" width="169" height="320"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <size key="intercellSpacing" width="3" height="0.0"/>
@@ -560,7 +590,7 @@
                                                     </connections>
                                                 </outlineView>
                                             </subviews>
-                                            <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                            <nil key="backgroundColor"/>
                                         </clipView>
                                         <scroller key="horizontalScroller" hidden="YES" verticalHuggingPriority="750" horizontal="YES" id="RBZ-Oo-6AK">
                                             <rect key="frame" x="1" y="119" width="238" height="15"/>
@@ -583,6 +613,10 @@
                                 <rect key="frame" x="170" y="0.0" width="400" height="320"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <subviews>
+                                    <customView translatesAutoresizingMaskIntoConstraints="NO" id="N8K-3a-hgb" customClass="BPInsetShadowView">
+                                        <rect key="frame" x="0.0" y="0.0" width="400" height="320"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                    </customView>
                                     <tabView drawsBackground="NO" type="noTabsNoBorder" initialItem="aFR-nx-bHM" translatesAutoresizingMaskIntoConstraints="NO" id="79A-lZ-LEo">
                                         <rect key="frame" x="0.0" y="0.0" width="400" height="320"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
@@ -686,7 +720,7 @@
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                                             <subviews>
                                                                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Cvc-Bk-c4F">
-                                                                    <rect key="frame" x="6" y="99" width="173" height="14"/>
+                                                                    <rect key="frame" x="6" y="99" width="171" height="14"/>
                                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Selected Formula Information" id="4h6-4K-GwY">
                                                                         <font key="font" metaFont="smallSystemBold"/>
@@ -909,14 +943,16 @@
                                                         </progressIndicator>
                                                     </subviews>
                                                     <constraints>
-                                                        <constraint firstItem="Rxv-SG-cWS" firstAttribute="top" secondItem="6fi-d1-4lx" secondAttribute="top" constant="10" id="17g-AQ-xNr"/>
+                                                        <constraint firstItem="uWN-mF-Zeh" firstAttribute="top" relation="greaterThanOrEqual" secondItem="eFu-TQ-AoR" secondAttribute="bottom" constant="8" id="0t0-Bj-JbH"/>
                                                         <constraint firstItem="uWN-mF-Zeh" firstAttribute="leading" secondItem="6fi-d1-4lx" secondAttribute="leading" constant="-1" id="Bng-9D-H52"/>
-                                                        <constraint firstItem="uWN-mF-Zeh" firstAttribute="top" secondItem="aUy-Es-0bh" secondAttribute="bottom" constant="7" id="Ef4-tk-2HI"/>
-                                                        <constraint firstItem="aUy-Es-0bh" firstAttribute="top" secondItem="6fi-d1-4lx" secondAttribute="top" constant="10" id="H6I-bq-hCz"/>
-                                                        <constraint firstItem="eFu-TQ-AoR" firstAttribute="top" secondItem="6fi-d1-4lx" secondAttribute="top" constant="11" id="Tat-YF-ind"/>
+                                                        <constraint firstItem="aUy-Es-0bh" firstAttribute="top" secondItem="6fi-d1-4lx" secondAttribute="top" constant="10" id="Hoy-Aa-vty"/>
+                                                        <constraint firstItem="uWN-mF-Zeh" firstAttribute="top" secondItem="aUy-Es-0bh" secondAttribute="bottom" constant="7" id="WFY-RH-4rp"/>
+                                                        <constraint firstItem="uWN-mF-Zeh" firstAttribute="top" secondItem="Rxv-SG-cWS" secondAttribute="bottom" constant="7" id="Xd3-Yi-PYW"/>
                                                         <constraint firstItem="Rxv-SG-cWS" firstAttribute="leading" secondItem="eFu-TQ-AoR" secondAttribute="trailing" constant="8" id="Yzn-Jb-48i"/>
                                                         <constraint firstAttribute="trailing" secondItem="aUy-Es-0bh" secondAttribute="trailing" constant="13" id="bRd-cQ-RQQ"/>
+                                                        <constraint firstItem="eFu-TQ-AoR" firstAttribute="top" relation="greaterThanOrEqual" secondItem="6fi-d1-4lx" secondAttribute="top" constant="11" id="c56-SJ-Nuv"/>
                                                         <constraint firstItem="aUy-Es-0bh" firstAttribute="leading" secondItem="Rxv-SG-cWS" secondAttribute="trailing" constant="8" id="iMS-j6-Ww9"/>
+                                                        <constraint firstItem="Rxv-SG-cWS" firstAttribute="top" secondItem="6fi-d1-4lx" secondAttribute="top" constant="10" id="imL-it-tIC"/>
                                                         <constraint firstAttribute="trailing" secondItem="uWN-mF-Zeh" secondAttribute="trailing" constant="-1" id="jL6-2R-8EI"/>
                                                         <constraint firstItem="2ce-dh-IlB" firstAttribute="leading" secondItem="6fi-d1-4lx" secondAttribute="leading" constant="8" id="mOz-Nd-eh4"/>
                                                         <constraint firstAttribute="bottom" secondItem="uWN-mF-Zeh" secondAttribute="bottom" constant="-1" id="nWr-jL-CrI"/>
@@ -959,7 +995,7 @@
                                                             </scroller>
                                                         </scrollView>
                                                         <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="CbV-C7-Qte">
-                                                            <rect key="frame" x="8" y="291" width="154" height="22"/>
+                                                            <rect key="frame" x="8" y="289" width="154" height="24"/>
                                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="width" constant="150" id="Buj-NU-hre"/>
@@ -1004,7 +1040,7 @@
                                                     <constraints>
                                                         <constraint firstAttribute="trailing" secondItem="UBC-qD-VOA" secondAttribute="trailing" constant="-1" id="1Rf-ao-D1b"/>
                                                         <constraint firstItem="RTo-rg-mQf" firstAttribute="top" secondItem="p04-F1-40m" secondAttribute="top" constant="10" id="8je-6j-S6h"/>
-                                                        <constraint firstItem="UBC-qD-VOA" firstAttribute="top" secondItem="CbV-C7-Qte" secondAttribute="bottom" constant="6" id="ArQ-2R-2Ck"/>
+                                                        <constraint firstItem="UBC-qD-VOA" firstAttribute="top" secondItem="CbV-C7-Qte" secondAttribute="bottom" constant="4" id="ArQ-2R-2Ck"/>
                                                         <constraint firstItem="UBC-qD-VOA" firstAttribute="leading" secondItem="p04-F1-40m" secondAttribute="leading" constant="-1" id="D6S-l1-v4j"/>
                                                         <constraint firstAttribute="trailing" secondItem="3aw-8I-EVx" secondAttribute="trailing" constant="12" id="H2s-hX-JqD"/>
                                                         <constraint firstAttribute="bottom" secondItem="UBC-qD-VOA" secondAttribute="bottom" constant="-1" id="TWL-IO-Oh7"/>
@@ -1019,10 +1055,6 @@
                                             </tabViewItem>
                                         </tabViewItems>
                                     </tabView>
-                                    <customView translatesAutoresizingMaskIntoConstraints="NO" id="N8K-3a-hgb" customClass="BPInsetShadowView">
-                                        <rect key="frame" x="0.0" y="0.0" width="400" height="320"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                    </customView>
                                 </subviews>
                                 <constraints>
                                     <constraint firstAttribute="bottom" secondItem="N8K-3a-hgb" secondAttribute="bottom" id="1aW-yp-Q98"/>
@@ -1041,36 +1073,6 @@
                             <real value="250"/>
                         </holdingPriorities>
                     </splitView>
-                    <customView hidden="YES" translatesAutoresizingMaskIntoConstraints="NO" id="SfC-W7-8MF" customClass="BPInsetShadowView">
-                        <rect key="frame" x="0.0" y="22" width="570" height="320"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                        <subviews>
-                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="maG-dP-mXL">
-                                <rect key="frame" x="181" y="167" width="209" height="19"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Homebrew is not installed" id="Jfc-d9-61S">
-                                    <font key="font" metaFont="systemBold" size="15"/>
-                                    <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
-                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
-                                </textFieldCell>
-                            </textField>
-                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="YjH-tX-oXi">
-                                <rect key="frame" x="157" y="142" width="256" height="17"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Please visit brew.sh to install Homebrew" id="kRZ-JR-SH6">
-                                    <font key="font" metaFont="system"/>
-                                    <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
-                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
-                                </textFieldCell>
-                            </textField>
-                        </subviews>
-                        <constraints>
-                            <constraint firstAttribute="centerX" secondItem="YjH-tX-oXi" secondAttribute="centerX" id="4za-CP-gNT"/>
-                            <constraint firstItem="maG-dP-mXL" firstAttribute="top" secondItem="SfC-W7-8MF" secondAttribute="top" constant="134" id="ccs-rg-GbT"/>
-                            <constraint firstAttribute="centerX" secondItem="maG-dP-mXL" secondAttribute="centerX" id="i4M-xe-V2i"/>
-                            <constraint firstItem="YjH-tX-oXi" firstAttribute="top" secondItem="maG-dP-mXL" secondAttribute="bottom" constant="8" id="x7w-ZX-54Y"/>
-                        </constraints>
-                    </customView>
                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="tiK-fW-tE7">
                         <rect key="frame" x="444" y="3" width="119" height="14"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
@@ -1121,7 +1123,7 @@
                         <nil key="toolTip"/>
                         <size key="minSize" width="96" height="22"/>
                         <size key="maxSize" width="96" height="22"/>
-                        <searchField key="view" verticalHuggingPriority="750" id="zLQ-g9-dpv">
+                        <searchField key="view" wantsLayer="YES" verticalHuggingPriority="750" id="zLQ-g9-dpv">
                             <rect key="frame" x="0.0" y="14" width="96" height="22"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                             <searchFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" borderStyle="bezel" placeholderString="" usesSingleLineMode="YES" bezelStyle="round" id="5Qx-kF-IcB">
