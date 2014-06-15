@@ -38,21 +38,22 @@ typedef NS_ENUM(NSUInteger, BPWindowOperation) {
 
 @interface BPHomebrewViewController : NSViewController
 
-@property (weak) IBOutlet NSTableView *tableView_formulae;
-@property (weak) IBOutlet NSClipView *clippingView_formulae;
-@property (weak) IBOutlet NSScrollView *scrollView_formulae;
-@property (weak) IBOutlet NSOutlineView *outlineView_sidebar;
-@property (weak) IBOutlet DMSplitView *splitView;
-@property (weak) IBOutlet NSTabView *tabView;
-@property (weak) IBOutlet NSTextField *label_information;
-@property (weak) IBOutlet NSTextField *label_formulaPath;
-@property (weak) IBOutlet NSTextField *label_formulaVersion;
-@property (weak) IBOutlet NSTextField *label_formulaDependencies;
-@property (weak) IBOutlet NSTextField *label_formulaConflicts;
+@property (weak) IBOutlet NSTableView              *tableView_formulae;
+@property (weak) IBOutlet NSClipView               *clippingView_formulae;
+@property (weak) IBOutlet NSScrollView             *scrollView_formulae;
+@property (weak) IBOutlet NSOutlineView            *outlineView_sidebar;
+@property (weak) IBOutlet DMSplitView              *splitView;
+@property (weak) IBOutlet NSTabView                *tabView;
+@property (weak) IBOutlet NSTextField              *label_information;
+@property (weak) IBOutlet NSTextField              *label_formulaPath;
+@property (weak) IBOutlet NSTextField              *label_formulaVersion;
+@property (weak) IBOutlet NSTextField              *label_formulaDependencies;
+@property (weak) IBOutlet NSTextField              *label_formulaConflicts;
 @property (weak) IBOutlet BPGenericTextPopoverView *formulaPopoverView;
-@property (weak) IBOutlet BPInsetShadowView *view_disablerLock;
-@property (weak) IBOutlet NSToolbar *toolbar;
-@property (weak) IBOutlet NSSearchField *searchField;
+@property (weak) IBOutlet BPInsetShadowView        *view_disablerLock;
+@property (weak) IBOutlet NSToolbar                *toolbar;
+@property (weak) IBOutlet NSSearchField            *searchField;
+@property (weak) IBOutlet NSMenu				   *menu_formula;
 
 @property (unsafe_unretained) IBOutlet BPUpdateDoctorController *updateDoctorViewController;
 

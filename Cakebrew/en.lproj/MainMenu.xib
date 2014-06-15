@@ -697,6 +697,7 @@
                                                                         <connections>
                                                                             <outlet property="dataSource" destination="547" id="V6h-YG-hlK"/>
                                                                             <outlet property="delegate" destination="547" id="nXs-gz-hL3"/>
+                                                                            <outlet property="menu" destination="dg5-kq-v1Y" id="g5j-1C-LWo"/>
                                                                         </connections>
                                                                     </tableView>
                                                                 </subviews>
@@ -995,12 +996,12 @@
                                                             </scroller>
                                                         </scrollView>
                                                         <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="CbV-C7-Qte">
-                                                            <rect key="frame" x="8" y="289" width="154" height="24"/>
+                                                            <rect key="frame" x="5" y="287" width="154" height="28"/>
                                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="width" constant="150" id="Buj-NU-hre"/>
                                                             </constraints>
-                                                            <textFieldCell key="cell" controlSize="mini" sendsActionOnEndEditing="YES" title="You should update homebrew at least once every 24 hours." id="yWT-69-OH8">
+                                                            <textFieldCell key="cell" controlSize="mini" allowsUndo="NO" sendsActionOnEndEditing="YES" title="You should update homebrew at least once every 24 hours." id="yWT-69-OH8">
                                                                 <font key="font" metaFont="miniSystem"/>
                                                                 <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                                                 <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
@@ -1040,14 +1041,14 @@
                                                     <constraints>
                                                         <constraint firstAttribute="trailing" secondItem="UBC-qD-VOA" secondAttribute="trailing" constant="-1" id="1Rf-ao-D1b"/>
                                                         <constraint firstItem="RTo-rg-mQf" firstAttribute="top" secondItem="p04-F1-40m" secondAttribute="top" constant="10" id="8je-6j-S6h"/>
-                                                        <constraint firstItem="UBC-qD-VOA" firstAttribute="top" secondItem="CbV-C7-Qte" secondAttribute="bottom" constant="4" id="ArQ-2R-2Ck"/>
+                                                        <constraint firstItem="UBC-qD-VOA" firstAttribute="top" secondItem="CbV-C7-Qte" secondAttribute="bottom" constant="2" id="ArQ-2R-2Ck"/>
                                                         <constraint firstItem="UBC-qD-VOA" firstAttribute="leading" secondItem="p04-F1-40m" secondAttribute="leading" constant="-1" id="D6S-l1-v4j"/>
                                                         <constraint firstAttribute="trailing" secondItem="3aw-8I-EVx" secondAttribute="trailing" constant="12" id="H2s-hX-JqD"/>
                                                         <constraint firstAttribute="bottom" secondItem="UBC-qD-VOA" secondAttribute="bottom" constant="-1" id="TWL-IO-Oh7"/>
-                                                        <constraint firstItem="CbV-C7-Qte" firstAttribute="top" secondItem="p04-F1-40m" secondAttribute="top" constant="7" id="bwl-eL-Xch"/>
+                                                        <constraint firstItem="CbV-C7-Qte" firstAttribute="top" secondItem="p04-F1-40m" secondAttribute="top" constant="5" id="bwl-eL-Xch"/>
                                                         <constraint firstItem="3aw-8I-EVx" firstAttribute="top" secondItem="p04-F1-40m" secondAttribute="top" constant="9" id="fVq-9V-xo7"/>
                                                         <constraint firstItem="3aw-8I-EVx" firstAttribute="leading" secondItem="RTo-rg-mQf" secondAttribute="trailing" constant="8" id="fip-Ib-eR4"/>
-                                                        <constraint firstItem="CbV-C7-Qte" firstAttribute="leading" secondItem="p04-F1-40m" secondAttribute="leading" constant="10" id="fw8-Zb-dSV"/>
+                                                        <constraint firstItem="CbV-C7-Qte" firstAttribute="leading" secondItem="p04-F1-40m" secondAttribute="leading" constant="7" id="fw8-Zb-dSV"/>
                                                         <constraint firstItem="RTo-rg-mQf" firstAttribute="leading" secondItem="su7-jp-AEh" secondAttribute="trailing" constant="8" id="hd0-WL-LCm"/>
                                                         <constraint firstItem="su7-jp-AEh" firstAttribute="top" secondItem="p04-F1-40m" secondAttribute="top" constant="11" id="jcs-nA-Co4"/>
                                                     </constraints>
@@ -1166,6 +1167,7 @@
                 <outlet property="label_formulaPath" destination="xnc-bd-zft" id="vCK-nv-vYb"/>
                 <outlet property="label_formulaVersion" destination="AJi-jy-Vvh" id="bfU-fl-8eX"/>
                 <outlet property="label_information" destination="tiK-fW-tE7" id="K14-X1-4bF"/>
+                <outlet property="menu_formula" destination="sBH-Ta-Jft" id="kCm-57-cUw"/>
                 <outlet property="outlineView_sidebar" destination="h1z-c9-U0s" id="PZy-Oz-lSv"/>
                 <outlet property="scrollView_formulae" destination="ZTf-N0-ClA" id="2Yf-0I-qyg"/>
                 <outlet property="searchField" destination="zLQ-g9-dpv" id="KJG-rk-obd"/>
@@ -1249,6 +1251,101 @@
                 <outlet property="textView" destination="76F-8G-r1b" id="636-ZX-1HH"/>
             </connections>
         </customView>
+        <menu title="Formula" id="dg5-kq-v1Y">
+            <items>
+                <menuItem title="Install Formula" id="Lcb-tm-ATo">
+                    <modifierMask key="keyEquivalentModifierMask"/>
+                    <connections>
+                        <action selector="installUninstallUpdate:" target="547" id="dvF-X5-AFi"/>
+                        <binding destination="547" name="enabled2" keyPath="self.currentFormula.installed" previousBinding="Nz4-8w-2do" id="ar5-Tg-nDj">
+                            <dictionary key="options">
+                                <integer key="NSMultipleValuesPlaceholder" value="-1"/>
+                                <integer key="NSNoSelectionPlaceholder" value="-1"/>
+                                <integer key="NSNotApplicablePlaceholder" value="-1"/>
+                                <integer key="NSNullPlaceholder" value="-1"/>
+                                <string key="NSValueTransformerName">NSNegateBoolean</string>
+                            </dictionary>
+                        </binding>
+                        <binding destination="547" name="enabled" keyPath="self.currentFormula" id="Nz4-8w-2do">
+                            <dictionary key="options">
+                                <string key="NSValueTransformerName">NSIsNotNil</string>
+                            </dictionary>
+                        </binding>
+                    </connections>
+                </menuItem>
+                <menuItem title="Uninstall Formula" id="i3A-Nx-qPJ">
+                    <modifierMask key="keyEquivalentModifierMask"/>
+                    <connections>
+                        <binding destination="547" name="enabled2" keyPath="self.currentFormula.installed" previousBinding="EPT-Ql-qEN" id="lGA-Gs-BUq">
+                            <dictionary key="options">
+                                <integer key="NSMultipleValuesPlaceholder" value="-1"/>
+                                <integer key="NSNoSelectionPlaceholder" value="-1"/>
+                                <integer key="NSNotApplicablePlaceholder" value="-1"/>
+                                <integer key="NSNullPlaceholder" value="-1"/>
+                            </dictionary>
+                        </binding>
+                        <binding destination="547" name="enabled" keyPath="self.currentFormula" id="EPT-Ql-qEN">
+                            <dictionary key="options">
+                                <string key="NSValueTransformerName">NSIsNotNil</string>
+                            </dictionary>
+                        </binding>
+                    </connections>
+                </menuItem>
+                <menuItem title="Update Formula" id="Hhd-b7-GOc">
+                    <modifierMask key="keyEquivalentModifierMask"/>
+                    <connections>
+                        <binding destination="547" name="enabled2" keyPath="self.currentFormula.outdated" previousBinding="rXd-8V-ocd" id="VpK-BR-HeB">
+                            <dictionary key="options">
+                                <integer key="NSMultipleValuesPlaceholder" value="-1"/>
+                                <integer key="NSNoSelectionPlaceholder" value="-1"/>
+                                <integer key="NSNotApplicablePlaceholder" value="-1"/>
+                                <integer key="NSNullPlaceholder" value="-1"/>
+                            </dictionary>
+                        </binding>
+                        <binding destination="547" name="enabled" keyPath="self.currentFormula" id="rXd-8V-ocd">
+                            <dictionary key="options">
+                                <string key="NSValueTransformerName">NSIsNotNil</string>
+                            </dictionary>
+                        </binding>
+                    </connections>
+                </menuItem>
+                <menuItem title="More Information" id="gxx-2S-F5T">
+                    <modifierMask key="keyEquivalentModifierMask"/>
+                    <connections>
+                        <action selector="showFormulaInfo:" target="547" id="EKP-ey-BAk"/>
+                        <binding destination="547" name="enabled" keyPath="self.currentFormula" id="l0h-2O-tyF">
+                            <dictionary key="options">
+                                <string key="NSValueTransformerName">NSIsNotNil</string>
+                            </dictionary>
+                        </binding>
+                    </connections>
+                </menuItem>
+                <menuItem isSeparatorItem="YES" id="lEK-nB-Jb8"/>
+                <menuItem title="Formula Website " keyEquivalent="w" id="0oV-it-p68">
+                    <modifierMask key="keyEquivalentModifierMask" option="YES" command="YES"/>
+                    <connections>
+                        <action selector="openSelectedFormulaWebsite:" target="547" id="ZsE-2j-NOS"/>
+                        <binding destination="547" name="enabled2" keyPath="self.currentFormula.website" previousBinding="gnJ-dl-HdY" id="rFA-T8-7mr">
+                            <dictionary key="options">
+                                <integer key="NSMultipleValuesPlaceholder" value="-1"/>
+                                <integer key="NSNoSelectionPlaceholder" value="-1"/>
+                                <integer key="NSNotApplicablePlaceholder" value="-1"/>
+                                <integer key="NSNullPlaceholder" value="-1"/>
+                                <string key="NSValueTransformerName">NSIsNotNil</string>
+                            </dictionary>
+                        </binding>
+                        <binding destination="547" name="enabled" keyPath="self.currentFormula" id="gnJ-dl-HdY">
+                            <dictionary key="options">
+                                <string key="NSValueTransformerName">NSIsNotNil</string>
+                            </dictionary>
+                        </binding>
+                    </connections>
+                </menuItem>
+            </items>
+            <connections>
+                <outlet property="delegate" destination="547" id="TTZ-f3-aNF"/>
+            </connections>
+        </menu>
     </objects>
     <resources>
         <image name="NSActionTemplate" width="14" height="14"/>

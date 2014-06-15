@@ -26,7 +26,7 @@
 #import "BPInstallationViewController.h"
 #import "Frameworks/PXSourceList.framework/Headers/PXSourceList.h"
 
-@interface BPHomebrewViewController () <NSTableViewDataSource, NSTableViewDelegate, PXSourceListDataSource, PXSourceListDelegate, BPHomebrewManagerDelegate>
+@interface BPHomebrewViewController () <NSTableViewDataSource, NSTableViewDelegate, PXSourceListDataSource, PXSourceListDelegate, BPHomebrewManagerDelegate, NSMenuDelegate>
 
 @property (strong, readonly) PXSourceListItem *rootSidebarCategory;
 @property (strong)           NSPopover        *formulaPopover;
@@ -44,6 +44,7 @@
 {
 	NSWindow					 *_operationWindow;
 	NSOutlineView __weak		 *_outlineView_sidebar;
+	NSTableView					 *_tableView_formulae;
 	DMSplitView __weak			 *_splitView;
 	BPHomebrewManager			 *_homebrewManager;
 	BPInsetShadowView __weak	 *_view_disablerLock;
@@ -380,6 +381,16 @@
 	return _splitView;
 }
 
+- (void)setTableView_formulae:(NSTableView *)tableView_formulae
+{
+	_tableView_formulae = tableView_formulae;
+}
+
+- (NSTableView*)tableView_formulae
+{
+	return _tableView_formulae;
+}
+
 - (void)setOutlineView_sidebar:(NSOutlineView *)outlineView_sidebar
 {
 	_outlineView_sidebar = outlineView_sidebar;
@@ -579,6 +590,13 @@
 
 	if (message) [self.label_information setStringValue:message];
 	[self.tabView selectTabViewItemAtIndex:tabIndex];
+}
+
+#pragma mark - NSMenu Delegate
+
+- (void)menuNeedsUpdate:(NSMenu *)menu
+{
+	[self.tableView_formulae selectRowIndexes:[NSIndexSet indexSetWithIndex:[self.tableView_formulae clickedRow]] byExtendingSelection:NO];
 }
 
 #pragma mark - IBActions
