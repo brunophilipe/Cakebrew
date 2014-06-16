@@ -566,7 +566,7 @@
 
 		case 3: // All Formulae
 			[self configureTableForListing:kBPListAll];
-			message = @"These are all the formulae available for instalation with Homebrew.";
+			message = @"These are all the formulae available for installation with Homebrew.";
 			break;
 
 		case 4:	// Leaves
