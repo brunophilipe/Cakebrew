@@ -32,7 +32,26 @@
 #define kBP_ENCODE_FORMULA_INST @"BP_ENCODE_FORMULA_INST"
 #define kBP_ENCODE_FORMULA_CNFL @"BP_ENCODE_FORMULA_CNFL"
 
+@interface BPFormula ()
+
+@property (strong) NSString *name;
+@property (strong) NSString *version;
+@property (strong) NSString *latestVersion;
+@property (strong) NSString *installPath;
+@property (strong) NSString *dependencies;
+@property (strong) NSString *conflicts;
+@property (strong) NSURL    *website;
+@property (strong) NSArray  *options;
+
+@property (getter = isInstalled)	BOOL installed;
+@property (getter = isDeprecated)	BOOL deprecated;
+
+@end
+
 @implementation BPFormula
+{
+	NSArray *_options;
+}
 
 + (BPFormula*)formulaWithName:(NSString*)name version:(NSString*)version andLatestVersion:(NSString*)latestVersion
 {
@@ -140,36 +159,65 @@
 		}
 	}
 
-	NSUInteger i=lineIndex;
-	lineIndex = 0;
+	NSRange range_deps = [output rangeOfString:@"==> Dependencies"];
+	NSRange range_opts = [output rangeOfString:@"==> Options"];
+	NSRange range_cvts = [output rangeOfString:@"==> Caveats"];
 
-	for ( ; i<lines.count; i++)
+	// Find dependencies
+	if (range_deps.location != NSNotFound)
 	{
-		line = [lines objectAtIndex:i];
-		if ([line isEqualToString:@"==> Dependencies"]) {
-			lineIndex = i+1;
-			break;
-		}
-	}
-
-	if (lineIndex == 0) {
-		return YES;
-	}
-
-	[self setDependencies:nil];
-
-	for (i=0; i<lines.count; i++) {
-		line = [lines objectAtIndex:lineIndex+i];
-
-		if (![line isEqualToString:@""] && ![line isEqualToString:@"==> Options"] && ![line isEqualToString:@"==> Caveats"]) {
-			if (self.dependencies) {
-				self.dependencies = [self.dependencies stringByAppendingFormat:@"; %@", line];
-			} else {
-				self.dependencies = line;
-			}
+		range_deps.location = range_deps.length+range_deps.location+1;
+		if (range_opts.location != NSNotFound) {
+			range_deps.length = range_opts.location-range_deps.location;
+		} else if (range_cvts.location != NSNotFound) {
+			range_deps.length = range_cvts.location-range_deps.location;
 		} else {
-			return YES;
+			range_deps.length = [output length] - range_deps.location;
 		}
+
+		NSMutableString __block *dependencies = nil;
+
+		[output enumerateSubstringsInRange:range_deps options:NSStringEnumerationByLines usingBlock:^(NSString *substring, NSRange substringRange, NSRange enclosingRange, BOOL *stop) {
+			if (!dependencies) {
+				dependencies = [NSMutableString stringWithString:substring];
+			} else {
+				[dependencies appendFormat:@"; %@", substring];
+			}
+		}];
+
+		[self setDependencies:[dependencies copy]];
+	} else {
+		[self setDependencies:nil];
+	}
+
+	// Find options
+	if (range_opts.location != NSNotFound)
+	{
+		NSString *optionsString = [output substringFromIndex:range_opts.length+range_opts.location+1];
+		NSMutableArray *options = [NSMutableArray arrayWithCapacity:10];
+
+		if (range_cvts.location != NSNotFound) {
+			optionsString = [optionsString substringToIndex:range_cvts.location];
+		}
+
+		NSMutableDictionary __block *formulaOption = nil;
+
+		[optionsString enumerateLinesUsingBlock:^(NSString *line, BOOL *stop) {
+			if ([line hasPrefix:@"--"]) { // This is an option command
+				formulaOption = [NSMutableDictionary dictionaryWithCapacity:2];
+				[formulaOption setObject:line forKey:kBP_FORMULA_OPTION_COMMAND];
+			} else if (formulaOption) { // This is the option description
+				[formulaOption setObject:[line stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]] forKey:kBP_FORMULA_OPTION_DESCRIPTION];
+				[options addObject:formulaOption];
+				formulaOption = nil;
+			} else {
+				*stop = YES;
+			}
+		}];
+
+		[self setOptions:[options copy]];
+	} else {
+		[self setOptions:nil];
 	}
 
 	return YES;

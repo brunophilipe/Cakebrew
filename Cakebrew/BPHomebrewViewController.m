@@ -24,6 +24,7 @@
 #import "BPHomebrewManager.h"
 #import "BPHomebrewInterface.h"
 #import "BPInstallationViewController.h"
+#import "BPFormulaOptionsViewController.h"
 #import "Frameworks/PXSourceList.framework/Headers/PXSourceList.h"
 
 @interface BPHomebrewViewController () <NSTableViewDataSource, NSTableViewDelegate, PXSourceListDataSource, PXSourceListDelegate, BPHomebrewManagerDelegate, NSMenuDelegate>
@@ -42,13 +43,15 @@
 
 @implementation BPHomebrewViewController
 {
-	NSWindow					 *_operationWindow;
-	NSOutlineView __weak		 *_outlineView_sidebar;
-	NSTableView					 *_tableView_formulae;
-	DMSplitView __weak			 *_splitView;
-	BPHomebrewManager			 *_homebrewManager;
-	BPInsetShadowView __weak	 *_view_disablerLock;
-	BPInstallationViewController *_operationViewController;
+	NSWindow					   *_operationWindow;
+	NSWindow					   *_formulaOptionsWindow;
+	NSOutlineView __weak		   *_outlineView_sidebar;
+	NSTableView					   *_tableView_formulae;
+	DMSplitView __weak			   *_splitView;
+	BPHomebrewManager			   *_homebrewManager;
+	BPInsetShadowView __weak	   *_view_disablerLock;
+	BPInstallationViewController   *_operationViewController;
+	BPFormulaOptionsViewController *_formulaOptionsViewController;
 }
 
 - (id)initWithCoder:(NSCoder *)aDecoder
@@ -141,6 +144,8 @@
 {
     _operationWindow = nil;
     _operationViewController = nil;
+	_formulaOptionsWindow = nil;
+	_formulaOptionsViewController = nil;
 }
 
 - (void)lockWindow
@@ -292,7 +297,7 @@
 
 	switch (mode) {
 		case kBPListAll:
-			titleWidth = (NSInteger)(totalWidth - 90);
+			titleWidth = (NSInteger)(totalWidth - 125);
 			_formulaeArray = [[BPHomebrewManager sharedManager] formulae_all];
 			[[self.tableView_formulae tableColumnWithIdentifier:@"Version"] setHidden:YES];
 			[[self.tableView_formulae tableColumnWithIdentifier:@"LatestVersion"] setHidden:YES];
@@ -451,14 +456,18 @@
 			}
         } else if ([columnIdentifer isEqualToString:@"Status"]) {
 			if ([element isKindOfClass:[BPFormula class]]) {
-				if (![(BPFormula*)element isInstalled]) {
-					return @"Not Installed";
-				} else {
-					if ([[BPHomebrewManager sharedManager] statusForFormula:element] == kBPFormulaOutdated) {
-						return @"Outdated";
-					} else {
+				switch ([[BPHomebrewManager sharedManager] statusForFormula:element]) {
+					case kBPFormulaInstalled:
 						return @"Installed";
-					}
+
+					case kBPFormulaNotInstalled:
+						return @"Not Installed";
+
+					case kBPFormulaOutdated:
+						return @"Update Available";
+
+					default:
+						return @"";
 				}
 			} else {
 				return element;
@@ -689,6 +698,37 @@
             }
 		} else {
 			operationBlock();
+		}
+	}
+}
+
+- (IBAction)installFormulaWithOptions:(id)sender
+{
+	if (_appDelegate.isRunningBackgroundTask)
+	{
+		[_appDelegate displayBackgroundWarning];
+		return;
+	}
+	[_appDelegate setRunningBackgroundTask:YES];
+
+	NSInteger selectedIndex = [self.tableView_formulae selectedRow];
+
+	if (selectedIndex >= 0) {
+		BPFormula *formula = [_formulaeArray objectAtIndex:(NSUInteger)selectedIndex];
+
+		_formulaOptionsViewController = [[BPFormulaOptionsViewController alloc] initWithNibName:@"BPFormulaOptionsViewController" bundle:nil];
+		_formulaOptionsWindow = [[NSWindow alloc] initWithContentRect:_formulaOptionsViewController.view.frame styleMask:NSTitledWindowMask|NSResizableWindowMask backing:NSBackingStoreBuffered defer:NO];
+		[_formulaOptionsWindow setContentView:_formulaOptionsViewController.view];
+		[_formulaOptionsViewController setWindow:_formulaOptionsWindow];
+		[_formulaOptionsViewController setFormula:formula];
+
+		if ([_appDelegate.window respondsToSelector:@selector(beginSheet:completionHandler:)]) {
+			[_appDelegate.window beginSheet:_formulaOptionsWindow completionHandler:^(NSModalResponse returnCode) {
+				_formulaOptionsWindow = nil;
+				_formulaOptionsViewController = nil;
+			}];
+		} else {
+			[[NSApplication sharedApplication] beginSheet:_formulaOptionsWindow modalForWindow:_appDelegate.window modalDelegate:self didEndSelector:@selector(windowOperationSheetDidEnd:returnCode:contextInfo:) contextInfo:nil];
 		}
 	}
 }

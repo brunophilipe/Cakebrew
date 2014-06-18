@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="5056" systemVersion="13C1021" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="5056" systemVersion="14A261i" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <deployment defaultVersion="1070" identifier="macosx"/>
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="5056"/>
@@ -53,7 +53,7 @@
                         <rect key="frame" x="1" y="1" width="438" height="162"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <textView editable="NO" importsGraphics="NO" richText="NO" findStyle="bar" verticallyResizable="YES" allowsNonContiguousLayout="YES" id="7hj-bv-E4Q">
+                            <textView editable="NO" importsGraphics="NO" richText="NO" findStyle="bar" verticallyResizable="YES" allowsNonContiguousLayout="YES" id="7hj-bv-E4Q" customClass="BPAutoScrollTextView">
                                 <rect key="frame" x="0.0" y="0.0" width="438" height="162"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -71,7 +71,7 @@
                         <autoresizingMask key="autoresizingMask"/>
                     </scroller>
                     <scroller key="verticalScroller" verticalHuggingPriority="750" doubleValue="1" horizontal="NO" id="gM6-l7-I6y">
-                        <rect key="frame" x="423" y="1" width="16" height="162"/>
+                        <rect key="frame" x="424" y="1" width="15" height="162"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </scroller>
                 </scrollView>

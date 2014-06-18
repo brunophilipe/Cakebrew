@@ -69,6 +69,7 @@ typedef NS_ENUM(NSUInteger, BPWindowOperation) {
 
 - (IBAction)showFormulaInfo:(id)sender;
 - (IBAction)installUninstallUpdate:(id)sender;
+- (IBAction)installFormulaWithOptions:(id)sender;
 - (IBAction)upgradeAllOutdatedFormulae:(id)sender;
 - (IBAction)updateHomebrew:(id)sender;
 - (IBAction)openSelectedFormulaWebsite:(id)sender;

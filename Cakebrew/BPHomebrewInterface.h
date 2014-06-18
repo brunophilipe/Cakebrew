@@ -20,6 +20,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "BPFormula.h"
 
 typedef NS_ENUM(NSInteger, BPListMode) {
 	kBPListAll,

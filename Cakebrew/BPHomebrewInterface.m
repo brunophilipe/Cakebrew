@@ -20,7 +20,6 @@
 //
 
 #import "BPHomebrewInterface.h"
-#import "BPFormula.h"
 
 static NSString *cakebrewOutputIdentifier = @"+++++Cakebrew+++++";
 
@@ -33,20 +32,20 @@ static NSString *cakebrewOutputIdentifier = @"+++++Cakebrew+++++";
 - (BPFormula *)parseFormulaItem:(NSString *)item;
 
 @end
+
 @interface BPHomebrewInterfaceListCallInstalled : BPHomebrewInterfaceListCall
-
 @end
+
 @interface BPHomebrewInterfaceListCallAll : BPHomebrewInterfaceListCall
-
 @end
+
 @interface BPHomebrewInterfaceListCallLeaves : BPHomebrewInterfaceListCall
-
 @end
+
 @interface BPHomebrewInterfaceListCallUpgradeable : BPHomebrewInterfaceListCall
-
 @end
-@interface BPHomebrewInterfaceListCallSearch : BPHomebrewInterfaceListCall
 
+@interface BPHomebrewInterfaceListCallSearch : BPHomebrewInterfaceListCall
 @end
 
 @implementation BPHomebrewInterface

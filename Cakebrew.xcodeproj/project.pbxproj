@@ -23,6 +23,9 @@
 		15B23A2918F4F21E00714212 /* Sparkle.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 15B23A2818F4F21E00714212 /* Sparkle.framework */; };
 		15B23A2A18F4F22400714212 /* Sparkle.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 15B23A2818F4F21E00714212 /* Sparkle.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		15B23A2C18F5003600714212 /* dsa_pub.pem in Resources */ = {isa = PBXBuildFile; fileRef = 15B23A2B18F5003600714212 /* dsa_pub.pem */; };
+		15B6F14C1950E37100144B01 /* BPFormulaOptionsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 15B6F14A1950E37100144B01 /* BPFormulaOptionsViewController.m */; };
+		15B6F14D1950E37100144B01 /* BPFormulaOptionsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 15B6F14B1950E37100144B01 /* BPFormulaOptionsViewController.xib */; };
+		15C34CBF19512DE100B92E36 /* BPAutoScrollTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 15C34CBE19512DE100B92E36 /* BPAutoScrollTextView.m */; };
 		15D2CF9318F1D66400B6D9F1 /* allFormulasTemplate.png in Resources */ = {isa = PBXBuildFile; fileRef = 15D2CF8918F1D66400B6D9F1 /* allFormulasTemplate.png */; };
 		15D2CF9418F1D66400B6D9F1 /* allFormulasTemplate@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 15D2CF8A18F1D66400B6D9F1 /* allFormulasTemplate@2x.png */; };
 		15D2CF9718F1D66400B6D9F1 /* installedTemplate.png in Resources */ = {isa = PBXBuildFile; fileRef = 15D2CF8D18F1D66400B6D9F1 /* installedTemplate.png */; };
@@ -96,6 +99,11 @@
 		158370B818F2471500176C9C /* PXSourceList.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PXSourceList.framework; path = Cakebrew/Frameworks/PXSourceList.framework; sourceTree = "<group>"; };
 		15B23A2818F4F21E00714212 /* Sparkle.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Sparkle.framework; path = Cakebrew/Frameworks/Sparkle.framework; sourceTree = "<group>"; };
 		15B23A2B18F5003600714212 /* dsa_pub.pem */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = dsa_pub.pem; sourceTree = "<group>"; };
+		15B6F1491950E37100144B01 /* BPFormulaOptionsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BPFormulaOptionsViewController.h; path = Views/BPFormulaOptionsViewController.h; sourceTree = "<group>"; };
+		15B6F14A1950E37100144B01 /* BPFormulaOptionsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BPFormulaOptionsViewController.m; path = Views/BPFormulaOptionsViewController.m; sourceTree = "<group>"; };
+		15B6F14B1950E37100144B01 /* BPFormulaOptionsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = BPFormulaOptionsViewController.xib; path = Views/BPFormulaOptionsViewController.xib; sourceTree = "<group>"; };
+		15C34CBD19512DE100B92E36 /* BPAutoScrollTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BPAutoScrollTextView.h; path = Views/BPAutoScrollTextView.h; sourceTree = "<group>"; };
+		15C34CBE19512DE100B92E36 /* BPAutoScrollTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BPAutoScrollTextView.m; path = Views/BPAutoScrollTextView.m; sourceTree = "<group>"; };
 		15D2CF8918F1D66400B6D9F1 /* allFormulasTemplate.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = allFormulasTemplate.png; sourceTree = "<group>"; };
 		15D2CF8A18F1D66400B6D9F1 /* allFormulasTemplate@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "allFormulasTemplate@2x.png"; sourceTree = "<group>"; };
 		15D2CF8D18F1D66400B6D9F1 /* installedTemplate.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = installedTemplate.png; sourceTree = "<group>"; };
@@ -170,6 +178,8 @@
 				1540FA3B18EDD8CE00334A5C /* BPTopBorderView.m */,
 				15705462191A887E0003E60F /* BPGenericTextPopoverView.h */,
 				15705463191A887E0003E60F /* BPGenericTextPopoverView.m */,
+				15C34CBD19512DE100B92E36 /* BPAutoScrollTextView.h */,
+				15C34CBE19512DE100B92E36 /* BPAutoScrollTextView.m */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -304,6 +314,9 @@
 				D2F732E919190B6D002B2512 /* BPPreferencesWindow.xib */,
 				D2F732EA19190B6D002B2512 /* BPPreferencesWindowController.h */,
 				D2F732EB19190B6D002B2512 /* BPPreferencesWindowController.m */,
+				15B6F1491950E37100144B01 /* BPFormulaOptionsViewController.h */,
+				15B6F14A1950E37100144B01 /* BPFormulaOptionsViewController.m */,
+				15B6F14B1950E37100144B01 /* BPFormulaOptionsViewController.xib */,
 				D2F732EE19190B75002B2512 /* Categories */,
 				1540FA3618ED099F00334A5C /* Views */,
 				15D5BEFB18EBD006001DDED7 /* Models */,
@@ -396,6 +409,7 @@
 			files = (
 				1529086B1927C05B00206767 /* .travis.yml in Resources */,
 				15D5BEF318EBB3FB001DDED7 /* plus.icns in Resources */,
+				15B6F14D1950E37100144B01 /* BPFormulaOptionsViewController.xib in Resources */,
 				D2F732EC19190B6D002B2512 /* BPPreferencesWindow.xib in Resources */,
 				1FE4FE63148E4CDD008EDE8B /* InfoPlist.strings in Resources */,
 				1FE4FE69148E4CDD008EDE8B /* Credits.rtf in Resources */,
@@ -459,9 +473,11 @@
 				1FE4FE77148E4D43008EDE8B /* BPHomebrewInterface.m in Sources */,
 				1540FA3918ED09BB00334A5C /* BPInsetShadowView.m in Sources */,
 				D2F732ED19190B6D002B2512 /* BPPreferencesWindowController.m in Sources */,
+				15C34CBF19512DE100B92E36 /* BPAutoScrollTextView.m in Sources */,
 				157270DA18F2598A00CA8C9C /* BPUpdateDoctorController.m in Sources */,
 				D2F732F119190B75002B2512 /* NSString+URLValidation.m in Sources */,
 				1FE4FE7A148E5FEB008EDE8B /* BPHomebrewViewController.m in Sources */,
+				15B6F14C1950E37100144B01 /* BPFormulaOptionsViewController.m in Sources */,
 				15D2CFAB18F202B300B6D9F1 /* DCOAboutWindowController.m in Sources */,
 				1540FA3D18EDDA1600334A5C /* BPTopBorderView.m in Sources */,
 				15705464191A887E0003E60F /* BPGenericTextPopoverView.m in Sources */,

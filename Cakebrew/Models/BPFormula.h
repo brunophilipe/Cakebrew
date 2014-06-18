@@ -23,16 +23,17 @@
 
 @interface BPFormula : NSObject <NSCoding>
 
-@property (strong) NSString *name;
-@property (strong) NSString *version;
-@property (strong) NSString *latestVersion;
-@property (strong) NSString *installPath;
-@property (strong) NSString *dependencies;
-@property (strong) NSString *conflicts;
-@property (strong) NSURL    *website;
+@property (strong, readonly) NSString *name;
+@property (strong, readonly) NSString *version;
+@property (strong, readonly) NSString *latestVersion;
+@property (strong, readonly) NSString *installPath;
+@property (strong, readonly) NSString *dependencies;
+@property (strong, readonly) NSString *conflicts;
+@property (strong, readonly) NSURL    *website;
+@property (strong, readonly) NSArray  *options;
 
-@property (getter = isInstalled)	BOOL installed;
-@property (getter = isDeprecated)	BOOL deprecated;
+@property (getter = isInstalled, readonly)	BOOL installed;
+@property (getter = isDeprecated, readonly)	BOOL deprecated;
 
 + (BPFormula*)formulaWithName:(NSString*)name version:(NSString*)version andLatestVersion:(NSString*)latestVersion;
 + (BPFormula*)formulaWithName:(NSString*)name andVersion:(NSString*)version;

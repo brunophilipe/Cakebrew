@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="5056" systemVersion="14A238x" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="5056" systemVersion="14A261i" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <deployment defaultVersion="1070" identifier="macosx"/>
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="5056"/>
@@ -94,6 +94,26 @@
                                         </dictionary>
                                     </binding>
                                     <binding destination="547" name="enabled2" keyPath="self.currentFormula.installed" previousBinding="J1D-i3-vrU" id="n2g-Zg-ofq">
+                                        <dictionary key="options">
+                                            <integer key="NSMultipleValuesPlaceholder" value="-1"/>
+                                            <integer key="NSNoSelectionPlaceholder" value="-1"/>
+                                            <integer key="NSNotApplicablePlaceholder" value="-1"/>
+                                            <integer key="NSNullPlaceholder" value="-1"/>
+                                            <string key="NSValueTransformerName">NSNegateBoolean</string>
+                                        </dictionary>
+                                    </binding>
+                                </connections>
+                            </menuItem>
+                            <menuItem title="Install Formula with Options..." id="X74-Yx-eRm">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                                <connections>
+                                    <action selector="installFormulaWithOptions:" target="547" id="0BB-I6-WDa"/>
+                                    <binding destination="547" name="enabled" keyPath="self.currentFormula" id="J4f-lR-6YZ">
+                                        <dictionary key="options">
+                                            <string key="NSValueTransformerName">NSIsNotNil</string>
+                                        </dictionary>
+                                    </binding>
+                                    <binding destination="547" name="enabled2" keyPath="self.currentFormula.installed" previousBinding="J4f-lR-6YZ" id="aH8-wq-HS4">
                                         <dictionary key="options">
                                             <integer key="NSMultipleValuesPlaceholder" value="-1"/>
                                             <integer key="NSNoSelectionPlaceholder" value="-1"/>
@@ -443,7 +463,7 @@
             <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
             <windowCollectionBehavior key="collectionBehavior" fullScreenPrimary="YES"/>
             <rect key="contentRect" x="629" y="349" width="570" height="342"/>
-            <rect key="screenRect" x="0.0" y="0.0" width="1440" height="878"/>
+            <rect key="screenRect" x="0.0" y="0.0" width="1440" height="877"/>
             <value key="minSize" type="size" width="570" height="342"/>
             <view key="contentView" id="372">
                 <rect key="frame" x="0.0" y="0.0" width="570" height="342"/>
@@ -996,7 +1016,7 @@
                                                             </scroller>
                                                         </scrollView>
                                                         <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="CbV-C7-Qte">
-                                                            <rect key="frame" x="5" y="287" width="154" height="28"/>
+                                                            <rect key="frame" x="5" y="291" width="154" height="24"/>
                                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="width" constant="150" id="Buj-NU-hre"/>
@@ -1041,7 +1061,7 @@
                                                     <constraints>
                                                         <constraint firstAttribute="trailing" secondItem="UBC-qD-VOA" secondAttribute="trailing" constant="-1" id="1Rf-ao-D1b"/>
                                                         <constraint firstItem="RTo-rg-mQf" firstAttribute="top" secondItem="p04-F1-40m" secondAttribute="top" constant="10" id="8je-6j-S6h"/>
-                                                        <constraint firstItem="UBC-qD-VOA" firstAttribute="top" secondItem="CbV-C7-Qte" secondAttribute="bottom" constant="2" id="ArQ-2R-2Ck"/>
+                                                        <constraint firstItem="UBC-qD-VOA" firstAttribute="top" secondItem="CbV-C7-Qte" secondAttribute="bottom" constant="6" id="ArQ-2R-2Ck"/>
                                                         <constraint firstItem="UBC-qD-VOA" firstAttribute="leading" secondItem="p04-F1-40m" secondAttribute="leading" constant="-1" id="D6S-l1-v4j"/>
                                                         <constraint firstAttribute="trailing" secondItem="3aw-8I-EVx" secondAttribute="trailing" constant="12" id="H2s-hX-JqD"/>
                                                         <constraint firstAttribute="bottom" secondItem="UBC-qD-VOA" secondAttribute="bottom" constant="-1" id="TWL-IO-Oh7"/>
@@ -1149,6 +1169,121 @@
             </toolbar>
             <contentBorderThickness minY="22"/>
         </window>
+        <menu title="Formula" id="dg5-kq-v1Y">
+            <items>
+                <menuItem title="Install Formula" id="Lcb-tm-ATo">
+                    <modifierMask key="keyEquivalentModifierMask"/>
+                    <connections>
+                        <action selector="installUninstallUpdate:" target="547" id="dvF-X5-AFi"/>
+                        <binding destination="547" name="enabled" keyPath="self.currentFormula" id="Nz4-8w-2do">
+                            <dictionary key="options">
+                                <string key="NSValueTransformerName">NSIsNotNil</string>
+                            </dictionary>
+                        </binding>
+                        <binding destination="547" name="enabled2" keyPath="self.currentFormula.installed" previousBinding="Nz4-8w-2do" id="ar5-Tg-nDj">
+                            <dictionary key="options">
+                                <integer key="NSMultipleValuesPlaceholder" value="-1"/>
+                                <integer key="NSNoSelectionPlaceholder" value="-1"/>
+                                <integer key="NSNotApplicablePlaceholder" value="-1"/>
+                                <integer key="NSNullPlaceholder" value="-1"/>
+                                <string key="NSValueTransformerName">NSNegateBoolean</string>
+                            </dictionary>
+                        </binding>
+                    </connections>
+                </menuItem>
+                <menuItem title="Install Formula with Options..." id="Vio-Nc-WTc">
+                    <modifierMask key="keyEquivalentModifierMask"/>
+                    <connections>
+                        <action selector="installFormulaWithOptions:" target="547" id="W9n-92-JB6"/>
+                        <binding destination="547" name="enabled" keyPath="self.currentFormula" id="is1-u7-LBB">
+                            <dictionary key="options">
+                                <string key="NSValueTransformerName">NSIsNotNil</string>
+                            </dictionary>
+                        </binding>
+                        <binding destination="547" name="enabled2" keyPath="self.currentFormula.installed" previousBinding="is1-u7-LBB" id="Us7-hx-rlC">
+                            <dictionary key="options">
+                                <integer key="NSMultipleValuesPlaceholder" value="-1"/>
+                                <integer key="NSNoSelectionPlaceholder" value="-1"/>
+                                <integer key="NSNotApplicablePlaceholder" value="-1"/>
+                                <integer key="NSNullPlaceholder" value="-1"/>
+                                <string key="NSValueTransformerName">NSNegateBoolean</string>
+                            </dictionary>
+                        </binding>
+                    </connections>
+                </menuItem>
+                <menuItem title="Uninstall Formula" id="i3A-Nx-qPJ">
+                    <modifierMask key="keyEquivalentModifierMask"/>
+                    <connections>
+                        <binding destination="547" name="enabled" keyPath="self.currentFormula" id="EPT-Ql-qEN">
+                            <dictionary key="options">
+                                <string key="NSValueTransformerName">NSIsNotNil</string>
+                            </dictionary>
+                        </binding>
+                        <binding destination="547" name="enabled2" keyPath="self.currentFormula.installed" previousBinding="EPT-Ql-qEN" id="lGA-Gs-BUq">
+                            <dictionary key="options">
+                                <integer key="NSMultipleValuesPlaceholder" value="-1"/>
+                                <integer key="NSNoSelectionPlaceholder" value="-1"/>
+                                <integer key="NSNotApplicablePlaceholder" value="-1"/>
+                                <integer key="NSNullPlaceholder" value="-1"/>
+                            </dictionary>
+                        </binding>
+                    </connections>
+                </menuItem>
+                <menuItem title="Update Formula" id="Hhd-b7-GOc">
+                    <modifierMask key="keyEquivalentModifierMask"/>
+                    <connections>
+                        <binding destination="547" name="enabled" keyPath="self.currentFormula" id="rXd-8V-ocd">
+                            <dictionary key="options">
+                                <string key="NSValueTransformerName">NSIsNotNil</string>
+                            </dictionary>
+                        </binding>
+                        <binding destination="547" name="enabled2" keyPath="self.currentFormula.outdated" previousBinding="rXd-8V-ocd" id="VpK-BR-HeB">
+                            <dictionary key="options">
+                                <integer key="NSMultipleValuesPlaceholder" value="-1"/>
+                                <integer key="NSNoSelectionPlaceholder" value="-1"/>
+                                <integer key="NSNotApplicablePlaceholder" value="-1"/>
+                                <integer key="NSNullPlaceholder" value="-1"/>
+                            </dictionary>
+                        </binding>
+                    </connections>
+                </menuItem>
+                <menuItem title="More Information" id="gxx-2S-F5T">
+                    <modifierMask key="keyEquivalentModifierMask"/>
+                    <connections>
+                        <action selector="showFormulaInfo:" target="547" id="EKP-ey-BAk"/>
+                        <binding destination="547" name="enabled" keyPath="self.currentFormula" id="l0h-2O-tyF">
+                            <dictionary key="options">
+                                <string key="NSValueTransformerName">NSIsNotNil</string>
+                            </dictionary>
+                        </binding>
+                    </connections>
+                </menuItem>
+                <menuItem isSeparatorItem="YES" id="lEK-nB-Jb8"/>
+                <menuItem title="Formula Website " keyEquivalent="w" id="0oV-it-p68">
+                    <modifierMask key="keyEquivalentModifierMask" option="YES" command="YES"/>
+                    <connections>
+                        <action selector="openSelectedFormulaWebsite:" target="547" id="ZsE-2j-NOS"/>
+                        <binding destination="547" name="enabled" keyPath="self.currentFormula" id="gnJ-dl-HdY">
+                            <dictionary key="options">
+                                <string key="NSValueTransformerName">NSIsNotNil</string>
+                            </dictionary>
+                        </binding>
+                        <binding destination="547" name="enabled2" keyPath="self.currentFormula.website" previousBinding="gnJ-dl-HdY" id="rFA-T8-7mr">
+                            <dictionary key="options">
+                                <integer key="NSMultipleValuesPlaceholder" value="-1"/>
+                                <integer key="NSNoSelectionPlaceholder" value="-1"/>
+                                <integer key="NSNotApplicablePlaceholder" value="-1"/>
+                                <integer key="NSNullPlaceholder" value="-1"/>
+                                <string key="NSValueTransformerName">NSIsNotNil</string>
+                            </dictionary>
+                        </binding>
+                    </connections>
+                </menuItem>
+            </items>
+            <connections>
+                <outlet property="delegate" destination="547" id="TTZ-f3-aNF"/>
+            </connections>
+        </menu>
         <customObject id="494" customClass="BPAppDelegate">
             <connections>
                 <outlet property="window" destination="371" id="532"/>
@@ -1209,10 +1344,10 @@
                                 <rect key="frame" x="0.0" y="0.0" width="410" height="183"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" white="1" alpha="0.0" colorSpace="calibratedWhite"/>
-                                <size key="minSize" width="410" height="183"/>
+                                <size key="minSize" width="394" height="183"/>
                                 <size key="maxSize" width="463" height="10000000"/>
                                 <color key="insertionPointColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                                <size key="minSize" width="410" height="183"/>
+                                <size key="minSize" width="394" height="183"/>
                                 <size key="maxSize" width="463" height="10000000"/>
                             </textView>
                         </subviews>
@@ -1251,101 +1386,6 @@
                 <outlet property="textView" destination="76F-8G-r1b" id="636-ZX-1HH"/>
             </connections>
         </customView>
-        <menu title="Formula" id="dg5-kq-v1Y">
-            <items>
-                <menuItem title="Install Formula" id="Lcb-tm-ATo">
-                    <modifierMask key="keyEquivalentModifierMask"/>
-                    <connections>
-                        <action selector="installUninstallUpdate:" target="547" id="dvF-X5-AFi"/>
-                        <binding destination="547" name="enabled2" keyPath="self.currentFormula.installed" previousBinding="Nz4-8w-2do" id="ar5-Tg-nDj">
-                            <dictionary key="options">
-                                <integer key="NSMultipleValuesPlaceholder" value="-1"/>
-                                <integer key="NSNoSelectionPlaceholder" value="-1"/>
-                                <integer key="NSNotApplicablePlaceholder" value="-1"/>
-                                <integer key="NSNullPlaceholder" value="-1"/>
-                                <string key="NSValueTransformerName">NSNegateBoolean</string>
-                            </dictionary>
-                        </binding>
-                        <binding destination="547" name="enabled" keyPath="self.currentFormula" id="Nz4-8w-2do">
-                            <dictionary key="options">
-                                <string key="NSValueTransformerName">NSIsNotNil</string>
-                            </dictionary>
-                        </binding>
-                    </connections>
-                </menuItem>
-                <menuItem title="Uninstall Formula" id="i3A-Nx-qPJ">
-                    <modifierMask key="keyEquivalentModifierMask"/>
-                    <connections>
-                        <binding destination="547" name="enabled2" keyPath="self.currentFormula.installed" previousBinding="EPT-Ql-qEN" id="lGA-Gs-BUq">
-                            <dictionary key="options">
-                                <integer key="NSMultipleValuesPlaceholder" value="-1"/>
-                                <integer key="NSNoSelectionPlaceholder" value="-1"/>
-                                <integer key="NSNotApplicablePlaceholder" value="-1"/>
-                                <integer key="NSNullPlaceholder" value="-1"/>
-                            </dictionary>
-                        </binding>
-                        <binding destination="547" name="enabled" keyPath="self.currentFormula" id="EPT-Ql-qEN">
-                            <dictionary key="options">
-                                <string key="NSValueTransformerName">NSIsNotNil</string>
-                            </dictionary>
-                        </binding>
-                    </connections>
-                </menuItem>
-                <menuItem title="Update Formula" id="Hhd-b7-GOc">
-                    <modifierMask key="keyEquivalentModifierMask"/>
-                    <connections>
-                        <binding destination="547" name="enabled2" keyPath="self.currentFormula.outdated" previousBinding="rXd-8V-ocd" id="VpK-BR-HeB">
-                            <dictionary key="options">
-                                <integer key="NSMultipleValuesPlaceholder" value="-1"/>
-                                <integer key="NSNoSelectionPlaceholder" value="-1"/>
-                                <integer key="NSNotApplicablePlaceholder" value="-1"/>
-                                <integer key="NSNullPlaceholder" value="-1"/>
-                            </dictionary>
-                        </binding>
-                        <binding destination="547" name="enabled" keyPath="self.currentFormula" id="rXd-8V-ocd">
-                            <dictionary key="options">
-                                <string key="NSValueTransformerName">NSIsNotNil</string>
-                            </dictionary>
-                        </binding>
-                    </connections>
-                </menuItem>
-                <menuItem title="More Information" id="gxx-2S-F5T">
-                    <modifierMask key="keyEquivalentModifierMask"/>
-                    <connections>
-                        <action selector="showFormulaInfo:" target="547" id="EKP-ey-BAk"/>
-                        <binding destination="547" name="enabled" keyPath="self.currentFormula" id="l0h-2O-tyF">
-                            <dictionary key="options">
-                                <string key="NSValueTransformerName">NSIsNotNil</string>
-                            </dictionary>
-                        </binding>
-                    </connections>
-                </menuItem>
-                <menuItem isSeparatorItem="YES" id="lEK-nB-Jb8"/>
-                <menuItem title="Formula Website " keyEquivalent="w" id="0oV-it-p68">
-                    <modifierMask key="keyEquivalentModifierMask" option="YES" command="YES"/>
-                    <connections>
-                        <action selector="openSelectedFormulaWebsite:" target="547" id="ZsE-2j-NOS"/>
-                        <binding destination="547" name="enabled2" keyPath="self.currentFormula.website" previousBinding="gnJ-dl-HdY" id="rFA-T8-7mr">
-                            <dictionary key="options">
-                                <integer key="NSMultipleValuesPlaceholder" value="-1"/>
-                                <integer key="NSNoSelectionPlaceholder" value="-1"/>
-                                <integer key="NSNotApplicablePlaceholder" value="-1"/>
-                                <integer key="NSNullPlaceholder" value="-1"/>
-                                <string key="NSValueTransformerName">NSIsNotNil</string>
-                            </dictionary>
-                        </binding>
-                        <binding destination="547" name="enabled" keyPath="self.currentFormula" id="gnJ-dl-HdY">
-                            <dictionary key="options">
-                                <string key="NSValueTransformerName">NSIsNotNil</string>
-                            </dictionary>
-                        </binding>
-                    </connections>
-                </menuItem>
-            </items>
-            <connections>
-                <outlet property="delegate" destination="547" id="TTZ-f3-aNF"/>
-            </connections>
-        </menu>
     </objects>
     <resources>
         <image name="NSActionTemplate" width="14" height="14"/>
