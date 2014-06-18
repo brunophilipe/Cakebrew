@@ -133,7 +133,9 @@
 }
 
 - (IBAction)ok:(id)sender {
-    NSWindow *mainWindow = BPAppDelegateRef.window;
+    NSWindow *mainWindow = self.parentSheet;
+	if (!mainWindow) mainWindow = BPAppDelegateRef.window;
+	
 	if ([mainWindow respondsToSelector:@selector(endSheet:)]) {
 		[mainWindow endSheet:self.window];
 	} else {

@@ -46,12 +46,12 @@
 }
 
 - (IBAction)install:(id)sender {
-	NSAlert *alert = [NSAlert alertWithMessageText:@"Attention!" defaultButton:@"Yes" alternateButton:@"Cancel" otherButton:nil informativeTextWithFormat:@"Are you sure you want to install the formula %@?", self.formula.name];
+	NSAlert *alert = [NSAlert alertWithMessageText:@"Attention!" defaultButton:@"Yes" alternateButton:@"Cancel" otherButton:nil informativeTextWithFormat:@"Are you sure you want to install the formula %@ with the selected options?", self.formula.name];
 	[alert.window setTitle:@"Cakebrew"];
 
 	NSInteger returnValue = [alert runModal];
 	if (returnValue == NSAlertDefaultReturn) {
-
+        [self.homebrewViewController prepareFormula:self.formula forOperation:kBPWindowOperationInstall inWindow:self.window alsoModal:YES];
 	}
 	else {
 		[BPAppDelegateRef setRunningBackgroundTask:NO];

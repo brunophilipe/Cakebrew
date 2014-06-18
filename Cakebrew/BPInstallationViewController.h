@@ -34,6 +34,7 @@
 @property (assign, nonatomic) BPFormula *formula;
 @property (strong, nonatomic) NSArray *formulae;
 @property (assign) NSWindow *window;
+@property (weak) NSWindow *parentSheet;
 
 @property (nonatomic) BPWindowOperation windowOperation;
 

@@ -66,6 +66,8 @@ typedef NS_ENUM(NSUInteger, BPWindowOperation) {
 
 @property (weak) BPFormula *currentFormula;
 
+- (void)prepareFormula:(BPFormula*)formula forOperation:(BPWindowOperation)operation;
+- (void)prepareFormula:(BPFormula*)formula forOperation:(BPWindowOperation)operation inWindow:(NSWindow*)window alsoModal:(BOOL)alsoModal;
 
 - (IBAction)showFormulaInfo:(id)sender;
 - (IBAction)installUninstallUpdate:(id)sender;

@@ -39,6 +39,8 @@
 @property BOOL isSearching;
 @property BPWindowOperation toolbarButtonOperation;
 
+@property NSWindow *alsoModalWindow;
+
 @end
 
 @implementation BPHomebrewViewController
@@ -117,10 +119,18 @@
 
 - (void)prepareFormula:(BPFormula*)formula forOperation:(BPWindowOperation)operation
 {
+    [self prepareFormula:formula forOperation:operation inWindow:_appDelegate.window alsoModal:NO];
+}
+
+- (void)prepareFormula:(BPFormula*)formula forOperation:(BPWindowOperation)operation inWindow:(NSWindow*)window alsoModal:(BOOL)alsoModal
+{
 	_operationViewController = [[BPInstallationViewController alloc] initWithNibName:@"BPInstallationViewController" bundle:nil];
 	_operationWindow = [[NSWindow alloc] initWithContentRect:_operationViewController.view.frame styleMask:NSTitledWindowMask|NSResizableWindowMask backing:NSBackingStoreBuffered defer:NO];
 	[_operationWindow setContentView:_operationViewController.view];
 	[_operationViewController setWindow:_operationWindow];
+
+	if (alsoModal) [_operationViewController setParentSheet:window];
+
 	if (formula) {
 		[_operationViewController setFormula:formula];
 	} else {
@@ -128,13 +138,20 @@
 	}
 	[_operationViewController setWindowOperation:operation];
 
-    if ([_appDelegate.window respondsToSelector:@selector(beginSheet:completionHandler:)]) {
-        [_appDelegate.window beginSheet:_operationWindow completionHandler:^(NSModalResponse returnCode) {
+    if ([window respondsToSelector:@selector(beginSheet:completionHandler:)]) {
+        [window beginSheet:_operationWindow completionHandler:^(NSModalResponse returnCode) {
             _operationWindow = nil;
             _operationViewController = nil;
+            if (alsoModal) {
+                [_appDelegate.window endSheet:window];
+            }
         }];
     } else {
-        [[NSApplication sharedApplication] beginSheet:_operationWindow modalForWindow:_appDelegate.window modalDelegate:self didEndSelector:@selector(windowOperationSheetDidEnd:returnCode:contextInfo:) contextInfo:nil];
+        if (alsoModal)
+        {
+            _alsoModalWindow = window;
+        }
+        [[NSApplication sharedApplication] beginSheet:_operationWindow modalForWindow:window modalDelegate:self didEndSelector:@selector(windowOperationSheetDidEnd:returnCode:contextInfo:) contextInfo:nil];
     }
 
 	[_operationViewController windowDidAppear];
@@ -142,6 +159,10 @@
 
 - (void)windowOperationSheetDidEnd:(NSWindow *)sheet returnCode:(NSInteger)returnCode contextInfo:(void *)contextInfo;
 {
+    if (_alsoModalWindow) {
+        [[NSApplication sharedApplication] endSheet:_alsoModalWindow];
+        _alsoModalWindow = nil;
+    }
     _operationWindow = nil;
     _operationViewController = nil;
 	_formulaOptionsWindow = nil;
@@ -721,6 +742,7 @@
 		[_formulaOptionsWindow setContentView:_formulaOptionsViewController.view];
 		[_formulaOptionsViewController setWindow:_formulaOptionsWindow];
 		[_formulaOptionsViewController setFormula:formula];
+		[_formulaOptionsViewController setHomebrewViewController:self];
 
 		if ([_appDelegate.window respondsToSelector:@selector(beginSheet:completionHandler:)]) {
 			[_appDelegate.window beginSheet:_formulaOptionsWindow completionHandler:^(NSModalResponse returnCode) {
