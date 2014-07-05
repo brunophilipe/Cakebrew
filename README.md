@@ -14,6 +14,10 @@ Do you need to use Homebrew but are afraid to use the terminal? Cakebrew is the 
 
 ![Screenshot as of May 27th](https://www.cakebrew.com/assets/img/app-bg.png)
 
+## Problems using ZSH?
+
+Please visit [this page](https://github.com/brunophilipe/Cakebrew/wiki#using-zsh-shell).
+
 ## Download
 
 [Download Now](https://www.cakebrew.com)
