@@ -184,6 +184,37 @@
 			name = Views;
 			sourceTree = "<group>";
 		};
+		15A974AB1968A3C900621C35 /* View Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				1FE4FE78148E5FEB008EDE8B /* BPHomebrewViewController.h */,
+				1FE4FE79148E5FEB008EDE8B /* BPHomebrewViewController.m */,
+				157270D718F2598A00CA8C9C /* BPUpdateDoctorController.h */,
+				157270D818F2598A00CA8C9C /* BPUpdateDoctorController.m */,
+				157270DC18F34CF900CA8C9C /* BPInstallationViewController.h */,
+				157270DD18F34CF900CA8C9C /* BPInstallationViewController.m */,
+				157270DE18F34CF900CA8C9C /* BPInstallationViewController.xib */,
+				D2F732E919190B6D002B2512 /* BPPreferencesWindow.xib */,
+				D2F732EA19190B6D002B2512 /* BPPreferencesWindowController.h */,
+				D2F732EB19190B6D002B2512 /* BPPreferencesWindowController.m */,
+				15B6F1491950E37100144B01 /* BPFormulaOptionsViewController.h */,
+				15B6F14A1950E37100144B01 /* BPFormulaOptionsViewController.m */,
+				15B6F14B1950E37100144B01 /* BPFormulaOptionsViewController.xib */,
+			);
+			name = "View Controllers";
+			sourceTree = "<group>";
+		};
+		15A974AC1968A3E800621C35 /* Homebrew */ = {
+			isa = PBXGroup;
+			children = (
+				1FE4FE75148E4D43008EDE8B /* BPHomebrewInterface.h */,
+				1FE4FE76148E4D43008EDE8B /* BPHomebrewInterface.m */,
+				1570BA3418EE0A66001C3C5C /* BPHomebrewManager.h */,
+				1570BA3518EE0A66001C3C5C /* BPHomebrewManager.m */,
+			);
+			name = Homebrew;
+			sourceTree = "<group>";
+		};
 		15D2CF8818F1D66400B6D9F1 /* Icon Templates */ = {
 			isa = PBXGroup;
 			children = (
@@ -297,33 +328,18 @@
 		1FE4FE5E148E4CDD008EDE8B /* Cakebrew */ = {
 			isa = PBXGroup;
 			children = (
-				1FE4FE6D148E4CDD008EDE8B /* MainMenu.xib */,
 				1FE4FE6A148E4CDD008EDE8B /* BPAppDelegate.h */,
 				1FE4FE6B148E4CDD008EDE8B /* BPAppDelegate.m */,
-				1FE4FE75148E4D43008EDE8B /* BPHomebrewInterface.h */,
-				1FE4FE76148E4D43008EDE8B /* BPHomebrewInterface.m */,
-				1FE4FE78148E5FEB008EDE8B /* BPHomebrewViewController.h */,
-				1FE4FE79148E5FEB008EDE8B /* BPHomebrewViewController.m */,
-				157270D718F2598A00CA8C9C /* BPUpdateDoctorController.h */,
-				157270D818F2598A00CA8C9C /* BPUpdateDoctorController.m */,
-				1570BA3418EE0A66001C3C5C /* BPHomebrewManager.h */,
-				1570BA3518EE0A66001C3C5C /* BPHomebrewManager.m */,
-				157270DC18F34CF900CA8C9C /* BPInstallationViewController.h */,
-				157270DD18F34CF900CA8C9C /* BPInstallationViewController.m */,
-				157270DE18F34CF900CA8C9C /* BPInstallationViewController.xib */,
-				D2F732E919190B6D002B2512 /* BPPreferencesWindow.xib */,
-				D2F732EA19190B6D002B2512 /* BPPreferencesWindowController.h */,
-				D2F732EB19190B6D002B2512 /* BPPreferencesWindowController.m */,
-				15B6F1491950E37100144B01 /* BPFormulaOptionsViewController.h */,
-				15B6F14A1950E37100144B01 /* BPFormulaOptionsViewController.m */,
-				15B6F14B1950E37100144B01 /* BPFormulaOptionsViewController.xib */,
+				1FE4FE6D148E4CDD008EDE8B /* MainMenu.xib */,
 				D2F732EE19190B75002B2512 /* Categories */,
-				1540FA3618ED099F00334A5C /* Views */,
-				15D5BEFB18EBD006001DDED7 /* Models */,
+				15A974AC1968A3E800621C35 /* Homebrew */,
 				15D5BEED18EBB3D9001DDED7 /* Icons */,
-				1FE4FE5F148E4CDD008EDE8B /* Supporting Files */,
-				15D5BEF618EBC56E001DDED7 /* Libraries */,
 				1536BFF618EBA92400B67C5C /* Images.xcassets */,
+				15D5BEF618EBC56E001DDED7 /* Libraries */,
+				15D5BEFB18EBD006001DDED7 /* Models */,
+				1FE4FE5F148E4CDD008EDE8B /* Supporting Files */,
+				15A974AB1968A3C900621C35 /* View Controllers */,
+				1540FA3618ED099F00334A5C /* Views */,
 			);
 			path = Cakebrew;
 			sourceTree = "<group>";
