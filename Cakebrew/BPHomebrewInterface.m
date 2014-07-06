@@ -410,7 +410,7 @@ static NSString *cakebrewOutputIdentifier = @"+++++Cakebrew+++++";
 
 - (BPFormula *)parseFormulaItem:(NSString *)item
 {
-	static NSString *regexString = @"(\\S*)\\s\\((\\S*) < (\\S*)\\)";
+	static NSString *regexString = @"(\\S+)\\s\\((\\S+,\\s)*(\\S+)\\s<\\s(\\S+)\\)";
 
 	BPFormula __block *formula = nil;
 	NSError *error = nil;
