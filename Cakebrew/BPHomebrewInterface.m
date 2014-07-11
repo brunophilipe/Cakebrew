@@ -410,17 +410,20 @@ static NSString *cakebrewOutputIdentifier = @"+++++Cakebrew+++++";
 
 - (BPFormula *)parseFormulaItem:(NSString *)item
 {
-	static NSString *regexString = @"(\\S+)\\s\\((\\S+,\\s)*(\\S+)\\s<\\s(\\S+)\\)";
+	static NSString *regexString = @"(\\S+)\\s\\((.*)\\)";
 
 	BPFormula __block *formula = nil;
 	NSError *error = nil;
 	NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:regexString options:NSRegularExpressionCaseInsensitive error:&error];
 
 	[regex enumerateMatchesInString:item options:0 range:NSMakeRange(0, [item length]) usingBlock:^(NSTextCheckingResult *result, NSMatchingFlags flags, BOOL *stop) {
-		if (result.resultType == NSTextCheckingTypeRegularExpression) {
+		if (result.resultType == NSTextCheckingTypeRegularExpression)
+		{
+			NSRange lastRange = [result rangeAtIndex:[result numberOfRanges]-1];
+			NSArray *versionsTuple = [[[[item substringWithRange:lastRange] componentsSeparatedByString:@","] lastObject] componentsSeparatedByString:@"<"];
 			formula = [BPFormula formulaWithName:[item substringWithRange:[result rangeAtIndex:1]]
-										 version:[item substringWithRange:[result rangeAtIndex:2]]
-								andLatestVersion:[item substringWithRange:[result rangeAtIndex:3]]];
+										 version:[[versionsTuple firstObject] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]]
+								andLatestVersion:[[versionsTuple lastObject] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]]];
 		}
 	}];
 
