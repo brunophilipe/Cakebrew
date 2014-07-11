@@ -95,7 +95,7 @@
 	dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
 		NSString __block *outputValue;
 		if (self.windowOperation == kBPWindowOperationInstall) {
-			[[BPHomebrewInterface sharedInterface] installFormula:self.formula.name withReturnBlock:^(NSString *output) {
+			[[BPHomebrewInterface sharedInterface] installFormula:self.formula.name withOptions:self.options andReturnBlock:^(NSString *output) {
 				if (outputValue) outputValue = [outputValue stringByAppendingString:output];
 				else outputValue = output;
 				[self.textView performSelectorOnMainThread:@selector(setString:) withObject:outputValue waitUntilDone:YES];

@@ -119,10 +119,10 @@
 
 - (void)prepareFormula:(BPFormula*)formula forOperation:(BPWindowOperation)operation
 {
-    [self prepareFormula:formula forOperation:operation inWindow:_appDelegate.window alsoModal:NO];
+    [self prepareFormula:formula forOperation:operation inWindow:_appDelegate.window alsoModal:NO withOptions:nil];
 }
 
-- (void)prepareFormula:(BPFormula*)formula forOperation:(BPWindowOperation)operation inWindow:(NSWindow*)window alsoModal:(BOOL)alsoModal
+- (void)prepareFormula:(BPFormula*)formula forOperation:(BPWindowOperation)operation inWindow:(NSWindow*)window alsoModal:(BOOL)alsoModal withOptions:(NSArray*)options
 {
 	_operationViewController = [[BPInstallationViewController alloc] initWithNibName:@"BPInstallationViewController" bundle:nil];
 	_operationWindow = [[NSWindow alloc] initWithContentRect:_operationViewController.view.frame styleMask:NSTitledWindowMask|NSResizableWindowMask backing:NSBackingStoreBuffered defer:NO];
@@ -136,6 +136,9 @@
 	} else {
 		[_operationViewController setFormulae:[_formulaeArray copy]];
 	}
+
+	[_operationViewController setOptions:options];
+
 	[_operationViewController setWindowOperation:operation];
 
     if ([window respondsToSelector:@selector(beginSheet:completionHandler:)]) {

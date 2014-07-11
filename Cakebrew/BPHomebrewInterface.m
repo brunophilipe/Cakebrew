@@ -309,9 +309,13 @@ static NSString *cakebrewOutputIdentifier = @"+++++Cakebrew+++++";
 	return val;
 }
 
-- (BOOL)installFormula:(NSString*)formula withReturnBlock:(void (^)(NSString*output))block
+- (BOOL)installFormula:(NSString*)formula withOptions:(NSArray*)options andReturnBlock:(void (^)(NSString*output))block
 {
-	BOOL val = [self performBrewCommandWithArguments:@[@"install", formula] dataReturnBlock:block];
+	NSArray *params = @[@"install", formula];
+	if (options) {
+		params = [params arrayByAddingObjectsFromArray:options];
+	}
+	BOOL val = [self performBrewCommandWithArguments:params dataReturnBlock:block];
 	[[NSNotificationCenter defaultCenter] postNotificationName:kBP_NOTIFICATION_FORMULAS_CHANGED object:nil];
 	return val;
 }

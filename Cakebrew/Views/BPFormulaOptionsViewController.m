@@ -51,7 +51,12 @@
 
 	NSInteger returnValue = [alert runModal];
 	if (returnValue == NSAlertDefaultReturn) {
-        [self.homebrewViewController prepareFormula:self.formula forOperation:kBPWindowOperationInstall inWindow:self.window alsoModal:YES];
+		NSMutableArray *options = [NSMutableArray arrayWithCapacity:[_useOptions count]];
+		for (NSInteger i=0; i<[_useOptions count]; i++) {
+			if ([[_useOptions objectAtIndex:i] boolValue])
+				[options addObject:[[_options objectAtIndex:i] objectForKey:kBP_FORMULA_OPTION_COMMAND]];
+		}
+        [self.homebrewViewController prepareFormula:self.formula forOperation:kBPWindowOperationInstall inWindow:self.window alsoModal:YES withOptions:options];
 	}
 	else {
 		[BPAppDelegateRef setRunningBackgroundTask:NO];
