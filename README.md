@@ -22,6 +22,10 @@ Please visit [this page](https://github.com/brunophilipe/Cakebrew/wiki#using-zsh
 
 [Download Now](https://www.cakebrew.com)
 
+### Yosemite
+
+All bugs introduced in Yosemite turn out to be problems with the beta version itself. If Homebrew works in your terminal it should work with Cakebrew.
+
 ## Website Source
 
 The source for the Cakebrew website is also present on GitHub! Visit the [repository](https://github.com/brunophilipe/Cakebrew-site/).
