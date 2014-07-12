@@ -13,7 +13,7 @@
 @interface BPFormulaOptionsViewController : NSViewController
 
 @property (weak) BPFormula *formula;
-@property (weak) BPHomebrewViewController *homebrewViewController;
+@property (strong) BPHomebrewViewController *homebrewViewController;
 
 @property (strong) NSWindow *window;
 
