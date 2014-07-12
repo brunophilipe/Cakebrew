@@ -25,7 +25,6 @@
 #import "BPHomebrewInterface.h"
 #import "BPInstallationViewController.h"
 #import "BPFormulaOptionsViewController.h"
-#import "Frameworks/PXSourceList.framework/Headers/PXSourceList.h"
 
 @interface BPHomebrewViewController () <NSTableViewDataSource, NSTableViewDelegate, PXSourceListDataSource, PXSourceListDelegate, BPHomebrewManagerDelegate, NSMenuDelegate>
 
@@ -47,13 +46,15 @@
 {
 	NSWindow					   *_operationWindow;
 	NSWindow					   *_formulaOptionsWindow;
-	NSOutlineView __weak		   *_outlineView_sidebar;
 	NSTableView					   *_tableView_formulae;
-	DMSplitView __weak			   *_splitView;
+
 	BPHomebrewManager			   *_homebrewManager;
-	BPInsetShadowView __weak	   *_view_disablerLock;
 	BPInstallationViewController   *_operationViewController;
 	BPFormulaOptionsViewController *_formulaOptionsViewController;
+
+	__weak DMSplitView			   *_splitView;
+	__weak PXSourceList			   *_outlineView_sidebar;
+	__weak BPInsetShadowView	   *_view_disablerLock;
 }
 
 - (id)initWithCoder:(NSCoder *)aDecoder
@@ -392,7 +393,7 @@
 		[_outlineView_sidebar selectRowIndexes:[NSIndexSet indexSetWithIndex:(NSUInteger)_lastSelectedSidebarIndex] byExtendingSelection:NO];
 }
 
-#pragma mark - Getters and Setters
+#pragma mark - Accessors
 
 - (void)setSplitView:(DMSplitView *)splitView
 {
@@ -420,16 +421,18 @@
 	return _tableView_formulae;
 }
 
-- (void)setOutlineView_sidebar:(NSOutlineView *)outlineView_sidebar
+- (void)setOutlineView_sidebar:(PXSourceList*)outlineView_sidebar
 {
 	_outlineView_sidebar = outlineView_sidebar;
+	[_outlineView_sidebar setDelegate:self];
+	[_outlineView_sidebar setDataSource:self];
 
 	dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.6 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
 		[_outlineView_sidebar selectRowIndexes:[NSIndexSet indexSetWithIndex:1] byExtendingSelection:NO];
 	});
 }
 
-- (NSOutlineView*)outlineView_sidebar
+- (PXSourceList*)outlineView_sidebar
 {
 	return _outlineView_sidebar;
 }

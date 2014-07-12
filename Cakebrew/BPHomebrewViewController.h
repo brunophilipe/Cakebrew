@@ -25,6 +25,7 @@
 #import "BPInsetShadowView.h"
 #import "BPUpdateDoctorController.h"
 #import "BPGenericTextPopoverView.h"
+#import "Frameworks/PXSourceList.framework/Headers/PXSourceList.h"
 
 typedef NS_ENUM(NSUInteger, BPWindowOperation) {
     kBPWindowOperationInstall,
@@ -41,7 +42,7 @@ typedef NS_ENUM(NSUInteger, BPWindowOperation) {
 @property (weak) IBOutlet NSTableView              *tableView_formulae;
 @property (weak) IBOutlet NSClipView               *clippingView_formulae;
 @property (weak) IBOutlet NSScrollView             *scrollView_formulae;
-@property (weak) IBOutlet NSOutlineView            *outlineView_sidebar;
+@property (weak) IBOutlet PXSourceList			   *outlineView_sidebar;
 @property (weak) IBOutlet DMSplitView              *splitView;
 @property (weak) IBOutlet NSTabView                *tabView;
 @property (weak) IBOutlet NSTextField              *label_information;

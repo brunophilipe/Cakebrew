@@ -604,10 +604,6 @@
                                                             </prototypeCellViews>
                                                         </tableColumn>
                                                     </tableColumns>
-                                                    <connections>
-                                                        <outlet property="dataSource" destination="547" id="Zku-a6-UyN"/>
-                                                        <outlet property="delegate" destination="547" id="mWv-If-q1w"/>
-                                                    </connections>
                                                 </outlineView>
                                             </subviews>
                                             <nil key="backgroundColor"/>
