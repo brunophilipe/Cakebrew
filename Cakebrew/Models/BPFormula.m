@@ -196,6 +196,8 @@
 		NSString *optionsString = [output substringFromIndex:range_opts.length+range_opts.location+1];
 		NSMutableArray *options = [NSMutableArray arrayWithCapacity:10];
 
+		range_cvts = [optionsString rangeOfString:@"==> Caveats"];
+
 		if (range_cvts.location != NSNotFound) {
 			optionsString = [optionsString substringToIndex:range_cvts.location];
 		}
