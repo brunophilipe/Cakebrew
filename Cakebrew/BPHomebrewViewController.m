@@ -757,10 +757,20 @@
 }
 
 - (IBAction)upgradeSelectedFormulae:(id)sender {
-	NSAlert *alert = [NSAlert alertWithMessageText:@"Attention!" defaultButton:@"Yes" alternateButton:@"Cancel" otherButton:nil informativeTextWithFormat:@"Are you sure you want to upgrade all outdated formulae?"];
+	NSMutableString *names = [NSMutableString string];
+	NSArray *selectedFormulae = [_formulaeArray objectsAtIndexes:[self.tableView_formulae selectedRowIndexes]];
+	[selectedFormulae enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+		if ([names compare:@""] == NSOrderedSame) {
+			[names appendString:[obj name]];
+		} else {
+			[names appendFormat:@", %@", [obj name]];
+		}
+	}];
+
+	NSAlert *alert = [NSAlert alertWithMessageText:@"Attention!" defaultButton:@"Yes" alternateButton:@"Cancel" otherButton:nil informativeTextWithFormat:@"Are you sure you want to upgrade these formulae: '%@'?", names];
 	[alert.window setTitle:@"Cakebrew"];
 	if ([alert runModal] == NSAlertDefaultReturn) {
-		[self prepareFormula:nil forOperation:kBPWindowOperationUpgrade];
+		[self prepareFormulae:selectedFormulae forOperation:kBPWindowOperationUpgrade inWindow:BPAppDelegateRef.window alsoModal:NO withOptions:nil];
 	}
 }
 
