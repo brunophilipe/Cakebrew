@@ -23,14 +23,18 @@
 #import "BPHomebrewInterface.h"
 #import "BPHomebrewManager.h"
 
-#define kBP_ENCODE_FORMULA_NAME @"BP_ENCODE_FORMULA_NAME"
-#define kBP_ENCODE_FORMULA_IVER @"BP_ENCODE_FORMULA_IVER"
-#define kBP_ENCODE_FORMULA_LVER @"BP_ENCODE_FORMULA_LVER"
-#define kBP_ENCODE_FORMULA_PATH @"BP_ENCODE_FORMULA_PATH"
-#define kBP_ENCODE_FORMULA_WURL @"BP_ENCODE_FORMULA_WURL"
-#define kBP_ENCODE_FORMULA_DEPS @"BP_ENCODE_FORMULA_DEPS"
-#define kBP_ENCODE_FORMULA_INST @"BP_ENCODE_FORMULA_INST"
-#define kBP_ENCODE_FORMULA_CNFL @"BP_ENCODE_FORMULA_CNFL"
+NSString *const kBP_ENCODE_FORMULA_NAME = @"BP_ENCODE_FORMULA_NAME";
+NSString *const kBP_ENCODE_FORMULA_IVER = @"BP_ENCODE_FORMULA_IVER";
+NSString *const kBP_ENCODE_FORMULA_LVER = @"BP_ENCODE_FORMULA_LVER";
+NSString *const kBP_ENCODE_FORMULA_PATH = @"BP_ENCODE_FORMULA_PATH";
+NSString *const kBP_ENCODE_FORMULA_WURL = @"BP_ENCODE_FORMULA_WURL";
+NSString *const kBP_ENCODE_FORMULA_DEPS = @"BP_ENCODE_FORMULA_DEPS";
+NSString *const kBP_ENCODE_FORMULA_INST = @"BP_ENCODE_FORMULA_INST";
+NSString *const kBP_ENCODE_FORMULA_CNFL = @"BP_ENCODE_FORMULA_CNFL";
+
+NSString *const kBPIdentifierDependencies = @"==> Dependencies";
+NSString *const kBPIdentifierOptions = @"==> Options";
+NSString *const kBPIdentifierCaveats = @"==> Caveats";
 
 @interface BPFormula ()
 
@@ -159,9 +163,9 @@
 		}
 	}
 
-	NSRange range_deps = [output rangeOfString:@"==> Dependencies"];
-	NSRange range_opts = [output rangeOfString:@"==> Options"];
-	NSRange range_cvts = [output rangeOfString:@"==> Caveats"];
+	NSRange range_deps = [output rangeOfString:kBPIdentifierDependencies];
+	NSRange range_opts = [output rangeOfString:kBPIdentifierOptions];
+	NSRange range_cvts = [output rangeOfString:kBPIdentifierCaveats];
 
 	// Find dependencies
 	if (range_deps.location != NSNotFound)
@@ -196,7 +200,7 @@
 		NSString *optionsString = [output substringFromIndex:range_opts.length+range_opts.location+1];
 		NSMutableArray *options = [NSMutableArray arrayWithCapacity:10];
 
-		range_cvts = [optionsString rangeOfString:@"==> Caveats"];
+		range_cvts = [optionsString rangeOfString:kBPIdentifierCaveats];
 
 		if (range_cvts.location != NSNotFound) {
 			optionsString = [optionsString substringToIndex:range_cvts.location];

@@ -22,8 +22,9 @@
 #import "BPHomebrewManager.h"
 #import "BPHomebrewInterface.h"
 
-#define kBP_CACHE_DICT_DATE_KEY @"BP_CACHE_DICT_DATE_KEY"
-#define kBP_CACHE_DICT_DATA_KEY @"BP_CACHE_DICT_DATA_KEY"
+NSString *const kBP_CACHE_DICT_DATE_KEY = @"BP_CACHE_DICT_DATE_KEY";
+NSString *const kBP_CACHE_DICT_DATA_KEY = @"BP_CACHE_DICT_DATA_KEY";
+
 #define kBP_SECONDS_IN_A_DAY 86400
 
 @implementation BPHomebrewManager
