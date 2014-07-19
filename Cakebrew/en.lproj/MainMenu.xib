@@ -193,11 +193,18 @@
                                 </connections>
                             </menuItem>
                             <menuItem isSeparatorItem="YES" id="eQo-BV-sa5"/>
-                            <menuItem title="Upgrade All Formulas" id="Ep8-j6-m5Q">
+                            <menuItem title="Upgrade Selected Formulae" id="Ep8-j6-m5Q">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                                 <connections>
-                                    <action selector="upgradeAllOutdatedFormulae:" target="547" id="KiX-eE-Z7L"/>
+                                    <action selector="upgradeSelectedFormulae:" target="547" id="Bew-vq-VDK"/>
                                     <binding destination="547" name="enabled" keyPath="self.enableUpgradeFormulasMenu" id="ngn-Rt-iDY"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem title="Upgrade All Formulae" id="DdP-fd-ccO">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                                <connections>
+                                    <action selector="upgradeAllOutdatedFormulae:" target="547" id="aHB-0Y-WgM"/>
+                                    <binding destination="547" name="enabled" keyPath="self.enableUpgradeFormulasMenu" id="Ldn-FC-8V8"/>
                                 </connections>
                             </menuItem>
                             <menuItem title="Search for Formula" keyEquivalent="f" id="DpP-yi-xdi">
@@ -463,7 +470,7 @@
             <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
             <windowCollectionBehavior key="collectionBehavior" fullScreenPrimary="YES"/>
             <rect key="contentRect" x="629" y="349" width="570" height="342"/>
-            <rect key="screenRect" x="0.0" y="0.0" width="1920" height="1057"/>
+            <rect key="screenRect" x="0.0" y="0.0" width="1440" height="877"/>
             <value key="minSize" type="size" width="570" height="342"/>
             <view key="contentView" id="372">
                 <rect key="frame" x="0.0" y="0.0" width="570" height="342"/>

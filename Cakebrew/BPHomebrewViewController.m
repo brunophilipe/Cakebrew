@@ -120,27 +120,22 @@
 
 - (void)prepareFormula:(BPFormula*)formula forOperation:(BPWindowOperation)operation
 {
-    [self prepareFormula:formula forOperation:operation inWindow:_appDelegate.window alsoModal:NO withOptions:nil];
+	NSArray *formulae = (formula ? @[formula] : nil);
+	[self prepareFormulae:formulae forOperation:operation inWindow:_appDelegate.window alsoModal:NO withOptions:nil];
 }
 
-- (void)prepareFormula:(BPFormula*)formula forOperation:(BPWindowOperation)operation inWindow:(NSWindow*)window alsoModal:(BOOL)alsoModal withOptions:(NSArray*)options
+- (void)prepareFormulae:(NSArray*)formulae forOperation:(BPWindowOperation)operation inWindow:(NSWindow*)window alsoModal:(BOOL)alsoModal withOptions:(NSArray*)options
 {
 	_operationViewController = [[BPInstallationViewController alloc] initWithNibName:@"BPInstallationViewController" bundle:nil];
 	_operationWindow = [[NSWindow alloc] initWithContentRect:_operationViewController.view.frame styleMask:NSTitledWindowMask|NSResizableWindowMask backing:NSBackingStoreBuffered defer:NO];
 	[_operationWindow setContentView:_operationViewController.view];
+
 	[_operationViewController setWindow:_operationWindow];
+	[_operationViewController setOptions:options];
+	[_operationViewController setWindowOperation:operation];
+	[_operationViewController setFormulae:formulae];
 
 	if (alsoModal) [_operationViewController setParentSheet:window];
-
-	if (formula) {
-		[_operationViewController setFormula:formula];
-	} else {
-		[_operationViewController setFormulae:[_formulaeArray copy]];
-	}
-
-	[_operationViewController setOptions:options];
-
-	[_operationViewController setWindowOperation:operation];
 
     if ([window respondsToSelector:@selector(beginSheet:completionHandler:)]) {
         [window beginSheet:_operationWindow completionHandler:^(NSModalResponse returnCode) {
@@ -758,6 +753,14 @@
 		} else {
 			[[NSApplication sharedApplication] beginSheet:_formulaOptionsWindow modalForWindow:_appDelegate.window modalDelegate:self didEndSelector:@selector(windowOperationSheetDidEnd:returnCode:contextInfo:) contextInfo:nil];
 		}
+	}
+}
+
+- (IBAction)upgradeSelectedFormulae:(id)sender {
+	NSAlert *alert = [NSAlert alertWithMessageText:@"Attention!" defaultButton:@"Yes" alternateButton:@"Cancel" otherButton:nil informativeTextWithFormat:@"Are you sure you want to upgrade all outdated formulae?"];
+	[alert.window setTitle:@"Cakebrew"];
+	if ([alert runModal] == NSAlertDefaultReturn) {
+		[self prepareFormula:nil forOperation:kBPWindowOperationUpgrade];
 	}
 }
 

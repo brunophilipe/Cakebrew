@@ -31,7 +31,6 @@
 @property (strong) IBOutlet NSButton *button_ok;
 @property (strong) IBOutlet NSProgressIndicator *progressIndicator;
 
-@property (assign, nonatomic) BPFormula *formula;
 @property (strong, nonatomic) NSArray *formulae;
 @property (strong, nonatomic) NSArray *options;
 @property (assign) NSWindow *window;

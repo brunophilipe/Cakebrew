@@ -56,7 +56,7 @@
 			if ([[_useOptions objectAtIndex:i] boolValue])
 				[options addObject:[[_options objectAtIndex:i] objectForKey:kBP_FORMULA_OPTION_COMMAND]];
 		}
-        [self.homebrewViewController prepareFormula:self.formula forOperation:kBPWindowOperationInstall inWindow:self.window alsoModal:YES withOptions:options];
+        [self.homebrewViewController prepareFormulae:@[self.formula] forOperation:kBPWindowOperationInstall inWindow:self.window alsoModal:YES withOptions:options];
 	}
 	else {
 		[BPAppDelegateRef setRunningBackgroundTask:NO];
