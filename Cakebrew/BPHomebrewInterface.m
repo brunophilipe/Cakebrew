@@ -48,6 +48,12 @@ static NSString *cakebrewOutputIdentifier = @"+++++Cakebrew+++++";
 @interface BPHomebrewInterfaceListCallSearch : BPHomebrewInterfaceListCall
 @end
 
+@interface BPHomebrewInterface ()
+
+@property BOOL systemHasAppNap;
+
+@end
+
 @implementation BPHomebrewInterface
 {
 	void (^operationUpdateBlock)(NSString*);
@@ -69,7 +75,8 @@ static NSString *cakebrewOutputIdentifier = @"+++++Cakebrew+++++";
 	self = [super init];
 	if (self) {
 		[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updatedFileHandle:) name:NSFileHandleDataAvailableNotification object:nil];
-        self.task = nil;
+        [self setTask:nil];
+		[self setSystemHasAppNap:[[NSProcessInfo processInfo] respondsToSelector:@selector(beginActivityWithOptions:reason:)]];
 	}
 	return self;
 }
@@ -151,6 +158,10 @@ static NSString *cakebrewOutputIdentifier = @"+++++Cakebrew+++++";
 
 	operationUpdateBlock = block;
 
+	id activity;
+	if (self.systemHasAppNap)
+		activity = [[NSProcessInfo processInfo] beginActivityWithOptions:NSActivityUserInitiated reason:@"running homebrew task"];
+
     self.task = [[NSTask alloc] init];
 
 	[self.task setLaunchPath:userShell];
@@ -176,6 +187,9 @@ static NSString *cakebrewOutputIdentifier = @"+++++Cakebrew+++++";
     [self.task waitUntilExit];
 
 	block([NSString stringWithFormat:taskDoneString, [NSDateFormatter localizedStringFromDate:[NSDate date] dateStyle:NSDateFormatterShortStyle timeStyle:NSDateFormatterShortStyle]]);
+
+	if (self.systemHasAppNap)
+		[[NSProcessInfo processInfo] endActivity:activity];
 
 	return YES;
 }
@@ -206,6 +220,10 @@ static NSString *cakebrewOutputIdentifier = @"+++++Cakebrew+++++";
 
 	if (!userShell || !arguments) return nil;
 
+	id activity;
+	if (self.systemHasAppNap)
+		activity = [[NSProcessInfo processInfo] beginActivityWithOptions:NSActivityUserInitiated reason:@"running homebrew task"];
+
     self.task = [[NSTask alloc] init];
 
 	[self.task setLaunchPath:userShell];
@@ -225,6 +243,9 @@ static NSString *cakebrewOutputIdentifier = @"+++++Cakebrew+++++";
 	string_error = [[NSString alloc] initWithData:[[pipe_error fileHandleForReading] readDataToEndOfFile] encoding:NSUTF8StringEncoding];
 
 	string_output = [self removeLoginShellOutputFromString:string_output];
+
+	if (self.systemHasAppNap)
+		[[NSProcessInfo processInfo] endActivity:activity];
 
 	if (!captureError) {
 		return string_output;
