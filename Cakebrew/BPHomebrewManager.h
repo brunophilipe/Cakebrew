@@ -49,6 +49,7 @@ typedef NS_ENUM(NSInteger, BPFormulaStatus) {
 + (BPHomebrewManager *)sharedManager;
 
 - (void)update;
+- (void)updateRebuildingCache:(BOOL)shouldRebuildCache;
 - (void)updateSearchWithName:(NSString *)name;
 
 - (BPFormulaStatus)statusForFormula:(BPFormula*)formula;

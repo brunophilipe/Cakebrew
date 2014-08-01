@@ -56,12 +56,17 @@ NSString *const kBP_CACHE_DICT_DATA_KEY = @"BP_CACHE_DICT_DATA_KEY";
 
 - (void)update
 {
+	[self updateRebuildingCache:YES];
+}
+
+- (void)updateRebuildingCache:(BOOL)shouldRebuildCache;
+{
     dispatch_async(dispatch_get_main_queue(), ^{
         [self setFormulae_installed:[[BPHomebrewInterface sharedInterface] listMode:kBPListInstalled]];
         [self setFormulae_leaves:[[BPHomebrewInterface sharedInterface] listMode:kBPListLeaves]];
         [self setFormulae_outdated:[[BPHomebrewInterface sharedInterface] listMode:kBPListOutdated]];
 
-        if (![self loadAllFormulaeCaches]) {
+        if (![self loadAllFormulaeCaches] || shouldRebuildCache) {
 			[self setFormulae_all:[[BPHomebrewInterface sharedInterface] listMode:kBPListAll]];
 			[self storeAllFormulaeCaches];
         }

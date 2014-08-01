@@ -209,7 +209,7 @@
 		}
 	}];
 
-	[[BPHomebrewManager sharedManager] update];
+	[[BPHomebrewManager sharedManager] updateRebuildingCache:YES];
 }
 
 - (void)updateInterfaceItems
