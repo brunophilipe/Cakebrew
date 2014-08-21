@@ -77,6 +77,14 @@
 	[_homebrewManager setDelegate:nil];
 }
 
+- (void)displayInformationForFormulae:(NSArray*)formulae
+{
+	[self.label_formulaPath setStringValue:@"Multiple values"];
+	[self.label_formulaDependencies setStringValue:@"Multiple values"];
+	[self.label_formulaConflicts setStringValue:@"Multiple values"];
+	[self.label_formulaVersion setStringValue:@"Multiple values"];
+}
+
 - (void)displayInformationForFormula:(BPFormula*)formula
 {
 	static NSString *depString = @"Formula no longer available.";
@@ -222,6 +230,14 @@
 		[self.toolbarButton_formulaInfo setEnabled:NO];
 		[self displayInformationForFormula:nil];
     }
+	else if ([[self.tableView_formulae selectedRowIndexes] count] > 1)
+	{
+		[self displayInformationForFormulae:nil];
+
+		[self.toolbarButton_installUninstall setImage:[NSImage imageNamed:@"reload.icns"]];
+		[self.toolbarButton_installUninstall setLabel:@"Update Selected"];
+		[self setToolbarButtonOperation:kBPWindowOperationUpgrade];
+	}
 	else
 	{
 		BPFormula *formula = [_formulaeArray objectAtIndex:selectedIndex];
@@ -323,6 +339,7 @@
 			[[self.tableView_formulae tableColumnWithIdentifier:@"LatestVersion"] setHidden:YES];
 			[[self.tableView_formulae tableColumnWithIdentifier:@"Status"] setHidden:NO];
 			[[self.tableView_formulae tableColumnWithIdentifier:@"Status"] setWidth:(totalWidth-titleWidth)*0.90];
+			[self.tableView_formulae setAllowsMultipleSelection:NO];
 			break;
 
 		case kBPListInstalled:
@@ -332,6 +349,7 @@
 			[[self.tableView_formulae tableColumnWithIdentifier:@"Version"] setWidth:(totalWidth-titleWidth)*0.95];
 			[[self.tableView_formulae tableColumnWithIdentifier:@"LatestVersion"] setHidden:YES];
 			[[self.tableView_formulae tableColumnWithIdentifier:@"Status"] setHidden:YES];
+			[self.tableView_formulae setAllowsMultipleSelection:NO];
 			break;
 
 		case kBPListLeaves:
@@ -340,6 +358,7 @@
 			[[self.tableView_formulae tableColumnWithIdentifier:@"Version"] setHidden:YES];
 			[[self.tableView_formulae tableColumnWithIdentifier:@"LatestVersion"] setHidden:YES];
 			[[self.tableView_formulae tableColumnWithIdentifier:@"Status"] setHidden:YES];
+			[self.tableView_formulae setAllowsMultipleSelection:NO];
 			break;
 
 		case kBPListOutdated:
@@ -350,6 +369,7 @@
 			[[self.tableView_formulae tableColumnWithIdentifier:@"LatestVersion"] setHidden:NO];
 			[[self.tableView_formulae tableColumnWithIdentifier:@"LatestVersion"] setWidth:(totalWidth-titleWidth)*0.48];
 			[[self.tableView_formulae tableColumnWithIdentifier:@"Status"] setHidden:YES];
+			[self.tableView_formulae setAllowsMultipleSelection:YES];
 			break;
 
 		case kBPListSearch:
@@ -359,6 +379,7 @@
 			[[self.tableView_formulae tableColumnWithIdentifier:@"LatestVersion"] setHidden:YES];
 			[[self.tableView_formulae tableColumnWithIdentifier:@"Status"] setHidden:NO];
 			[[self.tableView_formulae tableColumnWithIdentifier:@"Status"] setWidth:(totalWidth-titleWidth)*0.90];
+			[self.tableView_formulae setAllowsMultipleSelection:NO];
 			break;
 
 		default:
@@ -699,9 +720,11 @@
 
 			case kBPWindowOperationUpgrade:
 			{
-				message = nil;
+				message = @"Are you sure you want to upgrade the selected formuale?";
+				NSArray *formulae = [_formulaeArray objectsAtIndexes:[self.tableView_formulae selectedRowIndexes]];
+
 				operationBlock = ^{
-					[self prepareFormula:formula forOperation:kBPWindowOperationUpgrade];
+					[self prepareFormulae:formulae forOperation:kBPWindowOperationUpgrade inWindow:_appDelegate.window alsoModal:NO withOptions:nil];
 				};
 			}
 				break;
