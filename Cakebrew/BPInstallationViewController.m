@@ -67,7 +67,7 @@
 		[self.label_formulaName setStringValue:[(BPFormula*)[formulae firstObject] name]];
 	} else if (count > 1) {
 		NSString *formulaeNames = [[self namesOfFormulae:formulae] componentsJoinedByString:@", "];
-		[self.label_formulaName setStringValue:[formulaeNames substringWithRange:NSMakeRange(0, formulaeNames.length-2)]];
+		[self.label_formulaName setStringValue:formulaeNames];
 	} else {
 		[self.label_formulaName setStringValue:@"All Outdated Formulae"];
 	}
