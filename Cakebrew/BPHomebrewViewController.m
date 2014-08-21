@@ -23,8 +23,8 @@
 #import "BPFormula.h"
 #import "BPHomebrewManager.h"
 #import "BPHomebrewInterface.h"
-#import "BPInstallationViewController.h"
-#import "BPFormulaOptionsViewController.h"
+#import "BPFormulaOptionsWindowController.h"
+#import "BPInstallationWindowController.h"
 
 @interface BPHomebrewViewController () <NSTableViewDataSource, NSTableViewDelegate, PXSourceListDataSource, PXSourceListDelegate, BPHomebrewManagerDelegate, NSMenuDelegate>
 
@@ -40,17 +40,17 @@
 
 @property NSWindow *alsoModalWindow;
 
+@property (strong, nonatomic) BPFormulaOptionsWindowController *formulaOptionsWindowController;
+@property (strong, nonatomic) BPInstallationWindowController *operationWindowController;
+
 @end
 
 @implementation BPHomebrewViewController
 {
 	NSWindow					   *_operationWindow;
-	NSWindow					   *_formulaOptionsWindow;
 	NSTableView					   *_tableView_formulae;
 
 	BPHomebrewManager			   *_homebrewManager;
-	BPInstallationViewController   *_operationViewController;
-	BPFormulaOptionsViewController *_formulaOptionsViewController;
 
 	__weak DMSplitView			   *_splitView;
 	__weak PXSourceList			   *_outlineView_sidebar;
@@ -75,6 +75,26 @@
 {
 	[[NSNotificationCenter defaultCenter] removeObserver:self];
 	[_homebrewManager setDelegate:nil];
+}
+
+//lazy instantiation
+- (BPFormulaOptionsWindowController *)formulaOptionsWindowController {
+  
+  if (!_formulaOptionsWindowController) {
+    _formulaOptionsWindowController = [[BPFormulaOptionsWindowController alloc] init];
+  }
+  
+  return _formulaOptionsWindowController;
+}
+
+//lazy instantiation
+- (BPInstallationWindowController *)operationWindowController {
+  
+  if (!_operationWindowController) {
+    _operationWindowController = [[BPInstallationWindowController alloc] init];
+  }
+  
+  return _operationWindowController;
 }
 
 - (void)displayInformationForFormula:(BPFormula*)formula
@@ -126,46 +146,51 @@
 
 - (void)prepareFormulae:(NSArray*)formulae forOperation:(BPWindowOperation)operation inWindow:(NSWindow*)window alsoModal:(BOOL)alsoModal withOptions:(NSArray*)options
 {
-	_operationViewController = [[BPInstallationViewController alloc] initWithNibName:@"BPInstallationViewController" bundle:nil];
-	_operationWindow = [[NSWindow alloc] initWithContentRect:_operationViewController.view.frame styleMask:NSTitledWindowMask|NSResizableWindowMask backing:NSBackingStoreBuffered defer:NO];
-	[_operationWindow setContentView:_operationViewController.view];
+  self.operationWindowController.options = options;
+  self.operationWindowController.windowOperation = operation;
+  self.operationWindowController.formulae = formulae;
 
-	[_operationViewController setWindow:_operationWindow];
-	[_operationViewController setOptions:options];
-	[_operationViewController setWindowOperation:operation];
-	[_operationViewController setFormulae:formulae];
-
-	if (alsoModal) [_operationViewController setParentSheet:window];
-
-    if ([window respondsToSelector:@selector(beginSheet:completionHandler:)]) {
-        [window beginSheet:_operationWindow completionHandler:^(NSModalResponse returnCode) {
-            _operationWindow = nil;
-            _operationViewController = nil;
-            if (alsoModal) {
-                [_appDelegate.window endSheet:window];
-            }
-        }];
-    } else {
-        if (alsoModal)
-        {
-            _alsoModalWindow = window;
-        }
-        [[NSApplication sharedApplication] beginSheet:_operationWindow modalForWindow:window modalDelegate:self didEndSelector:@selector(windowOperationSheetDidEnd:returnCode:contextInfo:) contextInfo:nil];
-    }
-
-	[_operationViewController windowDidAppear];
+  NSWindow *installationWindow = self.operationWindowController.window;
+  
+  if ([window respondsToSelector:@selector(beginSheet:completionHandler:)]) {
+    [window beginSheet:installationWindow completionHandler:^(NSModalResponse returnCode) {
+      [BPAppDelegateRef setRunningBackgroundTask:NO];
+    }];
+    [self.operationWindowController executeInstallation];
+  } else {
+    NSDictionary *contextDict = [[NSDictionary alloc] initWithObjects:@[@"installationWindow"]
+                                                              forKeys:@[@"contextIdentificator"]];
+    [[NSApplication sharedApplication] beginSheet:installationWindow
+                                   modalForWindow:[NSApp mainWindow]
+                                    modalDelegate:self
+                                   didEndSelector:@selector(windowOperationSheetDidEnd:returnCode:contextInfo:)
+                                      contextInfo:(__bridge_retained void *)contextDict];
+    [self.operationWindowController executeInstallation];
+  }
 }
 
 - (void)windowOperationSheetDidEnd:(NSWindow *)sheet returnCode:(NSInteger)returnCode contextInfo:(void *)contextInfo;
 {
-    if (_alsoModalWindow) {
-        [[NSApplication sharedApplication] endSheet:_alsoModalWindow];
-        _alsoModalWindow = nil;
+  [sheet orderOut:self];
+  NSDictionary *contextDict = (__bridge_transfer NSDictionary *)contextInfo;
+  NSString *contextIdentificator = [contextDict valueForKey:@"contextIdentificator"];
+  if ([contextIdentificator isEqualToString:@"formulaOptionWindow"]) {
+    if(returnCode == NSModalResponseStop) {
+      BPFormula *formula = self.formulaOptionsWindowController.formula;
+      
+      if (formula) {
+        NSArray *options = [self.formulaOptionsWindowController allSelectedOptions];
+        [self prepareFormulae:@[formula] forOperation:kBPWindowOperationInstall
+                     inWindow:[NSApp mainWindow]
+                    alsoModal:NO
+                  withOptions:options];
+      }
+    } else {
+      [BPAppDelegateRef setRunningBackgroundTask:NO];
     }
-    _operationWindow = nil;
-    _operationViewController = nil;
-	_formulaOptionsWindow = nil;
-	_formulaOptionsViewController = nil;
+  } else if ([contextIdentificator isEqualToString:@"installationWindow"]){
+    [BPAppDelegateRef setRunningBackgroundTask:NO];
+  }
 }
 
 - (void)lockWindow
@@ -738,21 +763,36 @@
 	if (selectedIndex >= 0) {
 		BPFormula *formula = [_formulaeArray objectAtIndex:(NSUInteger)selectedIndex];
 
-		_formulaOptionsViewController = [[BPFormulaOptionsViewController alloc] initWithNibName:@"BPFormulaOptionsViewController" bundle:nil];
-		_formulaOptionsWindow = [[NSWindow alloc] initWithContentRect:_formulaOptionsViewController.view.frame styleMask:NSTitledWindowMask|NSResizableWindowMask backing:NSBackingStoreBuffered defer:NO];
-		[_formulaOptionsWindow setContentView:_formulaOptionsViewController.view];
-		[_formulaOptionsViewController setWindow:_formulaOptionsWindow];
-		[_formulaOptionsViewController setFormula:formula];
-		[_formulaOptionsViewController setHomebrewViewController:self];
+    [self.formulaOptionsWindowController setFormula:formula];
+    
+    NSWindow *formulaWindow = [self.formulaOptionsWindowController window];
+    
+    if([[NSApp mainWindow] respondsToSelector:@selector(beginSheet:completionHandler:)]){
+      [[NSApp mainWindow] beginSheet:formulaWindow completionHandler:^(NSModalResponse returnCode) {
+        if (returnCode == NSModalResponseStop) {
+          BPFormula *formula = self.formulaOptionsWindowController.formula;
+          
+          if (formula) {
+            NSArray *options = [self.formulaOptionsWindowController allSelectedOptions];
+            [self prepareFormulae:@[formula] forOperation:kBPWindowOperationInstall
+                         inWindow:[NSApp mainWindow]
+                        alsoModal:NO
+                      withOptions:options];
+          }
+        } else {
+          [BPAppDelegateRef setRunningBackgroundTask:NO];
+        }
 
-		if ([_appDelegate.window respondsToSelector:@selector(beginSheet:completionHandler:)]) {
-			[_appDelegate.window beginSheet:_formulaOptionsWindow completionHandler:^(NSModalResponse returnCode) {
-				_formulaOptionsWindow = nil;
-				_formulaOptionsViewController = nil;
-			}];
-		} else {
-			[[NSApplication sharedApplication] beginSheet:_formulaOptionsWindow modalForWindow:_appDelegate.window modalDelegate:self didEndSelector:@selector(windowOperationSheetDidEnd:returnCode:contextInfo:) contextInfo:nil];
-		}
+      }];
+    } else {
+      NSDictionary *contextDict = [[NSDictionary alloc] initWithObjects:@[@"formulaOptionWindow"]
+                                    forKeys:@[@"contextIdentificator"]];
+      [[NSApplication sharedApplication] beginSheet:formulaWindow
+                                     modalForWindow:[NSApp mainWindow]
+                                      modalDelegate:self
+                                     didEndSelector:@selector(windowOperationSheetDidEnd:returnCode:contextInfo:)
+                                        contextInfo:(__bridge_retained void *)contextDict];
+    }
 	}
 }
 

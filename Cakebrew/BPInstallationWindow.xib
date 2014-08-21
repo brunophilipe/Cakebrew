@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="5056" systemVersion="13E28" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+    <dependencies>
+        <deployment defaultVersion="1070" identifier="macosx"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="5056"/>
+    </dependencies>
+    <objects>
+        <customObject id="-2" userLabel="File's Owner" customClass="BPInstallationWindowController">
+            <connections>
+                <outlet property="formulaNameLabel" destination="357-7Y-dv7" id="3sl-x0-Xya"/>
+                <outlet property="okButton" destination="peQ-d6-b4t" id="wUc-PY-t6P"/>
+                <outlet property="progressIndicator" destination="Z86-NA-teS" id="Qos-6v-XTN"/>
+                <outlet property="recordTextView" destination="coD-Fc-WwQ" id="dxv-TH-J7q"/>
+                <outlet property="window" destination="QvC-M9-y7g" id="Gao-4l-KZO"/>
+                <outlet property="windowTitleLabel" destination="xUs-SB-m17" id="aYY-EX-48C"/>
+            </connections>
+        </customObject>
+        <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
+        <customObject id="-3" userLabel="Application"/>
+        <window title="Window" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" restorable="NO" oneShot="NO" releasedWhenClosed="NO" showsToolbarButton="NO" visibleAtLaunch="NO" animationBehavior="default" id="QvC-M9-y7g">
+            <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
+            <rect key="contentRect" x="196" y="240" width="480" height="270"/>
+            <rect key="screenRect" x="0.0" y="0.0" width="1440" height="878"/>
+            <view key="contentView" id="EiT-Mj-1SZ">
+                <rect key="frame" x="0.0" y="0.0" width="480" height="270"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="xUs-SB-m17">
+                        <rect key="frame" x="18" y="227" width="159" height="19"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="155" id="qLo-KE-ffA"/>
+                            <constraint firstAttribute="height" constant="19" id="qpv-23-dae"/>
+                        </constraints>
+                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Uninstalling Formula:" id="P2p-fh-Ixz">
+                            <font key="font" metaFont="system" size="15"/>
+                            <color key="textColor" white="0.34557481750000002" alpha="1" colorSpace="calibratedWhite"/>
+                            <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                        </textFieldCell>
+                    </textField>
+                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="357-7Y-dv7">
+                        <rect key="frame" x="181" y="227" width="281" height="19"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="19" id="OSk-0y-zjZ"/>
+                        </constraints>
+                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="formula" id="L1M-vW-tCK">
+                            <font key="font" metaFont="system" size="15"/>
+                            <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                            <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                        </textFieldCell>
+                    </textField>
+                    <scrollView horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7kc-mk-6lT">
+                        <rect key="frame" x="20" y="55" width="440" height="164"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <clipView key="contentView" id="3cv-KF-r8a">
+                            <rect key="frame" x="1" y="1" width="438" height="162"/>
+                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                            <subviews>
+                                <textView editable="NO" importsGraphics="NO" richText="NO" findStyle="bar" verticallyResizable="YES" allowsNonContiguousLayout="YES" id="coD-Fc-WwQ" customClass="BPAutoScrollTextView">
+                                    <rect key="frame" x="0.0" y="0.0" width="438" height="162"/>
+                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    <size key="minSize" width="438" height="162"/>
+                                    <size key="maxSize" width="463" height="10000000"/>
+                                    <color key="insertionPointColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                    <size key="minSize" width="438" height="162"/>
+                                    <size key="maxSize" width="463" height="10000000"/>
+                                </textView>
+                            </subviews>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        </clipView>
+                        <scroller key="horizontalScroller" verticalHuggingPriority="750" doubleValue="1" horizontal="YES" id="Tgf-4H-u03">
+                            <rect key="frame" x="1" y="147" width="438" height="16"/>
+                            <autoresizingMask key="autoresizingMask"/>
+                        </scroller>
+                        <scroller key="verticalScroller" verticalHuggingPriority="750" doubleValue="1" horizontal="NO" id="Sdu-Tz-xV9">
+                            <rect key="frame" x="423" y="1" width="16" height="162"/>
+                            <autoresizingMask key="autoresizingMask"/>
+                        </scroller>
+                    </scrollView>
+                    <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="peQ-d6-b4t">
+                        <rect key="frame" x="407" y="7" width="59" height="32"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="47" id="Lmm-SJ-ohI"/>
+                        </constraints>
+                        <buttonCell key="cell" type="push" title="OK" bezelStyle="rounded" alignment="center" enabled="NO" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="atZ-M7-fU1">
+                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                            <font key="font" metaFont="system"/>
+                            <string key="keyEquivalent" base64-UTF8="YES">
+DQ
+</string>
+                        </buttonCell>
+                        <connections>
+                            <action selector="okAction:" target="-2" id="22x-2Q-2sB"/>
+                        </connections>
+                    </button>
+                    <progressIndicator horizontalHuggingPriority="750" verticalHuggingPriority="750" maxValue="100" displayedWhenStopped="NO" bezeled="NO" indeterminate="YES" controlSize="small" style="spinning" translatesAutoresizingMaskIntoConstraints="NO" id="Z86-NA-teS">
+                        <rect key="frame" x="20" y="16" width="16" height="16"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                    </progressIndicator>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="xUs-SB-m17" firstAttribute="baseline" secondItem="357-7Y-dv7" secondAttribute="baseline" id="5MW-Pe-uDo"/>
+                    <constraint firstItem="7kc-mk-6lT" firstAttribute="top" secondItem="xUs-SB-m17" secondAttribute="bottom" constant="8" id="6RX-hG-Glt"/>
+                    <constraint firstItem="xUs-SB-m17" firstAttribute="leading" secondItem="Z86-NA-teS" secondAttribute="leading" id="CFj-Tk-QAd"/>
+                    <constraint firstItem="Z86-NA-teS" firstAttribute="top" secondItem="7kc-mk-6lT" secondAttribute="bottom" constant="23" id="Ewh-xf-9AC"/>
+                    <constraint firstItem="peQ-d6-b4t" firstAttribute="trailing" secondItem="7kc-mk-6lT" secondAttribute="trailing" id="Gb7-jg-h9h"/>
+                    <constraint firstItem="xUs-SB-m17" firstAttribute="leading" secondItem="7kc-mk-6lT" secondAttribute="leading" id="NUl-EZ-1f1"/>
+                    <constraint firstItem="357-7Y-dv7" firstAttribute="leading" secondItem="xUs-SB-m17" secondAttribute="trailing" constant="8" symbolic="YES" id="SIe-1c-xnv"/>
+                    <constraint firstItem="Z86-NA-teS" firstAttribute="centerY" secondItem="peQ-d6-b4t" secondAttribute="centerY" id="TOk-70-EUM"/>
+                    <constraint firstItem="xUs-SB-m17" firstAttribute="top" secondItem="EiT-Mj-1SZ" secondAttribute="top" constant="24" id="bOu-lR-YGN"/>
+                    <constraint firstAttribute="trailing" secondItem="peQ-d6-b4t" secondAttribute="trailing" constant="20" symbolic="YES" id="bsa-2h-bnn"/>
+                    <constraint firstItem="xUs-SB-m17" firstAttribute="leading" secondItem="EiT-Mj-1SZ" secondAttribute="leading" constant="20" symbolic="YES" id="c6D-1h-alb"/>
+                    <constraint firstItem="7kc-mk-6lT" firstAttribute="top" secondItem="xUs-SB-m17" secondAttribute="bottom" constant="8" symbolic="YES" id="ixo-5B-OrK"/>
+                    <constraint firstItem="peQ-d6-b4t" firstAttribute="trailing" secondItem="357-7Y-dv7" secondAttribute="trailing" id="jfy-RB-WKW"/>
+                    <constraint firstAttribute="bottom" secondItem="Z86-NA-teS" secondAttribute="bottom" constant="16" id="yvE-hP-5SE"/>
+                </constraints>
+            </view>
+        </window>
+    </objects>
+</document>
