@@ -97,6 +97,14 @@
   return _operationWindowController;
 }
 
+- (void)displayInformationForFormulae:(NSArray*)formulae
+{
+	[self.label_formulaPath setStringValue:@"Multiple values"];
+	[self.label_formulaDependencies setStringValue:@"Multiple values"];
+	[self.label_formulaConflicts setStringValue:@"Multiple values"];
+	[self.label_formulaVersion setStringValue:@"Multiple values"];
+}
+
 - (void)displayInformationForFormula:(BPFormula*)formula
 {
 	static NSString *depString = @"Formula no longer available.";
