@@ -201,7 +201,7 @@ static void * BPInstallationWindowControllerContext = &BPInstallationWindowContr
         self.formulaNameLabel.stringValue = [(BPFormula*)[self.formulae firstObject] name];
       } else if (count > 1) {
         NSString *formulaeNames = [[self namesOfAllFormulae] componentsJoinedByString:@", "];
-        self.formulaNameLabel.stringValue = [formulaeNames substringWithRange:NSMakeRange(0, formulaeNames.length-2)];
+        self.formulaNameLabel.stringValue = formulaeNames;
       } else {
         self.formulaNameLabel.stringValue = @"All Outdated Formulae";
       }
