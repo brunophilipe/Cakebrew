@@ -28,7 +28,7 @@ static void * BPInstallationWindowControllerContext = &BPInstallationWindowContr
 
 @property (weak) IBOutlet NSTextField *windowTitleLabel;
 @property (weak) IBOutlet NSTextField *formulaNameLabel;
-@property (strong) IBOutlet NSTextView *recordTextView;
+@property (unsafe_unretained) IBOutlet NSTextView *recordTextView; //NSTextView does not support weak in ARC at all (not just 10.7)
 @property (weak) IBOutlet NSButton *okButton;
 @property (weak) IBOutlet NSProgressIndicator *progressIndicator;
 
