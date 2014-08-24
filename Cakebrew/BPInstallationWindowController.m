@@ -53,8 +53,8 @@ static void * BPInstallationWindowControllerContext = &BPInstallationWindowContr
                                              object:nil];
 }
 
-- (id)init {
-  self = [super initWithWindowNibName:@"BPInstallationWindow"];
+- (instancetype)initWithWindow:(NSWindow *)window {
+  self = [super initWithWindow:window];
   if (self) {
     _windowOperation = kBPWindowOperationInstall;
   }
@@ -62,9 +62,10 @@ static void * BPInstallationWindowControllerContext = &BPInstallationWindowContr
   return self;
 }
 
-- (id)initWithWindowNibName:(NSString *)windowNibName {
-  return [self init];
+- (NSString *)windowNibName {
+  return @"BPInstallationWindow";
 }
+
 
 - (NSArray*)namesOfAllFormulae
 {

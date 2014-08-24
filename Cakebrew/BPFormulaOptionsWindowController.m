@@ -50,8 +50,8 @@ static void * BPFormulaOptionsWindowControllerContext = &BPFormulaOptionsWindowC
   [self refreshFormulaDependencies];
 }
 
-- (id)init {
-  self = [super initWithWindowNibName:@"BPFormulaOptionsWindow"];
+- (instancetype)initWithWindow:(NSWindow *)window {
+  self = [super initWithWindow:window];
   if (self) {
     _numberOfFormulaOptions = 0;
   }
@@ -59,8 +59,8 @@ static void * BPFormulaOptionsWindowControllerContext = &BPFormulaOptionsWindowC
   return self;
 }
 
-- (id)initWithWindowNibName:(NSString *)windowNibName {
-  return [self init];
+- (NSString *)windowNibName {
+  return @"BPFormulaOptionsWindow";
 }
 
 
