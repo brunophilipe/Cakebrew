@@ -62,10 +62,40 @@ static void * BPInstallationWindowControllerContext = &BPInstallationWindowContr
   return self;
 }
 
-- (NSString *)windowNibName {
-  return @"BPInstallationWindow";
++ (BPInstallationWindowController *)runWithOperation:(BPWindowOperation)windowOperation
+                                            formulae:(NSArray *)formulae
+                                             options:(NSArray *)options
+                                       modalDelegate:delegate{
+  BPInstallationWindowController *operationWindowController;
+  operationWindowController = [[BPInstallationWindowController alloc] initWithWindowNibName:@"BPInstallationWindow"];
+  operationWindowController.windowOperation = windowOperation;
+  operationWindowController.formulae = formulae;
+  operationWindowController.options = options;
+  operationWindowController.modalDelegate = delegate;
+
+  NSWindow *operationWindow = operationWindowController.window;
+  
+  if ([[NSApp mainWindow] respondsToSelector:@selector(beginSheet:completionHandler:)]) {
+    [[NSApp mainWindow] beginSheet:operationWindow completionHandler:^(NSModalResponse returnCode) {
+      [BPAppDelegateRef setRunningBackgroundTask:NO];
+    }];
+  } else {
+    [[NSApplication sharedApplication] beginSheet:operationWindow
+                                   modalForWindow:[NSApp mainWindow]
+                                    modalDelegate:operationWindowController
+                                   didEndSelector:@selector(windowOperationSheetDidEnd:returnCode:contextInfo:)
+                                      contextInfo:NULL];
+  }
+  [operationWindowController executeInstallation];
+  
+  return operationWindowController;
 }
 
+- (void)windowOperationSheetDidEnd:(NSWindow *)sheet returnCode:(NSInteger)returnCode contextInfo:(void *)contextInfo;
+{
+  [sheet orderOut:self];
+  [BPAppDelegateRef setRunningBackgroundTask:NO];
+}
 
 - (NSArray*)namesOfAllFormulae
 {

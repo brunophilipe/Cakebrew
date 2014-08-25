@@ -24,14 +24,13 @@
 
 static void * BPFormulaOptionsWindowControllerContext = &BPFormulaOptionsWindowControllerContext;
 
-@interface BPFormulaOptionsWindowController () <NSTableViewDataSource, NSTableViewDelegate> {
-  __weak BPFormula *_formula;
-}
+@interface BPFormulaOptionsWindowController () <NSTableViewDataSource, NSTableViewDelegate>
 
 @property (weak) IBOutlet NSTextField *infoLabel;
 @property (weak) IBOutlet NSTextField *formulaNameLabel;
 @property (weak) IBOutlet NSTextField *optionDetailsTextField;
 @property (weak) IBOutlet NSTableView *formulaOptionsTableView;
+
 
 @property NSUInteger numberOfFormulaOptions;
 @property (nonatomic, strong) NSArray *availableOptions;
@@ -59,10 +58,50 @@ static void * BPFormulaOptionsWindowControllerContext = &BPFormulaOptionsWindowC
   return self;
 }
 
-- (NSString *)windowNibName {
-  return @"BPFormulaOptionsWindow";
++ (BPFormulaOptionsWindowController *)runWithFormula:(BPFormula *)formula modalDelegate:(id)delegate {
+  BPFormulaOptionsWindowController *formulaOptionsWindowController;
+  formulaOptionsWindowController = [[BPFormulaOptionsWindowController alloc] initWithWindowNibName:@"BPFormulaOptionsWindow"];
+  formulaOptionsWindowController.modalDelegate = delegate;
+  formulaOptionsWindowController.formula = formula;
+  NSWindow *formulaWindow = formulaOptionsWindowController.window;
+  [BPAppDelegateRef setRunningBackgroundTask:YES];
+  
+  if ([[NSApp mainWindow] respondsToSelector:@selector(beginSheet:completionHandler:)]) {
+    [[NSApp mainWindow] beginSheet:formulaWindow completionHandler:^(NSModalResponse returnCode) {
+      if (returnCode == NSModalResponseStop) {
+        NSArray *options = [formulaOptionsWindowController allSelectedOptions];
+        if([delegate respondsToSelector:@selector(installFormula:withOptions:)]) {
+          [delegate installFormula:formula withOptions:options];
+        }
+      } else {
+        [BPAppDelegateRef setRunningBackgroundTask:NO];
+      }
+      
+    }];
+  } else {
+    [[NSApplication sharedApplication] beginSheet:formulaWindow
+                                   modalForWindow:[NSApp mainWindow]
+                                    modalDelegate:formulaOptionsWindowController
+                                   didEndSelector:@selector(windowOperationSheetDidEnd:returnCode:contextInfo:)
+                                      contextInfo:NULL];
+  }
+  return formulaOptionsWindowController;
 }
 
+
+- (void)windowOperationSheetDidEnd:(NSWindow *)sheet returnCode:(NSInteger)returnCode contextInfo:(void *)contextInfo {
+  [sheet orderOut:self];
+  
+  if(returnCode == NSModalResponseStop) {
+    NSArray *options = [self allSelectedOptions];
+    BPFormula *formula = [self formula];
+    if([self.modalDelegate respondsToSelector:@selector(installFormula:withOptions:)]) {
+      [self.modalDelegate installFormula:formula withOptions:options];
+    }
+  } else {
+    [BPAppDelegateRef setRunningBackgroundTask:NO];
+  }
+}
 
 - (void)refreshFormulaDependencies {
   self.availableOptions = [[self.formula options] copy];
@@ -88,7 +127,7 @@ static void * BPFormulaOptionsWindowControllerContext = &BPFormulaOptionsWindowC
 
 - (IBAction)cancel:(id)sender {
 	NSWindow *mainWindow = [NSApp mainWindow];
-	if ([mainWindow respondsToSelector:@selector(endSheet:)]) {
+	if ([mainWindow respondsToSelector:@selector(endSheet:returnCode:)]) {
 		[mainWindow endSheet:self.window returnCode:NSModalResponseAbort];
 	} else {
 		[[NSApplication sharedApplication] endSheet:self.window returnCode:NSModalResponseAbort];
@@ -195,6 +234,7 @@ static void * BPFormulaOptionsWindowControllerContext = &BPFormulaOptionsWindowC
 }
 
 - (void)dealloc {
+  self.modalDelegate = nil;
   [self removeObserver:self
             forKeyPath:@"numberOfFormulaOptions"
                context:BPFormulaOptionsWindowControllerContext];
