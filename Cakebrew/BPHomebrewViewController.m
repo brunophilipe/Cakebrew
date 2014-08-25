@@ -26,7 +26,7 @@
 #import "BPFormulaOptionsWindowController.h"
 #import "BPInstallationWindowController.h"
 
-@interface BPHomebrewViewController () <NSTableViewDataSource, NSTableViewDelegate, PXSourceListDataSource, PXSourceListDelegate, BPHomebrewManagerDelegate, NSMenuDelegate>
+@interface BPHomebrewViewController () <NSTableViewDataSource, NSTableViewDelegate, PXSourceListDataSource, PXSourceListDelegate, BPHomebrewManagerDelegate, NSMenuDelegate, BPFormulaOptionsWindowControllerDelegate>
 
 @property (strong, readonly) PXSourceListItem *rootSidebarCategory;
 @property (strong)           NSPopover        *formulaPopover;
