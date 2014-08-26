@@ -48,6 +48,9 @@ static NSString *cakebrewOutputIdentifier = @"+++++Cakebrew+++++";
 @interface BPHomebrewInterfaceListCallSearch : BPHomebrewInterfaceListCall
 @end
 
+@interface BPHomebrewInterfaceListCallRepositories: BPHomebrewInterfaceListCall
+@end
+
 @interface BPHomebrewInterface ()
 
 @property BOOL systemHasAppNap;
@@ -277,6 +280,10 @@ static NSString *cakebrewOutputIdentifier = @"+++++Cakebrew+++++";
             listCall = [[BPHomebrewInterfaceListCallUpgradeable alloc] init];
 			break;
 
+		case kBPListRepositories:
+            listCall = [[BPHomebrewInterfaceListCallRepositories alloc] init];
+			break;
+
 		default:
 			return nil;
 	}
@@ -466,6 +473,15 @@ static NSString *cakebrewOutputIdentifier = @"+++++Cakebrew+++++";
 - (instancetype)initWithSearchParameter:(NSString*)param
 {
     return (BPHomebrewInterfaceListCallSearch *)[super initWithArguments:@[@"search", param]];
+}
+
+@end
+
+@implementation BPHomebrewInterfaceListCallRepositories
+
+- (instancetype)init
+{
+  return (BPHomebrewInterfaceListCallRepositories *)[super initWithArguments:@[@"tap"]];
 }
 
 @end
