@@ -31,6 +31,7 @@ typedef NS_ENUM(NSUInteger, BPWindowOperation) {
     kBPWindowOperationInstall,
     kBPWindowOperationUninstall,
 	kBPWindowOperationUpgrade,
+	kBPWindowOperationTap,
 	kBPWindowOperationUntap
 };
 

@@ -355,6 +355,13 @@ static NSString *cakebrewOutputIdentifier = @"+++++Cakebrew+++++";
 	return val;
 }
 
+- (BOOL)tapRepository:(NSString *)repository withReturnsBlock:(void (^)(NSString *))block
+{
+	BOOL val = [self performBrewCommandWithArguments:@[@"tap", repository] dataReturnBlock:block];
+	[[NSNotificationCenter defaultCenter] postNotificationName:kBP_NOTIFICATION_FORMULAS_CHANGED object:nil];
+	return val;
+}
+
 - (BOOL)untapRepository:(NSString *)repository withReturnsBlock:(void (^)(NSString *))block
 {
 	BOOL val = [self performBrewCommandWithArguments:@[@"untap", repository] dataReturnBlock:block];

@@ -234,6 +234,11 @@
 			[self.toolbarButton_installUninstall setImage:[NSImage imageNamed:@"delete.icns"]];
 			[self.toolbarButton_installUninstall setLabel:@"Untap Repository"];
 			[self setToolbarButtonOperation:kBPWindowOperationUntap];
+		} else {
+			[self.toolbarButton_installUninstall setImage:[NSImage imageNamed:@"download.icns"]];
+			[self.toolbarButton_installUninstall setLabel:@"Tap Repository"];
+			[self setToolbarButtonOperation:kBPWindowOperationTap];
+		}
 	}
     else if(selectedIndex == -1 || selectedTab > 5)
 	{
@@ -718,6 +723,7 @@
 	[_appDelegate setRunningBackgroundTask:YES];
 
 	NSInteger selectedIndex = [self.tableView_formulae selectedRow];
+	NSInteger selectedTab = [self.outlineView_sidebar selectedRow];
 
 	if (selectedIndex >= 0) {
 		BPFormula *formula = [_formulaeArray objectAtIndex:(NSUInteger)selectedIndex];
@@ -777,6 +783,30 @@
             }
 		} else {
 			operationBlock();
+		}
+	}
+	else if (selectedTab == 5 && _toolbarButtonOperation == kBPWindowOperationTap)
+	{
+		NSAlert *alert = [NSAlert alertWithMessageText:@"Attention!" defaultButton:@"OK" alternateButton:@"Cancel" otherButton:nil informativeTextWithFormat:@"What repository would you like to tap?"];
+
+		NSTextField *input = [[NSTextField alloc] initWithFrame:NSMakeRect(0,0,200,24)];
+		[input setStringValue:@""];
+		[alert setAccessoryView:input];
+
+		NSInteger returnValue = [alert runModal];
+		if (returnValue == NSAlertDefaultReturn) {
+			NSString* name = [input stringValue];
+			if ([name length] > 0)
+			{
+				BPFormula *formula = [BPFormula formulaWithName:name];
+				[self prepareFormula:formula forOperation:kBPWindowOperationTap];
+			}
+			else {
+				[_appDelegate setRunningBackgroundTask:NO];
+			}
+		}
+		else {
+			[_appDelegate setRunningBackgroundTask:NO];
 		}
 	}
 }
