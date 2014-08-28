@@ -304,7 +304,7 @@
 - (void)buildSidebarTree
 {
 	NSArray *categoriesTitles = @[@"Installed", @"Outdated", @"All Formulae", @"Leaves", @"Repositories"];
-	NSArray *categoriesIcons = @[@"installedTemplate", @"outdatedTemplate", @"allFormulaeTemplate", @"pinTemplate", @"allFormulaeTemplate"];
+	NSArray *categoriesIcons = @[@"installedTemplate", @"outdatedTemplate", @"allFormulaeTemplate", @"pinTemplate", @"cloudTemplate"];
 	NSArray *categoriesValues = @[[NSNumber numberWithInteger:[[[BPHomebrewManager sharedManager] formulae_installed] count]],
 								  [NSNumber numberWithInteger:[[[BPHomebrewManager sharedManager] formulae_outdated] count]],
 								  [NSNumber numberWithInteger:[[[BPHomebrewManager sharedManager] formulae_all] count]],
