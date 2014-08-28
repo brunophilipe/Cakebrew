@@ -89,6 +89,10 @@
 		case kBPWindowOperationUpgrade:
 			message = @"Upgrading Formula:";
 			break;
+
+		case kBPWindowOperationUntap:
+			message = @"Untapping Repository:";
+			break;
 	}
 	[self.label_windowTitle setStringValue:message];
 }
@@ -141,6 +145,15 @@
 					[self.textView performSelectorOnMainThread:@selector(setString:) withObject:outputValue waitUntilDone:YES];
 				}];
 			}
+		}
+		else if (self.windowOperation == kBPWindowOperationUntap)
+		{
+			NSString *name = [[self.formulae firstObject] name];
+			[[BPHomebrewInterface sharedInterface] untapRepository:name withReturnsBlock:^(NSString *output) {
+				if (outputValue) outputValue = [outputValue stringByAppendingString:output];
+				else outputValue = output;
+				[self.textView performSelectorOnMainThread:@selector(setString:) withObject:outputValue waitUntilDone:YES];
+			}];
 		}
 
 		[self.progressIndicator stopAnimation:nil];

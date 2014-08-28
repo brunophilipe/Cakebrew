@@ -224,7 +224,18 @@
 {
 	NSUInteger selectedTab = (NSUInteger)[self.outlineView_sidebar selectedRow];
 	NSUInteger selectedIndex = (NSUInteger)[self.tableView_formulae selectedRow];
-    if(selectedIndex == -1 || selectedTab > 5)
+
+	if (selectedTab == 5) { // Repositories tab
+		[self displayInformationForFormula:nil];
+		[self.toolbarButton_installUninstall setEnabled:YES];
+		[self.toolbarButton_formulaInfo setEnabled:NO];
+
+		if (selectedIndex != -1) {
+			[self.toolbarButton_installUninstall setImage:[NSImage imageNamed:@"delete.icns"]];
+			[self.toolbarButton_installUninstall setLabel:@"Untap Repository"];
+			[self setToolbarButtonOperation:kBPWindowOperationUntap];
+	}
+    else if(selectedIndex == -1 || selectedTab > 5)
 	{
 		[self.toolbarButton_installUninstall setEnabled:NO];
 		[self.toolbarButton_formulaInfo setEnabled:NO];
@@ -739,6 +750,15 @@
 
 				operationBlock = ^{
 					[self prepareFormulae:formulae forOperation:kBPWindowOperationUpgrade inWindow:_appDelegate.window alsoModal:NO withOptions:nil];
+				};
+			}
+				break;
+
+			case kBPWindowOperationUntap:
+			{
+				message = @"Are you sure you want to untap the repository '%@'?";
+				operationBlock = ^{
+					[self prepareFormula:formula forOperation:kBPWindowOperationUntap];
 				};
 			}
 				break;
