@@ -23,15 +23,13 @@
 @class BPFormula;
 
 @protocol BPFormulaOptionsWindowControllerDelegate <NSObject>
-
 - (void)installFormula:(BPFormula *)formula withOptions:(NSArray *)options;
-
 @end
+
 
 @interface BPFormulaOptionsWindowController : NSWindowController
 
 @property (unsafe_unretained) id <BPFormulaOptionsWindowControllerDelegate> modalDelegate;
-@property (strong) BPFormula *formula;
 
 + (BPFormulaOptionsWindowController *)runWithFormula:(BPFormula *)formula modalDelegate:(id)delegate;
 

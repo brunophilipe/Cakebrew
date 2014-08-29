@@ -22,47 +22,64 @@
 #import "BPFormulaOptionsWindowController.h"
 #import "BPFormula.h"
 
-static void * BPFormulaOptionsWindowControllerContext = &BPFormulaOptionsWindowControllerContext;
+//these constants must match arraycontroller in XIB (array controller + binding on table columns)
+static NSString const *kFormulaOptionCommand = @"formulaOptionCommand";
+static NSString const *kIsFormulaOptionCommandApplied = @"isFormulaOptionCommandApplied";
+static NSString const *kFormulaOptionDescription = @"formulaOptionDescription";
 
-@interface BPFormulaOptionsWindowController () <NSTableViewDataSource, NSTableViewDelegate>
+@interface BPFormulaOptionsWindowController ()
 
-@property (weak) IBOutlet NSTextField *infoLabel;
+@property (weak) IBOutlet NSTextField *userHelpLabel;
 @property (weak) IBOutlet NSTextField *formulaNameLabel;
 @property (weak) IBOutlet NSTextField *optionDetailsTextField;
 @property (weak) IBOutlet NSTableView *formulaOptionsTableView;
+@property (strong) IBOutlet NSArrayController *formulasArrayController;
 
-
-@property NSUInteger numberOfFormulaOptions;
-@property (nonatomic, strong) NSArray *availableOptions;
-@property (nonatomic, strong) NSMutableArray *selectedOptions;
+@property (nonatomic, strong) NSMutableArray *availableOptions;
+@property (strong) BPFormula *formula;
 
 @end
 
 @implementation BPFormulaOptionsWindowController
-@synthesize formula = _formula;
 
 - (void)awakeFromNib {
-  [self addObserver:self
-         forKeyPath:@"numberOfFormulaOptions"
-            options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionInitial
-            context:BPFormulaOptionsWindowControllerContext];
-  [self refreshFormulaDependencies];
-}
-
-- (instancetype)initWithWindow:(NSWindow *)window {
-  self = [super initWithWindow:window];
-  if (self) {
-    _numberOfFormulaOptions = 0;
+  
+  NSUInteger numberOfFormulaOptions = [self.availableOptions count];
+  if (numberOfFormulaOptions > 0) {
+    [self.userHelpLabel setStringValue:@"Click on option for details."];
+  } else {
+    [self.userHelpLabel setStringValue:@"This formula has no installation options available."];
   }
   
-  return self;
+  //load array controller with array of mutable dictionaries with options
+  [self.formulasArrayController addObjects:self.availableOptions];
+  
+  [self.formulaOptionsTableView reloadData];
 }
 
 + (BPFormulaOptionsWindowController *)runWithFormula:(BPFormula *)formula modalDelegate:(id)delegate {
+  
   BPFormulaOptionsWindowController *formulaOptionsWindowController;
   formulaOptionsWindowController = [[BPFormulaOptionsWindowController alloc] initWithWindowNibName:@"BPFormulaOptionsWindow"];
   formulaOptionsWindowController.modalDelegate = delegate;
   formulaOptionsWindowController.formula = formula;
+  NSMutableArray *availableOptions = [[NSMutableArray alloc] init];
+  
+  for (id option in [formula options]) {
+    id optionCommand = [option objectForKey:kBP_FORMULA_OPTION_COMMAND];;
+    id optionDescription = [option objectForKey:kBP_FORMULA_OPTION_DESCRIPTION] ? [option objectForKey:kBP_FORMULA_OPTION_DESCRIPTION] : @"";
+    if (optionCommand) {
+      
+      // We want to be able to modify content of kWantsToInstallOption within table view
+      NSMutableDictionary *dictionary = [[NSMutableDictionary alloc] initWithDictionary:@{ kFormulaOptionCommand : optionCommand,
+                                                                                           kIsFormulaOptionCommandApplied : @NO,
+                                                                                           kFormulaOptionDescription : optionDescription}];
+      [availableOptions addObject:dictionary];
+    }
+  }
+  formulaOptionsWindowController.availableOptions = availableOptions;
+  
+  
   NSWindow *formulaWindow = formulaOptionsWindowController.window;
   [BPAppDelegateRef setRunningBackgroundTask:YES];
   
@@ -103,24 +120,16 @@ static void * BPFormulaOptionsWindowControllerContext = &BPFormulaOptionsWindowC
   }
 }
 
-- (void)refreshFormulaDependencies {
-  self.availableOptions = [[self.formula options] copy];
-  self.numberOfFormulaOptions = [self.availableOptions count];
-  self.selectedOptions = [[NSMutableArray alloc] initWithCapacity:self.numberOfFormulaOptions];
-  for (NSUInteger i = 0; i < self.numberOfFormulaOptions; i++) {
-    [self.selectedOptions addObject:@NO];
-  }
-  
-  [self.formulaOptionsTableView reloadData];
-}
-
+/*
+ * Return an array with formula options that user wants to use with formula
+ */
 - (NSArray *)allSelectedOptions {
-  NSMutableArray *options = [NSMutableArray arrayWithCapacity:self.numberOfFormulaOptions];
-
-  for (NSInteger i = 0; i < self.numberOfFormulaOptions; i++) {
-
-    if ([[self.selectedOptions objectAtIndex:i] boolValue])
-      [options addObject:[[self.availableOptions objectAtIndex:i] objectForKey:kBP_FORMULA_OPTION_COMMAND]];
+  NSMutableArray *options = [[NSMutableArray alloc] init];
+  
+  for (NSMutableDictionary *commandOption in self.availableOptions){
+    if ([commandOption[kIsFormulaOptionCommandApplied] isEqual: @YES]) {
+      [options addObject:commandOption[kFormulaOptionCommand]];
+    }
   }
   return [NSArray arrayWithArray:options];
 }
@@ -158,86 +167,6 @@ static void * BPFormulaOptionsWindowControllerContext = &BPFormulaOptionsWindowC
   } else {
     [[NSApplication sharedApplication] endSheet:self.window returnCode:modalResponse];
   }
-}
-
-#pragma mark - Table View Delegate
-
-- (void)tableViewSelectionDidChange:(NSNotification *)notification
-{
-  NSInteger selectedRow = [self.formulaOptionsTableView selectedRow];
-	if (selectedRow >= 0) {
-		[self.optionDetailsTextField setStringValue:[[self.availableOptions objectAtIndex:selectedRow] objectForKey:kBP_FORMULA_OPTION_DESCRIPTION]];
-	} else {
-		[self.optionDetailsTextField setStringValue:@""];
-	}
-}
-
-#pragma mark - Table View Data Source
-
-- (NSInteger)numberOfRowsInTableView:(NSTableView *)aTableView
-{
-	return self.numberOfFormulaOptions;
-}
-
-- (id)tableView:(NSTableView *)aTableView objectValueForTableColumn:(NSTableColumn *)aTableColumn row:(NSInteger)rowIndex
-{
-	if ([[aTableColumn identifier] isEqualToString:@"enabled"]) {
-		NSLog(@"%s", __PRETTY_FUNCTION__);
-		return [self.selectedOptions objectAtIndex:rowIndex];
-	} else {
-		return [[self.availableOptions objectAtIndex:rowIndex] objectForKey:kBP_FORMULA_OPTION_COMMAND];
-	}
-}
-
-- (void)tableView:(NSTableView *)tableView setObjectValue:(id)object forTableColumn:(NSTableColumn *)tableColumn row:(NSInteger)row
-{
-	if ([[tableColumn identifier] isEqualToString:@"enabled"]) {
-		[self.selectedOptions replaceObjectAtIndex:row withObject:object];
-	}
-}
-
-
-#pragma mark - Getters and Setters
-
-- (BPFormula *)formula
-{
-	return _formula;
-}
-
-- (void)setFormula:(BPFormula *)formula
-{
-  _formula = formula;
-  [self refreshFormulaDependencies];
-}
-
-- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
-  
-  if (context == BPFormulaOptionsWindowControllerContext) {
-    
-    if ([keyPath isEqualTo:@"numberOfFormulaOptions"]) {
-      
-      if (self.numberOfFormulaOptions > 0) {
-        [self.infoLabel setStringValue:@"Click on option for details."];
-      } else {
-        [self.infoLabel setStringValue:@"This formula has no installation options available."];
-      }
-    }
-    
-  } else {
-    @try {
-      [super observeValueForKeyPath:keyPath ofObject:object change:change context:context];
-    }
-    @catch (NSException *exception) {
-      ;
-    }
-  }
-}
-
-- (void)dealloc {
-  self.modalDelegate = nil;
-  [self removeObserver:self
-            forKeyPath:@"numberOfFormulaOptions"
-               context:BPFormulaOptionsWindowControllerContext];
 }
 
 @end

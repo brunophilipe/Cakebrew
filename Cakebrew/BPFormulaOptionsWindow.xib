@@ -9,8 +9,9 @@
             <connections>
                 <outlet property="formulaNameLabel" destination="LOq-R6-Hka" id="Y1G-Pi-RkC"/>
                 <outlet property="formulaOptionsTableView" destination="5A9-PF-xAL" id="XuD-y9-MPw"/>
-                <outlet property="infoLabel" destination="UPD-xs-vt4" id="8ZZ-fn-Fg7"/>
+                <outlet property="formulasArrayController" destination="hcg-K1-wSc" id="De0-P0-vxC"/>
                 <outlet property="optionDetailsTextField" destination="Edm-Gf-0gC" id="WPX-eZ-YXO"/>
+                <outlet property="userHelpLabel" destination="UPD-xs-vt4" id="rmE-Ac-rqz"/>
                 <outlet property="window" destination="QvC-M9-y7g" id="M7c-K6-S0V"/>
             </connections>
         </customObject>
@@ -77,6 +78,9 @@ Gw
                                                 <font key="font" metaFont="system"/>
                                             </buttonCell>
                                             <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
+                                            <connections>
+                                                <binding destination="hcg-K1-wSc" name="value" keyPath="arrangedObjects.isFormulaOptionCommandApplied" id="52P-dz-sUu"/>
+                                            </connections>
                                         </tableColumn>
                                         <tableColumn identifier="title" editable="NO" width="412" minWidth="18" maxWidth="1000" id="XqV-53-e7D">
                                             <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left" title="Options">
@@ -90,11 +94,17 @@ Gw
                                                 <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                             </textFieldCell>
                                             <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
+                                            <connections>
+                                                <binding destination="hcg-K1-wSc" name="value" keyPath="arrangedObjects.formulaOptionCommand" id="eTP-6Z-y0t">
+                                                    <dictionary key="options">
+                                                        <bool key="NSConditionallySetsEditable" value="YES"/>
+                                                    </dictionary>
+                                                </binding>
+                                            </connections>
                                         </tableColumn>
                                     </tableColumns>
                                     <connections>
-                                        <outlet property="dataSource" destination="-2" id="jz2-SJ-gQl"/>
-                                        <outlet property="delegate" destination="-2" id="pLB-kW-hnr"/>
+                                        <outlet property="dataSource" destination="hcg-K1-wSc" id="JYT-c5-FhU"/>
                                     </connections>
                                 </tableView>
                             </subviews>
@@ -145,11 +155,14 @@ Gw
                             <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                         </textFieldCell>
+                        <connections>
+                            <binding destination="hcg-K1-wSc" name="value" keyPath="selection.formulaOptionDescription" id="M2p-UU-plK"/>
+                        </connections>
                     </textField>
                     <textField appearanceType="aqua" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="UPD-xs-vt4">
                         <rect key="frame" x="97" y="22" width="292" height="17"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="right" id="tu4-qK-MyK">
+                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" id="tu4-qK-MyK">
                             <font key="font" metaFont="system"/>
                             <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
@@ -183,5 +196,12 @@ Gw
                 <outlet property="delegate" destination="-2" id="gqg-mp-nng"/>
             </connections>
         </window>
+        <arrayController selectsInsertedObjects="NO" avoidsEmptySelection="NO" id="hcg-K1-wSc">
+            <declaredKeys>
+                <string>formulaOptionCommand</string>
+                <string>isFormulaOptionCommandApplied</string>
+                <string>formulaOptionDescription</string>
+            </declaredKeys>
+        </arrayController>
     </objects>
 </document>
