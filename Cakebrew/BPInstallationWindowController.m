@@ -22,8 +22,6 @@
 #import "BPInstallationWindowController.h"
 #import "BPHomebrewInterface.h"
 
-static void * BPInstallationWindowControllerContext = &BPInstallationWindowControllerContext;
-
 @interface BPInstallationWindowController ()
 
 @property (weak) IBOutlet NSTextField *windowTitleLabel;
@@ -45,26 +43,37 @@ static void * BPInstallationWindowControllerContext = &BPInstallationWindowContr
   NSFont *font = [BPAppDelegateRef defaultFixedWidthFont];	
   [self.recordTextView setFont:font];
   [self.recordTextView setSelectable:YES];
-
-  [self addObserver:self forKeyPath:@"windowOperation"
-            options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionInitial
-            context:BPInstallationWindowControllerContext];
-  [self addObserver:self forKeyPath:@"formulae"
-            options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionInitial
-            context:BPInstallationWindowControllerContext];
-  [[NSNotificationCenter defaultCenter] addObserver:self
-                                           selector:@selector(addObjects:)
-                                               name:@""
-                                             object:nil];
 }
 
-- (instancetype)initWithWindow:(NSWindow *)window {
-  self = [super initWithWindow:window];
-  if (self) {
-    _windowOperation = kBPWindowOperationInstall;
-  }
+- (void)setupUI {
   
-  return self;
+  NSString *message;
+  switch (self.windowOperation) {
+    case kBPWindowOperationInstall:
+      message = @"Installing Formula:";
+      break;
+      
+    case kBPWindowOperationUninstall:
+      message = @"Uninstalling Formula:";
+      break;
+      
+    case kBPWindowOperationUpgrade:
+      message = @"Upgrading Formula:";
+      break;
+  }
+  [self.windowTitleLabel setStringValue:message];
+  
+  
+  NSUInteger count = [self.formulae count];
+  
+  if (count == 1) {
+    self.formulaNameLabel.stringValue = [(BPFormula*)[self.formulae firstObject] name];
+  } else if (count > 1) {
+    NSString *formulaeNames = [[self namesOfAllFormulae] componentsJoinedByString:@", "];
+    self.formulaNameLabel.stringValue = formulaeNames;
+  } else {
+    self.formulaNameLabel.stringValue = @"All Outdated Formulae";
+  }
 }
 
 + (BPInstallationWindowController *)runWithOperation:(BPWindowOperation)windowOperation
@@ -197,61 +206,6 @@ static void * BPInstallationWindowControllerContext = &BPInstallationWindowContr
   
 	[[NSNotificationCenter defaultCenter] postNotificationName:kBP_NOTIFICATION_FORMULAS_CHANGED
                                                       object:nil];
-}
-
-- (void)dealloc {
-  [self removeObserver:self
-            forKeyPath:@"windowOperation"
-               context:BPInstallationWindowControllerContext];
-  [self removeObserver:self
-            forKeyPath:@"formulae"
-               context:BPInstallationWindowControllerContext];
-}
-
-
-- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
-  
-  if (context == BPInstallationWindowControllerContext) {
-    
-    if ([keyPath isEqualTo:@"windowOperation"]) {
-      NSString *message;
-      switch (self.windowOperation) {
-        case kBPWindowOperationInstall:
-          message = @"Installing Formula:";
-          break;
-          
-        case kBPWindowOperationUninstall:
-          message = @"Uninstalling Formula:";
-          break;
-          
-        case kBPWindowOperationUpgrade:
-          message = @"Upgrading Formula:";
-          break;
-      }
-      [self.windowTitleLabel setStringValue:message];
-    }
-    if ([keyPath isEqualTo:@"formulae"]) {
-      NSUInteger count = [self.formulae count];
-      
-      if (count == 1) {
-        self.formulaNameLabel.stringValue = [(BPFormula*)[self.formulae firstObject] name];
-      } else if (count > 1) {
-        NSString *formulaeNames = [[self namesOfAllFormulae] componentsJoinedByString:@", "];
-        self.formulaNameLabel.stringValue = formulaeNames;
-      } else {
-        self.formulaNameLabel.stringValue = @"All Outdated Formulae";
-      }
-    }
-    
-  } else {
-    
-    @try {
-      [super observeValueForKeyPath:keyPath ofObject:object change:change context:context];
-    }
-    @catch (NSException *exception) {
-      ;
-    }
-  }
 }
 
 @end
