@@ -24,11 +24,6 @@
 
 @interface BPInstallationWindowController : NSWindowController
 
-@property (nonatomic) BPWindowOperation windowOperation;
-@property (strong, nonatomic) NSArray *formulae;
-@property (strong, nonatomic) NSArray *options;
-@property (unsafe_unretained) id modalDelegate;
-
 - (void)executeInstallation;
 
 + (BPInstallationWindowController *)runWithOperation:(BPWindowOperation)windowOperation

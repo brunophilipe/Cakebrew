@@ -32,6 +32,11 @@ static void * BPInstallationWindowControllerContext = &BPInstallationWindowContr
 @property (weak) IBOutlet NSButton *okButton;
 @property (weak) IBOutlet NSProgressIndicator *progressIndicator;
 
+@property (nonatomic) BPWindowOperation windowOperation;
+@property (strong, nonatomic) NSArray *formulae;
+@property (strong, nonatomic) NSArray *options;
+@property (unsafe_unretained) id modalDelegate;
+
 @end
 
 @implementation BPInstallationWindowController
