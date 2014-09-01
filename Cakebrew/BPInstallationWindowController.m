@@ -46,23 +46,16 @@
 }
 
 - (void)setupUI {
-  
-  NSString *message;
-  switch (self.windowOperation) {
-    case kBPWindowOperationInstall:
-      message = @"Installing Formula:";
-      break;
-      
-    case kBPWindowOperationUninstall:
-      message = @"Uninstalling Formula:";
-      break;
-      
-    case kBPWindowOperationUpgrade:
-      message = @"Upgrading Formula:";
-      break;
+  static NSDictionary *mappingMessage = nil;
+  if(!mappingMessage) {
+    mappingMessage = @{
+                        @(kBPWindowOperationInstall) : @"Installing Formula:",
+                        @(kBPWindowOperationUninstall) : @"Uninstalling Formula:",
+                        @(kBPWindowOperationUpgrade) : @"Upgrading Formula:",
+                      };
   }
-  [self.windowTitleLabel setStringValue:message];
   
+  self.windowTitleLabel.stringValue = mappingMessage[@(self.windowOperation)] ?: @"";
   
   NSUInteger count = [self.formulae count];
   
