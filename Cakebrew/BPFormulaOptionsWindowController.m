@@ -67,7 +67,7 @@ static NSString const *kFormulaOptionDescription = @"formulaOptionDescription";
   
   for (id option in [formula options]) {
     id optionCommand = [option objectForKey:kBP_FORMULA_OPTION_COMMAND];;
-    id optionDescription = [option objectForKey:kBP_FORMULA_OPTION_DESCRIPTION] ? [option objectForKey:kBP_FORMULA_OPTION_DESCRIPTION] : @"";
+    id optionDescription = [option objectForKey:kBP_FORMULA_OPTION_DESCRIPTION] ? : @"";
     if (optionCommand) {
       
       // We want to be able to modify content of kWantsToInstallOption within table view
@@ -124,14 +124,8 @@ static NSString const *kFormulaOptionDescription = @"formulaOptionDescription";
  * Return an array with formula options that user wants to use with formula
  */
 - (NSArray *)allSelectedOptions {
-  NSMutableArray *options = [[NSMutableArray alloc] init];
-  
-  for (NSMutableDictionary *commandOption in self.availableOptions){
-    if ([commandOption[kIsFormulaOptionCommandApplied] isEqual: @YES]) {
-      [options addObject:commandOption[kFormulaOptionCommand]];
-    }
-  }
-  return [NSArray arrayWithArray:options];
+  NSPredicate *selectedFormulas = [NSPredicate predicateWithFormat:@"%K == %@", kIsFormulaOptionCommandApplied, @YES];
+  return [self.availableOptions filteredArrayUsingPredicate:selectedFormulas];
 }
 
 - (IBAction)cancel:(id)sender {
@@ -156,8 +150,7 @@ static NSString const *kFormulaOptionDescription = @"formulaOptionDescription";
 	NSInteger modalResponse = NSModalResponseStop;
   if (returnValue == NSAlertDefaultReturn) {
 
-	}
-	else {
+	} else {
     modalResponse = NSModalResponseAbort;
 	}
   

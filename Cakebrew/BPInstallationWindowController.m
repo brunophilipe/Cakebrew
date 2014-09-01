@@ -106,11 +106,7 @@
 
 - (NSArray*)namesOfAllFormulae
 {
-	NSMutableArray *names = [NSMutableArray arrayWithCapacity:self.formulae.count];
-	for (BPFormula *formula in self.formulae) {
-		[names addObject:formula.name];
-	}
-	return [names copy];
+  return [self.formulae valueForKeyPath:@"@unionOfObjects.name"];
 }
 
 - (void)executeInstallation
