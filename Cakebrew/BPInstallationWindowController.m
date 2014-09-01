@@ -42,7 +42,6 @@
 - (void)awakeFromNib {
   NSFont *font = [BPAppDelegateRef defaultFixedWidthFont];	
   [self.recordTextView setFont:font];
-  [self.recordTextView setSelectable:YES];
 }
 
 - (void)setupUI {

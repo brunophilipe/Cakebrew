@@ -66,6 +66,9 @@
                                     <color key="insertionPointColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                     <size key="minSize" width="438" height="162"/>
                                     <size key="maxSize" width="463" height="10000000"/>
+                                    <userDefinedRuntimeAttributes>
+                                        <userDefinedRuntimeAttribute type="boolean" keyPath="selectable" value="YES"/>
+                                    </userDefinedRuntimeAttributes>
                                 </textView>
                             </subviews>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -75,7 +78,7 @@
                             <autoresizingMask key="autoresizingMask"/>
                         </scroller>
                         <scroller key="verticalScroller" verticalHuggingPriority="750" doubleValue="1" horizontal="NO" id="Sdu-Tz-xV9">
-                            <rect key="frame" x="423" y="1" width="16" height="162"/>
+                            <rect key="frame" x="424" y="1" width="15" height="162"/>
                             <autoresizingMask key="autoresizingMask"/>
                         </scroller>
                     </scrollView>
