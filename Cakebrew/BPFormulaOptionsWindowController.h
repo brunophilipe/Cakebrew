@@ -22,15 +22,13 @@
 #import <Cocoa/Cocoa.h>
 @class BPFormula;
 
-@protocol BPFormulaOptionsWindowControllerDelegate <NSObject>
-- (void)installFormula:(BPFormula *)formula withOptions:(NSArray *)options;
-@end
-
+typedef void (^InstalWithOptionsBlock_t)(NSArray *options);
 
 @interface BPFormulaOptionsWindowController : NSWindowController
 
-@property (unsafe_unretained) id <BPFormulaOptionsWindowControllerDelegate> modalDelegate;
+@property (nonatomic, copy) InstalWithOptionsBlock_t installWithOptionsBlock;
 
-+ (BPFormulaOptionsWindowController *)runWithFormula:(BPFormula *)formula modalDelegate:(id)delegate;
++ (BPFormulaOptionsWindowController *)runFormula:(BPFormula *)formula
+                                 withCompletionBlock:(InstalWithOptionsBlock_t)completionBlock;
 
 @end

@@ -26,7 +26,7 @@
 #import "BPFormulaOptionsWindowController.h"
 #import "BPInstallationWindowController.h"
 
-@interface BPHomebrewViewController () <NSTableViewDataSource, NSTableViewDelegate, PXSourceListDataSource, PXSourceListDelegate, BPHomebrewManagerDelegate, NSMenuDelegate, BPFormulaOptionsWindowControllerDelegate>
+@interface BPHomebrewViewController () <NSTableViewDataSource, NSTableViewDelegate, PXSourceListDataSource, PXSourceListDelegate, BPHomebrewManagerDelegate, NSMenuDelegate>
 
 @property (strong, readonly) PXSourceListItem *rootSidebarCategory;
 @property (strong)           NSPopover        *formulaPopover;
@@ -722,16 +722,13 @@
 
 	if (selectedIndex >= 0) {
 		BPFormula *formula = [_formulaeArray objectAtIndex:(NSUInteger)selectedIndex];
-    self.formulaOptionsWindowController = [BPFormulaOptionsWindowController runWithFormula:formula modalDelegate:self];
+    self.formulaOptionsWindowController = [BPFormulaOptionsWindowController runFormula:formula withCompletionBlock:^(NSArray *options) {
+      [self prepareFormulae:@[formula] forOperation:kBPWindowOperationInstall
+                   inWindow:[NSApp mainWindow]
+                  alsoModal:NO
+                withOptions:options];
+    }];
 	}
-}
-
-//this is a delegate call from formulaOptionsWindowController (due to beginSheet prior to 10.9)
-- (void)installFormula:(BPFormula *)formula withOptions:(NSArray *)options {
-  [self prepareFormulae:@[formula] forOperation:kBPWindowOperationInstall
-               inWindow:[NSApp mainWindow]
-              alsoModal:NO
-            withOptions:options];
 }
 
 - (IBAction)upgradeSelectedFormulae:(id)sender {

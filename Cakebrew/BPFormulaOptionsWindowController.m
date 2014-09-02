@@ -23,9 +23,9 @@
 #import "BPFormula.h"
 
 //these constants must match arraycontroller in XIB (array controller + binding on table columns)
-static NSString const *kFormulaOptionCommand = @"formulaOptionCommand";
-static NSString const *kIsFormulaOptionCommandApplied = @"isFormulaOptionCommandApplied";
-static NSString const *kFormulaOptionDescription = @"formulaOptionDescription";
+static NSString const * kFormulaOptionCommand = @"formulaOptionCommand";
+static NSString const * kIsFormulaOptionCommandApplied = @"isFormulaOptionCommandApplied";
+static NSString const * kFormulaOptionDescription = @"formulaOptionDescription";
 
 @interface BPFormulaOptionsWindowController ()
 
@@ -57,12 +57,12 @@ static NSString const *kFormulaOptionDescription = @"formulaOptionDescription";
   [self.formulaOptionsTableView reloadData];
 }
 
-+ (BPFormulaOptionsWindowController *)runWithFormula:(BPFormula *)formula modalDelegate:(id)delegate {
-  
++ (BPFormulaOptionsWindowController *)runFormula:(BPFormula *)formula withCompletionBlock:(InstalWithOptionsBlock_t)completionBlock
+{
   BPFormulaOptionsWindowController *formulaOptionsWindowController;
   formulaOptionsWindowController = [[BPFormulaOptionsWindowController alloc] initWithWindowNibName:@"BPFormulaOptionsWindow"];
-  formulaOptionsWindowController.modalDelegate = delegate;
   formulaOptionsWindowController.formula = formula;
+  formulaOptionsWindowController.installWithOptionsBlock = completionBlock;
   NSMutableArray *availableOptions = [[NSMutableArray alloc] init];
   
   for (id option in [formula options]) {
@@ -87,9 +87,7 @@ static NSString const *kFormulaOptionDescription = @"formulaOptionDescription";
     [[NSApp mainWindow] beginSheet:formulaWindow completionHandler:^(NSModalResponse returnCode) {
       if (returnCode == NSModalResponseStop) {
         NSArray *options = [formulaOptionsWindowController allSelectedOptions];
-        if([delegate respondsToSelector:@selector(installFormula:withOptions:)]) {
-          [delegate installFormula:formula withOptions:options];
-        }
+        formulaOptionsWindowController.installWithOptionsBlock(options);
       } else {
         [BPAppDelegateRef setRunningBackgroundTask:NO];
       }
@@ -111,10 +109,7 @@ static NSString const *kFormulaOptionDescription = @"formulaOptionDescription";
   
   if(returnCode == NSModalResponseStop) {
     NSArray *options = [self allSelectedOptions];
-    BPFormula *formula = [self formula];
-    if([self.modalDelegate respondsToSelector:@selector(installFormula:withOptions:)]) {
-      [self.modalDelegate installFormula:formula withOptions:options];
-    }
+    self.installWithOptionsBlock(options);
   } else {
     [BPAppDelegateRef setRunningBackgroundTask:NO];
   }
@@ -125,7 +120,9 @@ static NSString const *kFormulaOptionDescription = @"formulaOptionDescription";
  */
 - (NSArray *)allSelectedOptions {
   NSPredicate *selectedFormulas = [NSPredicate predicateWithFormat:@"%K == %@", kIsFormulaOptionCommandApplied, @YES];
-  return [self.availableOptions filteredArrayUsingPredicate:selectedFormulas];
+  NSArray *filteredArray = [self.availableOptions filteredArrayUsingPredicate:selectedFormulas];
+  NSArray *allOptions = [filteredArray valueForKeyPath:@"formulaOptionCommand"];
+  return allOptions;
 }
 
 - (IBAction)cancel:(id)sender {
