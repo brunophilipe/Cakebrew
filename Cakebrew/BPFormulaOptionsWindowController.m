@@ -23,9 +23,9 @@
 #import "BPFormula.h"
 
 //these constants must match arraycontroller in XIB (array controller + binding on table columns)
-static NSString const * kFormulaOptionCommand = @"formulaOptionCommand";
-static NSString const * kIsFormulaOptionCommandApplied = @"isFormulaOptionCommandApplied";
-static NSString const * kFormulaOptionDescription = @"formulaOptionDescription";
+static NSString * const kFormulaOptionCommand = @"formulaOptionCommand";
+static NSString * const kIsFormulaOptionCommandApplied = @"isFormulaOptionCommandApplied";
+static NSString * const kFormulaOptionDescription = @"formulaOptionDescription";
 
 @interface BPFormulaOptionsWindowController ()
 
@@ -121,7 +121,7 @@ static NSString const * kFormulaOptionDescription = @"formulaOptionDescription";
 - (NSArray *)allSelectedOptions {
   NSPredicate *selectedFormulas = [NSPredicate predicateWithFormat:@"%K == %@", kIsFormulaOptionCommandApplied, @YES];
   NSArray *filteredArray = [self.availableOptions filteredArrayUsingPredicate:selectedFormulas];
-  NSArray *allOptions = [filteredArray valueForKeyPath:@"formulaOptionCommand"];
+  NSArray *allOptions = [filteredArray valueForKeyPath:kFormulaOptionCommand];
   return allOptions;
 }
 
