@@ -30,7 +30,9 @@
 typedef NS_ENUM(NSUInteger, BPWindowOperation) {
     kBPWindowOperationInstall,
     kBPWindowOperationUninstall,
-	kBPWindowOperationUpgrade
+	kBPWindowOperationUpgrade,
+	kBPWindowOperationTap,
+	kBPWindowOperationUntap
 };
 
 @class DMSplitView;

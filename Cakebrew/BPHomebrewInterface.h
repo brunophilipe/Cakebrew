@@ -27,7 +27,8 @@ typedef NS_ENUM(NSInteger, BPListMode) {
     kBPListInstalled,
     kBPListLeaves,
 	kBPListOutdated,
-	kBPListSearch /* Don't call -[BPHomebrewInterface listMode:] with this parameter. */
+	kBPListSearch, /* Don't call -[BPHomebrewInterface listMode:] with this parameter. */
+	kBPListRepositories
 };
 
 @interface BPHomebrewInterface : NSObject
@@ -44,6 +45,8 @@ typedef NS_ENUM(NSInteger, BPListMode) {
 - (BOOL)upgradeFormulae:(NSArray*)formulae withReturnBlock:(void (^)(NSString*))block;
 - (BOOL)installFormula:(NSString*)formula withOptions:(NSArray*)options andReturnBlock:(void (^)(NSString*output))block;
 - (BOOL)uninstallFormula:(NSString*)formula withReturnBlock:(void (^)(NSString*))block;
+- (BOOL)tapRepository:(NSString*)formula withReturnsBlock:(void (^)(NSString*))block;
+- (BOOL)untapRepository:(NSString*)repository withReturnsBlock:(void (^)(NSString*))block;
 - (BOOL)runDoctorWithReturnBlock:(void (^)(NSString*))block;
 
 #pragma mark - Operations that return on finish

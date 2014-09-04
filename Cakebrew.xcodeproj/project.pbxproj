@@ -58,6 +58,8 @@
 		D2E53A4B19A6228300E05AFC /* BPFormulaOptionsWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = D2E53A4A19A6228300E05AFC /* BPFormulaOptionsWindowController.m */; };
 		D2E53A4D19A65B1600E05AFC /* BPInstallationWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = D2E53A4C19A65B1600E05AFC /* BPInstallationWindow.xib */; };
 		D2E53A5019A65BAD00E05AFC /* BPInstallationWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = D2E53A4F19A65BAD00E05AFC /* BPInstallationWindowController.m */; };
+		B58661A28038B63E5137AE50 /* cloudTemplate@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B5866C4F6DAFDFF8DD8A5314 /* cloudTemplate@2x.png */; };
+		B58668E3B0EBA26D892D0B61 /* cloudTemplate.png in Resources */ = {isa = PBXBuildFile; fileRef = B5866F6F1BEBE00B1EB5B5C7 /* cloudTemplate.png */; };
 		D2F732EC19190B6D002B2512 /* BPPreferencesWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = D2F732E919190B6D002B2512 /* BPPreferencesWindow.xib */; };
 		D2F732ED19190B6D002B2512 /* BPPreferencesWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = D2F732EB19190B6D002B2512 /* BPPreferencesWindowController.m */; };
 		D2F732F119190B75002B2512 /* NSString+URLValidation.m in Sources */ = {isa = PBXBuildFile; fileRef = D2F732F019190B75002B2512 /* NSString+URLValidation.m */; };
@@ -147,6 +149,8 @@
 		D2E53A4C19A65B1600E05AFC /* BPInstallationWindow.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BPInstallationWindow.xib; sourceTree = "<group>"; };
 		D2E53A4E19A65BAD00E05AFC /* BPInstallationWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BPInstallationWindowController.h; sourceTree = "<group>"; };
 		D2E53A4F19A65BAD00E05AFC /* BPInstallationWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BPInstallationWindowController.m; sourceTree = "<group>"; };
+		B5866C4F6DAFDFF8DD8A5314 /* cloudTemplate@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "cloudTemplate@2x.png"; sourceTree = "<group>"; };
+		B5866F6F1BEBE00B1EB5B5C7 /* cloudTemplate.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cloudTemplate.png; sourceTree = "<group>"; };
 		D2F732E919190B6D002B2512 /* BPPreferencesWindow.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BPPreferencesWindow.xib; sourceTree = "<group>"; };
 		D2F732EA19190B6D002B2512 /* BPPreferencesWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BPPreferencesWindowController.h; sourceTree = "<group>"; };
 		D2F732EB19190B6D002B2512 /* BPPreferencesWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BPPreferencesWindowController.m; sourceTree = "<group>"; };
@@ -230,6 +234,8 @@
 				15D2CF9218F1D66400B6D9F1 /* pinTemplate@2x.png */,
 				15D2CF9D18F1D6F700B6D9F1 /* wrenchTemplate.png */,
 				15D2CF9E18F1D6F700B6D9F1 /* wrenchTemplate@2x.png */,
+				B5866F6F1BEBE00B1EB5B5C7 /* cloudTemplate.png */,
+				B5866C4F6DAFDFF8DD8A5314 /* cloudTemplate@2x.png */,
 			);
 			path = "Icon Templates";
 			sourceTree = "<group>";
@@ -454,6 +460,8 @@
 				15D2CF9318F1D66400B6D9F1 /* allFormulasTemplate.png in Resources */,
 				15D5BEF218EBB3FB001DDED7 /* label.icns in Resources */,
 				15D2CF9B18F1D66400B6D9F1 /* pinTemplate.png in Resources */,
+				B58668E3B0EBA26D892D0B61 /* cloudTemplate.png in Resources */,
+				B58661A28038B63E5137AE50 /* cloudTemplate@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

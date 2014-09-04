@@ -48,6 +48,9 @@ static NSString *cakebrewOutputIdentifier = @"+++++Cakebrew+++++";
 @interface BPHomebrewInterfaceListCallSearch : BPHomebrewInterfaceListCall
 @end
 
+@interface BPHomebrewInterfaceListCallRepositories: BPHomebrewInterfaceListCall
+@end
+
 @interface BPHomebrewInterface ()
 
 @property BOOL systemHasAppNap;
@@ -277,6 +280,10 @@ static NSString *cakebrewOutputIdentifier = @"+++++Cakebrew+++++";
             listCall = [[BPHomebrewInterfaceListCallUpgradeable alloc] init];
 			break;
 
+		case kBPListRepositories:
+            listCall = [[BPHomebrewInterfaceListCallRepositories alloc] init];
+			break;
+
 		default:
 			return nil;
 	}
@@ -344,6 +351,20 @@ static NSString *cakebrewOutputIdentifier = @"+++++Cakebrew+++++";
 - (BOOL)uninstallFormula:(NSString*)formula withReturnBlock:(void (^)(NSString*output))block
 {
 	BOOL val = [self performBrewCommandWithArguments:@[@"uninstall", formula] dataReturnBlock:block];
+	[[NSNotificationCenter defaultCenter] postNotificationName:kBP_NOTIFICATION_FORMULAS_CHANGED object:nil];
+	return val;
+}
+
+- (BOOL)tapRepository:(NSString *)repository withReturnsBlock:(void (^)(NSString *))block
+{
+	BOOL val = [self performBrewCommandWithArguments:@[@"tap", repository] dataReturnBlock:block];
+	[[NSNotificationCenter defaultCenter] postNotificationName:kBP_NOTIFICATION_FORMULAS_CHANGED object:nil];
+	return val;
+}
+
+- (BOOL)untapRepository:(NSString *)repository withReturnsBlock:(void (^)(NSString *))block
+{
+	BOOL val = [self performBrewCommandWithArguments:@[@"untap", repository] dataReturnBlock:block];
 	[[NSNotificationCenter defaultCenter] postNotificationName:kBP_NOTIFICATION_FORMULAS_CHANGED object:nil];
 	return val;
 }
@@ -466,6 +487,15 @@ static NSString *cakebrewOutputIdentifier = @"+++++Cakebrew+++++";
 - (instancetype)initWithSearchParameter:(NSString*)param
 {
     return (BPHomebrewInterfaceListCallSearch *)[super initWithArguments:@[@"search", param]];
+}
+
+@end
+
+@implementation BPHomebrewInterfaceListCallRepositories
+
+- (instancetype)init
+{
+  return (BPHomebrewInterfaceListCallRepositories *)[super initWithArguments:@[@"tap"]];
 }
 
 @end

@@ -187,7 +187,23 @@
 {
 	NSUInteger selectedTab = (NSUInteger)[self.outlineView_sidebar selectedRow];
 	NSUInteger selectedIndex = (NSUInteger)[self.tableView_formulae selectedRow];
-    if(selectedIndex == -1 || selectedTab > 4)
+
+	if (selectedTab == 5) { // Repositories tab
+		[self displayInformationForFormula:nil];
+		[self.toolbarButton_installUninstall setEnabled:YES];
+		[self.toolbarButton_formulaInfo setEnabled:NO];
+
+		if (selectedIndex != -1) {
+			[self.toolbarButton_installUninstall setImage:[NSImage imageNamed:@"delete.icns"]];
+			[self.toolbarButton_installUninstall setLabel:@"Untap Repository"];
+			[self setToolbarButtonOperation:kBPWindowOperationUntap];
+		} else {
+			[self.toolbarButton_installUninstall setImage:[NSImage imageNamed:@"download.icns"]];
+			[self.toolbarButton_installUninstall setLabel:@"Tap Repository"];
+			[self setToolbarButtonOperation:kBPWindowOperationTap];
+		}
+	}
+    else if(selectedIndex == -1 || selectedTab > 5)
 	{
 		[self.toolbarButton_installUninstall setEnabled:NO];
 		[self.toolbarButton_formulaInfo setEnabled:NO];
@@ -250,12 +266,13 @@
 
 - (void)buildSidebarTree
 {
-	NSArray *categoriesTitles = @[@"Installed", @"Outdated", @"All Formulae", @"Leaves"];
-	NSArray *categoriesIcons = @[@"installedTemplate", @"outdatedTemplate", @"allFormulaeTemplate", @"pinTemplate"];
+	NSArray *categoriesTitles = @[@"Installed", @"Outdated", @"All Formulae", @"Leaves", @"Repositories"];
+	NSArray *categoriesIcons = @[@"installedTemplate", @"outdatedTemplate", @"allFormulaeTemplate", @"pinTemplate", @"cloudTemplate"];
 	NSArray *categoriesValues = @[[NSNumber numberWithInteger:[[[BPHomebrewManager sharedManager] formulae_installed] count]],
 								  [NSNumber numberWithInteger:[[[BPHomebrewManager sharedManager] formulae_outdated] count]],
 								  [NSNumber numberWithInteger:[[[BPHomebrewManager sharedManager] formulae_all] count]],
-								  [NSNumber numberWithInteger:[[[BPHomebrewManager sharedManager] formulae_leaves] count]]];
+								  [NSNumber numberWithInteger:[[[BPHomebrewManager sharedManager] formulae_leaves] count]],
+								  [NSNumber numberWithInteger:[[[BPHomebrewManager sharedManager] formulae_repositories] count]]];
 
 	PXSourceListItem *item, *parent;
 	_rootSidebarCategory = [PXSourceListItem itemWithTitle:@"" identifier:@"root"];
@@ -263,7 +280,7 @@
 	parent = [PXSourceListItem itemWithTitle:@"Formulae" identifier:@"group"];
 	[_rootSidebarCategory addChildItem:parent];
 
-	for (NSUInteger i=0; i<4; i++) {
+	for (NSUInteger i=0; i<5; i++) {
 		item = [PXSourceListItem itemWithTitle:[categoriesTitles objectAtIndex:i] identifier:@"item"];
 		[item setBadgeValue:[categoriesValues objectAtIndex:i]];
 		[item setIcon:[NSImage imageNamed:[categoriesIcons objectAtIndex:i]]];
@@ -344,6 +361,14 @@
 			[[self.tableView_formulae tableColumnWithIdentifier:@"Status"] setWidth:(totalWidth-titleWidth)*0.90];
 			[self.tableView_formulae setAllowsMultipleSelection:NO];
 			break;
+
+    case kBPListRepositories:
+			titleWidth = (NSInteger)(totalWidth * 0.99);
+			_formulaeArray = [[BPHomebrewManager sharedManager] formulae_repositories];
+			[[self.tableView_formulae tableColumnWithIdentifier:@"Version"] setHidden:YES];
+			[[self.tableView_formulae tableColumnWithIdentifier:@"LatestVersion"] setHidden:YES];
+			[[self.tableView_formulae tableColumnWithIdentifier:@"Status"] setHidden:YES];
+			[self.tableView_formulae setAllowsMultipleSelection:NO];
 
 		default:
 			break;
@@ -589,12 +614,17 @@
 			message = @"These formulae are not dependencies of any other formulae.";
 			break;
 
-		case 6: // Doctor
+		case 5: // Repositories
+			[self configureTableForListing:kBPListRepositories];
+			message = @"These are the repositories you have tapped";
+			break;
+
+		case 7: // Doctor
 			message = @"The doctor is a Homebrew feature that detects the most common causes of errors.";
 			tabIndex = 1;
 			break;
 
-		case 7: // Update Tool
+		case 8: // Update Tool
 			message = @"Updating Homebrew means fetching the latest info about the available formulae.";
 			tabIndex = 2;
 			break;
@@ -656,6 +686,7 @@
 	[_appDelegate setRunningBackgroundTask:YES];
 
 	NSInteger selectedIndex = [self.tableView_formulae selectedRow];
+	NSInteger selectedTab = [self.outlineView_sidebar selectedRow];
 
 	if (selectedIndex >= 0) {
 		BPFormula *formula = [_formulaeArray objectAtIndex:(NSUInteger)selectedIndex];
@@ -691,6 +722,15 @@
 				};
 			}
 				break;
+
+			case kBPWindowOperationUntap:
+			{
+				message = @"Are you sure you want to untap the repository '%@'?";
+				operationBlock = ^{
+					[self prepareFormula:formula forOperation:kBPWindowOperationUntap];
+				};
+			}
+				break;
 		}
 
 		if (message) {
@@ -706,6 +746,30 @@
             }
 		} else {
 			operationBlock();
+		}
+	}
+	else if (selectedTab == 5 && _toolbarButtonOperation == kBPWindowOperationTap)
+	{
+		NSAlert *alert = [NSAlert alertWithMessageText:@"Attention!" defaultButton:@"OK" alternateButton:@"Cancel" otherButton:nil informativeTextWithFormat:@"What repository would you like to tap?"];
+
+		NSTextField *input = [[NSTextField alloc] initWithFrame:NSMakeRect(0,0,200,24)];
+		[input setStringValue:@""];
+		[alert setAccessoryView:input];
+
+		NSInteger returnValue = [alert runModal];
+		if (returnValue == NSAlertDefaultReturn) {
+			NSString* name = [input stringValue];
+			if ([name length] > 0)
+			{
+				BPFormula *formula = [BPFormula formulaWithName:name];
+				[self prepareFormula:formula forOperation:kBPWindowOperationTap];
+			}
+			else {
+				[_appDelegate setRunningBackgroundTask:NO];
+			}
+		}
+		else {
+			[_appDelegate setRunningBackgroundTask:NO];
 		}
 	}
 }
