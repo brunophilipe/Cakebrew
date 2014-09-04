@@ -35,6 +35,7 @@
 - (void)awakeFromNib {
   NSFont *font = [BPAppDelegateRef defaultFixedWidthFont];
   [self.doctorTextView setFont:font];
+  self.isPerformingDoctor = NO;
 }
 
 - (NSString *)nibName {

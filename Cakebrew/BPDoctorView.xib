@@ -6,9 +6,6 @@
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="BPDoctorViewController">
-            <userDefinedRuntimeAttributes>
-                <userDefinedRuntimeAttribute type="boolean" keyPath="isPerformingDoctor" value="NO"/>
-            </userDefinedRuntimeAttributes>
             <connections>
                 <outlet property="doctorTextView" destination="ZcW-pB-23F" id="hW7-ly-gk6"/>
                 <outlet property="progressIndicator" destination="meX-qn-Mcd" id="T0m-uV-I3E"/>
@@ -117,6 +114,5 @@
                 <constraint firstItem="eDs-sG-t9C" firstAttribute="leading" secondItem="a0h-tH-egU" secondAttribute="leading" constant="8" id="vmx-ob-Jc8"/>
             </constraints>
         </view>
-        <userDefaultsController representsSharedInstance="YES" id="dA8-Xo-egR"/>
     </objects>
 </document>

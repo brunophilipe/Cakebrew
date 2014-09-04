@@ -35,6 +35,7 @@
 - (void)awakeFromNib {
   NSFont *font = [BPAppDelegateRef defaultFixedWidthFont];
   [self.updateTextView setFont:font];
+  self.isPerformingUpdate = NO;
 }
 
 - (NSString *)nibName {

@@ -6,9 +6,6 @@
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="BPUpdateViewController">
-            <userDefinedRuntimeAttributes>
-                <userDefinedRuntimeAttribute type="boolean" keyPath="isPerformingUpdate" value="NO"/>
-            </userDefinedRuntimeAttributes>
             <connections>
                 <outlet property="progressIndicator" destination="J7C-5S-Vor" id="JGd-Sr-ARj"/>
                 <outlet property="updateTextView" destination="qO9-DU-DCD" id="zuN-bH-JfI"/>
@@ -113,6 +110,5 @@
                 <constraint firstItem="wIZ-rp-y6N" firstAttribute="top" secondItem="tCl-LR-g5d" secondAttribute="top" constant="10" id="tuX-70-X1c"/>
             </constraints>
         </view>
-        <userDefaultsController representsSharedInstance="YES" id="VNC-9C-bOz"/>
     </objects>
 </document>
