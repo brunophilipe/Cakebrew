@@ -183,7 +183,7 @@ static NSString *cakebrewOutputIdentifier = @"+++++Cakebrew+++++";
 	[handle_error waitForDataInBackgroundAndNotify];
 
 	#ifdef DEBUG
-	block([NSString stringWithFormat:@"User Shell: %@\nCommand: %@ %@\nThe Doctor output is going to be different if run from Xcode!!\n\n", userShell, userShell, [arguments componentsJoinedByString:@" "]]);
+	block([NSString stringWithFormat:@"User Shell: %@\nCommand: %@ %@\nThe outputs are going to be different if run from Xcode!!\nInstalling and upgrading formulas is not advised in DEBUG mode!\n\n", userShell, userShell, [arguments componentsJoinedByString:@" "]]);
 	#endif
 
 	[self.task launch];

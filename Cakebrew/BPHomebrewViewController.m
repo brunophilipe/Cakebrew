@@ -823,7 +823,7 @@
 
 - (IBAction)updateHomebrew:(id)sender
 {
-	[self.outlineView_sidebar selectRowIndexes:[NSIndexSet indexSetWithIndex:7] byExtendingSelection:NO];
+	[self.outlineView_sidebar selectRowIndexes:[NSIndexSet indexSetWithIndex:8] byExtendingSelection:NO];
 	if (![self.updateDoctorViewController isRunning]) {
 		[self.updateDoctorViewController runStopUpdate:nil];
 	}
