@@ -15,7 +15,6 @@
 		15705464191A887E0003E60F /* BPGenericTextPopoverView.m in Sources */ = {isa = PBXBuildFile; fileRef = 15705463191A887E0003E60F /* BPGenericTextPopoverView.m */; };
 		1570BA3618EE0A66001C3C5C /* BPHomebrewManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 1570BA3518EE0A66001C3C5C /* BPHomebrewManager.m */; };
 		1570BA5618EE50BD001C3C5C /* BPFormula.m in Sources */ = {isa = PBXBuildFile; fileRef = 1570BA5518EE50BD001C3C5C /* BPFormula.m */; };
-		157270DA18F2598A00CA8C9C /* BPUpdateDoctorController.m in Sources */ = {isa = PBXBuildFile; fileRef = 157270D818F2598A00CA8C9C /* BPUpdateDoctorController.m */; };
 		158370B918F2471500176C9C /* PXSourceList.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 158370B818F2471500176C9C /* PXSourceList.framework */; };
 		158370BA18F2472100176C9C /* PXSourceList.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 158370B818F2471500176C9C /* PXSourceList.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		15B23A2918F4F21E00714212 /* Sparkle.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 15B23A2818F4F21E00714212 /* Sparkle.framework */; };
@@ -98,8 +97,6 @@
 		1570BA3518EE0A66001C3C5C /* BPHomebrewManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BPHomebrewManager.m; sourceTree = "<group>"; };
 		1570BA5418EE50BD001C3C5C /* BPFormula.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BPFormula.h; path = Models/BPFormula.h; sourceTree = "<group>"; };
 		1570BA5518EE50BD001C3C5C /* BPFormula.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BPFormula.m; path = Models/BPFormula.m; sourceTree = "<group>"; };
-		157270D718F2598A00CA8C9C /* BPUpdateDoctorController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BPUpdateDoctorController.h; sourceTree = "<group>"; };
-		157270D818F2598A00CA8C9C /* BPUpdateDoctorController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BPUpdateDoctorController.m; sourceTree = "<group>"; };
 		158370B818F2471500176C9C /* PXSourceList.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PXSourceList.framework; path = Cakebrew/Frameworks/PXSourceList.framework; sourceTree = "<group>"; };
 		15B23A2818F4F21E00714212 /* Sparkle.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Sparkle.framework; path = Cakebrew/Frameworks/Sparkle.framework; sourceTree = "<group>"; };
 		15B23A2B18F5003600714212 /* dsa_pub.pem */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = dsa_pub.pem; sourceTree = "<group>"; };
@@ -206,8 +203,6 @@
 			children = (
 				1FE4FE78148E5FEB008EDE8B /* BPHomebrewViewController.h */,
 				1FE4FE79148E5FEB008EDE8B /* BPHomebrewViewController.m */,
-				157270D718F2598A00CA8C9C /* BPUpdateDoctorController.h */,
-				157270D818F2598A00CA8C9C /* BPUpdateDoctorController.m */,
 				D2B3A39719B879CD00DE23B5 /* BPDoctorViewController.h */,
 				D2B3A39819B879CD00DE23B5 /* BPDoctorViewController.m */,
 				D2B3A39D19B87A2C00DE23B5 /* BPDoctorView.xib */,
@@ -525,7 +520,6 @@
 				D2F732ED19190B6D002B2512 /* BPPreferencesWindowController.m in Sources */,
 				15C34CBF19512DE100B92E36 /* BPAutoScrollTextView.m in Sources */,
 				D2B3A39B19B879CD00DE23B5 /* BPDoctorViewController.m in Sources */,
-				157270DA18F2598A00CA8C9C /* BPUpdateDoctorController.m in Sources */,
 				D2F732F119190B75002B2512 /* NSString+URLValidation.m in Sources */,
 				1FE4FE7A148E5FEB008EDE8B /* BPHomebrewViewController.m in Sources */,
 				15D2CFAB18F202B300B6D9F1 /* DCOAboutWindowController.m in Sources */,

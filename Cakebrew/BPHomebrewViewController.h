@@ -23,7 +23,6 @@
 #import "BPFormula.h"
 #import "DMSplitView.h"
 #import "BPInsetShadowView.h"
-#import "BPUpdateDoctorController.h"
 #import "BPGenericTextPopoverView.h"
 #import "Frameworks/PXSourceList.framework/Headers/PXSourceList.h"
 

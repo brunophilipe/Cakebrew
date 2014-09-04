@@ -477,8 +477,8 @@
                         <rect key="frame" x="0.0" y="22" width="570" height="320"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <subviews>
-                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="maG-dP-mXL">
-                                <rect key="frame" x="187" y="168" width="197" height="18"/>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="maG-dP-mXL">
+                                <rect key="frame" x="181" y="167" width="209" height="19"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Homebrew is not installed" id="Jfc-d9-61S">
                                     <font key="font" metaFont="systemBold" size="15"/>
@@ -486,8 +486,8 @@
                                     <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>
-                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="YjH-tX-oXi">
-                                <rect key="frame" x="159" y="143" width="252" height="17"/>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="YjH-tX-oXi">
+                                <rect key="frame" x="157" y="142" width="256" height="17"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Please visit brew.sh to install Homebrew" id="kRZ-JR-SH6">
                                     <font key="font" metaFont="system"/>
@@ -740,8 +740,8 @@
                                                             <rect key="frame" x="0.0" y="0.0" width="400" height="120"/>
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                                             <subviews>
-                                                                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Cvc-Bk-c4F">
-                                                                    <rect key="frame" x="6" y="99" width="171" height="14"/>
+                                                                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Cvc-Bk-c4F">
+                                                                    <rect key="frame" x="6" y="99" width="173" height="14"/>
                                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Selected Formula Information" id="4h6-4K-GwY">
                                                                         <font key="font" metaFont="smallSystemBold"/>
