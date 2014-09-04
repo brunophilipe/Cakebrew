@@ -56,6 +56,7 @@
 		1FE4FE7A148E5FEB008EDE8B /* BPHomebrewViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FE4FE79148E5FEB008EDE8B /* BPHomebrewViewController.m */; };
 		B58661A28038B63E5137AE50 /* cloudTemplate@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B5866C4F6DAFDFF8DD8A5314 /* cloudTemplate@2x.png */; };
 		B58668E3B0EBA26D892D0B61 /* cloudTemplate.png in Resources */ = {isa = PBXBuildFile; fileRef = B5866F6F1BEBE00B1EB5B5C7 /* cloudTemplate.png */; };
+		D26F6E7F19B8608B00F616C1 /* NSFont+Appearance.m in Sources */ = {isa = PBXBuildFile; fileRef = D26F6E7E19B8608B00F616C1 /* NSFont+Appearance.m */; };
 		D2B3A39B19B879CD00DE23B5 /* BPDoctorViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D2B3A39819B879CD00DE23B5 /* BPDoctorViewController.m */; };
 		D2B3A39C19B879CD00DE23B5 /* BPUpdateViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D2B3A39A19B879CD00DE23B5 /* BPUpdateViewController.m */; };
 		D2B3A39F19B87A2C00DE23B5 /* BPDoctorView.xib in Resources */ = {isa = PBXBuildFile; fileRef = D2B3A39D19B87A2C00DE23B5 /* BPDoctorView.xib */; };
@@ -149,6 +150,8 @@
 		1FE4FE79148E5FEB008EDE8B /* BPHomebrewViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BPHomebrewViewController.m; sourceTree = "<group>"; };
 		B5866C4F6DAFDFF8DD8A5314 /* cloudTemplate@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "cloudTemplate@2x.png"; sourceTree = "<group>"; };
 		B5866F6F1BEBE00B1EB5B5C7 /* cloudTemplate.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cloudTemplate.png; sourceTree = "<group>"; };
+		D26F6E7D19B8608B00F616C1 /* NSFont+Appearance.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSFont+Appearance.h"; path = "../NSFont+Appearance.h"; sourceTree = "<group>"; };
+		D26F6E7E19B8608B00F616C1 /* NSFont+Appearance.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSFont+Appearance.m"; path = "../NSFont+Appearance.m"; sourceTree = "<group>"; };
 		D2B3A39719B879CD00DE23B5 /* BPDoctorViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BPDoctorViewController.h; sourceTree = "<group>"; };
 		D2B3A39819B879CD00DE23B5 /* BPDoctorViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BPDoctorViewController.m; sourceTree = "<group>"; };
 		D2B3A39919B879CD00DE23B5 /* BPUpdateViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BPUpdateViewController.h; sourceTree = "<group>"; };
