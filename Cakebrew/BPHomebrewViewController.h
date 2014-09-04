@@ -58,8 +58,6 @@ typedef NS_ENUM(NSUInteger, BPWindowOperation) {
 @property (weak) IBOutlet NSSearchField            *searchField;
 @property (weak) IBOutlet NSMenu				   *menu_formula;
 
-@property (strong) IBOutlet BPUpdateDoctorController *updateDoctorViewController;
-
 @property IBOutlet NSToolbarItem *toolbarButton_formulaInfo;
 @property IBOutlet NSToolbarItem *toolbarButton_installUninstall;
 
