@@ -22,7 +22,7 @@
 #import "BPGenericTextPopoverView.h"
 #import "BPFormula.h"
 #import "BPHomebrewInterface.h"
-#import "NSFont+Appearane.h"
+#import "NSFont+Appearance.h"
 
 @implementation BPGenericTextPopoverView
 

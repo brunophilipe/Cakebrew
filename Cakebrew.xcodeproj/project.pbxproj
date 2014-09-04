@@ -56,7 +56,7 @@
 		1FE4FE7A148E5FEB008EDE8B /* BPHomebrewViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FE4FE79148E5FEB008EDE8B /* BPHomebrewViewController.m */; };
 		B58661A28038B63E5137AE50 /* cloudTemplate@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B5866C4F6DAFDFF8DD8A5314 /* cloudTemplate@2x.png */; };
 		B58668E3B0EBA26D892D0B61 /* cloudTemplate.png in Resources */ = {isa = PBXBuildFile; fileRef = B5866F6F1BEBE00B1EB5B5C7 /* cloudTemplate.png */; };
-		D26F6E7F19B8608B00F616C1 /* NSFont+Appearane.m in Sources */ = {isa = PBXBuildFile; fileRef = D26F6E7E19B8608B00F616C1 /* NSFont+Appearane.m */; };
+		D26F6E7F19B8608B00F616C1 /* NSFont+Appearance.m in Sources */ = {isa = PBXBuildFile; fileRef = D26F6E7E19B8608B00F616C1 /* NSFont+Appearance.m */; };
 		D2E53A4819A6215400E05AFC /* BPFormulaOptionsWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = D2E53A4719A6215400E05AFC /* BPFormulaOptionsWindow.xib */; };
 		D2E53A4B19A6228300E05AFC /* BPFormulaOptionsWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = D2E53A4A19A6228300E05AFC /* BPFormulaOptionsWindowController.m */; };
 		D2E53A4D19A65B1600E05AFC /* BPInstallationWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = D2E53A4C19A65B1600E05AFC /* BPInstallationWindow.xib */; };
@@ -146,8 +146,8 @@
 		1FE4FE79148E5FEB008EDE8B /* BPHomebrewViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BPHomebrewViewController.m; sourceTree = "<group>"; };
 		B5866C4F6DAFDFF8DD8A5314 /* cloudTemplate@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "cloudTemplate@2x.png"; sourceTree = "<group>"; };
 		B5866F6F1BEBE00B1EB5B5C7 /* cloudTemplate.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cloudTemplate.png; sourceTree = "<group>"; };
-		D26F6E7D19B8608B00F616C1 /* NSFont+Appearane.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSFont+Appearane.h"; path = "../NSFont+Appearane.h"; sourceTree = "<group>"; };
-		D26F6E7E19B8608B00F616C1 /* NSFont+Appearane.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSFont+Appearane.m"; path = "../NSFont+Appearane.m"; sourceTree = "<group>"; };
+		D26F6E7D19B8608B00F616C1 /* NSFont+Appearance.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSFont+Appearance.h"; path = "../NSFont+Appearance.h"; sourceTree = "<group>"; };
+		D26F6E7E19B8608B00F616C1 /* NSFont+Appearance.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSFont+Appearance.m"; path = "../NSFont+Appearance.m"; sourceTree = "<group>"; };
 		D2E53A4719A6215400E05AFC /* BPFormulaOptionsWindow.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BPFormulaOptionsWindow.xib; sourceTree = "<group>"; };
 		D2E53A4919A6228300E05AFC /* BPFormulaOptionsWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BPFormulaOptionsWindowController.h; sourceTree = "<group>"; };
 		D2E53A4A19A6228300E05AFC /* BPFormulaOptionsWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BPFormulaOptionsWindowController.m; sourceTree = "<group>"; };
@@ -372,8 +372,8 @@
 		D2F732EE19190B75002B2512 /* Categories */ = {
 			isa = PBXGroup;
 			children = (
-				D26F6E7D19B8608B00F616C1 /* NSFont+Appearane.h */,
-				D26F6E7E19B8608B00F616C1 /* NSFont+Appearane.m */,
+				D26F6E7D19B8608B00F616C1 /* NSFont+Appearance.h */,
+				D26F6E7E19B8608B00F616C1 /* NSFont+Appearance.m */,
 				D2F732EF19190B75002B2512 /* NSString+URLValidation.h */,
 				D2F732F019190B75002B2512 /* NSString+URLValidation.m */,
 			);
@@ -493,7 +493,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D26F6E7F19B8608B00F616C1 /* NSFont+Appearane.m in Sources */,
+				D26F6E7F19B8608B00F616C1 /* NSFont+Appearance.m in Sources */,
 				15D5BEFA18EBC56E001DDED7 /* DMSplitView.m in Sources */,
 				1570BA5618EE50BD001C3C5C /* BPFormula.m in Sources */,
 				1FE4FE65148E4CDD008EDE8B /* main.m in Sources */,

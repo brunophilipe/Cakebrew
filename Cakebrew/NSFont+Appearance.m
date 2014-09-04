@@ -6,9 +6,9 @@
 //  Copyright (c) 2014 Bruno Philipe. All rights reserved.
 //
 
-#import "NSFont+Appearane.h"
+#import "NSFont+Appearance.h"
 
-@implementation NSFont (Appearane)
+@implementation NSFont (Appearance)
 
 
 + (NSFont*)bp_defaultFixedWidthFont

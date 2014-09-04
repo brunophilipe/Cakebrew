@@ -21,7 +21,7 @@
 
 #import "BPInstallationWindowController.h"
 #import "BPHomebrewInterface.h"
-#import "NSFont+Appearane.h"
+#import "NSFont+Appearance.h"
 
 @interface BPInstallationWindowController ()
 

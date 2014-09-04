@@ -1,5 +1,5 @@
 //
-//  NSFont+Appearane.h
+//  NSFont+Appearance.h
 //  Cakebrew
 //
 //  Created by Marek Hrusovsky on 04/09/14.
@@ -8,7 +8,7 @@
 
 #import <Cocoa/Cocoa.h>
 
-@interface NSFont (Appearane)
+@interface NSFont (Appearance)
 
 + (NSFont*)bp_defaultFixedWidthFont;
 
