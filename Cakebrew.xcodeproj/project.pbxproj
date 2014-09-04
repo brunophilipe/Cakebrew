@@ -54,12 +54,13 @@
 		1FE4FE6F148E4CDD008EDE8B /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1FE4FE6D148E4CDD008EDE8B /* MainMenu.xib */; };
 		1FE4FE77148E4D43008EDE8B /* BPHomebrewInterface.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FE4FE76148E4D43008EDE8B /* BPHomebrewInterface.m */; };
 		1FE4FE7A148E5FEB008EDE8B /* BPHomebrewViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FE4FE79148E5FEB008EDE8B /* BPHomebrewViewController.m */; };
+		B58661A28038B63E5137AE50 /* cloudTemplate@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B5866C4F6DAFDFF8DD8A5314 /* cloudTemplate@2x.png */; };
+		B58668E3B0EBA26D892D0B61 /* cloudTemplate.png in Resources */ = {isa = PBXBuildFile; fileRef = B5866F6F1BEBE00B1EB5B5C7 /* cloudTemplate.png */; };
+		D26F6E7F19B8608B00F616C1 /* NSFont+Appearane.m in Sources */ = {isa = PBXBuildFile; fileRef = D26F6E7E19B8608B00F616C1 /* NSFont+Appearane.m */; };
 		D2E53A4819A6215400E05AFC /* BPFormulaOptionsWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = D2E53A4719A6215400E05AFC /* BPFormulaOptionsWindow.xib */; };
 		D2E53A4B19A6228300E05AFC /* BPFormulaOptionsWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = D2E53A4A19A6228300E05AFC /* BPFormulaOptionsWindowController.m */; };
 		D2E53A4D19A65B1600E05AFC /* BPInstallationWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = D2E53A4C19A65B1600E05AFC /* BPInstallationWindow.xib */; };
 		D2E53A5019A65BAD00E05AFC /* BPInstallationWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = D2E53A4F19A65BAD00E05AFC /* BPInstallationWindowController.m */; };
-		B58661A28038B63E5137AE50 /* cloudTemplate@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B5866C4F6DAFDFF8DD8A5314 /* cloudTemplate@2x.png */; };
-		B58668E3B0EBA26D892D0B61 /* cloudTemplate.png in Resources */ = {isa = PBXBuildFile; fileRef = B5866F6F1BEBE00B1EB5B5C7 /* cloudTemplate.png */; };
 		D2F732EC19190B6D002B2512 /* BPPreferencesWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = D2F732E919190B6D002B2512 /* BPPreferencesWindow.xib */; };
 		D2F732ED19190B6D002B2512 /* BPPreferencesWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = D2F732EB19190B6D002B2512 /* BPPreferencesWindowController.m */; };
 		D2F732F119190B75002B2512 /* NSString+URLValidation.m in Sources */ = {isa = PBXBuildFile; fileRef = D2F732F019190B75002B2512 /* NSString+URLValidation.m */; };
@@ -143,14 +144,16 @@
 		1FE4FE76148E4D43008EDE8B /* BPHomebrewInterface.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BPHomebrewInterface.m; sourceTree = "<group>"; };
 		1FE4FE78148E5FEB008EDE8B /* BPHomebrewViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BPHomebrewViewController.h; sourceTree = "<group>"; };
 		1FE4FE79148E5FEB008EDE8B /* BPHomebrewViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BPHomebrewViewController.m; sourceTree = "<group>"; };
+		B5866C4F6DAFDFF8DD8A5314 /* cloudTemplate@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "cloudTemplate@2x.png"; sourceTree = "<group>"; };
+		B5866F6F1BEBE00B1EB5B5C7 /* cloudTemplate.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cloudTemplate.png; sourceTree = "<group>"; };
+		D26F6E7D19B8608B00F616C1 /* NSFont+Appearane.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSFont+Appearane.h"; path = "../NSFont+Appearane.h"; sourceTree = "<group>"; };
+		D26F6E7E19B8608B00F616C1 /* NSFont+Appearane.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSFont+Appearane.m"; path = "../NSFont+Appearane.m"; sourceTree = "<group>"; };
 		D2E53A4719A6215400E05AFC /* BPFormulaOptionsWindow.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BPFormulaOptionsWindow.xib; sourceTree = "<group>"; };
 		D2E53A4919A6228300E05AFC /* BPFormulaOptionsWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BPFormulaOptionsWindowController.h; sourceTree = "<group>"; };
 		D2E53A4A19A6228300E05AFC /* BPFormulaOptionsWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BPFormulaOptionsWindowController.m; sourceTree = "<group>"; };
 		D2E53A4C19A65B1600E05AFC /* BPInstallationWindow.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BPInstallationWindow.xib; sourceTree = "<group>"; };
 		D2E53A4E19A65BAD00E05AFC /* BPInstallationWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BPInstallationWindowController.h; sourceTree = "<group>"; };
 		D2E53A4F19A65BAD00E05AFC /* BPInstallationWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BPInstallationWindowController.m; sourceTree = "<group>"; };
-		B5866C4F6DAFDFF8DD8A5314 /* cloudTemplate@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "cloudTemplate@2x.png"; sourceTree = "<group>"; };
-		B5866F6F1BEBE00B1EB5B5C7 /* cloudTemplate.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cloudTemplate.png; sourceTree = "<group>"; };
 		D2F732E919190B6D002B2512 /* BPPreferencesWindow.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BPPreferencesWindow.xib; sourceTree = "<group>"; };
 		D2F732EA19190B6D002B2512 /* BPPreferencesWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BPPreferencesWindowController.h; sourceTree = "<group>"; };
 		D2F732EB19190B6D002B2512 /* BPPreferencesWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BPPreferencesWindowController.m; sourceTree = "<group>"; };
@@ -369,6 +372,8 @@
 		D2F732EE19190B75002B2512 /* Categories */ = {
 			isa = PBXGroup;
 			children = (
+				D26F6E7D19B8608B00F616C1 /* NSFont+Appearane.h */,
+				D26F6E7E19B8608B00F616C1 /* NSFont+Appearane.m */,
 				D2F732EF19190B75002B2512 /* NSString+URLValidation.h */,
 				D2F732F019190B75002B2512 /* NSString+URLValidation.m */,
 			);
@@ -488,6 +493,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D26F6E7F19B8608B00F616C1 /* NSFont+Appearane.m in Sources */,
 				15D5BEFA18EBC56E001DDED7 /* DMSplitView.m in Sources */,
 				1570BA5618EE50BD001C3C5C /* BPFormula.m in Sources */,
 				1FE4FE65148E4CDD008EDE8B /* main.m in Sources */,

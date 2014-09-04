@@ -141,20 +141,7 @@ NSString *const kBP_FORMULA_OPTION_DESCRIPTION = @"BP_FORMULA_OPTION_DESCRIPTION
 	[alert runModal];
 }
 
-- (NSFont*)defaultFixedWidthFont
-{
-	static NSFont *font = nil;
 
-	if (!font) {
-		font = [NSFont fontWithName:@"Andale Mono" size:12];
-		if (!font)
-			font = [NSFont fontWithName:@"Menlo" size:12];
-		if (!font)
-			font = [NSFont systemFontOfSize:12];
-	}
-
-	return font;
-}
 
 - (IBAction)showAboutWindow:(id)sender
 {

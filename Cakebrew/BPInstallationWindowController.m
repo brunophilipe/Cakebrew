@@ -21,6 +21,7 @@
 
 #import "BPInstallationWindowController.h"
 #import "BPHomebrewInterface.h"
+#import "NSFont+Appearane.h"
 
 @interface BPInstallationWindowController ()
 
@@ -40,7 +41,7 @@
 @implementation BPInstallationWindowController
 
 - (void)awakeFromNib {
-  NSFont *font = [BPAppDelegateRef defaultFixedWidthFont];	
+  NSFont *font = [NSFont bp_defaultFixedWidthFont];
   [self.recordTextView setFont:font];
 }
 
