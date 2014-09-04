@@ -22,6 +22,7 @@
 #import "BPGenericTextPopoverView.h"
 #import "BPFormula.h"
 #import "BPHomebrewInterface.h"
+#import "NSFont+Appearance.h"
 
 @implementation BPGenericTextPopoverView
 
@@ -43,7 +44,7 @@
 
 - (void)setTextView:(NSTextView *)textView
 {
-	NSFont *font = [BPAppDelegateRef defaultFixedWidthFont];
+	NSFont *font = [NSFont bp_defaultFixedWidthFont];
 	
 	_textView = textView;
 	[_textView setFont:font];

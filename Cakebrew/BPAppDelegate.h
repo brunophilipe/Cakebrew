@@ -52,6 +52,4 @@ extern NSString *const kBP_FORMULA_OPTION_DESCRIPTION;
 
 - (void)displayBackgroundWarning;
 
-- (NSFont*)defaultFixedWidthFont;
-
 @end

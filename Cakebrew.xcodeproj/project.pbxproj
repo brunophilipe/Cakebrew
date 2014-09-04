@@ -385,6 +385,8 @@
 		D2F732EE19190B75002B2512 /* Categories */ = {
 			isa = PBXGroup;
 			children = (
+				D26F6E7D19B8608B00F616C1 /* NSFont+Appearance.h */,
+				D26F6E7E19B8608B00F616C1 /* NSFont+Appearance.m */,
 				D2F732EF19190B75002B2512 /* NSString+URLValidation.h */,
 				D2F732F019190B75002B2512 /* NSString+URLValidation.m */,
 			);
@@ -506,6 +508,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D26F6E7F19B8608B00F616C1 /* NSFont+Appearance.m in Sources */,
 				15D5BEFA18EBC56E001DDED7 /* DMSplitView.m in Sources */,
 				1570BA5618EE50BD001C3C5C /* BPFormula.m in Sources */,
 				D2B3A39C19B879CD00DE23B5 /* BPUpdateViewController.m in Sources */,

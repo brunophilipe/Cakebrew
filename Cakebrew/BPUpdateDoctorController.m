@@ -21,6 +21,7 @@
 
 #import "BPUpdateDoctorController.h"
 #import "BPHomebrewInterface.h"
+#import "NSFont+Appearance.h"
 
 @interface BPUpdateDoctorController ()
 
@@ -30,7 +31,7 @@
 
 - (void)setTextView_doctor:(NSTextView *)textView
 {
-	NSFont *font = [BPAppDelegateRef defaultFixedWidthFont];
+	NSFont *font = [NSFont bp_defaultFixedWidthFont];
 
 	_textView_doctor = textView;
 	[_textView_doctor setFont:font];
@@ -38,7 +39,7 @@
 
 - (void)setTextView_update:(NSTextView *)textView
 {
-	NSFont *font = [BPAppDelegateRef defaultFixedWidthFont];
+	NSFont *font = [NSFont bp_defaultFixedWidthFont];
 	
 	_textView_update = textView;
 	[_textView_update setFont:font];
