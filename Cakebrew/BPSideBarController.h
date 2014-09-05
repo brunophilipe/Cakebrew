@@ -9,6 +9,19 @@
 #import "Frameworks/PXSourceList.framework/Headers/PXSourceList.h"
 #import <Foundation/Foundation.h>
 
+NS_ENUM(NSUInteger, FormulaeSideBarItem) {
+  FormulaeSideBarItemFormulaeCategory = 0,
+  FormulaeSideBarItemInstalled = 1,
+  FormulaeSideBarItemOutdated = 2,
+  FormulaeSideBarItemAll = 3,
+  FormulaeSideBarItemLeaves = 4,
+  FormulaeSideBarItemRepositories = 5,
+  FormulaeSideBarItemToolsCategory = 6,
+  FormulaeSideBarItemDoctor = 7,
+  FormulaeSideBarItemUpdate = 8,
+  
+};
+
 @protocol BPSideBarControllerDelegate <NSObject>
 - (void)sourceListSelectionDidChange;
 @end

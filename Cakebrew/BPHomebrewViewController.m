@@ -315,37 +315,37 @@ typedef NS_ENUM(NSUInteger, HomeBrewTab) {
 	[self updateInterfaceItems];
   
 	switch ([self.outlineView_sidebar selectedRow]) {
-		case 1: // Installed Formulae
+		case FormulaeSideBarItemInstalled: // Installed Formulae
 			[self configureTableForListing:kBPListInstalled];
 			message = @"These are the formulae already installed in your system.";
 			break;
       
-		case 2: // Outdated Formulae
+		case FormulaeSideBarItemOutdated: // Outdated Formulae
 			[self configureTableForListing:kBPListOutdated];
 			message = @"These formulae are already installed, but have an update available.";
 			break;
       
-		case 3: // All Formulae
+		case FormulaeSideBarItemAll: // All Formulae
 			[self configureTableForListing:kBPListAll];
 			message = @"These are all the formulae available for installation with Homebrew.";
 			break;
       
-		case 4:	// Leaves
+		case FormulaeSideBarItemLeaves:	// Leaves
 			[self configureTableForListing:kBPListLeaves];
 			message = @"These formulae are not dependencies of any other formulae.";
 			break;
       
-		case 5: // Repositories
+		case FormulaeSideBarItemRepositories: // Repositories
 			[self configureTableForListing:kBPListRepositories];
 			message = @"These are the repositories you have tapped";
 			break;
       
-		case 7: // Doctor
+		case FormulaeSideBarItemDoctor: // Doctor
 			message = @"The doctor is a Homebrew feature that detects the most common causes of errors.";
 			tabIndex = HomeBrewTabDoctor;
 			break;
       
-		case 8: // Update Tool
+		case FormulaeSideBarItemUpdate: // Update Tool
 			message = @"Updating Homebrew means fetching the latest info about the available formulae.";
 			tabIndex = HomeBrewTabUpdate;
 			break;

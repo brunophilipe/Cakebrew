@@ -40,40 +40,40 @@
 	_rootSidebarCategory = [PXSourceListItem itemWithTitle:@"" identifier:@"root"];
   
 	parent = [PXSourceListItem itemWithTitle:@"Formulae" identifier:@"group"];
-	[_rootSidebarCategory addChildItem:parent];
+	[_rootSidebarCategory addChildItem:parent];  //FormulaeSideBarItemFormulaeCategory = 0,
   
   _instaledFormulaeSidebarItem = [PXSourceListItem itemWithTitle:@"Installed" identifier:@"item"];
   _instaledFormulaeSidebarItem.icon = [NSImage imageNamed:@"installedTemplate"];
-  [parent addChildItem:_instaledFormulaeSidebarItem];
+  [parent addChildItem:_instaledFormulaeSidebarItem];  //FormulaeSideBarItemInstalled = 1,
   
   _outdatedFormulaeSidebarItem = [PXSourceListItem itemWithTitle:@"Outdated" identifier:@"item"];
   _outdatedFormulaeSidebarItem.icon = [NSImage imageNamed:@"outdatedTemplate"];
-  [parent addChildItem:_outdatedFormulaeSidebarItem];
+  [parent addChildItem:_outdatedFormulaeSidebarItem]; //FormulaeSideBarItemOutdated = 2,
   
   _allFormulaeSidebarItem = [PXSourceListItem itemWithTitle:@"All Formulae" identifier:@"item"];
   _allFormulaeSidebarItem.icon = [NSImage imageNamed:@"allFormulaeTemplate"];
-  [parent addChildItem:_allFormulaeSidebarItem];
+  [parent addChildItem:_allFormulaeSidebarItem];  //FormulaeSideBarItemAll = 3,
   
   _leavesFormulaeSidebarItem = [PXSourceListItem itemWithTitle:@"Leaves" identifier:@"item"];
   _leavesFormulaeSidebarItem.icon = [NSImage imageNamed:@"pinTemplate"];
-  [parent addChildItem:_leavesFormulaeSidebarItem];
+  [parent addChildItem:_leavesFormulaeSidebarItem];  //FormulaeSideBarItemLeaves = 4,
 
   _repositoriesFormulaeSidebarItem = [PXSourceListItem itemWithTitle:@"Repositories" identifier:@"item"];
   _repositoriesFormulaeSidebarItem.icon = [NSImage imageNamed:@"cloudTemplate"];
-  [parent addChildItem:_repositoriesFormulaeSidebarItem];
+  [parent addChildItem:_repositoriesFormulaeSidebarItem];  //FormulaeSideBarItemRepositories = 5,
   
 	parent = [PXSourceListItem itemWithTitle:@"Tools" identifier:@"group"];
-	[_rootSidebarCategory addChildItem:parent];
+	[_rootSidebarCategory addChildItem:parent];  //FormulaeSideBarItemToolsCategory = 6,
   
 	item = [PXSourceListItem itemWithTitle:@"Doctor" identifier:@"item"];
 	[item setBadgeValue:@-1];
 	[item setIcon:[NSImage imageNamed:@"wrenchTemplate"]];
-	[parent addChildItem:item];
+	[parent addChildItem:item];  //FormulaeSideBarItemDoctor = 7,
   
 	item = [PXSourceListItem itemWithTitle:@"Update" identifier:@"item"];
 	[item setBadgeValue:@-1];
 	[item setIcon:[NSImage imageNamed:@"downloadTemplate"]];
-	[parent addChildItem:item];
+	[parent addChildItem:item];  //FormulaeSideBarItemUpdate = 8,
 }
 
 
