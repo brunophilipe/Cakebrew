@@ -155,18 +155,11 @@ typedef NS_ENUM(NSUInteger, HomeBrewTab) {
 	}
 }
 
-- (void)prepareFormula:(BPFormula*)formula forOperation:(BPWindowOperation)operation
-{
-	NSArray *formulae = (formula ? @[formula] : nil);
-	[self prepareFormulae:formulae forOperation:operation inWindow:_appDelegate.window alsoModal:NO withOptions:nil];
-}
-
-- (void)prepareFormulae:(NSArray*)formulae forOperation:(BPWindowOperation)operation inWindow:(NSWindow*)window alsoModal:(BOOL)alsoModal withOptions:(NSArray*)options
+- (void)prepareFormulae:(NSArray*)formulae forOperation:(BPWindowOperation)operation withOptions:(NSArray*)options
 {
   self.operationWindowController = [BPInstallationWindowController runWithOperation:operation
                                                                                    formulae:formulae
-                                                                                    options:options
-                                                                              modalDelegate:self];
+                                                                                    options:options];
 }
 
 - (void)lockWindow
@@ -728,7 +721,7 @@ typedef NS_ENUM(NSUInteger, HomeBrewTab) {
 			{
 				message = @"Are you sure you want to install the formula '%@'?";
 				operationBlock = ^{
-					[self prepareFormula:formula forOperation:kBPWindowOperationInstall];
+					[self prepareFormulae:@[formula] forOperation:kBPWindowOperationInstall withOptions:nil];
 				};
 			}
 				break;
@@ -737,7 +730,7 @@ typedef NS_ENUM(NSUInteger, HomeBrewTab) {
 			{
 				message = @"Are you sure you want to uninstall the formula '%@'?";
 				operationBlock = ^{
-					[self prepareFormula:formula forOperation:kBPWindowOperationUninstall];
+					[self prepareFormulae:@[formula] forOperation:kBPWindowOperationUninstall withOptions:nil];
 				};
 			}
 				break;
@@ -748,7 +741,7 @@ typedef NS_ENUM(NSUInteger, HomeBrewTab) {
 				NSArray *formulae = [_formulaeArray objectsAtIndexes:[self.tableView_formulae selectedRowIndexes]];
 
 				operationBlock = ^{
-					[self prepareFormulae:formulae forOperation:kBPWindowOperationUpgrade inWindow:_appDelegate.window alsoModal:NO withOptions:nil];
+					[self prepareFormulae:formulae forOperation:kBPWindowOperationUpgrade withOptions:nil];
 				};
 			}
 				break;
@@ -757,7 +750,7 @@ typedef NS_ENUM(NSUInteger, HomeBrewTab) {
 			{
 				message = @"Are you sure you want to untap the repository '%@'?";
 				operationBlock = ^{
-					[self prepareFormula:formula forOperation:kBPWindowOperationUntap];
+					[self prepareFormulae:@[formula] forOperation:kBPWindowOperationUntap withOptions:nil];
 				};
 			}
 				break;
@@ -792,7 +785,7 @@ typedef NS_ENUM(NSUInteger, HomeBrewTab) {
 			if ([name length] > 0)
 			{
 				BPFormula *formula = [BPFormula formulaWithName:name];
-				[self prepareFormula:formula forOperation:kBPWindowOperationTap];
+				[self prepareFormulae:@[formula] forOperation:kBPWindowOperationTap withOptions:nil];
 			}
 			else {
 				[_appDelegate setRunningBackgroundTask:NO];
@@ -817,10 +810,7 @@ typedef NS_ENUM(NSUInteger, HomeBrewTab) {
 	if (selectedIndex >= 0) {
 		BPFormula *formula = [_formulaeArray objectAtIndex:(NSUInteger)selectedIndex];
     self.formulaOptionsWindowController = [BPFormulaOptionsWindowController runFormula:formula withCompletionBlock:^(NSArray *options) {
-      [self prepareFormulae:@[formula] forOperation:kBPWindowOperationInstall
-                   inWindow:[NSApp mainWindow]
-                  alsoModal:NO
-                withOptions:options];
+      [self prepareFormulae:@[formula] forOperation:kBPWindowOperationInstall withOptions:options];
     }];
 	}
 }
@@ -839,7 +829,7 @@ typedef NS_ENUM(NSUInteger, HomeBrewTab) {
 	NSAlert *alert = [NSAlert alertWithMessageText:@"Attention!" defaultButton:@"Yes" alternateButton:@"Cancel" otherButton:nil informativeTextWithFormat:@"Are you sure you want to upgrade these formulae: '%@'?", names];
 	[alert.window setTitle:@"Cakebrew"];
 	if ([alert runModal] == NSAlertDefaultReturn) {
-		[self prepareFormulae:selectedFormulae forOperation:kBPWindowOperationUpgrade inWindow:BPAppDelegateRef.window alsoModal:NO withOptions:nil];
+		[self prepareFormulae:selectedFormulae forOperation:kBPWindowOperationUpgrade withOptions:nil];
 	}
 }
 
@@ -847,7 +837,7 @@ typedef NS_ENUM(NSUInteger, HomeBrewTab) {
 	NSAlert *alert = [NSAlert alertWithMessageText:@"Attention!" defaultButton:@"Yes" alternateButton:@"Cancel" otherButton:nil informativeTextWithFormat:@"Are you sure you want to upgrade all outdated formulae?"];
 	[alert.window setTitle:@"Cakebrew"];
 	if ([alert runModal] == NSAlertDefaultReturn) {
-		[self prepareFormula:nil forOperation:kBPWindowOperationUpgrade];
+		[self prepareFormulae:nil forOperation:kBPWindowOperationUpgrade withOptions:nil];
 	}
 }
 
