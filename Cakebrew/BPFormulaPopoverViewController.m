@@ -21,6 +21,7 @@
 {
   NSFont *font = [NSFont bp_defaultFixedWidthFont];
   [self.formulaTextView setFont:font];
+  [self.formulaTextView setTextColor:[NSColor whiteColor]];
   [self.formulaPopover setContentViewController:self];
 }
 
