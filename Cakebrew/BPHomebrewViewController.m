@@ -27,6 +27,8 @@
 #import "BPInstallationWindowController.h"
 #import "BPUpdateViewController.h"
 #import "BPDoctorViewController.h"
+#import "BPFormulaeDataSource.h"
+#import "BPSelectedFormulaViewController.h"
 
 typedef NS_ENUM(NSUInteger, HomeBrewTab) {
   HomeBrewTabFormulae,
@@ -40,31 +42,23 @@ typedef NS_ENUM(NSUInteger, HomeBrewTab) {
 @property (strong)           NSPopover        *formulaPopover;
 @property (weak)			 BPAppDelegate	  *appDelegate;
 
-@property NSArray   *formulaeArray;
 @property NSInteger lastSelectedSidebarIndex;
 
 @property BOOL isSearching;
 @property BPWindowOperation toolbarButtonOperation;
 
-@property NSWindow *alsoModalWindow;
-
+@property (strong, nonatomic) BPFormulaeDataSource *formulaeDataSource;
 @property (strong, nonatomic) BPFormulaOptionsWindowController *formulaOptionsWindowController;
 @property (strong, nonatomic) BPInstallationWindowController *operationWindowController;
 @property (strong, nonatomic) BPUpdateViewController *updateViewController;
 @property (strong, nonatomic) BPDoctorViewController *doctorViewController;
+@property (weak, nonatomic) IBOutlet BPSelectedFormulaViewController *selectedFormulaeViewController;
 
 @end
 
 @implementation BPHomebrewViewController
 {
-	NSWindow					   *_operationWindow;
-	NSTableView					   *_tableView_formulae;
-
 	BPHomebrewManager			   *_homebrewManager;
-
-	__weak DMSplitView			   *_splitView;
-	__weak PXSourceList			   *_outlineView_sidebar;
-	__weak BPInsetShadowView	   *_view_disablerLock;
 }
 
 - (id)initWithCoder:(NSCoder *)aDecoder
@@ -84,6 +78,9 @@ typedef NS_ENUM(NSUInteger, HomeBrewTab) {
 
 - (void)awakeFromNib
 {
+  self.formulaeDataSource = [[BPFormulaeDataSource alloc] initWithMode:kBPListAll];
+  self.tableView_formulae.dataSource = self.formulaeDataSource;
+  
   //Creating view for update tab
   self.updateViewController = [[BPUpdateViewController alloc] initWithNibName:nil bundle:nil];
   NSView *updateView = [self.updateViewController view];
@@ -99,60 +96,31 @@ typedef NS_ENUM(NSUInteger, HomeBrewTab) {
     NSTabViewItem *doctorTab = [self.tabView tabViewItemAtIndex:HomeBrewTabUpdate];
     [doctorTab setView:doctorView];
   }
+  
+  [self.splitView setMinSize:165.f ofSubviewAtIndex:0];
+	[self.splitView setMinSize:400.f ofSubviewAtIndex:1];
+	[self.splitView setDividerColor:kBPSidebarDividerColor];
+	[self.splitView setDividerThickness:0];
+  
+  [self.view_disablerLock setShouldDrawBackground:YES];
+  
+  [self.outlineView_sidebar setDelegate:self];
+	[self.outlineView_sidebar setDataSource:self];
+  
+  //THIS IS TOTALLY UGLY AND I BLAME PERSON WHO DID THIS!!!
+	dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.6 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+		[self.outlineView_sidebar selectRowIndexes:[NSIndexSet indexSetWithIndex:1] byExtendingSelection:NO];
+	});
+  
+  _appDelegate = BPAppDelegateRef;
 }
 
 - (void)dealloc
 {
-	[[NSNotificationCenter defaultCenter] removeObserver:self];
+  [[NSNotificationCenter defaultCenter] removeObserver:self name:kBP_NOTIFICATION_LOCK_WINDOW object:nil];
+  [[NSNotificationCenter defaultCenter] removeObserver:self name:kBP_NOTIFICATION_UNLOCK_WINDOW object:nil];
+  [[NSNotificationCenter defaultCenter] removeObserver:self name:kBP_NOTIFICATION_SEARCH_UPDATED object:nil];
 	[_homebrewManager setDelegate:nil];
-}
-- (void)displayInformationForFormulae:(NSArray*)formulae
-{
-	[self.label_formulaPath setStringValue:@"Multiple values"];
-	[self.label_formulaDependencies setStringValue:@"Multiple values"];
-	[self.label_formulaConflicts setStringValue:@"Multiple values"];
-	[self.label_formulaVersion setStringValue:@"Multiple values"];
-}
-
-- (void)displayInformationForFormula:(BPFormula*)formula
-{
-	static NSString *depString = @"Formula no longer available.";
-	static NSString *emptyString = @"--";
-
-	[self setCurrentFormula:formula];
-
-	if (formula) {
-		if (!formula.isDeprecated) {
-			if (formula.isInstalled) {
-				[self.label_formulaPath setStringValue:formula.installPath];
-			} else {
-				[self.label_formulaPath setStringValue:@"Formula Not Installed."];
-			}
-
-			[self.label_formulaVersion setStringValue:formula.latestVersion];
-
-			if (formula.dependencies) {
-				[self.label_formulaDependencies setStringValue:formula.dependencies];
-			} else {
-				[self.label_formulaDependencies setStringValue:@"This formula has no dependencies!"];
-			}
-
-			if (formula.conflicts) {
-				[self.label_formulaConflicts setStringValue:formula.conflicts];
-			} else {
-				[self.label_formulaConflicts setStringValue:@"This formula has no known conflicts."];
-			}
-		} else {
-			[self.label_formulaPath setStringValue:depString];
-			[self.label_formulaDependencies setStringValue:emptyString];
-			[self.label_formulaConflicts setStringValue:emptyString];
-		}
-	} else {
-		[self.label_formulaPath setStringValue:emptyString];
-		[self.label_formulaVersion setStringValue:emptyString];
-		[self.label_formulaDependencies setStringValue:emptyString];
-		[self.label_formulaConflicts setStringValue:emptyString];
-	}
 }
 
 - (void)prepareFormulae:(NSArray*)formulae forOperation:(BPWindowOperation)operation withOptions:(NSArray*)options
@@ -208,14 +176,19 @@ typedef NS_ENUM(NSUInteger, HomeBrewTab) {
 
 - (void)updateInterfaceItems
 {
-	NSUInteger selectedTab = (NSUInteger)[self.outlineView_sidebar selectedRow];
-	NSUInteger selectedIndex = (NSUInteger)[self.tableView_formulae selectedRow];
-
+	NSInteger selectedTab = [self.outlineView_sidebar selectedRow];
+	NSInteger selectedIndex = [self.tableView_formulae selectedRow];
+  NSIndexSet *selectedRows = [self.tableView_formulae selectedRowIndexes];
+  NSArray *selectedFormulae = [self.formulaeDataSource formulasAtIndexSet:selectedRows];
+  if ([selectedFormulae count] == 1) {
+    [self setCurrentFormula:[selectedFormulae firstObject]];
+  }
+  [self.selectedFormulaeViewController setFormulae:selectedFormulae];
+  
 	if (selectedTab == 5) { // Repositories tab
-		[self displayInformationForFormula:nil];
 		[self.toolbarButton_installUninstall setEnabled:YES];
 		[self.toolbarButton_formulaInfo setEnabled:NO];
-
+    
 		if (selectedIndex != -1) {
 			[self.toolbarButton_installUninstall setImage:[NSImage imageNamed:@"delete.icns"]];
 			[self.toolbarButton_installUninstall setLabel:@"Untap Repository"];
@@ -226,34 +199,31 @@ typedef NS_ENUM(NSUInteger, HomeBrewTab) {
 			[self setToolbarButtonOperation:kBPWindowOperationTap];
 		}
 	}
-    else if(selectedIndex == -1 || selectedTab > 5)
+  else if(selectedIndex == -1 || selectedTab > 5)
 	{
 		[self.toolbarButton_installUninstall setEnabled:NO];
 		[self.toolbarButton_formulaInfo setEnabled:NO];
-		[self displayInformationForFormula:nil];
-    }
+  }
 	else if ([[self.tableView_formulae selectedRowIndexes] count] > 1)
 	{
-		[self displayInformationForFormulae:nil];
-
 		[self.toolbarButton_installUninstall setImage:[NSImage imageNamed:@"reload.icns"]];
 		[self.toolbarButton_installUninstall setLabel:@"Update Selected"];
 		[self setToolbarButtonOperation:kBPWindowOperationUpgrade];
 	}
 	else
 	{
-		BPFormula *formula = [_formulaeArray objectAtIndex:selectedIndex];
-
+		BPFormula *formula = [self.formulaeDataSource formulaAtIndex:selectedIndex];
+    
 		[self.toolbarButton_installUninstall setEnabled:YES];
 		[self.toolbarButton_formulaInfo setEnabled:YES];
-
+    
 		switch ([[BPHomebrewManager sharedManager] statusForFormula:formula]) {
 			case kBPFormulaInstalled:
 				[self.toolbarButton_installUninstall setImage:[NSImage imageNamed:@"delete.icns"]];
 				[self.toolbarButton_installUninstall setLabel:@"Uninstall Formula"];
 				[self setToolbarButtonOperation:kBPWindowOperationUninstall];
 				break;
-
+        
 			case kBPFormulaOutdated:
 				if ([self.outlineView_sidebar selectedRow] == 2) {
 					[self.toolbarButton_installUninstall setImage:[NSImage imageNamed:@"reload.icns"]];
@@ -265,17 +235,14 @@ typedef NS_ENUM(NSUInteger, HomeBrewTab) {
 					[self setToolbarButtonOperation:kBPWindowOperationUninstall];
 				}
 				break;
-
+        
 			case kBPFormulaNotInstalled:
 				[self.toolbarButton_installUninstall setImage:[NSImage imageNamed:@"download.icns"]];
 				[self.toolbarButton_installUninstall setLabel:@"Install Formula"];
 				[self setToolbarButtonOperation:kBPWindowOperationInstall];
 				break;
 		}
-
-		[formula getInformation];
-		[self displayInformationForFormula:formula];
-    }
+  }
 }
 
 - (void)searchUpdatedNotification:(NSNotification*)notification
@@ -323,82 +290,15 @@ typedef NS_ENUM(NSUInteger, HomeBrewTab) {
 	[item setIcon:[NSImage imageNamed:@"downloadTemplate"]];
 	[parent addChildItem:item];
 
-	[self displayInformationForFormula:nil];
+	self.selectedFormulaeViewController.formulae = nil;
 	[self setEnableUpgradeFormulasMenu:([[BPHomebrewManager sharedManager] formulae_outdated].count > 0)];
 }
 
 - (void)configureTableForListing:(BPListMode)mode
 {
-	CGFloat totalWidth = 0;
-	NSInteger titleWidth = 0;
-
-	totalWidth = [self.clippingView_formulae frame].size.width;
-
-	switch (mode) {
-		case kBPListAll:
-			titleWidth = (NSInteger)(totalWidth - 125);
-			_formulaeArray = [[BPHomebrewManager sharedManager] formulae_all];
-			[[self.tableView_formulae tableColumnWithIdentifier:@"Version"] setHidden:YES];
-			[[self.tableView_formulae tableColumnWithIdentifier:@"LatestVersion"] setHidden:YES];
-			[[self.tableView_formulae tableColumnWithIdentifier:@"Status"] setHidden:NO];
-			[[self.tableView_formulae tableColumnWithIdentifier:@"Status"] setWidth:(totalWidth-titleWidth)*0.90];
-			[self.tableView_formulae setAllowsMultipleSelection:NO];
-			break;
-
-		case kBPListInstalled:
-			titleWidth = (NSInteger)(totalWidth * 0.4);
-			_formulaeArray = [[BPHomebrewManager sharedManager] formulae_installed];
-			[[self.tableView_formulae tableColumnWithIdentifier:@"Version"] setHidden:NO];
-			[[self.tableView_formulae tableColumnWithIdentifier:@"Version"] setWidth:(totalWidth-titleWidth)*0.95];
-			[[self.tableView_formulae tableColumnWithIdentifier:@"LatestVersion"] setHidden:YES];
-			[[self.tableView_formulae tableColumnWithIdentifier:@"Status"] setHidden:YES];
-			[self.tableView_formulae setAllowsMultipleSelection:NO];
-			break;
-
-		case kBPListLeaves:
-			titleWidth = (NSInteger)(totalWidth * 0.99);
-			_formulaeArray = [[BPHomebrewManager sharedManager] formulae_leaves];
-			[[self.tableView_formulae tableColumnWithIdentifier:@"Version"] setHidden:YES];
-			[[self.tableView_formulae tableColumnWithIdentifier:@"LatestVersion"] setHidden:YES];
-			[[self.tableView_formulae tableColumnWithIdentifier:@"Status"] setHidden:YES];
-			[self.tableView_formulae setAllowsMultipleSelection:NO];
-			break;
-
-		case kBPListOutdated:
-			titleWidth = (NSInteger)(totalWidth * 0.4);
-			_formulaeArray = [[BPHomebrewManager sharedManager] formulae_outdated];
-			[[self.tableView_formulae tableColumnWithIdentifier:@"Version"] setHidden:NO];
-			[[self.tableView_formulae tableColumnWithIdentifier:@"Version"] setWidth:(totalWidth-titleWidth)*0.48];
-			[[self.tableView_formulae tableColumnWithIdentifier:@"LatestVersion"] setHidden:NO];
-			[[self.tableView_formulae tableColumnWithIdentifier:@"LatestVersion"] setWidth:(totalWidth-titleWidth)*0.48];
-			[[self.tableView_formulae tableColumnWithIdentifier:@"Status"] setHidden:YES];
-			[self.tableView_formulae setAllowsMultipleSelection:YES];
-			break;
-
-		case kBPListSearch:
-			titleWidth = (NSInteger)(totalWidth - 90);
-			_formulaeArray = [[BPHomebrewManager sharedManager] formulae_search];
-			[[self.tableView_formulae tableColumnWithIdentifier:@"Version"] setHidden:YES];
-			[[self.tableView_formulae tableColumnWithIdentifier:@"LatestVersion"] setHidden:YES];
-			[[self.tableView_formulae tableColumnWithIdentifier:@"Status"] setHidden:NO];
-			[[self.tableView_formulae tableColumnWithIdentifier:@"Status"] setWidth:(totalWidth-titleWidth)*0.90];
-			[self.tableView_formulae setAllowsMultipleSelection:NO];
-			break;
-
-    case kBPListRepositories:
-			titleWidth = (NSInteger)(totalWidth * 0.99);
-			_formulaeArray = [[BPHomebrewManager sharedManager] formulae_repositories];
-			[[self.tableView_formulae tableColumnWithIdentifier:@"Version"] setHidden:YES];
-			[[self.tableView_formulae tableColumnWithIdentifier:@"LatestVersion"] setHidden:YES];
-			[[self.tableView_formulae tableColumnWithIdentifier:@"Status"] setHidden:YES];
-			[self.tableView_formulae setAllowsMultipleSelection:NO];
-
-		default:
-			break;
-	}
-
-	[[self.tableView_formulae tableColumnWithIdentifier:@"Name"] setWidth:titleWidth];
-	[self.tableView_formulae deselectAll:nil];
+  [self.tableView_formulae deselectAll:nil];
+  [self.tableView_formulae setMode:mode];
+  [self.formulaeDataSource setMode:mode];
 	[self.tableView_formulae reloadData];
 	[self updateInterfaceItems];
 }
@@ -418,118 +318,6 @@ typedef NS_ENUM(NSUInteger, HomeBrewTab) {
 		[_outlineView_sidebar selectRowIndexes:[NSIndexSet indexSetWithIndex:1] byExtendingSelection:NO];
 	else
 		[_outlineView_sidebar selectRowIndexes:[NSIndexSet indexSetWithIndex:(NSUInteger)_lastSelectedSidebarIndex] byExtendingSelection:NO];
-}
-
-#pragma mark - Accessors
-
-- (void)setSplitView:(DMSplitView *)splitView
-{
-	_splitView = splitView;
-	[_splitView setMinSize:165.f ofSubviewAtIndex:0];
-	[_splitView setMinSize:400.f ofSubviewAtIndex:1];
-	[_splitView setDividerColor:kBPSidebarDividerColor];
-	[_splitView setDividerThickness:0];
-
-	_appDelegate = BPAppDelegateRef;
-}
-
-- (DMSplitView*)splitView
-{
-	return _splitView;
-}
-
-- (void)setTableView_formulae:(NSTableView *)tableView_formulae
-{
-	_tableView_formulae = tableView_formulae;
-}
-
-- (NSTableView*)tableView_formulae
-{
-	return _tableView_formulae;
-}
-
-- (void)setOutlineView_sidebar:(PXSourceList*)outlineView_sidebar
-{
-	_outlineView_sidebar = outlineView_sidebar;
-	[_outlineView_sidebar setDelegate:self];
-	[_outlineView_sidebar setDataSource:self];
-
-	dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.6 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-		[_outlineView_sidebar selectRowIndexes:[NSIndexSet indexSetWithIndex:1] byExtendingSelection:NO];
-	});
-}
-
-- (PXSourceList*)outlineView_sidebar
-{
-	return _outlineView_sidebar;
-}
-
-- (void)setView_disablerLock:(BPInsetShadowView *)view_disablerLock
-{
-	_view_disablerLock = view_disablerLock;
-	[_view_disablerLock setShouldDrawBackground:YES];
-}
-
-- (BPInsetShadowView*)view_disablerLock
-{
-	return _view_disablerLock;
-}
-
-#pragma mark - NSTableView DataSource
-
-- (NSInteger)numberOfRowsInTableView:(NSTableView *)aTableView
-{
-    return [self.formulaeArray count];
-}
-
-- (id)tableView:(NSTableView *)tableView objectValueForTableColumn:(NSTableColumn *)tableColumn row:(NSInteger)row {
-    // the return value is typed as (id) because it will return a string in all cases with the exception of the
-    if(self.formulaeArray) {
-        NSString *columnIdentifer = [tableColumn identifier];
-        id element = [self.formulaeArray objectAtIndex:(NSUInteger)row];
-
-        // Compare each column identifier and set the return value to
-        // the Person field value appropriate for the column.
-        if ([columnIdentifer isEqualToString:@"Name"]) {
-			if ([element isKindOfClass:[BPFormula class]]) {
-				return [(BPFormula*)element name];
-			} else {
-				return element;
-			}
-        } else if ([columnIdentifer isEqualToString:@"Version"]) {
-			if ([element isKindOfClass:[BPFormula class]]) {
-				return [(BPFormula*)element version];
-			} else {
-				return element;
-			}
-		} else if ([columnIdentifer isEqualToString:@"LatestVersion"]) {
-			if ([element isKindOfClass:[BPFormula class]]) {
-				return [(BPFormula*)element latestVersion];
-			} else {
-				return element;
-			}
-        } else if ([columnIdentifer isEqualToString:@"Status"]) {
-			if ([element isKindOfClass:[BPFormula class]]) {
-				switch ([[BPHomebrewManager sharedManager] statusForFormula:element]) {
-					case kBPFormulaInstalled:
-						return @"Installed";
-
-					case kBPFormulaNotInstalled:
-						return @"Not Installed";
-
-					case kBPFormulaOutdated:
-						return @"Update Available";
-
-					default:
-						return @"";
-				}
-			} else {
-				return element;
-			}
-		}
-    }
-
-	return @"";
 }
 
 #pragma mark - NSTableView Delegate
@@ -679,7 +467,7 @@ typedef NS_ENUM(NSUInteger, HomeBrewTab) {
 			[self.formulaPopover close];
 		}
 
-		[self.formulaPopoverView setDataObject:[_formulaeArray objectAtIndex:(NSUInteger)selectedIndex]];
+		[self.formulaPopoverView setDataObject:[self.formulaeDataSource formulaAtIndex:selectedIndex]];
 
 		if (!self.formulaPopover) {
 			self.formulaPopover = [[NSPopover alloc] init];
@@ -707,15 +495,15 @@ typedef NS_ENUM(NSUInteger, HomeBrewTab) {
 		return;
 	}
 	[_appDelegate setRunningBackgroundTask:YES];
-
+  
 	NSInteger selectedIndex = [self.tableView_formulae selectedRow];
 	NSInteger selectedTab = [self.outlineView_sidebar selectedRow];
-
-	if (selectedIndex >= 0) {
-		BPFormula *formula = [_formulaeArray objectAtIndex:(NSUInteger)selectedIndex];
+  BPFormula *formula = [self.formulaeDataSource formulaAtIndex:selectedIndex];
+  
+	if (formula) {
 		NSString *message;
 		void (^operationBlock)(void);
-
+    
 		switch (_toolbarButtonOperation) {
 			case kBPWindowOperationInstall:
 			{
@@ -725,7 +513,7 @@ typedef NS_ENUM(NSUInteger, HomeBrewTab) {
 				};
 			}
 				break;
-
+        
 			case kBPWindowOperationUninstall:
 			{
 				message = @"Are you sure you want to uninstall the formula '%@'?";
@@ -734,18 +522,19 @@ typedef NS_ENUM(NSUInteger, HomeBrewTab) {
 				};
 			}
 				break;
-
+        
 			case kBPWindowOperationUpgrade:
 			{
 				message = @"Are you sure you want to upgrade the selected formuale?";
-				NSArray *formulae = [_formulaeArray objectsAtIndexes:[self.tableView_formulae selectedRowIndexes]];
-
+        NSIndexSet *indexes = [self.tableView_formulae selectedRowIndexes];
+        NSArray *formulae = [self.formulaeDataSource formulasAtIndexSet:indexes];
+        
 				operationBlock = ^{
 					[self prepareFormulae:formulae forOperation:kBPWindowOperationUpgrade withOptions:nil];
 				};
 			}
 				break;
-
+        
 			case kBPWindowOperationUntap:
 			{
 				message = @"Are you sure you want to untap the repository '%@'?";
@@ -753,20 +542,28 @@ typedef NS_ENUM(NSUInteger, HomeBrewTab) {
 					[self prepareFormulae:@[formula] forOperation:kBPWindowOperationUntap withOptions:nil];
 				};
 			}
+        
+      case kBPWindowOperationTap:
+			{
+				message = @"Are you sure you want to tap the repository '%@'?";
+				operationBlock = ^{
+					[self prepareFormulae:@[formula] forOperation:kBPWindowOperationTap withOptions:nil];
+				};
+			}
 				break;
 		}
-
+    
 		if (message) {
 			NSAlert *alert = [NSAlert alertWithMessageText:@"Attention!" defaultButton:@"Yes" alternateButton:@"Cancel" otherButton:nil informativeTextWithFormat:message, formula.name];
 			[alert.window setTitle:@"Cakebrew"];
-
-            NSInteger returnValue = [alert runModal];
+      
+      NSInteger returnValue = [alert runModal];
 			if (returnValue == NSAlertDefaultReturn) {
 				operationBlock();
 			}
-            else {
-                [_appDelegate setRunningBackgroundTask:NO];
-            }
+      else {
+        [_appDelegate setRunningBackgroundTask:NO];
+      }
 		} else {
 			operationBlock();
 		}
@@ -774,11 +571,11 @@ typedef NS_ENUM(NSUInteger, HomeBrewTab) {
 	else if (selectedTab == 5 && _toolbarButtonOperation == kBPWindowOperationTap)
 	{
 		NSAlert *alert = [NSAlert alertWithMessageText:@"Attention!" defaultButton:@"OK" alternateButton:@"Cancel" otherButton:nil informativeTextWithFormat:@"What repository would you like to tap?"];
-
+    
 		NSTextField *input = [[NSTextField alloc] initWithFrame:NSMakeRect(0,0,200,24)];
 		[input setStringValue:@""];
 		[alert setAccessoryView:input];
-
+    
 		NSInteger returnValue = [alert runModal];
 		if (returnValue == NSAlertDefaultReturn) {
 			NSString* name = [input stringValue];
@@ -804,11 +601,10 @@ typedef NS_ENUM(NSUInteger, HomeBrewTab) {
 		[_appDelegate displayBackgroundWarning];
 		return;
 	}
-
+  
 	NSInteger selectedIndex = [self.tableView_formulae selectedRow];
-
-	if (selectedIndex >= 0) {
-		BPFormula *formula = [_formulaeArray objectAtIndex:(NSUInteger)selectedIndex];
+  BPFormula *formula = [self.formulaeDataSource formulaAtIndex:selectedIndex];
+	if (formula) {
     self.formulaOptionsWindowController = [BPFormulaOptionsWindowController runFormula:formula withCompletionBlock:^(NSArray *options) {
       [self prepareFormulae:@[formula] forOperation:kBPWindowOperationInstall withOptions:options];
     }];
@@ -817,7 +613,8 @@ typedef NS_ENUM(NSUInteger, HomeBrewTab) {
 
 - (IBAction)upgradeSelectedFormulae:(id)sender {
 	NSMutableString *names = [NSMutableString string];
-	NSArray *selectedFormulae = [_formulaeArray objectsAtIndexes:[self.tableView_formulae selectedRowIndexes]];
+  NSIndexSet *indexes = [self.tableView_formulae selectedRowIndexes];
+  NSArray *selectedFormulae = [self.formulaeDataSource formulasAtIndexSet:indexes];
 	[selectedFormulae enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
 		if ([names compare:@""] == NSOrderedSame) {
 			[names appendString:[obj name]];
@@ -825,13 +622,14 @@ typedef NS_ENUM(NSUInteger, HomeBrewTab) {
 			[names appendFormat:@", %@", [obj name]];
 		}
 	}];
-
+  
 	NSAlert *alert = [NSAlert alertWithMessageText:@"Attention!" defaultButton:@"Yes" alternateButton:@"Cancel" otherButton:nil informativeTextWithFormat:@"Are you sure you want to upgrade these formulae: '%@'?", names];
 	[alert.window setTitle:@"Cakebrew"];
 	if ([alert runModal] == NSAlertDefaultReturn) {
 		[self prepareFormulae:selectedFormulae forOperation:kBPWindowOperationUpgrade withOptions:nil];
 	}
 }
+
 
 - (IBAction)upgradeAllOutdatedFormulae:(id)sender {
 	NSAlert *alert = [NSAlert alertWithMessageText:@"Attention!" defaultButton:@"Yes" alternateButton:@"Cancel" otherButton:nil informativeTextWithFormat:@"Are you sure you want to upgrade all outdated formulae?"];
@@ -849,8 +647,8 @@ typedef NS_ENUM(NSUInteger, HomeBrewTab) {
 
 - (IBAction)openSelectedFormulaWebsite:(id)sender {
 	NSInteger selectedIndex = [self.tableView_formulae selectedRow];
-	if (selectedIndex >= 0) {
-		BPFormula *formula = [_formulaeArray objectAtIndex:(NSUInteger)selectedIndex];
+  BPFormula *formula = [self.formulaeDataSource formulaAtIndex:selectedIndex];
+	if (formula) {
 		[[NSWorkspace sharedWorkspace] openURL:formula.website];
 	}
 }

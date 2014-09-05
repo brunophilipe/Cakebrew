@@ -76,9 +76,9 @@
   return [self.formulaeArray count];
 }
 
-- (BPFormula *)formulaAtIndex:(NSUInteger)index
+- (BPFormula *)formulaAtIndex:(NSInteger)index
 {
-  if ([self.formulaeArray count] > index) {
+  if ([self.formulaeArray count] > index && index > 0) {
     return [self.formulaeArray objectAtIndex:index];
   }
   return nil;
@@ -86,7 +86,7 @@
 
 - (NSArray *)formulasAtIndexSet:(NSIndexSet *)indexSet
 {
-  if (indexSet.count > 0 && [self.formulaeArray count] < indexSet.lastIndex) {
+  if (indexSet.count > 0 && [self.formulaeArray count] > indexSet.lastIndex) {
     return [self.formulaeArray objectsAtIndexes:indexSet];
   }
   return nil;

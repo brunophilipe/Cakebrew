@@ -654,7 +654,7 @@
                                                                 <rect key="frame" x="0.0" y="17" width="400" height="183"/>
                                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                 <subviews>
-                                                                    <tableView focusRingType="none" verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" alternatingRowBackgroundColors="YES" multipleSelection="NO" autosaveColumns="NO" headerView="Teu-qL-elL" id="nOF-Ra-wlA">
+                                                                    <tableView focusRingType="none" verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" alternatingRowBackgroundColors="YES" multipleSelection="NO" autosaveColumns="NO" headerView="Teu-qL-elL" id="nOF-Ra-wlA" customClass="BPFormulaeTableView">
                                                                         <rect key="frame" x="0.0" y="0.0" width="517" height="183"/>
                                                                         <autoresizingMask key="autoresizingMask"/>
                                                                         <size key="intercellSpacing" width="3" height="2"/>
@@ -1114,21 +1114,17 @@
             </connections>
         </customObject>
         <customObject id="420" customClass="NSFontManager"/>
-        <userDefaultsController representsSharedInstance="YES" id="659"/>
         <viewController title="HomebrewController" nibName="MainMenu" id="547" customClass="BPHomebrewViewController">
             <connections>
                 <outlet property="MainToolbar" destination="646" id="678"/>
                 <outlet property="clippingView_formulae" destination="imx-IN-SCs" id="Sku-zQ-Ocj"/>
                 <outlet property="formulaPopoverView" destination="ACU-Ca-y31" id="4Mc-fh-sex"/>
-                <outlet property="label_formulaConflicts" destination="tfH-bj-woo" id="Ge8-BU-wE3"/>
-                <outlet property="label_formulaDependencies" destination="jmd-cV-6fD" id="hEm-zJ-tHd"/>
-                <outlet property="label_formulaPath" destination="xnc-bd-zft" id="vCK-nv-vYb"/>
-                <outlet property="label_formulaVersion" destination="AJi-jy-Vvh" id="bfU-fl-8eX"/>
                 <outlet property="label_information" destination="tiK-fW-tE7" id="K14-X1-4bF"/>
                 <outlet property="menu_formula" destination="sBH-Ta-Jft" id="kCm-57-cUw"/>
                 <outlet property="outlineView_sidebar" destination="h1z-c9-U0s" id="PZy-Oz-lSv"/>
                 <outlet property="scrollView_formulae" destination="ZTf-N0-ClA" id="2Yf-0I-qyg"/>
                 <outlet property="searchField" destination="zLQ-g9-dpv" id="KJG-rk-obd"/>
+                <outlet property="selectedFormulaeViewController" destination="BDA-g8-7We" id="hNL-s0-Yf7"/>
                 <outlet property="splitView" destination="Exu-Zx-Kij" id="Bt8-rO-7vE"/>
                 <outlet property="tabView" destination="79A-lZ-LEo" id="ZHE-dc-ztv"/>
                 <outlet property="tableView_formulae" destination="nOF-Ra-wlA" id="78b-5b-rWb"/>
@@ -1196,6 +1192,15 @@
                 <outlet property="textView" destination="76F-8G-r1b" id="636-ZX-1HH"/>
             </connections>
         </customView>
+        <viewController id="BDA-g8-7We" customClass="BPSelectedFormulaViewController">
+            <connections>
+                <outlet property="formulaConflictsLabel" destination="tfH-bj-woo" id="Zpr-ZY-HNr"/>
+                <outlet property="formulaDependenciesLabel" destination="jmd-cV-6fD" id="5pN-bf-1FE"/>
+                <outlet property="formulaPathLabel" destination="xnc-bd-zft" id="cnW-Zm-yJ1"/>
+                <outlet property="formulaVersionLabel" destination="AJi-jy-Vvh" id="2Ug-yZ-Nhg"/>
+                <outlet property="view" destination="X3G-aV-OOA" id="GzC-If-1xP"/>
+            </connections>
+        </viewController>
     </objects>
     <resources>
         <image name="NSActionTemplate" width="14" height="14"/>

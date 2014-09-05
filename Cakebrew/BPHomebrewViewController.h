@@ -23,12 +23,13 @@
 #import "BPFormula.h"
 #import "DMSplitView.h"
 #import "BPInsetShadowView.h"
+#import "BPFormulaeTableView.h"
 #import "BPGenericTextPopoverView.h"
 #import "Frameworks/PXSourceList.framework/Headers/PXSourceList.h"
 
 typedef NS_ENUM(NSUInteger, BPWindowOperation) {
-    kBPWindowOperationInstall,
-    kBPWindowOperationUninstall,
+  kBPWindowOperationInstall,
+  kBPWindowOperationUninstall,
 	kBPWindowOperationUpgrade,
 	kBPWindowOperationTap,
 	kBPWindowOperationUntap
@@ -40,17 +41,13 @@ typedef NS_ENUM(NSUInteger, BPWindowOperation) {
 
 @interface BPHomebrewViewController : NSViewController
 
-@property (weak) IBOutlet NSTableView              *tableView_formulae;
+@property (weak) IBOutlet BPFormulaeTableView      *tableView_formulae;
 @property (weak) IBOutlet NSClipView               *clippingView_formulae;
 @property (weak) IBOutlet NSScrollView             *scrollView_formulae;
-@property (weak) IBOutlet PXSourceList			   *outlineView_sidebar;
+@property (weak) IBOutlet PXSourceList             *outlineView_sidebar;
 @property (weak) IBOutlet DMSplitView              *splitView;
 @property (weak) IBOutlet NSTabView                *tabView;
 @property (weak) IBOutlet NSTextField              *label_information;
-@property (weak) IBOutlet NSTextField              *label_formulaPath;
-@property (weak) IBOutlet NSTextField              *label_formulaVersion;
-@property (weak) IBOutlet NSTextField              *label_formulaDependencies;
-@property (weak) IBOutlet NSTextField              *label_formulaConflicts;
 @property (weak) IBOutlet BPGenericTextPopoverView *formulaPopoverView;
 @property (weak) IBOutlet BPInsetShadowView        *view_disablerLock;
 @property (weak) IBOutlet NSToolbar                *toolbar;

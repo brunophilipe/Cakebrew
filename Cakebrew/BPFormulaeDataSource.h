@@ -15,6 +15,6 @@
 @property (nonatomic, assign) BPListMode mode;
 
 - (instancetype)initWithMode:(BPListMode)aMode;
-- (BPFormula *)formulaAtIndex:(NSUInteger)index;
+- (BPFormula *)formulaAtIndex:(NSInteger)index;
 - (NSArray *)formulasAtIndexSet:(NSIndexSet *)indexSet;
 @end
