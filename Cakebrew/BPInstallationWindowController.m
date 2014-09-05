@@ -176,6 +176,38 @@
 				}];
 			}
 		}
+    else if (self.windowOperation == kBPWindowOperationTap)
+		{
+      if (self.formulae) {
+        NSString *name = [[self.formulae firstObject] name];
+        [homebrewInterface tapRepository:name withReturnsBlock:^(NSString *output) {
+          if (outputValue) {
+            outputValue = [outputValue stringByAppendingString:output];
+          } else {
+            outputValue = output;
+          }
+          [self.recordTextView performSelectorOnMainThread:@selector(setString:)
+                                                withObject:outputValue
+                                             waitUntilDone:YES];
+        }];
+      }
+		}
+		else if (self.windowOperation == kBPWindowOperationUntap)
+		{
+      if (self.formulae) {
+        NSString *name = [[self.formulae firstObject] name];
+        [[BPHomebrewInterface sharedInterface] untapRepository:name withReturnsBlock:^(NSString *output) {
+          if (outputValue) {
+            outputValue = [outputValue stringByAppendingString:output];
+          } else {
+            outputValue = output;
+          }
+          [self.recordTextView performSelectorOnMainThread:@selector(setString:)
+                                                withObject:outputValue
+                                             waitUntilDone:YES];
+        }];
+      }
+		}
 		[self.progressIndicator stopAnimation:nil];
 		[self.okButton setEnabled:YES];
 
