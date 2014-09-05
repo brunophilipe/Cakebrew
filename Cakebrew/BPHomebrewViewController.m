@@ -120,9 +120,9 @@ typedef NS_ENUM(NSUInteger, HomeBrewTab) {
   [self.outlineView_sidebar setDelegate:self.sidebarController];
 	[self.outlineView_sidebar setDataSource:self.sidebarController];
   
-  //THIS IS TOTALLY UGLY AND I BLAME PERSON WHO DID THIS!!!
+  //THIS IS TOTALLY UGLY -- SOMEONE WHO ADD THIS SHOULD ADD COMMENT
 	dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.6 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-		[self.outlineView_sidebar selectRowIndexes:[NSIndexSet indexSetWithIndex:1] byExtendingSelection:NO];
+		[self.outlineView_sidebar selectRowIndexes:[NSIndexSet indexSetWithIndex:FormulaeSideBarItemInstalled] byExtendingSelection:NO];
 	});
   
   _appDelegate = BPAppDelegateRef;
@@ -198,7 +198,7 @@ typedef NS_ENUM(NSUInteger, HomeBrewTab) {
   }
   [self.selectedFormulaeViewController setFormulae:selectedFormulae];
   
-	if (selectedTab == 5) { // Repositories tab
+	if (selectedTab == FormulaeSideBarItemRepositories) { // Repositories sidebaritem
 		[self.toolbarButton_installUninstall setEnabled:YES];
 		[self.toolbarButton_formulaInfo setEnabled:NO];
     
@@ -212,7 +212,7 @@ typedef NS_ENUM(NSUInteger, HomeBrewTab) {
 			[self setToolbarButtonOperation:kBPWindowOperationTap];
 		}
 	}
-  else if(selectedIndex == -1 || selectedTab > 5)
+  else if(selectedIndex == -1 || selectedTab > FormulaeSideBarItemToolsCategory)
 	{
 		[self.toolbarButton_installUninstall setEnabled:NO];
 		[self.toolbarButton_formulaInfo setEnabled:NO];
@@ -238,7 +238,7 @@ typedef NS_ENUM(NSUInteger, HomeBrewTab) {
 				break;
         
 			case kBPFormulaOutdated:
-				if ([self.outlineView_sidebar selectedRow] == 2) {
+				if ([self.outlineView_sidebar selectedRow] == FormulaeSideBarItemOutdated) {
 					[self.toolbarButton_installUninstall setImage:[NSImage imageNamed:@"reload.icns"]];
 					[self.toolbarButton_installUninstall setLabel:@"Update Formula"];
 					[self setToolbarButtonOperation:kBPWindowOperationUpgrade];
@@ -261,8 +261,8 @@ typedef NS_ENUM(NSUInteger, HomeBrewTab) {
 - (void)searchUpdatedNotification:(NSNotification*)notification
 {
 	_isSearching = YES;
-	if ([self.outlineView_sidebar selectedRow] != 2)
-		[self.outlineView_sidebar selectRowIndexes:[NSIndexSet indexSetWithIndex:3] byExtendingSelection:NO];
+	if ([self.outlineView_sidebar selectedRow] != FormulaeSideBarItemOutdated)
+		[self.outlineView_sidebar selectRowIndexes:[NSIndexSet indexSetWithIndex:FormulaeSideBarItemAll] byExtendingSelection:NO];
 
 	[self configureTableForListing:kBPListSearch];
 }
@@ -466,7 +466,7 @@ typedef NS_ENUM(NSUInteger, HomeBrewTab) {
 			operationBlock();
 		}
 	}
-	else if (selectedTab == 5 && _toolbarButtonOperation == kBPWindowOperationTap)
+	else if (selectedTab == FormulaeSideBarItemRepositories && _toolbarButtonOperation == kBPWindowOperationTap)
 	{
 		NSAlert *alert = [NSAlert alertWithMessageText:@"Attention!" defaultButton:@"OK" alternateButton:@"Cancel" otherButton:nil informativeTextWithFormat:@"What repository would you like to tap?"];
     

@@ -1115,7 +1115,6 @@
         <viewController title="HomebrewController" nibName="MainMenu" id="547" customClass="BPHomebrewViewController">
             <connections>
                 <outlet property="MainToolbar" destination="646" id="678"/>
-                <outlet property="clippingView_formulae" destination="imx-IN-SCs" id="Sku-zQ-Ocj"/>
                 <outlet property="label_information" destination="tiK-fW-tE7" id="K14-X1-4bF"/>
                 <outlet property="menu_formula" destination="sBH-Ta-Jft" id="kCm-57-cUw"/>
                 <outlet property="outlineView_sidebar" destination="h1z-c9-U0s" id="PZy-Oz-lSv"/>
