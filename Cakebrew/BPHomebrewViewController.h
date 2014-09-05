@@ -24,7 +24,7 @@
 #import "DMSplitView.h"
 #import "BPInsetShadowView.h"
 #import "BPFormulaeTableView.h"
-#import "BPGenericTextPopoverView.h"
+#import "BPFormulaPopoverViewController.h"
 #import "Frameworks/PXSourceList.framework/Headers/PXSourceList.h"
 
 typedef NS_ENUM(NSUInteger, BPWindowOperation) {
@@ -48,11 +48,10 @@ typedef NS_ENUM(NSUInteger, BPWindowOperation) {
 @property (weak) IBOutlet DMSplitView              *splitView;
 @property (weak) IBOutlet NSTabView                *tabView;
 @property (weak) IBOutlet NSTextField              *label_information;
-@property (weak) IBOutlet BPGenericTextPopoverView *formulaPopoverView;
 @property (weak) IBOutlet BPInsetShadowView        *view_disablerLock;
 @property (weak) IBOutlet NSToolbar                *toolbar;
 @property (weak) IBOutlet NSSearchField            *searchField;
-@property (weak) IBOutlet NSMenu				   *menu_formula;
+@property (weak) IBOutlet NSMenu                   *menu_formula;
 
 @property IBOutlet NSToolbarItem *toolbarButton_formulaInfo;
 @property IBOutlet NSToolbarItem *toolbarButton_installUninstall;

@@ -63,6 +63,9 @@
 		D2B3A3AA19B9CBEC00DE23B5 /* BPFormulaeTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = D2B3A3A919B9CBEC00DE23B5 /* BPFormulaeTableView.m */; };
 		D2B3A3AD19B9D39A00DE23B5 /* BPSelectedFormulaViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D2B3A3AC19B9D39A00DE23B5 /* BPSelectedFormulaViewController.m */; };
 		D2B3A3B019B9D7FC00DE23B5 /* BPFormulaeDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = D2B3A3AF19B9D7FC00DE23B5 /* BPFormulaeDataSource.m */; };
+		D2B3A3B819B9EA3500DE23B5 /* BPSideBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = D2B3A3B719B9EA3500DE23B5 /* BPSideBarController.m */; };
+		D2B3A3BB19B9FE4C00DE23B5 /* BPFormulaPopoverViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D2B3A3BA19B9FE4C00DE23B5 /* BPFormulaPopoverViewController.m */; };
+		D2B3A3BD19BA403300DE23B5 /* BPFormulaPopoverView.xib in Resources */ = {isa = PBXBuildFile; fileRef = D2B3A3BC19BA403300DE23B5 /* BPFormulaPopoverView.xib */; };
 		D2E53A4819A6215400E05AFC /* BPFormulaOptionsWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = D2E53A4719A6215400E05AFC /* BPFormulaOptionsWindow.xib */; };
 		D2E53A4B19A6228300E05AFC /* BPFormulaOptionsWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = D2E53A4A19A6228300E05AFC /* BPFormulaOptionsWindowController.m */; };
 		D2E53A4D19A65B1600E05AFC /* BPInstallationWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = D2E53A4C19A65B1600E05AFC /* BPInstallationWindow.xib */; };
@@ -164,6 +167,11 @@
 		D2B3A3AC19B9D39A00DE23B5 /* BPSelectedFormulaViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BPSelectedFormulaViewController.m; sourceTree = "<group>"; };
 		D2B3A3AE19B9D7FC00DE23B5 /* BPFormulaeDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BPFormulaeDataSource.h; sourceTree = "<group>"; };
 		D2B3A3AF19B9D7FC00DE23B5 /* BPFormulaeDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BPFormulaeDataSource.m; sourceTree = "<group>"; };
+		D2B3A3B619B9EA3500DE23B5 /* BPSideBarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BPSideBarController.h; sourceTree = "<group>"; };
+		D2B3A3B719B9EA3500DE23B5 /* BPSideBarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BPSideBarController.m; sourceTree = "<group>"; };
+		D2B3A3B919B9FE4C00DE23B5 /* BPFormulaPopoverViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BPFormulaPopoverViewController.h; sourceTree = "<group>"; };
+		D2B3A3BA19B9FE4C00DE23B5 /* BPFormulaPopoverViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BPFormulaPopoverViewController.m; sourceTree = "<group>"; };
+		D2B3A3BC19BA403300DE23B5 /* BPFormulaPopoverView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BPFormulaPopoverView.xib; sourceTree = "<group>"; };
 		D2E53A4719A6215400E05AFC /* BPFormulaOptionsWindow.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BPFormulaOptionsWindow.xib; sourceTree = "<group>"; };
 		D2E53A4919A6228300E05AFC /* BPFormulaOptionsWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BPFormulaOptionsWindowController.h; sourceTree = "<group>"; };
 		D2E53A4A19A6228300E05AFC /* BPFormulaOptionsWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BPFormulaOptionsWindowController.m; sourceTree = "<group>"; };
@@ -216,6 +224,11 @@
 				D2B3A3AF19B9D7FC00DE23B5 /* BPFormulaeDataSource.m */,
 				1FE4FE78148E5FEB008EDE8B /* BPHomebrewViewController.h */,
 				1FE4FE79148E5FEB008EDE8B /* BPHomebrewViewController.m */,
+				D2B3A3B919B9FE4C00DE23B5 /* BPFormulaPopoverViewController.h */,
+				D2B3A3BA19B9FE4C00DE23B5 /* BPFormulaPopoverViewController.m */,
+				D2B3A3BC19BA403300DE23B5 /* BPFormulaPopoverView.xib */,
+				D2B3A3B619B9EA3500DE23B5 /* BPSideBarController.h */,
+				D2B3A3B719B9EA3500DE23B5 /* BPSideBarController.m */,
 				D2B3A3AB19B9D39A00DE23B5 /* BPSelectedFormulaViewController.h */,
 				D2B3A3AC19B9D39A00DE23B5 /* BPSelectedFormulaViewController.m */,
 				D2B3A39719B879CD00DE23B5 /* BPDoctorViewController.h */,
@@ -473,6 +486,7 @@
 				15D2CFB518F2065200B6D9F1 /* downloadTemplate.png in Resources */,
 				1FE4FE6F148E4CDD008EDE8B /* MainMenu.xib in Resources */,
 				15D2CF9C18F1D66400B6D9F1 /* pinTemplate@2x.png in Resources */,
+				D2B3A3BD19BA403300DE23B5 /* BPFormulaPopoverView.xib in Resources */,
 				D2E53A4819A6215400E05AFC /* BPFormulaOptionsWindow.xib in Resources */,
 				15D5BEF518EBB430001DDED7 /* search.icns in Resources */,
 				15D2CFA218F1E71800B6D9F1 /* reload.icns in Resources */,
@@ -524,6 +538,7 @@
 				D2B3A3AD19B9D39A00DE23B5 /* BPSelectedFormulaViewController.m in Sources */,
 				D26F6E7F19B8608B00F616C1 /* NSFont+Appearance.m in Sources */,
 				15D5BEFA18EBC56E001DDED7 /* DMSplitView.m in Sources */,
+				D2B3A3B819B9EA3500DE23B5 /* BPSideBarController.m in Sources */,
 				1570BA5618EE50BD001C3C5C /* BPFormula.m in Sources */,
 				D2B3A39C19B879CD00DE23B5 /* BPUpdateViewController.m in Sources */,
 				1FE4FE65148E4CDD008EDE8B /* main.m in Sources */,
@@ -538,6 +553,7 @@
 				15C34CBF19512DE100B92E36 /* BPAutoScrollTextView.m in Sources */,
 				D2B3A3B019B9D7FC00DE23B5 /* BPFormulaeDataSource.m in Sources */,
 				D2B3A39B19B879CD00DE23B5 /* BPDoctorViewController.m in Sources */,
+				D2B3A3BB19B9FE4C00DE23B5 /* BPFormulaPopoverViewController.m in Sources */,
 				D2F732F119190B75002B2512 /* NSString+URLValidation.m in Sources */,
 				1FE4FE7A148E5FEB008EDE8B /* BPHomebrewViewController.m in Sources */,
 				15D2CFAB18F202B300B6D9F1 /* DCOAboutWindowController.m in Sources */,
