@@ -23,7 +23,6 @@
 #import "BPFormula.h"
 #import "DMSplitView.h"
 #import "BPInsetShadowView.h"
-#import "BPUpdateDoctorController.h"
 #import "BPGenericTextPopoverView.h"
 #import "Frameworks/PXSourceList.framework/Headers/PXSourceList.h"
 
@@ -57,8 +56,6 @@ typedef NS_ENUM(NSUInteger, BPWindowOperation) {
 @property (weak) IBOutlet NSToolbar                *toolbar;
 @property (weak) IBOutlet NSSearchField            *searchField;
 @property (weak) IBOutlet NSMenu				   *menu_formula;
-
-@property (strong) IBOutlet BPUpdateDoctorController *updateDoctorViewController;
 
 @property IBOutlet NSToolbarItem *toolbarButton_formulaInfo;
 @property IBOutlet NSToolbarItem *toolbarButton_installUninstall;

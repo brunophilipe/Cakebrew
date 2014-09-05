@@ -25,6 +25,14 @@
 #import "BPHomebrewInterface.h"
 #import "BPFormulaOptionsWindowController.h"
 #import "BPInstallationWindowController.h"
+#import "BPUpdateViewController.h"
+#import "BPDoctorViewController.h"
+
+typedef NS_ENUM(NSUInteger, HomeBrewTab) {
+  HomeBrewTabFormulae,
+  HomeBrewTabDoctor,
+  HomeBrewTabUpdate
+};
 
 @interface BPHomebrewViewController () <NSTableViewDataSource, NSTableViewDelegate, PXSourceListDataSource, PXSourceListDelegate, BPHomebrewManagerDelegate, NSMenuDelegate>
 
@@ -42,6 +50,8 @@
 
 @property (strong, nonatomic) BPFormulaOptionsWindowController *formulaOptionsWindowController;
 @property (strong, nonatomic) BPInstallationWindowController *operationWindowController;
+@property (strong, nonatomic) BPUpdateViewController *updateViewController;
+@property (strong, nonatomic) BPDoctorViewController *doctorViewController;
 
 @end
 
@@ -69,6 +79,26 @@
 		[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(searchUpdatedNotification:) name:kBP_NOTIFICATION_SEARCH_UPDATED object:nil];
 	}
 	return self;
+}
+
+
+- (void)awakeFromNib
+{
+  //Creating view for update tab
+  self.updateViewController = [[BPUpdateViewController alloc] initWithNibName:nil bundle:nil];
+  NSView *updateView = [self.updateViewController view];
+  if ([[self.tabView tabViewItems] count] > HomeBrewTabDoctor){
+    NSTabViewItem *updateTab = [self.tabView tabViewItemAtIndex:HomeBrewTabDoctor];
+    [updateTab setView:updateView];
+  }
+  
+  //Creating view for doctor tab
+  self.doctorViewController = [[BPDoctorViewController alloc] initWithNibName:nil bundle:nil];
+  NSView *doctorView = [self.doctorViewController view];
+  if ([[self.tabView tabViewItems] count] > HomeBrewTabUpdate){
+    NSTabViewItem *doctorTab = [self.tabView tabViewItemAtIndex:HomeBrewTabUpdate];
+    [doctorTab setView:doctorView];
+  }
 }
 
 - (void)dealloc
@@ -621,12 +651,12 @@
 
 		case 7: // Doctor
 			message = @"The doctor is a Homebrew feature that detects the most common causes of errors.";
-			tabIndex = 1;
+			tabIndex = HomeBrewTabDoctor;
 			break;
 
 		case 8: // Update Tool
 			message = @"Updating Homebrew means fetching the latest info about the available formulae.";
-			tabIndex = 2;
+			tabIndex = HomeBrewTabUpdate;
 			break;
 
 		default:
@@ -824,9 +854,7 @@
 - (IBAction)updateHomebrew:(id)sender
 {
 	[self.outlineView_sidebar selectRowIndexes:[NSIndexSet indexSetWithIndex:8] byExtendingSelection:NO];
-	if (![self.updateDoctorViewController isRunning]) {
-		[self.updateDoctorViewController runStopUpdate:nil];
-	}
+  [self.updateViewController runStopUpdate:nil];
 }
 
 - (IBAction)openSelectedFormulaWebsite:(id)sender {

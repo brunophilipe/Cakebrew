@@ -15,7 +15,6 @@
 		15705464191A887E0003E60F /* BPGenericTextPopoverView.m in Sources */ = {isa = PBXBuildFile; fileRef = 15705463191A887E0003E60F /* BPGenericTextPopoverView.m */; };
 		1570BA3618EE0A66001C3C5C /* BPHomebrewManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 1570BA3518EE0A66001C3C5C /* BPHomebrewManager.m */; };
 		1570BA5618EE50BD001C3C5C /* BPFormula.m in Sources */ = {isa = PBXBuildFile; fileRef = 1570BA5518EE50BD001C3C5C /* BPFormula.m */; };
-		157270DA18F2598A00CA8C9C /* BPUpdateDoctorController.m in Sources */ = {isa = PBXBuildFile; fileRef = 157270D818F2598A00CA8C9C /* BPUpdateDoctorController.m */; };
 		158370B918F2471500176C9C /* PXSourceList.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 158370B818F2471500176C9C /* PXSourceList.framework */; };
 		158370BA18F2472100176C9C /* PXSourceList.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 158370B818F2471500176C9C /* PXSourceList.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		15B23A2918F4F21E00714212 /* Sparkle.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 15B23A2818F4F21E00714212 /* Sparkle.framework */; };
@@ -54,12 +53,17 @@
 		1FE4FE6F148E4CDD008EDE8B /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1FE4FE6D148E4CDD008EDE8B /* MainMenu.xib */; };
 		1FE4FE77148E4D43008EDE8B /* BPHomebrewInterface.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FE4FE76148E4D43008EDE8B /* BPHomebrewInterface.m */; };
 		1FE4FE7A148E5FEB008EDE8B /* BPHomebrewViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FE4FE79148E5FEB008EDE8B /* BPHomebrewViewController.m */; };
+		B58661A28038B63E5137AE50 /* cloudTemplate@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B5866C4F6DAFDFF8DD8A5314 /* cloudTemplate@2x.png */; };
+		B58668E3B0EBA26D892D0B61 /* cloudTemplate.png in Resources */ = {isa = PBXBuildFile; fileRef = B5866F6F1BEBE00B1EB5B5C7 /* cloudTemplate.png */; };
+		D26F6E7F19B8608B00F616C1 /* NSFont+Appearance.m in Sources */ = {isa = PBXBuildFile; fileRef = D26F6E7E19B8608B00F616C1 /* NSFont+Appearance.m */; };
+		D2B3A39B19B879CD00DE23B5 /* BPDoctorViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D2B3A39819B879CD00DE23B5 /* BPDoctorViewController.m */; };
+		D2B3A39C19B879CD00DE23B5 /* BPUpdateViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D2B3A39A19B879CD00DE23B5 /* BPUpdateViewController.m */; };
+		D2B3A39F19B87A2C00DE23B5 /* BPDoctorView.xib in Resources */ = {isa = PBXBuildFile; fileRef = D2B3A39D19B87A2C00DE23B5 /* BPDoctorView.xib */; };
+		D2B3A3A019B87A2C00DE23B5 /* BPUpdateView.xib in Resources */ = {isa = PBXBuildFile; fileRef = D2B3A39E19B87A2C00DE23B5 /* BPUpdateView.xib */; };
 		D2E53A4819A6215400E05AFC /* BPFormulaOptionsWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = D2E53A4719A6215400E05AFC /* BPFormulaOptionsWindow.xib */; };
 		D2E53A4B19A6228300E05AFC /* BPFormulaOptionsWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = D2E53A4A19A6228300E05AFC /* BPFormulaOptionsWindowController.m */; };
 		D2E53A4D19A65B1600E05AFC /* BPInstallationWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = D2E53A4C19A65B1600E05AFC /* BPInstallationWindow.xib */; };
 		D2E53A5019A65BAD00E05AFC /* BPInstallationWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = D2E53A4F19A65BAD00E05AFC /* BPInstallationWindowController.m */; };
-		B58661A28038B63E5137AE50 /* cloudTemplate@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B5866C4F6DAFDFF8DD8A5314 /* cloudTemplate@2x.png */; };
-		B58668E3B0EBA26D892D0B61 /* cloudTemplate.png in Resources */ = {isa = PBXBuildFile; fileRef = B5866F6F1BEBE00B1EB5B5C7 /* cloudTemplate.png */; };
 		D2F732EC19190B6D002B2512 /* BPPreferencesWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = D2F732E919190B6D002B2512 /* BPPreferencesWindow.xib */; };
 		D2F732ED19190B6D002B2512 /* BPPreferencesWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = D2F732EB19190B6D002B2512 /* BPPreferencesWindowController.m */; };
 		D2F732F119190B75002B2512 /* NSString+URLValidation.m in Sources */ = {isa = PBXBuildFile; fileRef = D2F732F019190B75002B2512 /* NSString+URLValidation.m */; };
@@ -93,8 +97,6 @@
 		1570BA3518EE0A66001C3C5C /* BPHomebrewManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BPHomebrewManager.m; sourceTree = "<group>"; };
 		1570BA5418EE50BD001C3C5C /* BPFormula.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BPFormula.h; path = Models/BPFormula.h; sourceTree = "<group>"; };
 		1570BA5518EE50BD001C3C5C /* BPFormula.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BPFormula.m; path = Models/BPFormula.m; sourceTree = "<group>"; };
-		157270D718F2598A00CA8C9C /* BPUpdateDoctorController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BPUpdateDoctorController.h; sourceTree = "<group>"; };
-		157270D818F2598A00CA8C9C /* BPUpdateDoctorController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BPUpdateDoctorController.m; sourceTree = "<group>"; };
 		158370B818F2471500176C9C /* PXSourceList.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PXSourceList.framework; path = Cakebrew/Frameworks/PXSourceList.framework; sourceTree = "<group>"; };
 		15B23A2818F4F21E00714212 /* Sparkle.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Sparkle.framework; path = Cakebrew/Frameworks/Sparkle.framework; sourceTree = "<group>"; };
 		15B23A2B18F5003600714212 /* dsa_pub.pem */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = dsa_pub.pem; sourceTree = "<group>"; };
@@ -143,14 +145,22 @@
 		1FE4FE76148E4D43008EDE8B /* BPHomebrewInterface.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BPHomebrewInterface.m; sourceTree = "<group>"; };
 		1FE4FE78148E5FEB008EDE8B /* BPHomebrewViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BPHomebrewViewController.h; sourceTree = "<group>"; };
 		1FE4FE79148E5FEB008EDE8B /* BPHomebrewViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BPHomebrewViewController.m; sourceTree = "<group>"; };
+		B5866C4F6DAFDFF8DD8A5314 /* cloudTemplate@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "cloudTemplate@2x.png"; sourceTree = "<group>"; };
+		B5866F6F1BEBE00B1EB5B5C7 /* cloudTemplate.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cloudTemplate.png; sourceTree = "<group>"; };
+		D26F6E7D19B8608B00F616C1 /* NSFont+Appearance.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSFont+Appearance.h"; path = "../NSFont+Appearance.h"; sourceTree = "<group>"; };
+		D26F6E7E19B8608B00F616C1 /* NSFont+Appearance.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSFont+Appearance.m"; path = "../NSFont+Appearance.m"; sourceTree = "<group>"; };
+		D2B3A39719B879CD00DE23B5 /* BPDoctorViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BPDoctorViewController.h; sourceTree = "<group>"; };
+		D2B3A39819B879CD00DE23B5 /* BPDoctorViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BPDoctorViewController.m; sourceTree = "<group>"; };
+		D2B3A39919B879CD00DE23B5 /* BPUpdateViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BPUpdateViewController.h; sourceTree = "<group>"; };
+		D2B3A39A19B879CD00DE23B5 /* BPUpdateViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BPUpdateViewController.m; sourceTree = "<group>"; };
+		D2B3A39D19B87A2C00DE23B5 /* BPDoctorView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BPDoctorView.xib; sourceTree = "<group>"; };
+		D2B3A39E19B87A2C00DE23B5 /* BPUpdateView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BPUpdateView.xib; sourceTree = "<group>"; };
 		D2E53A4719A6215400E05AFC /* BPFormulaOptionsWindow.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BPFormulaOptionsWindow.xib; sourceTree = "<group>"; };
 		D2E53A4919A6228300E05AFC /* BPFormulaOptionsWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BPFormulaOptionsWindowController.h; sourceTree = "<group>"; };
 		D2E53A4A19A6228300E05AFC /* BPFormulaOptionsWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BPFormulaOptionsWindowController.m; sourceTree = "<group>"; };
 		D2E53A4C19A65B1600E05AFC /* BPInstallationWindow.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BPInstallationWindow.xib; sourceTree = "<group>"; };
 		D2E53A4E19A65BAD00E05AFC /* BPInstallationWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BPInstallationWindowController.h; sourceTree = "<group>"; };
 		D2E53A4F19A65BAD00E05AFC /* BPInstallationWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BPInstallationWindowController.m; sourceTree = "<group>"; };
-		B5866C4F6DAFDFF8DD8A5314 /* cloudTemplate@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "cloudTemplate@2x.png"; sourceTree = "<group>"; };
-		B5866F6F1BEBE00B1EB5B5C7 /* cloudTemplate.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cloudTemplate.png; sourceTree = "<group>"; };
 		D2F732E919190B6D002B2512 /* BPPreferencesWindow.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BPPreferencesWindow.xib; sourceTree = "<group>"; };
 		D2F732EA19190B6D002B2512 /* BPPreferencesWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BPPreferencesWindowController.h; sourceTree = "<group>"; };
 		D2F732EB19190B6D002B2512 /* BPPreferencesWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BPPreferencesWindowController.m; sourceTree = "<group>"; };
@@ -193,8 +203,12 @@
 			children = (
 				1FE4FE78148E5FEB008EDE8B /* BPHomebrewViewController.h */,
 				1FE4FE79148E5FEB008EDE8B /* BPHomebrewViewController.m */,
-				157270D718F2598A00CA8C9C /* BPUpdateDoctorController.h */,
-				157270D818F2598A00CA8C9C /* BPUpdateDoctorController.m */,
+				D2B3A39719B879CD00DE23B5 /* BPDoctorViewController.h */,
+				D2B3A39819B879CD00DE23B5 /* BPDoctorViewController.m */,
+				D2B3A39D19B87A2C00DE23B5 /* BPDoctorView.xib */,
+				D2B3A39919B879CD00DE23B5 /* BPUpdateViewController.h */,
+				D2B3A39A19B879CD00DE23B5 /* BPUpdateViewController.m */,
+				D2B3A39E19B87A2C00DE23B5 /* BPUpdateView.xib */,
 				D2E53A4E19A65BAD00E05AFC /* BPInstallationWindowController.h */,
 				D2E53A4F19A65BAD00E05AFC /* BPInstallationWindowController.m */,
 				D2E53A4C19A65B1600E05AFC /* BPInstallationWindow.xib */,
@@ -369,6 +383,8 @@
 		D2F732EE19190B75002B2512 /* Categories */ = {
 			isa = PBXGroup;
 			children = (
+				D26F6E7D19B8608B00F616C1 /* NSFont+Appearance.h */,
+				D26F6E7E19B8608B00F616C1 /* NSFont+Appearance.m */,
 				D2F732EF19190B75002B2512 /* NSString+URLValidation.h */,
 				D2F732F019190B75002B2512 /* NSString+URLValidation.m */,
 			);
@@ -432,6 +448,7 @@
 				1529086B1927C05B00206767 /* .travis.yml in Resources */,
 				15D5BEF318EBB3FB001DDED7 /* plus.icns in Resources */,
 				D2F732EC19190B6D002B2512 /* BPPreferencesWindow.xib in Resources */,
+				D2B3A39F19B87A2C00DE23B5 /* BPDoctorView.xib in Resources */,
 				1FE4FE63148E4CDD008EDE8B /* InfoPlist.strings in Resources */,
 				1FE4FE69148E4CDD008EDE8B /* Credits.rtf in Resources */,
 				15D2CFAA18F202B300B6D9F1 /* DCOAboutWindow.xib in Resources */,
@@ -455,6 +472,7 @@
 				15D2CF9818F1D66400B6D9F1 /* installedTemplate@2x.png in Resources */,
 				15B23A2C18F5003600714212 /* dsa_pub.pem in Resources */,
 				D2E53A4D19A65B1600E05AFC /* BPInstallationWindow.xib in Resources */,
+				D2B3A3A019B87A2C00DE23B5 /* BPUpdateView.xib in Resources */,
 				15D2CFBA18F20A8200B6D9F1 /* LICENSE in Resources */,
 				15D2CF9918F1D66400B6D9F1 /* outdatedTemplate.png in Resources */,
 				15D2CF9318F1D66400B6D9F1 /* allFormulasTemplate.png in Resources */,
@@ -488,8 +506,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D26F6E7F19B8608B00F616C1 /* NSFont+Appearance.m in Sources */,
 				15D5BEFA18EBC56E001DDED7 /* DMSplitView.m in Sources */,
 				1570BA5618EE50BD001C3C5C /* BPFormula.m in Sources */,
+				D2B3A39C19B879CD00DE23B5 /* BPUpdateViewController.m in Sources */,
 				1FE4FE65148E4CDD008EDE8B /* main.m in Sources */,
 				1570BA3618EE0A66001C3C5C /* BPHomebrewManager.m in Sources */,
 				1FE4FE6C148E4CDD008EDE8B /* BPAppDelegate.m in Sources */,
@@ -499,7 +519,7 @@
 				D2E53A5019A65BAD00E05AFC /* BPInstallationWindowController.m in Sources */,
 				D2F732ED19190B6D002B2512 /* BPPreferencesWindowController.m in Sources */,
 				15C34CBF19512DE100B92E36 /* BPAutoScrollTextView.m in Sources */,
-				157270DA18F2598A00CA8C9C /* BPUpdateDoctorController.m in Sources */,
+				D2B3A39B19B879CD00DE23B5 /* BPDoctorViewController.m in Sources */,
 				D2F732F119190B75002B2512 /* NSString+URLValidation.m in Sources */,
 				1FE4FE7A148E5FEB008EDE8B /* BPHomebrewViewController.m in Sources */,
 				15D2CFAB18F202B300B6D9F1 /* DCOAboutWindowController.m in Sources */,
