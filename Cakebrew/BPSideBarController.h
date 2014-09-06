@@ -28,7 +28,8 @@ NS_ENUM(NSUInteger, FormulaeSideBarItem) {
 
 @interface BPSideBarController : NSObject <PXSourceListDataSource, PXSourceListDelegate>
 
-@property (unsafe_unretained) id <BPSideBarControllerDelegate>delegate;
+@property (unsafe_unretained) IBOutlet id <BPSideBarControllerDelegate>delegate;
+
 - (void)refreshSidebarBadges;
 
 @end

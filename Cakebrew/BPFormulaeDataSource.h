@@ -17,4 +17,5 @@
 - (instancetype)initWithMode:(BPListMode)aMode;
 - (BPFormula *)formulaAtIndex:(NSInteger)index;
 - (NSArray *)formulasAtIndexSet:(NSIndexSet *)indexSet;
+- (void)refreshBackingArray;
 @end

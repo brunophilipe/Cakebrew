@@ -28,7 +28,6 @@
   self = [super init];
   if (self) {
     [self buildSidebarTree];
-    [self refreshSidebarBadges];
   }
   return self;
 }

@@ -608,6 +608,10 @@
                                                             </prototypeCellViews>
                                                         </tableColumn>
                                                     </tableColumns>
+                                                    <connections>
+                                                        <outlet property="dataSource" destination="SGP-Ky-0Th" id="jlZ-9y-XxE"/>
+                                                        <outlet property="delegate" destination="SGP-Ky-0Th" id="3mr-dZ-ehR"/>
+                                                    </connections>
                                                 </outlineView>
                                             </subviews>
                                             <nil key="backgroundColor"/>
@@ -1112,6 +1116,11 @@
             </connections>
         </customObject>
         <customObject id="420" customClass="NSFontManager"/>
+        <customObject id="SGP-Ky-0Th" customClass="BPSideBarController">
+            <connections>
+                <outlet property="delegate" destination="547" id="a4R-ai-ZRe"/>
+            </connections>
+        </customObject>
         <viewController title="HomebrewController" nibName="MainMenu" id="547" customClass="BPHomebrewViewController">
             <connections>
                 <outlet property="MainToolbar" destination="646" id="678"/>
@@ -1121,6 +1130,7 @@
                 <outlet property="scrollView_formulae" destination="ZTf-N0-ClA" id="2Yf-0I-qyg"/>
                 <outlet property="searchField" destination="zLQ-g9-dpv" id="KJG-rk-obd"/>
                 <outlet property="selectedFormulaeViewController" destination="BDA-g8-7We" id="hNL-s0-Yf7"/>
+                <outlet property="sidebarController" destination="SGP-Ky-0Th" id="etb-bD-RB5"/>
                 <outlet property="splitView" destination="Exu-Zx-Kij" id="Bt8-rO-7vE"/>
                 <outlet property="tabView" destination="79A-lZ-LEo" id="ZHE-dc-ztv"/>
                 <outlet property="tableView_formulae" destination="nOF-Ra-wlA" id="78b-5b-rWb"/>

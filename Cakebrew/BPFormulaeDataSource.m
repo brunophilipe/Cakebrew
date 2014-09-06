@@ -27,17 +27,17 @@
   if (self) {
     _mode = aMode;
   }
-  [self refreshData];
+  [self refreshBackingArray];
   return self;
 }
 
 - (void)setMode:(BPListMode)mode
 {
   _mode = mode;
-  [self refreshData];
+  [self refreshBackingArray];
 }
 
-- (void)refreshData
+- (void)refreshBackingArray
 {
   switch (self.mode) {
 		case kBPListAll:

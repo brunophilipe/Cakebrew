@@ -28,7 +28,6 @@
 #import "BPUpdateViewController.h"
 #import "BPDoctorViewController.h"
 #import "BPFormulaeDataSource.h"
-#import "BPSideBarController.h"
 #import "BPSelectedFormulaViewController.h"
 
 typedef NS_ENUM(NSUInteger, HomeBrewTab) {
@@ -46,7 +45,7 @@ typedef NS_ENUM(NSUInteger, HomeBrewTab) {
 @property BOOL isSearching;
 @property BPWindowOperation toolbarButtonOperation;
 
-@property (strong, nonatomic) BPSideBarController *sidebarController;
+
 @property (strong, nonatomic) BPFormulaeDataSource *formulaeDataSource;
 @property (strong, nonatomic) BPFormulaOptionsWindowController *formulaOptionsWindowController;
 @property (strong, nonatomic) BPInstallationWindowController *operationWindowController;
@@ -66,7 +65,7 @@ typedef NS_ENUM(NSUInteger, HomeBrewTab) {
 {
   if (!_formulaPopoverViewController) {
     _formulaPopoverViewController = [[BPFormulaPopoverViewController alloc] init];
-    //this will initialize whole controller
+    //this will force initialize controller with its view
    __unused NSView *view = _formulaPopoverViewController.view;
   }
   return _formulaPopoverViewController;
@@ -95,7 +94,7 @@ typedef NS_ENUM(NSUInteger, HomeBrewTab) {
   //Creating view for update tab
   self.updateViewController = [[BPUpdateViewController alloc] initWithNibName:nil bundle:nil];
   NSView *updateView = [self.updateViewController view];
-  if ([[self.tabView tabViewItems] count] > HomeBrewTabDoctor){
+  if ([[self.tabView tabViewItems] count] > HomeBrewTabDoctor) {
     NSTabViewItem *updateTab = [self.tabView tabViewItemAtIndex:HomeBrewTabDoctor];
     [updateTab setView:updateView];
   }
@@ -103,7 +102,7 @@ typedef NS_ENUM(NSUInteger, HomeBrewTab) {
   //Creating view for doctor tab
   self.doctorViewController = [[BPDoctorViewController alloc] initWithNibName:nil bundle:nil];
   NSView *doctorView = [self.doctorViewController view];
-  if ([[self.tabView tabViewItems] count] > HomeBrewTabUpdate){
+  if ([[self.tabView tabViewItems] count] > HomeBrewTabUpdate) {
     NSTabViewItem *doctorTab = [self.tabView tabViewItemAtIndex:HomeBrewTabUpdate];
     [doctorTab setView:doctorView];
   }
@@ -115,15 +114,9 @@ typedef NS_ENUM(NSUInteger, HomeBrewTab) {
   
   [self.view_disablerLock setShouldDrawBackground:YES];
   
-  self.sidebarController = [[BPSideBarController alloc] init];
-  self.sidebarController.delegate = self;
-  [self.outlineView_sidebar setDelegate:self.sidebarController];
-	[self.outlineView_sidebar setDataSource:self.sidebarController];
+  [self.sidebarController refreshSidebarBadges];
   
-  //THIS IS TOTALLY UGLY -- SOMEONE WHO ADD THIS SHOULD ADD COMMENT
-	dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.6 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-		[self.outlineView_sidebar selectRowIndexes:[NSIndexSet indexSetWithIndex:FormulaeSideBarItemInstalled] byExtendingSelection:NO];
-	});
+  [self.outlineView_sidebar selectRowIndexes:[NSIndexSet indexSetWithIndex:FormulaeSideBarItemInstalled] byExtendingSelection:NO];
   
   _appDelegate = BPAppDelegateRef;
 }
@@ -139,8 +132,8 @@ typedef NS_ENUM(NSUInteger, HomeBrewTab) {
 - (void)prepareFormulae:(NSArray*)formulae forOperation:(BPWindowOperation)operation withOptions:(NSArray*)options
 {
   self.operationWindowController = [BPInstallationWindowController runWithOperation:operation
-                                                                                   formulae:formulae
-                                                                                    options:options];
+                                                                           formulae:formulae
+                                                                            options:options];
 }
 
 - (void)lockWindow
@@ -281,6 +274,7 @@ typedef NS_ENUM(NSUInteger, HomeBrewTab) {
 - (void)homebrewManagerFinishedUpdating:(BPHomebrewManager *)manager
 {
   self.selectedFormulaeViewController.formulae = nil;
+  [self.formulaeDataSource refreshBackingArray];
   [self.sidebarController refreshSidebarBadges];
 
 	// Used after unlocking the app when inserting custom homebrew installation path
@@ -291,7 +285,7 @@ typedef NS_ENUM(NSUInteger, HomeBrewTab) {
   [self setEnableUpgradeFormulasMenu:([[BPHomebrewManager sharedManager] formulae_outdated].count > 0)];
   
 	if (shouldReselectFirstRow)
-		[_outlineView_sidebar selectRowIndexes:[NSIndexSet indexSetWithIndex:1] byExtendingSelection:NO];
+		[_outlineView_sidebar selectRowIndexes:[NSIndexSet indexSetWithIndex:FormulaeSideBarItemInstalled] byExtendingSelection:NO];
 	else
 		[_outlineView_sidebar selectRowIndexes:[NSIndexSet indexSetWithIndex:(NSUInteger)_lastSelectedSidebarIndex] byExtendingSelection:NO];
 }

@@ -25,6 +25,7 @@
 #import "BPInsetShadowView.h"
 #import "BPFormulaeTableView.h"
 #import "BPFormulaPopoverViewController.h"
+#import "BPSideBarController.h"
 #import "Frameworks/PXSourceList.framework/Headers/PXSourceList.h"
 
 typedef NS_ENUM(NSUInteger, BPWindowOperation) {
@@ -41,9 +42,10 @@ typedef NS_ENUM(NSUInteger, BPWindowOperation) {
 
 @interface BPHomebrewViewController : NSViewController
 
+@property (weak) IBOutlet BPSideBarController      *sidebarController;
 @property (weak) IBOutlet BPFormulaeTableView      *tableView_formulae;
 @property (weak) IBOutlet NSScrollView             *scrollView_formulae;
-@property (weak) IBOutlet PXSourceList             *outlineView_sidebar;
+@property (assign) IBOutlet PXSourceList           *outlineView_sidebar;
 @property (weak) IBOutlet DMSplitView              *splitView;
 @property (weak) IBOutlet NSTabView                *tabView;
 @property (weak) IBOutlet NSTextField              *label_information;
