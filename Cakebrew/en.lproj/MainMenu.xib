@@ -608,6 +608,10 @@
                                                             </prototypeCellViews>
                                                         </tableColumn>
                                                     </tableColumns>
+                                                    <connections>
+                                                        <outlet property="dataSource" destination="SGP-Ky-0Th" id="jlZ-9y-XxE"/>
+                                                        <outlet property="delegate" destination="SGP-Ky-0Th" id="3mr-dZ-ehR"/>
+                                                    </connections>
                                                 </outlineView>
                                             </subviews>
                                             <nil key="backgroundColor"/>
@@ -654,7 +658,7 @@
                                                                 <rect key="frame" x="0.0" y="17" width="400" height="183"/>
                                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                 <subviews>
-                                                                    <tableView focusRingType="none" verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" alternatingRowBackgroundColors="YES" multipleSelection="NO" autosaveColumns="NO" headerView="Teu-qL-elL" id="nOF-Ra-wlA">
+                                                                    <tableView focusRingType="none" verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" alternatingRowBackgroundColors="YES" multipleSelection="NO" autosaveColumns="NO" headerView="Teu-qL-elL" id="nOF-Ra-wlA" customClass="BPFormulaeTableView">
                                                                         <rect key="frame" x="0.0" y="0.0" width="517" height="183"/>
                                                                         <autoresizingMask key="autoresizingMask"/>
                                                                         <size key="intercellSpacing" width="3" height="2"/>
@@ -715,8 +719,6 @@
                                                                             </tableColumn>
                                                                         </tableColumns>
                                                                         <connections>
-                                                                            <outlet property="dataSource" destination="547" id="V6h-YG-hlK"/>
-                                                                            <outlet property="delegate" destination="547" id="nXs-gz-hL3"/>
                                                                             <outlet property="menu" destination="dg5-kq-v1Y" id="g5j-1C-LWo"/>
                                                                         </connections>
                                                                     </tableView>
@@ -1114,21 +1116,21 @@
             </connections>
         </customObject>
         <customObject id="420" customClass="NSFontManager"/>
-        <userDefaultsController representsSharedInstance="YES" id="659"/>
+        <customObject id="SGP-Ky-0Th" customClass="BPSideBarController">
+            <connections>
+                <outlet property="delegate" destination="547" id="a4R-ai-ZRe"/>
+            </connections>
+        </customObject>
         <viewController title="HomebrewController" nibName="MainMenu" id="547" customClass="BPHomebrewViewController">
             <connections>
                 <outlet property="MainToolbar" destination="646" id="678"/>
-                <outlet property="clippingView_formulae" destination="imx-IN-SCs" id="Sku-zQ-Ocj"/>
-                <outlet property="formulaPopoverView" destination="ACU-Ca-y31" id="4Mc-fh-sex"/>
-                <outlet property="label_formulaConflicts" destination="tfH-bj-woo" id="Ge8-BU-wE3"/>
-                <outlet property="label_formulaDependencies" destination="jmd-cV-6fD" id="hEm-zJ-tHd"/>
-                <outlet property="label_formulaPath" destination="xnc-bd-zft" id="vCK-nv-vYb"/>
-                <outlet property="label_formulaVersion" destination="AJi-jy-Vvh" id="bfU-fl-8eX"/>
                 <outlet property="label_information" destination="tiK-fW-tE7" id="K14-X1-4bF"/>
                 <outlet property="menu_formula" destination="sBH-Ta-Jft" id="kCm-57-cUw"/>
                 <outlet property="outlineView_sidebar" destination="h1z-c9-U0s" id="PZy-Oz-lSv"/>
                 <outlet property="scrollView_formulae" destination="ZTf-N0-ClA" id="2Yf-0I-qyg"/>
                 <outlet property="searchField" destination="zLQ-g9-dpv" id="KJG-rk-obd"/>
+                <outlet property="selectedFormulaeViewController" destination="BDA-g8-7We" id="hNL-s0-Yf7"/>
+                <outlet property="sidebarController" destination="SGP-Ky-0Th" id="etb-bD-RB5"/>
                 <outlet property="splitView" destination="Exu-Zx-Kij" id="Bt8-rO-7vE"/>
                 <outlet property="tabView" destination="79A-lZ-LEo" id="ZHE-dc-ztv"/>
                 <outlet property="tableView_formulae" destination="nOF-Ra-wlA" id="78b-5b-rWb"/>
@@ -1139,63 +1141,15 @@
                 <outlet property="view_disablerLock" destination="SfC-W7-8MF" id="uGc-Al-iak"/>
             </connections>
         </viewController>
-        <customView id="ACU-Ca-y31" customClass="BPGenericTextPopoverView">
-            <rect key="frame" x="0.0" y="0.0" width="450" height="250"/>
-            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-            <subviews>
-                <scrollView borderType="none" horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" hasHorizontalScroller="NO" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="H8C-4e-Aaq">
-                    <rect key="frame" x="20" y="20" width="410" height="183"/>
-                    <autoresizingMask key="autoresizingMask"/>
-                    <clipView key="contentView" drawsBackground="NO" copiesOnScroll="NO" id="hhY-D0-rm2">
-                        <rect key="frame" x="0.0" y="0.0" width="410" height="183"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <textView editable="NO" importsGraphics="NO" richText="NO" findStyle="bar" verticallyResizable="YES" spellingCorrection="YES" id="76F-8G-r1b">
-                                <rect key="frame" x="0.0" y="0.0" width="410" height="183"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                <color key="backgroundColor" white="1" alpha="0.0" colorSpace="calibratedWhite"/>
-                                <size key="minSize" width="410" height="183"/>
-                                <size key="maxSize" width="463" height="10000000"/>
-                                <color key="insertionPointColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                                <size key="minSize" width="410" height="183"/>
-                                <size key="maxSize" width="463" height="10000000"/>
-                            </textView>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="0.0" colorSpace="calibratedWhite"/>
-                    </clipView>
-                    <scroller key="horizontalScroller" hidden="YES" verticalHuggingPriority="750" doubleValue="1" horizontal="YES" id="sx0-QM-4sq">
-                        <rect key="frame" x="-100" y="-100" width="87" height="18"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </scroller>
-                    <scroller key="verticalScroller" verticalHuggingPriority="750" doubleValue="1" horizontal="NO" id="KQo-h0-2tB">
-                        <rect key="frame" x="394" y="0.0" width="16" height="183"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </scroller>
-                </scrollView>
-                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="T60-Zi-U74">
-                    <rect key="frame" x="18" y="211" width="414" height="19"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" title="Information" id="gnb-kG-4Hv">
-                        <font key="font" metaFont="system" size="16"/>
-                        <color key="textColor" name="alternateSelectedControlTextColor" catalog="System" colorSpace="catalog"/>
-                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
-                    </textFieldCell>
-                </textField>
-            </subviews>
-            <constraints>
-                <constraint firstItem="H8C-4e-Aaq" firstAttribute="top" secondItem="T60-Zi-U74" secondAttribute="bottom" constant="8" id="1zB-4U-iYb"/>
-                <constraint firstAttribute="trailing" secondItem="H8C-4e-Aaq" secondAttribute="trailing" constant="20" id="HAo-Ps-ryy"/>
-                <constraint firstItem="T60-Zi-U74" firstAttribute="top" secondItem="ACU-Ca-y31" secondAttribute="top" constant="20" id="Kxk-m6-lmJ"/>
-                <constraint firstAttribute="bottom" secondItem="H8C-4e-Aaq" secondAttribute="bottom" constant="20" id="b5p-7u-bwm"/>
-                <constraint firstAttribute="trailing" secondItem="T60-Zi-U74" secondAttribute="trailing" constant="20" id="sBq-ra-Z9t"/>
-                <constraint firstItem="H8C-4e-Aaq" firstAttribute="leading" secondItem="ACU-Ca-y31" secondAttribute="leading" constant="20" id="wN1-Ia-qYH"/>
-                <constraint firstItem="T60-Zi-U74" firstAttribute="leading" secondItem="ACU-Ca-y31" secondAttribute="leading" constant="20" id="zsJ-Nt-gev"/>
-            </constraints>
+        <viewController id="BDA-g8-7We" customClass="BPSelectedFormulaViewController">
             <connections>
-                <outlet property="label_title" destination="T60-Zi-U74" id="fiL-ol-Je1"/>
-                <outlet property="textView" destination="76F-8G-r1b" id="636-ZX-1HH"/>
+                <outlet property="formulaConflictsLabel" destination="tfH-bj-woo" id="Zpr-ZY-HNr"/>
+                <outlet property="formulaDependenciesLabel" destination="jmd-cV-6fD" id="5pN-bf-1FE"/>
+                <outlet property="formulaPathLabel" destination="xnc-bd-zft" id="cnW-Zm-yJ1"/>
+                <outlet property="formulaVersionLabel" destination="AJi-jy-Vvh" id="2Ug-yZ-Nhg"/>
+                <outlet property="view" destination="X3G-aV-OOA" id="GzC-If-1xP"/>
             </connections>
-        </customView>
+        </viewController>
     </objects>
     <resources>
         <image name="NSActionTemplate" width="14" height="14"/>

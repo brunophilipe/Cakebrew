@@ -28,7 +28,6 @@
 
 + (BPInstallationWindowController *)runWithOperation:(BPWindowOperation)windowOperation
                                             formulae:(NSArray *)formulae
-                                             options:(NSArray *)options
-                                       modalDelegate:delegate;
+                                             options:(NSArray *)options;
 
 @end

@@ -34,7 +34,6 @@
 @property (nonatomic) BPWindowOperation windowOperation;
 @property (strong, nonatomic) NSArray *formulae;
 @property (strong, nonatomic) NSArray *options;
-@property (unsafe_unretained) id modalDelegate;
 
 @end
 
@@ -71,14 +70,12 @@
 
 + (BPInstallationWindowController *)runWithOperation:(BPWindowOperation)windowOperation
                                             formulae:(NSArray *)formulae
-                                             options:(NSArray *)options
-                                       modalDelegate:delegate{
+                                             options:(NSArray *)options {
   BPInstallationWindowController *operationWindowController;
   operationWindowController = [[BPInstallationWindowController alloc] initWithWindowNibName:@"BPInstallationWindow"];
   operationWindowController.windowOperation = windowOperation;
   operationWindowController.formulae = formulae;
   operationWindowController.options = options;
-  operationWindowController.modalDelegate = delegate;
 
   NSWindow *operationWindow = operationWindowController.window;
   
@@ -175,6 +172,38 @@
                                                          waitUntilDone:YES];
 				}];
 			}
+		}
+    else if (self.windowOperation == kBPWindowOperationTap)
+		{
+      if (self.formulae) {
+        NSString *name = [[self.formulae firstObject] name];
+        [homebrewInterface tapRepository:name withReturnsBlock:^(NSString *output) {
+          if (outputValue) {
+            outputValue = [outputValue stringByAppendingString:output];
+          } else {
+            outputValue = output;
+          }
+          [self.recordTextView performSelectorOnMainThread:@selector(setString:)
+                                                withObject:outputValue
+                                             waitUntilDone:YES];
+        }];
+      }
+		}
+		else if (self.windowOperation == kBPWindowOperationUntap)
+		{
+      if (self.formulae) {
+        NSString *name = [[self.formulae firstObject] name];
+        [[BPHomebrewInterface sharedInterface] untapRepository:name withReturnsBlock:^(NSString *output) {
+          if (outputValue) {
+            outputValue = [outputValue stringByAppendingString:output];
+          } else {
+            outputValue = output;
+          }
+          [self.recordTextView performSelectorOnMainThread:@selector(setString:)
+                                                withObject:outputValue
+                                             waitUntilDone:YES];
+        }];
+      }
 		}
 		[self.progressIndicator stopAnimation:nil];
 		[self.okButton setEnabled:YES];
