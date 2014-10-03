@@ -29,8 +29,8 @@
 #import "Frameworks/PXSourceList.framework/Headers/PXSourceList.h"
 
 typedef NS_ENUM(NSUInteger, BPWindowOperation) {
-  kBPWindowOperationInstall,
-  kBPWindowOperationUninstall,
+	kBPWindowOperationInstall,
+	kBPWindowOperationUninstall,
 	kBPWindowOperationUpgrade,
 	kBPWindowOperationTap,
 	kBPWindowOperationUntap
