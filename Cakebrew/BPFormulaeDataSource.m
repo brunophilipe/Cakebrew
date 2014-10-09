@@ -78,7 +78,7 @@
 
 - (BPFormula *)formulaAtIndex:(NSInteger)index
 {
-  if ([self.formulaeArray count] > index && index > 0) {
+  if ([self.formulaeArray count] > index && index >= 0) {
     return [self.formulaeArray objectAtIndex:index];
   }
   return nil;
