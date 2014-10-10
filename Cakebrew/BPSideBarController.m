@@ -66,12 +66,12 @@
   
 	item = [PXSourceListItem itemWithTitle:@"Doctor" identifier:@"item"];
 	[item setBadgeValue:@-1];
-	[item setIcon:[NSImage imageNamed:@"wrenchTemplate"]];
+	[item setIcon:[NSImage imageNamed:@"doctorTemplate"]];
 	[parent addChildItem:item];  //FormulaeSideBarItemDoctor = 7,
   
 	item = [PXSourceListItem itemWithTitle:@"Update" identifier:@"item"];
 	[item setBadgeValue:@-1];
-	[item setIcon:[NSImage imageNamed:@"downloadTemplate"]];
+	[item setIcon:[NSImage imageNamed:@"updateTemplate"]];
 	[parent addChildItem:item];  //FormulaeSideBarItemUpdate = 8,
 }
 
@@ -140,10 +140,7 @@
 	}
 	else
 	{
-		if (sourceListItem.badgeValue.integerValue == -2)
-			[cellView.badgeView setBadgeText:@"!"];
-		else
-			[cellView.badgeView setHidden:YES];
+		[cellView.badgeView setHidden:YES];
 	}
   
 	if (sourceListItem.icon)

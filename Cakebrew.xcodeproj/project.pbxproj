@@ -20,23 +20,11 @@
 		15B23A2A18F4F22400714212 /* Sparkle.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 15B23A2818F4F21E00714212 /* Sparkle.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		15B23A2C18F5003600714212 /* dsa_pub.pem in Resources */ = {isa = PBXBuildFile; fileRef = 15B23A2B18F5003600714212 /* dsa_pub.pem */; };
 		15C34CBF19512DE100B92E36 /* BPAutoScrollTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 15C34CBE19512DE100B92E36 /* BPAutoScrollTextView.m */; };
-		15D2CF9318F1D66400B6D9F1 /* allFormulasTemplate.png in Resources */ = {isa = PBXBuildFile; fileRef = 15D2CF8918F1D66400B6D9F1 /* allFormulasTemplate.png */; };
-		15D2CF9418F1D66400B6D9F1 /* allFormulasTemplate@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 15D2CF8A18F1D66400B6D9F1 /* allFormulasTemplate@2x.png */; };
-		15D2CF9718F1D66400B6D9F1 /* installedTemplate.png in Resources */ = {isa = PBXBuildFile; fileRef = 15D2CF8D18F1D66400B6D9F1 /* installedTemplate.png */; };
-		15D2CF9818F1D66400B6D9F1 /* installedTemplate@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 15D2CF8E18F1D66400B6D9F1 /* installedTemplate@2x.png */; };
-		15D2CF9918F1D66400B6D9F1 /* outdatedTemplate.png in Resources */ = {isa = PBXBuildFile; fileRef = 15D2CF8F18F1D66400B6D9F1 /* outdatedTemplate.png */; };
-		15D2CF9A18F1D66400B6D9F1 /* outdatedTemplate@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 15D2CF9018F1D66400B6D9F1 /* outdatedTemplate@2x.png */; };
-		15D2CF9B18F1D66400B6D9F1 /* pinTemplate.png in Resources */ = {isa = PBXBuildFile; fileRef = 15D2CF9118F1D66400B6D9F1 /* pinTemplate.png */; };
-		15D2CF9C18F1D66400B6D9F1 /* pinTemplate@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 15D2CF9218F1D66400B6D9F1 /* pinTemplate@2x.png */; };
-		15D2CF9F18F1D6F700B6D9F1 /* wrenchTemplate.png in Resources */ = {isa = PBXBuildFile; fileRef = 15D2CF9D18F1D6F700B6D9F1 /* wrenchTemplate.png */; };
-		15D2CFA018F1D6F700B6D9F1 /* wrenchTemplate@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 15D2CF9E18F1D6F700B6D9F1 /* wrenchTemplate@2x.png */; };
 		15D2CFA218F1E71800B6D9F1 /* reload.icns in Resources */ = {isa = PBXBuildFile; fileRef = 15D2CFA118F1E71800B6D9F1 /* reload.icns */; };
 		15D2CFA418F1EAD200B6D9F1 /* globe.icns in Resources */ = {isa = PBXBuildFile; fileRef = 15D2CFA318F1EAD200B6D9F1 /* globe.icns */; };
 		15D2CFAA18F202B300B6D9F1 /* DCOAboutWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 15D2CFA718F202B300B6D9F1 /* DCOAboutWindow.xib */; };
 		15D2CFAB18F202B300B6D9F1 /* DCOAboutWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 15D2CFA918F202B300B6D9F1 /* DCOAboutWindowController.m */; };
 		15D2CFAD18F202D000B6D9F1 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 15D2CFAC18F202D000B6D9F1 /* QuartzCore.framework */; };
-		15D2CFB518F2065200B6D9F1 /* downloadTemplate.png in Resources */ = {isa = PBXBuildFile; fileRef = 15D2CFB318F2065200B6D9F1 /* downloadTemplate.png */; };
-		15D2CFB618F2065200B6D9F1 /* downloadTemplate@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 15D2CFB418F2065200B6D9F1 /* downloadTemplate@2x.png */; };
 		15D2CFB818F206DF00B6D9F1 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 15D2CFB718F206DF00B6D9F1 /* README.md */; };
 		15D2CFBA18F20A8200B6D9F1 /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = 15D2CFB918F20A8200B6D9F1 /* LICENSE */; };
 		15D5BEF118EBB3FB001DDED7 /* delete.icns in Resources */ = {isa = PBXBuildFile; fileRef = 15D5BEEE18EBB3FB001DDED7 /* delete.icns */; };
@@ -52,8 +40,6 @@
 		1FE4FE6F148E4CDD008EDE8B /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1FE4FE6D148E4CDD008EDE8B /* MainMenu.xib */; };
 		1FE4FE77148E4D43008EDE8B /* BPHomebrewInterface.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FE4FE76148E4D43008EDE8B /* BPHomebrewInterface.m */; };
 		1FE4FE7A148E5FEB008EDE8B /* BPHomebrewViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FE4FE79148E5FEB008EDE8B /* BPHomebrewViewController.m */; };
-		B58661A28038B63E5137AE50 /* cloudTemplate@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B5866C4F6DAFDFF8DD8A5314 /* cloudTemplate@2x.png */; };
-		B58668E3B0EBA26D892D0B61 /* cloudTemplate.png in Resources */ = {isa = PBXBuildFile; fileRef = B5866F6F1BEBE00B1EB5B5C7 /* cloudTemplate.png */; };
 		D26F6E7F19B8608B00F616C1 /* NSFont+Appearance.m in Sources */ = {isa = PBXBuildFile; fileRef = D26F6E7E19B8608B00F616C1 /* NSFont+Appearance.m */; };
 		D2B3A39B19B879CD00DE23B5 /* BPDoctorViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D2B3A39819B879CD00DE23B5 /* BPDoctorViewController.m */; };
 		D2B3A39C19B879CD00DE23B5 /* BPUpdateViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D2B3A39A19B879CD00DE23B5 /* BPUpdateViewController.m */; };
@@ -105,24 +91,12 @@
 		15B23A2B18F5003600714212 /* dsa_pub.pem */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = dsa_pub.pem; sourceTree = "<group>"; };
 		15C34CBD19512DE100B92E36 /* BPAutoScrollTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BPAutoScrollTextView.h; path = Views/BPAutoScrollTextView.h; sourceTree = "<group>"; };
 		15C34CBE19512DE100B92E36 /* BPAutoScrollTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BPAutoScrollTextView.m; path = Views/BPAutoScrollTextView.m; sourceTree = "<group>"; };
-		15D2CF8918F1D66400B6D9F1 /* allFormulasTemplate.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = allFormulasTemplate.png; sourceTree = "<group>"; };
-		15D2CF8A18F1D66400B6D9F1 /* allFormulasTemplate@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "allFormulasTemplate@2x.png"; sourceTree = "<group>"; };
-		15D2CF8D18F1D66400B6D9F1 /* installedTemplate.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = installedTemplate.png; sourceTree = "<group>"; };
-		15D2CF8E18F1D66400B6D9F1 /* installedTemplate@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "installedTemplate@2x.png"; sourceTree = "<group>"; };
-		15D2CF8F18F1D66400B6D9F1 /* outdatedTemplate.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = outdatedTemplate.png; sourceTree = "<group>"; };
-		15D2CF9018F1D66400B6D9F1 /* outdatedTemplate@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "outdatedTemplate@2x.png"; sourceTree = "<group>"; };
-		15D2CF9118F1D66400B6D9F1 /* pinTemplate.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pinTemplate.png; sourceTree = "<group>"; };
-		15D2CF9218F1D66400B6D9F1 /* pinTemplate@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "pinTemplate@2x.png"; sourceTree = "<group>"; };
-		15D2CF9D18F1D6F700B6D9F1 /* wrenchTemplate.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = wrenchTemplate.png; sourceTree = "<group>"; };
-		15D2CF9E18F1D6F700B6D9F1 /* wrenchTemplate@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "wrenchTemplate@2x.png"; sourceTree = "<group>"; };
 		15D2CFA118F1E71800B6D9F1 /* reload.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = reload.icns; sourceTree = "<group>"; };
 		15D2CFA318F1EAD200B6D9F1 /* globe.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = globe.icns; sourceTree = "<group>"; };
 		15D2CFA718F202B300B6D9F1 /* DCOAboutWindow.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DCOAboutWindow.xib; sourceTree = "<group>"; };
 		15D2CFA818F202B300B6D9F1 /* DCOAboutWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DCOAboutWindowController.h; sourceTree = "<group>"; };
 		15D2CFA918F202B300B6D9F1 /* DCOAboutWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DCOAboutWindowController.m; sourceTree = "<group>"; };
 		15D2CFAC18F202D000B6D9F1 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
-		15D2CFB318F2065200B6D9F1 /* downloadTemplate.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = downloadTemplate.png; sourceTree = "<group>"; };
-		15D2CFB418F2065200B6D9F1 /* downloadTemplate@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "downloadTemplate@2x.png"; sourceTree = "<group>"; };
 		15D2CFB718F206DF00B6D9F1 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.md; sourceTree = SOURCE_ROOT; };
 		15D2CFB918F20A8200B6D9F1 /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = SOURCE_ROOT; };
 		15D5BEEE18EBB3FB001DDED7 /* delete.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = delete.icns; sourceTree = "<group>"; };
@@ -148,8 +122,6 @@
 		1FE4FE76148E4D43008EDE8B /* BPHomebrewInterface.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BPHomebrewInterface.m; sourceTree = "<group>"; };
 		1FE4FE78148E5FEB008EDE8B /* BPHomebrewViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BPHomebrewViewController.h; sourceTree = "<group>"; };
 		1FE4FE79148E5FEB008EDE8B /* BPHomebrewViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BPHomebrewViewController.m; sourceTree = "<group>"; };
-		B5866C4F6DAFDFF8DD8A5314 /* cloudTemplate@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "cloudTemplate@2x.png"; sourceTree = "<group>"; };
-		B5866F6F1BEBE00B1EB5B5C7 /* cloudTemplate.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cloudTemplate.png; sourceTree = "<group>"; };
 		D26F6E7D19B8608B00F616C1 /* NSFont+Appearance.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSFont+Appearance.h"; path = "../NSFont+Appearance.h"; sourceTree = "<group>"; };
 		D26F6E7E19B8608B00F616C1 /* NSFont+Appearance.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSFont+Appearance.m"; path = "../NSFont+Appearance.m"; sourceTree = "<group>"; };
 		D2B3A39719B879CD00DE23B5 /* BPDoctorViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BPDoctorViewController.h; sourceTree = "<group>"; };
@@ -256,27 +228,6 @@
 			name = Homebrew;
 			sourceTree = "<group>";
 		};
-		15D2CF8818F1D66400B6D9F1 /* Icon Templates */ = {
-			isa = PBXGroup;
-			children = (
-				15D2CFB318F2065200B6D9F1 /* downloadTemplate.png */,
-				15D2CFB418F2065200B6D9F1 /* downloadTemplate@2x.png */,
-				15D2CF8918F1D66400B6D9F1 /* allFormulasTemplate.png */,
-				15D2CF8A18F1D66400B6D9F1 /* allFormulasTemplate@2x.png */,
-				15D2CF8D18F1D66400B6D9F1 /* installedTemplate.png */,
-				15D2CF8E18F1D66400B6D9F1 /* installedTemplate@2x.png */,
-				15D2CF8F18F1D66400B6D9F1 /* outdatedTemplate.png */,
-				15D2CF9018F1D66400B6D9F1 /* outdatedTemplate@2x.png */,
-				15D2CF9118F1D66400B6D9F1 /* pinTemplate.png */,
-				15D2CF9218F1D66400B6D9F1 /* pinTemplate@2x.png */,
-				15D2CF9D18F1D6F700B6D9F1 /* wrenchTemplate.png */,
-				15D2CF9E18F1D6F700B6D9F1 /* wrenchTemplate@2x.png */,
-				B5866F6F1BEBE00B1EB5B5C7 /* cloudTemplate.png */,
-				B5866C4F6DAFDFF8DD8A5314 /* cloudTemplate@2x.png */,
-			);
-			path = "Icon Templates";
-			sourceTree = "<group>";
-		};
 		15D2CFA618F202B300B6D9F1 /* DCOAboutWindow */ = {
 			isa = PBXGroup;
 			children = (
@@ -290,7 +241,6 @@
 		15D5BEED18EBB3D9001DDED7 /* Icons */ = {
 			isa = PBXGroup;
 			children = (
-				15D2CF8818F1D66400B6D9F1 /* Icon Templates */,
 				15D5BEEE18EBB3FB001DDED7 /* delete.icns */,
 				15D5BEEF18EBB3FB001DDED7 /* label.icns */,
 				15D5BEF018EBB3FB001DDED7 /* plus.icns */,
@@ -475,35 +425,21 @@
 				1FE4FE63148E4CDD008EDE8B /* InfoPlist.strings in Resources */,
 				1FE4FE69148E4CDD008EDE8B /* Credits.rtf in Resources */,
 				15D2CFAA18F202B300B6D9F1 /* DCOAboutWindow.xib in Resources */,
-				15D2CF9A18F1D66400B6D9F1 /* outdatedTemplate@2x.png in Resources */,
-				15D2CF9718F1D66400B6D9F1 /* installedTemplate.png in Resources */,
-				15D2CFB618F2065200B6D9F1 /* downloadTemplate@2x.png in Resources */,
-				15D2CFB518F2065200B6D9F1 /* downloadTemplate.png in Resources */,
 				1FE4FE6F148E4CDD008EDE8B /* MainMenu.xib in Resources */,
-				15D2CF9C18F1D66400B6D9F1 /* pinTemplate@2x.png in Resources */,
 				D2B3A3BD19BA403300DE23B5 /* BPFormulaPopoverView.xib in Resources */,
 				D2E53A4819A6215400E05AFC /* BPFormulaOptionsWindow.xib in Resources */,
 				15D5BEF518EBB430001DDED7 /* search.icns in Resources */,
 				15D2CFA218F1E71800B6D9F1 /* reload.icns in Resources */,
-				15D2CFA018F1D6F700B6D9F1 /* wrenchTemplate@2x.png in Resources */,
-				15D2CF9418F1D66400B6D9F1 /* allFormulasTemplate@2x.png in Resources */,
 				1540FA3518ECF66B00334A5C /* download.icns in Resources */,
 				15D5BEF118EBB3FB001DDED7 /* delete.icns in Resources */,
-				15D2CF9F18F1D6F700B6D9F1 /* wrenchTemplate.png in Resources */,
 				1536BFF718EBA92400B67C5C /* Images.xcassets in Resources */,
 				15D2CFA418F1EAD200B6D9F1 /* globe.icns in Resources */,
 				15D2CFB818F206DF00B6D9F1 /* README.md in Resources */,
-				15D2CF9818F1D66400B6D9F1 /* installedTemplate@2x.png in Resources */,
 				15B23A2C18F5003600714212 /* dsa_pub.pem in Resources */,
 				D2E53A4D19A65B1600E05AFC /* BPInstallationWindow.xib in Resources */,
 				D2B3A3A019B87A2C00DE23B5 /* BPUpdateView.xib in Resources */,
 				15D2CFBA18F20A8200B6D9F1 /* LICENSE in Resources */,
-				15D2CF9918F1D66400B6D9F1 /* outdatedTemplate.png in Resources */,
-				15D2CF9318F1D66400B6D9F1 /* allFormulasTemplate.png in Resources */,
 				15D5BEF218EBB3FB001DDED7 /* label.icns in Resources */,
-				15D2CF9B18F1D66400B6D9F1 /* pinTemplate.png in Resources */,
-				B58668E3B0EBA26D892D0B61 /* cloudTemplate.png in Resources */,
-				B58661A28038B63E5137AE50 /* cloudTemplate@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
