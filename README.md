@@ -22,6 +22,10 @@ Please visit [this page](https://github.com/brunophilipe/Cakebrew/wiki#using-zsh
 
 [Download Now](https://www.cakebrew.com)
 
+### Version 1.0.10 Release Candidate
+
+Lots of changes were made, so a RC version before pushing to the main release tree is a good thing to do. If you are interested in testing the new version of Cakebrew with new features (and, just maybe, some undiscovered bugs), [please download it here](https://www.cakebrew.com/files/cakebrew-1.0.10rc.zip).
+
 ### Yosemite
 
 All bugs introduced in Yosemite turn out to be problems with the beta version itself. If Homebrew works in your terminal it should work with Cakebrew.
