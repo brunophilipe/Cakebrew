@@ -19,6 +19,5 @@
 @property (strong, nonatomic) NSColor *textColor;
 @property (strong, nonatomic) NSColor *backgroundColor;
 @property (assign, nonatomic) NSUInteger badgeValue;
-@property (assign, nonatomic) NSString *badgeText;
 
 @end

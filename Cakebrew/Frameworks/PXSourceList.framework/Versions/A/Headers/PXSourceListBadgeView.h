@@ -41,7 +41,6 @@
  @since Requires the Mac OS X 10.7 SDK or above.
  */
 @property (assign, nonatomic) NSUInteger badgeValue;
-@property (assign, nonatomic) NSString *badgeText;
 
 ///---------------------------------------------------------------------------------------
 /// @name Customising the badge appearance
