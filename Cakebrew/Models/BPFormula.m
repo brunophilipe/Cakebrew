@@ -47,9 +47,6 @@ NSString *const kBPIdentifierCaveats = @"==> Caveats";
 @property (strong) NSURL    *website;
 @property (strong) NSArray  *options;
 
-@property (getter = isInstalled)	BOOL installed;
-@property (getter = isDeprecated)	BOOL deprecated;
-
 @end
 
 @implementation BPFormula
@@ -65,7 +62,6 @@ NSString *const kBPIdentifierCaveats = @"==> Caveats";
 		formula.name = name;
 		formula.version = version;
         formula.latestVersion = latestVersion;
-		formula.installed = NO;
 	}
 
 	return formula;
@@ -78,7 +74,6 @@ NSString *const kBPIdentifierCaveats = @"==> Caveats";
 	if (formula) {
 		formula.name = name;
 		formula.version = version;
-		formula.installed = NO;
 	}
 
 	return formula;
@@ -113,8 +108,6 @@ NSString *const kBPIdentifierCaveats = @"==> Caveats";
 		self.website		= [aDecoder decodeObjectForKey:kBP_ENCODE_FORMULA_WURL];
 		self.dependencies	= [aDecoder decodeObjectForKey:kBP_ENCODE_FORMULA_DEPS];
 		self.conflicts		= [aDecoder decodeObjectForKey:kBP_ENCODE_FORMULA_CNFL];
-
-		self.installed = [[aDecoder decodeObjectForKey:kBP_ENCODE_FORMULA_INST] boolValue];
 	}
 	return self;
 }
@@ -129,7 +122,6 @@ NSString *const kBPIdentifierCaveats = @"==> Caveats";
 	output = [[BPHomebrewInterface sharedInterface] informationForFormula:self.name];
 
 	if ([output isEqualToString:@""]) {
-		[self setDeprecated:YES];
 		return YES;
 	}
 
@@ -151,10 +143,8 @@ NSString *const kBPIdentifierCaveats = @"==> Caveats";
 		line = [lines objectAtIndex:lineIndex];
 	}
 
-	if ([line isEqualToString:@"Not installed"]) {
-		[self setInstalled:NO];
-	} else {
-		[self setInstalled:YES];
+	if (![line isEqualToString:@"Not installed"])
+	{
 		if ([line isEqualToString:@""]) { //keg-only formual has no path
 			lineIndex += 1;
 			[self setInstallPath:[lines objectAtIndex:lineIndex]];
@@ -228,9 +218,6 @@ NSString *const kBPIdentifierCaveats = @"==> Caveats";
 
 	return YES;
 }
-
-- (void)setInstalled:(BOOL)installed
-{}
 
 - (BOOL)isInstalled
 {
