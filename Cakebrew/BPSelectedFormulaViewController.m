@@ -23,7 +23,6 @@
 
 - (void)displayInformationForFormulae
 {
-  static NSString *depString = @"Formula no longer available.";
 	static NSString *emptyString = @"--";
   static NSString *multipleString = @"Multiple values";
   
@@ -36,31 +35,25 @@
   if ([self.formulae count] == 1) {
     BPFormula *formula = [self.formulae firstObject];
     [formula getInformation];
-    if (!formula.isDeprecated) {
-			if (formula.isInstalled) {
-				[self.formulaPathLabel setStringValue:formula.installPath];
-			} else {
-				[self.formulaPathLabel setStringValue:@"Formula Not Installed."];
-			}
-      
-			[self.formulaVersionLabel setStringValue:formula.latestVersion];
-      
-			if (formula.dependencies) {
-				[self.formulaDependenciesLabel setStringValue:formula.dependencies];
-			} else {
-				[self.formulaDependenciesLabel setStringValue:@"This formula has no dependencies!"];
-			}
-      
-			if (formula.conflicts) {
-				[self.formulaConflictsLabel setStringValue:formula.conflicts];
-			} else {
-				[self.formulaConflictsLabel setStringValue:@"This formula has no known conflicts."];
-			}
-		} else {
-			[self.formulaPathLabel setStringValue:depString];
-			[self.formulaDependenciesLabel setStringValue:emptyString];
-			[self.formulaConflictsLabel setStringValue:emptyString];
-		}
+    if (formula.isInstalled) {
+      [self.formulaPathLabel setStringValue:formula.installPath];
+    } else {
+      [self.formulaPathLabel setStringValue:@"Formula Not Installed."];
+    }
+    
+    [self.formulaVersionLabel setStringValue:formula.latestVersion];
+    
+    if (formula.dependencies) {
+      [self.formulaDependenciesLabel setStringValue:formula.dependencies];
+    } else {
+      [self.formulaDependenciesLabel setStringValue:@"This formula has no dependencies!"];
+    }
+    
+    if (formula.conflicts) {
+      [self.formulaConflictsLabel setStringValue:formula.conflicts];
+    } else {
+      [self.formulaConflictsLabel setStringValue:@"This formula has no known conflicts."];
+    }
   }
   if ([self.formulae count] > 1) {
     [self.formulaPathLabel setStringValue:multipleString];
