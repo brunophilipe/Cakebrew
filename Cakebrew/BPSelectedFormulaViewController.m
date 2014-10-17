@@ -40,8 +40,11 @@
     } else {
       [self.formulaPathLabel setStringValue:@"Formula Not Installed."];
     }
-    
-    [self.formulaVersionLabel setStringValue:formula.latestVersion];
+    if (formula.latestVersion) {
+      [self.formulaVersionLabel setStringValue:formula.latestVersion];
+    } else {
+      [self.formulaVersionLabel setStringValue:emptyString];
+    }
     
     if (formula.dependencies) {
       [self.formulaDependenciesLabel setStringValue:formula.dependencies];
