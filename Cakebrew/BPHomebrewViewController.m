@@ -434,6 +434,7 @@ typedef NS_ENUM(NSUInteger, HomeBrewTab) {
 					[self prepareFormulae:@[formula] forOperation:kBPWindowOperationUntap withOptions:nil];
 				};
 			}
+        break;
 
 			case kBPWindowOperationTap:
 			{
