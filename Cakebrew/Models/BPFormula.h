@@ -33,7 +33,6 @@
 @property (strong, readonly) NSArray  *options;
 
 @property (getter = isInstalled, readonly)	BOOL installed;
-@property (getter = isDeprecated, readonly)	BOOL deprecated;
 
 + (BPFormula*)formulaWithName:(NSString*)name version:(NSString*)version andLatestVersion:(NSString*)latestVersion;
 + (BPFormula*)formulaWithName:(NSString*)name andVersion:(NSString*)version;
