@@ -466,6 +466,7 @@ typedef NS_ENUM(NSUInteger, HomeBrewTab) {
 	else if (selectedTab == FormulaeSideBarItemRepositories && _toolbarButtonOperation == kBPWindowOperationTap)
 	{
 		NSAlert *alert = [NSAlert alertWithMessageText:@"Attention!" defaultButton:@"OK" alternateButton:@"Cancel" otherButton:nil informativeTextWithFormat:@"What repository would you like to tap?"];
+		[alert.window setTitle:@"Cakebrew"];
 
 		NSTextField *input = [[NSTextField alloc] initWithFrame:NSMakeRect(0,0,200,24)];
 		[input setStringValue:@""];
