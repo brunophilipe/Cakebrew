@@ -273,8 +273,8 @@ typedef NS_ENUM(NSUInteger, HomeBrewTab) {
 
 - (void)homebrewManagerFinishedUpdating:(BPHomebrewManager *)manager
 {
-  [[self.tableView_formulae menu] cancelTracking];
-  self.currentFormula = nil;
+	[[self.tableView_formulae menu] cancelTracking];
+	self.currentFormula = nil;
 	self.selectedFormulaeViewController.formulae = nil;
 	[self.formulaeDataSource refreshBackingArray];
 	[self.sidebarController refreshSidebarBadges];
