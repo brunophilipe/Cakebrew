@@ -21,7 +21,7 @@
 {
   NSFont *font = [NSFont bp_defaultFixedWidthFont];
   [self.formulaTextView setFont:font];
-  [self.formulaTextView setTextColor:[NSColor whiteColor]];
+  [self.formulaTextView setTextColor:[NSColor blackColor]];
   [self.formulaPopover setContentViewController:self];
 }
 
@@ -32,6 +32,7 @@
   if (string) {
     [self.formulaTextView setString:string];
     [self.formulaTitleLabel setStringValue:[NSString stringWithFormat:@"Information for Formula: %@", [_formula performSelector:@selector(name)]]];
+    [self.formulaTitleLabel setTextColor:[NSColor blackColor]];
   } else {
     [self.formulaTextView setString:@"Error retrieving Formula information"];
   }
