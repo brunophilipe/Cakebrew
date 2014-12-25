@@ -80,6 +80,9 @@ static NSString *cakebrewOutputIdentifier = @"+++++Cakebrew+++++";
 		[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updatedFileHandle:) name:NSFileHandleDataAvailableNotification object:nil];
         [self setTask:nil];
 		[self setSystemHasAppNap:[[NSProcessInfo processInfo] respondsToSelector:@selector(beginActivityWithOptions:reason:)]];
+
+		if (![self checkForHomebrew])
+			[self showHomebrewNotInstalledMessage];
 	}
 	return self;
 }
@@ -87,6 +90,36 @@ static NSString *cakebrewOutputIdentifier = @"+++++Cakebrew+++++";
 - (void)dealloc
 {
 	[[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
+- (BOOL)checkForHomebrew
+{
+	NSString *userShell = [self getValidUserShell];
+
+	if (!userShell) return NO;
+
+	self.task = [[NSTask alloc] init];
+	[self.task setLaunchPath:userShell];
+	[self.task setArguments:@[@"-l", @"-c", @"which brew"]];
+
+	NSPipe *pipe_output = [NSPipe pipe];
+	NSPipe *pipe_error = [NSPipe pipe];
+	[self.task setStandardOutput:pipe_output];
+	[self.task setStandardInput:[NSPipe pipe]];
+	[self.task setStandardError:pipe_error];
+
+	[self.task launch];
+	[self.task waitUntilExit];
+
+	NSString *string_output, *string_error;
+	string_output = [[NSString alloc] initWithData:[[pipe_output fileHandleForReading] readDataToEndOfFile] encoding:NSUTF8StringEncoding];
+	string_error = [[NSString alloc] initWithData:[[pipe_error fileHandleForReading] readDataToEndOfFile] encoding:NSUTF8StringEncoding];
+
+	string_output = [self removeLoginShellOutputFromString:string_output];
+
+	NSLog(@"`which brew` returned \"%@\"", string_output);
+
+	return string_output.length != 0;
 }
 
 #pragma mark - Public Methods
