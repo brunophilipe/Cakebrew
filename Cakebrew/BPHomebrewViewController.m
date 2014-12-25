@@ -190,10 +190,12 @@ typedef NS_ENUM(NSUInteger, HomeBrewTab) {
 		[self setCurrentFormula:[selectedFormulae firstObject]];
 	}
 	[self.selectedFormulaeViewController setFormulae:selectedFormulae];
+	[self.selectedFormulaeViewController.view setHidden:NO];
 
 	if (selectedTab == FormulaeSideBarItemRepositories) { // Repositories sidebaritem
 		[self.toolbarButton_installUninstall setEnabled:YES];
 		[self.toolbarButton_formulaInfo setEnabled:NO];
+		[self.selectedFormulaeViewController.view setHidden:YES];
 
 		if (selectedIndex != -1) {
 			[self.toolbarButton_installUninstall setImage:[NSImage imageNamed:@"delete.icns"]];
@@ -205,7 +207,7 @@ typedef NS_ENUM(NSUInteger, HomeBrewTab) {
 			[self setToolbarButtonOperation:kBPWindowOperationTap];
 		}
 	}
-	else if(selectedIndex == -1 || selectedTab > FormulaeSideBarItemToolsCategory)
+	else if (selectedIndex == -1 || selectedTab > FormulaeSideBarItemToolsCategory)
 	{
 		[self.toolbarButton_installUninstall setEnabled:NO];
 		[self.toolbarButton_formulaInfo setEnabled:NO];
