@@ -586,7 +586,7 @@
                                                                     <constraints>
                                                                         <constraint firstItem="NPs-Sj-pMf" firstAttribute="top" secondItem="NjY-GN-l2W" secondAttribute="top" constant="1" id="Bbq-eB-vXU"/>
                                                                         <constraint firstItem="UGv-FF-mH4" firstAttribute="centerY" secondItem="NjY-GN-l2W" secondAttribute="centerY" id="HDo-6S-nEU"/>
-                                                                        <constraint firstItem="NPs-Sj-pMf" firstAttribute="leading" secondItem="UGv-FF-mH4" secondAttribute="trailing" priority="250" constant="14" id="cQD-qh-CCh"/>
+                                                                        <constraint firstItem="NPs-Sj-pMf" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="UGv-FF-mH4" secondAttribute="trailing" priority="250" constant="14" id="cQD-qh-CCh"/>
                                                                         <constraint firstAttribute="trailing" secondItem="NPs-Sj-pMf" secondAttribute="trailing" constant="3" id="deY-JF-So7"/>
                                                                         <constraint firstItem="UGv-FF-mH4" firstAttribute="bottom" secondItem="rod-fH-u2L" secondAttribute="bottom" id="esB-n4-tea"/>
                                                                         <constraint firstItem="UGv-FF-mH4" firstAttribute="leading" secondItem="rod-fH-u2L" secondAttribute="trailing" constant="7" id="nvX-qK-xNx"/>
