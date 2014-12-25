@@ -139,19 +139,29 @@ typedef NS_ENUM(NSUInteger, HomeBrewTab) {
 - (void)lockWindow
 {
 	[self.view_disablerLock setHidden:NO];
+	[self.view_disablerLock setWantsLayer:YES];
 	[self.label_information setHidden:YES];
+	[self.splitView setHidden:YES];
+
 	[self.toolbar.items enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
 		if ([obj respondsToSelector:@selector(setEnabled:)]) {
-			[obj performSelector:@selector(setEnabled:) withObject:@NO];
+			[obj setEnabled:NO];
 		}
 	}];
 
-	NSAlert *alert = [NSAlert alertWithMessageText:@"Error!" defaultButton:@"Homebrew Website" alternateButton:@"OK" otherButton:nil informativeTextWithFormat:@"Homebrew was not found in your system. Please install Homebrew before using Cakebrew. You can click the button below to open Homebrew's website."];
+	NSAlert *alert = [[NSAlert alloc] init];
+	[alert setMessageText:@"Error!"];
+	[alert setInformativeText:@"Homebrew was not found in your system. Please install Homebrew before using Cakebrew. You can click the button below to open Homebrew's website."];
+	[alert setShowsSuppressionButton:NO];
+	[alert setShowsHelp:NO];
+	[alert addButtonWithTitle:@"Homebrew Website"];
+	[alert addButtonWithTitle:@"Cancel"];
+
 	[alert.window setTitle:@"Cakebrew"];
 
-	if ([alert respondsToSelector:@selector(beginSheet:completionHandler:)]) {
+	if ([alert respondsToSelector:@selector(beginSheetModalForWindow:completionHandler:)]) {
 		[alert beginSheetModalForWindow:_appDelegate.window completionHandler:^(NSModalResponse returnCode) {
-			if (returnCode == NSAlertDefaultReturn) {
+			if (returnCode == 1000) {
 				[[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:@"http://brew.sh"]];
 			}
 		}];
@@ -171,9 +181,11 @@ typedef NS_ENUM(NSUInteger, HomeBrewTab) {
 {
 	[self.view_disablerLock setHidden:YES];
 	[self.label_information setHidden:NO];
+	[self.splitView setHidden:NO];
+
 	[self.toolbar.items enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
 		if ([obj respondsToSelector:@selector(setEnabled:)]) {
-			[obj performSelector:@selector(setEnabled:) withObject:@YES];
+			[obj setEnabled:YES];
 		}
 	}];
 
