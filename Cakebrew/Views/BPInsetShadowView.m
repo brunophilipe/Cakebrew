@@ -47,7 +47,7 @@
 	NSGraphicsContext *context = [NSGraphicsContext currentContext];
 	[context saveGraphicsState];
 
-	[context setCompositingOperation:NSCompositePlusDarker];
+	[context setCompositingOperation:NSCompositeDifference];
 
 	NSBezierPath *path = [NSBezierPath
 						  bezierPathWithRoundedRect:[self bounds]
