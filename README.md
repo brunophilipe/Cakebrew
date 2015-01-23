@@ -10,6 +10,8 @@ Cakebrew does for [Homebrew](http://brew.sh) what Synaptics does to Linux packag
 
 Do you need to use Homebrew but are afraid to use the terminal? Cakebrew is the app for you!
 
+Cakebrew was based on a project by [vincentsaluzzo](https://github.com/vincentsaluzzo/Homebrew-GUI). Although most of the original project has already been modified, his project was the kickstart for what would become Cakebrew, and his commits are still in the working tree.
+
 ## Screenshots
 
 ![Screenshot as of May 27th](https://www.cakebrew.com/assets/img/app-bg.png)
