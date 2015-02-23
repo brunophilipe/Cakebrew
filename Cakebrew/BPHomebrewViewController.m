@@ -53,6 +53,8 @@ typedef NS_ENUM(NSUInteger, HomeBrewTab) {
 @property (strong, nonatomic) BPDoctorViewController *doctorViewController;
 @property (strong, nonatomic) BPFormulaPopoverViewController *formulaPopoverViewController;
 @property (weak, nonatomic) IBOutlet BPSelectedFormulaViewController *selectedFormulaeViewController;
+@property (weak, nonatomic) IBOutlet NSView *formulaeView;
+
 
 @end
 
@@ -91,6 +93,13 @@ typedef NS_ENUM(NSUInteger, HomeBrewTab) {
 	self.tableView_formulae.dataSource = self.formulaeDataSource;
 	self.tableView_formulae.delegate = self;
 
+  //link formulae tableview
+  NSView *formulaeView = self.formulaeView;
+  if ([[self.tabView tabViewItems] count] > HomeBrewTabFormulae) {
+    NSTabViewItem *formulaeTab = [self.tabView tabViewItemAtIndex:HomeBrewTabFormulae];
+    [formulaeTab setView:formulaeView];
+  }
+  
 	//Creating view for update tab
 	self.updateViewController = [[BPUpdateViewController alloc] initWithNibName:nil bundle:nil];
 	NSView *updateView = [self.updateViewController view];

@@ -36,7 +36,11 @@
     BPFormula *formula = [self.formulae firstObject];
     [formula getInformation];
     if (formula.isInstalled) {
-      [self.formulaPathLabel setStringValue:formula.installPath];
+      if ([formula.installPath length]) {
+        [self.formulaPathLabel setStringValue:formula.installPath];
+      } else {
+        [self.formulaPathLabel setStringValue:emptyString];
+      }
     } else {
       [self.formulaPathLabel setStringValue:@"Formula Not Installed."];
     }
