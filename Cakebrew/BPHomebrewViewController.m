@@ -52,8 +52,9 @@ typedef NS_ENUM(NSUInteger, HomeBrewTab) {
 @property (strong, nonatomic) BPUpdateViewController *updateViewController;
 @property (strong, nonatomic) BPDoctorViewController *doctorViewController;
 @property (strong, nonatomic) BPFormulaPopoverViewController *formulaPopoverViewController;
-@property (weak, nonatomic) IBOutlet BPSelectedFormulaViewController *selectedFormulaeViewController;
-@property (weak, nonatomic) IBOutlet NSView *formulaeView;
+@property (strong, nonatomic) BPSelectedFormulaViewController *selectedFormulaeViewController;
+@property (weak, nonatomic) IBOutlet NSSplitView *formulaeSplitView;
+@property (weak, nonatomic) IBOutlet NSView *selectedFormulaView;
 
 
 @end
@@ -73,28 +74,44 @@ typedef NS_ENUM(NSUInteger, HomeBrewTab) {
 	return _formulaPopoverViewController;
 }
 
+- (id)init
+{
+  self = [super init];
+  if (self) {
+    [self commonInit];
+  }
+  return self;
+}
+
 - (id)initWithCoder:(NSCoder *)aDecoder
 {
 	self = [super initWithCoder:aDecoder];
 	if (self) {
-		_homebrewManager = [BPHomebrewManager sharedManager];
-		[_homebrewManager setDelegate:self];
-
-		[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(lockWindow) name:kBP_NOTIFICATION_LOCK_WINDOW object:nil];
-		[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(unlockWindow) name:kBP_NOTIFICATION_UNLOCK_WINDOW object:nil];
-		[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(searchUpdatedNotification:) name:kBP_NOTIFICATION_SEARCH_UPDATED object:nil];
+    [self commonInit];
 	}
 	return self;
 }
+
+- (void)commonInit
+{
+  _homebrewManager = [BPHomebrewManager sharedManager];
+  [_homebrewManager setDelegate:self];
+  self.selectedFormulaeViewController = [[BPSelectedFormulaViewController alloc] init];
+
+  [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(lockWindow) name:kBP_NOTIFICATION_LOCK_WINDOW object:nil];
+  [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(unlockWindow) name:kBP_NOTIFICATION_UNLOCK_WINDOW object:nil];
+  [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(searchUpdatedNotification:) name:kBP_NOTIFICATION_SEARCH_UPDATED object:nil];
+}
+
 
 - (void)awakeFromNib
 {
 	self.formulaeDataSource = [[BPFormulaeDataSource alloc] initWithMode:kBPListAll];
 	self.tableView_formulae.dataSource = self.formulaeDataSource;
 	self.tableView_formulae.delegate = self;
-
+  
   //link formulae tableview
-  NSView *formulaeView = self.formulaeView;
+  NSView *formulaeView = self.formulaeSplitView;
   if ([[self.tabView tabViewItems] count] > HomeBrewTabFormulae) {
     NSTabViewItem *formulaeTab = [self.tabView tabViewItemAtIndex:HomeBrewTabFormulae];
     [formulaeTab setView:formulaeView];
@@ -115,6 +132,44 @@ typedef NS_ENUM(NSUInteger, HomeBrewTab) {
 		NSTabViewItem *doctorTab = [self.tabView tabViewItemAtIndex:HomeBrewTabDoctor];
 		[doctorTab setView:doctorView];
 	}
+  
+
+  NSView *selectedFormulaView = [self.selectedFormulaeViewController view];
+  [self.selectedFormulaView addSubview:selectedFormulaView];
+  selectedFormulaView.translatesAutoresizingMaskIntoConstraints = NO;
+  
+  [self.selectedFormulaView addConstraint:[NSLayoutConstraint constraintWithItem:selectedFormulaView
+                                                                  attribute:NSLayoutAttributeTop
+                                                                  relatedBy:NSLayoutRelationEqual
+                                                                     toItem:self.selectedFormulaView
+                                                                  attribute:NSLayoutAttributeTop
+                                                                 multiplier:1.0f
+                                                                   constant:0.0f]];
+
+  [self.selectedFormulaView addConstraint:[NSLayoutConstraint constraintWithItem:selectedFormulaView
+                                                                  attribute:NSLayoutAttributeLeft
+                                                                  relatedBy:NSLayoutRelationEqual
+                                                                     toItem:self.selectedFormulaView
+                                                                  attribute:NSLayoutAttributeLeft
+                                                                 multiplier:1.0f
+                                                                   constant:0.0f]];
+  
+  [self.selectedFormulaView addConstraint:[NSLayoutConstraint constraintWithItem:selectedFormulaView
+                                                                  attribute:NSLayoutAttributeBottom
+                                                                  relatedBy:NSLayoutRelationEqual
+                                                                     toItem:self.selectedFormulaView
+                                                                  attribute:NSLayoutAttributeBottom
+                                                                 multiplier:1.0f
+                                                                   constant:0.0f]];
+  
+  [self.selectedFormulaView addConstraint:[NSLayoutConstraint constraintWithItem:selectedFormulaView
+                                                                  attribute:NSLayoutAttributeRight
+                                                                  relatedBy:NSLayoutRelationEqual
+                                                                     toItem:self.selectedFormulaView
+                                                                  attribute:NSLayoutAttributeRight
+                                                                 multiplier:1.0f
+                                                                   constant:0.0f]];
+
 
 	[self.splitView setMinSize:165.f ofSubviewAtIndex:0];
 	[self.splitView setMinSize:400.f ofSubviewAtIndex:1];
@@ -211,12 +266,18 @@ typedef NS_ENUM(NSUInteger, HomeBrewTab) {
 		[self setCurrentFormula:[selectedFormulae firstObject]];
 	}
 	[self.selectedFormulaeViewController setFormulae:selectedFormulae];
-	[self.selectedFormulaeViewController.view setHidden:NO];
+  
+  
+  CGFloat height = [self.formulaeSplitView bounds].size.height;
+  CGFloat preferedHeightOfSelectedFormulaView = 120.f;
+  [self.formulaeSplitView setPosition:height - preferedHeightOfSelectedFormulaView
+                     ofDividerAtIndex:0];
 
 	if (selectedTab == FormulaeSideBarItemRepositories) { // Repositories sidebaritem
 		[self.toolbarButton_installUninstall setEnabled:YES];
 		[self.toolbarButton_formulaInfo setEnabled:NO];
-		[self.selectedFormulaeViewController.view setHidden:YES];
+    [self.formulaeSplitView setPosition:height
+                       ofDividerAtIndex:0];
 
 		if (selectedIndex != -1) {
 			[self.toolbarButton_installUninstall setImage:[NSImage imageNamed:@"delete.icns"]];

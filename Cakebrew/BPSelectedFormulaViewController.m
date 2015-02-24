@@ -15,6 +15,13 @@
 
 @implementation BPSelectedFormulaViewController
 
+
+
+- (NSString *)nibName
+{
+  return @"BPSelectedFormula";
+}
+
 - (void)setFormulae:(NSArray *)formulae
 {
   _formulae = formulae;
