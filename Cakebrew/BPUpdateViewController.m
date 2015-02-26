@@ -34,42 +34,48 @@
 @implementation BPUpdateViewController
 
 - (void)awakeFromNib {
-  NSFont *font = [NSFont bp_defaultFixedWidthFont];
-  [self.updateTextView setFont:font];
-  self.isPerformingUpdate = NO;
+	NSFont *font = [NSFont bp_defaultFixedWidthFont];
+	[self.updateTextView setFont:font];
+	self.isPerformingUpdate = NO;
 }
 
 - (NSString *)nibName {
-  return @"BPUpdateView";
+	return @"BPUpdateView";
 }
 
 - (IBAction)runStopUpdate:(id)sender {
 	BPAppDelegate *appDelegate = BPAppDelegateRef;
-  
+	
+	NSLog(@"Starting Update Process...");
+	
 	if (appDelegate.isRunningBackgroundTask)
 	{
 		[appDelegate displayBackgroundWarning];
 		return;
 	}
 	[appDelegate setRunningBackgroundTask:YES];
-  
+	
 	[self.updateTextView setString:@""];
-  self.isPerformingUpdate = YES;
+	self.isPerformingUpdate = YES;
 	[self.progressIndicator startAnimation:sender];
-  
-  dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
+	
+	dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
+		NSLog(@"Updating...");
 		[[BPHomebrewInterface sharedInterface] updateWithReturnBlock:^(NSString *output) {
+			NSLog(@"Got feedback from shell!");
 			[self.updateTextView performSelectorOnMainThread:@selector(setString:)
-                                            withObject:[self.updateTextView.string stringByAppendingString:output]
-                                         waitUntilDone:YES];
+												  withObject:[self.updateTextView.string stringByAppendingString:output]
+											   waitUntilDone:YES];
 		}];
-    
-    dispatch_async(dispatch_get_main_queue(), ^{
-      [self.progressIndicator stopAnimation:sender];
-      self.isPerformingUpdate = NO;
+		NSLog(@"Setting up finalization task callback...");
+		dispatch_async(dispatch_get_main_queue(), ^{
+			NSLog(@"Finalization callback called!");
+			[self.progressIndicator stopAnimation:sender];
+			self.isPerformingUpdate = NO;
 			[appDelegate setRunningBackgroundTask:NO];
-    });
-  });
+			NSLog(@"Update Process Finished!");
+		});
+	});
 }
 
 - (IBAction)clearLogUpdate:(id)sender {

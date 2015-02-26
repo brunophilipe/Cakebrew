@@ -52,7 +52,7 @@ typedef NS_ENUM(NSUInteger, HomeBrewTab) {
 @property (strong, nonatomic) BPUpdateViewController *updateViewController;
 @property (strong, nonatomic) BPDoctorViewController *doctorViewController;
 @property (strong, nonatomic) BPFormulaPopoverViewController *formulaPopoverViewController;
-@property (weak, nonatomic) IBOutlet BPSelectedFormulaViewController *selectedFormulaeViewController;
+@property (strong, nonatomic) IBOutlet BPSelectedFormulaViewController *selectedFormulaeViewController;
 
 @end
 
@@ -149,13 +149,7 @@ typedef NS_ENUM(NSUInteger, HomeBrewTab) {
 		}
 	}];
 
-	NSAlert *alert = [[NSAlert alloc] init];
-	[alert setMessageText:@"Error!"];
-	[alert setInformativeText:@"Homebrew was not found in your system. Please install Homebrew before using Cakebrew. You can click the button below to open Homebrew's website."];
-	[alert setShowsSuppressionButton:NO];
-	[alert setShowsHelp:NO];
-	[alert addButtonWithTitle:@"Homebrew Website"];
-	[alert addButtonWithTitle:@"Cancel"];
+	NSAlert *alert = [NSAlert alertWithMessageText:@"Error!" defaultButton:@"Homebrew Website" alternateButton:@"Cancel" otherButton:nil informativeTextWithFormat:@"Homebrew was not found in your system. Please install Homebrew before using Cakebrew. You can click the button below to open Homebrew's website."];
 
 	[alert.window setTitle:@"Cakebrew"];
 
@@ -166,14 +160,10 @@ typedef NS_ENUM(NSUInteger, HomeBrewTab) {
 			}
 		}];
 	} else {
-		[[NSApplication sharedApplication] beginSheet:alert.window modalForWindow:_appDelegate.window modalDelegate:self didEndSelector:@selector(openBrewWebsiteSheetDidEnd:returnCode:contextInfo:) contextInfo:nil];
-	}
-}
-
-- (void)openBrewWebsiteSheetDidEnd:(NSWindow *)sheet returnCode:(NSInteger)returnCode contextInfo:(void *)contextInfo;
-{
-	if (returnCode == NSAlertDefaultReturn) {
-		[[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:@"http://brew.sh"]];
+		NSModalResponse returnCode = [alert runModal];
+		if (returnCode == NSAlertDefaultReturn) {
+			[[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:@"http://brew.sh"]];
+		}
 	}
 }
 
