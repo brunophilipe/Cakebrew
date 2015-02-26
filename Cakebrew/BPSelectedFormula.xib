@@ -16,8 +16,8 @@
         </customObject>
         <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
         <customObject id="-3" userLabel="Application" customClass="NSObject"/>
-        <customView misplaced="YES" placeholderIntrinsicWidth="infinite" placeholderIntrinsicHeight="120" translatesAutoresizingMaskIntoConstraints="NO" id="GxG-TU-x9D">
-            <rect key="frame" x="0.0" y="0.0" width="425" height="116"/>
+        <customView placeholderIntrinsicWidth="infinite" placeholderIntrinsicHeight="120" translatesAutoresizingMaskIntoConstraints="NO" id="GxG-TU-x9D">
+            <rect key="frame" x="0.0" y="0.0" width="425" height="119"/>
             <subviews>
                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Eyh-hm-eD7">
                     <rect key="frame" x="6" y="99" width="171" height="14"/>
