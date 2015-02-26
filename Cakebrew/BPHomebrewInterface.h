@@ -41,7 +41,6 @@ typedef NS_ENUM(NSInteger, BPListMode) {
 #pragma mark - Operations with live data callback block
 
 - (BOOL)updateWithReturnBlock:(void (^)(NSString*))block;
-- (BOOL)upgradeFormula:(NSString*)formula withReturnBlock:(void (^)(NSString*))block;
 - (BOOL)upgradeFormulae:(NSArray*)formulae withReturnBlock:(void (^)(NSString*))block;
 - (BOOL)installFormula:(NSString*)formula withOptions:(NSArray*)options andReturnBlock:(void (^)(NSString*output))block;
 - (BOOL)uninstallFormula:(NSString*)formula withReturnBlock:(void (^)(NSString*))block;

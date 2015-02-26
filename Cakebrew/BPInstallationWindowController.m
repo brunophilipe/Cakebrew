@@ -162,7 +162,8 @@
 																		  waitUntilDone:YES];
 								   }];
 			} else {
-				[homebrewInterface upgradeFormula:kBP_UPGRADE_ALL_FORMULAS
+        //no parameter is necessary to upgrade all formulas; recycling API with empty string
+				[homebrewInterface upgradeFormulae:@[@""]
 								  withReturnBlock:^(NSString *output) {
 									  if (outputValue) {
 										  outputValue = [outputValue stringByAppendingString:output];

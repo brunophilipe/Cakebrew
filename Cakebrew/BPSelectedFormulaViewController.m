@@ -15,6 +15,35 @@
 
 @implementation BPSelectedFormulaViewController
 
+- (void)awakeFromNib
+{
+  [[NSNotificationCenter defaultCenter] addObserver:self
+                                           selector:@selector(updatePreferedWidth:)
+                                               name:NSViewFrameDidChangeNotification
+                                             object:self.view];
+}
+
+- (void)dealloc
+{
+  [[NSNotificationCenter defaultCenter] removeObserver:self
+                                                  name:NSViewFrameDidChangeNotification
+                                                object:self.view];
+}
+
+- (void)updatePreferedWidth:(id)sender
+{
+  self.formulaDependenciesLabel.preferredMaxLayoutWidth = self.formulaDependenciesLabel.frame.size.width;
+  self.formulaConflictsLabel.preferredMaxLayoutWidth = self.formulaConflictsLabel.frame.size.width;
+  self.formulaVersionLabel.preferredMaxLayoutWidth = self.formulaVersionLabel.frame.size.width;
+  self.formulaPathLabel.preferredMaxLayoutWidth = self.formulaPathLabel.frame.size.width;
+  [[self view] layout];
+}
+
+- (NSString *)nibName
+{
+  return @"BPSelectedFormula";
+}
+
 - (void)setFormulae:(NSArray *)formulae
 {
   _formulae = formulae;
@@ -36,7 +65,11 @@
     BPFormula *formula = [self.formulae firstObject];
     [formula getInformation];
     if (formula.isInstalled) {
-      [self.formulaPathLabel setStringValue:formula.installPath];
+      if ([formula.installPath length]) {
+        [self.formulaPathLabel setStringValue:formula.installPath];
+      } else {
+        [self.formulaPathLabel setStringValue:emptyString];
+      }
     } else {
       [self.formulaPathLabel setStringValue:@"Formula Not Installed."];
     }

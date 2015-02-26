@@ -10,6 +10,8 @@ Cakebrew does for [Homebrew](http://brew.sh) what Synaptics does to Linux packag
 
 Do you need to use Homebrew but are afraid to use the terminal? Cakebrew is the app for you!
 
+Cakebrew was based on a project by [vincentsaluzzo](https://github.com/vincentsaluzzo/Homebrew-GUI). Although most of the original project has already been modified, his project was the kickstart for what would become Cakebrew, and his commits are still in the working tree.
+
 ## Screenshots
 
 ![Screenshot as of May 27th](https://www.cakebrew.com/assets/img/app-bg.png)
@@ -20,11 +22,7 @@ Please visit [this page](https://github.com/brunophilipe/Cakebrew/wiki#using-zsh
 
 ## Download
 
-[Download Now](https://www.cakebrew.com)
-
-### Version 1.0.10 Release Candidate 2 (November 2, 2014)
-
-Lots of changes were made, so a RC version before pushing to the main release tree is a good thing to do. If you are interested in testing the new version of Cakebrew with new features (and, just maybe, some undiscovered bugs), [please download it here](https://www.cakebrew.com/files/cakebrew-1.0.10rc2.zip).
+[Download Now – Version 1.0.10](https://www.cakebrew.com)
 
 ### Yosemite
 
@@ -47,4 +45,4 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with this program.  If not, see [<http://www.gnu.org/licenses/>](http://www.gnu.org/licenses/).
 
-This document was written with my free plain text editor, [https://brunophilipe.com/software/tiptyper](TipTyper)!
+This document was written with my free plain text editor, [TipTyper](https://brunophilipe.com/software/tiptyper)!
