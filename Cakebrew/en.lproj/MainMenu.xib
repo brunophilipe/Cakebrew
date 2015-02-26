@@ -490,7 +490,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="169" height="320"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <subviews>
-                                                <outlineView appearanceType="vibrantLight" verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" selectionHighlightStyle="sourceList" columnReordering="NO" multipleSelection="NO" autosaveColumns="NO" rowHeight="24" rowSizeStyle="systemDefault" viewBased="YES" indentationPerLevel="14" outlineTableColumn="LEF-be-VWM" id="h1z-c9-U0s" customClass="PXSourceList">
+                                                <outlineView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" selectionHighlightStyle="sourceList" columnReordering="NO" multipleSelection="NO" autosaveColumns="NO" rowHeight="24" rowSizeStyle="systemDefault" viewBased="YES" indentationPerLevel="14" outlineTableColumn="LEF-be-VWM" id="h1z-c9-U0s" customClass="PXSourceList">
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <size key="intercellSpacing" width="3" height="2"/>
                                                     <color key="backgroundColor" name="_sourceListBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -604,9 +604,6 @@
                                 <rect key="frame" x="170" y="0.0" width="400" height="320"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <subviews>
-                                    <customView translatesAutoresizingMaskIntoConstraints="NO" id="N8K-3a-hgb" customClass="BPInsetShadowView">
-                                        <rect key="frame" x="0.0" y="0.0" width="400" height="320"/>
-                                    </customView>
                                     <tabView drawsBackground="NO" type="noTabsNoBorder" initialItem="aFR-nx-bHM" translatesAutoresizingMaskIntoConstraints="NO" id="79A-lZ-LEo">
                                         <rect key="frame" x="0.0" y="0.0" width="400" height="320"/>
                                         <font key="font" metaFont="system"/>
@@ -633,14 +630,10 @@
                                     </tabView>
                                 </subviews>
                                 <constraints>
-                                    <constraint firstAttribute="bottom" secondItem="N8K-3a-hgb" secondAttribute="bottom" id="1aW-yp-Q98"/>
                                     <constraint firstItem="79A-lZ-LEo" firstAttribute="top" secondItem="C6z-4a-AJ0" secondAttribute="top" id="6jB-M8-K5D"/>
                                     <constraint firstAttribute="trailing" secondItem="79A-lZ-LEo" secondAttribute="trailing" id="DiK-dq-xEg"/>
-                                    <constraint firstItem="N8K-3a-hgb" firstAttribute="top" secondItem="C6z-4a-AJ0" secondAttribute="top" id="Muu-fU-U1R"/>
                                     <constraint firstItem="79A-lZ-LEo" firstAttribute="leading" secondItem="C6z-4a-AJ0" secondAttribute="leading" id="Rny-Ns-v82"/>
-                                    <constraint firstItem="N8K-3a-hgb" firstAttribute="leading" secondItem="C6z-4a-AJ0" secondAttribute="leading" id="aiL-YS-kb1"/>
                                     <constraint firstAttribute="bottom" secondItem="79A-lZ-LEo" secondAttribute="bottom" id="uOK-XH-cAW"/>
-                                    <constraint firstAttribute="trailing" secondItem="N8K-3a-hgb" secondAttribute="trailing" id="zKf-Uq-y6b"/>
                                 </constraints>
                             </customView>
                         </subviews>
@@ -649,7 +642,7 @@
                             <real value="250"/>
                         </holdingPriorities>
                     </splitView>
-                    <customView hidden="YES" translatesAutoresizingMaskIntoConstraints="NO" id="SfC-W7-8MF" customClass="BPInsetShadowView">
+                    <customView hidden="YES" translatesAutoresizingMaskIntoConstraints="NO" id="SfC-W7-8MF">
                         <rect key="frame" x="0.0" y="22" width="570" height="320"/>
                         <subviews>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="maG-dP-mXL">

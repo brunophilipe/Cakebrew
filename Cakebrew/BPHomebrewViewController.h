@@ -22,7 +22,6 @@
 #import <Foundation/Foundation.h>
 #import "BPFormula.h"
 #import "DMSplitView.h"
-#import "BPInsetShadowView.h"
 #import "BPFormulaeTableView.h"
 #import "BPFormulaPopoverViewController.h"
 #import "BPSideBarController.h"
@@ -37,7 +36,6 @@ typedef NS_ENUM(NSUInteger, BPWindowOperation) {
 };
 
 @class DMSplitView;
-@class BPInsetShadowView;
 @class BPUpdateDoctorController;
 
 @interface BPHomebrewViewController : NSViewController
@@ -50,7 +48,7 @@ typedef NS_ENUM(NSUInteger, BPWindowOperation) {
 @property (weak) IBOutlet DMSplitView              *splitView;
 @property (weak) IBOutlet NSTabView                *tabView;
 @property (weak) IBOutlet NSTextField              *label_information;
-@property (weak) IBOutlet BPInsetShadowView        *view_disablerLock;
+@property (weak) IBOutlet NSView				   *view_disablerLock;
 @property (weak) IBOutlet NSToolbar                *toolbar;
 @property (weak) IBOutlet NSSearchField            *searchField;
 @property (weak) IBOutlet NSMenu                   *menu_formula;

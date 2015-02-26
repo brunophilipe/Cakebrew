@@ -10,8 +10,6 @@
 		1529086B1927C05B00206767 /* .travis.yml in Resources */ = {isa = PBXBuildFile; fileRef = 1529086A1927C05B00206767 /* .travis.yml */; };
 		1536BFF718EBA92400B67C5C /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1536BFF618EBA92400B67C5C /* Images.xcassets */; };
 		1540FA3518ECF66B00334A5C /* download.icns in Resources */ = {isa = PBXBuildFile; fileRef = 1540FA3418ECF66B00334A5C /* download.icns */; };
-		1540FA3918ED09BB00334A5C /* BPInsetShadowView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1540FA3818ED09BB00334A5C /* BPInsetShadowView.m */; };
-		1540FA3D18EDDA1600334A5C /* BPTopBorderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1540FA3B18EDD8CE00334A5C /* BPTopBorderView.m */; };
 		1570BA3618EE0A66001C3C5C /* BPHomebrewManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 1570BA3518EE0A66001C3C5C /* BPHomebrewManager.m */; };
 		1570BA5618EE50BD001C3C5C /* BPFormula.m in Sources */ = {isa = PBXBuildFile; fileRef = 1570BA5518EE50BD001C3C5C /* BPFormula.m */; };
 		158370B918F2471500176C9C /* PXSourceList.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 158370B818F2471500176C9C /* PXSourceList.framework */; };
@@ -79,10 +77,6 @@
 		1529086A1927C05B00206767 /* .travis.yml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .travis.yml; sourceTree = SOURCE_ROOT; };
 		1536BFF618EBA92400B67C5C /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		1540FA3418ECF66B00334A5C /* download.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = download.icns; sourceTree = "<group>"; };
-		1540FA3718ED09BB00334A5C /* BPInsetShadowView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BPInsetShadowView.h; path = Views/BPInsetShadowView.h; sourceTree = "<group>"; };
-		1540FA3818ED09BB00334A5C /* BPInsetShadowView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BPInsetShadowView.m; path = Views/BPInsetShadowView.m; sourceTree = "<group>"; };
-		1540FA3A18EDD8CE00334A5C /* BPTopBorderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BPTopBorderView.h; path = Views/BPTopBorderView.h; sourceTree = "<group>"; };
-		1540FA3B18EDD8CE00334A5C /* BPTopBorderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BPTopBorderView.m; path = Views/BPTopBorderView.m; sourceTree = "<group>"; };
 		1570BA3418EE0A66001C3C5C /* BPHomebrewManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BPHomebrewManager.h; sourceTree = "<group>"; };
 		1570BA3518EE0A66001C3C5C /* BPHomebrewManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BPHomebrewManager.m; sourceTree = "<group>"; };
 		1570BA5418EE50BD001C3C5C /* BPFormula.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BPFormula.h; path = Models/BPFormula.h; sourceTree = "<group>"; };
@@ -176,10 +170,6 @@
 			children = (
 				D2B3A3A819B9CBEC00DE23B5 /* BPFormulaeTableView.h */,
 				D2B3A3A919B9CBEC00DE23B5 /* BPFormulaeTableView.m */,
-				1540FA3718ED09BB00334A5C /* BPInsetShadowView.h */,
-				1540FA3818ED09BB00334A5C /* BPInsetShadowView.m */,
-				1540FA3A18EDD8CE00334A5C /* BPTopBorderView.h */,
-				1540FA3B18EDD8CE00334A5C /* BPTopBorderView.m */,
 				15C34CBD19512DE100B92E36 /* BPAutoScrollTextView.h */,
 				15C34CBE19512DE100B92E36 /* BPAutoScrollTextView.m */,
 			);
@@ -482,7 +472,6 @@
 				1FE4FE77148E4D43008EDE8B /* BPHomebrewInterface.m in Sources */,
 				D2B3A3AA19B9CBEC00DE23B5 /* BPFormulaeTableView.m in Sources */,
 				D2E53A4B19A6228300E05AFC /* BPFormulaOptionsWindowController.m in Sources */,
-				1540FA3918ED09BB00334A5C /* BPInsetShadowView.m in Sources */,
 				D2E53A5019A65BAD00E05AFC /* BPInstallationWindowController.m in Sources */,
 				D2F732ED19190B6D002B2512 /* BPPreferencesWindowController.m in Sources */,
 				15C34CBF19512DE100B92E36 /* BPAutoScrollTextView.m in Sources */,
@@ -492,7 +481,6 @@
 				D2F732F119190B75002B2512 /* NSString+URLValidation.m in Sources */,
 				1FE4FE7A148E5FEB008EDE8B /* BPHomebrewViewController.m in Sources */,
 				15D2CFAB18F202B300B6D9F1 /* DCOAboutWindowController.m in Sources */,
-				1540FA3D18EDDA1600334A5C /* BPTopBorderView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

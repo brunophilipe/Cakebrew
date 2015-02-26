@@ -134,7 +134,7 @@ static NSString *cakebrewOutputIdentifier = @"+++++Cakebrew+++++";
 - (NSString *)getValidUserShell
 {
 	NSString *userShell = [[[NSProcessInfo processInfo] environment] objectForKey:@"SHELL"];
-	NSLog(@"User shell: %@", userShell);
+//	NSLog(@"User shell: %@", userShell);
 
 	// avoid executing stuff like /sbin/nologin as a shell
 	BOOL isValidShell = NO;
