@@ -32,11 +32,12 @@ typedef NS_ENUM(NSInteger, BPListMode) {
 };
 
 @interface BPHomebrewInterface : NSObject
-@property (nonatomic) NSTask *task; // default nil;
 
 + (BPHomebrewInterface *)sharedInterface;
 
 - (void)hideHomebrewNotInstalledMessage;
+
+@property (strong, nonatomic) NSTask *task; // default nil;
 
 #pragma mark - Operations with live data callback block
 

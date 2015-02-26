@@ -25,7 +25,7 @@ static NSString *cakebrewOutputIdentifier = @"+++++Cakebrew+++++";
 
 @interface BPHomebrewInterfaceListCall : NSObject
 
-@property (readonly) NSArray *arguments;
+@property (strong, readonly) NSArray *arguments;
 
 - (instancetype)initWithArguments:(NSArray *)arguments;
 - (NSArray *)parseData:(NSString *)data;

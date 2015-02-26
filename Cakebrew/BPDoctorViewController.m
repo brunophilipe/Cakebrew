@@ -34,41 +34,42 @@
 @implementation BPDoctorViewController
 
 - (void)awakeFromNib {
-  NSFont *font = [NSFont bp_defaultFixedWidthFont];
-  [self.doctorTextView setFont:font];
-  self.isPerformingDoctor = NO;
+	NSFont *font = [NSFont bp_defaultFixedWidthFont];
+	[self.doctorTextView setFont:font];
+	self.isPerformingDoctor = NO;
 }
 
 - (NSString *)nibName {
-  return @"BPDoctorView";
+	return @"BPDoctorView";
 }
 
 - (IBAction)runStopDoctor:(id)sender {
 	BPAppDelegate *appDelegate = BPAppDelegateRef;
-  
+	
 	if (appDelegate.isRunningBackgroundTask)
 	{
 		[appDelegate displayBackgroundWarning];
 		return;
 	}
 	[appDelegate setRunningBackgroundTask:YES];
-  
+	
 	[self.doctorTextView setString:@""];
 	self.isPerformingDoctor = YES;
 	[self.progressIndicator startAnimation:sender];
-  
-  dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
+	
+	dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
 		[[BPHomebrewInterface sharedInterface] runDoctorWithReturnBlock:^(NSString *output) {
 			[self.doctorTextView performSelectorOnMainThread:@selector(setString:)
-                                            withObject:[self.doctorTextView.string stringByAppendingString:output]
-                                         waitUntilDone:YES];
+												  withObject:[self.doctorTextView.string stringByAppendingString:output]
+											   waitUntilDone:YES];
 		}];
-    
-    dispatch_async(dispatch_get_main_queue(), ^{
-      [self.progressIndicator stopAnimation:sender];
-      self.isPerformingDoctor = NO;
+		
+		dispatch_async(dispatch_get_main_queue(), ^{
+			NSLog(@"Finished doctor");
+			[self.progressIndicator stopAnimation:sender];
+			self.isPerformingDoctor = NO;
 			[appDelegate setRunningBackgroundTask:NO];
-    });
+		});
 	});
 }
 
