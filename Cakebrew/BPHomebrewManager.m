@@ -27,6 +27,10 @@ NSString *const kBP_CACHE_DICT_DATA_KEY = @"BP_CACHE_DICT_DATA_KEY";
 
 #define kBP_SECONDS_IN_A_DAY 86400
 
+@interface BPHomebrewManager () <BPHomebrewInterfaceDelegate>
+
+@end
+
 @implementation BPHomebrewManager
 
 + (BPHomebrewManager *)sharedManager
@@ -44,7 +48,7 @@ NSString *const kBP_CACHE_DICT_DATA_KEY = @"BP_CACHE_DICT_DATA_KEY";
 {
 	self = [super init];
 	if (self) {
-		[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(update) name:kBP_NOTIFICATION_FORMULAS_CHANGED object:nil];
+		[[BPHomebrewInterface sharedInterface] setDelegate:self];
 	}
 	return self;
 }
@@ -54,12 +58,7 @@ NSString *const kBP_CACHE_DICT_DATA_KEY = @"BP_CACHE_DICT_DATA_KEY";
 	[[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
-- (void)update
-{
-	[self updateRebuildingCache:YES];
-}
-
-- (void)updateRebuildingCache:(BOOL)shouldRebuildCache;
+- (void)reloadFromInterfaceRebuildingCache:(BOOL)shouldRebuildCache;
 {
     dispatch_async(dispatch_get_main_queue(), ^{
         [self setFormulae_installed:[[BPHomebrewInterface sharedInterface] listMode:kBPListInstalled]];
@@ -89,8 +88,6 @@ NSString *const kBP_CACHE_DICT_DATA_KEY = @"BP_CACHE_DICT_DATA_KEY";
 	}
 
 	_formulae_search = [array copy];
-
-	[[NSNotificationCenter defaultCenter] postNotificationName:kBP_NOTIFICATION_SEARCH_UPDATED object:nil];
 }
 
 /**
@@ -172,6 +169,20 @@ NSString *const kBP_CACHE_DICT_DATA_KEY = @"BP_CACHE_DICT_DATA_KEY";
     if (brewTask && [brewTask isRunning]) {
         [[BPHomebrewInterface sharedInterface].task terminate];
     }
+}
+
+#pragma - Homebrew Interface Delegate
+
+- (void)homebrewInterfaceDidUpdateFormulae
+{
+	[self reloadFromInterfaceRebuildingCache:YES];
+}
+
+- (void)homebrewInterfaceShouldLockWindow:(BOOL)shouldLock
+{
+	if (self.delegate) {
+		[self.delegate homebrewManager:self shouldLockWindow:shouldLock];
+	}
 }
 
 @end

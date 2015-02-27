@@ -31,6 +31,13 @@ typedef NS_ENUM(NSInteger, BPListMode) {
 	kBPListRepositories
 };
 
+@protocol BPHomebrewInterfaceDelegate <NSObject>
+
+- (void)homebrewInterfaceDidUpdateFormulae;
+- (void)homebrewInterfaceShouldLockWindow:(BOOL)shouldLock;
+
+@end
+
 @interface BPHomebrewInterface : NSObject
 
 + (BPHomebrewInterface *)sharedInterface;
@@ -38,6 +45,7 @@ typedef NS_ENUM(NSInteger, BPListMode) {
 - (void)hideHomebrewNotInstalledMessage;
 
 @property (strong, nonatomic) NSTask *task; // default nil;
+@property (weak) id<BPHomebrewInterfaceDelegate> delegate;
 
 #pragma mark - Operations with live data callback block
 

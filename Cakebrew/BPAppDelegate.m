@@ -75,7 +75,7 @@ NSString *const kBP_FORMULA_OPTION_DESCRIPTION = @"BP_FORMULA_OPTION_DESCRIPTION
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification
 {
 	[self setupSignalHandler];
-	[[BPHomebrewManager sharedManager] updateRebuildingCache:NO];
+	[[BPHomebrewManager sharedManager] reloadFromInterfaceRebuildingCache:NO];
 }
 
 - (BOOL)applicationShouldHandleReopen:(NSApplication *)sender hasVisibleWindows:(BOOL)flag

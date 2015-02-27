@@ -21,6 +21,7 @@
 
 #import "BPInstallationWindowController.h"
 #import "BPHomebrewInterface.h"
+#import "BPHomebrewManager.h"
 #import "NSFont+Appearance.h"
 
 @interface BPInstallationWindowController ()
@@ -216,7 +217,8 @@
 
 
 
-- (IBAction)okAction:(id)sender {
+- (IBAction)okAction:(id)sender
+{
 	self.recordTextView.string = @"";
 	NSWindow *mainWindow = [NSApp mainWindow];
 	if ([mainWindow respondsToSelector:@selector(endSheet:)]) {
@@ -225,8 +227,7 @@
 		[[NSApplication sharedApplication] endSheet:self.window];
 	}
 
-	[[NSNotificationCenter defaultCenter] postNotificationName:kBP_NOTIFICATION_FORMULAS_CHANGED
-														object:nil];
+	[[BPHomebrewManager sharedManager] reloadFromInterfaceRebuildingCache:YES];
 }
 
 @end

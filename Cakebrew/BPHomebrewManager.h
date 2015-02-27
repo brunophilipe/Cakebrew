@@ -33,6 +33,8 @@ typedef NS_ENUM(NSInteger, BPFormulaStatus) {
 @protocol BPHomebrewManagerDelegate <NSObject>
 
 - (void)homebrewManagerFinishedUpdating:(BPHomebrewManager*)manager;
+- (void)homebrewManager:(BPHomebrewManager *)manager didUpdateSearchResults:(NSArray *)searchResults;
+- (void)homebrewManager:(BPHomebrewManager *)manager shouldLockWindow:(BOOL)shouldLock;
 
 @end
 
@@ -49,8 +51,7 @@ typedef NS_ENUM(NSInteger, BPFormulaStatus) {
 
 + (BPHomebrewManager *)sharedManager;
 
-- (void)update;
-- (void)updateRebuildingCache:(BOOL)shouldRebuildCache;
+- (void)reloadFromInterfaceRebuildingCache:(BOOL)shouldRebuildCache;
 - (void)updateSearchWithName:(NSString *)name;
 
 - (BPFormulaStatus)statusForFormula:(BPFormula*)formula;

@@ -62,7 +62,7 @@ typedef NS_ENUM(NSUInteger, HomeBrewTab) {
 
 @implementation BPHomebrewViewController
 {
-	BPHomebrewManager			   *_homebrewManager;
+	BPHomebrewManager *_homebrewManager;
 }
 
 - (BPFormulaPopoverViewController *)formulaPopoverViewController
@@ -98,10 +98,6 @@ typedef NS_ENUM(NSUInteger, HomeBrewTab) {
 	_homebrewManager = [BPHomebrewManager sharedManager];
 	[_homebrewManager setDelegate:self];
 	self.selectedFormulaeViewController = [[BPSelectedFormulaViewController alloc] init];
-	
-	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(lockWindow) name:kBP_NOTIFICATION_LOCK_WINDOW object:nil];
-	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(unlockWindow) name:kBP_NOTIFICATION_UNLOCK_WINDOW object:nil];
-	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(searchUpdatedNotification:) name:kBP_NOTIFICATION_SEARCH_UPDATED object:nil];
 }
 
 
@@ -186,9 +182,6 @@ typedef NS_ENUM(NSUInteger, HomeBrewTab) {
 
 - (void)dealloc
 {
-	[[NSNotificationCenter defaultCenter] removeObserver:self name:kBP_NOTIFICATION_LOCK_WINDOW object:nil];
-	[[NSNotificationCenter defaultCenter] removeObserver:self name:kBP_NOTIFICATION_UNLOCK_WINDOW object:nil];
-	[[NSNotificationCenter defaultCenter] removeObserver:self name:kBP_NOTIFICATION_SEARCH_UPDATED object:nil];
 	[_homebrewManager setDelegate:nil];
 }
 
@@ -197,52 +190,6 @@ typedef NS_ENUM(NSUInteger, HomeBrewTab) {
 	self.operationWindowController = [BPInstallationWindowController runWithOperation:operation
 																			 formulae:formulae
 																			  options:options];
-}
-
-- (void)lockWindow
-{
-	[self.view_disablerLock setHidden:NO];
-	[self.view_disablerLock setWantsLayer:YES];
-	[self.label_information setHidden:YES];
-	[self.splitView setHidden:YES];
-	
-	[self.toolbar.items enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
-		if ([obj respondsToSelector:@selector(setEnabled:)]) {
-			[obj setEnabled:NO];
-		}
-	}];
-	
-	NSAlert *alert = [NSAlert alertWithMessageText:@"Error!" defaultButton:@"Homebrew Website" alternateButton:@"Cancel" otherButton:nil informativeTextWithFormat:@"Homebrew was not found in your system. Please install Homebrew before using Cakebrew. You can click the button below to open Homebrew's website."];
-	
-	[alert.window setTitle:@"Cakebrew"];
-	
-	if ([alert respondsToSelector:@selector(beginSheetModalForWindow:completionHandler:)]) {
-		[alert beginSheetModalForWindow:_appDelegate.window completionHandler:^(NSModalResponse returnCode) {
-			if (returnCode == 1000) {
-				[[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:@"http://brew.sh"]];
-			}
-		}];
-	} else {
-		NSModalResponse returnCode = [alert runModal];
-		if (returnCode == NSAlertDefaultReturn) {
-			[[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:@"http://brew.sh"]];
-		}
-	}
-}
-
-- (void)unlockWindow
-{
-	[self.view_disablerLock setHidden:YES];
-	[self.label_information setHidden:NO];
-	[self.splitView setHidden:NO];
-	
-	[self.toolbar.items enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
-		if ([obj respondsToSelector:@selector(setEnabled:)]) {
-			[obj setEnabled:YES];
-		}
-	}];
-	
-	[[BPHomebrewManager sharedManager] updateRebuildingCache:YES];
 }
 
 - (void)updateInterfaceItems
@@ -324,15 +271,6 @@ typedef NS_ENUM(NSUInteger, HomeBrewTab) {
 	}
 }
 
-- (void)searchUpdatedNotification:(NSNotification*)notification
-{
-	_isSearching = YES;
-	if ([self.outlineView_sidebar selectedRow] != FormulaeSideBarItemOutdated)
-		[self.outlineView_sidebar selectRowIndexes:[NSIndexSet indexSetWithIndex:FormulaeSideBarItemAll] byExtendingSelection:NO];
-	
-	[self configureTableForListing:kBPListSearch];
-}
-
 - (void)configureTableForListing:(BPListMode)mode
 {
 	[self.tableView_formulae deselectAll:nil];
@@ -363,6 +301,60 @@ typedef NS_ENUM(NSUInteger, HomeBrewTab) {
 		[_outlineView_sidebar selectRowIndexes:[NSIndexSet indexSetWithIndex:FormulaeSideBarItemInstalled] byExtendingSelection:NO];
 	else
 		[_outlineView_sidebar selectRowIndexes:[NSIndexSet indexSetWithIndex:(NSUInteger)_lastSelectedSidebarIndex] byExtendingSelection:NO];
+}
+
+- (void)homebrewManager:(BPHomebrewManager *)manager didUpdateSearchResults:(NSArray *)searchResults
+{
+	_isSearching = YES;
+	if ([self.outlineView_sidebar selectedRow] != FormulaeSideBarItemOutdated)
+		[self.outlineView_sidebar selectRowIndexes:[NSIndexSet indexSetWithIndex:FormulaeSideBarItemAll] byExtendingSelection:NO];
+	
+	[self configureTableForListing:kBPListSearch];
+}
+
+- (void)homebrewManager:(BPHomebrewManager *)manager shouldLockWindow:(BOOL)shouldLock
+{
+	if (shouldLock) {
+		[self.view_disablerLock setHidden:NO];
+		[self.view_disablerLock setWantsLayer:YES];
+		[self.label_information setHidden:YES];
+		[self.splitView setHidden:YES];
+		
+		[self.toolbar.items enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+			if ([obj respondsToSelector:@selector(setEnabled:)]) {
+				[obj setEnabled:NO];
+			}
+		}];
+		
+		NSAlert *alert = [NSAlert alertWithMessageText:@"Error!" defaultButton:@"Homebrew Website" alternateButton:@"Cancel" otherButton:nil informativeTextWithFormat:@"Homebrew was not found in your system. Please install Homebrew before using Cakebrew. You can click the button below to open Homebrew's website."];
+		
+		[alert.window setTitle:@"Cakebrew"];
+		
+		if ([alert respondsToSelector:@selector(beginSheetModalForWindow:completionHandler:)]) {
+			[alert beginSheetModalForWindow:_appDelegate.window completionHandler:^(NSModalResponse returnCode) {
+				if (returnCode == 1000) {
+					[[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:@"http://brew.sh"]];
+				}
+			}];
+		} else {
+			NSModalResponse returnCode = [alert runModal];
+			if (returnCode == NSAlertDefaultReturn) {
+				[[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:@"http://brew.sh"]];
+			}
+		}
+	} else {
+		[self.view_disablerLock setHidden:YES];
+		[self.label_information setHidden:NO];
+		[self.splitView setHidden:NO];
+		
+		[self.toolbar.items enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+			if ([obj respondsToSelector:@selector(setEnabled:)]) {
+				[obj setEnabled:YES];
+			}
+		}];
+		
+		[[BPHomebrewManager sharedManager] reloadFromInterfaceRebuildingCache:YES];
+	}
 }
 
 #pragma mark - NSTableView Delegate

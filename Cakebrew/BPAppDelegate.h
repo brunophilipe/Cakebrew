@@ -29,11 +29,6 @@ extern NSString *const kBP_HOMEBREW_WEBSITE;
 
 extern NSString *const kBP_EXCEPTION_HOMEBREW_NOT_INSTALLED;
 
-extern NSString *const kBP_NOTIFICATION_FORMULAS_CHANGED;
-extern NSString *const kBP_NOTIFICATION_LOCK_WINDOW;
-extern NSString *const kBP_NOTIFICATION_UNLOCK_WINDOW;
-extern NSString *const kBP_NOTIFICATION_SEARCH_UPDATED;
-
 extern NSString *const kBP_FORMULA_OPTION_COMMAND;
 extern NSString *const kBP_FORMULA_OPTION_DESCRIPTION;
 
