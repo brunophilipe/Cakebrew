@@ -42,8 +42,6 @@ typedef NS_ENUM(NSInteger, BPListMode) {
 
 + (BPHomebrewInterface *)sharedInterface;
 
-- (void)hideHomebrewNotInstalledMessage;
-
 @property (strong, nonatomic) NSTask *task; // default nil;
 @property (weak) id<BPHomebrewInterfaceDelegate> delegate;
 

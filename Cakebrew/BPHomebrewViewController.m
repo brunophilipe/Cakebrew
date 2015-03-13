@@ -542,8 +542,8 @@ typedef NS_ENUM(NSUInteger, HomeBrewTab) {
 			NSString* name = [input stringValue];
 			if ([name length] > 0)
 			{
-				BPFormula *formula = [BPFormula formulaWithName:name];
-				[self prepareFormulae:@[formula] forOperation:kBPWindowOperationTap withOptions:nil];
+				BPFormula *lformula = [BPFormula formulaWithName:name];
+				[self prepareFormulae:@[lformula] forOperation:kBPWindowOperationTap withOptions:nil];
 			}
 			else {
 				[_appDelegate setRunningBackgroundTask:NO];

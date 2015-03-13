@@ -25,13 +25,9 @@
 
 - (BOOL)bp_containsValidURL
 {
-  //TODO: Implement more sophisticated validation
-  NSURL *URL = [NSURL URLWithString:self];
-  if (URL) {
-    return YES;
-  } else {
-    return NO;
-  }
+    //TODO: Implement more sophisticated validation
+    NSURL *URL = [NSURL URLWithString:self];
+    return URL != nil;
 }
 
 @end

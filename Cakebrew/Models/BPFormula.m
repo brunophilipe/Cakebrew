@@ -198,12 +198,12 @@ NSString *const kBPIdentifierCaveats = @"==> Caveats";
 
 		NSMutableDictionary __block *formulaOption = nil;
 
-		[optionsString enumerateLinesUsingBlock:^(NSString *line, BOOL *stop) {
-			if ([line hasPrefix:@"--"]) { // This is an option command
+		[optionsString enumerateLinesUsingBlock:^(NSString *match_line, BOOL *stop) {
+			if ([match_line hasPrefix:@"--"]) { // This is an option command
 				formulaOption = [NSMutableDictionary dictionaryWithCapacity:2];
-				[formulaOption setObject:line forKey:kBP_FORMULA_OPTION_COMMAND];
+                [formulaOption setObject:match_line forKey:kBP_FORMULA_OPTION_COMMAND];
 			} else if (formulaOption) { // This is the option description
-				[formulaOption setObject:[line stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]] forKey:kBP_FORMULA_OPTION_DESCRIPTION];
+				[formulaOption setObject:[match_line stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]] forKey:kBP_FORMULA_OPTION_DESCRIPTION];
 				[options addObject:formulaOption];
 				formulaOption = nil;
 			} else {

@@ -111,27 +111,13 @@ static NSString *cakebrewOutputIdentifier = @"+++++Cakebrew+++++";
 	[self.task launch];
 	[self.task waitUntilExit];
 	
-	NSString *string_output, *string_error;
+	NSString *string_output;
 	string_output = [[NSString alloc] initWithData:[[pipe_output fileHandleForReading] readDataToEndOfFile] encoding:NSUTF8StringEncoding];
-	string_error = [[NSString alloc] initWithData:[[pipe_error fileHandleForReading] readDataToEndOfFile] encoding:NSUTF8StringEncoding];
-	
 	string_output = [self removeLoginShellOutputFromString:string_output];
 	
 	NSLog(@"`which brew` returned \"%@\"", string_output);
 	
 	return string_output.length != 0;
-}
-
-#pragma mark - Public Methods
-
-- (void)hideHomebrewNotInstalledMessage
-{
-	if (self.delegate) {
-		id delegate = self.delegate;
-		dispatch_async(dispatch_get_main_queue(), ^{
-			[delegate homebrewInterfaceShouldLockWindow:NO];
-		});
-	}
 }
 
 #pragma mark - Private Methods
@@ -164,7 +150,7 @@ static NSString *cakebrewOutputIdentifier = @"+++++Cakebrew+++++";
 	return userShell;
 }
 
-- (NSArray *)formatArgumentsForShell:(NSString *)shellName withExtraArguments:(NSArray *)extraArguments sendOutputId:(BOOL)sendOutputID
+- (NSArray *)formatArguments:(NSArray *)extraArguments sendOutputId:(BOOL)sendOutputID
 {
 	NSString *command = nil;
 	if (sendOutputID) {
@@ -196,9 +182,8 @@ static NSString *cakebrewOutputIdentifier = @"+++++Cakebrew+++++";
 	static NSString *taskDoneString = @"Task finished at %@!";
 	
 	NSString *userShell = [self getValidUserShell];
-	NSString *shellName = [userShell lastPathComponent];
 	
-	arguments = [self formatArgumentsForShell:shellName withExtraArguments:arguments sendOutputId:NO];
+	arguments = [self formatArguments:arguments sendOutputId:NO];
 	
 	if (!userShell || !arguments) return NO;
 	
@@ -225,7 +210,7 @@ static NSString *cakebrewOutputIdentifier = @"+++++Cakebrew+++++";
 	NSFileHandle *handle_error = [pipe_error fileHandleForReading];
 	[handle_error waitForDataInBackgroundAndNotify];
 	
-#ifdef DEBUG
+#ifdef DEBUG2
 	block([NSString stringWithFormat:@"User Shell: %@\nCommand: %@ %@\nThe outputs are going to be different if run from Xcode!!\nInstalling and upgrading formulas is not advised in DEBUG mode!\n\n", userShell, userShell, [arguments componentsJoinedByString:@" "]]);
 #endif
 	
@@ -304,6 +289,8 @@ static NSString *cakebrewOutputIdentifier = @"+++++Cakebrew+++++";
 #pragma mark - Operations that return on finish
 
 - (NSArray*)listMode:(BPListMode)mode {
+	NSLog(@"Listing with mode: %ld", (long)mode);
+	
 	BPHomebrewInterfaceListCall *listCall = nil;
 	
 	switch (mode) {
@@ -332,6 +319,8 @@ static NSString *cakebrewOutputIdentifier = @"+++++Cakebrew+++++";
 	}
 	
 	NSString *string = [self performBrewCommandWithArguments:listCall.arguments];
+	
+	NSLog(@"Finished list mode: %ld", (long)mode);
 	
 	if (string) {
 		return [listCall parseData:string];
