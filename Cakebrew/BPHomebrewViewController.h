@@ -49,6 +49,7 @@ typedef NS_ENUM(NSUInteger, BPWindowOperation) {
 @property (weak) IBOutlet NSTabView                *tabView;
 @property (weak) IBOutlet NSTextField              *label_information;
 @property (weak) IBOutlet NSView				   *view_disablerLock;
+@property (weak) IBOutlet NSView				   *view_loading;
 @property (weak) IBOutlet NSToolbar                *toolbar;
 @property (weak) IBOutlet NSSearchField            *searchField;
 @property (weak) IBOutlet NSMenu                   *menu_formula;

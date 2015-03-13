@@ -18,6 +18,7 @@
 		15B23A2A18F4F22400714212 /* Sparkle.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 15B23A2818F4F21E00714212 /* Sparkle.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		15B23A2C18F5003600714212 /* dsa_pub.pem in Resources */ = {isa = PBXBuildFile; fileRef = 15B23A2B18F5003600714212 /* dsa_pub.pem */; };
 		15C34CBF19512DE100B92E36 /* BPAutoScrollTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 15C34CBE19512DE100B92E36 /* BPAutoScrollTextView.m */; };
+		15CEFC631AB335B2005CF54A /* BPLoadingView.m in Sources */ = {isa = PBXBuildFile; fileRef = 15CEFC621AB335B2005CF54A /* BPLoadingView.m */; };
 		15D2CFA218F1E71800B6D9F1 /* reload.icns in Resources */ = {isa = PBXBuildFile; fileRef = 15D2CFA118F1E71800B6D9F1 /* reload.icns */; };
 		15D2CFA418F1EAD200B6D9F1 /* globe.icns in Resources */ = {isa = PBXBuildFile; fileRef = 15D2CFA318F1EAD200B6D9F1 /* globe.icns */; };
 		15D2CFAA18F202B300B6D9F1 /* DCOAboutWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 15D2CFA718F202B300B6D9F1 /* DCOAboutWindow.xib */; };
@@ -86,6 +87,8 @@
 		15B23A2B18F5003600714212 /* dsa_pub.pem */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = dsa_pub.pem; sourceTree = "<group>"; };
 		15C34CBD19512DE100B92E36 /* BPAutoScrollTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BPAutoScrollTextView.h; path = Views/BPAutoScrollTextView.h; sourceTree = "<group>"; };
 		15C34CBE19512DE100B92E36 /* BPAutoScrollTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BPAutoScrollTextView.m; path = Views/BPAutoScrollTextView.m; sourceTree = "<group>"; };
+		15CEFC611AB335B2005CF54A /* BPLoadingView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BPLoadingView.h; path = Views/BPLoadingView.h; sourceTree = "<group>"; };
+		15CEFC621AB335B2005CF54A /* BPLoadingView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BPLoadingView.m; path = Views/BPLoadingView.m; sourceTree = "<group>"; };
 		15D2CFA118F1E71800B6D9F1 /* reload.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = reload.icns; sourceTree = "<group>"; };
 		15D2CFA318F1EAD200B6D9F1 /* globe.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = globe.icns; sourceTree = "<group>"; };
 		15D2CFA718F202B300B6D9F1 /* DCOAboutWindow.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DCOAboutWindow.xib; sourceTree = "<group>"; };
@@ -172,6 +175,8 @@
 				D2B3A3A919B9CBEC00DE23B5 /* BPFormulaeTableView.m */,
 				15C34CBD19512DE100B92E36 /* BPAutoScrollTextView.h */,
 				15C34CBE19512DE100B92E36 /* BPAutoScrollTextView.m */,
+				15CEFC611AB335B2005CF54A /* BPLoadingView.h */,
+				15CEFC621AB335B2005CF54A /* BPLoadingView.m */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -465,6 +470,7 @@
 				15D5BEFA18EBC56E001DDED7 /* DMSplitView.m in Sources */,
 				D2B3A3B819B9EA3500DE23B5 /* BPSideBarController.m in Sources */,
 				1570BA5618EE50BD001C3C5C /* BPFormula.m in Sources */,
+				15CEFC631AB335B2005CF54A /* BPLoadingView.m in Sources */,
 				D2B3A39C19B879CD00DE23B5 /* BPUpdateViewController.m in Sources */,
 				1FE4FE65148E4CDD008EDE8B /* main.m in Sources */,
 				1570BA3618EE0A66001C3C5C /* BPHomebrewManager.m in Sources */,

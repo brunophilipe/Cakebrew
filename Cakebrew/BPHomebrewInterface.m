@@ -98,7 +98,7 @@ static NSString *cakebrewOutputIdentifier = @"+++++Cakebrew+++++";
 	
 	self.task = [[NSTask alloc] init];
 	[self.task setLaunchPath:self.path_shell];
-	[self.task setArguments:@[@"-l", @"-c", @"which breww"]];
+	[self.task setArguments:@[@"-l", @"-c", @"which brew"]];
 	
 	NSPipe *pipe_output = [NSPipe pipe];
 	NSPipe *pipe_error = [NSPipe pipe];
@@ -120,17 +120,19 @@ static NSString *cakebrewOutputIdentifier = @"+++++Cakebrew+++++";
 
 - (void)setDelegate:(id<BPHomebrewInterfaceDelegate>)delegate
 {
-	_delegate = delegate;
-	
-	[self setPath_shell:[self getValidUserShellPath]];
-	
-	if (![self checkForHomebrew])
-		[self showHomebrewNotInstalledMessage];
-	else
-	{
-		[self setPath_cellar:[self getUserCellarPath]];
+	if (_delegate != delegate) {
+		_delegate = delegate;
 		
-		NSLog(@"Cellar Path: %@", self.path_cellar);
+		[self setPath_shell:[self getValidUserShellPath]];
+		
+		if (![self checkForHomebrew])
+			[self showHomebrewNotInstalledMessage];
+		else
+		{
+			[self setPath_cellar:[self getUserCellarPath]];
+			
+			NSLog(@"Cellar Path: %@", self.path_cellar);
+		}
 	}
 }
 
@@ -165,14 +167,19 @@ static NSString *cakebrewOutputIdentifier = @"+++++Cakebrew+++++";
 
 - (NSString *)getUserCellarPath
 {
-	NSString *brew_config = [self performBrewCommandWithArguments:@[@"config"]];
-	NSString __block *path = nil;
+	NSString __block *path = [[NSUserDefaults standardUserDefaults] objectForKey:@"BPBrewCellarPath"];
 	
-	[brew_config enumerateLinesUsingBlock:^(NSString *line, BOOL *stop) {
-		if ([line hasPrefix:@"HOMEBREW_CELLAR"]) {
-			path = [line substringFromIndex:17];
-		}
-	}];
+	if (!path) {
+		NSString *brew_config = [self performBrewCommandWithArguments:@[@"config"]];
+		
+		[brew_config enumerateLinesUsingBlock:^(NSString *line, BOOL *stop) {
+			if ([line hasPrefix:@"HOMEBREW_CELLAR"]) {
+				path = [line substringFromIndex:17];
+			}
+		}];
+		
+		[[NSUserDefaults standardUserDefaults] setObject:path forKey:@"BPBrewCellarPath"];
+	}
 	
 	return path;
 }

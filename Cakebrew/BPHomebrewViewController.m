@@ -171,11 +171,15 @@ typedef NS_ENUM(NSUInteger, HomeBrewTab) {
 	[self.splitView setMinSize:165.f ofSubviewAtIndex:0];
 	[self.splitView setMinSize:400.f ofSubviewAtIndex:1];
 	[self.splitView setDividerColor:kBPSidebarDividerColor];
-	[self.splitView setDividerThickness:0];
+	[self.splitView setDividerThickness:1];
 	
 	[self.sidebarController refreshSidebarBadges];
 	
 	[self.outlineView_sidebar selectRowIndexes:[NSIndexSet indexSetWithIndex:FormulaeSideBarItemInstalled] byExtendingSelection:NO];
+	
+	[self.view_loading setHidden:NO];
+	[self.splitView setHidden:YES];
+	[self setToolbarItemsEnabled:NO];
 	
 	_appDelegate = BPAppDelegateRef;
 }
@@ -280,13 +284,27 @@ typedef NS_ENUM(NSUInteger, HomeBrewTab) {
 	[self updateInterfaceItems];
 }
 
+- (void)setToolbarItemsEnabled:(BOOL)yesOrNo
+{
+	[self.toolbar.items enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+		if ([obj respondsToSelector:@selector(setEnabled:)]) {
+			[obj setEnabled:yesOrNo];
+		}
+	}];
+}
+
 #pragma mark - Homebrew Manager Delegate
 
 - (void)homebrewManagerFinishedUpdating:(BPHomebrewManager *)manager
 {
 	[[self.tableView_formulae menu] cancelTracking];
+	
 	self.currentFormula = nil;
 	self.selectedFormulaeViewController.formulae = nil;
+	
+	[self.view_loading setHidden:YES];
+	[self.splitView setHidden:NO];
+	[self setToolbarItemsEnabled:YES];
 	[self.formulaeDataSource refreshBackingArray];
 	[self.sidebarController refreshSidebarBadges];
 	
@@ -320,11 +338,7 @@ typedef NS_ENUM(NSUInteger, HomeBrewTab) {
 		[self.label_information setHidden:YES];
 		[self.splitView setHidden:YES];
 		
-		[self.toolbar.items enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
-			if ([obj respondsToSelector:@selector(setEnabled:)]) {
-				[obj setEnabled:NO];
-			}
-		}];
+		[self setToolbarItemsEnabled:NO];
 		
 		NSAlert *alert = [NSAlert alertWithMessageText:@"Error!" defaultButton:@"Homebrew Website" alternateButton:@"Cancel" otherButton:nil informativeTextWithFormat:@"Homebrew was not found in your system. Please install Homebrew before using Cakebrew. You can click the button below to open Homebrew's website."];
 		
@@ -347,11 +361,7 @@ typedef NS_ENUM(NSUInteger, HomeBrewTab) {
 		[self.label_information setHidden:NO];
 		[self.splitView setHidden:NO];
 		
-		[self.toolbar.items enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
-			if ([obj respondsToSelector:@selector(setEnabled:)]) {
-				[obj setEnabled:YES];
-			}
-		}];
+		[self setToolbarItemsEnabled:YES];
 		
 		[[BPHomebrewManager sharedManager] reloadFromInterfaceRebuildingCache:YES];
 	}
