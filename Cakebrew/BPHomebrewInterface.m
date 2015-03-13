@@ -242,8 +242,8 @@ static NSString *cakebrewOutputIdentifier = @"+++++Cakebrew+++++";
 	NSFileHandle *handle_error = [pipe_error fileHandleForReading];
 	[handle_error waitForDataInBackgroundAndNotify];
 	
-#ifdef DEBUG2
-	block([NSString stringWithFormat:@"User Shell: %@\nCommand: %@ %@\nThe outputs are going to be different if run from Xcode!!\nInstalling and upgrading formulas is not advised in DEBUG mode!\n\n", userShell, userShell, [arguments componentsJoinedByString:@" "]]);
+#ifdef DEBUG
+	block([NSString stringWithFormat:@"User Shell: %@\nCommand: %@\nThe outputs are going to be different if run from Xcode!!\nInstalling and upgrading formulas is not advised in DEBUG mode!\n\n", self.path_shell, [arguments componentsJoinedByString:@" "]]);
 #endif
 	
 	[self.task launch];
