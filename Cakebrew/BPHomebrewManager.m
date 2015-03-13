@@ -178,10 +178,10 @@ NSString *const kBP_CACHE_DICT_DATA_KEY = @"BP_CACHE_DICT_DATA_KEY";
 	[self reloadFromInterfaceRebuildingCache:YES];
 }
 
-- (void)homebrewInterfaceShouldLockWindow:(BOOL)shouldLock
+- (void)homebrewInterfaceShouldDisplayNoBrewMessage:(BOOL)yesOrNo
 {
 	if (self.delegate) {
-		[self.delegate homebrewManager:self shouldLockWindow:shouldLock];
+		[self.delegate homebrewManager:self shouldDisplayNoBrewMessage:yesOrNo];
 	}
 }
 

@@ -34,7 +34,7 @@ typedef NS_ENUM(NSInteger, BPListMode) {
 @protocol BPHomebrewInterfaceDelegate <NSObject>
 
 - (void)homebrewInterfaceDidUpdateFormulae;
-- (void)homebrewInterfaceShouldLockWindow:(BOOL)shouldLock;
+- (void)homebrewInterfaceShouldDisplayNoBrewMessage:(BOOL)yesOrNo;
 
 @end
 
@@ -43,7 +43,7 @@ typedef NS_ENUM(NSInteger, BPListMode) {
 + (BPHomebrewInterface *)sharedInterface;
 
 @property (strong, nonatomic) NSTask *task; // default nil;
-@property (weak) id<BPHomebrewInterfaceDelegate> delegate;
+@property (weak, nonatomic) id<BPHomebrewInterfaceDelegate> delegate;
 
 #pragma mark - Operations with live data callback block
 

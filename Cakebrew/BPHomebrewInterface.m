@@ -55,6 +55,9 @@ static NSString *cakebrewOutputIdentifier = @"+++++Cakebrew+++++";
 
 @property BOOL systemHasAppNap;
 
+@property (strong) NSString *path_cellar;
+@property (strong) NSString *path_shell;
+
 @end
 
 @implementation BPHomebrewInterface
@@ -80,9 +83,6 @@ static NSString *cakebrewOutputIdentifier = @"+++++Cakebrew+++++";
 		[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updatedFileHandle:) name:NSFileHandleDataAvailableNotification object:nil];
 		[self setTask:nil];
 		[self setSystemHasAppNap:[[NSProcessInfo processInfo] respondsToSelector:@selector(beginActivityWithOptions:reason:)]];
-		
-		if (![self checkForHomebrew])
-			[self showHomebrewNotInstalledMessage];
 	}
 	return self;
 }
@@ -94,13 +94,11 @@ static NSString *cakebrewOutputIdentifier = @"+++++Cakebrew+++++";
 
 - (BOOL)checkForHomebrew
 {
-	NSString *userShell = [self getValidUserShell];
-	
-	if (!userShell) return NO;
+	if (!self.path_shell) return NO;
 	
 	self.task = [[NSTask alloc] init];
-	[self.task setLaunchPath:userShell];
-	[self.task setArguments:@[@"-l", @"-c", @"which brew"]];
+	[self.task setLaunchPath:self.path_shell];
+	[self.task setArguments:@[@"-l", @"-c", @"which breww"]];
 	
 	NSPipe *pipe_output = [NSPipe pipe];
 	NSPipe *pipe_error = [NSPipe pipe];
@@ -120,12 +118,27 @@ static NSString *cakebrewOutputIdentifier = @"+++++Cakebrew+++++";
 	return string_output.length != 0;
 }
 
+- (void)setDelegate:(id<BPHomebrewInterfaceDelegate>)delegate
+{
+	_delegate = delegate;
+	
+	[self setPath_shell:[self getValidUserShellPath]];
+	
+	if (![self checkForHomebrew])
+		[self showHomebrewNotInstalledMessage];
+	else
+	{
+		[self setPath_cellar:[self getUserCellarPath]];
+		
+		NSLog(@"Cellar Path: %@", self.path_cellar);
+	}
+}
+
 #pragma mark - Private Methods
 
-- (NSString *)getValidUserShell
+- (NSString *)getValidUserShellPath
 {
 	NSString *userShell = [[[NSProcessInfo processInfo] environment] objectForKey:@"SHELL"];
-	//	NSLog(@"User shell: %@", userShell);
 	
 	// avoid executing stuff like /sbin/nologin as a shell
 	BOOL isValidShell = NO;
@@ -150,6 +163,20 @@ static NSString *cakebrewOutputIdentifier = @"+++++Cakebrew+++++";
 	return userShell;
 }
 
+- (NSString *)getUserCellarPath
+{
+	NSString *brew_config = [self performBrewCommandWithArguments:@[@"config"]];
+	NSString __block *path = nil;
+	
+	[brew_config enumerateLinesUsingBlock:^(NSString *line, BOOL *stop) {
+		if ([line hasPrefix:@"HOMEBREW_CELLAR"]) {
+			path = [line substringFromIndex:17];
+		}
+	}];
+	
+	return path;
+}
+
 - (NSArray *)formatArguments:(NSArray *)extraArguments sendOutputId:(BOOL)sendOutputID
 {
 	NSString *command = nil;
@@ -171,7 +198,7 @@ static NSString *cakebrewOutputIdentifier = @"+++++Cakebrew+++++";
 		if (self.delegate) {
 			id delegate = self.delegate;
 			dispatch_async(dispatch_get_main_queue(), ^{
-				[delegate homebrewInterfaceShouldLockWindow:YES];
+				[delegate homebrewInterfaceShouldDisplayNoBrewMessage:YES];
 			});
 		}
 	}
@@ -181,11 +208,9 @@ static NSString *cakebrewOutputIdentifier = @"+++++Cakebrew+++++";
 {
 	static NSString *taskDoneString = @"Task finished at %@!";
 	
-	NSString *userShell = [self getValidUserShell];
-	
 	arguments = [self formatArguments:arguments sendOutputId:NO];
 	
-	if (!userShell || !arguments) return NO;
+	if (!self.path_shell || !arguments) return NO;
 	
 	operationUpdateBlock = block;
 	
@@ -195,7 +220,7 @@ static NSString *cakebrewOutputIdentifier = @"+++++Cakebrew+++++";
 	
 	self.task = [[NSTask alloc] init];
 	
-	[self.task setLaunchPath:userShell];
+	[self.task setLaunchPath:self.path_shell];
 	[self.task setArguments:arguments];
 	
 	NSPipe *pipe_output = [NSPipe pipe];
@@ -244,12 +269,9 @@ static NSString *cakebrewOutputIdentifier = @"+++++Cakebrew+++++";
 
 - (NSString*)performBrewCommandWithArguments:(NSArray*)arguments captureError:(BOOL)captureError
 {
-	NSString *userShell = [self getValidUserShell];
-	NSString *shellName = [userShell lastPathComponent];
+	arguments = [self formatArguments:arguments sendOutputId:YES];
 	
-	arguments = [self formatArgumentsForShell:shellName withExtraArguments:arguments sendOutputId:YES];
-	
-	if (!userShell || !arguments) return nil;
+	if (!self.path_shell || !arguments) return nil;
 	
 	id activity;
 	if (self.systemHasAppNap)
@@ -257,7 +279,7 @@ static NSString *cakebrewOutputIdentifier = @"+++++Cakebrew+++++";
 	
 	self.task = [[NSTask alloc] init];
 	
-	[self.task setLaunchPath:userShell];
+	[self.task setLaunchPath:self.path_shell];
 	[self.task setArguments:arguments];
 	
 	NSPipe *pipe_output = [NSPipe pipe];

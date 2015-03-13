@@ -312,9 +312,9 @@ typedef NS_ENUM(NSUInteger, HomeBrewTab) {
 	[self configureTableForListing:kBPListSearch];
 }
 
-- (void)homebrewManager:(BPHomebrewManager *)manager shouldLockWindow:(BOOL)shouldLock
+- (void)homebrewManager:(BPHomebrewManager *)manager shouldDisplayNoBrewMessage:(BOOL)yesOrNo
 {
-	if (shouldLock) {
+	if (yesOrNo) {
 		[self.view_disablerLock setHidden:NO];
 		[self.view_disablerLock setWantsLayer:YES];
 		[self.label_information setHidden:YES];
@@ -332,7 +332,7 @@ typedef NS_ENUM(NSUInteger, HomeBrewTab) {
 		
 		if ([alert respondsToSelector:@selector(beginSheetModalForWindow:completionHandler:)]) {
 			[alert beginSheetModalForWindow:_appDelegate.window completionHandler:^(NSModalResponse returnCode) {
-				if (returnCode == 1000) {
+				if (returnCode == NSAlertDefaultReturn) {
 					[[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:@"http://brew.sh"]];
 				}
 			}];
