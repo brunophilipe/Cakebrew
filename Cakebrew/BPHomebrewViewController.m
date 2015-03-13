@@ -168,8 +168,8 @@ typedef NS_ENUM(NSUInteger, HomeBrewTab) {
 																		  constant:0.0f]];
 	
 	
-	[self.splitView setMinSize:165.f ofSubviewAtIndex:0];
-	[self.splitView setMinSize:400.f ofSubviewAtIndex:1];
+	[self.splitView setMinSize:185.f ofSubviewAtIndex:0];
+	[self.splitView setMinSize:380.f ofSubviewAtIndex:1];
 	[self.splitView setDividerColor:kBPSidebarDividerColor];
 	[self.splitView setDividerThickness:1];
 	
