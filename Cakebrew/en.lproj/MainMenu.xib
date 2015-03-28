@@ -136,6 +136,7 @@ CA
 </string>
                                 <modifierMask key="keyEquivalentModifierMask"/>
                                 <connections>
+                                    <action selector="installUninstallUpdate:" target="547" id="fxx-FC-1i8"/>
                                     <binding destination="547" name="enabled" keyPath="self.currentFormula" id="eUR-qe-OOt">
                                         <dictionary key="options">
                                             <string key="NSValueTransformerName">NSIsNotNil</string>
@@ -153,6 +154,7 @@ CA
                             </menuItem>
                             <menuItem title="Update Formula" keyEquivalent="r" id="4ab-Ns-Wry">
                                 <connections>
+                                    <action selector="installUninstallUpdate:" target="547" id="rLA-69-nJ2"/>
                                     <binding destination="547" name="enabled" keyPath="self.currentFormula" id="x7H-Zr-6Sf">
                                         <dictionary key="options">
                                             <string key="NSValueTransformerName">NSIsNotNil</string>
