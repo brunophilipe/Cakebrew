@@ -183,6 +183,8 @@ typedef NS_ENUM(NSUInteger, HomeBrewTab) {
 	[self.splitView setHidden:YES];
 	[self setToolbarItemsEnabled:NO];
 	
+	[self.searchField.cell accessibilitySetOverrideValue:@[self.tableView_formulae] forAttribute:NSAccessibilityLinkedUIElementsAttribute];
+
 	_appDelegate = BPAppDelegateRef;
 }
 
