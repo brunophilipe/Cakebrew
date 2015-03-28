@@ -85,6 +85,9 @@
                     <menu key="submenu" title="Formula" id="sBH-Ta-Jft">
                         <items>
                             <menuItem title="Install Formula" id="fhF-VX-squ">
+                                <string key="keyEquivalent" base64-UTF8="YES">
+DQ
+</string>
                                 <modifierMask key="keyEquivalentModifierMask"/>
                                 <connections>
                                     <action selector="installUninstallUpdate:" target="547" id="Fr2-ua-RsK"/>
@@ -105,7 +108,10 @@
                                 </connections>
                             </menuItem>
                             <menuItem title="Install Formula with Options..." id="X74-Yx-eRm">
-                                <modifierMask key="keyEquivalentModifierMask"/>
+                                <string key="keyEquivalent" base64-UTF8="YES">
+DQ
+</string>
+                                <modifierMask key="keyEquivalentModifierMask" option="YES"/>
                                 <connections>
                                     <action selector="installFormulaWithOptions:" target="547" id="0BB-I6-WDa"/>
                                     <binding destination="547" name="enabled" keyPath="self.currentFormula" id="J4f-lR-6YZ">
@@ -125,6 +131,9 @@
                                 </connections>
                             </menuItem>
                             <menuItem title="Uninstall Formula" id="Tzv-5t-RhL">
+                                <string key="keyEquivalent" base64-UTF8="YES">
+CA
+</string>
                                 <modifierMask key="keyEquivalentModifierMask"/>
                                 <connections>
                                     <binding destination="547" name="enabled" keyPath="self.currentFormula" id="eUR-qe-OOt">
@@ -142,8 +151,7 @@
                                     </binding>
                                 </connections>
                             </menuItem>
-                            <menuItem title="Update Formula" id="4ab-Ns-Wry">
-                                <modifierMask key="keyEquivalentModifierMask"/>
+                            <menuItem title="Update Formula" keyEquivalent="r" id="4ab-Ns-Wry">
                                 <connections>
                                     <binding destination="547" name="enabled" keyPath="self.currentFormula" id="x7H-Zr-6Sf">
                                         <dictionary key="options">
@@ -160,8 +168,7 @@
                                     </binding>
                                 </connections>
                             </menuItem>
-                            <menuItem title="More Information" id="eus-Jb-JjS">
-                                <modifierMask key="keyEquivalentModifierMask"/>
+                            <menuItem title="More Information" keyEquivalent="i" id="eus-Jb-JjS">
                                 <connections>
                                     <action selector="showFormulaInfo:" target="547" id="O1K-Cz-TGd"/>
                                     <binding destination="547" name="enabled" keyPath="self.currentFormula" id="kNw-uF-DZ5">
@@ -193,15 +200,14 @@
                                 </connections>
                             </menuItem>
                             <menuItem isSeparatorItem="YES" id="eQo-BV-sa5"/>
-                            <menuItem title="Upgrade Selected Formulae" id="Ep8-j6-m5Q">
-                                <modifierMask key="keyEquivalentModifierMask"/>
+                            <menuItem title="Upgrade Selected Formulae" keyEquivalent="u" id="Ep8-j6-m5Q">
                                 <connections>
                                     <action selector="upgradeSelectedFormulae:" target="547" id="Bew-vq-VDK"/>
                                     <binding destination="547" name="enabled" keyPath="self.enableUpgradeFormulasMenu" id="ngn-Rt-iDY"/>
                                 </connections>
                             </menuItem>
-                            <menuItem title="Upgrade All Formulae" id="DdP-fd-ccO">
-                                <modifierMask key="keyEquivalentModifierMask"/>
+                            <menuItem title="Upgrade All Formulae" keyEquivalent="u" id="DdP-fd-ccO">
+                                <modifierMask key="keyEquivalentModifierMask" option="YES" command="YES"/>
                                 <connections>
                                     <action selector="upgradeAllOutdatedFormulae:" target="547" id="aHB-0Y-WgM"/>
                                     <binding destination="547" name="enabled" keyPath="self.enableUpgradeFormulasMenu" id="Ldn-FC-8V8"/>
