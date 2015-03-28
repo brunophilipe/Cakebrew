@@ -950,7 +950,7 @@ CA
                                         <color key="backgroundColor" white="1" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <color key="gridColor" name="gridColor" catalog="System" colorSpace="catalog"/>
                                         <tableColumns>
-                                            <tableColumn identifier="Name" width="160" minWidth="40" maxWidth="1000" id="A78-TI-Q8X">
+                                            <tableColumn identifier="Name" editable="NO" width="160" minWidth="40" maxWidth="1000" id="A78-TI-Q8X">
                                                 <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left" title="Name">
                                                     <font key="font" metaFont="smallSystem"/>
                                                     <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
@@ -963,7 +963,7 @@ CA
                                                 </textFieldCell>
                                                 <tableColumnResizingMask key="resizingMask" userResizable="YES"/>
                                             </tableColumn>
-                                            <tableColumn identifier="Version" width="115" minWidth="40" maxWidth="1000" id="h5d-xc-Jih">
+                                            <tableColumn identifier="Version" editable="NO" width="115" minWidth="40" maxWidth="1000" id="h5d-xc-Jih">
                                                 <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left" title="Version">
                                                     <font key="font" metaFont="smallSystem"/>
                                                     <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
@@ -976,7 +976,7 @@ CA
                                                 </textFieldCell>
                                                 <tableColumnResizingMask key="resizingMask" userResizable="YES"/>
                                             </tableColumn>
-                                            <tableColumn identifier="LatestVersion" width="115" minWidth="40" maxWidth="1000" id="ba4-r8-kgo">
+                                            <tableColumn identifier="LatestVersion" editable="NO" width="115" minWidth="40" maxWidth="1000" id="ba4-r8-kgo">
                                                 <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left" title="Latest Version">
                                                     <font key="font" metaFont="smallSystem"/>
                                                     <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
@@ -989,7 +989,7 @@ CA
                                                 </textFieldCell>
                                                 <tableColumnResizingMask key="resizingMask" userResizable="YES"/>
                                             </tableColumn>
-                                            <tableColumn identifier="Status" width="115" minWidth="40" maxWidth="1000" id="JRi-Nr-5hA">
+                                            <tableColumn identifier="Status" editable="NO" width="115" minWidth="40" maxWidth="1000" id="JRi-Nr-5hA">
                                                 <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left" title="Status">
                                                     <font key="font" metaFont="smallSystem"/>
                                                     <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
