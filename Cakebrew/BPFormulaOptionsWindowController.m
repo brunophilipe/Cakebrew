@@ -171,4 +171,9 @@ static NSString * const kFormulaOptionsTitleColumnId = @"title";
 		[cell accessibilitySetOverrideValue:[[_formulasArrayController.arrangedObjects objectAtIndex:row] valueForKey:kFormulaOptionDescription] forAttribute:NSAccessibilityHelpAttribute];
 }
 
+-(NSString*)tableView:(NSTableView *)tableView toolTipForCell:(NSCell *)cell rect:(NSRectPointer)rect tableColumn:(NSTableColumn *)tableColumn row:(NSInteger)row mouseLocation:(NSPoint)mouseLocation
+{
+	return [[_formulasArrayController.arrangedObjects objectAtIndex:row] valueForKey:kFormulaOptionDescription];
+}
+
 @end
