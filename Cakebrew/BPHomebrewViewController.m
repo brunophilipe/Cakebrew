@@ -631,12 +631,14 @@ typedef NS_ENUM(NSUInteger, HomeBrewTab) {
 - (IBAction)searchFormulasFieldDidChange:(id)sender {
 	NSSearchField *searchField = sender;
 	NSString *searchPhrase = searchField.stringValue;
+	
 	if ([searchPhrase isEqualToString:@""]) {
 		_isSearching = NO;
-		[self configureTableForListing:kBPListAll];
 	} else {
 		[[BPHomebrewManager sharedManager] updateSearchWithName:searchPhrase];
 	}
+	
+	[self configureTableForListing:kBPListAll];
 }
 
 - (IBAction)beginFormulaSearch:(id)sender {
