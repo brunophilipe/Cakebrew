@@ -25,11 +25,11 @@
 
 - (instancetype)init
 {
-  self = [super init];
-  if (self) {
-    [self buildSidebarTree];
-  }
-  return self;
+	self = [super init];
+	if (self) {
+		[self buildSidebarTree];
+	}
+	return self;
 }
 
 
@@ -37,38 +37,38 @@
 {
 	PXSourceListItem *item, *parent;
 	_rootSidebarCategory = [PXSourceListItem itemWithTitle:@"" identifier:@"root"];
-  
+
 	parent = [PXSourceListItem itemWithTitle:@"Formulae" identifier:@"group"];
 	[_rootSidebarCategory addChildItem:parent];  //FormulaeSideBarItemFormulaeCategory = 0,
-  
-  _instaledFormulaeSidebarItem = [PXSourceListItem itemWithTitle:@"Installed" identifier:@"item"];
-  _instaledFormulaeSidebarItem.icon = [NSImage imageNamed:@"installedTemplate"];
-  [parent addChildItem:_instaledFormulaeSidebarItem];  //FormulaeSideBarItemInstalled = 1,
-  
-  _outdatedFormulaeSidebarItem = [PXSourceListItem itemWithTitle:@"Outdated" identifier:@"item"];
-  _outdatedFormulaeSidebarItem.icon = [NSImage imageNamed:@"outdatedTemplate"];
-  [parent addChildItem:_outdatedFormulaeSidebarItem]; //FormulaeSideBarItemOutdated = 2,
-  
-  _allFormulaeSidebarItem = [PXSourceListItem itemWithTitle:@"All Formulae" identifier:@"item"];
-  _allFormulaeSidebarItem.icon = [NSImage imageNamed:@"allFormulaeTemplate"];
-  [parent addChildItem:_allFormulaeSidebarItem];  //FormulaeSideBarItemAll = 3,
-  
-  _leavesFormulaeSidebarItem = [PXSourceListItem itemWithTitle:@"Leaves" identifier:@"item"];
-  _leavesFormulaeSidebarItem.icon = [NSImage imageNamed:@"pinTemplate"];
-  [parent addChildItem:_leavesFormulaeSidebarItem];  //FormulaeSideBarItemLeaves = 4,
 
-  _repositoriesFormulaeSidebarItem = [PXSourceListItem itemWithTitle:@"Repositories" identifier:@"item"];
-  _repositoriesFormulaeSidebarItem.icon = [NSImage imageNamed:@"cloudTemplate"];
-  [parent addChildItem:_repositoriesFormulaeSidebarItem];  //FormulaeSideBarItemRepositories = 5,
-  
+	_instaledFormulaeSidebarItem = [PXSourceListItem itemWithTitle:@"Installed" identifier:@"item"];
+	_instaledFormulaeSidebarItem.icon = [NSImage imageNamed:@"installedTemplate"];
+	[parent addChildItem:_instaledFormulaeSidebarItem];  //FormulaeSideBarItemInstalled = 1,
+
+	_outdatedFormulaeSidebarItem = [PXSourceListItem itemWithTitle:@"Outdated" identifier:@"item"];
+	_outdatedFormulaeSidebarItem.icon = [NSImage imageNamed:@"outdatedTemplate"];
+	[parent addChildItem:_outdatedFormulaeSidebarItem]; //FormulaeSideBarItemOutdated = 2,
+
+	_allFormulaeSidebarItem = [PXSourceListItem itemWithTitle:@"All Formulae" identifier:@"item"];
+	_allFormulaeSidebarItem.icon = [NSImage imageNamed:@"allFormulaeTemplate"];
+	[parent addChildItem:_allFormulaeSidebarItem];  //FormulaeSideBarItemAll = 3,
+
+	_leavesFormulaeSidebarItem = [PXSourceListItem itemWithTitle:@"Leaves" identifier:@"item"];
+	_leavesFormulaeSidebarItem.icon = [NSImage imageNamed:@"pinTemplate"];
+	[parent addChildItem:_leavesFormulaeSidebarItem];  //FormulaeSideBarItemLeaves = 4,
+
+	_repositoriesFormulaeSidebarItem = [PXSourceListItem itemWithTitle:@"Repositories" identifier:@"item"];
+	_repositoriesFormulaeSidebarItem.icon = [NSImage imageNamed:@"cloudTemplate"];
+	[parent addChildItem:_repositoriesFormulaeSidebarItem];  //FormulaeSideBarItemRepositories = 5,
+
 	parent = [PXSourceListItem itemWithTitle:@"Tools" identifier:@"group"];
 	[_rootSidebarCategory addChildItem:parent];  //FormulaeSideBarItemToolsCategory = 6,
-  
+
 	item = [PXSourceListItem itemWithTitle:@"Doctor" identifier:@"item"];
 	[item setBadgeValue:@-1];
 	[item setIcon:[NSImage imageNamed:@"doctorTemplate"]];
 	[parent addChildItem:item];  //FormulaeSideBarItemDoctor = 7,
-  
+
 	item = [PXSourceListItem itemWithTitle:@"Update" identifier:@"item"];
 	[item setBadgeValue:@-1];
 	[item setIcon:[NSImage imageNamed:@"updateTemplate"]];
@@ -78,23 +78,23 @@
 
 - (void)refreshSidebarBadges
 {
-  
-  self.instaledFormulaeSidebarItem.badgeValue = @([[[BPHomebrewManager sharedManager] formulae_installed] count]);
-  self.outdatedFormulaeSidebarItem.badgeValue = @([[[BPHomebrewManager sharedManager] formulae_outdated] count]);
-  self.allFormulaeSidebarItem.badgeValue = @([[[BPHomebrewManager sharedManager] formulae_all] count]);
-  self.leavesFormulaeSidebarItem.badgeValue = @([[[BPHomebrewManager sharedManager] formulae_leaves] count]);
-  self.repositoriesFormulaeSidebarItem.badgeValue = @([[[BPHomebrewManager sharedManager] formulae_repositories] count]);
+
+	self.instaledFormulaeSidebarItem.badgeValue = @([[[BPHomebrewManager sharedManager] formulae_installed] count]);
+	self.outdatedFormulaeSidebarItem.badgeValue = @([[[BPHomebrewManager sharedManager] formulae_outdated] count]);
+	self.allFormulaeSidebarItem.badgeValue = @([[[BPHomebrewManager sharedManager] formulae_all] count]);
+	self.leavesFormulaeSidebarItem.badgeValue = @([[[BPHomebrewManager sharedManager] formulae_leaves] count]);
+	self.repositoriesFormulaeSidebarItem.badgeValue = @([[[BPHomebrewManager sharedManager] formulae_repositories] count]);
 }
 
 #pragma mark - PXSourceList Data Source
 
 - (NSUInteger)sourceList:(PXSourceList*)sourceList numberOfChildrenOfItem:(id)item
 {
-	if (!item) { //Is root
-		return [[self.rootSidebarCategory children] count];
-	} else {
-		return [[(PXSourceListItem*)item children] count];
-	}
+if (!item) { //Is root
+	return [[self.rootSidebarCategory children] count];
+} else {
+	return [[(PXSourceListItem*)item children] count];
+}
 }
 
 - (id)sourceList:(PXSourceList*)aSourceList child:(NSUInteger)index ofItem:(id)item
@@ -119,21 +119,21 @@
 
 - (BOOL)sourceList:(PXSourceList *)aSourceList isGroupAlwaysExpanded:(id)group
 {
-  return YES;
+	return YES;
 }
 
 - (NSView *)sourceList:(PXSourceList *)aSourceList viewForItem:(id)item
 {
 	PXSourceListTableCellView *cellView = nil;
-  
-  if ([[(PXSourceListItem*)item identifier] isEqualToString:@"group"])
-    cellView = [aSourceList makeViewWithIdentifier:@"HeaderCell" owner:nil];
-  else
-    cellView = [aSourceList makeViewWithIdentifier:@"MainCell" owner:nil];
-  
-  PXSourceListItem *sourceListItem = item;
-  cellView.textField.stringValue = sourceListItem.title;
-  
+
+	if ([[(PXSourceListItem*)item identifier] isEqualToString:@"group"])
+		cellView = [aSourceList makeViewWithIdentifier:@"HeaderCell" owner:nil];
+	else
+		cellView = [aSourceList makeViewWithIdentifier:@"MainCell" owner:nil];
+
+	PXSourceListItem *sourceListItem = item;
+	cellView.textField.stringValue = sourceListItem.title;
+
 	if (sourceListItem.badgeValue.integerValue >= 0)
 	{
 		cellView.badgeView.badgeValue = (NSUInteger) sourceListItem.badgeValue.integerValue;
@@ -142,20 +142,20 @@
 	{
 		[cellView.badgeView setHidden:YES];
 	}
-  
+
 	if (sourceListItem.icon)
 		[cellView.imageView setImage:sourceListItem.icon];
-  
+
 	[cellView.badgeView calcSize];
-  
-  return cellView;
+
+	return cellView;
 }
 
 - (void)sourceListSelectionDidChange:(NSNotification *)notification
 {
-  if ([self.delegate respondsToSelector:@selector(sourceListSelectionDidChange)]) {
-    [self.delegate sourceListSelectionDidChange];
-  }
+	if ([self.delegate respondsToSelector:@selector(sourceListSelectionDidChange)]) {
+		[self.delegate sourceListSelectionDidChange];
+	}
 }
 
 @end
