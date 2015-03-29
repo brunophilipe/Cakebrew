@@ -106,6 +106,7 @@ Gw
                                     </tableColumns>
                                     <connections>
                                         <outlet property="dataSource" destination="hcg-K1-wSc" id="JYT-c5-FhU"/>
+                                        <outlet property="delegate" destination="-2" id="Uzy-wa-s6S"/>
                                     </connections>
                                 </tableView>
                             </subviews>

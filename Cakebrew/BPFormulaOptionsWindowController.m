@@ -27,7 +27,9 @@ static NSString * const kFormulaOptionCommand = @"formulaOptionCommand";
 static NSString * const kIsFormulaOptionCommandApplied = @"isFormulaOptionCommandApplied";
 static NSString * const kFormulaOptionDescription = @"formulaOptionDescription";
 
-@interface BPFormulaOptionsWindowController ()
+static NSString * const kFormulaOptionsTitleColumnId = @"title";
+
+@interface BPFormulaOptionsWindowController () <NSTableViewDelegate>
 
 @property (weak) IBOutlet NSTextField *userHelpLabel;
 @property (weak) IBOutlet NSTextField *formulaNameLabel;
@@ -50,11 +52,15 @@ static NSString * const kFormulaOptionDescription = @"formulaOptionDescription";
   } else {
     [self.userHelpLabel setStringValue:@"This formula has no installation options available."];
   }
-  
+  [self.optionDetailsTextField accessibilitySetOverrideValue:NSLocalizedString(@"Option description is also available in the Formula Options table as a VoiceOver help for each row", nil) forAttribute:NSAccessibilityDescriptionAttribute];
+
   //load array controller with array of mutable dictionaries with options
   [self.formulasArrayController addObjects:self.availableOptions];
-  
+
+  self.formulaNameLabel.stringValue = self.formula.name;
+
   [self.formulaOptionsTableView reloadData];
+  [self.formulaOptionsTableView accessibilitySetOverrideValue:NSLocalizedString(@"Formula Options", nil) forAttribute:NSAccessibilityDescriptionAttribute];
 }
 
 + (BPFormulaOptionsWindowController *)runFormula:(BPFormula *)formula withCompletionBlock:(InstalWithOptionsBlock_t)completionBlock
@@ -157,6 +163,17 @@ static NSString * const kFormulaOptionDescription = @"formulaOptionDescription";
   } else {
     [[NSApplication sharedApplication] endSheet:self.window returnCode:modalResponse];
   }
+}
+
+-(void)tableView:(NSTableView *)tableView willDisplayCell:(id)cell forTableColumn:(NSTableColumn *)tableColumn row:(NSInteger)row
+{
+	if ([tableColumn.identifier isEqualToString:kFormulaOptionsTitleColumnId])
+		[cell accessibilitySetOverrideValue:[[_formulasArrayController.arrangedObjects objectAtIndex:row] valueForKey:kFormulaOptionDescription] forAttribute:NSAccessibilityHelpAttribute];
+}
+
+-(NSString*)tableView:(NSTableView *)tableView toolTipForCell:(NSCell *)cell rect:(NSRectPointer)rect tableColumn:(NSTableColumn *)tableColumn row:(NSInteger)row mouseLocation:(NSPoint)mouseLocation
+{
+	return [[_formulasArrayController.arrangedObjects objectAtIndex:row] valueForKey:kFormulaOptionDescription];
 }
 
 @end
