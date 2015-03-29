@@ -56,7 +56,9 @@ static NSString * const kFormulaOptionsTitleColumnId = @"title";
 
   //load array controller with array of mutable dictionaries with options
   [self.formulasArrayController addObjects:self.availableOptions];
-  
+
+  self.formulaNameLabel.stringValue = self.formula.name;
+
   [self.formulaOptionsTableView reloadData];
   [self.formulaOptionsTableView accessibilitySetOverrideValue:NSLocalizedString(@"Formula Options", nil) forAttribute:NSAccessibilityDescriptionAttribute];
 }
