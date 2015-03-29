@@ -106,7 +106,8 @@ typedef NS_ENUM(NSUInteger, HomeBrewTab) {
 	self.formulaeDataSource = [[BPFormulaeDataSource alloc] initWithMode:kBPListAll];
 	self.tableView_formulae.dataSource = self.formulaeDataSource;
 	self.tableView_formulae.delegate = self;
-	
+	[self.tableView_formulae accessibilitySetOverrideValue:NSLocalizedString(@"Formulae", nil) forAttribute:NSAccessibilityDescriptionAttribute];
+
 	//link formulae tableview
 	NSView *formulaeView = self.formulaeSplitView;
 	if ([[self.tabView tabViewItems] count] > HomeBrewTabFormulae) {
@@ -176,11 +177,14 @@ typedef NS_ENUM(NSUInteger, HomeBrewTab) {
 	[self.sidebarController refreshSidebarBadges];
 	
 	[self.outlineView_sidebar selectRowIndexes:[NSIndexSet indexSetWithIndex:FormulaeSideBarItemInstalled] byExtendingSelection:NO];
-	
+	[self.outlineView_sidebar accessibilitySetOverrideValue:NSLocalizedString(@"Tools", nil) forAttribute:NSAccessibilityDescriptionAttribute];
+
 	[self.view_loading setHidden:NO];
 	[self.splitView setHidden:YES];
 	[self setToolbarItemsEnabled:NO];
 	
+	[self.searchField.cell accessibilitySetOverrideValue:@[self.tableView_formulae] forAttribute:NSAccessibilityLinkedUIElementsAttribute];
+
 	_appDelegate = BPAppDelegateRef;
 }
 
