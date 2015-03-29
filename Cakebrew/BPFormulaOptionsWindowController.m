@@ -58,6 +58,7 @@ static NSString * const kFormulaOptionsTitleColumnId = @"title";
   [self.formulasArrayController addObjects:self.availableOptions];
   
   [self.formulaOptionsTableView reloadData];
+  [self.formulaOptionsTableView accessibilitySetOverrideValue:NSLocalizedString(@"Formula Options", nil) forAttribute:NSAccessibilityDescriptionAttribute];
 }
 
 + (BPFormulaOptionsWindowController *)runFormula:(BPFormula *)formula withCompletionBlock:(InstalWithOptionsBlock_t)completionBlock
