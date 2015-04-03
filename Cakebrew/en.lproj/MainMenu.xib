@@ -478,7 +478,7 @@ CA
             <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
             <windowCollectionBehavior key="collectionBehavior" fullScreenPrimary="YES"/>
             <rect key="contentRect" x="629" y="349" width="570" height="342"/>
-            <rect key="screenRect" x="0.0" y="0.0" width="1360" height="745"/>
+            <rect key="screenRect" x="0.0" y="0.0" width="1440" height="877"/>
             <value key="minSize" type="size" width="570" height="342"/>
             <view key="contentView" id="372">
                 <rect key="frame" x="0.0" y="0.0" width="570" height="342"/>
@@ -489,7 +489,7 @@ CA
                         <constraints>
                             <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="115" id="olS-5g-fL0"/>
                         </constraints>
-                        <textFieldCell key="cell" controlSize="small" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="right" title="Label" id="3xE-6a-fkA">
+                        <textFieldCell key="cell" controlSize="small" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="right" title="Loading..." id="3xE-6a-fkA">
                             <font key="font" metaFont="smallSystem"/>
                             <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
@@ -561,9 +561,9 @@ CA
                                             <rect key="frame" x="0.0" y="0.0" width="190" height="320"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <subviews>
-                                                <outlineView appearanceType="vibrantLight" verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" selectionHighlightStyle="sourceList" columnReordering="NO" multipleSelection="NO" autosaveColumns="NO" rowHeight="24" rowSizeStyle="systemDefault" viewBased="YES" indentationPerLevel="14" outlineTableColumn="LEF-be-VWM" id="h1z-c9-U0s" customClass="PXSourceList">
+                                                <outlineView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" selectionHighlightStyle="sourceList" columnReordering="NO" multipleSelection="NO" autosaveColumns="NO" rowHeight="24" rowSizeStyle="systemDefault" viewBased="YES" indentationPerLevel="16" outlineTableColumn="LEF-be-VWM" id="h1z-c9-U0s" customClass="PXSourceList">
                                                     <autoresizingMask key="autoresizingMask"/>
-                                                    <size key="intercellSpacing" width="3" height="2"/>
+                                                    <size key="intercellSpacing" width="0.0" height="2"/>
                                                     <color key="backgroundColor" name="_sourceListBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                     <color key="gridColor" name="gridColor" catalog="System" colorSpace="catalog"/>
                                                     <tableColumns>
@@ -619,19 +619,18 @@ CA
                                                                                 <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                                                             </textFieldCell>
                                                                         </textField>
-                                                                        <customView ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="NPs-Sj-pMf" customClass="PXSourceListBadgeView">
-                                                                            <rect key="frame" x="141" y="2" width="22" height="14"/>
+                                                                        <customView translatesAutoresizingMaskIntoConstraints="NO" id="NPs-Sj-pMf" customClass="PXSourceListBadgeView">
+                                                                            <rect key="frame" x="135" y="2" width="51" height="14"/>
                                                                             <constraints>
                                                                                 <constraint firstAttribute="height" constant="14" id="12w-J6-f3L"/>
-                                                                                <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="22" id="Ftk-RJ-p0R"/>
                                                                             </constraints>
                                                                         </customView>
                                                                     </subviews>
                                                                     <constraints>
                                                                         <constraint firstItem="NPs-Sj-pMf" firstAttribute="top" secondItem="NjY-GN-l2W" secondAttribute="top" constant="1" id="Bbq-eB-vXU"/>
                                                                         <constraint firstItem="UGv-FF-mH4" firstAttribute="centerY" secondItem="NjY-GN-l2W" secondAttribute="centerY" id="HDo-6S-nEU"/>
-                                                                        <constraint firstItem="NPs-Sj-pMf" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="UGv-FF-mH4" secondAttribute="trailing" priority="250" constant="14" id="cQD-qh-CCh"/>
-                                                                        <constraint firstAttribute="trailing" secondItem="NPs-Sj-pMf" secondAttribute="trailing" constant="3" id="deY-JF-So7"/>
+                                                                        <constraint firstItem="NPs-Sj-pMf" firstAttribute="leading" secondItem="UGv-FF-mH4" secondAttribute="trailing" constant="8" id="PNr-vv-HuL"/>
+                                                                        <constraint firstAttribute="trailing" secondItem="NPs-Sj-pMf" secondAttribute="trailing" constant="4" id="deY-JF-So7"/>
                                                                         <constraint firstItem="UGv-FF-mH4" firstAttribute="bottom" secondItem="rod-fH-u2L" secondAttribute="bottom" id="esB-n4-tea"/>
                                                                         <constraint firstItem="UGv-FF-mH4" firstAttribute="leading" secondItem="rod-fH-u2L" secondAttribute="trailing" constant="7" id="nvX-qK-xNx"/>
                                                                         <constraint firstItem="rod-fH-u2L" firstAttribute="leading" secondItem="NjY-GN-l2W" secondAttribute="leading" constant="3" id="psC-pY-A2P"/>
@@ -654,7 +653,7 @@ CA
                                             </subviews>
                                             <nil key="backgroundColor"/>
                                         </clipView>
-                                        <scroller key="horizontalScroller" verticalHuggingPriority="750" horizontal="YES" id="RBZ-Oo-6AK">
+                                        <scroller key="horizontalScroller" hidden="YES" verticalHuggingPriority="750" horizontal="YES" id="RBZ-Oo-6AK">
                                             <rect key="frame" x="1" y="119" width="238" height="15"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                         </scroller>
