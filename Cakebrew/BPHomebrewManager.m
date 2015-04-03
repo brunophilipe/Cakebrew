@@ -60,7 +60,7 @@ NSString *const kBP_CACHE_DICT_DATA_KEY = @"BP_CACHE_DICT_DATA_KEY";
 
 - (void)reloadFromInterfaceRebuildingCache:(BOOL)shouldRebuildCache;
 {
-    dispatch_async(dispatch_get_global_queue(QOS_CLASS_BACKGROUND, 0), ^{
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
 		[[BPHomebrewInterface sharedInterface] setDelegate:self];
 		
         [self setFormulae_installed:[[BPHomebrewInterface sharedInterface] listMode:kBPListInstalled]];
