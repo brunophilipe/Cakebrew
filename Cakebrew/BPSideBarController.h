@@ -19,7 +19,6 @@ NS_ENUM(NSUInteger, FormulaeSideBarItem) {
   FormulaeSideBarItemToolsCategory = 6,
   FormulaeSideBarItemDoctor = 7,
   FormulaeSideBarItemUpdate = 8,
-  
 };
 
 @protocol BPSideBarControllerDelegate <NSObject>
@@ -30,7 +29,7 @@ NS_ENUM(NSUInteger, FormulaeSideBarItem) {
 
 @property (assign) IBOutlet PXSourceList *sidebar;
 
-@property (unsafe_unretained) IBOutlet id <BPSideBarControllerDelegate>delegate;
+@property (unsafe_unretained) id <BPSideBarControllerDelegate>delegate;
 
 - (void)refreshSidebarBadges;
 - (void)configureSidebarSettings;
