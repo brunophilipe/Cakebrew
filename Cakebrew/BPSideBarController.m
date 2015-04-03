@@ -93,11 +93,11 @@
 
 - (NSUInteger)sourceList:(PXSourceList*)sourceList numberOfChildrenOfItem:(id)item
 {
-if (!item) { //Is root
-	return [[self.rootSidebarCategory children] count];
-} else {
-	return [[(PXSourceListItem*)item children] count];
-}
+	if (!item) { //Is root
+		return [[self.rootSidebarCategory children] count];
+	} else {
+		return [[(PXSourceListItem*)item children] count];
+	}
 }
 
 - (id)sourceList:(PXSourceList*)aSourceList child:(NSUInteger)index ofItem:(id)item

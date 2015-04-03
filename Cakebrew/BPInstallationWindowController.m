@@ -226,8 +226,6 @@
 	} else {
 		[[NSApplication sharedApplication] endSheet:self.window];
 	}
-
-	[[BPHomebrewManager sharedManager] reloadFromInterfaceRebuildingCache:YES];
 }
 
 @end

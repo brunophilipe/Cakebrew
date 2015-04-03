@@ -609,9 +609,9 @@ CA
                                                                             <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="NSActionTemplate" id="As7-Xw-rr0"/>
                                                                         </imageView>
                                                                         <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="UGv-FF-mH4">
-                                                                            <rect key="frame" x="25" y="0.0" width="104" height="17"/>
+                                                                            <rect key="frame" x="25" y="0.0" width="97" height="17"/>
                                                                             <constraints>
-                                                                                <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="100" id="nTu-IB-1td"/>
+                                                                                <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="80" id="nTu-IB-1td"/>
                                                                             </constraints>
                                                                             <textFieldCell key="cell" lineBreakMode="truncatingTail" sendsActionOnEndEditing="YES" title="Table View Cell" id="zVW-Ch-xYV">
                                                                                 <font key="font" metaFont="system"/>
@@ -620,14 +620,14 @@ CA
                                                                             </textFieldCell>
                                                                         </textField>
                                                                         <customView translatesAutoresizingMaskIntoConstraints="NO" id="NPs-Sj-pMf" customClass="PXSourceListBadgeView">
-                                                                            <rect key="frame" x="135" y="2" width="51" height="14"/>
+                                                                            <rect key="frame" x="128" y="2" width="58" height="14"/>
                                                                             <constraints>
                                                                                 <constraint firstAttribute="height" constant="14" id="12w-J6-f3L"/>
                                                                             </constraints>
                                                                         </customView>
                                                                     </subviews>
                                                                     <constraints>
-                                                                        <constraint firstItem="NPs-Sj-pMf" firstAttribute="top" secondItem="NjY-GN-l2W" secondAttribute="top" constant="1" id="Bbq-eB-vXU"/>
+                                                                        <constraint firstAttribute="centerY" secondItem="NPs-Sj-pMf" secondAttribute="centerY" id="CLe-TN-CY2"/>
                                                                         <constraint firstItem="UGv-FF-mH4" firstAttribute="centerY" secondItem="NjY-GN-l2W" secondAttribute="centerY" id="HDo-6S-nEU"/>
                                                                         <constraint firstItem="NPs-Sj-pMf" firstAttribute="leading" secondItem="UGv-FF-mH4" secondAttribute="trailing" constant="8" id="PNr-vv-HuL"/>
                                                                         <constraint firstAttribute="trailing" secondItem="NPs-Sj-pMf" secondAttribute="trailing" constant="4" id="deY-JF-So7"/>
