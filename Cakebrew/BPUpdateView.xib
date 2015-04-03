@@ -59,14 +59,13 @@
                     </textFieldCell>
                 </textField>
                 <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="wIZ-rp-y6N">
-                    <rect key="frame" x="189" y="291" width="69" height="19"/>
+                    <rect key="frame" x="188" y="292" width="70" height="19"/>
                     <constraints>
-                        <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="69" id="LQO-TU-utV"/>
-                        <constraint firstAttribute="width" constant="69" id="MG8-9o-efy"/>
+                        <constraint firstAttribute="width" constant="70" id="MG8-9o-efy"/>
                     </constraints>
                     <buttonCell key="cell" type="roundRect" title="Clear Log" bezelStyle="roundedRect" alignment="center" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="EE6-5g-Jos">
                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                        <font key="font" metaFont="cellTitle"/>
+                        <font key="font" metaFont="smallSystem"/>
                         <string key="keyEquivalent">k</string>
                         <modifierMask key="keyEquivalentModifierMask" command="YES"/>
                     </buttonCell>
@@ -78,7 +77,7 @@
                     <rect key="frame" x="266" y="292" width="122" height="19"/>
                     <buttonCell key="cell" type="roundRect" title="Update Homebrew" bezelStyle="roundedRect" alignment="center" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="MVF-cn-lfW">
                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                        <font key="font" metaFont="cellTitle"/>
+                        <font key="font" metaFont="smallSystem"/>
                     </buttonCell>
                     <connections>
                         <action selector="runStopUpdate:" target="-2" id="aTU-BQ-RrD"/>
@@ -90,7 +89,7 @@
                     </connections>
                 </button>
                 <progressIndicator horizontalHuggingPriority="750" verticalHuggingPriority="750" maxValue="100" displayedWhenStopped="NO" bezeled="NO" indeterminate="YES" controlSize="small" style="spinning" translatesAutoresizingMaskIntoConstraints="NO" id="J7C-5S-Vor">
-                    <rect key="frame" x="165" y="293" width="16" height="16"/>
+                    <rect key="frame" x="164" y="293" width="16" height="16"/>
                 </progressIndicator>
             </subviews>
             <constraints>
@@ -105,7 +104,7 @@
                 <constraint firstAttribute="trailing" secondItem="ODz-Ic-CmJ" secondAttribute="trailing" constant="-1" id="p3z-wk-NFR"/>
                 <constraint firstItem="ovx-vH-lDR" firstAttribute="top" secondItem="tCl-LR-g5d" secondAttribute="top" constant="5" id="pSj-JK-kwU"/>
                 <constraint firstItem="J7C-5S-Vor" firstAttribute="top" secondItem="tCl-LR-g5d" secondAttribute="top" constant="11" id="pqs-fs-Th8"/>
-                <constraint firstItem="wIZ-rp-y6N" firstAttribute="top" secondItem="tCl-LR-g5d" secondAttribute="top" constant="10" id="tuX-70-X1c"/>
+                <constraint firstItem="wIZ-rp-y6N" firstAttribute="top" secondItem="tCl-LR-g5d" secondAttribute="top" constant="9" id="tuX-70-X1c"/>
             </constraints>
         </view>
     </objects>
