@@ -32,7 +32,6 @@
 	return self;
 }
 
-
 - (void)buildSidebarTree
 {
 	PXSourceListItem *item, *parent;
@@ -75,14 +74,18 @@
 	[parent addChildItem:item];  //FormulaeSideBarItemUpdate = 8,
 }
 
+- (void)configureSidebarSettings
+{
+	[self.sidebar selectRowIndexes:[NSIndexSet indexSetWithIndex:FormulaeSideBarItemInstalled] byExtendingSelection:NO];
+	[self.sidebar accessibilitySetOverrideValue:NSLocalizedString(@"Tools", nil) forAttribute:NSAccessibilityDescriptionAttribute];
+}
 
 - (void)refreshSidebarBadges
 {
-
-	self.instaledFormulaeSidebarItem.badgeValue = @([[[BPHomebrewManager sharedManager] formulae_installed] count]);
-	self.outdatedFormulaeSidebarItem.badgeValue = @([[[BPHomebrewManager sharedManager] formulae_outdated] count]);
-	self.allFormulaeSidebarItem.badgeValue = @([[[BPHomebrewManager sharedManager] formulae_all] count]);
-	self.leavesFormulaeSidebarItem.badgeValue = @([[[BPHomebrewManager sharedManager] formulae_leaves] count]);
+	self.instaledFormulaeSidebarItem.badgeValue		= @([[[BPHomebrewManager sharedManager] formulae_installed] count]);
+	self.outdatedFormulaeSidebarItem.badgeValue		= @([[[BPHomebrewManager sharedManager] formulae_outdated] count]);
+	self.allFormulaeSidebarItem.badgeValue			= @([[[BPHomebrewManager sharedManager] formulae_all] count]);
+	self.leavesFormulaeSidebarItem.badgeValue		= @([[[BPHomebrewManager sharedManager] formulae_leaves] count]);
 	self.repositoriesFormulaeSidebarItem.badgeValue = @([[[BPHomebrewManager sharedManager] formulae_repositories] count]);
 }
 

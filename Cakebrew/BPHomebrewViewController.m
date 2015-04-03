@@ -174,10 +174,9 @@ typedef NS_ENUM(NSUInteger, HomeBrewTab) {
 	[self.splitView setDividerColor:kBPSidebarDividerColor];
 	[self.splitView setDividerThickness:1];
 	
+	[self.sidebarController setDelegate:self];
 	[self.sidebarController refreshSidebarBadges];
-	
-	[self.outlineView_sidebar selectRowIndexes:[NSIndexSet indexSetWithIndex:FormulaeSideBarItemInstalled] byExtendingSelection:NO];
-	[self.outlineView_sidebar accessibilitySetOverrideValue:NSLocalizedString(@"Tools", nil) forAttribute:NSAccessibilityDescriptionAttribute];
+	[self.sidebarController configureSidebarSettings];
 
 	[self.view_loading setHidden:NO];
 	[self.splitView setHidden:YES];
@@ -202,7 +201,7 @@ typedef NS_ENUM(NSUInteger, HomeBrewTab) {
 
 - (void)updateInterfaceItems
 {
-	NSInteger selectedTab = [self.outlineView_sidebar selectedRow];
+	NSInteger selectedSidebarRow = [self.sidebarController.sidebar selectedRow];
 	NSInteger selectedIndex = [self.tableView_formulae selectedRow];
 	NSIndexSet *selectedRows = [self.tableView_formulae selectedRowIndexes];
 	NSArray *selectedFormulae = [self.formulaeDataSource formulasAtIndexSet:selectedRows];
@@ -217,7 +216,7 @@ typedef NS_ENUM(NSUInteger, HomeBrewTab) {
 	[self.formulaeSplitView setPosition:height - preferedHeightOfSelectedFormulaView
 					   ofDividerAtIndex:0];
 	
-	if (selectedTab == FormulaeSideBarItemRepositories) { // Repositories sidebaritem
+	if (selectedSidebarRow == FormulaeSideBarItemRepositories) { // Repositories sidebaritem
 		[self.toolbarButton_installUninstall setEnabled:YES];
 		[self.toolbarButton_formulaInfo setEnabled:NO];
 		[self.formulaeSplitView setPosition:height
@@ -233,7 +232,7 @@ typedef NS_ENUM(NSUInteger, HomeBrewTab) {
 			[self setToolbarButtonOperation:kBPWindowOperationTap];
 		}
 	}
-	else if (selectedIndex == -1 || selectedTab > FormulaeSideBarItemToolsCategory)
+	else if (selectedIndex == -1 || selectedSidebarRow > FormulaeSideBarItemToolsCategory)
 	{
 		[self.toolbarButton_installUninstall setEnabled:NO];
 		[self.toolbarButton_formulaInfo setEnabled:NO];
@@ -259,7 +258,7 @@ typedef NS_ENUM(NSUInteger, HomeBrewTab) {
 				break;
 				
 			case kBPFormulaOutdated:
-				if ([self.outlineView_sidebar selectedRow] == FormulaeSideBarItemOutdated) {
+				if (selectedSidebarRow == FormulaeSideBarItemOutdated) {
 					[self.toolbarButton_installUninstall setImage:[NSImage imageNamed:@"reload.icns"]];
 					[self.toolbarButton_installUninstall setLabel:@"Update Formula"];
 					[self setToolbarButtonOperation:kBPWindowOperationUpgrade];
@@ -308,28 +307,29 @@ typedef NS_ENUM(NSUInteger, HomeBrewTab) {
 	
 	[self.view_loading setHidden:YES];
 	[self.splitView setHidden:NO];
+	
 	[self setToolbarItemsEnabled:YES];
 	[self.formulaeDataSource refreshBackingArray];
 	[self.sidebarController refreshSidebarBadges];
 	
 	// Used after unlocking the app when inserting custom homebrew installation path
-	BOOL shouldReselectFirstRow = ([_outlineView_sidebar selectedRow] < 0);
+	BOOL shouldReselectFirstRow = ([self.sidebarController.sidebar selectedRow] < 0);
 	
-	[self.outlineView_sidebar reloadData];
+	[self.sidebarController.sidebar reloadData];
 	
 	[self setEnableUpgradeFormulasMenu:([[BPHomebrewManager sharedManager] formulae_outdated].count > 0)];
 	
 	if (shouldReselectFirstRow)
-		[_outlineView_sidebar selectRowIndexes:[NSIndexSet indexSetWithIndex:FormulaeSideBarItemInstalled] byExtendingSelection:NO];
+		[self.sidebarController.sidebar selectRowIndexes:[NSIndexSet indexSetWithIndex:FormulaeSideBarItemInstalled] byExtendingSelection:NO];
 	else
-		[_outlineView_sidebar selectRowIndexes:[NSIndexSet indexSetWithIndex:(NSUInteger)_lastSelectedSidebarIndex] byExtendingSelection:NO];
+		[self.sidebarController.sidebar selectRowIndexes:[NSIndexSet indexSetWithIndex:(NSUInteger)_lastSelectedSidebarIndex] byExtendingSelection:NO];
 }
 
 - (void)homebrewManager:(BPHomebrewManager *)manager didUpdateSearchResults:(NSArray *)searchResults
 {
 	_isSearching = YES;
-	if ([self.outlineView_sidebar selectedRow] != FormulaeSideBarItemOutdated)
-		[self.outlineView_sidebar selectRowIndexes:[NSIndexSet indexSetWithIndex:FormulaeSideBarItemAll] byExtendingSelection:NO];
+	if ([self.sidebarController.sidebar selectedRow] != FormulaeSideBarItemOutdated)
+		[self.sidebarController.sidebar selectRowIndexes:[NSIndexSet indexSetWithIndex:FormulaeSideBarItemAll] byExtendingSelection:NO];
 	
 	[self configureTableForListing:kBPListSearch];
 }
@@ -383,13 +383,14 @@ typedef NS_ENUM(NSUInteger, HomeBrewTab) {
 {
 	NSString *message;
 	NSUInteger tabIndex = 0;
+	NSInteger selectedSidebarRow = [self.sidebarController.sidebar selectedRow];
 	
-	if ([self.outlineView_sidebar selectedRow] >= 0)
-		_lastSelectedSidebarIndex = [self.outlineView_sidebar selectedRow];
+	if (selectedSidebarRow >= 0)
+		_lastSelectedSidebarIndex = selectedSidebarRow;
 	
 	[self updateInterfaceItems];
 	
-	switch ([self.outlineView_sidebar selectedRow]) {
+	switch (selectedSidebarRow) {
 		case FormulaeSideBarItemInstalled: // Installed Formulae
 			[self configureTableForListing:kBPListInstalled];
 			message = @"These are the formulae already installed in your system.";
@@ -469,9 +470,9 @@ typedef NS_ENUM(NSUInteger, HomeBrewTab) {
 	}
 	[_appDelegate setRunningBackgroundTask:YES];
 	
-	NSInteger selectedIndex = [self.tableView_formulae selectedRow];
-	NSInteger selectedTab = [self.outlineView_sidebar selectedRow];
-	BPFormula *formula = [self.formulaeDataSource formulaAtIndex:selectedIndex];
+	NSInteger selectedFormula = [self.tableView_formulae selectedRow];
+	NSInteger selectedSidebarRow = [self.sidebarController.sidebar selectedRow];
+	BPFormula *formula = [self.formulaeDataSource formulaAtIndex:selectedFormula];
 	
 	if (formula) {
 		NSString *message;
@@ -542,7 +543,7 @@ typedef NS_ENUM(NSUInteger, HomeBrewTab) {
 			operationBlock();
 		}
 	}
-	else if (selectedTab == FormulaeSideBarItemRepositories && _toolbarButtonOperation == kBPWindowOperationTap)
+	else if (selectedSidebarRow == FormulaeSideBarItemRepositories && _toolbarButtonOperation == kBPWindowOperationTap)
 	{
 		NSAlert *alert = [NSAlert alertWithMessageText:@"Attention!" defaultButton:@"OK" alternateButton:@"Cancel" otherButton:nil informativeTextWithFormat:@"What repository would you like to tap?"];
 		[alert.window setTitle:@"Cakebrew"];
@@ -616,7 +617,7 @@ typedef NS_ENUM(NSUInteger, HomeBrewTab) {
 
 - (IBAction)updateHomebrew:(id)sender
 {
-	[self.outlineView_sidebar selectRowIndexes:[NSIndexSet indexSetWithIndex:8] byExtendingSelection:NO];
+	[self.sidebarController.sidebar selectRowIndexes:[NSIndexSet indexSetWithIndex:8] byExtendingSelection:NO];
 	[self.updateViewController runStopUpdate:nil];
 }
 
