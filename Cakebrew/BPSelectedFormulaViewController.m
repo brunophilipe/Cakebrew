@@ -8,8 +8,11 @@
 
 #import "BPSelectedFormulaViewController.h"
 #import "BPFormula.h"
+#import "BPTimedDispatch.h"
 
 @interface BPSelectedFormulaViewController ()
+
+@property (strong) BPTimedDispatch *timedDispatch;
 
 @end
 
@@ -21,6 +24,8 @@
 											 selector:@selector(updatePreferedWidth:)
 												 name:NSViewFrameDidChangeNotification
 											   object:self.view];
+	
+	[self setTimedDispatch:[BPTimedDispatch new]];
 }
 
 - (void)dealloc
@@ -66,33 +71,36 @@
 	}
 	if ([self.formulae count] == 1) {
 		BPFormula *formula = [self.formulae firstObject];
-		[formula getInformation];
-		if (formula.isInstalled) {
-			if ([formula.installPath length]) {
-				[self.formulaPathLabel setStringValue:formula.installPath];
+		
+		[self.timedDispatch scheduleDispatchAfterTimeInterval:0.3 ofBlock:^{
+			[formula getInformation];
+			if (formula.isInstalled) {
+				if ([formula.installPath length]) {
+					[self.formulaPathLabel setStringValue:formula.installPath];
+				} else {
+					[self.formulaPathLabel setStringValue:emptyString];
+				}
 			} else {
-				[self.formulaPathLabel setStringValue:emptyString];
+				[self.formulaPathLabel setStringValue:@"Formula Not Installed."];
 			}
-		} else {
-			[self.formulaPathLabel setStringValue:@"Formula Not Installed."];
-		}
-		if (formula.latestVersion) {
-			[self.formulaVersionLabel setStringValue:formula.latestVersion];
-		} else {
-			[self.formulaVersionLabel setStringValue:emptyString];
-		}
-		
-		if (formula.dependencies) {
-			[self.formulaDependenciesLabel setStringValue:formula.dependencies];
-		} else {
-			[self.formulaDependenciesLabel setStringValue:@"This formula has no dependencies!"];
-		}
-		
-		if (formula.conflicts) {
-			[self.formulaConflictsLabel setStringValue:formula.conflicts];
-		} else {
-			[self.formulaConflictsLabel setStringValue:@"This formula has no known conflicts."];
-		}
+			if (formula.latestVersion) {
+				[self.formulaVersionLabel setStringValue:formula.latestVersion];
+			} else {
+				[self.formulaVersionLabel setStringValue:emptyString];
+			}
+			
+			if (formula.dependencies) {
+				[self.formulaDependenciesLabel setStringValue:formula.dependencies];
+			} else {
+				[self.formulaDependenciesLabel setStringValue:@"This formula has no dependencies!"];
+			}
+			
+			if (formula.conflicts) {
+				[self.formulaConflictsLabel setStringValue:formula.conflicts];
+			} else {
+				[self.formulaConflictsLabel setStringValue:@"This formula has no known conflicts."];
+			}
+		}];
 	}
 	if ([self.formulae count] > 1) {
 		[self.formulaPathLabel setStringValue:multipleString];
