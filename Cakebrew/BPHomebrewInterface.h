@@ -58,6 +58,6 @@ typedef NS_ENUM(NSInteger, BPListMode) {
 #pragma mark - Operations that return on finish
 
 - (NSArray*)listMode:(BPListMode)mode;
-- (NSString*)informationForFormula:(NSString*)formula;
+- (NSString*)informationForFormula:(NSString*)formula __deprecated;
 
 @end

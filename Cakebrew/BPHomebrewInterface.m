@@ -358,7 +358,8 @@ static NSString *cakebrewOutputIdentifier = @"+++++Cakebrew+++++";
 	}
 }
 
-- (NSString*)informationForFormula:(NSString*)formula {
+- (NSString*)informationForFormula:(NSString*)formula __deprecated
+{
 	return [self performBrewCommandWithArguments:@[@"info", formula]];
 }
 
