@@ -61,6 +61,8 @@ typedef NS_ENUM(NSUInteger, BPWindowOperation) {
 
 @property (unsafe_unretained) BPFormula *currentFormula;
 
+- (BOOL)isHomebrewInstalled;
+
 - (void)prepareFormulae:(NSArray*)formulae forOperation:(BPWindowOperation)operation withOptions:(NSArray*)options;
 
 - (IBAction)showFormulaInfo:(id)sender;

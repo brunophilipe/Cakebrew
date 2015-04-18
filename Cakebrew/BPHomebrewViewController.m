@@ -42,7 +42,9 @@ typedef NS_ENUM(NSUInteger, HomeBrewTab) {
 
 @property NSInteger lastSelectedSidebarIndex;
 
-@property BOOL isSearching;
+@property (getter=isSearching)			BOOL searching;
+@property (getter=isHomebrewInstalled)	BOOL homebrewInstalled;
+
 @property BPWindowOperation toolbarButtonOperation;
 
 
@@ -97,7 +99,10 @@ typedef NS_ENUM(NSUInteger, HomeBrewTab) {
 {
 	_homebrewManager = [BPHomebrewManager sharedManager];
 	[_homebrewManager setDelegate:self];
+	
 	self.selectedFormulaeViewController = [[BPSelectedFormulaViewController alloc] init];
+	
+	self.homebrewInstalled = YES;
 }
 
 
@@ -300,34 +305,37 @@ typedef NS_ENUM(NSUInteger, HomeBrewTab) {
 
 - (void)homebrewManagerFinishedUpdating:(BPHomebrewManager *)manager
 {
-	[[self.tableView_formulae menu] cancelTracking];
-	
-	self.currentFormula = nil;
-	self.selectedFormulaeViewController.formulae = nil;
-	
-	[self.view_loading setHidden:YES];
-	[self.splitView setHidden:NO];
-	
-	[self setToolbarItemsEnabled:YES];
-	[self.formulaeDataSource refreshBackingArray];
-	[self.sidebarController refreshSidebarBadges];
-	
-	// Used after unlocking the app when inserting custom homebrew installation path
-	BOOL shouldReselectFirstRow = ([self.sidebarController.sidebar selectedRow] < 0);
-	
-	[self.sidebarController.sidebar reloadData];
-	
-	[self setEnableUpgradeFormulasMenu:([[BPHomebrewManager sharedManager] formulae_outdated].count > 0)];
-	
-	if (shouldReselectFirstRow)
-		[self.sidebarController.sidebar selectRowIndexes:[NSIndexSet indexSetWithIndex:FormulaeSideBarItemInstalled] byExtendingSelection:NO];
-	else
-		[self.sidebarController.sidebar selectRowIndexes:[NSIndexSet indexSetWithIndex:(NSUInteger)_lastSelectedSidebarIndex] byExtendingSelection:NO];
+	if (self.isHomebrewInstalled)
+	{
+		[[self.tableView_formulae menu] cancelTracking];
+		
+		self.currentFormula = nil;
+		self.selectedFormulaeViewController.formulae = nil;
+		
+		[self.view_loading setHidden:YES];
+		[self.splitView	   setHidden:NO];
+		
+		[self setToolbarItemsEnabled:YES];
+		[self.formulaeDataSource refreshBackingArray];
+		[self.sidebarController refreshSidebarBadges];
+		
+		// Used after unlocking the app when inserting custom homebrew installation path
+		BOOL shouldReselectFirstRow = ([self.sidebarController.sidebar selectedRow] < 0);
+		
+		[self.sidebarController.sidebar reloadData];
+		
+		[self setEnableUpgradeFormulasMenu:([[BPHomebrewManager sharedManager] formulae_outdated].count > 0)];
+		
+		if (shouldReselectFirstRow)
+			[self.sidebarController.sidebar selectRowIndexes:[NSIndexSet indexSetWithIndex:FormulaeSideBarItemInstalled] byExtendingSelection:NO];
+		else
+			[self.sidebarController.sidebar selectRowIndexes:[NSIndexSet indexSetWithIndex:(NSUInteger)_lastSelectedSidebarIndex] byExtendingSelection:NO];
+	}
 }
 
 - (void)homebrewManager:(BPHomebrewManager *)manager didUpdateSearchResults:(NSArray *)searchResults
 {
-	_isSearching = YES;
+	[self setSearching:YES];
 	if ([self.sidebarController.sidebar selectedRow] != FormulaeSideBarItemOutdated)
 		[self.sidebarController.sidebar selectRowIndexes:[NSIndexSet indexSetWithIndex:FormulaeSideBarItemAll] byExtendingSelection:NO];
 	
@@ -336,6 +344,8 @@ typedef NS_ENUM(NSUInteger, HomeBrewTab) {
 
 - (void)homebrewManager:(BPHomebrewManager *)manager shouldDisplayNoBrewMessage:(BOOL)yesOrNo
 {
+	[self setHomebrewInstalled:!yesOrNo];
+	
 	if (yesOrNo)
 	{
 		[self.view_disablerLock setHidden:NO];
@@ -640,7 +650,7 @@ typedef NS_ENUM(NSUInteger, HomeBrewTab) {
 	NSString *searchPhrase = searchField.stringValue;
 	
 	if ([searchPhrase isEqualToString:@""]) {
-		_isSearching = NO;
+		[self setSearching:NO];
 	} else {
 		[[BPHomebrewManager sharedManager] updateSearchWithName:searchPhrase];
 	}

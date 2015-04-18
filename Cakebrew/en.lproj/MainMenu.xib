@@ -218,6 +218,7 @@ CA
                             <menuItem title="Search for Formula" keyEquivalent="f" id="DpP-yi-xdi">
                                 <connections>
                                     <action selector="beginFormulaSearch:" target="547" id="VZg-fP-whi"/>
+                                    <binding destination="547" name="enabled" keyPath="self.isHomebrewInstalled" id="b5b-XU-lqu"/>
                                 </connections>
                             </menuItem>
                         </items>
@@ -443,37 +444,44 @@ CA
                             <menuItem title="Installed Formulae" tag="1" keyEquivalent="1" id="8gP-gb-YtQ">
                                 <connections>
                                     <action selector="selectSideBarRowWithSenderTag:" target="SGP-Ky-0Th" id="Cet-wG-7MQ"/>
+                                    <binding destination="547" name="enabled" keyPath="self.isHomebrewInstalled" id="6cc-n7-VsC"/>
                                 </connections>
                             </menuItem>
                             <menuItem title="Outdated Formulae" tag="2" keyEquivalent="2" id="KUc-5l-twA">
                                 <connections>
                                     <action selector="selectSideBarRowWithSenderTag:" target="SGP-Ky-0Th" id="c5K-Fg-jvj"/>
+                                    <binding destination="547" name="enabled" keyPath="self.isHomebrewInstalled" id="nxa-lg-Pas"/>
                                 </connections>
                             </menuItem>
                             <menuItem title="All Formulae" tag="3" keyEquivalent="3" id="zam-2s-isx">
                                 <connections>
                                     <action selector="selectSideBarRowWithSenderTag:" target="SGP-Ky-0Th" id="opC-R1-TQR"/>
+                                    <binding destination="547" name="enabled" keyPath="self.isHomebrewInstalled" id="FJZ-kb-M6F"/>
                                 </connections>
                             </menuItem>
                             <menuItem title="Leaves" tag="4" keyEquivalent="4" id="M9N-PI-gBO">
                                 <connections>
                                     <action selector="selectSideBarRowWithSenderTag:" target="SGP-Ky-0Th" id="Uhl-lk-qPT"/>
+                                    <binding destination="547" name="enabled" keyPath="self.isHomebrewInstalled" id="ZMY-TV-Vtp"/>
                                 </connections>
                             </menuItem>
                             <menuItem title="Repositories" tag="5" keyEquivalent="5" id="dXD-3s-NhA">
                                 <connections>
                                     <action selector="selectSideBarRowWithSenderTag:" target="SGP-Ky-0Th" id="s3g-8g-eFB"/>
+                                    <binding destination="547" name="enabled" keyPath="self.isHomebrewInstalled" id="Y5h-D2-XfT"/>
                                 </connections>
                             </menuItem>
                             <menuItem isSeparatorItem="YES" id="kEe-QJ-gfj"/>
                             <menuItem title="Doctor" tag="7" keyEquivalent="6" id="eI9-b4-Rmg">
                                 <connections>
                                     <action selector="selectSideBarRowWithSenderTag:" target="SGP-Ky-0Th" id="DMG-th-yEC"/>
+                                    <binding destination="547" name="enabled" keyPath="self.isHomebrewInstalled" id="xxS-YX-gBx"/>
                                 </connections>
                             </menuItem>
                             <menuItem title="Update" tag="8" keyEquivalent="7" id="8Vh-lk-gYe">
                                 <connections>
                                     <action selector="selectSideBarRowWithSenderTag:" target="SGP-Ky-0Th" id="fUp-dE-WjG"/>
+                                    <binding destination="547" name="enabled" keyPath="self.isHomebrewInstalled" id="HeO-ww-Vvq"/>
                                 </connections>
                             </menuItem>
                         </items>
@@ -552,7 +560,7 @@ CA
                                             <rect key="frame" x="0.0" y="0.0" width="190" height="320"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <subviews>
-                                                <outlineView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" selectionHighlightStyle="sourceList" columnReordering="NO" multipleSelection="NO" autosaveColumns="NO" rowHeight="24" rowSizeStyle="systemDefault" viewBased="YES" indentationPerLevel="16" outlineTableColumn="LEF-be-VWM" id="h1z-c9-U0s" customClass="PXSourceList">
+                                                <outlineView appearanceType="vibrantLight" verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" selectionHighlightStyle="sourceList" columnReordering="NO" multipleSelection="NO" autosaveColumns="NO" rowHeight="24" rowSizeStyle="systemDefault" viewBased="YES" indentationPerLevel="16" outlineTableColumn="LEF-be-VWM" id="h1z-c9-U0s" customClass="PXSourceList">
                                                     <rect key="frame" x="0.0" y="0.0" width="190" height="0.0"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <size key="intercellSpacing" width="0.0" height="2"/>
@@ -1084,6 +1092,7 @@ CA
             </holdingPriorities>
             <point key="canvasLocation" x="469" y="762"/>
         </splitView>
+        <userDefaultsController representsSharedInstance="YES" id="Bum-pn-dFZ"/>
     </objects>
     <resources>
         <image name="NSActionTemplate" width="14" height="14"/>
