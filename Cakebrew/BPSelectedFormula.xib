@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="6254" systemVersion="14C109" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="7531" systemVersion="14D131" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="6254"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="7531"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="BPSelectedFormulaViewController">
@@ -21,6 +21,9 @@
             <subviews>
                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Eyh-hm-eD7">
                     <rect key="frame" x="6" y="99" width="171" height="14"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="14" id="59d-1q-Ics"/>
+                    </constraints>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Selected Formula Information" id="F2k-Nm-vhK">
                         <font key="font" metaFont="smallSystemBold"/>
                         <color key="textColor" white="0.34734260950000001" alpha="1" colorSpace="calibratedWhite"/>
@@ -30,6 +33,7 @@
                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Cd6-mA-TjE">
                     <rect key="frame" x="6" y="75" width="54" height="14"/>
                     <constraints>
+                        <constraint firstAttribute="height" constant="14" id="R5r-hX-fF8"/>
                         <constraint firstAttribute="width" constant="50" id="YGc-Oh-RhW"/>
                     </constraints>
                     <textFieldCell key="cell" controlSize="small" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Location:" id="Vpa-gA-Haq">
@@ -66,6 +70,7 @@
                     <rect key="frame" x="6" y="53" width="47" height="14"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="43" id="j7x-ZW-bYC"/>
+                        <constraint firstAttribute="height" constant="14" id="zLN-vb-5tS"/>
                     </constraints>
                     <textFieldCell key="cell" controlSize="small" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Version:" id="0oO-wP-SOX">
                         <font key="font" metaFont="smallSystem"/>
@@ -77,6 +82,7 @@
                     <rect key="frame" x="6" y="31" width="83" height="14"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="79" id="GkS-mU-Ub7"/>
+                        <constraint firstAttribute="height" constant="14" id="cfz-G0-ewg"/>
                     </constraints>
                     <textFieldCell key="cell" controlSize="small" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Dependencies:" id="v3f-Nd-iQs">
                         <font key="font" metaFont="smallSystem"/>
@@ -96,6 +102,7 @@
                     <rect key="frame" x="6" y="9" width="54" height="14"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="50" id="3WV-w8-Loa"/>
+                        <constraint firstAttribute="height" constant="14" id="Hd4-vv-WBX"/>
                     </constraints>
                     <textFieldCell key="cell" controlSize="small" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Conflicts:" id="jTd-ja-Dck">
                         <font key="font" metaFont="smallSystem"/>

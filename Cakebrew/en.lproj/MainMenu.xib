@@ -611,7 +611,7 @@ CA
                                                                         <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="UGv-FF-mH4">
                                                                             <rect key="frame" x="25" y="0.0" width="97" height="17"/>
                                                                             <constraints>
-                                                                                <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="80" id="nTu-IB-1td"/>
+                                                                                <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="40" id="nTu-IB-1td"/>
                                                                             </constraints>
                                                                             <textFieldCell key="cell" lineBreakMode="truncatingTail" sendsActionOnEndEditing="YES" title="Table View Cell" id="zVW-Ch-xYV">
                                                                                 <font key="font" metaFont="system"/>
@@ -1088,7 +1088,7 @@ CA
             </subviews>
             <holdingPriorities>
                 <real value="250"/>
-                <real value="251"/>
+                <real value="243"/>
             </holdingPriorities>
             <point key="canvasLocation" x="469" y="762"/>
         </splitView>

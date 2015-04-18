@@ -43,7 +43,7 @@
 		self.formulaConflictsLabel.preferredMaxLayoutWidth = self.formulaConflictsLabel.frame.size.width;
 		self.formulaVersionLabel.preferredMaxLayoutWidth = self.formulaVersionLabel.frame.size.width;
 		self.formulaPathLabel.preferredMaxLayoutWidth = self.formulaPathLabel.frame.size.width;
-		[[self view] layout];
+		[[self view] layoutSubtreeIfNeeded];
 	}
 }
 
