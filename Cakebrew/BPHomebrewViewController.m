@@ -336,10 +336,12 @@ typedef NS_ENUM(NSUInteger, HomeBrewTab) {
 
 - (void)homebrewManager:(BPHomebrewManager *)manager shouldDisplayNoBrewMessage:(BOOL)yesOrNo
 {
-	if (yesOrNo) {
+	if (yesOrNo)
+	{
 		[self.view_disablerLock setHidden:NO];
 		[self.view_disablerLock setWantsLayer:YES];
 		[self.label_information setHidden:YES];
+		[self.view_loading setHidden:YES];
 		[self.splitView setHidden:YES];
 		
 		[self setToolbarItemsEnabled:NO];
@@ -360,7 +362,9 @@ typedef NS_ENUM(NSUInteger, HomeBrewTab) {
 				[[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:@"http://brew.sh"]];
 			}
 		}
-	} else {
+	}
+	else
+	{
 		[self.view_disablerLock setHidden:YES];
 		[self.label_information setHidden:NO];
 		[self.splitView setHidden:NO];
