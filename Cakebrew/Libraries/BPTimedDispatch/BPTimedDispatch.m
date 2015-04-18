@@ -12,6 +12,7 @@
 
 @property (nonatomic, copy) void (^schedulledBlock)(void);
 @property (atomic, strong) NSTimer *dispatchTimer;
+@property dispatch_queue_t dispatchQueue;
 
 @end
 
@@ -19,7 +20,13 @@
 
 - (void)scheduleDispatchAfterTimeInterval:(NSTimeInterval)interval ofBlock:(void (^)(void))block
 {
+	[self scheduleDispatchAfterTimeInterval:interval inQueue:dispatch_get_main_queue() ofBlock:block];
+}
+
+- (void)scheduleDispatchAfterTimeInterval:(NSTimeInterval)interval inQueue:(dispatch_queue_t)queue ofBlock:(void (^)(void))block
+{
 	[self setSchedulledBlock:block];
+	[self setDispatchQueue:queue];
 	
 	if (self.dispatchTimer)
 	{
@@ -33,9 +40,12 @@
 
 - (void)dispatchBlock
 {
-	[self setDispatchTimer:nil];
-	self.schedulledBlock();
-	[self setSchedulledBlock:nil];
+	dispatch_async(self.dispatchQueue, ^{
+		self.schedulledBlock();
+		
+		[self setDispatchTimer:nil];
+		[self setSchedulledBlock:nil];
+	});
 }
 
 @end

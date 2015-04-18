@@ -11,5 +11,6 @@
 @interface BPTimedDispatch : NSObject
 
 - (void)scheduleDispatchAfterTimeInterval:(NSTimeInterval)interval ofBlock:(void (^)(void))block;
+- (void)scheduleDispatchAfterTimeInterval:(NSTimeInterval)interval inQueue:(dispatch_queue_t)queue ofBlock:(void (^)(void))block;
 
 @end
