@@ -30,20 +30,21 @@
 	
 	if (self.dispatchTimer)
 	{
-		[self.dispatchTimer setFireDate:[[NSDate new] dateByAddingTimeInterval:interval]];
+		[self.dispatchTimer invalidate];
 	}
-	else
-	{
-		[self setDispatchTimer:[NSTimer scheduledTimerWithTimeInterval:interval target:self selector:@selector(dispatchBlock) userInfo:nil repeats:NO]];
-	}
+		 
+	[self setDispatchTimer:[NSTimer scheduledTimerWithTimeInterval:interval
+															target:self
+														  selector:@selector(dispatchBlockTimerDidFire:)
+														  userInfo:nil
+														   repeats:NO]];
 }
 
-- (void)dispatchBlock
+- (void)dispatchBlockTimerDidFire:(NSTimer*)sender
 {
 	dispatch_async(self.dispatchQueue, ^{
-		self.schedulledBlock();
+		if (self.schedulledBlock) self.schedulledBlock();
 		
-		[self setDispatchTimer:nil];
 		[self setSchedulledBlock:nil];
 	});
 }
