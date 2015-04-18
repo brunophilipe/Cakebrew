@@ -34,4 +34,6 @@ NS_ENUM(NSUInteger, FormulaeSideBarItem) {
 - (void)refreshSidebarBadges;
 - (void)configureSidebarSettings;
 
+- (IBAction)selectSideBarRowWithSenderTag:(id)sender;
+
 @end

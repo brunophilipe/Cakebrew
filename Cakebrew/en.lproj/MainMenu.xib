@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="6751" systemVersion="14C1514" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="7531" systemVersion="14D131" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="6751"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="7531"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="NSApplication">
@@ -436,6 +436,49 @@ CA
                         </items>
                     </menu>
                 </menuItem>
+                <menuItem title="View" id="ZNi-97-e1J">
+                    <modifierMask key="keyEquivalentModifierMask"/>
+                    <menu key="submenu" title="View" id="mwc-hE-3i2">
+                        <items>
+                            <menuItem title="Installed Formulae" tag="1" keyEquivalent="1" id="8gP-gb-YtQ">
+                                <connections>
+                                    <action selector="selectSideBarRowWithSenderTag:" target="SGP-Ky-0Th" id="Cet-wG-7MQ"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem title="Outdated Formulae" tag="2" keyEquivalent="2" id="KUc-5l-twA">
+                                <connections>
+                                    <action selector="selectSideBarRowWithSenderTag:" target="SGP-Ky-0Th" id="c5K-Fg-jvj"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem title="All Formulae" tag="3" keyEquivalent="3" id="zam-2s-isx">
+                                <connections>
+                                    <action selector="selectSideBarRowWithSenderTag:" target="SGP-Ky-0Th" id="opC-R1-TQR"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem title="Leaves" tag="4" keyEquivalent="4" id="M9N-PI-gBO">
+                                <connections>
+                                    <action selector="selectSideBarRowWithSenderTag:" target="SGP-Ky-0Th" id="Uhl-lk-qPT"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem title="Repositories" tag="5" keyEquivalent="5" id="dXD-3s-NhA">
+                                <connections>
+                                    <action selector="selectSideBarRowWithSenderTag:" target="SGP-Ky-0Th" id="s3g-8g-eFB"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem isSeparatorItem="YES" id="kEe-QJ-gfj"/>
+                            <menuItem title="Doctor" tag="7" keyEquivalent="6" id="eI9-b4-Rmg">
+                                <connections>
+                                    <action selector="selectSideBarRowWithSenderTag:" target="SGP-Ky-0Th" id="DMG-th-yEC"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem title="Update" tag="8" keyEquivalent="7" id="8Vh-lk-gYe">
+                                <connections>
+                                    <action selector="selectSideBarRowWithSenderTag:" target="SGP-Ky-0Th" id="fUp-dE-WjG"/>
+                                </connections>
+                            </menuItem>
+                        </items>
+                    </menu>
+                </menuItem>
                 <menuItem title="Window" id="19">
                     <menu key="submenu" title="Window" systemMenu="window" id="24">
                         <items>
@@ -562,6 +605,7 @@ CA
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <subviews>
                                                 <outlineView appearanceType="vibrantLight" verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" selectionHighlightStyle="sourceList" columnReordering="NO" multipleSelection="NO" autosaveColumns="NO" rowHeight="24" rowSizeStyle="systemDefault" viewBased="YES" indentationPerLevel="16" outlineTableColumn="LEF-be-VWM" id="h1z-c9-U0s" customClass="PXSourceList">
+                                                    <rect key="frame" x="0.0" y="0.0" width="190" height="0.0"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <size key="intercellSpacing" width="0.0" height="2"/>
                                                     <color key="backgroundColor" name="_sourceListBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -938,11 +982,11 @@ CA
                     <subviews>
                         <scrollView focusRingType="none" borderType="none" autohidesScrollers="YES" horizontalLineScroll="19" horizontalPageScroll="10" verticalLineScroll="19" verticalPageScroll="10" usesPredominantAxisScrolling="NO" horizontalScrollElasticity="none" scrollerKnobStyle="dark" translatesAutoresizingMaskIntoConstraints="NO" id="YpG-G5-bXX">
                             <rect key="frame" x="0.0" y="0.0" width="396" height="264"/>
-                            <clipView key="contentView" focusRingType="none" misplaced="YES" copiesOnScroll="NO" id="6nf-zO-0ou">
+                            <clipView key="contentView" focusRingType="none" copiesOnScroll="NO" id="6nf-zO-0ou">
                                 <rect key="frame" x="0.0" y="17" width="379" height="183"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <subviews>
-                                    <tableView focusRingType="none" verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" alternatingRowBackgroundColors="YES" multipleSelection="NO" autosaveColumns="NO" headerView="pLZ-e2-9bs" id="swO-GD-dpc" customClass="BPFormulaeTableView">
+                                    <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" alternatingRowBackgroundColors="YES" multipleSelection="NO" autosaveColumns="NO" headerView="pLZ-e2-9bs" id="swO-GD-dpc" customClass="BPFormulaeTableView">
                                         <rect key="frame" x="0.0" y="0.0" width="517" height="19"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <size key="intercellSpacing" width="3" height="2"/>

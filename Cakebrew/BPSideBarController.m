@@ -161,4 +161,11 @@
 	}
 }
 
+#pragma mark - Actions
+
+- (IBAction)selectSideBarRowWithSenderTag:(id)sender
+{
+	[self.sidebar selectRowIndexes:[NSIndexSet indexSetWithIndex:[sender tag]] byExtendingSelection:NO];
+}
+
 @end
