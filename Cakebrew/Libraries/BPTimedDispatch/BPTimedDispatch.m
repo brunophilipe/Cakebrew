@@ -42,10 +42,11 @@
 
 - (void)dispatchBlockTimerDidFire:(NSTimer*)sender
 {
+	void (^localBlock)(void) = self.schedulledBlock;
+	[self setSchedulledBlock:nil];
+	
 	dispatch_async(self.dispatchQueue, ^{
-		if (self.schedulledBlock) self.schedulledBlock();
-		
-		[self setSchedulledBlock:nil];
+		if (localBlock) localBlock();
 	});
 }
 
