@@ -72,7 +72,7 @@
 	if ([self.formulae count] == 1) {
 		BPFormula *formula = [self.formulae firstObject];
 		
-		[self.timedDispatch scheduleDispatchAfterTimeInterval:0.3 ofBlock:^{
+		[self.timedDispatch scheduleDispatchAfterTimeInterval:0.3 inQueue:dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0) ofBlock:^{
 			[formula getInformation];
 			if (formula.isInstalled) {
 				if ([formula.installPath length]) {
