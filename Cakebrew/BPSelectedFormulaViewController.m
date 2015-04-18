@@ -63,46 +63,68 @@
 	static NSString *emptyString = @"--";
 	static NSString *multipleString = @"Multiple values";
 	
-	if (!self.formulae || [self.formulae count] == 0) {
+	if (!self.formulae || [self.formulae count] == 0)
+	{
 		[self.formulaPathLabel setStringValue:emptyString];
 		[self.formulaVersionLabel setStringValue:emptyString];
 		[self.formulaDependenciesLabel setStringValue:emptyString];
 		[self.formulaConflictsLabel setStringValue:emptyString];
 	}
-	if ([self.formulae count] == 1) {
+	
+	if ([self.formulae count] == 1)
+	{
 		BPFormula *formula = [self.formulae firstObject];
 		
 		[self.timedDispatch scheduleDispatchAfterTimeInterval:0.3 inQueue:dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0) ofBlock:^{
 			[formula getInformation];
-			if (formula.isInstalled) {
-				if ([formula.installPath length]) {
+			
+			if (formula.isInstalled)
+			{
+				if ([formula.installPath length])
+				{
 					[self.formulaPathLabel setStringValue:formula.installPath];
-				} else {
+				}
+				else
+				{
 					[self.formulaPathLabel setStringValue:emptyString];
 				}
-			} else {
+			}
+			else
+			{
 				[self.formulaPathLabel setStringValue:@"Formula Not Installed."];
 			}
-			if (formula.latestVersion) {
+			
+			if (formula.latestVersion)
+			{
 				[self.formulaVersionLabel setStringValue:formula.latestVersion];
-			} else {
+			}
+			else
+			{
 				[self.formulaVersionLabel setStringValue:emptyString];
 			}
 			
-			if (formula.dependencies) {
+			if (formula.dependencies)
+			{
 				[self.formulaDependenciesLabel setStringValue:formula.dependencies];
-			} else {
+			}
+			else
+			{
 				[self.formulaDependenciesLabel setStringValue:@"This formula has no dependencies!"];
 			}
 			
-			if (formula.conflicts) {
+			if (formula.conflicts)
+			{
 				[self.formulaConflictsLabel setStringValue:formula.conflicts];
-			} else {
+			}
+			else
+			{
 				[self.formulaConflictsLabel setStringValue:@"This formula has no known conflicts."];
 			}
 		}];
 	}
-	if ([self.formulae count] > 1) {
+	
+	if ([self.formulae count] > 1)
+	{
 		[self.formulaPathLabel setStringValue:multipleString];
 		[self.formulaDependenciesLabel setStringValue:multipleString];
 		[self.formulaConflictsLabel setStringValue:multipleString];

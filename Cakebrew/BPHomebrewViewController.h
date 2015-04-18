@@ -46,8 +46,8 @@ typedef NS_ENUM(NSUInteger, BPWindowOperation) {
 @property (unsafe_unretained) IBOutlet DMSplitView              *splitView;
 @property (unsafe_unretained) IBOutlet NSTabView                *tabView;
 @property (unsafe_unretained) IBOutlet NSTextField              *label_information;
-@property (unsafe_unretained) IBOutlet NSView				   *view_disablerLock;
-@property (unsafe_unretained) IBOutlet NSView				   *view_loading;
+@property (unsafe_unretained) IBOutlet NSView				    *view_disablerLock;
+@property (unsafe_unretained) IBOutlet NSView				    *view_loading;
 @property (unsafe_unretained) IBOutlet NSToolbar                *toolbar;
 @property (unsafe_unretained) IBOutlet NSSearchField            *searchField;
 @property (unsafe_unretained) IBOutlet NSMenu                   *menu_formula;

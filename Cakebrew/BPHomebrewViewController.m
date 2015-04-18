@@ -388,6 +388,8 @@ typedef NS_ENUM(NSUInteger, HomeBrewTab) {
 	if (selectedSidebarRow >= 0)
 		_lastSelectedSidebarIndex = selectedSidebarRow;
 	
+	[self.tableView_formulae deselectAll:nil];
+	
 	[self updateInterfaceItems];
 	
 	switch (selectedSidebarRow) {
