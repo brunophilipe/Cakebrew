@@ -59,10 +59,7 @@
                     </textFieldCell>
                 </textField>
                 <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="wIZ-rp-y6N">
-                    <rect key="frame" x="196" y="292" width="70" height="19"/>
-                    <constraints>
-                        <constraint firstAttribute="width" constant="70" id="MG8-9o-efy"/>
-                    </constraints>
+                    <rect key="frame" x="200" y="292" width="66" height="19"/>
                     <buttonCell key="cell" type="roundRect" title="Clear Log" bezelStyle="roundedRect" alignment="center" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="EE6-5g-Jos">
                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                         <font key="font" metaFont="smallSystem"/>
@@ -89,7 +86,7 @@
                     </connections>
                 </button>
                 <progressIndicator horizontalHuggingPriority="750" verticalHuggingPriority="750" maxValue="100" displayedWhenStopped="NO" bezeled="NO" indeterminate="YES" controlSize="small" style="spinning" translatesAutoresizingMaskIntoConstraints="NO" id="J7C-5S-Vor">
-                    <rect key="frame" x="172" y="293" width="16" height="16"/>
+                    <rect key="frame" x="176" y="293" width="16" height="16"/>
                 </progressIndicator>
             </subviews>
             <constraints>

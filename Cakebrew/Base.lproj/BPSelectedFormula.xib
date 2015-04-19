@@ -30,11 +30,11 @@
                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
                 </textField>
-                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Cd6-mA-TjE">
+                <textField horizontalHuggingPriority="252" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Cd6-mA-TjE">
                     <rect key="frame" x="6" y="75" width="54" height="14"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="14" id="R5r-hX-fF8"/>
-                        <constraint firstAttribute="width" constant="50" id="YGc-Oh-RhW"/>
+                        <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="50" id="YGc-Oh-RhW"/>
                     </constraints>
                     <textFieldCell key="cell" controlSize="small" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Location:" id="Vpa-gA-Haq">
                         <font key="font" metaFont="smallSystem"/>
@@ -66,10 +66,10 @@
                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
                 </textField>
-                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="BJs-EC-wJG">
+                <textField horizontalHuggingPriority="252" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="BJs-EC-wJG">
                     <rect key="frame" x="6" y="53" width="47" height="14"/>
                     <constraints>
-                        <constraint firstAttribute="width" constant="43" id="j7x-ZW-bYC"/>
+                        <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="43" id="j7x-ZW-bYC"/>
                         <constraint firstAttribute="height" constant="14" id="zLN-vb-5tS"/>
                     </constraints>
                     <textFieldCell key="cell" controlSize="small" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Version:" id="0oO-wP-SOX">
@@ -78,10 +78,10 @@
                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
                 </textField>
-                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="6Du-gV-h2P">
+                <textField horizontalHuggingPriority="252" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="6Du-gV-h2P">
                     <rect key="frame" x="6" y="31" width="83" height="14"/>
                     <constraints>
-                        <constraint firstAttribute="width" constant="79" id="GkS-mU-Ub7"/>
+                        <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="79" id="GkS-mU-Ub7"/>
                         <constraint firstAttribute="height" constant="14" id="cfz-G0-ewg"/>
                     </constraints>
                     <textFieldCell key="cell" controlSize="small" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Dependencies:" id="v3f-Nd-iQs">
@@ -98,10 +98,10 @@
                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
                 </textField>
-                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="qga-yy-j75">
+                <textField horizontalHuggingPriority="252" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="qga-yy-j75">
                     <rect key="frame" x="6" y="9" width="54" height="14"/>
                     <constraints>
-                        <constraint firstAttribute="width" constant="50" id="3WV-w8-Loa"/>
+                        <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="50" id="3WV-w8-Loa"/>
                         <constraint firstAttribute="height" constant="14" id="Hd4-vv-WBX"/>
                     </constraints>
                     <textFieldCell key="cell" controlSize="small" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Conflicts:" id="jTd-ja-Dck">

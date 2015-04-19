@@ -44,7 +44,7 @@
 "Formula_Options_VoiceOver" = "Opções da Fórmula";
 "Formula_Options_Confirmation" = "Tem certeza que deseja instalar a fórmula '%@' com as opções selecionadas?";
 
-"Formula_Popover_Title" = "Informação para Fórmula: %@";
+"Formula_Popover_Title" = "Informações para Fórmula: %@";
 "Formula_Popover_Error" = "Erro ao buscar informações!";
 
 "Homebrew_Task_Finished" = "Tarefa finalizada em %@!";
@@ -81,7 +81,7 @@
 
 "Sidebar_Item_Installed" = "Instaladas";
 "Sidebar_Item_Outdated" = "Desatualizadas";
-"Sidebar_Item_All" = "Todas as Fórmulas";
+"Sidebar_Item_All" = "Todas";
 "Sidebar_Item_Leaves" = "Folhas";
 "Sidebar_Item_Repos" = "Repositórios";
 "Sidebar_Item_Doctor" = "Doutor";

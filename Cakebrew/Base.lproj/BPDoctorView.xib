@@ -31,9 +31,6 @@
                 </textField>
                 <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="zhN-hL-ggl">
                     <rect key="frame" x="229" y="291" width="70" height="19"/>
-                    <constraints>
-                        <constraint firstAttribute="width" constant="70" id="Xon-dK-EIb"/>
-                    </constraints>
                     <buttonCell key="cell" type="roundRect" title="Clear Log" bezelStyle="roundedRect" alignment="center" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="AlR-6d-ju7">
                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                         <font key="font" metaFont="cellTitle"/>
@@ -74,9 +71,6 @@
                 </scrollView>
                 <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="PFL-SR-FAj">
                     <rect key="frame" x="307" y="291" width="80" height="19"/>
-                    <constraints>
-                        <constraint firstAttribute="width" constant="80" id="vXX-OW-i94"/>
-                    </constraints>
                     <buttonCell key="cell" type="roundRect" title="Run Doctor" bezelStyle="roundedRect" alignment="center" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="YyI-zq-THZ">
                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                         <font key="font" metaFont="cellTitle"/>
