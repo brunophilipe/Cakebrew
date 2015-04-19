@@ -20,9 +20,16 @@
 		15C34CBF19512DE100B92E36 /* BPAutoScrollTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 15C34CBE19512DE100B92E36 /* BPAutoScrollTextView.m */; };
 		15CEFC631AB335B2005CF54A /* BPLoadingView.m in Sources */ = {isa = PBXBuildFile; fileRef = 15CEFC621AB335B2005CF54A /* BPLoadingView.m */; };
 		15D28A121AE1BD27005C8A3E /* BPTimedDispatch.m in Sources */ = {isa = PBXBuildFile; fileRef = 15D28A111AE1BD27005C8A3E /* BPTimedDispatch.m */; };
+		15D28A141AE332DB005C8A3E /* DCOAboutWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 15D28A161AE332DB005C8A3E /* DCOAboutWindow.xib */; };
+		15D28A171AE332E6005C8A3E /* BPDoctorView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 15D28A191AE332E6005C8A3E /* BPDoctorView.xib */; };
+		15D28A1A1AE332EA005C8A3E /* BPFormulaOptionsWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 15D28A1C1AE332EA005C8A3E /* BPFormulaOptionsWindow.xib */; };
+		15D28A1D1AE332EF005C8A3E /* BPFormulaPopoverView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 15D28A1F1AE332EF005C8A3E /* BPFormulaPopoverView.xib */; };
+		15D28A201AE332F4005C8A3E /* BPInstallationWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 15D28A221AE332F4005C8A3E /* BPInstallationWindow.xib */; };
+		15D28A231AE332F9005C8A3E /* BPPreferencesWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 15D28A251AE332F9005C8A3E /* BPPreferencesWindow.xib */; };
+		15D28A261AE332FD005C8A3E /* BPSelectedFormula.xib in Resources */ = {isa = PBXBuildFile; fileRef = 15D28A281AE332FD005C8A3E /* BPSelectedFormula.xib */; };
+		15D28A291AE33301005C8A3E /* BPUpdateView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 15D28A2B1AE33301005C8A3E /* BPUpdateView.xib */; };
 		15D2CFA218F1E71800B6D9F1 /* reload.icns in Resources */ = {isa = PBXBuildFile; fileRef = 15D2CFA118F1E71800B6D9F1 /* reload.icns */; };
 		15D2CFA418F1EAD200B6D9F1 /* globe.icns in Resources */ = {isa = PBXBuildFile; fileRef = 15D2CFA318F1EAD200B6D9F1 /* globe.icns */; };
-		15D2CFAA18F202B300B6D9F1 /* DCOAboutWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 15D2CFA718F202B300B6D9F1 /* DCOAboutWindow.xib */; };
 		15D2CFAB18F202B300B6D9F1 /* DCOAboutWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 15D2CFA918F202B300B6D9F1 /* DCOAboutWindowController.m */; };
 		15D2CFAD18F202D000B6D9F1 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 15D2CFAC18F202D000B6D9F1 /* QuartzCore.framework */; };
 		15D2CFB818F206DF00B6D9F1 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 15D2CFB718F206DF00B6D9F1 /* README.md */; };
@@ -43,20 +50,13 @@
 		D26F6E7F19B8608B00F616C1 /* NSFont+Appearance.m in Sources */ = {isa = PBXBuildFile; fileRef = D26F6E7E19B8608B00F616C1 /* NSFont+Appearance.m */; };
 		D2B3A39B19B879CD00DE23B5 /* BPDoctorViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D2B3A39819B879CD00DE23B5 /* BPDoctorViewController.m */; };
 		D2B3A39C19B879CD00DE23B5 /* BPUpdateViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D2B3A39A19B879CD00DE23B5 /* BPUpdateViewController.m */; };
-		D2B3A39F19B87A2C00DE23B5 /* BPDoctorView.xib in Resources */ = {isa = PBXBuildFile; fileRef = D2B3A39D19B87A2C00DE23B5 /* BPDoctorView.xib */; };
-		D2B3A3A019B87A2C00DE23B5 /* BPUpdateView.xib in Resources */ = {isa = PBXBuildFile; fileRef = D2B3A39E19B87A2C00DE23B5 /* BPUpdateView.xib */; };
 		D2B3A3AA19B9CBEC00DE23B5 /* BPFormulaeTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = D2B3A3A919B9CBEC00DE23B5 /* BPFormulaeTableView.m */; };
 		D2B3A3AD19B9D39A00DE23B5 /* BPSelectedFormulaViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D2B3A3AC19B9D39A00DE23B5 /* BPSelectedFormulaViewController.m */; };
 		D2B3A3B019B9D7FC00DE23B5 /* BPFormulaeDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = D2B3A3AF19B9D7FC00DE23B5 /* BPFormulaeDataSource.m */; };
 		D2B3A3B819B9EA3500DE23B5 /* BPSideBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = D2B3A3B719B9EA3500DE23B5 /* BPSideBarController.m */; };
 		D2B3A3BB19B9FE4C00DE23B5 /* BPFormulaPopoverViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D2B3A3BA19B9FE4C00DE23B5 /* BPFormulaPopoverViewController.m */; };
-		D2B3A3BD19BA403300DE23B5 /* BPFormulaPopoverView.xib in Resources */ = {isa = PBXBuildFile; fileRef = D2B3A3BC19BA403300DE23B5 /* BPFormulaPopoverView.xib */; };
-		D2DDB9BF1A9AD1D60082339D /* BPSelectedFormula.xib in Resources */ = {isa = PBXBuildFile; fileRef = D2DDB9BE1A9AD1D60082339D /* BPSelectedFormula.xib */; };
-		D2E53A4819A6215400E05AFC /* BPFormulaOptionsWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = D2E53A4719A6215400E05AFC /* BPFormulaOptionsWindow.xib */; };
 		D2E53A4B19A6228300E05AFC /* BPFormulaOptionsWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = D2E53A4A19A6228300E05AFC /* BPFormulaOptionsWindowController.m */; };
-		D2E53A4D19A65B1600E05AFC /* BPInstallationWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = D2E53A4C19A65B1600E05AFC /* BPInstallationWindow.xib */; };
 		D2E53A5019A65BAD00E05AFC /* BPInstallationWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = D2E53A4F19A65BAD00E05AFC /* BPInstallationWindowController.m */; };
-		D2F732EC19190B6D002B2512 /* BPPreferencesWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = D2F732E919190B6D002B2512 /* BPPreferencesWindow.xib */; };
 		D2F732ED19190B6D002B2512 /* BPPreferencesWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = D2F732EB19190B6D002B2512 /* BPPreferencesWindowController.m */; };
 		D2F732F119190B75002B2512 /* NSString+URLValidation.m in Sources */ = {isa = PBXBuildFile; fileRef = D2F732F019190B75002B2512 /* NSString+URLValidation.m */; };
 /* End PBXBuildFile section */
@@ -92,9 +92,17 @@
 		15CEFC621AB335B2005CF54A /* BPLoadingView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BPLoadingView.m; path = Views/BPLoadingView.m; sourceTree = "<group>"; };
 		15D28A101AE1BD27005C8A3E /* BPTimedDispatch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BPTimedDispatch.h; path = BPTimedDispatch/BPTimedDispatch.h; sourceTree = "<group>"; };
 		15D28A111AE1BD27005C8A3E /* BPTimedDispatch.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BPTimedDispatch.m; path = BPTimedDispatch/BPTimedDispatch.m; sourceTree = "<group>"; };
+		15D28A131AE332BC005C8A3E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MainMenu.xib; sourceTree = "<group>"; };
+		15D28A151AE332DB005C8A3E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/DCOAboutWindow.xib; sourceTree = "<group>"; };
+		15D28A181AE332E6005C8A3E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/BPDoctorView.xib; sourceTree = "<group>"; };
+		15D28A1B1AE332EA005C8A3E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/BPFormulaOptionsWindow.xib; sourceTree = "<group>"; };
+		15D28A1E1AE332EF005C8A3E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/BPFormulaPopoverView.xib; sourceTree = "<group>"; };
+		15D28A211AE332F4005C8A3E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/BPInstallationWindow.xib; sourceTree = "<group>"; };
+		15D28A241AE332F9005C8A3E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/BPPreferencesWindow.xib; sourceTree = "<group>"; };
+		15D28A271AE332FD005C8A3E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/BPSelectedFormula.xib; sourceTree = "<group>"; };
+		15D28A2A1AE33301005C8A3E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/BPUpdateView.xib; sourceTree = "<group>"; };
 		15D2CFA118F1E71800B6D9F1 /* reload.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = reload.icns; sourceTree = "<group>"; };
 		15D2CFA318F1EAD200B6D9F1 /* globe.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = globe.icns; sourceTree = "<group>"; };
-		15D2CFA718F202B300B6D9F1 /* DCOAboutWindow.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DCOAboutWindow.xib; sourceTree = "<group>"; };
 		15D2CFA818F202B300B6D9F1 /* DCOAboutWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DCOAboutWindowController.h; sourceTree = "<group>"; };
 		15D2CFA918F202B300B6D9F1 /* DCOAboutWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DCOAboutWindowController.m; sourceTree = "<group>"; };
 		15D2CFAC18F202D000B6D9F1 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
@@ -118,7 +126,6 @@
 		1FE4FE68148E4CDD008EDE8B /* en */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; name = en; path = en.lproj/Credits.rtf; sourceTree = "<group>"; };
 		1FE4FE6A148E4CDD008EDE8B /* BPAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BPAppDelegate.h; sourceTree = "<group>"; };
 		1FE4FE6B148E4CDD008EDE8B /* BPAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BPAppDelegate.m; sourceTree = "<group>"; };
-		1FE4FE6E148E4CDD008EDE8B /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainMenu.xib; sourceTree = "<group>"; };
 		1FE4FE75148E4D43008EDE8B /* BPHomebrewInterface.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BPHomebrewInterface.h; sourceTree = "<group>"; };
 		1FE4FE76148E4D43008EDE8B /* BPHomebrewInterface.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BPHomebrewInterface.m; sourceTree = "<group>"; };
 		1FE4FE78148E5FEB008EDE8B /* BPHomebrewViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BPHomebrewViewController.h; sourceTree = "<group>"; };
@@ -129,8 +136,6 @@
 		D2B3A39819B879CD00DE23B5 /* BPDoctorViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BPDoctorViewController.m; sourceTree = "<group>"; };
 		D2B3A39919B879CD00DE23B5 /* BPUpdateViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BPUpdateViewController.h; sourceTree = "<group>"; };
 		D2B3A39A19B879CD00DE23B5 /* BPUpdateViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BPUpdateViewController.m; sourceTree = "<group>"; };
-		D2B3A39D19B87A2C00DE23B5 /* BPDoctorView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BPDoctorView.xib; sourceTree = "<group>"; };
-		D2B3A39E19B87A2C00DE23B5 /* BPUpdateView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BPUpdateView.xib; sourceTree = "<group>"; };
 		D2B3A3A819B9CBEC00DE23B5 /* BPFormulaeTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BPFormulaeTableView.h; sourceTree = "<group>"; };
 		D2B3A3A919B9CBEC00DE23B5 /* BPFormulaeTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BPFormulaeTableView.m; sourceTree = "<group>"; };
 		D2B3A3AB19B9D39A00DE23B5 /* BPSelectedFormulaViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BPSelectedFormulaViewController.h; sourceTree = "<group>"; };
@@ -141,15 +146,10 @@
 		D2B3A3B719B9EA3500DE23B5 /* BPSideBarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BPSideBarController.m; sourceTree = "<group>"; };
 		D2B3A3B919B9FE4C00DE23B5 /* BPFormulaPopoverViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BPFormulaPopoverViewController.h; sourceTree = "<group>"; };
 		D2B3A3BA19B9FE4C00DE23B5 /* BPFormulaPopoverViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BPFormulaPopoverViewController.m; sourceTree = "<group>"; };
-		D2B3A3BC19BA403300DE23B5 /* BPFormulaPopoverView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BPFormulaPopoverView.xib; sourceTree = "<group>"; };
-		D2DDB9BE1A9AD1D60082339D /* BPSelectedFormula.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BPSelectedFormula.xib; sourceTree = "<group>"; };
-		D2E53A4719A6215400E05AFC /* BPFormulaOptionsWindow.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BPFormulaOptionsWindow.xib; sourceTree = "<group>"; };
 		D2E53A4919A6228300E05AFC /* BPFormulaOptionsWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BPFormulaOptionsWindowController.h; sourceTree = "<group>"; };
 		D2E53A4A19A6228300E05AFC /* BPFormulaOptionsWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BPFormulaOptionsWindowController.m; sourceTree = "<group>"; };
-		D2E53A4C19A65B1600E05AFC /* BPInstallationWindow.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BPInstallationWindow.xib; sourceTree = "<group>"; };
 		D2E53A4E19A65BAD00E05AFC /* BPInstallationWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BPInstallationWindowController.h; sourceTree = "<group>"; };
 		D2E53A4F19A65BAD00E05AFC /* BPInstallationWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BPInstallationWindowController.m; sourceTree = "<group>"; };
-		D2F732E919190B6D002B2512 /* BPPreferencesWindow.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BPPreferencesWindow.xib; sourceTree = "<group>"; };
 		D2F732EA19190B6D002B2512 /* BPPreferencesWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BPPreferencesWindowController.h; sourceTree = "<group>"; };
 		D2F732EB19190B6D002B2512 /* BPPreferencesWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BPPreferencesWindowController.m; sourceTree = "<group>"; };
 		D2F732EF19190B75002B2512 /* NSString+URLValidation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+URLValidation.h"; sourceTree = "<group>"; };
@@ -187,31 +187,31 @@
 		15A974AB1968A3C900621C35 /* View Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				D2B3A39D19B87A2C00DE23B5 /* BPDoctorView.xib */,
+				15D28A191AE332E6005C8A3E /* BPDoctorView.xib */,
 				D2B3A39719B879CD00DE23B5 /* BPDoctorViewController.h */,
 				D2B3A39819B879CD00DE23B5 /* BPDoctorViewController.m */,
 				D2B3A3AE19B9D7FC00DE23B5 /* BPFormulaeDataSource.h */,
 				D2B3A3AF19B9D7FC00DE23B5 /* BPFormulaeDataSource.m */,
-				D2E53A4719A6215400E05AFC /* BPFormulaOptionsWindow.xib */,
+				15D28A1C1AE332EA005C8A3E /* BPFormulaOptionsWindow.xib */,
 				D2E53A4919A6228300E05AFC /* BPFormulaOptionsWindowController.h */,
 				D2E53A4A19A6228300E05AFC /* BPFormulaOptionsWindowController.m */,
-				D2B3A3BC19BA403300DE23B5 /* BPFormulaPopoverView.xib */,
+				15D28A1F1AE332EF005C8A3E /* BPFormulaPopoverView.xib */,
 				D2B3A3B919B9FE4C00DE23B5 /* BPFormulaPopoverViewController.h */,
 				D2B3A3BA19B9FE4C00DE23B5 /* BPFormulaPopoverViewController.m */,
 				1FE4FE78148E5FEB008EDE8B /* BPHomebrewViewController.h */,
 				1FE4FE79148E5FEB008EDE8B /* BPHomebrewViewController.m */,
-				D2E53A4C19A65B1600E05AFC /* BPInstallationWindow.xib */,
+				15D28A221AE332F4005C8A3E /* BPInstallationWindow.xib */,
 				D2E53A4E19A65BAD00E05AFC /* BPInstallationWindowController.h */,
 				D2E53A4F19A65BAD00E05AFC /* BPInstallationWindowController.m */,
-				D2F732E919190B6D002B2512 /* BPPreferencesWindow.xib */,
+				15D28A251AE332F9005C8A3E /* BPPreferencesWindow.xib */,
 				D2F732EA19190B6D002B2512 /* BPPreferencesWindowController.h */,
 				D2F732EB19190B6D002B2512 /* BPPreferencesWindowController.m */,
-				D2DDB9BE1A9AD1D60082339D /* BPSelectedFormula.xib */,
+				15D28A281AE332FD005C8A3E /* BPSelectedFormula.xib */,
 				D2B3A3AB19B9D39A00DE23B5 /* BPSelectedFormulaViewController.h */,
 				D2B3A3AC19B9D39A00DE23B5 /* BPSelectedFormulaViewController.m */,
 				D2B3A3B619B9EA3500DE23B5 /* BPSideBarController.h */,
 				D2B3A3B719B9EA3500DE23B5 /* BPSideBarController.m */,
-				D2B3A39E19B87A2C00DE23B5 /* BPUpdateView.xib */,
+				15D28A2B1AE33301005C8A3E /* BPUpdateView.xib */,
 				D2B3A39919B879CD00DE23B5 /* BPUpdateViewController.h */,
 				D2B3A39A19B879CD00DE23B5 /* BPUpdateViewController.m */,
 			);
@@ -241,7 +241,7 @@
 		15D2CFA618F202B300B6D9F1 /* DCOAboutWindow */ = {
 			isa = PBXGroup;
 			children = (
-				15D2CFA718F202B300B6D9F1 /* DCOAboutWindow.xib */,
+				15D28A161AE332DB005C8A3E /* DCOAboutWindow.xib */,
 				15D2CFA818F202B300B6D9F1 /* DCOAboutWindowController.h */,
 				15D2CFA918F202B300B6D9F1 /* DCOAboutWindowController.m */,
 			);
@@ -413,6 +413,7 @@
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
+				Base,
 			);
 			mainGroup = 1FE4FE49148E4CDD008EDE8B;
 			productRefGroup = 1FE4FE55148E4CDD008EDE8B /* Products */;
@@ -431,16 +432,16 @@
 			files = (
 				1529086B1927C05B00206767 /* .travis.yml in Resources */,
 				15D5BEF318EBB3FB001DDED7 /* plus.icns in Resources */,
-				D2F732EC19190B6D002B2512 /* BPPreferencesWindow.xib in Resources */,
-				D2B3A39F19B87A2C00DE23B5 /* BPDoctorView.xib in Resources */,
+				15D28A231AE332F9005C8A3E /* BPPreferencesWindow.xib in Resources */,
+				15D28A171AE332E6005C8A3E /* BPDoctorView.xib in Resources */,
 				1FE4FE63148E4CDD008EDE8B /* InfoPlist.strings in Resources */,
 				1FE4FE69148E4CDD008EDE8B /* Credits.rtf in Resources */,
-				15D2CFAA18F202B300B6D9F1 /* DCOAboutWindow.xib in Resources */,
+				15D28A141AE332DB005C8A3E /* DCOAboutWindow.xib in Resources */,
 				1FE4FE6F148E4CDD008EDE8B /* MainMenu.xib in Resources */,
-				D2B3A3BD19BA403300DE23B5 /* BPFormulaPopoverView.xib in Resources */,
-				D2E53A4819A6215400E05AFC /* BPFormulaOptionsWindow.xib in Resources */,
+				15D28A1D1AE332EF005C8A3E /* BPFormulaPopoverView.xib in Resources */,
+				15D28A1A1AE332EA005C8A3E /* BPFormulaOptionsWindow.xib in Resources */,
 				15D5BEF518EBB430001DDED7 /* search.icns in Resources */,
-				D2DDB9BF1A9AD1D60082339D /* BPSelectedFormula.xib in Resources */,
+				15D28A261AE332FD005C8A3E /* BPSelectedFormula.xib in Resources */,
 				15D2CFA218F1E71800B6D9F1 /* reload.icns in Resources */,
 				1540FA3518ECF66B00334A5C /* download.icns in Resources */,
 				15D5BEF118EBB3FB001DDED7 /* delete.icns in Resources */,
@@ -448,8 +449,8 @@
 				15D2CFA418F1EAD200B6D9F1 /* globe.icns in Resources */,
 				15D2CFB818F206DF00B6D9F1 /* README.md in Resources */,
 				15B23A2C18F5003600714212 /* dsa_pub.pem in Resources */,
-				D2E53A4D19A65B1600E05AFC /* BPInstallationWindow.xib in Resources */,
-				D2B3A3A019B87A2C00DE23B5 /* BPUpdateView.xib in Resources */,
+				15D28A201AE332F4005C8A3E /* BPInstallationWindow.xib in Resources */,
+				15D28A291AE33301005C8A3E /* BPUpdateView.xib in Resources */,
 				15D2CFBA18F20A8200B6D9F1 /* LICENSE in Resources */,
 				15D5BEF218EBB3FB001DDED7 /* label.icns in Resources */,
 			);
@@ -507,6 +508,70 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
+		15D28A161AE332DB005C8A3E /* DCOAboutWindow.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				15D28A151AE332DB005C8A3E /* Base */,
+			);
+			name = DCOAboutWindow.xib;
+			sourceTree = "<group>";
+		};
+		15D28A191AE332E6005C8A3E /* BPDoctorView.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				15D28A181AE332E6005C8A3E /* Base */,
+			);
+			name = BPDoctorView.xib;
+			sourceTree = "<group>";
+		};
+		15D28A1C1AE332EA005C8A3E /* BPFormulaOptionsWindow.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				15D28A1B1AE332EA005C8A3E /* Base */,
+			);
+			name = BPFormulaOptionsWindow.xib;
+			sourceTree = "<group>";
+		};
+		15D28A1F1AE332EF005C8A3E /* BPFormulaPopoverView.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				15D28A1E1AE332EF005C8A3E /* Base */,
+			);
+			name = BPFormulaPopoverView.xib;
+			sourceTree = "<group>";
+		};
+		15D28A221AE332F4005C8A3E /* BPInstallationWindow.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				15D28A211AE332F4005C8A3E /* Base */,
+			);
+			name = BPInstallationWindow.xib;
+			sourceTree = "<group>";
+		};
+		15D28A251AE332F9005C8A3E /* BPPreferencesWindow.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				15D28A241AE332F9005C8A3E /* Base */,
+			);
+			name = BPPreferencesWindow.xib;
+			sourceTree = "<group>";
+		};
+		15D28A281AE332FD005C8A3E /* BPSelectedFormula.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				15D28A271AE332FD005C8A3E /* Base */,
+			);
+			name = BPSelectedFormula.xib;
+			sourceTree = "<group>";
+		};
+		15D28A2B1AE33301005C8A3E /* BPUpdateView.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				15D28A2A1AE33301005C8A3E /* Base */,
+			);
+			name = BPUpdateView.xib;
+			sourceTree = "<group>";
+		};
 		1FE4FE61148E4CDD008EDE8B /* InfoPlist.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -526,7 +591,7 @@
 		1FE4FE6D148E4CDD008EDE8B /* MainMenu.xib */ = {
 			isa = PBXVariantGroup;
 			children = (
-				1FE4FE6E148E4CDD008EDE8B /* en */,
+				15D28A131AE332BC005C8A3E /* Base */,
 			);
 			name = MainMenu.xib;
 			sourceTree = "<group>";

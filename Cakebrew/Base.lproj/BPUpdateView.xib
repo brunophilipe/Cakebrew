@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="6751" systemVersion="14C1514" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="7531" systemVersion="14D131" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="6751"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="7531"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="BPUpdateViewController">
@@ -59,7 +59,7 @@
                     </textFieldCell>
                 </textField>
                 <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="wIZ-rp-y6N">
-                    <rect key="frame" x="188" y="292" width="70" height="19"/>
+                    <rect key="frame" x="196" y="292" width="70" height="19"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="70" id="MG8-9o-efy"/>
                     </constraints>
@@ -74,7 +74,7 @@
                     </connections>
                 </button>
                 <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="dWd-Zo-8Vf">
-                    <rect key="frame" x="266" y="292" width="122" height="19"/>
+                    <rect key="frame" x="274" y="292" width="114" height="19"/>
                     <buttonCell key="cell" type="roundRect" title="Update Homebrew" bezelStyle="roundedRect" alignment="center" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="MVF-cn-lfW">
                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                         <font key="font" metaFont="smallSystem"/>
@@ -89,7 +89,7 @@
                     </connections>
                 </button>
                 <progressIndicator horizontalHuggingPriority="750" verticalHuggingPriority="750" maxValue="100" displayedWhenStopped="NO" bezeled="NO" indeterminate="YES" controlSize="small" style="spinning" translatesAutoresizingMaskIntoConstraints="NO" id="J7C-5S-Vor">
-                    <rect key="frame" x="164" y="293" width="16" height="16"/>
+                    <rect key="frame" x="172" y="293" width="16" height="16"/>
                 </progressIndicator>
             </subviews>
             <constraints>
