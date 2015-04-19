@@ -301,6 +301,63 @@ typedef NS_ENUM(NSUInteger, HomeBrewTab) {
 	}];
 }
 
+#pragma mark – Footer Information Label
+
+- (void)updateInfoLabelWithSidebarSelection
+{
+	FormulaeSideBarItem selectedSidebarRow = [self.sidebarController.sidebar selectedRow];
+	NSString *message = nil;
+	
+	switch (selectedSidebarRow)
+	{
+		case FormulaeSideBarItemInstalled: // Installed Formulae
+			message = @"These are the formulae already installed in your system.";
+			break;
+			
+		case FormulaeSideBarItemOutdated: // Outdated Formulae
+			message = @"These formulae are already installed, but have an update available.";
+			break;
+			
+		case FormulaeSideBarItemAll: // All Formulae
+			message = @"These are all the formulae available for installation with Homebrew.";
+			break;
+			
+		case FormulaeSideBarItemLeaves:	// Leaves
+			message = @"These formulae are not dependencies of any other formulae.";
+			break;
+			
+		case FormulaeSideBarItemRepositories: // Repositories
+			message = @"These are the repositories you have tapped.";
+			break;
+			
+		case FormulaeSideBarItemDoctor: // Doctor
+			message = @"The doctor is a Homebrew feature that detects the most common causes of errors.";
+			break;
+			
+		case FormulaeSideBarItemUpdate: // Update Tool
+			message = @"Updating Homebrew means fetching the latest info about the available formulae.";
+			break;
+			
+		default:
+			break;
+	}
+	
+	if (self.isSearching)
+	{
+		message = @"These are the results of your search.";
+	}
+	
+	[self updateInfoLabelWithText:message];
+}
+
+- (void)updateInfoLabelWithText:(NSString*)message
+{
+	if (message)
+	{
+		[self.label_information setStringValue:message];
+	}
+}
+
 #pragma mark - Homebrew Manager Delegate
 
 - (void)homebrewManagerFinishedUpdating:(BPHomebrewManager *)manager
@@ -336,8 +393,8 @@ typedef NS_ENUM(NSUInteger, HomeBrewTab) {
 - (void)homebrewManager:(BPHomebrewManager *)manager didUpdateSearchResults:(NSArray *)searchResults
 {
 	[self setSearching:YES];
-	if ([self.sidebarController.sidebar selectedRow] != FormulaeSideBarItemOutdated)
-		[self.sidebarController.sidebar selectRowIndexes:[NSIndexSet indexSetWithIndex:FormulaeSideBarItemAll] byExtendingSelection:NO];
+	
+	[self.sidebarController.sidebar selectRowIndexes:[NSIndexSet indexSetWithIndex:FormulaeSideBarItemAll] byExtendingSelection:NO];
 	
 	[self configureTableForListing:kBPListSearch];
 }
@@ -387,7 +444,8 @@ typedef NS_ENUM(NSUInteger, HomeBrewTab) {
 
 #pragma mark - NSTableView Delegate
 
-- (void)tableViewSelectionDidChange:(NSNotification *)notification {
+- (void)tableViewSelectionDidChange:(NSNotification *)notification
+{
 	[self updateInterfaceItems];
 }
 
@@ -395,7 +453,6 @@ typedef NS_ENUM(NSUInteger, HomeBrewTab) {
 
 - (void)sourceListSelectionDidChange
 {
-	NSString *message;
 	NSUInteger tabIndex = 0;
 	NSInteger selectedSidebarRow = [self.sidebarController.sidebar selectedRow];
 	
@@ -406,39 +463,33 @@ typedef NS_ENUM(NSUInteger, HomeBrewTab) {
 	
 	[self updateInterfaceItems];
 	
-	switch (selectedSidebarRow) {
+	switch (selectedSidebarRow)
+	{
 		case FormulaeSideBarItemInstalled: // Installed Formulae
 			[self configureTableForListing:kBPListInstalled];
-			message = @"These are the formulae already installed in your system.";
 			break;
 			
 		case FormulaeSideBarItemOutdated: // Outdated Formulae
 			[self configureTableForListing:kBPListOutdated];
-			message = @"These formulae are already installed, but have an update available.";
 			break;
 			
 		case FormulaeSideBarItemAll: // All Formulae
 			[self configureTableForListing:kBPListAll];
-			message = @"These are all the formulae available for installation with Homebrew.";
 			break;
 			
 		case FormulaeSideBarItemLeaves:	// Leaves
 			[self configureTableForListing:kBPListLeaves];
-			message = @"These formulae are not dependencies of any other formulae.";
 			break;
 			
 		case FormulaeSideBarItemRepositories: // Repositories
 			[self configureTableForListing:kBPListRepositories];
-			message = @"These are the repositories you have tapped.";
 			break;
 			
 		case FormulaeSideBarItemDoctor: // Doctor
-			message = @"The doctor is a Homebrew feature that detects the most common causes of errors.";
 			tabIndex = HomeBrewTabDoctor;
 			break;
 			
 		case FormulaeSideBarItemUpdate: // Update Tool
-			message = @"Updating Homebrew means fetching the latest info about the available formulae.";
 			tabIndex = HomeBrewTabUpdate;
 			break;
 			
@@ -446,7 +497,8 @@ typedef NS_ENUM(NSUInteger, HomeBrewTab) {
 			break;
 	}
 	
-	if (message) [self.label_information setStringValue:message];
+	[self updateInfoLabelWithSidebarSelection];
+	
 	[self.tabView selectTabViewItemAtIndex:tabIndex];
 }
 
@@ -477,7 +529,8 @@ typedef NS_ENUM(NSUInteger, HomeBrewTab) {
 				  preferredEdge:NSMaxXEdge];
 }
 
-- (IBAction)installUninstallUpdate:(id)sender {
+- (IBAction)installUninstallUpdate:(id)sender
+{
 	// Check if there is a background task running. It is not smart to run two different Homebrew tasks at the same time!
 	if (_appDelegate.isRunningBackgroundTask)
 	{
@@ -490,7 +543,8 @@ typedef NS_ENUM(NSUInteger, HomeBrewTab) {
 	NSInteger selectedSidebarRow = [self.sidebarController.sidebar selectedRow];
 	BPFormula *formula = [self.formulaeDataSource formulaAtIndex:selectedFormula];
 	
-	if (formula) {
+	if (formula)
+	{
 		NSString *message;
 		void (^operationBlock)(void);
 		
@@ -544,7 +598,8 @@ typedef NS_ENUM(NSUInteger, HomeBrewTab) {
 				break;
 		}
 		
-		if (message) {
+		if (message)
+		{
 			NSAlert *alert = [NSAlert alertWithMessageText:@"Attention!" defaultButton:@"Yes" alternateButton:@"Cancel" otherButton:nil informativeTextWithFormat:message, formula.name];
 			[alert.window setTitle:@"Cakebrew"];
 			
@@ -576,11 +631,13 @@ typedef NS_ENUM(NSUInteger, HomeBrewTab) {
 				BPFormula *lformula = [BPFormula formulaWithName:name];
 				[self prepareFormulae:@[lformula] forOperation:kBPWindowOperationTap withOptions:nil];
 			}
-			else {
+			else
+			{
 				[_appDelegate setRunningBackgroundTask:NO];
 			}
 		}
-		else {
+		else
+		{
 			[_appDelegate setRunningBackgroundTask:NO];
 		}
 	}
@@ -596,14 +653,16 @@ typedef NS_ENUM(NSUInteger, HomeBrewTab) {
 	
 	NSInteger selectedIndex = [self.tableView_formulae selectedRow];
 	BPFormula *formula = [self.formulaeDataSource formulaAtIndex:selectedIndex];
-	if (formula) {
+	if (formula)
+	{
 		self.formulaOptionsWindowController = [BPFormulaOptionsWindowController runFormula:formula withCompletionBlock:^(NSArray *options) {
 			[self prepareFormulae:@[formula] forOperation:kBPWindowOperationInstall withOptions:options];
 		}];
 	}
 }
 
-- (IBAction)upgradeSelectedFormulae:(id)sender {
+- (IBAction)upgradeSelectedFormulae:(id)sender
+{
 	NSMutableString *names = [NSMutableString string];
 	NSIndexSet *indexes = [self.tableView_formulae selectedRowIndexes];
 	NSArray *selectedFormulae = [self.formulaeDataSource formulasAtIndexSet:indexes];
@@ -617,13 +676,15 @@ typedef NS_ENUM(NSUInteger, HomeBrewTab) {
 	
 	NSAlert *alert = [NSAlert alertWithMessageText:@"Attention!" defaultButton:@"Yes" alternateButton:@"Cancel" otherButton:nil informativeTextWithFormat:@"Are you sure you want to upgrade these formulae: '%@'?", names];
 	[alert.window setTitle:@"Cakebrew"];
-	if ([alert runModal] == NSAlertDefaultReturn) {
+	if ([alert runModal] == NSAlertDefaultReturn)
+	{
 		[self prepareFormulae:selectedFormulae forOperation:kBPWindowOperationUpgrade withOptions:nil];
 	}
 }
 
 
-- (IBAction)upgradeAllOutdatedFormulae:(id)sender {
+- (IBAction)upgradeAllOutdatedFormulae:(id)sender
+{
 	NSAlert *alert = [NSAlert alertWithMessageText:@"Attention!" defaultButton:@"Yes" alternateButton:@"Cancel" otherButton:nil informativeTextWithFormat:@"Are you sure you want to upgrade all outdated formulae?"];
 	[alert.window setTitle:@"Cakebrew"];
 	if ([alert runModal] == NSAlertDefaultReturn) {
@@ -637,7 +698,8 @@ typedef NS_ENUM(NSUInteger, HomeBrewTab) {
 	[self.updateViewController runStopUpdate:nil];
 }
 
-- (IBAction)openSelectedFormulaWebsite:(id)sender {
+- (IBAction)openSelectedFormulaWebsite:(id)sender
+{
 	NSInteger selectedIndex = [self.tableView_formulae selectedRow];
 	BPFormula *formula = [self.formulaeDataSource formulaAtIndex:selectedIndex];
 	if (formula) {
@@ -645,13 +707,18 @@ typedef NS_ENUM(NSUInteger, HomeBrewTab) {
 	}
 }
 
-- (IBAction)searchFormulasFieldDidChange:(id)sender {
+- (IBAction)searchFormulasFieldDidChange:(id)sender
+{
 	NSSearchField *searchField = sender;
 	NSString *searchPhrase = searchField.stringValue;
 	
-	if ([searchPhrase isEqualToString:@""]) {
+	if ([searchPhrase isEqualToString:@""])
+	{
 		[self setSearching:NO];
-	} else {
+		[self updateInfoLabelWithSidebarSelection];
+	}
+	else
+	{
 		[[BPHomebrewManager sharedManager] updateSearchWithName:searchPhrase];
 	}
 	
