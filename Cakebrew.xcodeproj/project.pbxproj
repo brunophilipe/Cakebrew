@@ -467,7 +467,7 @@
 			);
 			outputPaths = (
 			);
-			runOnlyForDeploymentPostprocessing = 1;
+			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "/bin/sh \"Cakebrew/BumpBuild.sh\" \"${PROJECT_DIR}/${INFOPLIST_FILE}\"";
 		};
@@ -613,7 +613,7 @@
 				GCC_PREFIX_HEADER = "Cakebrew/Cakebrew-Prefix.pch";
 				GCC_PREPROCESSOR_DEFINITIONS = "$(inherited)";
 				INFOPLIST_FILE = "Cakebrew/Cakebrew-Info.plist";
-				MACOSX_DEPLOYMENT_TARGET = 10.7;
+				MACOSX_DEPLOYMENT_TARGET = 10.8;
 				PRODUCT_NAME = Cakebrew;
 				WRAPPER_EXTENSION = app;
 			};
@@ -632,7 +632,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Cakebrew/Cakebrew-Prefix.pch";
 				INFOPLIST_FILE = "Cakebrew/Cakebrew-Info.plist";
-				MACOSX_DEPLOYMENT_TARGET = 10.7;
+				MACOSX_DEPLOYMENT_TARGET = 10.8;
 				PRODUCT_NAME = Cakebrew;
 				WRAPPER_EXTENSION = app;
 			};
