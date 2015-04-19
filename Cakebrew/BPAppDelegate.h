@@ -46,4 +46,6 @@ extern NSString *const kBP_FORMULA_OPTION_DESCRIPTION;
 
 - (void)displayBackgroundWarning;
 
+- (float)OSXVersion;
+
 @end

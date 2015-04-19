@@ -19,29 +19,32 @@
 
 - (void)awakeFromNib
 {
-  NSFont *font = [NSFont bp_defaultFixedWidthFont];
-  [self.formulaTextView setFont:font];
-  [self.formulaTextView setTextColor:[NSColor blackColor]];
-  [self.formulaPopover setContentViewController:self];
+	NSFont *font = [NSFont bp_defaultFixedWidthFont];
+	[self.formulaTextView setFont:font];
+	[self.formulaTextView setTextColor:[NSColor blackColor]];
+	[self.formulaPopover setContentViewController:self];
 }
 
 - (void)setFormula:(BPFormula *)formula
 {
-  _formula = formula;
-  NSString *string = [[BPHomebrewInterface sharedInterface] informationForFormula:[_formula performSelector:@selector(name)]];
-  if (string) {
-    [self.formulaTextView setString:string];
-    [self.formulaTitleLabel setStringValue:[NSString stringWithFormat:@"Information for Formula: %@", [_formula performSelector:@selector(name)]]];
-    [self.formulaTitleLabel setTextColor:[NSColor blackColor]];
-  } else {
-    [self.formulaTextView setString:@"Error retrieving Formula information"];
-  }
-  
+	_formula = formula;
+	NSString *string = [[BPHomebrewInterface sharedInterface] informationForFormula:[_formula performSelector:@selector(name)]];
+	if (string) {
+		[self.formulaTextView setString:string];
+		[self.formulaTitleLabel setStringValue:[NSString stringWithFormat:NSLocalizedString(@"Formula_Popover_Title", nil), [_formula performSelector:@selector(name)]]];
+	} else {
+		[self.formulaTextView setString:NSLocalizedString(@"Formula_Popover_Error", nil)];
+	}
+	
+	float OSXVersion = [BPAppDelegateRef OSXVersion];
+	
+	[self.formulaTitleLabel setTextColor:(OSXVersion >= 10.10 ? [NSColor blackColor] : [NSColor whiteColor])];
+	[self.formulaTextView   setTextColor:(OSXVersion >= 10.10 ? [NSColor blackColor] : [NSColor whiteColor])];
 }
 
 - (NSString *)nibName
 {
-  return @"BPFormulaPopoverView";
+	return @"BPFormulaPopoverView";
 }
 
 @end
