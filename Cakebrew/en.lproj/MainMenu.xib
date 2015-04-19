@@ -602,7 +602,7 @@ CA
                                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                     <subviews>
                                                                         <imageView translatesAutoresizingMaskIntoConstraints="NO" id="rod-fH-u2L">
-                                                                            <rect key="frame" x="3" y="0.0" width="17" height="17"/>
+                                                                            <rect key="frame" x="3" y="1" width="17" height="14"/>
                                                                             <constraints>
                                                                                 <constraint firstAttribute="width" constant="17" id="51M-wS-fP1"/>
                                                                             </constraints>
@@ -631,10 +631,9 @@ CA
                                                                         <constraint firstItem="UGv-FF-mH4" firstAttribute="centerY" secondItem="NjY-GN-l2W" secondAttribute="centerY" id="HDo-6S-nEU"/>
                                                                         <constraint firstItem="NPs-Sj-pMf" firstAttribute="leading" secondItem="UGv-FF-mH4" secondAttribute="trailing" constant="8" id="PNr-vv-HuL"/>
                                                                         <constraint firstAttribute="trailing" secondItem="NPs-Sj-pMf" secondAttribute="trailing" constant="4" id="deY-JF-So7"/>
-                                                                        <constraint firstItem="UGv-FF-mH4" firstAttribute="bottom" secondItem="rod-fH-u2L" secondAttribute="bottom" id="esB-n4-tea"/>
                                                                         <constraint firstItem="UGv-FF-mH4" firstAttribute="leading" secondItem="rod-fH-u2L" secondAttribute="trailing" constant="7" id="nvX-qK-xNx"/>
                                                                         <constraint firstItem="rod-fH-u2L" firstAttribute="leading" secondItem="NjY-GN-l2W" secondAttribute="leading" constant="3" id="psC-pY-A2P"/>
-                                                                        <constraint firstItem="rod-fH-u2L" firstAttribute="top" secondItem="UGv-FF-mH4" secondAttribute="top" id="s2B-gv-OLx"/>
+                                                                        <constraint firstAttribute="centerY" secondItem="rod-fH-u2L" secondAttribute="centerY" constant="-1" id="wB2-cl-RQf"/>
                                                                     </constraints>
                                                                     <connections>
                                                                         <outlet property="badgeView" destination="NPs-Sj-pMf" id="gfz-Xa-rJt"/>
