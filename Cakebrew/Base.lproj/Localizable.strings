@@ -30,7 +30,7 @@
 
 "Confirmation_Install_Formula" = "Are you sure you want to install the formula '%@'?";
 "Confirmation_Uninstall_Formula" = "Are you sure you want to uninstall the formula '%@'?";
-"Confirmation_Update_Formula" = "Are you sure you want to update the selected formuale?";
+"Confirmation_Update_Formula" = "Are you sure you want to update the selected formulae?";
 "Confirmation_Tap_Repo" = "Are you sure you want to tap the repository '%@'?";
 "Confirmation_Untap_Repo" = "Are you sure you want to untap the repository '%@'?";
 
