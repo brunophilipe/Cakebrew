@@ -141,37 +141,17 @@ typedef NS_ENUM(NSUInteger, HomeBrewTab) {
 	[self.selectedFormulaView addSubview:selectedFormulaView];
 	selectedFormulaView.translatesAutoresizingMaskIntoConstraints = NO;
 	
-	[self.selectedFormulaView addConstraint:[NSLayoutConstraint constraintWithItem:selectedFormulaView
-																		 attribute:NSLayoutAttributeTop
-																		 relatedBy:NSLayoutRelationEqual
-																			toItem:self.selectedFormulaView
-																		 attribute:NSLayoutAttributeTop
-																		multiplier:1.0f
-																		  constant:0.0f]];
+	[self.selectedFormulaView addConstraints:[NSLayoutConstraint
+											  constraintsWithVisualFormat:@"V:|-0-[view]-0-|"
+											  options:0
+											  metrics:nil
+											  views:@{@"view": selectedFormulaView}]];
 	
-	[self.selectedFormulaView addConstraint:[NSLayoutConstraint constraintWithItem:selectedFormulaView
-																		 attribute:NSLayoutAttributeLeft
-																		 relatedBy:NSLayoutRelationEqual
-																			toItem:self.selectedFormulaView
-																		 attribute:NSLayoutAttributeLeft
-																		multiplier:1.0f
-																		  constant:0.0f]];
-	
-	[self.selectedFormulaView addConstraint:[NSLayoutConstraint constraintWithItem:selectedFormulaView
-																		 attribute:NSLayoutAttributeBottom
-																		 relatedBy:NSLayoutRelationEqual
-																			toItem:self.selectedFormulaView
-																		 attribute:NSLayoutAttributeBottom
-																		multiplier:1.0f
-																		  constant:0.0f]];
-	
-	[self.selectedFormulaView addConstraint:[NSLayoutConstraint constraintWithItem:selectedFormulaView
-																		 attribute:NSLayoutAttributeRight
-																		 relatedBy:NSLayoutRelationEqual
-																			toItem:self.selectedFormulaView
-																		 attribute:NSLayoutAttributeRight
-																		multiplier:1.0f
-																		  constant:0.0f]];
+	[self.selectedFormulaView addConstraints:[NSLayoutConstraint
+											  constraintsWithVisualFormat:@"H:|-0-[view]-0-|"
+											  options:0
+											  metrics:nil
+											  views:@{@"view": selectedFormulaView}]];
 	
 	
 	[self.splitView setMinSize:185.f ofSubviewAtIndex:0];
