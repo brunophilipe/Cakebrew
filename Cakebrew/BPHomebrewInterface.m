@@ -155,7 +155,11 @@ static NSString *cakebrewOutputIdentifier = @"+++++Cakebrew+++++";
 	{
 		static NSAlert *alert = nil;
 		if (!alert)
-			alert = [NSAlert alertWithMessageText:@"No Valid shell was found!" defaultButton:@"OK" alternateButton:nil otherButton:nil informativeTextWithFormat:@"Please add your shell \"%@\" to the valid shells file at \"/etc/shells\" before trying again.", userShell];
+			alert = [NSAlert alertWithMessageText:NSLocalizedString(@"Message_Shell_Invalid_Title", nil)
+									defaultButton:NSLocalizedString(@"Generic_OK", nil)
+								  alternateButton:nil
+									  otherButton:nil
+						informativeTextWithFormat:NSLocalizedString(@"Message_Shell_Invalid_Body", nil), userShell];
 		[alert performSelectorOnMainThread:@selector(runModal) withObject:nil waitUntilDone:YES];
 		
 		NSLog(@"No valid shell found...");
@@ -213,7 +217,7 @@ static NSString *cakebrewOutputIdentifier = @"+++++Cakebrew+++++";
 
 - (BOOL)performBrewCommandWithArguments:(NSArray*)arguments dataReturnBlock:(void (^)(NSString*))block
 {
-	static NSString *taskDoneString = @"Task finished at %@!";
+	NSString *taskDoneString = NSLocalizedString(@"Homebrew_Task_Finished", nil);
 	
 	arguments = [self formatArguments:arguments sendOutputId:NO];
 	
@@ -223,7 +227,7 @@ static NSString *cakebrewOutputIdentifier = @"+++++Cakebrew+++++";
 	
 	id activity;
 	if (self.systemHasAppNap)
-		activity = [[NSProcessInfo processInfo] beginActivityWithOptions:NSActivityUserInitiated reason:@"running homebrew task"];
+		activity = [[NSProcessInfo processInfo] beginActivityWithOptions:NSActivityUserInitiated reason:NSLocalizedString(@"Homebrew_AppNap_Task_Reason", nil)];
 	
 	self.task = [[NSTask alloc] init];
 	
@@ -282,7 +286,7 @@ static NSString *cakebrewOutputIdentifier = @"+++++Cakebrew+++++";
 	
 	id activity;
 	if (self.systemHasAppNap)
-		activity = [[NSProcessInfo processInfo] beginActivityWithOptions:NSActivityUserInitiated reason:@"running homebrew task"];
+		activity = [[NSProcessInfo processInfo] beginActivityWithOptions:NSActivityUserInitiated reason:NSLocalizedString(@"Homebrew_AppNap_Task_Reason", nil)];
 	
 	self.task = [[NSTask alloc] init];
 	

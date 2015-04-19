@@ -40,13 +40,17 @@
 
 @implementation BPInstallationWindowController
 
-- (void)awakeFromNib {
+- (void)awakeFromNib
+{
 	[self setupUI];
 }
 
-- (void)setupUI {
+- (void)setupUI
+{
 	static NSDictionary *mappingMessage = nil;
-	if(!mappingMessage) {
+	
+	if(!mappingMessage)
+	{
 		mappingMessage = @{
 						   @(kBPWindowOperationInstall) : @"Installing Formula:",
 						   @(kBPWindowOperationUninstall) : @"Uninstalling Formula:",

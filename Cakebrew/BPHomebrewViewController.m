@@ -229,11 +229,11 @@ typedef NS_ENUM(NSUInteger, HomeBrewTab) {
 		
 		if (selectedIndex != -1) {
 			[self.toolbarButton_installUninstall setImage:[NSImage imageNamed:@"delete.icns"]];
-			[self.toolbarButton_installUninstall setLabel:@"Untap Repository"];
+			[self.toolbarButton_installUninstall setLabel:NSLocalizedString(@"Toolbar_Untap_Repo", nil)];
 			[self setToolbarButtonOperation:kBPWindowOperationUntap];
 		} else {
 			[self.toolbarButton_installUninstall setImage:[NSImage imageNamed:@"download.icns"]];
-			[self.toolbarButton_installUninstall setLabel:@"Tap Repository"];
+			[self.toolbarButton_installUninstall setLabel:NSLocalizedString(@"Toolbar_Tap_Repo", nil)];
 			[self setToolbarButtonOperation:kBPWindowOperationTap];
 		}
 	}
@@ -245,7 +245,7 @@ typedef NS_ENUM(NSUInteger, HomeBrewTab) {
 	else if ([[self.tableView_formulae selectedRowIndexes] count] > 1)
 	{
 		[self.toolbarButton_installUninstall setImage:[NSImage imageNamed:@"reload.icns"]];
-		[self.toolbarButton_installUninstall setLabel:@"Update Selected"];
+		[self.toolbarButton_installUninstall setLabel:NSLocalizedString(@"Toolbar_Update_Selected", nil)];
 		[self setToolbarButtonOperation:kBPWindowOperationUpgrade];
 	}
 	else
@@ -258,25 +258,25 @@ typedef NS_ENUM(NSUInteger, HomeBrewTab) {
 		switch ([[BPHomebrewManager sharedManager] statusForFormula:formula]) {
 			case kBPFormulaInstalled:
 				[self.toolbarButton_installUninstall setImage:[NSImage imageNamed:@"delete.icns"]];
-				[self.toolbarButton_installUninstall setLabel:@"Uninstall Formula"];
+				[self.toolbarButton_installUninstall setLabel:NSLocalizedString(@"Toolbar_Uninstall_Formula", nil)];
 				[self setToolbarButtonOperation:kBPWindowOperationUninstall];
 				break;
 				
 			case kBPFormulaOutdated:
 				if (selectedSidebarRow == FormulaeSideBarItemOutdated) {
 					[self.toolbarButton_installUninstall setImage:[NSImage imageNamed:@"reload.icns"]];
-					[self.toolbarButton_installUninstall setLabel:@"Update Formula"];
+					[self.toolbarButton_installUninstall setLabel:NSLocalizedString(@"Toolbar_Update_Formula", nil)];
 					[self setToolbarButtonOperation:kBPWindowOperationUpgrade];
 				} else {
 					[self.toolbarButton_installUninstall setImage:[NSImage imageNamed:@"delete.icns"]];
-					[self.toolbarButton_installUninstall setLabel:@"Uninstall Formula"];
+					[self.toolbarButton_installUninstall setLabel:NSLocalizedString(@"Toolbar_Uninstall_Formula", nil)];
 					[self setToolbarButtonOperation:kBPWindowOperationUninstall];
 				}
 				break;
 				
 			case kBPFormulaNotInstalled:
 				[self.toolbarButton_installUninstall setImage:[NSImage imageNamed:@"download.icns"]];
-				[self.toolbarButton_installUninstall setLabel:@"Install Formula"];
+				[self.toolbarButton_installUninstall setLabel:NSLocalizedString(@"Toolbar_Install_Formula", nil)];
 				[self setToolbarButtonOperation:kBPWindowOperationInstall];
 				break;
 		}
@@ -311,31 +311,31 @@ typedef NS_ENUM(NSUInteger, HomeBrewTab) {
 	switch (selectedSidebarRow)
 	{
 		case FormulaeSideBarItemInstalled: // Installed Formulae
-			message = @"These are the formulae already installed in your system.";
+			message = NSLocalizedString(@"Sidebar_Info_Installed", nil);
 			break;
 			
 		case FormulaeSideBarItemOutdated: // Outdated Formulae
-			message = @"These formulae are already installed, but have an update available.";
+			message = NSLocalizedString(@"Sidebar_Info_Outdated", nil);
 			break;
 			
 		case FormulaeSideBarItemAll: // All Formulae
-			message = @"These are all the formulae available for installation with Homebrew.";
+			message = NSLocalizedString(@"Sidebar_Info_All", nil);
 			break;
 			
 		case FormulaeSideBarItemLeaves:	// Leaves
-			message = @"These formulae are not dependencies of any other formulae.";
+			message = NSLocalizedString(@"Sidebar_Info_Leaves", nil);
 			break;
 			
 		case FormulaeSideBarItemRepositories: // Repositories
-			message = @"These are the repositories you have tapped.";
+			message = NSLocalizedString(@"Sidebar_Info_Repos", nil);
 			break;
 			
 		case FormulaeSideBarItemDoctor: // Doctor
-			message = @"The doctor is a Homebrew feature that detects the most common causes of errors.";
+			message = NSLocalizedString(@"Sidebar_Info_Doctor", nil);
 			break;
 			
 		case FormulaeSideBarItemUpdate: // Update Tool
-			message = @"Updating Homebrew means fetching the latest info about the available formulae.";
+			message = NSLocalizedString(@"Sidebar_Info_Update", nil);
 			break;
 			
 		default:
@@ -344,7 +344,7 @@ typedef NS_ENUM(NSUInteger, HomeBrewTab) {
 	
 	if (self.isSearching)
 	{
-		message = @"These are the results of your search.";
+		message = NSLocalizedString(@"Sidebar_Info_SearchResults", nil);
 	}
 	
 	[self updateInfoLabelWithText:message];
@@ -413,20 +413,26 @@ typedef NS_ENUM(NSUInteger, HomeBrewTab) {
 		
 		[self setToolbarItemsEnabled:NO];
 		
-		NSAlert *alert = [NSAlert alertWithMessageText:@"Error!" defaultButton:@"Homebrew Website" alternateButton:@"Cancel" otherButton:nil informativeTextWithFormat:@"Homebrew was not found in your system. Please install Homebrew before using Cakebrew. You can click the button below to open Homebrew's website."];
+		NSAlert *alert = [NSAlert alertWithMessageText:NSLocalizedString(@"Generic_Error", nil)
+										 defaultButton:NSLocalizedString(@"Message_No_Homebrew_Title", nil)
+									   alternateButton:NSLocalizedString(@"Generic_Cancel", nil)
+										   otherButton:nil
+							 informativeTextWithFormat:NSLocalizedString(@"Message_No_Homebrew_Body", nil)];
 		
-		[alert.window setTitle:@"Cakebrew"];
+		[alert.window setTitle:NSLocalizedString(@"Cakebrew", nil)];
+		
+		NSURL *brew_URL = [NSURL URLWithString:@"http://brew.sh"];
 		
 		if ([alert respondsToSelector:@selector(beginSheetModalForWindow:completionHandler:)]) {
 			[alert beginSheetModalForWindow:_appDelegate.window completionHandler:^(NSModalResponse returnCode) {
 				if (returnCode == NSAlertDefaultReturn) {
-					[[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:@"http://brew.sh"]];
+					[[NSWorkspace sharedWorkspace] openURL:brew_URL];
 				}
 			}];
 		} else {
 			NSModalResponse returnCode = [alert runModal];
 			if (returnCode == NSAlertDefaultReturn) {
-				[[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:@"http://brew.sh"]];
+				[[NSWorkspace sharedWorkspace] openURL:brew_URL];
 			}
 		}
 	}
@@ -551,7 +557,7 @@ typedef NS_ENUM(NSUInteger, HomeBrewTab) {
 		switch (_toolbarButtonOperation) {
 			case kBPWindowOperationInstall:
 			{
-				message = @"Are you sure you want to install the formula '%@'?";
+				message = NSLocalizedString(@"Confirmation_Install_Formula", nil);
 				operationBlock = ^{
 					[self prepareFormulae:@[formula] forOperation:kBPWindowOperationInstall withOptions:nil];
 				};
@@ -560,7 +566,7 @@ typedef NS_ENUM(NSUInteger, HomeBrewTab) {
 				
 			case kBPWindowOperationUninstall:
 			{
-				message = @"Are you sure you want to uninstall the formula '%@'?";
+				message = NSLocalizedString(@"Confirmation_Uninstall_Formula", nil);
 				operationBlock = ^{
 					[self prepareFormulae:@[formula] forOperation:kBPWindowOperationUninstall withOptions:nil];
 				};
@@ -569,7 +575,7 @@ typedef NS_ENUM(NSUInteger, HomeBrewTab) {
 				
 			case kBPWindowOperationUpgrade:
 			{
-				message = @"Are you sure you want to upgrade the selected formuale?";
+				message = NSLocalizedString(@"Confirmation_Update_Formula", nil);
 				NSIndexSet *indexes = [self.tableView_formulae selectedRowIndexes];
 				NSArray *formulae = [self.formulaeDataSource formulasAtIndexSet:indexes];
 				
@@ -581,7 +587,7 @@ typedef NS_ENUM(NSUInteger, HomeBrewTab) {
 				
 			case kBPWindowOperationUntap:
 			{
-				message = @"Are you sure you want to untap the repository '%@'?";
+				message = NSLocalizedString(@"Confirmation_Untap_Repo", nil);
 				operationBlock = ^{
 					[self prepareFormulae:@[formula] forOperation:kBPWindowOperationUntap withOptions:nil];
 				};
@@ -590,7 +596,7 @@ typedef NS_ENUM(NSUInteger, HomeBrewTab) {
 				
 			case kBPWindowOperationTap:
 			{
-				message = @"Are you sure you want to tap the repository '%@'?";
+				message = NSLocalizedString(@"Confirmation_Tap_Repo", nil);
 				operationBlock = ^{
 					[self prepareFormulae:@[formula] forOperation:kBPWindowOperationTap withOptions:nil];
 				};
@@ -600,8 +606,13 @@ typedef NS_ENUM(NSUInteger, HomeBrewTab) {
 		
 		if (message)
 		{
-			NSAlert *alert = [NSAlert alertWithMessageText:@"Attention!" defaultButton:@"Yes" alternateButton:@"Cancel" otherButton:nil informativeTextWithFormat:message, formula.name];
-			[alert.window setTitle:@"Cakebrew"];
+			NSAlert *alert = [NSAlert alertWithMessageText:NSLocalizedString(@"Generic_Attention", nil)
+											 defaultButton:NSLocalizedString(@"Generic_Yes", nil)
+										   alternateButton:NSLocalizedString(@"Generic_Cancel", nil)
+											   otherButton:nil
+								 informativeTextWithFormat:message, formula.name];
+			
+			[alert.window setTitle:NSLocalizedString(@"Cakebrew", nil)];
 			
 			NSInteger returnValue = [alert runModal];
 			if (returnValue == NSAlertDefaultReturn) {
@@ -616,15 +627,21 @@ typedef NS_ENUM(NSUInteger, HomeBrewTab) {
 	}
 	else if (selectedSidebarRow == FormulaeSideBarItemRepositories && _toolbarButtonOperation == kBPWindowOperationTap)
 	{
-		NSAlert *alert = [NSAlert alertWithMessageText:@"Attention!" defaultButton:@"OK" alternateButton:@"Cancel" otherButton:nil informativeTextWithFormat:@"What repository would you like to tap?"];
-		[alert.window setTitle:@"Cakebrew"];
+		NSAlert *alert = [NSAlert alertWithMessageText:NSLocalizedString(@"Message_Tap_Title", nil)
+										 defaultButton:NSLocalizedString(@"Generic_OK", nil)
+									   alternateButton:NSLocalizedString(@"Generic_Cancel", nil)
+										   otherButton:nil
+							 informativeTextWithFormat:NSLocalizedString(@"Message_Tap_Body", nil)];
+		
+		[alert.window setTitle:NSLocalizedString(@"Cakebrew", nil)];
 		
 		NSTextField *input = [[NSTextField alloc] initWithFrame:NSMakeRect(0,0,200,24)];
 		[input setStringValue:@""];
 		[alert setAccessoryView:input];
 		
 		NSInteger returnValue = [alert runModal];
-		if (returnValue == NSAlertDefaultReturn) {
+		if (returnValue == NSAlertDefaultReturn)
+		{
 			NSString* name = [input stringValue];
 			if ([name length] > 0)
 			{
@@ -674,8 +691,13 @@ typedef NS_ENUM(NSUInteger, HomeBrewTab) {
 		}
 	}];
 	
-	NSAlert *alert = [NSAlert alertWithMessageText:@"Attention!" defaultButton:@"Yes" alternateButton:@"Cancel" otherButton:nil informativeTextWithFormat:@"Are you sure you want to upgrade these formulae: '%@'?", names];
-	[alert.window setTitle:@"Cakebrew"];
+	NSAlert *alert = [NSAlert alertWithMessageText:NSLocalizedString(@"Message_Update_Formulae_Title", nil)
+									 defaultButton:NSLocalizedString(@"Generic_Yes", nil)
+								   alternateButton:NSLocalizedString(@"Generic_Cancel", nil)
+									   otherButton:nil
+						 informativeTextWithFormat:NSLocalizedString(@"Message_Update_Formulae_Body", nil), names];
+	
+	[alert.window setTitle:NSLocalizedString(@"Cakebrew", nil)];
 	if ([alert runModal] == NSAlertDefaultReturn)
 	{
 		[self prepareFormulae:selectedFormulae forOperation:kBPWindowOperationUpgrade withOptions:nil];
@@ -685,8 +707,14 @@ typedef NS_ENUM(NSUInteger, HomeBrewTab) {
 
 - (IBAction)upgradeAllOutdatedFormulae:(id)sender
 {
-	NSAlert *alert = [NSAlert alertWithMessageText:@"Attention!" defaultButton:@"Yes" alternateButton:@"Cancel" otherButton:nil informativeTextWithFormat:@"Are you sure you want to upgrade all outdated formulae?"];
-	[alert.window setTitle:@"Cakebrew"];
+	NSAlert *alert = [NSAlert alertWithMessageText:NSLocalizedString(@"Message_Update_All_Outdated_Title", nil)
+									 defaultButton:NSLocalizedString(@"Generic_Yes", nil)
+								   alternateButton:NSLocalizedString(@"Generic_Cancel", nil)
+									   otherButton:nil
+						 informativeTextWithFormat:NSLocalizedString(@"Message_Update_All_Outdated_Body", nil)];
+
+	[alert.window setTitle:NSLocalizedString(@"Cakebrew", nil)];
+	
 	if ([alert runModal] == NSAlertDefaultReturn) {
 		[self prepareFormulae:nil forOperation:kBPWindowOperationUpgrade withOptions:nil];
 	}

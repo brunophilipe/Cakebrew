@@ -122,13 +122,13 @@
 			if ([element isKindOfClass:[BPFormula class]]) {
 				switch ([[BPHomebrewManager sharedManager] statusForFormula:element]) {
 					case kBPFormulaInstalled:
-						return @"Installed";
+						return NSLocalizedString(@"Formula_Status_Installed", nil);
             
 					case kBPFormulaNotInstalled:
-						return @"Not Installed";
+						return NSLocalizedString(@"Formula_Status_Not_Installed", nil);
             
 					case kBPFormulaOutdated:
-						return @"Update Available";
+						return NSLocalizedString(@"Formula_Status_Outdated", nil);
             
 					default:
 						return @"";

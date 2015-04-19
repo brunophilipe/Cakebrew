@@ -28,6 +28,7 @@
 		15D28A231AE332F9005C8A3E /* BPPreferencesWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 15D28A251AE332F9005C8A3E /* BPPreferencesWindow.xib */; };
 		15D28A261AE332FD005C8A3E /* BPSelectedFormula.xib in Resources */ = {isa = PBXBuildFile; fileRef = 15D28A281AE332FD005C8A3E /* BPSelectedFormula.xib */; };
 		15D28A291AE33301005C8A3E /* BPUpdateView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 15D28A2B1AE33301005C8A3E /* BPUpdateView.xib */; };
+		15D28A2E1AE33453005C8A3E /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 15D28A301AE33453005C8A3E /* Localizable.strings */; };
 		15D2CFA218F1E71800B6D9F1 /* reload.icns in Resources */ = {isa = PBXBuildFile; fileRef = 15D2CFA118F1E71800B6D9F1 /* reload.icns */; };
 		15D2CFA418F1EAD200B6D9F1 /* globe.icns in Resources */ = {isa = PBXBuildFile; fileRef = 15D2CFA318F1EAD200B6D9F1 /* globe.icns */; };
 		15D2CFAB18F202B300B6D9F1 /* DCOAboutWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 15D2CFA918F202B300B6D9F1 /* DCOAboutWindowController.m */; };
@@ -101,6 +102,7 @@
 		15D28A241AE332F9005C8A3E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/BPPreferencesWindow.xib; sourceTree = "<group>"; };
 		15D28A271AE332FD005C8A3E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/BPSelectedFormula.xib; sourceTree = "<group>"; };
 		15D28A2A1AE33301005C8A3E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/BPUpdateView.xib; sourceTree = "<group>"; };
+		15D28A2F1AE33453005C8A3E /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Localizable.strings; sourceTree = "<group>"; };
 		15D2CFA118F1E71800B6D9F1 /* reload.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = reload.icns; sourceTree = "<group>"; };
 		15D2CFA318F1EAD200B6D9F1 /* globe.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = globe.icns; sourceTree = "<group>"; };
 		15D2CFA818F202B300B6D9F1 /* DCOAboutWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DCOAboutWindowController.h; sourceTree = "<group>"; };
@@ -351,6 +353,7 @@
 		1FE4FE5F148E4CDD008EDE8B /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				15D28A301AE33453005C8A3E /* Localizable.strings */,
 				15B23A2B18F5003600714212 /* dsa_pub.pem */,
 				15D2CFB918F20A8200B6D9F1 /* LICENSE */,
 				15D2CFB718F206DF00B6D9F1 /* README.md */,
@@ -443,6 +446,7 @@
 				15D5BEF518EBB430001DDED7 /* search.icns in Resources */,
 				15D28A261AE332FD005C8A3E /* BPSelectedFormula.xib in Resources */,
 				15D2CFA218F1E71800B6D9F1 /* reload.icns in Resources */,
+				15D28A2E1AE33453005C8A3E /* Localizable.strings in Resources */,
 				1540FA3518ECF66B00334A5C /* download.icns in Resources */,
 				15D5BEF118EBB3FB001DDED7 /* delete.icns in Resources */,
 				1536BFF718EBA92400B67C5C /* Images.xcassets in Resources */,
@@ -570,6 +574,14 @@
 				15D28A2A1AE33301005C8A3E /* Base */,
 			);
 			name = BPUpdateView.xib;
+			sourceTree = "<group>";
+		};
+		15D28A301AE33453005C8A3E /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				15D28A2F1AE33453005C8A3E /* Base */,
+			);
+			name = Localizable.strings;
 			sourceTree = "<group>";
 		};
 		1FE4FE61148E4CDD008EDE8B /* InfoPlist.strings */ = {

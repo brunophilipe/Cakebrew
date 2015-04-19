@@ -124,7 +124,11 @@ NSString *const kBP_FORMULA_OPTION_DESCRIPTION = @"BP_FORMULA_OPTION_DESCRIPTION
 {
 	static NSAlert *alert= nil;
 	if (!alert)
-		alert = [NSAlert alertWithMessageText:@"Active background task!" defaultButton:@"OK" alternateButton:nil otherButton:nil informativeTextWithFormat:@"Sorry, a background task is already running. You can't perform two tasks at the same time."];
+		alert = [NSAlert alertWithMessageText:NSLocalizedString(@"Message_BGTask_Title", nil)
+								defaultButton:NSLocalizedString(@"Generic_OK", nil)
+							  alternateButton:nil
+								  otherButton:nil
+					informativeTextWithFormat:NSLocalizedString(@"Message_BGTask_Body", nil)];
 
 	[alert runModal];
 }
