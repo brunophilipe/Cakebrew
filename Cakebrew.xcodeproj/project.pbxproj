@@ -103,6 +103,8 @@
 		15D28A271AE332FD005C8A3E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/BPSelectedFormula.xib; sourceTree = "<group>"; };
 		15D28A2A1AE33301005C8A3E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/BPUpdateView.xib; sourceTree = "<group>"; };
 		15D28A2F1AE33453005C8A3E /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Localizable.strings; sourceTree = "<group>"; };
+		15D28A311AE342BD005C8A3E /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		15D28A321AE342C6005C8A3E /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; name = Base; path = Base.lproj/Credits.rtf; sourceTree = "<group>"; };
 		15D2CFA118F1E71800B6D9F1 /* reload.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = reload.icns; sourceTree = "<group>"; };
 		15D2CFA318F1EAD200B6D9F1 /* globe.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = globe.icns; sourceTree = "<group>"; };
 		15D2CFA818F202B300B6D9F1 /* DCOAboutWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DCOAboutWindowController.h; sourceTree = "<group>"; };
@@ -122,10 +124,8 @@
 		1FE4FE5C148E4CDD008EDE8B /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		1FE4FE5D148E4CDD008EDE8B /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		1FE4FE60148E4CDD008EDE8B /* Cakebrew-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Cakebrew-Info.plist"; sourceTree = "<group>"; };
-		1FE4FE62148E4CDD008EDE8B /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		1FE4FE64148E4CDD008EDE8B /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		1FE4FE66148E4CDD008EDE8B /* Cakebrew-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Cakebrew-Prefix.pch"; sourceTree = "<group>"; };
-		1FE4FE68148E4CDD008EDE8B /* en */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; name = en; path = en.lproj/Credits.rtf; sourceTree = "<group>"; };
 		1FE4FE6A148E4CDD008EDE8B /* BPAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BPAppDelegate.h; sourceTree = "<group>"; };
 		1FE4FE6B148E4CDD008EDE8B /* BPAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BPAppDelegate.m; sourceTree = "<group>"; };
 		1FE4FE75148E4D43008EDE8B /* BPHomebrewInterface.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BPHomebrewInterface.h; sourceTree = "<group>"; };
@@ -587,7 +587,7 @@
 		1FE4FE61148E4CDD008EDE8B /* InfoPlist.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
-				1FE4FE62148E4CDD008EDE8B /* en */,
+				15D28A311AE342BD005C8A3E /* Base */,
 			);
 			name = InfoPlist.strings;
 			sourceTree = "<group>";
@@ -595,7 +595,7 @@
 		1FE4FE67148E4CDD008EDE8B /* Credits.rtf */ = {
 			isa = PBXVariantGroup;
 			children = (
-				1FE4FE68148E4CDD008EDE8B /* en */,
+				15D28A321AE342C6005C8A3E /* Base */,
 			);
 			name = Credits.rtf;
 			sourceTree = "<group>";
