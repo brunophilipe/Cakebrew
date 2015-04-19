@@ -52,9 +52,9 @@
 	if(!mappingMessage)
 	{
 		mappingMessage = @{
-						   @(kBPWindowOperationInstall) : @"Installing Formula:",
-						   @(kBPWindowOperationUninstall) : @"Uninstalling Formula:",
-						   @(kBPWindowOperationUpgrade) : @"Upgrading Formula:",
+						   @(kBPWindowOperationInstall) : NSLocalizedString(@"Installation_Window_Operation_Install", nil),
+						   @(kBPWindowOperationUninstall) : NSLocalizedString(@"Installation_Window_Operation_Uninstall", nil),
+						   @(kBPWindowOperationUpgrade) : NSLocalizedString(@"Installation_Window_Operation_Update", nil),
 						   };
 	}
 
@@ -70,7 +70,7 @@
 		NSString *formulaeNames = [[self namesOfAllFormulae] componentsJoinedByString:@", "];
 		self.formulaNameLabel.stringValue = formulaeNames;
 	} else {
-		self.formulaNameLabel.stringValue = @"All Outdated Formulae";
+		self.formulaNameLabel.stringValue = NSLocalizedString(@"Installation_Window_All_Formulae", nil);
 	}
 }
 

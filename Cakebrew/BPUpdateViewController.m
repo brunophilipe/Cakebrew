@@ -46,8 +46,6 @@
 - (IBAction)runStopUpdate:(id)sender {
 	BPAppDelegate *appDelegate = BPAppDelegateRef;
 	
-	NSLog(@"Starting Update Process...");
-	
 	if (appDelegate.isRunningBackgroundTask)
 	{
 		[appDelegate displayBackgroundWarning];
@@ -60,20 +58,16 @@
 	[self.progressIndicator startAnimation:sender];
 	
 	dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
-		NSLog(@"Updating...");
 		[[BPHomebrewInterface sharedInterface] updateWithReturnBlock:^(NSString *output) {
-			NSLog(@"Got feedback from shell!");
 			[self.updateTextView performSelectorOnMainThread:@selector(setString:)
 												  withObject:[self.updateTextView.string stringByAppendingString:output]
 											   waitUntilDone:YES];
 		}];
-		NSLog(@"Setting up finalization task callback...");
+
 		dispatch_async(dispatch_get_main_queue(), ^{
-			NSLog(@"Finalization callback called!");
 			[self.progressIndicator stopAnimation:sender];
 			self.isPerformingUpdate = NO;
 			[appDelegate setRunningBackgroundTask:NO];
-			NSLog(@"Update Process Finished!");
 		});
 	});
 }

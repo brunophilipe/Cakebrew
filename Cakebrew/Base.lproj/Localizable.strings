@@ -48,7 +48,7 @@
 "Formula_Popover_Error" = "Error retrieving Formula information";
 
 "Homebrew_Task_Finished" = "Task finished at %@!";
-"Homebrew_AppNap_Task_Reaso`n" = "Running Homebrew task";
+"Homebrew_AppNap_Task_Reason" = "Running Homebrew task";
 
 "Toolbar_Install_Formula" = "Install Formula";
 "Toolbar_Uninstall_Formula" = "Uninstall Formula";
@@ -65,3 +65,42 @@
 "Sidebar_Info_Doctor" = "The doctor is a Homebrew feature that detects the most common causes of errors.";
 "Sidebar_Info_Update" = "Updating Homebrew means fetching the latest info about the available formulae.";
 "Sidebar_Info_SearchResults" = "These are the results of your search.";
+
+"Installation_Window_Operation_Install" = "Installing Formula:";
+"Installation_Window_Operation_Uninstall" = "Uninstalling Formula:";
+"Installation_Window_Operation_Update" = "Updating Formula:";
+"Installation_Window_All_Formulae" = "All Outdated Formulae";
+
+"Info_View_Multiple_Values" = "Multiple Values";
+"Info_View_Formula_Not_Installed" = "Formula Not Installed.";
+"Info_View_Formula_No_Dependencies" = "This formula has no dependencies!";
+"Info_View_Formula_No_Conflicts" = "This formula has no known conflicts.";
+
+"Sidebar_Group_Formulae" = "Formulae";
+"Sidebar_Group_Tools" = "Tools";
+
+"Sidebar_Item_Installed" = "Installed";
+"Sidebar_Item_Outdated" = "Outdated";
+"Sidebar_Item_All" = "All Formulae";
+"Sidebar_Item_Leaves" = "Leaves";
+"Sidebar_Item_Repos" = "Repositories";
+"Sidebar_Item_Doctor" = "Doctor";
+"Sidebar_Item_Update" = "Update";
+
+"Sidebar_VoiceOver_Tools" = "Tools";
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

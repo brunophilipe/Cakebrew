@@ -61,7 +61,8 @@
 - (void)displayInformationForFormulae
 {
 	static NSString *emptyString = @"--";
-	static NSString *multipleString = @"Multiple values";
+	
+	NSString *multipleString = NSLocalizedString(@"Info_View_Multiple_Values", nil);
 	
 	if (!self.formulae || [self.formulae count] == 0)
 	{
@@ -91,7 +92,7 @@
 			}
 			else
 			{
-				[self.formulaPathLabel setStringValue:@"Formula Not Installed."];
+				[self.formulaPathLabel setStringValue:NSLocalizedString(@"Info_View_Formula_Not_Installed", nil)];
 			}
 			
 			if (formula.latestVersion)
@@ -109,7 +110,7 @@
 			}
 			else
 			{
-				[self.formulaDependenciesLabel setStringValue:@"This formula has no dependencies!"];
+				[self.formulaDependenciesLabel setStringValue:NSLocalizedString(@"Info_View_Formula_No_Dependencies", nil)];
 			}
 			
 			if (formula.conflicts)
@@ -118,7 +119,7 @@
 			}
 			else
 			{
-				[self.formulaConflictsLabel setStringValue:@"This formula has no known conflicts."];
+				[self.formulaConflictsLabel setStringValue:NSLocalizedString(@"Info_View_Formula_No_Conflicts", nil)];
 			}
 		}];
 	}
