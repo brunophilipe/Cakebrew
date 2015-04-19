@@ -1,0 +1,106 @@
+/* 
+  Localizable.strings
+  Cakebrew
+
+  Created by Bruno Philipe on 4/18/15.
+  Copyright (c) 2015 Bruno Philipe. All rights reserved.
+*/
+
+"Cakebrew" = "Cakebrew";
+
+"Generic_OK" = "OK";
+"Generic_Cancel" = "Cancel";
+"Generic_Error" = "Error";
+"Generic_Attention" = "Attention!";
+"Generic_Yes" = "Yes";
+"Generic_No" = "No";
+
+"Message_BGTask_Title" = "Active background task!";
+"Message_BGTask_Body" = "Sorry, a background task is already running. You can't perform two tasks at the same time.";
+"Message_No_Homebrew_Title" = "Homebrew Website";
+"Message_No_Homebrew_Body" = "Homebrew was not found in your system. Please install Homebrew before using Cakebrew. You can click the button below to open Homebrew's website.";
+"Message_Shell_Invalid_Title" = "No Valid shell was found!";
+"Message_Shell_Invalid_Body" = "Please add your shell \"%@\" to the valid shells file at \"/etc/shells\" before trying again.";
+"Message_Tap_Title" = "Tapping Repository";
+"Message_Tap_Body" = "What repository would you like to tap?";
+"Message_Update_Formulae_Title" = "Updating Formulae";
+"Message_Update_Formulae_Body" = "Are you sure you want to update these formulae: '%@'?";
+"Message_Update_All_Outdated_Title" = "Updating all Outdated";
+"Message_Update_All_Outdated_Body" = "Are you sure you want to update all outdated formulae?";
+
+"Confirmation_Install_Formula" = "Are you sure you want to install the formula '%@'?";
+"Confirmation_Uninstall_Formula" = "Are you sure you want to uninstall the formula '%@'?";
+"Confirmation_Update_Formula" = "Are you sure you want to update the selected formuale?";
+"Confirmation_Tap_Repo" = "Are you sure you want to tap the repository '%@'?";
+"Confirmation_Untap_Repo" = "Are you sure you want to untap the repository '%@'?";
+
+"Formula_Status_Installed" = "Installed";
+"Formula_Status_Not_Installed" = "Not Installed";
+"Formula_Status_Outdated" = "Update Available";
+
+"Formula_Options_ClickForDetails" = "Click on option for details.";
+"Formula_Options_NoOptions" = "This formula has no installation options available.";
+"Formula_Options_VoiceOver_Description" = "Option description is also available in the Formula Options table as a VoiceOver help for each row.";
+"Formula_Options_VoiceOver" = "Formula Options";
+"Formula_Options_Confirmation" = "Are you sure you want to install the formula %@ with the selected options?";
+
+"Formula_Popover_Title" = "Information for Formula: %@";
+"Formula_Popover_Error" = "Error retrieving Formula information";
+
+"Homebrew_Task_Finished" = "Task finished at %@!";
+"Homebrew_AppNap_Task_Reason" = "Running Homebrew task";
+
+"Toolbar_Install_Formula" = "Install Formula";
+"Toolbar_Uninstall_Formula" = "Uninstall Formula";
+"Toolbar_Update_Formula" = "Update Formula";
+"Toolbar_Tap_Repo" = "Tap Repository";
+"Toolbar_Untap_Repo" = "Untap Repository";
+"Toolbar_Update_Selected" = "Update Selected";
+
+"Sidebar_Info_Installed" = "These are the formulae already installed in your system.";
+"Sidebar_Info_Outdated" = "These formulae are already installed, but have an update available.";
+"Sidebar_Info_All" = "These are all the formulae available for installation with Homebrew.";
+"Sidebar_Info_Leaves" = "These formulae are not dependencies of any other formulae.";
+"Sidebar_Info_Repos" = "These are the repositories you have tapped.";
+"Sidebar_Info_Doctor" = "The doctor is a Homebrew feature that detects the most common causes of errors.";
+"Sidebar_Info_Update" = "Updating Homebrew means fetching the latest info about the available formulae.";
+"Sidebar_Info_SearchResults" = "These are the results of your search.";
+
+"Installation_Window_Operation_Install" = "Installing Formula:";
+"Installation_Window_Operation_Uninstall" = "Uninstalling Formula:";
+"Installation_Window_Operation_Update" = "Updating Formula:";
+"Installation_Window_All_Formulae" = "All Outdated Formulae";
+
+"Info_View_Multiple_Values" = "Multiple Values";
+"Info_View_Formula_Not_Installed" = "Formula Not Installed.";
+"Info_View_Formula_No_Dependencies" = "This formula has no dependencies!";
+"Info_View_Formula_No_Conflicts" = "This formula has no known conflicts.";
+
+"Sidebar_Group_Formulae" = "Formulae";
+"Sidebar_Group_Tools" = "Tools";
+
+"Sidebar_Item_Installed" = "Installed";
+"Sidebar_Item_Outdated" = "Outdated";
+"Sidebar_Item_All" = "All Formulae";
+"Sidebar_Item_Leaves" = "Leaves";
+"Sidebar_Item_Repos" = "Repositories";
+"Sidebar_Item_Doctor" = "Doctor";
+"Sidebar_Item_Update" = "Update";
+
+"Sidebar_VoiceOver_Tools" = "Tools";
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

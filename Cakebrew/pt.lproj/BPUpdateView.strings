@@ -1,0 +1,9 @@
+
+/* Class = "NSButtonCell"; title = "Clear Log"; ObjectID = "EE6-5g-Jos"; */
+"EE6-5g-Jos.title" = "Limpar Log";
+
+/* Class = "NSButtonCell"; title = "Update Homebrew"; ObjectID = "MVF-cn-lfW"; */
+"MVF-cn-lfW.title" = "Atualizar Homebrew";
+
+/* Class = "NSTextFieldCell"; title = "You should update homebrew at least once every 24 hours."; ObjectID = "xJf-gA-oo0"; */
+"xJf-gA-oo0.title" = "Você deve atualizar o Homebrew pelo menos uma vez a cada 24 horas.";

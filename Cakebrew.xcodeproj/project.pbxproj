@@ -105,6 +105,18 @@
 		15D28A2F1AE33453005C8A3E /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Localizable.strings; sourceTree = "<group>"; };
 		15D28A311AE342BD005C8A3E /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		15D28A321AE342C6005C8A3E /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; name = Base; path = Base.lproj/Credits.rtf; sourceTree = "<group>"; };
+		15D28A331AE3433F005C8A3E /* pt */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = pt; path = pt.lproj/Localizable.strings; sourceTree = "<group>"; };
+		15D28A341AE3433F005C8A3E /* pt */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = pt; path = pt.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		15D28A351AE3433F005C8A3E /* pt */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; name = pt; path = pt.lproj/Credits.rtf; sourceTree = "<group>"; };
+		15D28A361AE3433F005C8A3E /* pt */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = pt; path = pt.lproj/MainMenu.strings; sourceTree = "<group>"; };
+		15D28A371AE3433F005C8A3E /* pt */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = pt; path = pt.lproj/DCOAboutWindow.strings; sourceTree = "<group>"; };
+		15D28A381AE3433F005C8A3E /* pt */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = pt; path = pt.lproj/BPDoctorView.strings; sourceTree = "<group>"; };
+		15D28A391AE3433F005C8A3E /* pt */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = pt; path = pt.lproj/BPFormulaOptionsWindow.strings; sourceTree = "<group>"; };
+		15D28A3A1AE3433F005C8A3E /* pt */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = pt; path = pt.lproj/BPFormulaPopoverView.strings; sourceTree = "<group>"; };
+		15D28A3B1AE3433F005C8A3E /* pt */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = pt; path = pt.lproj/BPInstallationWindow.strings; sourceTree = "<group>"; };
+		15D28A3C1AE34340005C8A3E /* pt */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = pt; path = pt.lproj/BPPreferencesWindow.strings; sourceTree = "<group>"; };
+		15D28A3D1AE34340005C8A3E /* pt */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = pt; path = pt.lproj/BPSelectedFormula.strings; sourceTree = "<group>"; };
+		15D28A3E1AE34340005C8A3E /* pt */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = pt; path = pt.lproj/BPUpdateView.strings; sourceTree = "<group>"; };
 		15D2CFA118F1E71800B6D9F1 /* reload.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = reload.icns; sourceTree = "<group>"; };
 		15D2CFA318F1EAD200B6D9F1 /* globe.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = globe.icns; sourceTree = "<group>"; };
 		15D2CFA818F202B300B6D9F1 /* DCOAboutWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DCOAboutWindowController.h; sourceTree = "<group>"; };
@@ -417,6 +429,7 @@
 			knownRegions = (
 				en,
 				Base,
+				pt,
 			);
 			mainGroup = 1FE4FE49148E4CDD008EDE8B;
 			productRefGroup = 1FE4FE55148E4CDD008EDE8B /* Products */;
@@ -516,6 +529,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				15D28A151AE332DB005C8A3E /* Base */,
+				15D28A371AE3433F005C8A3E /* pt */,
 			);
 			name = DCOAboutWindow.xib;
 			sourceTree = "<group>";
@@ -524,6 +538,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				15D28A181AE332E6005C8A3E /* Base */,
+				15D28A381AE3433F005C8A3E /* pt */,
 			);
 			name = BPDoctorView.xib;
 			sourceTree = "<group>";
@@ -532,6 +547,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				15D28A1B1AE332EA005C8A3E /* Base */,
+				15D28A391AE3433F005C8A3E /* pt */,
 			);
 			name = BPFormulaOptionsWindow.xib;
 			sourceTree = "<group>";
@@ -540,6 +556,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				15D28A1E1AE332EF005C8A3E /* Base */,
+				15D28A3A1AE3433F005C8A3E /* pt */,
 			);
 			name = BPFormulaPopoverView.xib;
 			sourceTree = "<group>";
@@ -548,6 +565,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				15D28A211AE332F4005C8A3E /* Base */,
+				15D28A3B1AE3433F005C8A3E /* pt */,
 			);
 			name = BPInstallationWindow.xib;
 			sourceTree = "<group>";
@@ -556,6 +574,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				15D28A241AE332F9005C8A3E /* Base */,
+				15D28A3C1AE34340005C8A3E /* pt */,
 			);
 			name = BPPreferencesWindow.xib;
 			sourceTree = "<group>";
@@ -564,6 +583,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				15D28A271AE332FD005C8A3E /* Base */,
+				15D28A3D1AE34340005C8A3E /* pt */,
 			);
 			name = BPSelectedFormula.xib;
 			sourceTree = "<group>";
@@ -572,6 +592,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				15D28A2A1AE33301005C8A3E /* Base */,
+				15D28A3E1AE34340005C8A3E /* pt */,
 			);
 			name = BPUpdateView.xib;
 			sourceTree = "<group>";
@@ -580,6 +601,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				15D28A2F1AE33453005C8A3E /* Base */,
+				15D28A331AE3433F005C8A3E /* pt */,
 			);
 			name = Localizable.strings;
 			sourceTree = "<group>";
@@ -588,6 +610,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				15D28A311AE342BD005C8A3E /* Base */,
+				15D28A341AE3433F005C8A3E /* pt */,
 			);
 			name = InfoPlist.strings;
 			sourceTree = "<group>";
@@ -596,6 +619,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				15D28A321AE342C6005C8A3E /* Base */,
+				15D28A351AE3433F005C8A3E /* pt */,
 			);
 			name = Credits.rtf;
 			sourceTree = "<group>";
@@ -604,6 +628,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				15D28A131AE332BC005C8A3E /* Base */,
+				15D28A361AE3433F005C8A3E /* pt */,
 			);
 			name = MainMenu.xib;
 			sourceTree = "<group>";
