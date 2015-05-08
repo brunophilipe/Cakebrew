@@ -21,7 +21,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface BPFormula : NSObject <NSCoding>
+@interface BPFormula : NSObject <NSCoding, NSCopying>
 
 @property (strong, readonly) NSString *name;
 @property (strong, readonly) NSString *version;

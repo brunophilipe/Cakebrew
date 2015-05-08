@@ -112,6 +112,26 @@ NSString *const kBPIdentifierCaveats = @"==> Caveats";
 	return self;
 }
 
+- (id)copyWithZone:(NSZone *)zone
+{
+	/*
+	 * Following best practices as suggested by:
+	 * http://stackoverflow.com/questions/9907154/best-practice-when-implementing-copywithzone
+	 */
+    BPFormula *formula = [[[self class] allocWithZone:zone] init];
+    if (formula)
+    {
+        formula->_name			= [self->_name			copy];
+		formula->_version		= [self->_version		copy];
+		formula->_latestVersion = [self->_latestVersion copy];
+		formula->_installPath	= [self->_installPath	copy];
+		formula->_website		= [self->_website		copy];
+		formula->_dependencies	= [self->_dependencies	copy];
+		formula->_conflicts		= [self->_conflicts		copy];
+    }
+	return formula;
+}
+
 - (BOOL)getInformation
 {
     NSString *line         = nil;

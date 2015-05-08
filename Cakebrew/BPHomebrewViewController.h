@@ -59,7 +59,7 @@ typedef NS_ENUM(NSUInteger, BPWindowOperation) {
 @property (strong, nonatomic) NSString *formulaMenuTitle;
 @property BOOL enableUpgradeFormulasMenu;
 
-@property (unsafe_unretained) BPFormula *currentFormula;
+@property (copy) BPFormula *currentFormula;
 
 - (BOOL)isHomebrewInstalled;
 
