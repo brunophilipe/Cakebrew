@@ -466,6 +466,7 @@ typedef NS_ENUM(NSUInteger, HomeBrewTab) {
 		_lastSelectedSidebarIndex = selectedSidebarRow;
 	
 	[self.tableView_formulae deselectAll:nil];
+	[self setCurrentFormula:nil];
 	
 	[self updateInterfaceItems];
 	
