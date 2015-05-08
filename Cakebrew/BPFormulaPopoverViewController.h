@@ -12,8 +12,8 @@
 @interface BPFormulaPopoverViewController : NSViewController
 
 @property (strong) IBOutlet NSTextView *formulaTextView;
-@property (unsafe_unretained) IBOutlet NSTextField *formulaTitleLabel;
-@property (unsafe_unretained, nonatomic) BPFormula *formula;
-@property (unsafe_unretained) IBOutlet NSPopover *formulaPopover;
+@property (weak) IBOutlet NSTextField *formulaTitleLabel;
+@property (weak, nonatomic) BPFormula *formula;
+@property (weak) IBOutlet NSPopover *formulaPopover;
 
 @end

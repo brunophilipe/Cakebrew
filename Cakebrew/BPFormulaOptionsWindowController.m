@@ -31,10 +31,10 @@ static NSString * const kFormulaOptionsTitleColumnId = @"title";
 
 @interface BPFormulaOptionsWindowController () <NSTableViewDelegate>
 
-@property (unsafe_unretained) IBOutlet NSTextField *userHelpLabel;
-@property (unsafe_unretained) IBOutlet NSTextField *formulaNameLabel;
-@property (unsafe_unretained) IBOutlet NSTextField *optionDetailsTextField;
-@property (unsafe_unretained) IBOutlet NSTableView *formulaOptionsTableView;
+@property (weak) IBOutlet NSTextField *userHelpLabel;
+@property (weak) IBOutlet NSTextField *formulaNameLabel;
+@property (weak) IBOutlet NSTextField *optionDetailsTextField;
+@property (weak) IBOutlet NSTableView *formulaOptionsTableView;
 @property (strong) IBOutlet NSArrayController *formulasArrayController;
 
 @property (nonatomic, strong) NSMutableArray *availableOptions;

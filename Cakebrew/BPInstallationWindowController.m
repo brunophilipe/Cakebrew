@@ -26,11 +26,11 @@
 
 @interface BPInstallationWindowController ()
 
-@property (unsafe_unretained) IBOutlet NSTextField *windowTitleLabel;
-@property (unsafe_unretained) IBOutlet NSTextField *formulaNameLabel;
+@property (weak) IBOutlet NSTextField *windowTitleLabel;
+@property (weak) IBOutlet NSTextField *formulaNameLabel;
 @property (unsafe_unretained) IBOutlet NSTextView *recordTextView; //NSTextView does not support weak in ARC at all (not just 10.7)
-@property (unsafe_unretained) IBOutlet NSButton *okButton;
-@property (unsafe_unretained) IBOutlet NSProgressIndicator *progressIndicator;
+@property (weak) IBOutlet NSButton *okButton;
+@property (weak) IBOutlet NSProgressIndicator *progressIndicator;
 
 @property (nonatomic) BPWindowOperation windowOperation;
 @property (strong, nonatomic) NSArray *formulae;

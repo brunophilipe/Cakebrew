@@ -26,7 +26,7 @@
 @interface BPUpdateViewController ()
 
 @property (unsafe_unretained, nonatomic) IBOutlet NSTextView *updateTextView;
-@property (unsafe_unretained, nonatomic) IBOutlet NSProgressIndicator *progressIndicator;
+@property (weak, nonatomic) IBOutlet NSProgressIndicator *progressIndicator;
 @property (assign) BOOL isPerformingUpdate;
 
 @end

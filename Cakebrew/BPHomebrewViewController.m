@@ -38,7 +38,7 @@ typedef NS_ENUM(NSUInteger, HomeBrewTab) {
 
 @interface BPHomebrewViewController () <NSTableViewDelegate, BPSideBarControllerDelegate, BPHomebrewManagerDelegate, NSMenuDelegate>
 
-@property (unsafe_unretained) BPAppDelegate *appDelegate;
+@property (weak) BPAppDelegate *appDelegate;
 
 @property NSInteger lastSelectedSidebarIndex;
 
@@ -56,8 +56,8 @@ typedef NS_ENUM(NSUInteger, HomeBrewTab) {
 @property (strong, nonatomic) BPFormulaPopoverViewController *formulaPopoverViewController;
 @property (strong, nonatomic) BPSelectedFormulaViewController *selectedFormulaeViewController;
 
-@property (unsafe_unretained, nonatomic) IBOutlet NSSplitView *formulaeSplitView;
-@property (unsafe_unretained, nonatomic) IBOutlet NSView *selectedFormulaView;
+@property (weak, nonatomic) IBOutlet NSSplitView *formulaeSplitView;
+@property (weak, nonatomic) IBOutlet NSView *selectedFormulaView;
 
 
 @end

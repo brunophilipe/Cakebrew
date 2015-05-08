@@ -10,11 +10,11 @@
 
 @interface BPSelectedFormulaViewController : NSViewController
 
-@property (unsafe_unretained, nonatomic) NSArray *formulae;
+@property (weak, nonatomic) NSArray *formulae;
 
-@property (unsafe_unretained) IBOutlet NSTextField *formulaPathLabel;
-@property (unsafe_unretained) IBOutlet NSTextField *formulaVersionLabel;
-@property (unsafe_unretained) IBOutlet NSTextField *formulaDependenciesLabel;
-@property (unsafe_unretained) IBOutlet NSTextField *formulaConflictsLabel;
+@property (weak) IBOutlet NSTextField *formulaPathLabel;
+@property (weak) IBOutlet NSTextField *formulaVersionLabel;
+@property (weak) IBOutlet NSTextField *formulaDependenciesLabel;
+@property (weak) IBOutlet NSTextField *formulaConflictsLabel;
 
 @end

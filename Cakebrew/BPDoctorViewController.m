@@ -26,7 +26,7 @@
 @interface BPDoctorViewController ()
 
 @property (unsafe_unretained, nonatomic) IBOutlet NSTextView *doctorTextView;
-@property (unsafe_unretained, nonatomic) IBOutlet NSProgressIndicator *progressIndicator;
+@property (weak, nonatomic) IBOutlet NSProgressIndicator *progressIndicator;
 @property (assign) BOOL isPerformingDoctor;
 
 @end

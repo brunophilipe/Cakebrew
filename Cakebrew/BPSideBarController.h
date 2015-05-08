@@ -30,7 +30,7 @@ typedef NS_ENUM(NSUInteger, FormulaeSideBarItem)
 
 @property (assign) IBOutlet PXSourceList *sidebar;
 
-@property (unsafe_unretained) id <BPSideBarControllerDelegate>delegate;
+@property (weak) id <BPSideBarControllerDelegate>delegate;
 
 - (void)refreshSidebarBadges;
 - (void)configureSidebarSettings;

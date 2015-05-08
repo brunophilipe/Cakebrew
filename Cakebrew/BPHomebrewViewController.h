@@ -40,17 +40,17 @@ typedef NS_ENUM(NSUInteger, BPWindowOperation) {
 
 @interface BPHomebrewViewController : NSViewController
 
-@property (unsafe_unretained) IBOutlet BPSideBarController      *sidebarController;
-@property (unsafe_unretained) IBOutlet BPFormulaeTableView      *tableView_formulae;
-@property (unsafe_unretained) IBOutlet NSScrollView             *scrollView_formulae;
-@property (unsafe_unretained) IBOutlet DMSplitView              *splitView;
-@property (unsafe_unretained) IBOutlet NSTabView                *tabView;
-@property (unsafe_unretained) IBOutlet NSTextField              *label_information;
-@property (unsafe_unretained) IBOutlet NSView				    *view_disablerLock;
-@property (unsafe_unretained) IBOutlet NSView				    *view_loading;
-@property (unsafe_unretained) IBOutlet NSToolbar                *toolbar;
-@property (unsafe_unretained) IBOutlet NSSearchField            *searchField;
-@property (unsafe_unretained) IBOutlet NSMenu                   *menu_formula;
+@property (weak) IBOutlet BPSideBarController      *sidebarController;
+@property (weak) IBOutlet BPFormulaeTableView      *tableView_formulae;
+@property (weak) IBOutlet NSScrollView             *scrollView_formulae;
+@property (weak) IBOutlet DMSplitView              *splitView;
+@property (weak) IBOutlet NSTabView                *tabView;
+@property (weak) IBOutlet NSTextField              *label_information;
+@property (weak) IBOutlet NSView				    *view_disablerLock;
+@property (weak) IBOutlet NSView				    *view_loading;
+@property (weak) IBOutlet NSToolbar                *toolbar;
+@property (weak) IBOutlet NSSearchField            *searchField;
+@property (weak) IBOutlet NSMenu                   *menu_formula;
 
 @property IBOutlet NSToolbarItem *toolbarButton_formulaInfo;
 @property IBOutlet NSToolbarItem *toolbarButton_installUninstall;
