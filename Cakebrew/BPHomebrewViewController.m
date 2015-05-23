@@ -585,6 +585,9 @@ typedef NS_ENUM(NSUInteger, HomeBrewTab) {
 				};
 			}
 				break;
+				
+			default:
+				break;
 		}
 		
 		if (message)
