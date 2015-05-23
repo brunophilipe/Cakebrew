@@ -370,8 +370,6 @@ typedef NS_ENUM(NSUInteger, HomeBrewTab) {
 			[self.sidebarController.sidebar selectRowIndexes:[NSIndexSet indexSetWithIndex:FormulaeSideBarItemInstalled] byExtendingSelection:NO];
 		else
 			[self.sidebarController.sidebar selectRowIndexes:[NSIndexSet indexSetWithIndex:(NSUInteger)_lastSelectedSidebarIndex] byExtendingSelection:NO];
-		
-		[self.sidebarController.sidebar becomeFirstResponder];
 	}
 }
 
