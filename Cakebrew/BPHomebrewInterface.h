@@ -56,6 +56,8 @@ typedef NS_ENUM(NSInteger, BPListMode) {
 - (BOOL)runCleanupWithReturnBlock:(void (^)(NSString*output))block;
 - (BOOL)runDoctorWithReturnBlock:(void (^)(NSString*))block;
 
+- (BOOL)installHomebrewUsingInputPipe:(NSPipe*)pipe andWithReturnBlock:(void (^)(NSString*))block;
+
 #pragma mark - Operations that return on finish
 
 - (NSArray*)listMode:(BPListMode)mode;

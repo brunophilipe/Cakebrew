@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="7706" systemVersion="14D136" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+    <dependencies>
+        <deployment identifier="macosx"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="7706"/>
+    </dependencies>
+    <objects>
+        <customObject id="-2" userLabel="File's Owner" customClass="BPInstallBrewWindowController">
+            <connections>
+                <outlet property="okButton" destination="msa-23-tnb" id="PWz-ak-lKA"/>
+                <outlet property="progressIndicator" destination="Io6-X8-QDW" id="mAM-1c-mHc"/>
+                <outlet property="textView" destination="9Ry-gn-RmQ" id="Sft-8L-bYV"/>
+                <outlet property="window" destination="F0z-JX-Cv5" id="gIp-Ho-8D9"/>
+            </connections>
+        </customObject>
+        <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
+        <customObject id="-3" userLabel="Application" customClass="NSObject"/>
+        <window title="Install Homebrew" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" restorable="NO" oneShot="NO" releasedWhenClosed="NO" showsToolbarButton="NO" visibleAtLaunch="NO" animationBehavior="default" id="F0z-JX-Cv5">
+            <windowStyleMask key="styleMask" titled="YES" resizable="YES"/>
+            <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
+            <rect key="contentRect" x="196" y="240" width="480" height="270"/>
+            <rect key="screenRect" x="0.0" y="0.0" width="1440" height="877"/>
+            <view key="contentView" id="se5-gp-TjO">
+                <rect key="frame" x="0.0" y="0.0" width="480" height="270"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="YNY-29-vJy">
+                        <rect key="frame" x="18" y="232" width="162" height="18"/>
+                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Installing Homebrew…" id="ixf-AF-e30">
+                            <font key="font" metaFont="system" size="15"/>
+                            <color key="textColor" white="0.34557481750000002" alpha="1" colorSpace="calibratedWhite"/>
+                            <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                        </textFieldCell>
+                    </textField>
+                    <scrollView horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ojP-dI-GFc">
+                        <rect key="frame" x="20" y="59" width="440" height="165"/>
+                        <clipView key="contentView" id="YrT-YM-Tbz">
+                            <rect key="frame" x="1" y="1" width="438" height="162"/>
+                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                            <subviews>
+                                <textView editable="NO" importsGraphics="NO" richText="NO" findStyle="bar" verticallyResizable="YES" allowsNonContiguousLayout="YES" spellingCorrection="YES" id="9Ry-gn-RmQ" customClass="BPAutoScrollTextView">
+                                    <rect key="frame" x="0.0" y="0.0" width="438" height="162"/>
+                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    <size key="minSize" width="438" height="163"/>
+                                    <size key="maxSize" width="463" height="10000000"/>
+                                    <attributedString key="textStorage">
+                                        <fragment content="empty">
+                                            <attributes>
+                                                <font key="NSFont" size="12" name="CourierNewPSMT"/>
+                                                <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural"/>
+                                            </attributes>
+                                        </fragment>
+                                    </attributedString>
+                                    <color key="insertionPointColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                    <size key="minSize" width="438" height="163"/>
+                                    <size key="maxSize" width="463" height="10000000"/>
+                                    <userDefinedRuntimeAttributes>
+                                        <userDefinedRuntimeAttribute type="boolean" keyPath="selectable" value="YES"/>
+                                    </userDefinedRuntimeAttributes>
+                                </textView>
+                            </subviews>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        </clipView>
+                        <scroller key="horizontalScroller" verticalHuggingPriority="750" doubleValue="1" horizontal="YES" id="uhr-qV-jOu">
+                            <rect key="frame" x="1" y="147" width="438" height="16"/>
+                            <autoresizingMask key="autoresizingMask"/>
+                        </scroller>
+                        <scroller key="verticalScroller" verticalHuggingPriority="750" doubleValue="1" horizontal="NO" id="d4R-GQ-KMF">
+                            <rect key="frame" x="423" y="1" width="16" height="162"/>
+                            <autoresizingMask key="autoresizingMask"/>
+                        </scroller>
+                    </scrollView>
+                    <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="msa-23-tnb">
+                        <rect key="frame" x="406" y="11" width="60" height="32"/>
+                        <buttonCell key="cell" type="push" title="OK" bezelStyle="rounded" alignment="center" enabled="NO" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="DS1-f7-ShN">
+                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                            <font key="font" metaFont="system"/>
+                        </buttonCell>
+                        <connections>
+                            <action selector="didClickOK:" target="-2" id="ucg-7T-4cz"/>
+                        </connections>
+                    </button>
+                    <progressIndicator horizontalHuggingPriority="750" verticalHuggingPriority="750" maxValue="100" displayedWhenStopped="NO" bezeled="NO" indeterminate="YES" controlSize="small" style="spinning" translatesAutoresizingMaskIntoConstraints="NO" id="Io6-X8-QDW">
+                        <rect key="frame" x="20" y="20" width="16" height="16"/>
+                    </progressIndicator>
+                    <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="K5s-wy-fwh">
+                        <rect key="frame" x="44" y="18" width="360" height="22"/>
+                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" state="on" borderStyle="bezel" drawsBackground="YES" id="4cZ-Ul-2tk">
+                            <font key="font" metaFont="system"/>
+                            <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                        </textFieldCell>
+                        <connections>
+                            <action selector="inputFieldDidReturn:" target="-2" id="xCB-dp-ues"/>
+                        </connections>
+                    </textField>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="ojP-dI-GFc" firstAttribute="leading" secondItem="se5-gp-TjO" secondAttribute="leading" constant="20" id="5Sx-Zg-sIN"/>
+                    <constraint firstItem="ojP-dI-GFc" firstAttribute="top" secondItem="YNY-29-vJy" secondAttribute="bottom" constant="8" id="HFX-fO-uma"/>
+                    <constraint firstItem="YNY-29-vJy" firstAttribute="leading" secondItem="se5-gp-TjO" secondAttribute="leading" constant="20" id="PYa-my-CtZ"/>
+                    <constraint firstAttribute="trailing" secondItem="ojP-dI-GFc" secondAttribute="trailing" constant="20" id="PuD-IA-lHv"/>
+                    <constraint firstAttribute="bottom" secondItem="Io6-X8-QDW" secondAttribute="bottom" constant="20" id="X5A-y2-Mmg"/>
+                    <constraint firstItem="Io6-X8-QDW" firstAttribute="top" secondItem="ojP-dI-GFc" secondAttribute="bottom" constant="23" id="aXT-hK-Crl"/>
+                    <constraint firstItem="Io6-X8-QDW" firstAttribute="leading" secondItem="se5-gp-TjO" secondAttribute="leading" constant="20" id="dCD-53-grp"/>
+                    <constraint firstItem="K5s-wy-fwh" firstAttribute="leading" secondItem="Io6-X8-QDW" secondAttribute="trailing" constant="8" id="gPN-4s-280"/>
+                    <constraint firstAttribute="bottom" secondItem="msa-23-tnb" secondAttribute="bottom" constant="18" id="gxP-zE-SYm"/>
+                    <constraint firstItem="K5s-wy-fwh" firstAttribute="top" secondItem="ojP-dI-GFc" secondAttribute="bottom" constant="19" id="myi-pa-jqR"/>
+                    <constraint firstItem="YNY-29-vJy" firstAttribute="top" secondItem="se5-gp-TjO" secondAttribute="top" constant="20" id="pZc-Zh-hXU"/>
+                    <constraint firstAttribute="trailing" secondItem="msa-23-tnb" secondAttribute="trailing" constant="20" id="q8J-Al-fOd"/>
+                    <constraint firstItem="msa-23-tnb" firstAttribute="leading" secondItem="K5s-wy-fwh" secondAttribute="trailing" constant="8" id="r8O-Vp-SBf"/>
+                    <constraint firstItem="msa-23-tnb" firstAttribute="top" secondItem="ojP-dI-GFc" secondAttribute="bottom" constant="20" id="zEh-Oe-EFA"/>
+                </constraints>
+            </view>
+            <connections>
+                <outlet property="delegate" destination="-2" id="0bl-1N-AYu"/>
+            </connections>
+        </window>
+    </objects>
+</document>

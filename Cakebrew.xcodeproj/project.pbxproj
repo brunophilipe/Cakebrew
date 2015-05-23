@@ -10,6 +10,8 @@
 		1529086B1927C05B00206767 /* .travis.yml in Resources */ = {isa = PBXBuildFile; fileRef = 1529086A1927C05B00206767 /* .travis.yml */; };
 		1536BFF718EBA92400B67C5C /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1536BFF618EBA92400B67C5C /* Images.xcassets */; };
 		1540FA3518ECF66B00334A5C /* download.icns in Resources */ = {isa = PBXBuildFile; fileRef = 1540FA3418ECF66B00334A5C /* download.icns */; };
+		1558B4AB1B1045C400E0A8B6 /* BPInstallBrewWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1558B4A91B1045C400E0A8B6 /* BPInstallBrewWindowController.m */; };
+		1558B4AC1B1045C400E0A8B6 /* BPInstallBrewWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1558B4AA1B1045C400E0A8B6 /* BPInstallBrewWindowController.xib */; };
 		1570BA3618EE0A66001C3C5C /* BPHomebrewManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 1570BA3518EE0A66001C3C5C /* BPHomebrewManager.m */; };
 		1570BA5618EE50BD001C3C5C /* BPFormula.m in Sources */ = {isa = PBXBuildFile; fileRef = 1570BA5518EE50BD001C3C5C /* BPFormula.m */; };
 		158370B918F2471500176C9C /* PXSourceList.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 158370B818F2471500176C9C /* PXSourceList.framework */; };
@@ -82,6 +84,9 @@
 		1540FA3418ECF66B00334A5C /* download.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = download.icns; sourceTree = "<group>"; };
 		1558B49D1B100C1300E0A8B6 /* pt */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = pt; path = pt.lproj/MainMenu.strings; sourceTree = "<group>"; };
 		1558B49F1B100C7500E0A8B6 /* pt */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = pt; path = pt.lproj/BPSelectedFormula.strings; sourceTree = "<group>"; };
+		1558B4A81B1045C400E0A8B6 /* BPInstallBrewWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BPInstallBrewWindowController.h; sourceTree = "<group>"; };
+		1558B4A91B1045C400E0A8B6 /* BPInstallBrewWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BPInstallBrewWindowController.m; sourceTree = "<group>"; };
+		1558B4AA1B1045C400E0A8B6 /* BPInstallBrewWindowController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BPInstallBrewWindowController.xib; sourceTree = "<group>"; };
 		1570BA3418EE0A66001C3C5C /* BPHomebrewManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BPHomebrewManager.h; sourceTree = "<group>"; };
 		1570BA3518EE0A66001C3C5C /* BPHomebrewManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BPHomebrewManager.m; sourceTree = "<group>"; };
 		1570BA5418EE50BD001C3C5C /* BPFormula.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BPFormula.h; path = Models/BPFormula.h; sourceTree = "<group>"; };
@@ -228,6 +233,9 @@
 				15D28A2B1AE33301005C8A3E /* BPUpdateView.xib */,
 				D2B3A39919B879CD00DE23B5 /* BPUpdateViewController.h */,
 				D2B3A39A19B879CD00DE23B5 /* BPUpdateViewController.m */,
+				1558B4AA1B1045C400E0A8B6 /* BPInstallBrewWindowController.xib */,
+				1558B4A81B1045C400E0A8B6 /* BPInstallBrewWindowController.h */,
+				1558B4A91B1045C400E0A8B6 /* BPInstallBrewWindowController.m */,
 			);
 			name = "View Controllers";
 			sourceTree = "<group>";
@@ -454,6 +462,7 @@
 				1FE4FE69148E4CDD008EDE8B /* Credits.rtf in Resources */,
 				15D28A141AE332DB005C8A3E /* DCOAboutWindow.xib in Resources */,
 				1FE4FE6F148E4CDD008EDE8B /* MainMenu.xib in Resources */,
+				1558B4AC1B1045C400E0A8B6 /* BPInstallBrewWindowController.xib in Resources */,
 				15D28A1D1AE332EF005C8A3E /* BPFormulaPopoverView.xib in Resources */,
 				15D28A1A1AE332EA005C8A3E /* BPFormulaOptionsWindow.xib in Resources */,
 				15D5BEF518EBB430001DDED7 /* search.icns in Resources */,
@@ -511,6 +520,7 @@
 				D2B3A3AA19B9CBEC00DE23B5 /* BPFormulaeTableView.m in Sources */,
 				D2E53A4B19A6228300E05AFC /* BPFormulaOptionsWindowController.m in Sources */,
 				D2E53A5019A65BAD00E05AFC /* BPInstallationWindowController.m in Sources */,
+				1558B4AB1B1045C400E0A8B6 /* BPInstallBrewWindowController.m in Sources */,
 				D2F732ED19190B6D002B2512 /* BPPreferencesWindowController.m in Sources */,
 				15C34CBF19512DE100B92E36 /* BPAutoScrollTextView.m in Sources */,
 				D2B3A3B019B9D7FC00DE23B5 /* BPFormulaeDataSource.m in Sources */,
@@ -705,6 +715,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
 				COMBINE_HIDPI_IMAGES = YES;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -715,8 +726,11 @@
 				GCC_PREFIX_HEADER = "Cakebrew/Cakebrew-Prefix.pch";
 				GCC_PREPROCESSOR_DEFINITIONS = "$(inherited)";
 				INFOPLIST_FILE = "Cakebrew/Cakebrew-Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 10.8;
 				PRODUCT_NAME = Cakebrew;
+				SWIFT_OBJC_BRIDGING_HEADER = "";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -725,6 +739,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
 				COMBINE_HIDPI_IMAGES = YES;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -734,8 +749,10 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Cakebrew/Cakebrew-Prefix.pch";
 				INFOPLIST_FILE = "Cakebrew/Cakebrew-Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 10.8;
 				PRODUCT_NAME = Cakebrew;
+				SWIFT_OBJC_BRIDGING_HEADER = "";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

@@ -76,5 +76,6 @@ typedef NS_ENUM(NSUInteger, BPWindowOperation) {
 - (IBAction)searchFormulasFieldDidChange:(id)sender;
 - (IBAction)beginFormulaSearch:(id)sender;
 - (IBAction)runHomebrewCleanup:(id)sender;
+- (IBAction)runHomebrewInstaller:(id)sender;
 
 @end

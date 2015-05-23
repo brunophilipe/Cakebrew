@@ -29,6 +29,7 @@
 #import "BPDoctorViewController.h"
 #import "BPFormulaeDataSource.h"
 #import "BPSelectedFormulaViewController.h"
+#import "BPInstallBrewWindowController.h"
 
 typedef NS_ENUM(NSUInteger, HomeBrewTab) {
 	HomeBrewTabFormulae,
@@ -59,6 +60,7 @@ typedef NS_ENUM(NSUInteger, HomeBrewTab) {
 @property (strong, nonatomic) BPDoctorViewController			*doctorViewController;
 @property (strong, nonatomic) BPFormulaPopoverViewController	*formulaPopoverViewController;
 @property (strong, nonatomic) BPSelectedFormulaViewController	*selectedFormulaeViewController;
+@property (strong, nonatomic) BPInstallBrewWindowController		*installBrewWindowController;
 
 @property (weak, nonatomic) IBOutlet NSSplitView *formulaeSplitView;
 @property (weak, nonatomic) IBOutlet NSView		 *selectedFormulaView;
@@ -397,7 +399,7 @@ typedef NS_ENUM(NSUInteger, HomeBrewTab) {
 		[self.splitView setHidden:YES];
 		
 		[self setToolbarItemsEnabled:NO];
-		
+		/*
 		NSAlert *alert = [NSAlert alertWithMessageText:NSLocalizedString(@"Generic_Error", nil)
 										 defaultButton:NSLocalizedString(@"Message_No_Homebrew_Title", nil)
 									   alternateButton:NSLocalizedString(@"Generic_Cancel", nil)
@@ -419,7 +421,7 @@ typedef NS_ENUM(NSUInteger, HomeBrewTab) {
 			if (returnCode == NSAlertDefaultReturn) {
 				[[NSWorkspace sharedWorkspace] openURL:brew_URL];
 			}
-		}
+		}*/
 	}
 	else
 	{
@@ -759,6 +761,11 @@ typedef NS_ENUM(NSUInteger, HomeBrewTab) {
 	self.operationWindowController = [BPInstallationWindowController runWithOperation:kBPWindowOperationCleanup
 																			 formulae:nil
 																			  options:nil];
+}
+
+- (IBAction)runHomebrewInstaller:(id)sender
+{
+	self.installBrewWindowController = [BPInstallBrewWindowController run];
 }
 
 @end

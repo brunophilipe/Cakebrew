@@ -188,13 +188,13 @@ static NSString *cakebrewOutputIdentifier = @"+++++Cakebrew+++++";
 	return path;
 }
 
-- (NSArray *)formatArguments:(NSArray *)extraArguments sendOutputId:(BOOL)sendOutputID
+- (NSArray *)formatArguments:(NSArray *)extraArguments prependingBrew:(BOOL)prependBrewCommand sendOutputId:(BOOL)sendOutputID
 {
 	NSString *command = nil;
 	if (sendOutputID) {
-		command = [NSString stringWithFormat:@"echo \"%@\";brew %@", cakebrewOutputIdentifier, [extraArguments componentsJoinedByString:@" "]];
+		command = [NSString stringWithFormat:@"echo \"%@\";%@%@", cakebrewOutputIdentifier, prependBrewCommand ? @"brew " : @"", [extraArguments componentsJoinedByString:@" "]];
 	} else {
-		command = [NSString stringWithFormat:@"brew %@", [extraArguments componentsJoinedByString:@" "]];
+		command = [NSString stringWithFormat:@"%@%@", prependBrewCommand ? @"brew " : @"", [extraArguments componentsJoinedByString:@" "]];
 	}
 	NSArray *arguments = @[@"-l", @"-c", command];
 	
@@ -217,9 +217,14 @@ static NSString *cakebrewOutputIdentifier = @"+++++Cakebrew+++++";
 
 - (BOOL)performBrewCommandWithArguments:(NSArray*)arguments dataReturnBlock:(void (^)(NSString*))block
 {
+	return [self performCommandWithArguments:arguments isBrewTask:YES inputPipe:nil dataReturnBlock:block];
+}
+
+- (BOOL)performCommandWithArguments:(NSArray*)arguments isBrewTask:(BOOL)isBrewTask inputPipe:(NSPipe*)pipe_input dataReturnBlock:(void (^)(NSString*))block
+{
 	NSString *taskDoneString = NSLocalizedString(@"Homebrew_Task_Finished", nil);
 	
-	arguments = [self formatArguments:arguments sendOutputId:NO];
+	arguments = [self formatArguments:arguments prependingBrew:isBrewTask sendOutputId:NO];
 	
 	if (!self.path_shell || !arguments) return NO;
 	
@@ -236,8 +241,11 @@ static NSString *cakebrewOutputIdentifier = @"+++++Cakebrew+++++";
 	
 	NSPipe *pipe_output = [NSPipe pipe];
 	NSPipe *pipe_error = [NSPipe pipe];
+	
+	if (!pipe_input) pipe_input = [NSPipe pipe];
+	
 	[self.task setStandardOutput:pipe_output];
-	[self.task setStandardInput:[NSPipe pipe]];
+	[self.task setStandardInput:pipe_input];
 	[self.task setStandardError:pipe_error];
 	
 	NSFileHandle *handle_output = [pipe_output fileHandleForReading];
@@ -280,7 +288,7 @@ static NSString *cakebrewOutputIdentifier = @"+++++Cakebrew+++++";
 
 - (NSString*)performBrewCommandWithArguments:(NSArray*)arguments captureError:(BOOL)captureError
 {
-	arguments = [self formatArguments:arguments sendOutputId:YES];
+	arguments = [self formatArguments:arguments prependingBrew:YES sendOutputId:YES];
 	
 	if (!self.path_shell || !arguments) return nil;
 	
@@ -438,6 +446,24 @@ static NSString *cakebrewOutputIdentifier = @"+++++Cakebrew+++++";
 	BOOL val = [self performBrewCommandWithArguments:@[@"doctor"] dataReturnBlock:block];
 	[self sendDelegateFormulaeUpdatedCall];
 	return val;
+}
+
+- (BOOL)installHomebrewUsingInputPipe:(NSPipe*)pipe andWithReturnBlock:(void (^)(NSString*))block
+{
+//	NSURL *installerURL = [NSURL URLWithString:@"https://raw.githubusercontent.com/Homebrew/install/master/install"];
+//	NSError *error = nil;
+//	NSString *installerCode = [NSString stringWithContentsOfURL:installerURL encoding:NSUTF8StringEncoding error:&error];
+//	NSURL *fileURL = [[[NSFileManager defaultManager] URLForDirectory:NSCachesDirectory
+//															inDomain:NSUserDomainMask
+//												   appropriateForURL:nil
+//															  create:YES
+//															   error:&error] URLByAppendingPathComponent:@"installbrew.rb"];
+//	
+//	[installerCode writeToURL:fileURL atomically:YES encoding:NSUTF8StringEncoding error:&error];
+//	
+//	NSArray *arguments = @[@"ruby", [fileURL path]];
+	NSArray *arguments = @[@"ruby", @"-e \"$(curl -sL https://raw.githubusercontent.com/Homebrew/install/master/install)\""];
+	return [self performCommandWithArguments:arguments isBrewTask:NO inputPipe:pipe dataReturnBlock:block];
 }
 
 - (void)sendDelegateFormulaeUpdatedCall

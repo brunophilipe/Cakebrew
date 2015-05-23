@@ -236,8 +236,6 @@
 	});
 }
 
-
-
 - (IBAction)okAction:(id)sender
 {
 	self.recordTextView.string = @"";
