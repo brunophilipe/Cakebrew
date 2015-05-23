@@ -36,7 +36,11 @@ typedef NS_ENUM(NSUInteger, HomeBrewTab) {
 	HomeBrewTabUpdate
 };
 
-@interface BPHomebrewViewController () <NSTableViewDelegate, BPSideBarControllerDelegate, BPHomebrewManagerDelegate, NSMenuDelegate>
+@interface BPHomebrewViewController () <NSTableViewDelegate,
+										BPSideBarControllerDelegate,
+										BPSelectedFormulaViewControllerDelegate,
+										BPHomebrewManagerDelegate,
+										NSMenuDelegate>
 
 @property (weak) BPAppDelegate *appDelegate;
 
@@ -48,16 +52,16 @@ typedef NS_ENUM(NSUInteger, HomeBrewTab) {
 @property BPWindowOperation toolbarButtonOperation;
 
 
-@property (strong, nonatomic) BPFormulaeDataSource *formulaeDataSource;
-@property (strong, nonatomic) BPFormulaOptionsWindowController *formulaOptionsWindowController;
-@property (strong, nonatomic) BPInstallationWindowController *operationWindowController;
-@property (strong, nonatomic) BPUpdateViewController *updateViewController;
-@property (strong, nonatomic) BPDoctorViewController *doctorViewController;
-@property (strong, nonatomic) BPFormulaPopoverViewController *formulaPopoverViewController;
-@property (strong, nonatomic) BPSelectedFormulaViewController *selectedFormulaeViewController;
+@property (strong, nonatomic) BPFormulaeDataSource				*formulaeDataSource;
+@property (strong, nonatomic) BPFormulaOptionsWindowController	*formulaOptionsWindowController;
+@property (strong, nonatomic) BPInstallationWindowController	*operationWindowController;
+@property (strong, nonatomic) BPUpdateViewController			*updateViewController;
+@property (strong, nonatomic) BPDoctorViewController			*doctorViewController;
+@property (strong, nonatomic) BPFormulaPopoverViewController	*formulaPopoverViewController;
+@property (strong, nonatomic) BPSelectedFormulaViewController	*selectedFormulaeViewController;
 
 @property (weak, nonatomic) IBOutlet NSSplitView *formulaeSplitView;
-@property (weak, nonatomic) IBOutlet NSView *selectedFormulaView;
+@property (weak, nonatomic) IBOutlet NSView		 *selectedFormulaView;
 
 
 @end
@@ -101,6 +105,7 @@ typedef NS_ENUM(NSUInteger, HomeBrewTab) {
 	[_homebrewManager setDelegate:self];
 	
 	self.selectedFormulaeViewController = [[BPSelectedFormulaViewController alloc] init];
+	[self.selectedFormulaeViewController setDelegate:self];
 	
 	self.homebrewInstalled = YES;
 }
@@ -186,13 +191,11 @@ typedef NS_ENUM(NSUInteger, HomeBrewTab) {
 
 - (void)updateInterfaceItems
 {
-	NSInteger selectedSidebarRow = [self.sidebarController.sidebar selectedRow];
-	NSInteger selectedIndex = [self.tableView_formulae selectedRow];
-	NSIndexSet *selectedRows = [self.tableView_formulae selectedRowIndexes];
-	NSArray *selectedFormulae = [self.formulaeDataSource formulasAtIndexSet:selectedRows];
-	if ([selectedFormulae count] == 1) {
-		[self setCurrentFormula:[selectedFormulae firstObject]];
-	}
+	NSInteger selectedSidebarRow	= [self.sidebarController.sidebar selectedRow];
+	NSInteger selectedIndex			= [self.tableView_formulae selectedRow];
+	NSIndexSet *selectedRows		= [self.tableView_formulae selectedRowIndexes];
+	NSArray *selectedFormulae		= [self.formulaeDataSource formulasAtIndexSet:selectedRows];
+	
 	[self.selectedFormulaeViewController setFormulae:selectedFormulae];
 	
 	
@@ -435,6 +438,13 @@ typedef NS_ENUM(NSUInteger, HomeBrewTab) {
 - (void)tableViewSelectionDidChange:(NSNotification *)notification
 {
 	[self updateInterfaceItems];
+}
+
+#pragma mark - BPSelectedFormulaViewController Delegate
+
+- (void)selectedFormulaViewDidUpdateFormulaInfoForFormula:(BPFormula *)formula
+{
+	if (formula) [self setCurrentFormula:formula];
 }
 
 #pragma mark - BPSideBarDelegate Delegate

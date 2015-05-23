@@ -7,7 +7,6 @@
 //
 
 #import "BPSelectedFormulaViewController.h"
-#import "BPFormula.h"
 #import "BPTimedDispatch.h"
 
 @interface BPSelectedFormulaViewController ()
@@ -120,6 +119,11 @@
 			else
 			{
 				[self.formulaConflictsLabel setStringValue:NSLocalizedString(@"Info_View_Formula_No_Conflicts", nil)];
+			}
+			
+			if ([self.delegate respondsToSelector:@selector(selectedFormulaViewDidUpdateFormulaInfoForFormula:)])
+			{
+				[self.delegate selectedFormulaViewDidUpdateFormulaInfoForFormula:formula];
 			}
 		}];
 	}
