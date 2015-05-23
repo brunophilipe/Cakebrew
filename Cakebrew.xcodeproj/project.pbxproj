@@ -10,7 +10,6 @@
 		1529086B1927C05B00206767 /* .travis.yml in Resources */ = {isa = PBXBuildFile; fileRef = 1529086A1927C05B00206767 /* .travis.yml */; };
 		1536BFF718EBA92400B67C5C /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1536BFF618EBA92400B67C5C /* Images.xcassets */; };
 		1540FA3518ECF66B00334A5C /* download.icns in Resources */ = {isa = PBXBuildFile; fileRef = 1540FA3418ECF66B00334A5C /* download.icns */; };
-		1558B4D71B11234400E0A8B6 /* address.png in Resources */ = {isa = PBXBuildFile; fileRef = 1558B4D61B11234400E0A8B6 /* address.png */; };
 		1570BA3618EE0A66001C3C5C /* BPHomebrewManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 1570BA3518EE0A66001C3C5C /* BPHomebrewManager.m */; };
 		1570BA5618EE50BD001C3C5C /* BPFormula.m in Sources */ = {isa = PBXBuildFile; fileRef = 1570BA5518EE50BD001C3C5C /* BPFormula.m */; };
 		158370B918F2471500176C9C /* PXSourceList.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 158370B818F2471500176C9C /* PXSourceList.framework */; };
@@ -83,7 +82,6 @@
 		1540FA3418ECF66B00334A5C /* download.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = download.icns; sourceTree = "<group>"; };
 		1558B49D1B100C1300E0A8B6 /* pt */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = pt; path = pt.lproj/MainMenu.strings; sourceTree = "<group>"; };
 		1558B49F1B100C7500E0A8B6 /* pt */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = pt; path = pt.lproj/BPSelectedFormula.strings; sourceTree = "<group>"; };
-		1558B4D61B11234400E0A8B6 /* address.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = address.png; sourceTree = SOURCE_ROOT; };
 		1570BA3418EE0A66001C3C5C /* BPHomebrewManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BPHomebrewManager.h; sourceTree = "<group>"; };
 		1570BA3518EE0A66001C3C5C /* BPHomebrewManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BPHomebrewManager.m; sourceTree = "<group>"; };
 		1570BA5418EE50BD001C3C5C /* BPFormula.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BPFormula.h; path = Models/BPFormula.h; sourceTree = "<group>"; };
@@ -377,7 +375,6 @@
 				1FE4FE66148E4CDD008EDE8B /* Cakebrew-Prefix.pch */,
 				1FE4FE67148E4CDD008EDE8B /* Credits.rtf */,
 				1529086A1927C05B00206767 /* .travis.yml */,
-				1558B4D61B11234400E0A8B6 /* address.png */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -466,7 +463,6 @@
 				1540FA3518ECF66B00334A5C /* download.icns in Resources */,
 				15D5BEF118EBB3FB001DDED7 /* delete.icns in Resources */,
 				1536BFF718EBA92400B67C5C /* Images.xcassets in Resources */,
-				1558B4D71B11234400E0A8B6 /* address.png in Resources */,
 				15D2CFA418F1EAD200B6D9F1 /* globe.icns in Resources */,
 				15D2CFB818F206DF00B6D9F1 /* README.md in Resources */,
 				15B23A2C18F5003600714212 /* dsa_pub.pem in Resources */,

@@ -42,7 +42,7 @@ As of now, the following languages are supported:
 * English
 * Portuguese
 
-If you wish to contribute by translating Cakebrew to your language, please get in contact through <img src="https://raw.githubusercontent.com/brunophilipe/Cakebrew/dev/address.png" style="height:20px;">.
+If you wish to contribute by translating Cakebrew to your language, please open a [new issue in GitHub](https://github.com/brunophilipe/Cakebrew/issues).
 
 ## Website Source
 
