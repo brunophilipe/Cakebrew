@@ -80,6 +80,8 @@
 		1529086A1927C05B00206767 /* .travis.yml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .travis.yml; sourceTree = SOURCE_ROOT; };
 		1536BFF618EBA92400B67C5C /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		1540FA3418ECF66B00334A5C /* download.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = download.icns; sourceTree = "<group>"; };
+		1558B49D1B100C1300E0A8B6 /* pt */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = pt; path = pt.lproj/MainMenu.strings; sourceTree = "<group>"; };
+		1558B49F1B100C7500E0A8B6 /* pt */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = pt; path = pt.lproj/BPSelectedFormula.strings; sourceTree = "<group>"; };
 		1570BA3418EE0A66001C3C5C /* BPHomebrewManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BPHomebrewManager.h; sourceTree = "<group>"; };
 		1570BA3518EE0A66001C3C5C /* BPHomebrewManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BPHomebrewManager.m; sourceTree = "<group>"; };
 		1570BA5418EE50BD001C3C5C /* BPFormula.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BPFormula.h; path = Models/BPFormula.h; sourceTree = "<group>"; };
@@ -108,14 +110,12 @@
 		15D28A331AE3433F005C8A3E /* pt */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = pt; path = pt.lproj/Localizable.strings; sourceTree = "<group>"; };
 		15D28A341AE3433F005C8A3E /* pt */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = pt; path = pt.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		15D28A351AE3433F005C8A3E /* pt */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; name = pt; path = pt.lproj/Credits.rtf; sourceTree = "<group>"; };
-		15D28A361AE3433F005C8A3E /* pt */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = pt; path = pt.lproj/MainMenu.strings; sourceTree = "<group>"; };
 		15D28A371AE3433F005C8A3E /* pt */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = pt; path = pt.lproj/DCOAboutWindow.strings; sourceTree = "<group>"; };
 		15D28A381AE3433F005C8A3E /* pt */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = pt; path = pt.lproj/BPDoctorView.strings; sourceTree = "<group>"; };
 		15D28A391AE3433F005C8A3E /* pt */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = pt; path = pt.lproj/BPFormulaOptionsWindow.strings; sourceTree = "<group>"; };
 		15D28A3A1AE3433F005C8A3E /* pt */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = pt; path = pt.lproj/BPFormulaPopoverView.strings; sourceTree = "<group>"; };
 		15D28A3B1AE3433F005C8A3E /* pt */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = pt; path = pt.lproj/BPInstallationWindow.strings; sourceTree = "<group>"; };
 		15D28A3C1AE34340005C8A3E /* pt */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = pt; path = pt.lproj/BPPreferencesWindow.strings; sourceTree = "<group>"; };
-		15D28A3D1AE34340005C8A3E /* pt */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = pt; path = pt.lproj/BPSelectedFormula.strings; sourceTree = "<group>"; };
 		15D28A3E1AE34340005C8A3E /* pt */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = pt; path = pt.lproj/BPUpdateView.strings; sourceTree = "<group>"; };
 		15D2CFA118F1E71800B6D9F1 /* reload.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = reload.icns; sourceTree = "<group>"; };
 		15D2CFA318F1EAD200B6D9F1 /* globe.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = globe.icns; sourceTree = "<group>"; };
@@ -583,7 +583,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				15D28A271AE332FD005C8A3E /* Base */,
-				15D28A3D1AE34340005C8A3E /* pt */,
+				1558B49F1B100C7500E0A8B6 /* pt */,
 			);
 			name = BPSelectedFormula.xib;
 			sourceTree = "<group>";
@@ -628,7 +628,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				15D28A131AE332BC005C8A3E /* Base */,
-				15D28A361AE3433F005C8A3E /* pt */,
+				1558B49D1B100C1300E0A8B6 /* pt */,
 			);
 			name = MainMenu.xib;
 			sourceTree = "<group>";

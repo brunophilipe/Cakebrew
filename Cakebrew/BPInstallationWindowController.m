@@ -49,16 +49,18 @@
 {
 	static NSDictionary *mappingMessage = nil;
 	
-	if(!mappingMessage)
+	if (!mappingMessage)
 	{
-		mappingMessage = @{
-						   @(kBPWindowOperationInstall) : NSLocalizedString(@"Installation_Window_Operation_Install", nil),
-						   @(kBPWindowOperationUninstall) : NSLocalizedString(@"Installation_Window_Operation_Uninstall", nil),
-						   @(kBPWindowOperationUpgrade) : NSLocalizedString(@"Installation_Window_Operation_Update", nil),
-						   };
+		mappingMessage = @{@(kBPWindowOperationInstall)		: NSLocalizedString(@"Installation_Window_Operation_Install", nil),
+						   @(kBPWindowOperationUninstall)	: NSLocalizedString(@"Installation_Window_Operation_Uninstall", nil),
+						   @(kBPWindowOperationUpgrade)		: NSLocalizedString(@"Installation_Window_Operation_Update", nil),
+						   @(kBPWindowOperationTap)			: NSLocalizedString(@"Installation_Window_Operation_Tap", nil),
+						   @(kBPWindowOperationUntap)		: NSLocalizedString(@"Installation_Window_Operation_Untap", nil),
+						   @(kBPWindowOperationCleanup)		: NSLocalizedString(@"Installation_Window_Operation_Cleanup", nil)};
 	}
 
 	NSFont *font = [NSFont bp_defaultFixedWidthFont];
+	
 	[self.recordTextView setFont:font];
 	self.windowTitleLabel.stringValue = mappingMessage[@(self.windowOperation)] ?: @"";
 
@@ -69,8 +71,10 @@
 	} else if (count > 1) {
 		NSString *formulaeNames = [[self namesOfAllFormulae] componentsJoinedByString:@", "];
 		self.formulaNameLabel.stringValue = formulaeNames;
-	} else {
+	} else if (self.windowOperation != kBPWindowOperationCleanup) {
 		self.formulaNameLabel.stringValue = NSLocalizedString(@"Installation_Window_All_Formulae", nil);
+	} else {
+		self.formulaNameLabel.stringValue = @"";
 	}
 }
 
@@ -212,6 +216,19 @@
 													   waitUntilDone:YES];
 				}];
 			}
+		}
+		else if (self.windowOperation == kBPWindowOperationCleanup)
+		{
+			[[BPHomebrewInterface sharedInterface] runCleanupWithReturnBlock:^(NSString *output) {
+				if (outputValue) {
+					outputValue = [outputValue stringByAppendingString:output];
+				} else {
+					outputValue = output;
+				}
+				[self.recordTextView performSelectorOnMainThread:@selector(setString:)
+													  withObject:outputValue
+												   waitUntilDone:YES];
+			}];
 		}
 		[self.progressIndicator stopAnimation:nil];
 		[self.okButton setEnabled:YES];

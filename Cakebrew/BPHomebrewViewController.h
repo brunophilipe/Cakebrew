@@ -32,7 +32,8 @@ typedef NS_ENUM(NSUInteger, BPWindowOperation) {
 	kBPWindowOperationUninstall,
 	kBPWindowOperationUpgrade,
 	kBPWindowOperationTap,
-	kBPWindowOperationUntap
+	kBPWindowOperationUntap,
+	kBPWindowOperationCleanup
 };
 
 @class DMSplitView;
@@ -74,5 +75,6 @@ typedef NS_ENUM(NSUInteger, BPWindowOperation) {
 - (IBAction)openSelectedFormulaWebsite:(id)sender;
 - (IBAction)searchFormulasFieldDidChange:(id)sender;
 - (IBAction)beginFormulaSearch:(id)sender;
+- (IBAction)runHomebrewCleanup:(id)sender;
 
 @end

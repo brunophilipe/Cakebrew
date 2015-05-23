@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="7531" systemVersion="14D131" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="7706" systemVersion="14D136" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="7531"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="7706"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="NSApplication">
@@ -107,7 +107,7 @@ DQ
                                     </binding>
                                 </connections>
                             </menuItem>
-                            <menuItem title="Install Formula with Options..." id="X74-Yx-eRm">
+                            <menuItem title="Install Formula with Options…" id="X74-Yx-eRm">
                                 <string key="keyEquivalent" base64-UTF8="YES">
 DQ
 </string>
@@ -219,6 +219,20 @@ CA
                                 <connections>
                                     <action selector="beginFormulaSearch:" target="547" id="VZg-fP-whi"/>
                                     <binding destination="547" name="enabled" keyPath="self.isHomebrewInstalled" id="b5b-XU-lqu"/>
+                                </connections>
+                            </menuItem>
+                        </items>
+                    </menu>
+                </menuItem>
+                <menuItem title="Tools" id="b3s-t3-YFx">
+                    <modifierMask key="keyEquivalentModifierMask"/>
+                    <menu key="submenu" title="Tools" id="lOM-6G-bAo">
+                        <items>
+                            <menuItem title="Brew Cleanup…" id="OKR-gG-lsa">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                                <connections>
+                                    <action selector="runHomebrewCleanup:" target="547" id="UJD-Ns-ued"/>
+                                    <binding destination="547" name="enabled" keyPath="self.isHomebrewInstalled" id="lSy-fl-XmV"/>
                                 </connections>
                             </menuItem>
                         </items>
@@ -958,7 +972,7 @@ CA
                 <outlet property="sidebar" destination="h1z-c9-U0s" id="CEM-3v-TUM"/>
             </connections>
         </customObject>
-        <viewController title="HomebrewController" nibName="MainMenu" id="547" customClass="BPHomebrewViewController">
+        <viewController title="HomebrewController" nibName="MainMenu" id="547" userLabel="Homebrew Controller" customClass="BPHomebrewViewController">
             <connections>
                 <outlet property="formulaeSplitView" destination="hkt-Ff-Ha2" id="PSG-Ga-xEa"/>
                 <outlet property="label_information" destination="tiK-fW-tE7" id="K14-X1-4bF"/>

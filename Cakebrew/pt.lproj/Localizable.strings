@@ -69,6 +69,9 @@
 "Installation_Window_Operation_Install" = "Instalando Fórmula:";
 "Installation_Window_Operation_Uninstall" = "Desinstalando Fórmula:";
 "Installation_Window_Operation_Update" = "Atualizando Fórmula:";
+"Installation_Window_Operation_Tap" = "Adiconando Repositório:";
+"Installation_Window_Operation_Untap" = "Removendo Repositório:";
+"Installation_Window_Operation_Cleanup" = "Executando Cleanup...";
 "Installation_Window_All_Formulae" = "Todas as Fórmulas desatualizadas";
 
 "Info_View_Multiple_Values" = "Múltiplos Valores";
@@ -88,19 +91,3 @@
 "Sidebar_Item_Update" = "Atualizar";
 
 "Sidebar_VoiceOver_Tools" = "Ferramentas";
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

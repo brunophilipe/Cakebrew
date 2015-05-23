@@ -53,6 +53,7 @@ typedef NS_ENUM(NSInteger, BPListMode) {
 - (BOOL)uninstallFormula:(NSString*)formula withReturnBlock:(void (^)(NSString*))block;
 - (BOOL)tapRepository:(NSString*)formula withReturnsBlock:(void (^)(NSString*))block;
 - (BOOL)untapRepository:(NSString*)repository withReturnsBlock:(void (^)(NSString*))block;
+- (BOOL)runCleanupWithReturnBlock:(void (^)(NSString*output))block;
 - (BOOL)runDoctorWithReturnBlock:(void (^)(NSString*))block;
 
 #pragma mark - Operations that return on finish

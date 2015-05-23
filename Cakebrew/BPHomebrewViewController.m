@@ -367,6 +367,8 @@ typedef NS_ENUM(NSUInteger, HomeBrewTab) {
 			[self.sidebarController.sidebar selectRowIndexes:[NSIndexSet indexSetWithIndex:FormulaeSideBarItemInstalled] byExtendingSelection:NO];
 		else
 			[self.sidebarController.sidebar selectRowIndexes:[NSIndexSet indexSetWithIndex:(NSUInteger)_lastSelectedSidebarIndex] byExtendingSelection:NO];
+		
+		[self.sidebarController.sidebar becomeFirstResponder];
 	}
 }
 
@@ -734,8 +736,16 @@ typedef NS_ENUM(NSUInteger, HomeBrewTab) {
 	[self configureTableForListing:kBPListAll];
 }
 
-- (IBAction)beginFormulaSearch:(id)sender {
+- (IBAction)beginFormulaSearch:(id)sender
+{
 	[self.searchField becomeFirstResponder];
+}
+
+- (IBAction)runHomebrewCleanup:(id)sender
+{
+	self.operationWindowController = [BPInstallationWindowController runWithOperation:kBPWindowOperationCleanup
+																			 formulae:nil
+																			  options:nil];
 }
 
 @end

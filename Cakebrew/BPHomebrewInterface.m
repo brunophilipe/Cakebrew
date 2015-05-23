@@ -428,6 +428,11 @@ static NSString *cakebrewOutputIdentifier = @"+++++Cakebrew+++++";
 	return val;
 }
 
+- (BOOL)runCleanupWithReturnBlock:(void (^)(NSString*output))block
+{
+	return [self performBrewCommandWithArguments:@[@"cleanup"] dataReturnBlock:block];;
+}
+
 - (BOOL)runDoctorWithReturnBlock:(void (^)(NSString*output))block
 {
 	BOOL val = [self performBrewCommandWithArguments:@[@"doctor"] dataReturnBlock:block];
