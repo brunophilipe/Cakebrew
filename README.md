@@ -22,13 +22,7 @@ Cakebrew was based on a project by [vincentsaluzzo](https://github.com/vincentsa
 
 ## Download
 
-[Download Now – Version 1.0.10](https://www.cakebrew.com)
-
-### Version 1.1 Release Candidate
-
-A new version of Cakebrew is almost here. Please, help the development of Cakebrew by testing the RC version of the new release and reporting back any bugs you find.
-
-[Download – Version 1.1 RC](https://cakebrew.com/files/cakebrew-1.1rc1.zip)
+[Download Now – Version 1.1](https://www.cakebrew.com)
 
 ## Problems using ZSH?
 
