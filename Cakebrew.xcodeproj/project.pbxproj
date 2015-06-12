@@ -12,10 +12,10 @@
 		1540FA3518ECF66B00334A5C /* download.icns in Resources */ = {isa = PBXBuildFile; fileRef = 1540FA3418ECF66B00334A5C /* download.icns */; };
 		1570BA3618EE0A66001C3C5C /* BPHomebrewManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 1570BA3518EE0A66001C3C5C /* BPHomebrewManager.m */; };
 		1570BA5618EE50BD001C3C5C /* BPFormula.m in Sources */ = {isa = PBXBuildFile; fileRef = 1570BA5518EE50BD001C3C5C /* BPFormula.m */; };
+		1570EFAF1B2B91170075453A /* Sparkle.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 15B23A2818F4F21E00714212 /* Sparkle.framework */; };
+		1570EFB01B2B91170075453A /* Sparkle.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 15B23A2818F4F21E00714212 /* Sparkle.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		158370B918F2471500176C9C /* PXSourceList.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 158370B818F2471500176C9C /* PXSourceList.framework */; };
 		158370BA18F2472100176C9C /* PXSourceList.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 158370B818F2471500176C9C /* PXSourceList.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
-		15B23A2918F4F21E00714212 /* Sparkle.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 15B23A2818F4F21E00714212 /* Sparkle.framework */; };
-		15B23A2A18F4F22400714212 /* Sparkle.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 15B23A2818F4F21E00714212 /* Sparkle.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		15B23A2C18F5003600714212 /* dsa_pub.pem in Resources */ = {isa = PBXBuildFile; fileRef = 15B23A2B18F5003600714212 /* dsa_pub.pem */; };
 		15C34CBF19512DE100B92E36 /* BPAutoScrollTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 15C34CBE19512DE100B92E36 /* BPAutoScrollTextView.m */; };
 		15CEFC631AB335B2005CF54A /* BPLoadingView.m in Sources */ = {isa = PBXBuildFile; fileRef = 15CEFC621AB335B2005CF54A /* BPLoadingView.m */; };
@@ -70,7 +70,7 @@
 			dstSubfolderSpec = 10;
 			files = (
 				158370BA18F2472100176C9C /* PXSourceList.framework in CopyFiles */,
-				15B23A2A18F4F22400714212 /* Sparkle.framework in CopyFiles */,
+				1570EFB01B2B91170075453A /* Sparkle.framework in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -177,7 +177,7 @@
 				15D2CFAD18F202D000B6D9F1 /* QuartzCore.framework in Frameworks */,
 				1FE4FE59148E4CDD008EDE8B /* Cocoa.framework in Frameworks */,
 				158370B918F2471500176C9C /* PXSourceList.framework in Frameworks */,
-				15B23A2918F4F21E00714212 /* Sparkle.framework in Frameworks */,
+				1570EFAF1B2B91170075453A /* Sparkle.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -736,6 +736,7 @@
 				GCC_PREFIX_HEADER = "Cakebrew/Cakebrew-Prefix.pch";
 				GCC_PREPROCESSOR_DEFINITIONS = "$(inherited)";
 				INFOPLIST_FILE = "Cakebrew/Cakebrew-Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 10.8;
 				PRODUCT_NAME = Cakebrew;
 				WRAPPER_EXTENSION = app;
@@ -756,6 +757,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Cakebrew/Cakebrew-Prefix.pch";
 				INFOPLIST_FILE = "Cakebrew/Cakebrew-Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 10.8;
 				PRODUCT_NAME = Cakebrew;
 				WRAPPER_EXTENSION = app;
