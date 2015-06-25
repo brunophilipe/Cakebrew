@@ -41,9 +41,9 @@
                     <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="357-7Y-dv7">
                         <rect key="frame" x="173" y="227" width="289" height="19"/>
                         <constraints>
-                            <constraint firstAttribute="height" constant="19" id="OSk-0y-zjZ"/>
+                            <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="19" id="OSk-0y-zjZ"/>
                         </constraints>
-                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="formula" id="L1M-vW-tCK">
+                        <textFieldCell key="cell" allowsUndo="NO" sendsActionOnEndEditing="YES" title="formula" id="L1M-vW-tCK">
                             <font key="font" metaFont="system" size="15"/>
                             <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
@@ -101,19 +101,18 @@ DQ
                     </progressIndicator>
                 </subviews>
                 <constraints>
-                    <constraint firstItem="xUs-SB-m17" firstAttribute="baseline" secondItem="357-7Y-dv7" secondAttribute="baseline" id="5MW-Pe-uDo"/>
-                    <constraint firstItem="7kc-mk-6lT" firstAttribute="top" secondItem="xUs-SB-m17" secondAttribute="bottom" constant="8" id="6RX-hG-Glt"/>
                     <constraint firstItem="xUs-SB-m17" firstAttribute="leading" secondItem="Z86-NA-teS" secondAttribute="leading" id="CFj-Tk-QAd"/>
                     <constraint firstItem="Z86-NA-teS" firstAttribute="top" secondItem="7kc-mk-6lT" secondAttribute="bottom" constant="23" id="Ewh-xf-9AC"/>
                     <constraint firstItem="peQ-d6-b4t" firstAttribute="trailing" secondItem="7kc-mk-6lT" secondAttribute="trailing" id="Gb7-jg-h9h"/>
                     <constraint firstItem="xUs-SB-m17" firstAttribute="leading" secondItem="7kc-mk-6lT" secondAttribute="leading" id="NUl-EZ-1f1"/>
                     <constraint firstItem="357-7Y-dv7" firstAttribute="leading" secondItem="xUs-SB-m17" secondAttribute="trailing" constant="8" symbolic="YES" id="SIe-1c-xnv"/>
                     <constraint firstItem="Z86-NA-teS" firstAttribute="centerY" secondItem="peQ-d6-b4t" secondAttribute="centerY" id="TOk-70-EUM"/>
+                    <constraint firstItem="357-7Y-dv7" firstAttribute="top" secondItem="EiT-Mj-1SZ" secondAttribute="top" constant="24" id="ZCI-S3-umu"/>
                     <constraint firstItem="xUs-SB-m17" firstAttribute="top" secondItem="EiT-Mj-1SZ" secondAttribute="top" constant="24" id="bOu-lR-YGN"/>
                     <constraint firstAttribute="trailing" secondItem="peQ-d6-b4t" secondAttribute="trailing" constant="20" symbolic="YES" id="bsa-2h-bnn"/>
                     <constraint firstItem="xUs-SB-m17" firstAttribute="leading" secondItem="EiT-Mj-1SZ" secondAttribute="leading" constant="20" symbolic="YES" id="c6D-1h-alb"/>
-                    <constraint firstItem="7kc-mk-6lT" firstAttribute="top" secondItem="xUs-SB-m17" secondAttribute="bottom" constant="8" symbolic="YES" id="ixo-5B-OrK"/>
                     <constraint firstItem="peQ-d6-b4t" firstAttribute="trailing" secondItem="357-7Y-dv7" secondAttribute="trailing" id="jfy-RB-WKW"/>
+                    <constraint firstItem="7kc-mk-6lT" firstAttribute="top" secondItem="357-7Y-dv7" secondAttribute="bottom" constant="8" id="lAs-Qt-qsU"/>
                     <constraint firstAttribute="bottom" secondItem="Z86-NA-teS" secondAttribute="bottom" constant="16" id="yvE-hP-5SE"/>
                 </constraints>
             </view>
