@@ -25,7 +25,7 @@
 #import "BPFormulaeTableView.h"
 #import "BPFormulaPopoverViewController.h"
 #import "BPSideBarController.h"
-#import "Frameworks/PXSourceList.framework/Headers/PXSourceList.h"
+#import "PXSourceList.h"
 
 typedef NS_ENUM(NSUInteger, BPWindowOperation) {
 	kBPWindowOperationInstall,
