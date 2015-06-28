@@ -38,6 +38,8 @@
 + (BPFormula*)formulaWithName:(NSString*)name andVersion:(NSString*)version;
 + (BPFormula*)formulaWithName:(NSString*)name;
 
+- (NSString*)installedName;
+
 - (BOOL)getInformation;
 
 - (BOOL)isOutdated;

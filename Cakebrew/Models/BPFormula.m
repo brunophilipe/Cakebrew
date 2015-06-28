@@ -132,6 +132,20 @@ NSString *const kBPIdentifierCaveats = @"==> Caveats";
 	return formula;
 }
 
+- (NSString*)installedName
+{
+	NSRange locationOfLastSlash = [self.name rangeOfString:@"/" options:NSBackwardsSearch];
+	
+	if (locationOfLastSlash.location != NSNotFound)
+	{
+		return [self.name substringFromIndex:locationOfLastSlash.location+1];
+	}
+	else
+	{
+		return [self name];
+	}
+}
+
 - (BOOL)getInformation
 {
     NSString *line         = nil;

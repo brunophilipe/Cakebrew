@@ -147,10 +147,14 @@ NSString *const kBP_CACHE_DICT_DATA_KEY = @"BP_CACHE_DICT_DATA_KEY";
 - (NSInteger)searchForFormula:(BPFormula*)formula inArray:(NSArray*)array
 {
 	NSUInteger index = 0;
-	for (BPFormula* item in array) {
-		if ([item.name isEqualToString:formula.name]) {
+
+	for (BPFormula* item in array)
+	{
+		if ([[item installedName] isEqualToString:[formula installedName]])
+		{
 			return index;
 		}
+		
 		index++;
 	}
 
@@ -161,12 +165,17 @@ NSString *const kBP_CACHE_DICT_DATA_KEY = @"BP_CACHE_DICT_DATA_KEY";
 {
 	if ([self searchForFormula:formula inArray:self.formulae_installed] >= 0)
 	{
-		if ([self searchForFormula:formula inArray:self.formulae_outdated] >= 0) {
+		if ([self searchForFormula:formula inArray:self.formulae_outdated] >= 0)
+		{
 			return kBPFormulaOutdated;
-		} else {
+		}
+		else
+		{
 			return kBPFormulaInstalled;
 		}
-	} else {
+	}
+	else
+	{
 		return kBPFormulaNotInstalled;
 	}
 }
