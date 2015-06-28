@@ -219,13 +219,17 @@ static NSString *cakebrewOutputIdentifier = @"+++++Cakebrew+++++";
 {
 	arguments = [self formatArguments:arguments sendOutputId:NO];
 	
-	if (!self.path_shell || !arguments) return NO;
+	if (!self.path_shell || !arguments)
+	{
+		return NO;
+	}
 	
 	operationUpdateBlock = block;
 	
 	id activity;
 	if (self.systemHasAppNap)
-		activity = [[NSProcessInfo processInfo] beginActivityWithOptions:NSActivityUserInitiated reason:NSLocalizedString(@"Homebrew_AppNap_Task_Reason", nil)];
+		activity = [[NSProcessInfo processInfo] beginActivityWithOptions:NSActivityUserInitiated
+																  reason:NSLocalizedString(@"Homebrew_AppNap_Task_Reason", nil)];
 	
 	self.task = [[NSTask alloc] init];
 	
