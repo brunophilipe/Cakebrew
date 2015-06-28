@@ -97,7 +97,7 @@ NSString *const kBPIdentifierCaveats = @"==> Caveats";
 	if (self.conflicts)			[aCoder encodeObject:self.conflicts			forKey:kBP_ENCODE_FORMULA_CNFL];
 	if (self.shortDescription)	[aCoder encodeObject:self.shortDescription	forKey:kBP_ENCODE_FORMULA_SDSC];
 
-	[aCoder encodeObject:@(self.installed) forKey:kBP_ENCODE_FORMULA_INST];
+	[aCoder encodeObject:@([self isInstalled]) forKey:kBP_ENCODE_FORMULA_INST];
 }
 
 - (id)initWithCoder:(NSCoder *)aDecoder

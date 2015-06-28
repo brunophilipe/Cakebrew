@@ -33,16 +33,32 @@
 @property (strong, readonly) NSURL    *website;
 @property (strong, readonly) NSArray  *options;
 
-@property (getter = isInstalled, readonly)	BOOL installed;
-
 + (BPFormula*)formulaWithName:(NSString*)name version:(NSString*)version andLatestVersion:(NSString*)latestVersion;
 + (BPFormula*)formulaWithName:(NSString*)name andVersion:(NSString*)version;
 + (BPFormula*)formulaWithName:(NSString*)name;
 
+/**
+ *  The short name for the formula. Useful for taps. Returns the remaining substring after the last slash character.
+ *
+ *  @return The last substring after the last slash character.
+ */
 - (NSString*)installedName;
 
+/**
+ *  Retrieves and updates the formula info with the information from the 'brew info' command.
+ *
+ *  @return `YES` if the process succeeded, or `NO` otherwise.
+ */
 - (BOOL)getInformation;
 
+/**
+ *  @return `YES` if the formula is installed, or `NO` otherwise.
+ */
+- (BOOL)isInstalled;
+
+/**
+ *  @return `YES` if the formula is installed and outdated, or `NO` otherwise.
+ */
 - (BOOL)isOutdated;
 
 @end

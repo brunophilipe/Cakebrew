@@ -33,7 +33,16 @@ typedef NS_ENUM(NSInteger, BPListMode) {
 
 @protocol BPHomebrewInterfaceDelegate <NSObject>
 
+/**
+ *  Caled when the formulae cache has been updated.
+ */
 - (void)homebrewInterfaceDidUpdateFormulae;
+
+/**
+ *  Called if homebrew is not detected in the system.
+ *
+ *  @param yesOrNo `YES` if brew was not found.
+ */
 - (void)homebrewInterfaceShouldDisplayNoBrewMessage:(BOOL)yesOrNo;
 
 @end
@@ -42,23 +51,114 @@ typedef NS_ENUM(NSInteger, BPListMode) {
 
 + (BPHomebrewInterface *)sharedInterface;
 
+/**
+ *  Currently running task.
+ */
 @property (strong, nonatomic) NSTask *task; // default nil;
+
+/**
+ *  The delegate object.
+ */
 @property (weak, nonatomic) id<BPHomebrewInterfaceDelegate> delegate;
 
 #pragma mark - Operations with live data callback block
 
+/**
+ *  Update Homebrew.
+ *
+ *  @param block Data callback block. This block will be called with new data to be diplayed while the process runs.
+ *
+ *  @return `YES` if successful.
+ */
 - (BOOL)updateWithReturnBlock:(void (^)(NSString*))block;
+
+/**
+ *  Upgrade parameter formulae to the latest available version.
+ *
+ *  @param formulae The list of formulae to be upgraded.
+ *  @param block	Data callback block. This block will be called with new data to be diplayed while the process runs.
+ *
+ *  @return `YES` if successful.
+ */
 - (BOOL)upgradeFormulae:(NSArray*)formulae withReturnBlock:(void (^)(NSString*))block;
+
+/**
+ *  Install formula with options.
+ *
+ *  @param formula The formula to be installed.
+ *  @param options Options for the formula installation (as explained in the info for a formula).
+ *  @param block   Data callback block. This block will be called with new data to be diplayed while the process runs.
+ *
+ *  @return `YES` if successful.
+ */
 - (BOOL)installFormula:(NSString*)formula withOptions:(NSArray*)options andReturnBlock:(void (^)(NSString*output))block;
+
+/**
+ *  Uninstalls a formula.
+ *
+ *  @param formula The formula to be uninstalled.
+ *  @param block   Data callback block. This block will be called with new data to be diplayed while the process runs.
+ *
+ *  @return `YES` if successful.
+ */
 - (BOOL)uninstallFormula:(NSString*)formula withReturnBlock:(void (^)(NSString*))block;
-- (BOOL)tapRepository:(NSString*)formula withReturnsBlock:(void (^)(NSString*))block;
+
+/**
+ *  Taps a repo.
+ *
+ *  @param repository The repo to be tapped.
+ *  @param block Data callback block. This block will be called with new data to be diplayed while the process runs.
+ *
+ *  @return `YES` if successful.
+ */
+- (BOOL)tapRepository:(NSString*)repository withReturnsBlock:(void (^)(NSString*))block;
+
+/**
+ *  Untaps a repo.
+ *
+ *  @param repository The repo to be untapped.
+ *  @param block Data callback block. This block will be called with new data to be diplayed while the process runs.
+ *
+ *  @return `YES` if successful.
+ */
 - (BOOL)untapRepository:(NSString*)repository withReturnsBlock:(void (^)(NSString*))block;
+
+/**
+ *  Runs Homebrew cleanup tool.
+ *
+ *  @param block Data callback block. This block will be called with new data to be diplayed while the process runs.
+ *
+ *  @return `YES` if successful.
+ */
 - (BOOL)runCleanupWithReturnBlock:(void (^)(NSString*output))block;
+
+/**
+ *  Runs Homebrew doctor tool.
+ *
+ *  @param block Data callback block. This block will be called with new data to be diplayed while the process runs.
+ *
+ *  @return `YES` if successful.
+ */
 - (BOOL)runDoctorWithReturnBlock:(void (^)(NSString*))block;
 
 #pragma mark - Operations that return on finish
 
+/**
+ *  Lists all formulae that fits the description of the parameter mode.
+ *
+ *  @param mode All, Installed, Leaves, Outdated, etc.
+ *
+ *  @return List of BPFormula objects.
+ */
 - (NSArray*)listMode:(BPListMode)mode;
+
+/**
+ *  Executes `brew info` for parameter formula name.
+ *
+ *  @param formula The name of the formula.
+ *
+ *  @return The information for the parameter formula as output by Homebrew.
+ */
 - (NSString*)informationForFormula:(NSString*)formula;
 
 @end

@@ -326,7 +326,8 @@ static NSString *cakebrewOutputIdentifier = @"+++++Cakebrew+++++";
 
 #pragma mark - Operations that return on finish
 
-- (NSArray*)listMode:(BPListMode)mode {
+- (NSArray*)listMode:(BPListMode)mode
+{
 	NSLog(@"Listing with mode: %ld", (long)mode);
 	
 	BPHomebrewInterfaceListCall *listCall = nil;
@@ -360,9 +361,12 @@ static NSString *cakebrewOutputIdentifier = @"+++++Cakebrew+++++";
 	
 	NSLog(@"Finished list mode: %ld", (long)mode);
 	
-	if (string) {
+	if (string)
+	{
 		return [listCall parseData:string];
-	} else {
+	}
+	else
+	{
 		return nil;
 	}
 }
