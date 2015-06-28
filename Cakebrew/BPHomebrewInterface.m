@@ -217,8 +217,6 @@ static NSString *cakebrewOutputIdentifier = @"+++++Cakebrew+++++";
 
 - (BOOL)performBrewCommandWithArguments:(NSArray*)arguments dataReturnBlock:(void (^)(NSString*))block
 {
-	NSString *taskDoneString = NSLocalizedString(@"Homebrew_Task_Finished", nil);
-	
 	arguments = [self formatArguments:arguments sendOutputId:NO];
 	
 	if (!self.path_shell || !arguments) return NO;
@@ -253,7 +251,14 @@ static NSString *cakebrewOutputIdentifier = @"+++++Cakebrew+++++";
 	[self.task launch];
 	[self.task waitUntilExit];
 	
-	block([NSString stringWithFormat:taskDoneString, [NSDateFormatter localizedStringFromDate:[NSDate date] dateStyle:NSDateFormatterShortStyle timeStyle:NSDateFormatterShortStyle]]);
+	NSString *taskDoneString = [NSString stringWithFormat:@"%@ %@ %@!",
+								NSLocalizedString(@"Homebrew_Task_Finished", nil),
+								NSLocalizedString(@"Homebrew_Task_Finished_At", nil),
+								[NSDateFormatter localizedStringFromDate:[NSDate date]
+															   dateStyle:NSDateFormatterShortStyle
+															   timeStyle:NSDateFormatterShortStyle]];
+	
+	block(taskDoneString);
 	
 	if (self.systemHasAppNap)
 		[[NSProcessInfo processInfo] endActivity:activity];

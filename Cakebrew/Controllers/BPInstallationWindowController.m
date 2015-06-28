@@ -40,6 +40,23 @@
 
 @implementation BPInstallationWindowController
 
++ (NSDictionary*)sharedTaskMessagesMap
+{
+	static NSDictionary *taskMessages = nil;
+	
+	if (!taskMessages)
+	{
+		taskMessages   = @{@(kBPWindowOperationInstall)		: NSLocalizedString(@"Installation_Window_Operation_Install", nil),
+						   @(kBPWindowOperationUninstall)	: NSLocalizedString(@"Installation_Window_Operation_Uninstall", nil),
+						   @(kBPWindowOperationUpgrade)		: NSLocalizedString(@"Installation_Window_Operation_Update", nil),
+						   @(kBPWindowOperationTap)			: NSLocalizedString(@"Installation_Window_Operation_Tap", nil),
+						   @(kBPWindowOperationUntap)		: NSLocalizedString(@"Installation_Window_Operation_Untap", nil),
+						   @(kBPWindowOperationCleanup)		: NSLocalizedString(@"Installation_Window_Operation_Cleanup", nil)};
+	}
+	
+	return taskMessages;
+}
+
 - (void)awakeFromNib
 {
 	[self setupUI];
@@ -47,33 +64,29 @@
 
 - (void)setupUI
 {
-	static NSDictionary *mappingMessage = nil;
-	
-	if (!mappingMessage)
-	{
-		mappingMessage = @{@(kBPWindowOperationInstall)		: NSLocalizedString(@"Installation_Window_Operation_Install", nil),
-						   @(kBPWindowOperationUninstall)	: NSLocalizedString(@"Installation_Window_Operation_Uninstall", nil),
-						   @(kBPWindowOperationUpgrade)		: NSLocalizedString(@"Installation_Window_Operation_Update", nil),
-						   @(kBPWindowOperationTap)			: NSLocalizedString(@"Installation_Window_Operation_Tap", nil),
-						   @(kBPWindowOperationUntap)		: NSLocalizedString(@"Installation_Window_Operation_Untap", nil),
-						   @(kBPWindowOperationCleanup)		: NSLocalizedString(@"Installation_Window_Operation_Cleanup", nil)};
-	}
-
+	NSDictionary *messagesMap = [self.class sharedTaskMessagesMap];
 	NSFont *font = [NSFont bp_defaultFixedWidthFont];
 	
 	[self.recordTextView setFont:font];
-	self.windowTitleLabel.stringValue = mappingMessage[@(self.windowOperation)] ?: @"";
+	self.windowTitleLabel.stringValue = messagesMap[@(self.windowOperation)] ?: @"";
 
 	NSUInteger count = [self.formulae count];
 
-	if (count == 1) {
+	if (count == 1)
+	{
 		self.formulaNameLabel.stringValue = [(BPFormula*)[self.formulae firstObject] name];
-	} else if (count > 1) {
+	}
+	else if (count > 1)
+	{
 		NSString *formulaeNames = [[self namesOfAllFormulae] componentsJoinedByString:@", "];
 		self.formulaNameLabel.stringValue = formulaeNames;
-	} else if (self.windowOperation != kBPWindowOperationCleanup) {
+	}
+	else if (self.windowOperation != kBPWindowOperationCleanup)
+	{
 		self.formulaNameLabel.stringValue = NSLocalizedString(@"Installation_Window_All_Formulae", nil);
-	} else {
+	}
+	else
+	{
 		self.formulaNameLabel.stringValue = @"";
 	}
 }
@@ -231,14 +244,27 @@
 			}];
 		}
 		
-		[self.progressIndicator stopAnimation:nil];
-		[self.okButton setEnabled:YES];
-		
-		[[NSApplication sharedApplication] requestUserAttention:NSInformationalRequest];
+		[self finishTask];
 	});
 }
 
-
+- (void)finishTask
+{
+//	NSDictionary *messagesMap = [self.class sharedTaskMessagesMap];
+	
+	[self.progressIndicator stopAnimation:nil];
+	[self.okButton setEnabled:YES];
+	
+	[[NSApplication sharedApplication] requestUserAttention:NSInformationalRequest];
+	
+	NSUserNotification *userNotification = [NSUserNotification new];
+	[userNotification setTitle:NSLocalizedString(@"Homebrew_Task_Finished", nil)];
+	[userNotification setSubtitle:[NSString stringWithFormat:@"%@ %@",
+								   self.windowTitleLabel.stringValue,
+								   self.formulaNameLabel.stringValue]];
+	
+	[[NSUserNotificationCenter defaultUserNotificationCenter] scheduleNotification:userNotification];
+}
 
 - (IBAction)okAction:(id)sender
 {

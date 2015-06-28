@@ -23,5 +23,11 @@
 /* Class = "NSTextFieldCell"; title = "Conflitos:"; ObjectID = "jTd-ja-Dck"; */
 "jTd-ja-Dck.title" = "Conflitos:";
 
+/* Class = "NSTextFieldCell"; title = "No description provided"; ObjectID = "tcI-5w-fqk"; */
+"tcI-5w-fqk.title" = "Nenhuma descrição inserida";
+
 /* Class = "NSTextFieldCell"; title = "Dependências:"; ObjectID = "v3f-Nd-iQs"; */
 "v3f-Nd-iQs.title" = "Dependências:";
+
+/* Class = "NSTextFieldCell"; title = "Descrição:"; ObjectID = "y6Q-3P-Z8p"; */
+"y6Q-3P-Z8p.title" = "Descrição:";

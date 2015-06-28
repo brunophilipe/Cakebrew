@@ -47,7 +47,8 @@
 "Formula_Popover_Title" = "Information for Formula: %@";
 "Formula_Popover_Error" = "Error retrieving Formula information";
 
-"Homebrew_Task_Finished" = "Task finished at %@!";
+"Homebrew_Task_Finished" = "Task finished";
+"Homebrew_Task_Finished_At" = "at";
 "Homebrew_AppNap_Task_Reason" = "Running Homebrew task";
 
 "Toolbar_Install_Formula" = "Install Formula";
