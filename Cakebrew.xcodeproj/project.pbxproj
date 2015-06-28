@@ -197,7 +197,7 @@
 			name = Views;
 			sourceTree = "<group>";
 		};
-		15A974AB1968A3C900621C35 /* View Controllers */ = {
+		15A974AB1968A3C900621C35 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
 				15D28A191AE332E6005C8A3E /* BPDoctorView.xib */,
@@ -228,7 +228,7 @@
 				150AEC4A1B3F999A00163767 /* BPUpdateViewController.h */,
 				150AEC4B1B3F999A00163767 /* BPUpdateViewController.m */,
 			);
-			name = "View Controllers";
+			name = Controllers;
 			sourceTree = "<group>";
 		};
 		15A974AC1968A3E800621C35 /* Homebrew */ = {
@@ -355,7 +355,7 @@
 				15D5BEF618EBC56E001DDED7 /* Libraries */,
 				15D5BEFB18EBD006001DDED7 /* Models */,
 				1FE4FE5F148E4CDD008EDE8B /* Supporting Files */,
-				15A974AB1968A3C900621C35 /* View Controllers */,
+				15A974AB1968A3C900621C35 /* Controllers */,
 				1540FA3618ED099F00334A5C /* Views */,
 			);
 			path = Cakebrew;
