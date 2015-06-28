@@ -160,7 +160,8 @@ NSString *const kBPIdentifierCaveats = @"==> Caveats";
 
 	output = [[BPHomebrewInterface sharedInterface] informationForFormula:self.name];
 
-	if ([output isEqualToString:@""]) {
+	if ([output isEqualToString:@""])
+	{
 		return YES;
 	}
 
@@ -168,7 +169,7 @@ NSString *const kBPIdentifierCaveats = @"==> Caveats";
 
 	lineIndex = 0;
 	line = [lines objectAtIndex:lineIndex];
-	[self setLatestVersion:[line substringFromIndex:[self.name length]+2]];
+	[self setLatestVersion:[line substringFromIndex:[line rangeOfString:@":"].location+2]];
 	
 	lineIndex = 1;
 	line = [lines objectAtIndex:lineIndex];

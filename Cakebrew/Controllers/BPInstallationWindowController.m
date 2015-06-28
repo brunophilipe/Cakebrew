@@ -250,15 +250,13 @@
 
 - (void)finishTask
 {
-//	NSDictionary *messagesMap = [self.class sharedTaskMessagesMap];
-	
 	[self.progressIndicator stopAnimation:nil];
 	[self.okButton setEnabled:YES];
 	
 	[[NSApplication sharedApplication] requestUserAttention:NSInformationalRequest];
 	
 	NSUserNotification *userNotification = [NSUserNotification new];
-	[userNotification setTitle:NSLocalizedString(@"Homebrew_Task_Finished", nil)];
+	[userNotification setTitle:[NSLocalizedString(@"Homebrew_Task_Finished", nil) capitalizedString]];
 	[userNotification setSubtitle:[NSString stringWithFormat:@"%@ %@",
 								   self.windowTitleLabel.stringValue,
 								   self.formulaNameLabel.stringValue]];

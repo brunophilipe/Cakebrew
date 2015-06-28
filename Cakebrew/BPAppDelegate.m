@@ -71,9 +71,12 @@ NSString *const kBP_FORMULA_OPTION_DESCRIPTION = @"BP_FORMULA_OPTION_DESCRIPTION
 
 - (BOOL)applicationShouldHandleReopen:(NSApplication *)sender hasVisibleWindows:(BOOL)flag
 {
-	if (!flag) {
+	if (!flag)
+	{
 		[self.window makeKeyAndOrderFront:self];
 	}
+	
+	[[NSUserNotificationCenter defaultUserNotificationCenter] removeAllDeliveredNotifications];
 
 	return YES;
 }
