@@ -78,6 +78,7 @@
 "Info_View_Formula_Not_Installed" = "Fórmula não Instalada.";
 "Info_View_Formula_No_Dependencies" = "Esta fórmula não possui dependências!";
 "Info_View_Formula_No_Conflicts" = "Esta fórmula não possui nenhum conflito conhecido.";
+"Info_View_Formula_No_Description" = "Nenhuma descrição foi inserida.";
 
 "Sidebar_Group_Formulae" = "Fórmulas";
 "Sidebar_Group_Tools" = "Ferramentas";

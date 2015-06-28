@@ -38,10 +38,10 @@
 {
 	if ([self.formulaDependenciesLabel respondsToSelector:@selector(preferredMaxLayoutWidth)])
 	{
-		self.formulaDependenciesLabel.preferredMaxLayoutWidth = self.formulaDependenciesLabel.frame.size.width;
-		self.formulaConflictsLabel.preferredMaxLayoutWidth = self.formulaConflictsLabel.frame.size.width;
-		self.formulaVersionLabel.preferredMaxLayoutWidth = self.formulaVersionLabel.frame.size.width;
-		self.formulaPathLabel.preferredMaxLayoutWidth = self.formulaPathLabel.frame.size.width;
+		self.formulaDependenciesLabel.preferredMaxLayoutWidth	= self.formulaDependenciesLabel.frame.size.width;
+		self.formulaConflictsLabel.preferredMaxLayoutWidth		= self.formulaConflictsLabel.frame.size.width;
+		self.formulaVersionLabel.preferredMaxLayoutWidth		= self.formulaVersionLabel.frame.size.width;
+		self.formulaPathLabel.preferredMaxLayoutWidth			= self.formulaPathLabel.frame.size.width;
 		[[self view] layoutSubtreeIfNeeded];
 	}
 }
@@ -65,17 +65,21 @@
 	
 	if (!self.formulae || [self.formulae count] == 0)
 	{
-		[self.formulaPathLabel setStringValue:emptyString];
-		[self.formulaVersionLabel setStringValue:emptyString];
-		[self.formulaDependenciesLabel setStringValue:emptyString];
-		[self.formulaConflictsLabel setStringValue:emptyString];
+		[self.formulaDescriptionLabel	setStringValue:emptyString];
+		[self.formulaPathLabel			setStringValue:emptyString];
+		[self.formulaVersionLabel		setStringValue:emptyString];
+		[self.formulaDependenciesLabel	setStringValue:emptyString];
+		[self.formulaConflictsLabel		setStringValue:emptyString];
 	}
 	
 	if ([self.formulae count] == 1)
 	{
 		BPFormula *formula = [self.formulae firstObject];
 		
-		[self.timedDispatch scheduleDispatchAfterTimeInterval:0.3 inQueue:dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0) ofBlock:^{
+		[self.timedDispatch scheduleDispatchAfterTimeInterval:0.3
+													  inQueue:dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0)
+													  ofBlock:^
+		{
 			[formula getInformation];
 			
 			if (formula.isInstalled)
@@ -119,6 +123,15 @@
 			else
 			{
 				[self.formulaConflictsLabel setStringValue:NSLocalizedString(@"Info_View_Formula_No_Conflicts", nil)];
+			}
+			
+			if (formula.shortDescription)
+			{
+				[self.formulaDescriptionLabel setStringValue:formula.shortDescription];
+			}
+			else
+			{
+				[self.formulaDescriptionLabel setStringValue:NSLocalizedString(@"Info_View_Formula_No_Description", nil)];
 			}
 			
 			if ([self.delegate respondsToSelector:@selector(selectedFormulaViewDidUpdateFormulaInfoForFormula:)])

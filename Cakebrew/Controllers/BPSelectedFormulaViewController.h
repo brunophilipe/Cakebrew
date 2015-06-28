@@ -22,6 +22,7 @@
 
 @property (weak) id<BPSelectedFormulaViewControllerDelegate> delegate;
 
+@property (weak) IBOutlet NSTextField *formulaDescriptionLabel;
 @property (weak) IBOutlet NSTextField *formulaPathLabel;
 @property (weak) IBOutlet NSTextField *formulaVersionLabel;
 @property (weak) IBOutlet NSTextField *formulaDependenciesLabel;

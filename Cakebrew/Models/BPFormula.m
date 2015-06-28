@@ -31,6 +31,7 @@ NSString *const kBP_ENCODE_FORMULA_WURL = @"BP_ENCODE_FORMULA_WURL";
 NSString *const kBP_ENCODE_FORMULA_DEPS = @"BP_ENCODE_FORMULA_DEPS";
 NSString *const kBP_ENCODE_FORMULA_INST = @"BP_ENCODE_FORMULA_INST";
 NSString *const kBP_ENCODE_FORMULA_CNFL = @"BP_ENCODE_FORMULA_CNFL";
+NSString *const kBP_ENCODE_FORMULA_SDSC = @"BP_ENCODE_FORMULA_SDSC";
 
 NSString *const kBPIdentifierDependencies = @"==> Dependencies";
 NSString *const kBPIdentifierOptions = @"==> Options";
@@ -44,6 +45,7 @@ NSString *const kBPIdentifierCaveats = @"==> Caveats";
 @property (strong) NSString *installPath;
 @property (strong) NSString *dependencies;
 @property (strong) NSString *conflicts;
+@property (strong) NSString *shortDescription;
 @property (strong) NSURL    *website;
 @property (strong) NSArray  *options;
 
@@ -86,13 +88,14 @@ NSString *const kBPIdentifierCaveats = @"==> Caveats";
 
 - (void)encodeWithCoder:(NSCoder *)aCoder
 {
-	if (self.name)				[aCoder encodeObject:self.name			forKey:kBP_ENCODE_FORMULA_NAME];
-	if (self.version)			[aCoder encodeObject:self.version		forKey:kBP_ENCODE_FORMULA_IVER];
-	if (self.latestVersion)		[aCoder encodeObject:self.latestVersion	forKey:kBP_ENCODE_FORMULA_LVER];
-	if (self.installPath)		[aCoder encodeObject:self.installPath	forKey:kBP_ENCODE_FORMULA_PATH];
-	if (self.website)			[aCoder encodeObject:self.website		forKey:kBP_ENCODE_FORMULA_WURL];
-	if (self.dependencies)		[aCoder encodeObject:self.dependencies	forKey:kBP_ENCODE_FORMULA_DEPS];
-	if (self.conflicts)			[aCoder encodeObject:self.conflicts		forKey:kBP_ENCODE_FORMULA_CNFL];
+	if (self.name)				[aCoder encodeObject:self.name				forKey:kBP_ENCODE_FORMULA_NAME];
+	if (self.version)			[aCoder encodeObject:self.version			forKey:kBP_ENCODE_FORMULA_IVER];
+	if (self.latestVersion)		[aCoder encodeObject:self.latestVersion		forKey:kBP_ENCODE_FORMULA_LVER];
+	if (self.installPath)		[aCoder encodeObject:self.installPath		forKey:kBP_ENCODE_FORMULA_PATH];
+	if (self.website)			[aCoder encodeObject:self.website			forKey:kBP_ENCODE_FORMULA_WURL];
+	if (self.dependencies)		[aCoder encodeObject:self.dependencies		forKey:kBP_ENCODE_FORMULA_DEPS];
+	if (self.conflicts)			[aCoder encodeObject:self.conflicts			forKey:kBP_ENCODE_FORMULA_CNFL];
+	if (self.shortDescription)	[aCoder encodeObject:self.shortDescription	forKey:kBP_ENCODE_FORMULA_SDSC];
 
 	[aCoder encodeObject:@(self.installed) forKey:kBP_ENCODE_FORMULA_INST];
 }
@@ -101,13 +104,14 @@ NSString *const kBPIdentifierCaveats = @"==> Caveats";
 {
 	self = [super init];
 	if (self) {
-		self.name			= [aDecoder decodeObjectForKey:kBP_ENCODE_FORMULA_NAME];
-		self.version		= [aDecoder decodeObjectForKey:kBP_ENCODE_FORMULA_IVER];
-		self.latestVersion	= [aDecoder decodeObjectForKey:kBP_ENCODE_FORMULA_LVER];
-		self.installPath	= [aDecoder decodeObjectForKey:kBP_ENCODE_FORMULA_PATH];
-		self.website		= [aDecoder decodeObjectForKey:kBP_ENCODE_FORMULA_WURL];
-		self.dependencies	= [aDecoder decodeObjectForKey:kBP_ENCODE_FORMULA_DEPS];
-		self.conflicts		= [aDecoder decodeObjectForKey:kBP_ENCODE_FORMULA_CNFL];
+		self.name				= [aDecoder decodeObjectForKey:kBP_ENCODE_FORMULA_NAME];
+		self.version			= [aDecoder decodeObjectForKey:kBP_ENCODE_FORMULA_IVER];
+		self.latestVersion		= [aDecoder decodeObjectForKey:kBP_ENCODE_FORMULA_LVER];
+		self.installPath		= [aDecoder decodeObjectForKey:kBP_ENCODE_FORMULA_PATH];
+		self.website			= [aDecoder decodeObjectForKey:kBP_ENCODE_FORMULA_WURL];
+		self.dependencies		= [aDecoder decodeObjectForKey:kBP_ENCODE_FORMULA_DEPS];
+		self.conflicts			= [aDecoder decodeObjectForKey:kBP_ENCODE_FORMULA_CNFL];
+		self.shortDescription	= [aDecoder decodeObjectForKey:kBP_ENCODE_FORMULA_CNFL];
 	}
 	return self;
 }
@@ -121,13 +125,14 @@ NSString *const kBPIdentifierCaveats = @"==> Caveats";
     BPFormula *formula = [[[self class] allocWithZone:zone] init];
     if (formula)
     {
-        formula->_name			= [self->_name			copy];
-		formula->_version		= [self->_version		copy];
-		formula->_latestVersion = [self->_latestVersion copy];
-		formula->_installPath	= [self->_installPath	copy];
-		formula->_website		= [self->_website		copy];
-		formula->_dependencies	= [self->_dependencies	copy];
-		formula->_conflicts		= [self->_conflicts		copy];
+		formula->_name				= [self->_name				copy];
+		formula->_version			= [self->_version			copy];
+		formula->_latestVersion 	= [self->_latestVersion 	copy];
+		formula->_installPath		= [self->_installPath		copy];
+		formula->_website			= [self->_website			copy];
+		formula->_dependencies		= [self->_dependencies		copy];
+		formula->_conflicts			= [self->_conflicts			copy];
+		formula->_shortDescription	= [self->_shortDescription	copy];
     }
 	return formula;
 }
@@ -164,16 +169,30 @@ NSString *const kBPIdentifierCaveats = @"==> Caveats";
 	lineIndex = 0;
 	line = [lines objectAtIndex:lineIndex];
 	[self setLatestVersion:[line substringFromIndex:[self.name length]+2]];
-
+	
 	lineIndex = 1;
 	line = [lines objectAtIndex:lineIndex];
-	[self setWebsite:[NSURL URLWithString:line]];
+	id url = [NSURL URLWithString:line];
+	
+	if (url == nil)
+	{
+		[self setShortDescription:line];
 
-	lineIndex = 2;
+		lineIndex = 2;
+		line = [lines objectAtIndex:lineIndex];
+		[self setWebsite:[NSURL URLWithString:line]];
+	}
+	else
+	{
+		[self setWebsite:url];
+	}
+	
+	lineIndex++;
 	line = [lines objectAtIndex:lineIndex];
-	if ([line rangeOfString:@"Conflicts with:"].location != NSNotFound) {
+	if ([line rangeOfString:@"Conflicts with:"].location != NSNotFound)
+	{
 		[self setConflicts:[line substringFromIndex:15]];
-		lineIndex = 3;
+		lineIndex++;
 		line = [lines objectAtIndex:lineIndex];
 	}
 
@@ -205,10 +224,18 @@ NSString *const kBPIdentifierCaveats = @"==> Caveats";
 
 		NSMutableString __block *dependencies = nil;
 
-		[output enumerateSubstringsInRange:range_deps options:NSStringEnumerationByLines usingBlock:^(NSString *substring, NSRange substringRange, NSRange enclosingRange, BOOL *stop) {
-			if (!dependencies) {
+		[output enumerateSubstringsInRange:range_deps
+								   options:NSStringEnumerationByLines usingBlock:^(NSString *substring,
+																				   NSRange substringRange,
+																				   NSRange enclosingRange,
+																				   BOOL *stop)
+		{
+			if (!dependencies)
+			{
 				dependencies = [NSMutableString stringWithString:substring];
-			} else {
+			}
+			else
+			{
 				[dependencies appendFormat:@"; %@", substring];
 			}
 		}];

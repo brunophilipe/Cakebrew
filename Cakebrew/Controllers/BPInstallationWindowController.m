@@ -171,7 +171,7 @@
 																		  waitUntilDone:YES];
 								   }];
 			} else {
-        //no parameter is necessary to upgrade all formulas; recycling API with empty string
+				//no parameter is necessary to upgrade all formulas; recycling API with empty string
 				[homebrewInterface upgradeFormulae:@[@""]
 								  withReturnBlock:^(NSString *output) {
 									  if (outputValue) {
@@ -230,9 +230,11 @@
 												   waitUntilDone:YES];
 			}];
 		}
+		
 		[self.progressIndicator stopAnimation:nil];
 		[self.okButton setEnabled:YES];
-
+		
+		[[NSApplication sharedApplication] requestUserAttention:NSInformationalRequest];
 	});
 }
 

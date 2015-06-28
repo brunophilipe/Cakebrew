@@ -29,6 +29,7 @@
 @property (strong, readonly) NSString *installPath;
 @property (strong, readonly) NSString *dependencies;
 @property (strong, readonly) NSString *conflicts;
+@property (strong, readonly) NSString *shortDescription;
 @property (strong, readonly) NSURL    *website;
 @property (strong, readonly) NSArray  *options;
 
