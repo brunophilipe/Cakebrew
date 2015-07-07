@@ -113,7 +113,7 @@ static NSString *cakebrewOutputIdentifier = @"+++++Cakebrew+++++";
 	string_output = [[NSString alloc] initWithData:[[pipe_output fileHandleForReading] readDataToEndOfFile] encoding:NSUTF8StringEncoding];
 	string_output = [self removeLoginShellOutputFromString:string_output];
 	
-	NSLog(@"`which brew` returned \"%@\"", string_output);
+	NSLog(@"brew: %@", string_output);
 	
 	return string_output.length != 0;
 }
@@ -131,7 +131,7 @@ static NSString *cakebrewOutputIdentifier = @"+++++Cakebrew+++++";
 		{
 			[self setPath_cellar:[self getUserCellarPath]];
 			
-			NSLog(@"Cellar Path: %@", self.path_cellar);
+			NSLog(@"cellar: %@", self.path_cellar);
 		}
 	}
 }
@@ -332,8 +332,6 @@ static NSString *cakebrewOutputIdentifier = @"+++++Cakebrew+++++";
 
 - (NSArray*)listMode:(BPListMode)mode
 {
-	NSLog(@"Listing with mode: %ld", (long)mode);
-	
 	BPHomebrewInterfaceListCall *listCall = nil;
 	
 	switch (mode) {
@@ -362,8 +360,6 @@ static NSString *cakebrewOutputIdentifier = @"+++++Cakebrew+++++";
 	}
 	
 	NSString *string = [self performBrewCommandWithArguments:listCall.arguments];
-	
-	NSLog(@"Finished list mode: %ld", (long)mode);
 	
 	if (string)
 	{
