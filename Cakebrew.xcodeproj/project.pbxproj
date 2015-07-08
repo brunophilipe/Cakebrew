@@ -16,7 +16,6 @@
 		150AEC531B3F999A00163767 /* BPSelectedFormulaViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 150AEC471B3F999A00163767 /* BPSelectedFormulaViewController.m */; };
 		150AEC541B3F999A00163767 /* BPSideBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 150AEC491B3F999A00163767 /* BPSideBarController.m */; };
 		150AEC551B3F999A00163767 /* BPUpdateViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 150AEC4B1B3F999A00163767 /* BPUpdateViewController.m */; };
-		1529086B1927C05B00206767 /* .travis.yml in Resources */ = {isa = PBXBuildFile; fileRef = 1529086A1927C05B00206767 /* .travis.yml */; };
 		1536BFF718EBA92400B67C5C /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1536BFF618EBA92400B67C5C /* Images.xcassets */; };
 		1540FA3518ECF66B00334A5C /* download.icns in Resources */ = {isa = PBXBuildFile; fileRef = 1540FA3418ECF66B00334A5C /* download.icns */; };
 		1570BA3618EE0A66001C3C5C /* BPHomebrewManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 1570BA3518EE0A66001C3C5C /* BPHomebrewManager.m */; };
@@ -451,7 +450,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1529086B1927C05B00206767 /* .travis.yml in Resources */,
 				15D5BEF318EBB3FB001DDED7 /* plus.icns in Resources */,
 				15D28A231AE332F9005C8A3E /* BPPreferencesWindow.xib in Resources */,
 				15D28A171AE332E6005C8A3E /* BPDoctorView.xib in Resources */,
