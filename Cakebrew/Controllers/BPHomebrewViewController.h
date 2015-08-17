@@ -49,12 +49,7 @@ typedef NS_ENUM(NSUInteger, BPWindowOperation) {
 @property (weak) IBOutlet NSTextField              *label_information;
 @property (weak) IBOutlet NSView				    *view_disablerLock;
 @property (weak) IBOutlet NSView				    *view_loading;
-@property (weak) IBOutlet NSToolbar                *toolbar;
-@property (weak) IBOutlet NSSearchField            *searchField;
 @property (weak) IBOutlet NSMenu                   *menu_formula;
-
-@property IBOutlet NSToolbarItem *toolbarButton_formulaInfo;
-@property IBOutlet NSToolbarItem *toolbarButton_installUninstall;
 
 // Cocoa bindings
 @property (strong, nonatomic) NSString *formulaMenuTitle;
@@ -73,7 +68,6 @@ typedef NS_ENUM(NSUInteger, BPWindowOperation) {
 - (IBAction)upgradeAllOutdatedFormulae:(id)sender;
 - (IBAction)updateHomebrew:(id)sender;
 - (IBAction)openSelectedFormulaWebsite:(id)sender;
-- (IBAction)searchFormulasFieldDidChange:(id)sender;
 - (IBAction)beginFormulaSearch:(id)sender;
 - (IBAction)runHomebrewCleanup:(id)sender;
 

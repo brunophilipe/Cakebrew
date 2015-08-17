@@ -29,6 +29,7 @@
 #import "BPDoctorViewController.h"
 #import "BPFormulaeDataSource.h"
 #import "BPSelectedFormulaViewController.h"
+#import "BPToolbar.h"
 
 typedef NS_ENUM(NSUInteger, HomeBrewTab) {
 	HomeBrewTabFormulae,
@@ -40,6 +41,7 @@ typedef NS_ENUM(NSUInteger, HomeBrewTab) {
 										BPSideBarControllerDelegate,
 										BPSelectedFormulaViewControllerDelegate,
 										BPHomebrewManagerDelegate,
+                    BPToolbarProtocol,
 										NSMenuDelegate>
 
 @property (weak) BPAppDelegate *appDelegate;
@@ -59,6 +61,7 @@ typedef NS_ENUM(NSUInteger, HomeBrewTab) {
 @property (strong, nonatomic) BPDoctorViewController			*doctorViewController;
 @property (strong, nonatomic) BPFormulaPopoverViewController	*formulaPopoverViewController;
 @property (strong, nonatomic) BPSelectedFormulaViewController	*selectedFormulaeViewController;
+@property (strong, nonatomic) BPToolbar                *toolbar;
 
 @property (weak, nonatomic) IBOutlet NSSplitView *formulaeSplitView;
 @property (weak, nonatomic) IBOutlet NSView		 *selectedFormulaView;
@@ -170,9 +173,11 @@ typedef NS_ENUM(NSUInteger, HomeBrewTab) {
 
 	[self.view_loading setHidden:NO];
 	[self.splitView setHidden:YES];
-	[self setToolbarItemsEnabled:NO];
-	
-	[self.searchField.cell accessibilitySetOverrideValue:@[self.tableView_formulae] forAttribute:NSAccessibilityLinkedUIElementsAttribute];
+  self.toolbar = [[BPToolbar alloc] initWithIdentifier:nil];
+  self.toolbar.delegate = self.toolbar;
+  self.toolbar.controller = self;
+  [[[self view] window] setToolbar:self.toolbar];
+	[self.toolbar configureForMode:BPToolbarModeEmpty];
 
 	_appDelegate = BPAppDelegateRef;
 }
@@ -205,61 +210,51 @@ typedef NS_ENUM(NSUInteger, HomeBrewTab) {
 					   ofDividerAtIndex:0];
 	
 	if (selectedSidebarRow == FormulaeSideBarItemRepositories) { // Repositories sidebaritem
-		[self.toolbarButton_installUninstall setEnabled:YES];
-		[self.toolbarButton_formulaInfo setEnabled:NO];
+    [self.toolbar configureForMode:BPToolbarModeTap];
 		[self.formulaeSplitView setPosition:height
 						   ofDividerAtIndex:0];
 		
 		if (selectedIndex != -1) {
-			[self.toolbarButton_installUninstall setImage:[NSImage imageNamed:@"delete.icns"]];
-			[self.toolbarButton_installUninstall setLabel:NSLocalizedString(@"Toolbar_Untap_Repo", nil)];
+      [self.toolbar configureForMode:BPToolbarModeUntap];
 			[self setToolbarButtonOperation:kBPWindowOperationUntap];
 		} else {
-			[self.toolbarButton_installUninstall setImage:[NSImage imageNamed:@"download.icns"]];
-			[self.toolbarButton_installUninstall setLabel:NSLocalizedString(@"Toolbar_Tap_Repo", nil)];
+      [self.toolbar configureForMode:BPToolbarModeTap];
 			[self setToolbarButtonOperation:kBPWindowOperationTap];
 		}
 	}
 	else if (selectedIndex == -1 || selectedSidebarRow > FormulaeSideBarItemToolsCategory)
 	{
-		[self.toolbarButton_installUninstall setEnabled:NO];
-		[self.toolbarButton_formulaInfo setEnabled:NO];
+    [self.toolbar configureForMode:BPToolbarModeDefault];
 	}
 	else if ([[self.tableView_formulae selectedRowIndexes] count] > 1)
 	{
-		[self.toolbarButton_installUninstall setImage:[NSImage imageNamed:@"reload.icns"]];
-		[self.toolbarButton_installUninstall setLabel:NSLocalizedString(@"Toolbar_Update_Selected", nil)];
+    [self.toolbar configureForMode:BPToolbarModeUpdateMany];
 		[self setToolbarButtonOperation:kBPWindowOperationUpgrade];
 	}
 	else
 	{
 		BPFormula *formula = [self.formulaeDataSource formulaAtIndex:selectedIndex];
 		
-		[self.toolbarButton_installUninstall setEnabled:YES];
-		[self.toolbarButton_formulaInfo setEnabled:YES];
+    [self.toolbar configureForMode:BPToolbarModeInstall];
 		
 		switch ([[BPHomebrewManager sharedManager] statusForFormula:formula]) {
 			case kBPFormulaInstalled:
-				[self.toolbarButton_installUninstall setImage:[NSImage imageNamed:@"delete.icns"]];
-				[self.toolbarButton_installUninstall setLabel:NSLocalizedString(@"Toolbar_Uninstall_Formula", nil)];
+        [self.toolbar configureForMode:BPToolbarModeUninstall];
 				[self setToolbarButtonOperation:kBPWindowOperationUninstall];
 				break;
 				
 			case kBPFormulaOutdated:
 				if (selectedSidebarRow == FormulaeSideBarItemOutdated) {
-					[self.toolbarButton_installUninstall setImage:[NSImage imageNamed:@"reload.icns"]];
-					[self.toolbarButton_installUninstall setLabel:NSLocalizedString(@"Toolbar_Update_Formula", nil)];
+					[self.toolbar configureForMode:BPToolbarModeUpdateSingle];
 					[self setToolbarButtonOperation:kBPWindowOperationUpgrade];
 				} else {
-					[self.toolbarButton_installUninstall setImage:[NSImage imageNamed:@"delete.icns"]];
-					[self.toolbarButton_installUninstall setLabel:NSLocalizedString(@"Toolbar_Uninstall_Formula", nil)];
+          [self.toolbar configureForMode:BPToolbarModeUninstall];
 					[self setToolbarButtonOperation:kBPWindowOperationUninstall];
 				}
 				break;
 				
 			case kBPFormulaNotInstalled:
-				[self.toolbarButton_installUninstall setImage:[NSImage imageNamed:@"download.icns"]];
-				[self.toolbarButton_installUninstall setLabel:NSLocalizedString(@"Toolbar_Install_Formula", nil)];
+        [self.toolbar configureForMode:BPToolbarModeInstall];
 				[self setToolbarButtonOperation:kBPWindowOperationInstall];
 				break;
 		}
@@ -275,14 +270,6 @@ typedef NS_ENUM(NSUInteger, HomeBrewTab) {
 	[self updateInterfaceItems];
 }
 
-- (void)setToolbarItemsEnabled:(BOOL)yesOrNo
-{
-	[self.toolbar.items enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
-		if ([obj respondsToSelector:@selector(setEnabled:)]) {
-			[obj setEnabled:yesOrNo];
-		}
-	}];
-}
 
 #pragma mark – Footer Information Label
 
@@ -355,7 +342,7 @@ typedef NS_ENUM(NSUInteger, HomeBrewTab) {
 		[self.view_loading setHidden:YES];
 		[self.splitView	   setHidden:NO];
 		
-		[self setToolbarItemsEnabled:YES];
+    [self.toolbar configureForMode:BPToolbarModeDefault];
 		[self.formulaeDataSource refreshBackingArray];
 		[self.sidebarController refreshSidebarBadges];
 		
@@ -394,7 +381,7 @@ typedef NS_ENUM(NSUInteger, HomeBrewTab) {
 		[self.view_loading setHidden:YES];
 		[self.splitView setHidden:YES];
 		
-		[self setToolbarItemsEnabled:NO];
+		[self.toolbar configureForMode:BPToolbarModeEmpty];
 		
 		NSAlert *alert = [NSAlert alertWithMessageText:NSLocalizedString(@"Generic_Error", nil)
 										 defaultButton:NSLocalizedString(@"Message_No_Homebrew_Title", nil)
@@ -425,7 +412,7 @@ typedef NS_ENUM(NSUInteger, HomeBrewTab) {
 		[self.label_information setHidden:NO];
 		[self.splitView setHidden:NO];
 		
-		[self setToolbarItemsEnabled:YES];
+		[self.toolbar configureForMode:BPToolbarModeDefault];
 		
 		[[BPHomebrewManager sharedManager] reloadFromInterfaceRebuildingCache:YES];
 	}
@@ -729,27 +716,24 @@ typedef NS_ENUM(NSUInteger, HomeBrewTab) {
 	}
 }
 
-- (IBAction)searchFormulasFieldDidChange:(id)sender
+- (void)performSearchWithString:(NSString *)searchPhrase
 {
-	NSSearchField *searchField = sender;
-	NSString *searchPhrase = searchField.stringValue;
-	
-	if ([searchPhrase isEqualToString:@""])
-	{
-		[self setSearching:NO];
-		[self updateInfoLabelWithSidebarSelection];
-	}
-	else
-	{
-		[[BPHomebrewManager sharedManager] updateSearchWithName:searchPhrase];
-	}
-	
-	[self configureTableForListing:kBPListAll];
+  if ([searchPhrase isEqualToString:@""])
+  {
+    [self setSearching:NO];
+    [self updateInfoLabelWithSidebarSelection];
+  }
+  else
+  {
+    [[BPHomebrewManager sharedManager] updateSearchWithName:searchPhrase];
+  }
+  
+  [self configureTableForListing:kBPListAll];
 }
 
 - (IBAction)beginFormulaSearch:(id)sender
 {
-	[self.searchField becomeFirstResponder];
+  [self.toolbar makeSearchFieldFirstResponder];
 }
 
 - (IBAction)runHomebrewCleanup:(id)sender

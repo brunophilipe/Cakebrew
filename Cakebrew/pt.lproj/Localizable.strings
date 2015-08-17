@@ -57,6 +57,9 @@
 "Toolbar_Tap_Repo" = "Adicionar Repositório";
 "Toolbar_Untap_Repo" = "remover Repositório";
 "Toolbar_Update_Selected" = "Atualizar Selecionadas";
+"Toolbar_More_Information" = "Mais Informações";
+"Toolbar_Homebrew_Update" = "Atualizar Homebrew";
+"Toolbar_Search" = "Buscar Fórmulas";
 
 "Sidebar_Info_Installed" = "These are the fórmulas already installed in your system.";
 "Sidebar_Info_Outdated" = "These fórmulas are already installed, but have an update available.";

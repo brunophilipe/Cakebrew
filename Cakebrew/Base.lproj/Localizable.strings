@@ -57,6 +57,9 @@
 "Toolbar_Tap_Repo" = "Tap Repository";
 "Toolbar_Untap_Repo" = "Untap Repository";
 "Toolbar_Update_Selected" = "Update Selected";
+"Toolbar_More_Information" = "More Information";
+"Toolbar_Homebrew_Update" = "Update Homebrew";
+"Toolbar_Search" = "Search Formulae";
 
 "Sidebar_Info_Installed" = "These are the formulae already installed in your system.";
 "Sidebar_Info_Outdated" = "These formulae are already installed, but have an update available.";
