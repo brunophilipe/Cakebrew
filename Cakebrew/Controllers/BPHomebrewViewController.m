@@ -579,15 +579,6 @@ typedef NS_ENUM(NSUInteger, HomeBrewTab) {
 			}
 				break;
 				
-			case kBPWindowOperationTap:
-			{
-				message = NSLocalizedString(@"Confirmation_Tap_Repo", nil);
-				operationBlock = ^{
-					[self prepareFormulae:@[formula] forOperation:kBPWindowOperationTap withOptions:nil];
-				};
-			}
-				break;
-				
 			default:
 				break;
 		}
