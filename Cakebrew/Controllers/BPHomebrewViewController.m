@@ -516,6 +516,9 @@ typedef NS_ENUM(NSUInteger, HomeBrewTab) {
 	}
 	NSInteger selectedIndex = [self.tableView_formulae selectedRow];
 	BPFormula *formula = [self.formulaeDataSource formulaAtIndex:selectedIndex];
+  if (!formula) {
+    return;
+  }
 	[self.formulaPopoverViewController setFormula:formula];
 	
 	NSRect anchorRect = [self.tableView_formulae rectOfRow:selectedIndex];
@@ -530,57 +533,32 @@ typedef NS_ENUM(NSUInteger, HomeBrewTab) {
 {
   [self checkForBackgroundOperation];
 	
-	NSInteger selectedFormula = [self.tableView_formulae selectedRow];
-	NSInteger selectedSidebarRow = [self.sidebarController.sidebar selectedRow];
-	BPFormula *formula = [self.formulaeDataSource formulaAtIndex:selectedFormula];
+  NSInteger selectedSidebarRow = [self.sidebarController.sidebar selectedRow];
+  NSIndexSet *indexes = [self.tableView_formulae selectedRowIndexes];
+  NSArray *formulae = [self.formulaeDataSource formulasAtIndexSet:indexes];
 	
-	if (formula)
+	if ([formulae count])
 	{
 		NSString *message;
-		void (^operationBlock)(void);
-		
+    void (^operationBlock)(void) = ^{
+          [self prepareFormulae:formulae forOperation:_toolbarButtonOperation withOptions:nil];
+        };
 		switch (_toolbarButtonOperation) {
-			case kBPWindowOperationInstall:
-			{
-				message = NSLocalizedString(@"Confirmation_Install_Formula", nil);
-				operationBlock = ^{
-					[self prepareFormulae:@[formula] forOperation:kBPWindowOperationInstall withOptions:nil];
-				};
-			}
+      case kBPWindowOperationInstall:
+        message = NSLocalizedString(@"Confirmation_Install_Formula", nil);
+        break;
+      case kBPWindowOperationUninstall:
+        message = NSLocalizedString(@"Confirmation_Uninstall_Formula", nil);
+        break;
+      case kBPWindowOperationUpgrade:
+        message = NSLocalizedString(@"Confirmation_Update_Formula", nil);
+        break;
+      case kBPWindowOperationUntap:
+        message = NSLocalizedString(@"Confirmation_Untap_Repo", nil);
 				break;
-				
-			case kBPWindowOperationUninstall:
-			{
-				message = NSLocalizedString(@"Confirmation_Uninstall_Formula", nil);
-				operationBlock = ^{
-					[self prepareFormulae:@[formula] forOperation:kBPWindowOperationUninstall withOptions:nil];
-				};
-			}
+      default: {
 				break;
-				
-			case kBPWindowOperationUpgrade:
-			{
-				message = NSLocalizedString(@"Confirmation_Update_Formula", nil);
-				NSIndexSet *indexes = [self.tableView_formulae selectedRowIndexes];
-				NSArray *formulae = [self.formulaeDataSource formulasAtIndexSet:indexes];
-				
-				operationBlock = ^{
-					[self prepareFormulae:formulae forOperation:kBPWindowOperationUpgrade withOptions:nil];
-				};
-			}
-				break;
-				
-			case kBPWindowOperationUntap:
-			{
-				message = NSLocalizedString(@"Confirmation_Untap_Repo", nil);
-				operationBlock = ^{
-					[self prepareFormulae:@[formula] forOperation:kBPWindowOperationUntap withOptions:nil];
-				};
-			}
-				break;
-				
-			default:
-				break;
+      }
 		}
 		
 		if (message)
@@ -589,7 +567,7 @@ typedef NS_ENUM(NSUInteger, HomeBrewTab) {
 											 defaultButton:NSLocalizedString(@"Generic_Yes", nil)
 										   alternateButton:NSLocalizedString(@"Generic_Cancel", nil)
 											   otherButton:nil
-								 informativeTextWithFormat:message, formula.name];
+								 informativeTextWithFormat:message, [(BPFormula *)([formulae firstObject]) name]];
 			
 			[alert.window setTitle:NSLocalizedString(@"Cakebrew", nil)];
 			
@@ -624,14 +602,6 @@ typedef NS_ENUM(NSUInteger, HomeBrewTab) {
 				BPFormula *lformula = [BPFormula formulaWithName:name];
 				[self prepareFormulae:@[lformula] forOperation:kBPWindowOperationTap withOptions:nil];
 			}
-			else
-			{
-				[_appDelegate setRunningBackgroundTask:NO];
-			}
-		}
-		else
-		{
-			[_appDelegate setRunningBackgroundTask:NO];
 		}
 	}
 }
