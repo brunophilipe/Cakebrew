@@ -382,53 +382,39 @@ typedef NS_ENUM(NSUInteger, HomeBrewTab) {
 	[self configureTableForListing:kBPListSearch];
 }
 
-- (void)homebrewManager:(BPHomebrewManager *)manager shouldDisplayNoBrewMessage:(BOOL)yesOrNo
+- (void)homebrewManagerCouldNotBrew:(BPHomebrewManager *)manager
 {
-	[self setHomebrewInstalled:!yesOrNo];
-	
-	if (yesOrNo)
-	{
-		[self.view_disablerLock setHidden:NO];
-		[self.view_disablerLock setWantsLayer:YES];
-		[self.label_information setHidden:YES];
-		[self.view_loading setHidden:YES];
-		[self.splitView setHidden:YES];
-		
-		[self setToolbarItemsEnabled:NO];
-		
-		NSAlert *alert = [NSAlert alertWithMessageText:NSLocalizedString(@"Generic_Error", nil)
-										 defaultButton:NSLocalizedString(@"Message_No_Homebrew_Title", nil)
-									   alternateButton:NSLocalizedString(@"Generic_Cancel", nil)
-										   otherButton:nil
-							 informativeTextWithFormat:NSLocalizedString(@"Message_No_Homebrew_Body", nil)];
-		
-		[alert.window setTitle:NSLocalizedString(@"Cakebrew", nil)];
-		
-		NSURL *brew_URL = [NSURL URLWithString:@"http://brew.sh"];
-		
-		if ([alert respondsToSelector:@selector(beginSheetModalForWindow:completionHandler:)]) {
-			[alert beginSheetModalForWindow:_appDelegate.window completionHandler:^(NSModalResponse returnCode) {
-				if (returnCode == NSAlertDefaultReturn) {
-					[[NSWorkspace sharedWorkspace] openURL:brew_URL];
-				}
-			}];
-		} else {
-			NSModalResponse returnCode = [alert runModal];
-			if (returnCode == NSAlertDefaultReturn) {
-				[[NSWorkspace sharedWorkspace] openURL:brew_URL];
-			}
-		}
-	}
-	else
-	{
-		[self.view_disablerLock setHidden:YES];
-		[self.label_information setHidden:NO];
-		[self.splitView setHidden:NO];
-		
-		[self setToolbarItemsEnabled:YES];
-		
-		[[BPHomebrewManager sharedManager] reloadFromInterfaceRebuildingCache:YES];
-	}
+	[self setHomebrewInstalled:NO];
+  [self.view_disablerLock setHidden:NO];
+  [self.view_disablerLock setWantsLayer:YES];
+  [self.label_information setHidden:YES];
+  [self.view_loading setHidden:YES];
+  [self.splitView setHidden:YES];
+  
+  [self setToolbarItemsEnabled:NO];
+  
+  NSAlert *alert = [NSAlert alertWithMessageText:NSLocalizedString(@"Generic_Error", nil)
+                   defaultButton:NSLocalizedString(@"Message_No_Homebrew_Title", nil)
+                   alternateButton:NSLocalizedString(@"Generic_Cancel", nil)
+                     otherButton:nil
+             informativeTextWithFormat:NSLocalizedString(@"Message_No_Homebrew_Body", nil)];
+  
+  [alert.window setTitle:NSLocalizedString(@"Cakebrew", nil)];
+  
+  NSURL *brew_URL = [NSURL URLWithString:@"http://brew.sh"];
+  
+  if ([alert respondsToSelector:@selector(beginSheetModalForWindow:completionHandler:)]) {
+    [alert beginSheetModalForWindow:_appDelegate.window completionHandler:^(NSModalResponse returnCode) {
+      if (returnCode == NSAlertDefaultReturn) {
+        [[NSWorkspace sharedWorkspace] openURL:brew_URL];
+      }
+    }];
+  } else {
+    NSModalResponse returnCode = [alert runModal];
+    if (returnCode == NSAlertDefaultReturn) {
+      [[NSWorkspace sharedWorkspace] openURL:brew_URL];
+    }
+  }
 }
 
 #pragma mark - NSTableView Delegate

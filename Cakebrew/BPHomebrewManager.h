@@ -34,7 +34,7 @@ typedef NS_ENUM(NSInteger, BPFormulaStatus) {
 
 - (void)homebrewManagerFinishedUpdating:(BPHomebrewManager*)manager;
 - (void)homebrewManager:(BPHomebrewManager *)manager didUpdateSearchResults:(NSArray *)searchResults;
-- (void)homebrewManager:(BPHomebrewManager *)manager shouldDisplayNoBrewMessage:(BOOL)yesOrNo;
+- (void)homebrewManagerCouldNotBrew:(BPHomebrewManager *)manager;
 
 @end
 

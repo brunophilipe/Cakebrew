@@ -209,7 +209,7 @@ static NSString *cakebrewOutputIdentifier = @"+++++Cakebrew+++++";
 		if (self.delegate) {
 			id delegate = self.delegate;
 			dispatch_async(dispatch_get_main_queue(), ^{
-				[delegate homebrewInterfaceShouldDisplayNoBrewMessage:YES];
+				[delegate homebrewInterfaceDisplayNoBrewMessage];
 			});
 		}
 	}

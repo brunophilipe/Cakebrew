@@ -41,9 +41,8 @@ typedef NS_ENUM(NSInteger, BPListMode) {
 /**
  *  Called if homebrew is not detected in the system.
  *
- *  @param yesOrNo `YES` if brew was not found.
  */
-- (void)homebrewInterfaceShouldDisplayNoBrewMessage:(BOOL)yesOrNo;
+- (void)homebrewInterfaceDisplayNoBrewMessage;
 
 @end
 
