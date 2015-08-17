@@ -528,13 +528,7 @@ typedef NS_ENUM(NSUInteger, HomeBrewTab) {
 
 - (IBAction)installUninstallUpdate:(id)sender
 {
-	// Check if there is a background task running. It is not smart to run two different Homebrew tasks at the same time!
-	if (_appDelegate.isRunningBackgroundTask)
-	{
-		[_appDelegate displayBackgroundWarning];
-		return;
-	}
-	[_appDelegate setRunningBackgroundTask:YES];
+  [self checkForBackgroundOperation];
 	
 	NSInteger selectedFormula = [self.tableView_formulae selectedRow];
 	NSInteger selectedSidebarRow = [self.sidebarController.sidebar selectedRow];
@@ -612,9 +606,6 @@ typedef NS_ENUM(NSUInteger, HomeBrewTab) {
 			if (returnValue == NSAlertDefaultReturn) {
 				operationBlock();
 			}
-			else {
-				[_appDelegate setRunningBackgroundTask:NO];
-			}
 		} else {
 			operationBlock();
 		}
@@ -656,11 +647,7 @@ typedef NS_ENUM(NSUInteger, HomeBrewTab) {
 
 - (IBAction)installFormulaWithOptions:(id)sender
 {
-	if (_appDelegate.isRunningBackgroundTask)
-	{
-		[_appDelegate displayBackgroundWarning];
-		return;
-	}
+  [self checkForBackgroundOperation];
 	
 	NSInteger selectedIndex = [self.tableView_formulae selectedRow];
 	BPFormula *formula = [self.formulaeDataSource formulaAtIndex:selectedIndex];
@@ -757,6 +744,16 @@ typedef NS_ENUM(NSUInteger, HomeBrewTab) {
 	self.operationWindowController = [BPInstallationWindowController runWithOperation:kBPWindowOperationCleanup
 																			 formulae:nil
 																			  options:nil];
+}
+
+- (void)checkForBackgroundOperation
+{
+  // Check if there is a background task running. It is not smart to run two different Homebrew tasks at the same time!
+  if (_appDelegate.isRunningBackgroundTask)
+  {
+    [_appDelegate displayBackgroundWarning];
+    return;
+  }
 }
 
 @end
