@@ -218,59 +218,91 @@ static NSString *kToolbarItemSearchIdentifier = @"toolbarItemSearch";
 #pragma clang diagnostic ignored "-Wundeclared-selector"
 
 - (NSToolbarItem *)toolbarItemHomebrewUpdate {
-  return [self toolbarItemWithIdentifier:kToolbarItemHomebrewUpdateIdentifier
+  static NSToolbarItem* toolbarItemHomebrewUpdate = nil;
+  if (!toolbarItemHomebrewUpdate) {
+  toolbarItemHomebrewUpdate = [self toolbarItemWithIdentifier:kToolbarItemHomebrewUpdateIdentifier
                                     icon:@"globe.icns"
                                    label:NSLocalizedString(@"Toolbar_Homebrew_Update", nil)
                                   action:@selector(updateHomebrew:)];
+  }
+  return toolbarItemHomebrewUpdate;
 }
 
 - (NSToolbarItem *)toolbarItemInstall {
-  return [self toolbarItemWithIdentifier:kToolbarItemInstallIdentifier
+  static NSToolbarItem* toolbarItemInstall = nil;
+  if (!toolbarItemInstall) {
+    toolbarItemInstall = [self toolbarItemWithIdentifier:kToolbarItemInstallIdentifier
                                     icon:@"download.icns"
                                    label:NSLocalizedString(@"Toolbar_Install_Formula", nil)
                                   action:@selector(installUninstallUpdate:)];
+  }
+  return toolbarItemInstall;
 }
 
 - (NSToolbarItem *)toolbarItemUninstall {
-  return [self toolbarItemWithIdentifier:kToolbarItemUninstallIdentifier
+  static NSToolbarItem* toolbarItemUninstall = nil;
+  if (!toolbarItemUninstall) {
+    toolbarItemUninstall = [self toolbarItemWithIdentifier:kToolbarItemUninstallIdentifier
                                     icon:@"delete.icns"
                                    label:NSLocalizedString(@"Toolbar_Uninstall_Formula", nil)
                                   action:@selector(installUninstallUpdate:)];
+  }
+  return toolbarItemUninstall;
 }
 
 - (NSToolbarItem *)toolbarItemTap {
-  return [self toolbarItemWithIdentifier:kToolbarItemTapIdentifier
+  static NSToolbarItem* toolbarItemTap = nil;
+  if (!toolbarItemTap) {
+    toolbarItemTap = [self toolbarItemWithIdentifier:kToolbarItemTapIdentifier
                                     icon:@"download.icns"
                                    label:NSLocalizedString(@"Toolbar_Tap_Repo", nil)
                                   action:@selector(installUninstallUpdate:)];
+  }
+  return toolbarItemTap;
 }
 
 - (NSToolbarItem *)toolbarItemUntap {
-  return [self toolbarItemWithIdentifier:kToolbarItemUntapIdentifier
+  static NSToolbarItem* toolbarItemUntap = nil;
+  if (!toolbarItemUntap) {
+    toolbarItemUntap = [self toolbarItemWithIdentifier:kToolbarItemUntapIdentifier
                                     icon:@"delete.icns"
                                    label:NSLocalizedString(@"Toolbar_Untap_Repo", nil)
                                   action:@selector(installUninstallUpdate:)];
+  }
+  return toolbarItemUntap;
 }
 
 - (NSToolbarItem *)toolbarItemUpdateSingle {
-  return [self toolbarItemWithIdentifier:kToolbarItemUpdateSingleIdentifier
+  static NSToolbarItem* toolbarItemUpdateSingle = nil;
+  if (!toolbarItemUpdateSingle) {
+    toolbarItemUpdateSingle = [self toolbarItemWithIdentifier:kToolbarItemUpdateSingleIdentifier
                                     icon:@"reload.icns"
                                    label:NSLocalizedString(@"Toolbar_Update_Formula", nil)
                                   action:@selector(installUninstallUpdate:)];
+  }
+  return toolbarItemUpdateSingle;
 }
 
 - (NSToolbarItem *)toolbarItemUpdateMany {
-  return [self toolbarItemWithIdentifier:kToolbarItemUpdateManyIdentifier
+  static NSToolbarItem* toolbarItemUpdateMany = nil;
+  if (!toolbarItemUpdateMany) {
+    toolbarItemUpdateMany = [self toolbarItemWithIdentifier:kToolbarItemUpdateManyIdentifier
                                     icon:@"reload.icns"
                                    label:NSLocalizedString(@"Toolbar_Update_Selected", nil)
                                   action:@selector(upgradeSelectedFormulae:)];
+  }
+  return toolbarItemUpdateMany;
 }
 
 - (NSToolbarItem *)toolbarItemInformation {
-  return [self toolbarItemWithIdentifier:kToolbarItemInformationIdentifier
+  static NSToolbarItem* toolbarItemInformation = nil;
+  if (!toolbarItemInformation) {
+    toolbarItemInformation = [self toolbarItemWithIdentifier:kToolbarItemInformationIdentifier
                                     icon:@"label.icns"
                                    label:NSLocalizedString(@"Toolbar_More_Information", nil)
                                   action:@selector(showFormulaInfo:)];
+  }
+  return toolbarItemInformation;
 }
 
 - (NSToolbarItem *)toolbarItemSearch {
