@@ -332,7 +332,8 @@ static NSString *kToolbarItemSearchIdentifier = @"toolbarItemSearch";
   item.label = label;
   item.paletteLabel = label;
   item.action = action;
-  item.autovalidates = NO;
+  item.target = self.controller;
+  item.autovalidates = YES;
   return item;
 }
 
