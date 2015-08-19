@@ -72,23 +72,21 @@
 
 	NSUInteger count = [self.formulae count];
 
-	if (count == 1)
-	{
-		self.formulaNameLabel.stringValue = [(BPFormula*)[self.formulae firstObject] name];
-	}
-	else if (count > 1)
-	{
-		NSString *formulaeNames = [[self namesOfAllFormulae] componentsJoinedByString:@", "];
-		self.formulaNameLabel.stringValue = formulaeNames;
-	}
-	else if (self.windowOperation != kBPWindowOperationCleanup)
-	{
-		self.formulaNameLabel.stringValue = NSLocalizedString(@"Installation_Window_All_Formulae", nil);
-	}
-	else
-	{
-		self.formulaNameLabel.stringValue = @"";
-	}
+  if (count >= 1)
+  {
+    NSString *formulaeNames = [[self namesOfAllFormulae] componentsJoinedByString:@", "];
+    self.formulaNameLabel.stringValue = formulaeNames;
+  }
+  else {
+    if (self.windowOperation != kBPWindowOperationCleanup)
+    {
+      self.formulaNameLabel.stringValue = NSLocalizedString(@"Installation_Window_All_Formulae", nil);
+    }
+    else
+    {
+      self.formulaNameLabel.stringValue = @"";
+    }
+  }
 }
 
 + (BPInstallationWindowController *)runWithOperation:(BPWindowOperation)windowOperation
