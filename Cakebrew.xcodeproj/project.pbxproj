@@ -24,6 +24,7 @@
 		1570EFB01B2B91170075453A /* Sparkle.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 15B23A2818F4F21E00714212 /* Sparkle.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		158370B918F2471500176C9C /* PXSourceList.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 158370B818F2471500176C9C /* PXSourceList.framework */; };
 		158370BA18F2472100176C9C /* PXSourceList.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 158370B818F2471500176C9C /* PXSourceList.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		15A00B411B8406FB00528486 /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 15A00B401B8406FB00528486 /* Credits.rtf */; };
 		15B23A2C18F5003600714212 /* dsa_pub.pem in Resources */ = {isa = PBXBuildFile; fileRef = 15B23A2B18F5003600714212 /* dsa_pub.pem */; };
 		15C34CBF19512DE100B92E36 /* BPAutoScrollTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 15C34CBE19512DE100B92E36 /* BPAutoScrollTextView.m */; };
 		15CEFC631AB335B2005CF54A /* BPLoadingView.m in Sources */ = {isa = PBXBuildFile; fileRef = 15CEFC621AB335B2005CF54A /* BPLoadingView.m */; };
@@ -51,7 +52,6 @@
 		1FE4FE59148E4CDD008EDE8B /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1FE4FE58148E4CDD008EDE8B /* Cocoa.framework */; };
 		1FE4FE63148E4CDD008EDE8B /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 1FE4FE61148E4CDD008EDE8B /* InfoPlist.strings */; };
 		1FE4FE65148E4CDD008EDE8B /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FE4FE64148E4CDD008EDE8B /* main.m */; };
-		1FE4FE69148E4CDD008EDE8B /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 1FE4FE67148E4CDD008EDE8B /* Credits.rtf */; };
 		1FE4FE6C148E4CDD008EDE8B /* BPAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FE4FE6B148E4CDD008EDE8B /* BPAppDelegate.m */; };
 		1FE4FE6F148E4CDD008EDE8B /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1FE4FE6D148E4CDD008EDE8B /* MainMenu.xib */; };
 		1FE4FE77148E4D43008EDE8B /* BPHomebrewInterface.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FE4FE76148E4D43008EDE8B /* BPHomebrewInterface.m */; };
@@ -106,6 +106,7 @@
 		15A00B3C1B84000600528486 /* pt */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = pt; path = pt.lproj/MainMenu.strings; sourceTree = "<group>"; };
 		15A00B3D1B84002E00528486 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		15A00B3E1B84003F00528486 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		15A00B401B8406FB00528486 /* Credits.rtf */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.rtf; path = Credits.rtf; sourceTree = "<group>"; };
 		15B23A2818F4F21E00714212 /* Sparkle.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Sparkle.framework; path = Cakebrew/Frameworks/Sparkle.framework; sourceTree = "<group>"; };
 		15B23A2B18F5003600714212 /* dsa_pub.pem */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = dsa_pub.pem; sourceTree = "<group>"; };
 		15C34CBD19512DE100B92E36 /* BPAutoScrollTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BPAutoScrollTextView.h; path = Views/BPAutoScrollTextView.h; sourceTree = "<group>"; };
@@ -123,7 +124,6 @@
 		15D28A241AE332F9005C8A3E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/BPPreferencesWindow.xib; sourceTree = "<group>"; };
 		15D28A271AE332FD005C8A3E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/BPSelectedFormula.xib; sourceTree = "<group>"; };
 		15D28A2A1AE33301005C8A3E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/BPUpdateView.xib; sourceTree = "<group>"; };
-		15D28A321AE342C6005C8A3E /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; name = Base; path = Base.lproj/Credits.rtf; sourceTree = "<group>"; };
 		15D28A331AE3433F005C8A3E /* pt */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = pt; path = pt.lproj/Localizable.strings; sourceTree = "<group>"; };
 		15D28A341AE3433F005C8A3E /* pt */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = pt; path = pt.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		15D28A371AE3433F005C8A3E /* pt */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = pt; path = pt.lproj/DCOAboutWindow.strings; sourceTree = "<group>"; };
@@ -371,7 +371,7 @@
 				1FE4FE61148E4CDD008EDE8B /* InfoPlist.strings */,
 				1FE4FE64148E4CDD008EDE8B /* main.m */,
 				1FE4FE66148E4CDD008EDE8B /* Cakebrew-Prefix.pch */,
-				1FE4FE67148E4CDD008EDE8B /* Credits.rtf */,
+				15A00B401B8406FB00528486 /* Credits.rtf */,
 				1529086A1927C05B00206767 /* .travis.yml */,
 			);
 			name = "Supporting Files";
@@ -451,9 +451,9 @@
 			files = (
 				15D5BEF318EBB3FB001DDED7 /* plus.icns in Resources */,
 				15D28A231AE332F9005C8A3E /* BPPreferencesWindow.xib in Resources */,
+				15A00B411B8406FB00528486 /* Credits.rtf in Resources */,
 				15D28A171AE332E6005C8A3E /* BPDoctorView.xib in Resources */,
 				1FE4FE63148E4CDD008EDE8B /* InfoPlist.strings in Resources */,
-				1FE4FE69148E4CDD008EDE8B /* Credits.rtf in Resources */,
 				15D28A141AE332DB005C8A3E /* DCOAboutWindow.xib in Resources */,
 				1FE4FE6F148E4CDD008EDE8B /* MainMenu.xib in Resources */,
 				15D28A1D1AE332EF005C8A3E /* BPFormulaPopoverView.xib in Resources */,
@@ -615,14 +615,6 @@
 				15A00B3D1B84002E00528486 /* en */,
 			);
 			name = InfoPlist.strings;
-			sourceTree = "<group>";
-		};
-		1FE4FE67148E4CDD008EDE8B /* Credits.rtf */ = {
-			isa = PBXVariantGroup;
-			children = (
-				15D28A321AE342C6005C8A3E /* Base */,
-			);
-			name = Credits.rtf;
 			sourceTree = "<group>";
 		};
 		1FE4FE6D148E4CDD008EDE8B /* MainMenu.xib */ = {
