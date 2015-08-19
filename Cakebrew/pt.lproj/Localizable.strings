@@ -23,6 +23,8 @@
 "Message_Shell_Invalid_Body" = "Favor adicionar seu shell \"%@\" à lista de shells válidos do sistema em \"/etc/shells\".";
 "Message_Tap_Title" = "Adicionando (Tapping) Repositório";
 "Message_Tap_Body" = "Qual repositório você deseja adicionar?";
+"Message_Untap_Title" = "Untapping Repository";
+"Message_Untap_Body" = "Tem certeza que deseja remover o repositório '%@'?";
 "Message_Update_Formulae_Title" = "Atualizando Fórmulas";
 "Message_Update_Formulae_Body" = "Tem certeza que deseja atualizar estas fórmulas: '%@'?";
 "Message_Update_All_Outdated_Title" = "Atualizando todas as Desatualizadas";

@@ -23,6 +23,8 @@
 "Message_Shell_Invalid_Body" = "Please add your shell \"%@\" to the valid shells file at \"/etc/shells\" before trying again.";
 "Message_Tap_Title" = "Tapping Repository";
 "Message_Tap_Body" = "What repository would you like to tap?";
+"Message_Untap_Title" = "Untapping Repository";
+"Message_Untap_Body" = "Are you sure you want to untap the repository '%@'?";
 "Message_Update_Formulae_Title" = "Updating Formulae";
 "Message_Update_Formulae_Body" = "Are you sure you want to update these formulae: '%@'?";
 "Message_Update_All_Outdated_Title" = "Updating all Outdated";

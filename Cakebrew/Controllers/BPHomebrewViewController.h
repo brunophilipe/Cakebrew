@@ -59,10 +59,8 @@ typedef NS_ENUM(NSUInteger, BPWindowOperation) {
 
 - (BOOL)isHomebrewInstalled;
 
-- (void)prepareFormulae:(NSArray*)formulae forOperation:(BPWindowOperation)operation withOptions:(NSArray*)options;
 
 - (IBAction)showFormulaInfo:(id)sender;
-- (IBAction)installUninstallUpdate:(id)sender;
 - (IBAction)installFormulaWithOptions:(id)sender;
 - (IBAction)upgradeSelectedFormulae:(id)sender;
 - (IBAction)upgradeAllOutdatedFormulae:(id)sender;

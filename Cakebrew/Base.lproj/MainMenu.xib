@@ -90,7 +90,7 @@ DQ
 </string>
                                 <modifierMask key="keyEquivalentModifierMask"/>
                                 <connections>
-                                    <action selector="installUninstallUpdate:" target="547" id="Fr2-ua-RsK"/>
+                                    <action selector="installFormula:" target="547" id="wOJ-Aj-tcg"/>
                                     <binding destination="547" name="enabled" keyPath="self.currentFormula" id="J1D-i3-vrU">
                                         <dictionary key="options">
                                             <string key="NSValueTransformerName">NSIsNotNil</string>
@@ -136,7 +136,7 @@ CA
 </string>
                                 <modifierMask key="keyEquivalentModifierMask"/>
                                 <connections>
-                                    <action selector="installUninstallUpdate:" target="547" id="fxx-FC-1i8"/>
+                                    <action selector="uninstallFormula:" target="547" id="60n-p5-vUn"/>
                                     <binding destination="547" name="enabled" keyPath="self.currentFormula" id="eUR-qe-OOt">
                                         <dictionary key="options">
                                             <string key="NSValueTransformerName">NSIsNotNil</string>
@@ -154,7 +154,7 @@ CA
                             </menuItem>
                             <menuItem title="Update Formula" keyEquivalent="r" id="4ab-Ns-Wry">
                                 <connections>
-                                    <action selector="installUninstallUpdate:" target="547" id="rLA-69-nJ2"/>
+                                    <action selector="upgradeSelectedFormulae:" target="547" id="Bb6-9M-scU"/>
                                     <binding destination="547" name="enabled" keyPath="self.currentFormula" id="x7H-Zr-6Sf">
                                         <dictionary key="options">
                                             <string key="NSValueTransformerName">NSIsNotNil</string>
@@ -830,7 +830,7 @@ CA
                 <menuItem title="Install Formula" id="Lcb-tm-ATo">
                     <modifierMask key="keyEquivalentModifierMask"/>
                     <connections>
-                        <action selector="installUninstallUpdate:" target="547" id="dvF-X5-AFi"/>
+                        <action selector="installFormula:" target="547" id="efD-tb-gb9"/>
                         <binding destination="547" name="enabled" keyPath="self.currentFormula" id="Nz4-8w-2do">
                             <dictionary key="options">
                                 <string key="NSValueTransformerName">NSIsNotNil</string>
@@ -870,7 +870,7 @@ CA
                 <menuItem title="Uninstall Formula" id="i3A-Nx-qPJ">
                     <modifierMask key="keyEquivalentModifierMask"/>
                     <connections>
-                        <action selector="installUninstallUpdate:" target="547" id="fdc-Oc-upB"/>
+                        <action selector="uninstallFormula:" target="547" id="V1K-gg-pFF"/>
                         <binding destination="547" name="enabled" keyPath="self.currentFormula" id="EPT-Ql-qEN">
                             <dictionary key="options">
                                 <string key="NSValueTransformerName">NSIsNotNil</string>
@@ -889,7 +889,7 @@ CA
                 <menuItem title="Update Formula" id="Hhd-b7-GOc">
                     <modifierMask key="keyEquivalentModifierMask"/>
                     <connections>
-                        <action selector="installUninstallUpdate:" target="547" id="F9d-VX-scf"/>
+                        <action selector="upgradeSelectedFormulae:" target="547" id="D56-QQ-lYl"/>
                         <binding destination="547" name="enabled" keyPath="self.currentFormula" id="rXd-8V-ocd">
                             <dictionary key="options">
                                 <string key="NSValueTransformerName">NSIsNotNil</string>

@@ -80,32 +80,32 @@ static NSString *kToolbarItemMultiActionIdentifier = @"toolbarItemMultiAction";
       [self reconfigureItem:multiActionItem
                   imageName:@"download.icns"
                       label:NSLocalizedString(@"Toolbar_Install_Formula", nil)
-                     action:@selector(installUninstallUpdate:)];
+                     action:@selector(installFormula:)];
       
       break;
     case BPToolbarModeUninstall:
       [self reconfigureItem:multiActionItem
                   imageName:@"delete.icns"
                       label:NSLocalizedString(@"Toolbar_Uninstall_Formula", nil)
-                     action:@selector(installUninstallUpdate:)];
+                     action:@selector(uninstallFormula:)];
       break;
     case BPToolbarModeTap:
       [self reconfigureItem:multiActionItem
                   imageName:@"download.icns"
                       label:NSLocalizedString(@"Toolbar_Tap_Repo", nil)
-                     action:@selector(installUninstallUpdate:)];
+                     action:@selector(tapRepository:)];
       break;
     case BPToolbarModeUntap:
       [self reconfigureItem:multiActionItem
                   imageName:@"delete.icns"
                       label:NSLocalizedString(@"Toolbar_Untap_Repo", nil)
-                     action:@selector(installUninstallUpdate:)];
+                     action:@selector(untapRepository:)];
       break;
     case BPToolbarModeUpdateSingle:
       [self reconfigureItem:multiActionItem
                   imageName:@"reload.icns"
                       label:NSLocalizedString(@"Toolbar_Update_Formula", nil)
-                     action:@selector(installUninstallUpdate:)];
+                     action:@selector(upgradeSelectedFormulae:)];
       break;
     case BPToolbarModeUpdateMany:
       [self reconfigureItem:multiActionItem
@@ -117,6 +117,7 @@ static NSString *kToolbarItemMultiActionIdentifier = @"toolbarItemMultiAction";
     default:
       break;
   }
+  [self validateVisibleItems];
 }
 
 - (void)setController:(id)controller
