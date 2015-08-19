@@ -177,7 +177,7 @@ typedef NS_ENUM(NSUInteger, HomeBrewTab) {
   self.toolbar.delegate = self.toolbar;
   self.toolbar.controller = self;
   [[[self view] window] setToolbar:self.toolbar];
-	[self.toolbar configureForMode:BPToolbarModeEmpty];
+  [self.toolbar lockItems];
 
 	_appDelegate = BPAppDelegateRef;
 }
@@ -343,6 +343,7 @@ typedef NS_ENUM(NSUInteger, HomeBrewTab) {
 		[self.splitView	   setHidden:NO];
 		
     [self.toolbar configureForMode:BPToolbarModeDefault];
+    [self.toolbar unlockItems];
 		[self.formulaeDataSource refreshBackingArray];
 		[self.sidebarController refreshSidebarBadges];
 		
@@ -380,8 +381,7 @@ typedef NS_ENUM(NSUInteger, HomeBrewTab) {
 		[self.label_information setHidden:YES];
 		[self.view_loading setHidden:YES];
 		[self.splitView setHidden:YES];
-		
-		[self.toolbar configureForMode:BPToolbarModeEmpty];
+    [self.toolbar lockItems];
 		
 		NSAlert *alert = [NSAlert alertWithMessageText:NSLocalizedString(@"Generic_Error", nil)
 										 defaultButton:NSLocalizedString(@"Message_No_Homebrew_Title", nil)
@@ -412,7 +412,7 @@ typedef NS_ENUM(NSUInteger, HomeBrewTab) {
 		[self.label_information setHidden:NO];
 		[self.splitView setHidden:NO];
 		
-		[self.toolbar configureForMode:BPToolbarModeDefault];
+    [self.toolbar unlockItems];
 		
 		[[BPHomebrewManager sharedManager] reloadFromInterfaceRebuildingCache:YES];
 	}

@@ -1,9 +1,22 @@
 //
 //  BPToolbar.m
-//
+//  Cakebrew
 //
 //  Created by Marek Hrusovsky on 16/08/15.
+//	Copyright (c) 2014 Bruno Philipe. All rights reserved.
 //
+//	This program is free software: you can redistribute it and/or modify
+//	it under the terms of the GNU General Public License as published by
+//	the Free Software Foundation, either version 3 of the License, or
+//	(at your option) any later version.
+//
+//	This program is distributed in the hope that it will be useful,
+//	but WITHOUT ANY WARRANTY; without even the implied warranty of
+//	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.	See the
+//	GNU General Public License for more details.
+//
+//	You should have received a copy of the GNU General Public License
+//	along with this program.	If not, see <http://www.gnu.org/licenses/>.
 //
 
 #import "BPToolbar.h"
@@ -11,14 +24,9 @@
 static NSString *kToolbarIdentifier = @"toolbarIdentifier";
 
 static NSString *kToolbarItemHomebrewUpdateIdentifier = @"toolbarItemHomebrewUpdate";
-static NSString *kToolbarItemInstallIdentifier = @"toolbarItemInstall";
-static NSString *kToolbarItemUninstallIdentifier = @"toolbarItemUninstall";
-static NSString *kToolbarItemTapIdentifier = @"toolbarItemTap";
-static NSString *kToolbarItemUntapIdentifier = @"toolbarItemUntap";
-static NSString *kToolbarItemUpdateSingleIdentifier = @"toolbarItemUpdateSingle";
-static NSString *kToolbarItemUpdateManyIdentifier = @"toolbarItemUpdateMany";
 static NSString *kToolbarItemInformationIdentifier = @"toolbarItemInformation";
 static NSString *kToolbarItemSearchIdentifier = @"toolbarItemSearch";
+static NSString *kToolbarItemMultiActionIdentifier = @"toolbarItemMultiAction";
 
 
 @interface BPToolbar() <NSTextFieldDelegate>
@@ -33,47 +41,80 @@ static NSString *kToolbarItemSearchIdentifier = @"toolbarItemSearch";
 {
   self = [super initWithIdentifier:kToolbarIdentifier];
   if (self) {
-    _currentMode = BPToolbarModeEmpty;
+    [self configureForMode:BPToolbarModeDefault];
+    [self lockItems];
   }
   return self;
 }
 
 - (void)configureForMode:(BPToolbarMode)mode
 {
-  if (mode == self.currentMode) {
-    return;
+  NSToolbarItem *moreInfoItem = [self toolbarItemInformation];
+  if (mode == BPToolbarModeTap ||
+      mode == BPToolbarModeUntap ||
+      mode == BPToolbarModeUpdateMany ||
+      mode == BPToolbarModeDefault) {
+    //will force toolbar to show empty nonclickable item
+    [self reconfigureItem:moreInfoItem
+                imageName:nil
+                    label:nil
+                   action:nil];
+  
   } else {
-    self.currentMode = mode;
+    [self reconfigureItem:moreInfoItem
+                imageName:@"label.icns"
+                    label:NSLocalizedString(@"Toolbar_More_Information", nil)
+                   action:@selector(showFormulaInfo:)];
   }
   
-  [self removeAllToolbarItems];
+  
+  NSToolbarItem *multiActionItem = [self toolbarItemMultiAction];
   switch (mode) {
-    case BPToolbarModeEmpty:
-      break;
     case BPToolbarModeDefault:
-      [self insertSearchToolbarItem];
-      [self insertHomebrewUpdateToolbarItemWithFlexibleSpace];
+      [self reconfigureItem:multiActionItem
+                  imageName:nil
+                      label:nil
+                     action:nil];
       break;
     case BPToolbarModeInstall:
-      [self insertToolbarItemsForInstallMode];
+      [self reconfigureItem:multiActionItem
+                  imageName:@"download.icns"
+                      label:NSLocalizedString(@"Toolbar_Install_Formula", nil)
+                     action:@selector(installUninstallUpdate:)];
+      
       break;
     case BPToolbarModeUninstall:
-      [self insertToolbarItemsForUninstallMode];
+      [self reconfigureItem:multiActionItem
+                  imageName:@"delete.icns"
+                      label:NSLocalizedString(@"Toolbar_Uninstall_Formula", nil)
+                     action:@selector(installUninstallUpdate:)];
       break;
     case BPToolbarModeTap:
-      [self insertToolbarItemsForTapMode];
+      [self reconfigureItem:multiActionItem
+                  imageName:@"download.icns"
+                      label:NSLocalizedString(@"Toolbar_Tap_Repo", nil)
+                     action:@selector(installUninstallUpdate:)];
       break;
     case BPToolbarModeUntap:
-      [self insertToolbarItemsForUntapMode];
+      [self reconfigureItem:multiActionItem
+                  imageName:@"delete.icns"
+                      label:NSLocalizedString(@"Toolbar_Untap_Repo", nil)
+                     action:@selector(installUninstallUpdate:)];
       break;
     case BPToolbarModeUpdateSingle:
-      [self insertToolbarItemsForUpdateSingleMode];
+      [self reconfigureItem:multiActionItem
+                  imageName:@"reload.icns"
+                      label:NSLocalizedString(@"Toolbar_Update_Formula", nil)
+                     action:@selector(installUninstallUpdate:)];
       break;
     case BPToolbarModeUpdateMany:
-      [self insertToolbarItemsForUpdateManyMode];
+      [self reconfigureItem:multiActionItem
+                  imageName:@"reload.icns"
+                      label:NSLocalizedString(@"Toolbar_Update_Selected", nil)
+                     action:@selector(upgradeSelectedFormulae:)];
       break;
+      
     default:
-      [self insertHomebrewUpdateToolbarItemWithFlexibleSpace];
       break;
   }
 }
@@ -86,20 +127,24 @@ static NSString *kToolbarItemSearchIdentifier = @"toolbarItemSearch";
   }
 }
 
+
+
 - (void)updateToolbarItemsWithTarget:(id)target
 {
-  NSArray *toolbarItems = self.items;
-  for (NSToolbarItem *item in toolbarItems) {
-    item.target = target;
-  }
+  NSDictionary *supportedItems = [self customToolbarItems];
+  [supportedItems enumerateKeysAndObjectsUsingBlock:^(id key, NSToolbarItem *object, BOOL *stop) {
+                                            [object setTarget:target];
+                                          }];
 }
 
-- (void)removeAllToolbarItems
+- (void)lockItems
 {
-  NSUInteger numberOfItems = [self.items count];
-  for (; numberOfItems > 0; numberOfItems--) {
-    [self removeItemAtIndex:0];
-  }
+  [self updateToolbarItemsWithTarget:nil];
+}
+
+- (void)unlockItems
+{
+  [self updateToolbarItemsWithTarget:_controller];
 }
 
 - (NSToolbarItem *)toolbar:(NSToolbar *)toolbar itemForItemIdentifier:(NSString *)itemIdentifier willBeInsertedIntoToolbar:(BOOL)flag
@@ -112,11 +157,22 @@ static NSString *kToolbarItemSearchIdentifier = @"toolbarItemSearch";
 }
 
 - (NSArray *)toolbarDefaultItemIdentifiers:(NSToolbar *)toolbar{
-  return @[];
+  return @[kToolbarItemHomebrewUpdateIdentifier,
+           NSToolbarFlexibleSpaceItemIdentifier,
+           kToolbarItemMultiActionIdentifier,
+           kToolbarItemInformationIdentifier,
+           kToolbarItemSearchIdentifier,
+           ];
 }
 
 - (NSArray *)toolbarAllowedItemIdentifiers:(NSToolbar *)toolbar{
-  return @[];
+  NSArray *systemToolbarItems = [self systemToolbarItems];
+  NSArray *customToolbarItems = @[kToolbarItemHomebrewUpdateIdentifier,
+                                  kToolbarItemInformationIdentifier,
+                                  kToolbarItemSearchIdentifier,
+                                  kToolbarItemMultiActionIdentifier
+                                  ];
+  return [systemToolbarItems arrayByAddingObjectsFromArray:customToolbarItems];
 }
 
 - (NSArray *)systemToolbarItems
@@ -138,84 +194,13 @@ static NSString *kToolbarItemSearchIdentifier = @"toolbarItemSearch";
   if (!customToolbarItems) {
     customToolbarItems =  @{
                             kToolbarItemHomebrewUpdateIdentifier : [self toolbarItemHomebrewUpdate],
-                            kToolbarItemInstallIdentifier : [self toolbarItemInstall],
-                            kToolbarItemUninstallIdentifier : [self toolbarItemUninstall],
-                            kToolbarItemTapIdentifier : [self toolbarItemTap],
-                            kToolbarItemUntapIdentifier : [self toolbarItemUntap],
-                            kToolbarItemUpdateSingleIdentifier : [self toolbarItemUpdateSingle],
-                            kToolbarItemUpdateManyIdentifier : [self toolbarItemUpdateMany],
                             kToolbarItemInformationIdentifier : [self toolbarItemInformation],
                             kToolbarItemSearchIdentifier : [self toolbarItemSearch],
+                            kToolbarItemMultiActionIdentifier : [self toolbarItemMultiAction]
                             };
   }
   return customToolbarItems;
 }
-
-- (void)insertToolbarItemsForInstallMode
-{
-  [self insertSearchToolbarItem];
-  [self insertInformationToolbarItem];
-  [self insertItemWithItemIdentifier:kToolbarItemInstallIdentifier atIndex:0];
-  [self insertHomebrewUpdateToolbarItemWithFlexibleSpace];
-}
-
-- (void)insertToolbarItemsForUninstallMode
-{
-  [self insertSearchToolbarItem];
-  [self insertInformationToolbarItem];
-  [self insertItemWithItemIdentifier:kToolbarItemUninstallIdentifier atIndex:0];
-  
-  [self insertHomebrewUpdateToolbarItemWithFlexibleSpace];
-}
-
-- (void)insertToolbarItemsForTapMode
-{
-  [self insertSearchToolbarItem];
-  [self insertItemWithItemIdentifier:kToolbarItemTapIdentifier atIndex:0];
-  [self insertHomebrewUpdateToolbarItemWithFlexibleSpace];
-}
-
-- (void)insertToolbarItemsForUntapMode
-{
-  [self insertSearchToolbarItem];
-  [self insertItemWithItemIdentifier:kToolbarItemUntapIdentifier atIndex:0];
-  [self insertHomebrewUpdateToolbarItemWithFlexibleSpace];
-}
-
-- (void)insertToolbarItemsForUpdateSingleMode
-{
-  [self insertSearchToolbarItem];
-  [self insertInformationToolbarItem];
-  [self insertItemWithItemIdentifier:kToolbarItemUpdateSingleIdentifier atIndex:0];
-  [self insertHomebrewUpdateToolbarItemWithFlexibleSpace];
-}
-
-- (void)insertToolbarItemsForUpdateManyMode
-{
-  [self insertSearchToolbarItem];
-  [self insertItemWithItemIdentifier:kToolbarItemUpdateManyIdentifier atIndex:0];
-  [self insertHomebrewUpdateToolbarItemWithFlexibleSpace];
-}
-
-
-- (void)insertHomebrewUpdateToolbarItemWithFlexibleSpace
-{
-  [self insertItemWithItemIdentifier:NSToolbarFlexibleSpaceItemIdentifier atIndex:0];
-  [self insertItemWithItemIdentifier:kToolbarItemHomebrewUpdateIdentifier atIndex:0];
-}
-
-- (void)insertSearchToolbarItem
-{
-  [self insertItemWithItemIdentifier:kToolbarItemSearchIdentifier atIndex:0];
-}
-
-- (void)insertInformationToolbarItem
-{
-  [self insertItemWithItemIdentifier:kToolbarItemInformationIdentifier atIndex:0];
-}
-
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wundeclared-selector"
 
 - (NSToolbarItem *)toolbarItemHomebrewUpdate {
   static NSToolbarItem* toolbarItemHomebrewUpdate = nil;
@@ -228,72 +213,6 @@ static NSString *kToolbarItemSearchIdentifier = @"toolbarItemSearch";
   return toolbarItemHomebrewUpdate;
 }
 
-- (NSToolbarItem *)toolbarItemInstall {
-  static NSToolbarItem* toolbarItemInstall = nil;
-  if (!toolbarItemInstall) {
-    toolbarItemInstall = [self toolbarItemWithIdentifier:kToolbarItemInstallIdentifier
-                                    icon:@"download.icns"
-                                   label:NSLocalizedString(@"Toolbar_Install_Formula", nil)
-                                  action:@selector(installUninstallUpdate:)];
-  }
-  return toolbarItemInstall;
-}
-
-- (NSToolbarItem *)toolbarItemUninstall {
-  static NSToolbarItem* toolbarItemUninstall = nil;
-  if (!toolbarItemUninstall) {
-    toolbarItemUninstall = [self toolbarItemWithIdentifier:kToolbarItemUninstallIdentifier
-                                    icon:@"delete.icns"
-                                   label:NSLocalizedString(@"Toolbar_Uninstall_Formula", nil)
-                                  action:@selector(installUninstallUpdate:)];
-  }
-  return toolbarItemUninstall;
-}
-
-- (NSToolbarItem *)toolbarItemTap {
-  static NSToolbarItem* toolbarItemTap = nil;
-  if (!toolbarItemTap) {
-    toolbarItemTap = [self toolbarItemWithIdentifier:kToolbarItemTapIdentifier
-                                    icon:@"download.icns"
-                                   label:NSLocalizedString(@"Toolbar_Tap_Repo", nil)
-                                  action:@selector(installUninstallUpdate:)];
-  }
-  return toolbarItemTap;
-}
-
-- (NSToolbarItem *)toolbarItemUntap {
-  static NSToolbarItem* toolbarItemUntap = nil;
-  if (!toolbarItemUntap) {
-    toolbarItemUntap = [self toolbarItemWithIdentifier:kToolbarItemUntapIdentifier
-                                    icon:@"delete.icns"
-                                   label:NSLocalizedString(@"Toolbar_Untap_Repo", nil)
-                                  action:@selector(installUninstallUpdate:)];
-  }
-  return toolbarItemUntap;
-}
-
-- (NSToolbarItem *)toolbarItemUpdateSingle {
-  static NSToolbarItem* toolbarItemUpdateSingle = nil;
-  if (!toolbarItemUpdateSingle) {
-    toolbarItemUpdateSingle = [self toolbarItemWithIdentifier:kToolbarItemUpdateSingleIdentifier
-                                    icon:@"reload.icns"
-                                   label:NSLocalizedString(@"Toolbar_Update_Formula", nil)
-                                  action:@selector(installUninstallUpdate:)];
-  }
-  return toolbarItemUpdateSingle;
-}
-
-- (NSToolbarItem *)toolbarItemUpdateMany {
-  static NSToolbarItem* toolbarItemUpdateMany = nil;
-  if (!toolbarItemUpdateMany) {
-    toolbarItemUpdateMany = [self toolbarItemWithIdentifier:kToolbarItemUpdateManyIdentifier
-                                    icon:@"reload.icns"
-                                   label:NSLocalizedString(@"Toolbar_Update_Selected", nil)
-                                  action:@selector(upgradeSelectedFormulae:)];
-  }
-  return toolbarItemUpdateMany;
-}
-
 - (NSToolbarItem *)toolbarItemInformation {
   static NSToolbarItem* toolbarItemInformation = nil;
   if (!toolbarItemInformation) {
@@ -304,6 +223,20 @@ static NSString *kToolbarItemSearchIdentifier = @"toolbarItemSearch";
   }
   return toolbarItemInformation;
 }
+
+
+- (NSToolbarItem *)toolbarItemMultiAction {
+  static NSToolbarItem* toolbarItemMultiAction = nil;
+  if (!toolbarItemMultiAction) {
+    toolbarItemMultiAction = [self toolbarItemWithIdentifier:kToolbarItemMultiActionIdentifier
+                                                        icon:nil
+                                                       label:nil
+                                                      action:nil];
+  }
+  return toolbarItemMultiAction;
+}
+
+
 
 - (NSToolbarItem *)toolbarItemSearch {
   static NSToolbarItem* item = nil;
@@ -320,8 +253,6 @@ static NSString *kToolbarItemSearchIdentifier = @"toolbarItemSearch";
   return item;
 }
 
-#pragma clang diagnostic pop
-
 - (NSToolbarItem *)toolbarItemWithIdentifier:(NSString *)identifier
                                         icon:(NSString *)iconName
                                        label:(NSString *)label
@@ -335,6 +266,13 @@ static NSString *kToolbarItemSearchIdentifier = @"toolbarItemSearch";
   item.target = self.controller;
   item.autovalidates = YES;
   return item;
+}
+
+- (void)reconfigureItem:(NSToolbarItem *)item imageName:(NSString *)imageName label:(NSString *)label action:(SEL)action
+{
+  item.image = [NSImage imageNamed:imageName];
+  item.label = label;
+  item.action = action;
 }
 
 - (void)makeSearchFieldFirstResponder
