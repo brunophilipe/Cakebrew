@@ -206,8 +206,8 @@
 /* Class = "NSMenuItem"; title = "Parar de Falar"; ObjectID = "NrN-pe-J7E"; */
 "NrN-pe-J7E.title" = "Parar de Falar";
 
-/* Class = "NSMenuItem"; title = "Brew Cleanup…"; ObjectID = "OKR-gG-lsa"; */
-"OKR-gG-lsa.title" = "Brew Cleanup…";
+/* Class = "NSMenuItem"; title = "Executar \"brew cleanup\"…"; ObjectID = "OKR-gG-lsa"; */
+"OKR-gG-lsa.title" = "Executar \"brew cleanup\"…";
 
 /* Class = "NSMenuItem"; title = "Buscar e Substituir…"; ObjectID = "OSn-ju-y85"; */
 "OSn-ju-y85.title" = "Buscar e Substituir…";

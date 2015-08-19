@@ -19,7 +19,7 @@
 "Message_BGTask_Body" = "Desculpe, uma tarefa já está sendo executada em segundo plano. Você não pode executar mais de uma tarefa simultaneamente.";
 "Message_No_Homebrew_Title" = "Website do Homebrew";
 "Message_No_Homebrew_Body" = "Homebrew não foi encontrado no seu sistema. Favor instalar o Homebrew antes de usar o Cakebrew. Clique no botão abaixo para abrir o website do Homebrew.";
-"Message_Shell_Invalid_Title" = "No Valid shell was found!";
+"Message_Shell_Invalid_Title" = "Nenhum shell válido foi encontrado!";
 "Message_Shell_Invalid_Body" = "Favor adicionar seu shell \"%@\" à lista de shells válidos do sistema em \"/etc/shells\".";
 "Message_Tap_Title" = "Adicionando (Tapping) Repositório";
 "Message_Tap_Body" = "Qual repositório você deseja adicionar?";
@@ -63,14 +63,14 @@
 "Toolbar_Homebrew_Update" = "Atualizar Homebrew";
 "Toolbar_Search" = "Buscar Fórmulas";
 
-"Sidebar_Info_Installed" = "These are the fórmulas already installed in your system.";
-"Sidebar_Info_Outdated" = "These fórmulas are already installed, but have an update available.";
-"Sidebar_Info_All" = "These are all the fórmulas available for installation with Homebrew.";
-"Sidebar_Info_Leaves" = "These fórmulas are not dependencies of any other fórmulas.";
-"Sidebar_Info_Repos" = "These are the repositories you have tapped.";
-"Sidebar_Info_Doctor" = "The doctor is a Homebrew feature that detects the most common causes of errors.";
-"Sidebar_Info_Update" = "Updating Homebrew means fetching the latest info about the available fórmulas.";
-"Sidebar_Info_SearchResults" = "These are the results of your search.";
+"Sidebar_Info_Installed" = "Estas fórmulas estão atualmente instaladas em seu sistema.";
+"Sidebar_Info_Outdated" = "Estas fórmulas estão instaladas, Mas possuem atualizações disponíveis.";
+"Sidebar_Info_All" = "Estas são todas as fórmulas disponíveis para instalação com o Homebrew.";
+"Sidebar_Info_Leaves" = "Estas fórmulas não são dependência de nenhuma outra fórmula instalada.";
+"Sidebar_Info_Repos" = "Estes são os repositórios que você adicionou.";
+"Sidebar_Info_Doctor" = "O Doutor é uma derramenta do Homebrew que busca problemas comuns no seu sistema.";
+"Sidebar_Info_Update" = "Atualizar o Homebrew significa baixar a lista de fórmulas disponíveis mais recente.";
+"Sidebar_Info_SearchResults" = "Estes são os resultados de sua busca.";
 
 "Installation_Window_Operation_Install" = "Instalando Fórmula:";
 "Installation_Window_Operation_Uninstall" = "Desinstalando Fórmula:";
