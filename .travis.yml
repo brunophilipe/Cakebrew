@@ -1,5 +1,2 @@
 language: objective-c
-before_install:
-- brew update
-- brew install xctool
 script: xctool test -project Cakebrew.xcodeproj -scheme CakebrewTests test
