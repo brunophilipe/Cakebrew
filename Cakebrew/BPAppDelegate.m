@@ -22,9 +22,8 @@
 #import "BPHomebrewManager.h"
 #import "DCOAboutWindowController.h"
 #import "BPPreferencesWindowController.h"
+#import "BPAppDelegate.h"
 
-NSString *const kBP_HOMEBREW_PROXY_KEY = @"BP_HOMEBREW_PROXY_KEY";
-NSString *const kBP_HOMEBREW_PROXY_ENABLE_KEY = @"BP_HOMEBREW_PROXY_ENABLE_KEY";
 NSString *const kBP_HOMEBREW_WEBSITE = @"https://www.cakebrew.com";
 
 
@@ -53,7 +52,7 @@ NSString *const kBP_HOMEBREW_WEBSITE = @"https://www.cakebrew.com";
 {
 	if (!_aboutWindowController){
 		_aboutWindowController = [[DCOAboutWindowController alloc] init];
-		[_aboutWindowController setAppWebsiteURL:kBP_CAKEBREW_URL];
+		[_aboutWindowController setAppWebsiteURL:[NSURL URLWithString:kBP_HOMEBREW_WEBSITE]];
 	}
 	return _aboutWindowController;
 }
@@ -140,7 +139,7 @@ NSString *const kBP_HOMEBREW_WEBSITE = @"https://www.cakebrew.com";
 
 - (IBAction)openWebsite:(id)sender
 {
-	[[NSWorkspace sharedWorkspace] openURL:kBP_CAKEBREW_URL];
+	[[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:kBP_HOMEBREW_WEBSITE]];
 }
 
 - (IBAction)showPreferencesWindow:(id)sender {

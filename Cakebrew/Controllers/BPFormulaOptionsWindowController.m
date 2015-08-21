@@ -21,6 +21,7 @@
 
 #import "BPFormulaOptionsWindowController.h"
 #import "BPFormula.h"
+#import "BPAppDelegate.h"
 
 //these constants must match arraycontroller in XIB (array controller + binding on table columns)
 static NSString * const kFormulaOptionCommand = @"formulaOptionCommand";
@@ -87,7 +88,8 @@ static NSString * const kFormulaOptionsTitleColumnId = @"title";
 	
 	
 	NSWindow *formulaWindow = formulaOptionsWindowController.window;
-	[BPAppDelegateRef setRunningBackgroundTask:YES];
+  BPAppDelegate *appDelegate = (BPAppDelegate*)[[NSApplication sharedApplication] delegate];
+	[appDelegate setRunningBackgroundTask:YES];
 	
 	if ([[NSApp mainWindow] respondsToSelector:@selector(beginSheet:completionHandler:)]) {
 		[[NSApp mainWindow] beginSheet:formulaWindow completionHandler:^(NSModalResponse returnCode) {
@@ -95,7 +97,8 @@ static NSString * const kFormulaOptionsTitleColumnId = @"title";
 				NSArray *options = [formulaOptionsWindowController allSelectedOptions];
 				formulaOptionsWindowController.installWithOptionsBlock(options);
 			} else {
-				[BPAppDelegateRef setRunningBackgroundTask:NO];
+        BPAppDelegate *appDelegate = (BPAppDelegate*)[[NSApplication sharedApplication] delegate];
+				[appDelegate setRunningBackgroundTask:NO];
 			}
 			
 		}];
@@ -117,7 +120,8 @@ static NSString * const kFormulaOptionsTitleColumnId = @"title";
 		NSArray *options = [self allSelectedOptions];
 		self.installWithOptionsBlock(options);
 	} else {
-		[BPAppDelegateRef setRunningBackgroundTask:NO];
+    BPAppDelegate *appDelegate = (BPAppDelegate*)[[NSApplication sharedApplication] delegate];
+		[appDelegate setRunningBackgroundTask:NO];
 	}
 }
 

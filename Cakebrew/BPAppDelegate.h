@@ -23,11 +23,7 @@
 
 extern NSString *const kBP_HOMEBREW_PATH;
 extern NSString *const kBP_HOMEBREW_PATH_KEY;
-extern NSString *const kBP_HOMEBREW_PROXY_KEY;
-extern NSString *const kBP_HOMEBREW_PROXY_ENABLE_KEY;
 extern NSString *const kBP_HOMEBREW_WEBSITE;
-
-extern NSString *const kBP_EXCEPTION_HOMEBREW_NOT_INSTALLED;
 
 @interface BPAppDelegate : NSObject <NSApplicationDelegate>
 

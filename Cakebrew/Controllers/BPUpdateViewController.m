@@ -22,6 +22,7 @@
 #import "BPUpdateViewController.h"
 #import "BPHomebrewInterface.h"
 #import "NSFont+Appearance.h"
+#import "BPAppDelegate.h"
 
 @interface BPUpdateViewController ()
 
@@ -44,7 +45,7 @@
 }
 
 - (IBAction)runStopUpdate:(id)sender {
-	BPAppDelegate *appDelegate = BPAppDelegateRef;
+	BPAppDelegate *appDelegate = (BPAppDelegate*)[[NSApplication sharedApplication] delegate];
 	
 	if (appDelegate.isRunningBackgroundTask)
 	{

@@ -29,6 +29,7 @@
 #import "BPDoctorViewController.h"
 #import "BPFormulaeDataSource.h"
 #import "BPSelectedFormulaViewController.h"
+#import "BPAppDelegate.h"
 
 typedef NS_ENUM(NSUInteger, HomeBrewTab) {
 	HomeBrewTabFormulae,
@@ -161,7 +162,7 @@ typedef NS_ENUM(NSUInteger, HomeBrewTab) {
 	
 	[self.splitView setMinSize:185.f ofSubviewAtIndex:0];
 	[self.splitView setMinSize:380.f ofSubviewAtIndex:1];
-	[self.splitView setDividerColor:kBPSidebarDividerColor];
+	[self.splitView setDividerColor:[NSColor colorWithCalibratedRed:0.835294 green:0.858824 blue:0.858824 alpha:1.0]];
 	[self.splitView setDividerThickness:1];
 	
 	[self.sidebarController setDelegate:self];
@@ -174,7 +175,7 @@ typedef NS_ENUM(NSUInteger, HomeBrewTab) {
 	
 	[self.searchField.cell accessibilitySetOverrideValue:@[self.tableView_formulae] forAttribute:NSAccessibilityLinkedUIElementsAttribute];
 
-	_appDelegate = BPAppDelegateRef;
+	_appDelegate = (BPAppDelegate*)[[NSApplication sharedApplication] delegate];
 }
 
 - (void)dealloc

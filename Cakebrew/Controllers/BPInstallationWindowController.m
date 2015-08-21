@@ -23,6 +23,7 @@
 #import "BPHomebrewInterface.h"
 #import "BPHomebrewManager.h"
 #import "NSFont+Appearance.h"
+#import "BPAppDelegate.h"
 
 @interface BPInstallationWindowController ()
 
@@ -105,7 +106,8 @@
 
 	if ([[NSApp mainWindow] respondsToSelector:@selector(beginSheet:completionHandler:)]) {
 		[[NSApp mainWindow] beginSheet:operationWindow completionHandler:^(NSModalResponse returnCode) {
-			[BPAppDelegateRef setRunningBackgroundTask:NO];
+      BPAppDelegate *appDelegate = (BPAppDelegate*)[[NSApplication sharedApplication] delegate];
+			[appDelegate setRunningBackgroundTask:NO];
 		}];
 	} else {
 		[[NSApplication sharedApplication] beginSheet:operationWindow
@@ -122,7 +124,8 @@
 - (void)windowOperationSheetDidEnd:(NSWindow *)sheet returnCode:(NSInteger)returnCode contextInfo:(void *)contextInfo;
 {
 	[sheet orderOut:self];
-	[BPAppDelegateRef setRunningBackgroundTask:NO];
+  BPAppDelegate *appDelegate = (BPAppDelegate*)[[NSApplication sharedApplication] delegate];
+	[appDelegate setRunningBackgroundTask:NO];
 }
 
 - (NSArray*)namesOfAllFormulae

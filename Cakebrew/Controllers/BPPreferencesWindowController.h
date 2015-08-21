@@ -22,6 +22,8 @@
 
 extern NSString *const BPProxyEnabledDidChangeNotification;
 extern NSString *const BPProxyStringDidChangeNotification;
+extern NSString *const kBP_HOMEBREW_PROXY_KEY;
+extern NSString *const kBP_HOMEBREW_PROXY_ENABLE_KEY;
 
 @interface BPPreferencesWindowController : NSWindowController
 

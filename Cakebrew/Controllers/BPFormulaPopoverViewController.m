@@ -10,6 +10,7 @@
 #import "NSFont+Appearance.h"
 #import "BPFormula.h"
 #import "BPHomebrewInterface.h"
+#import "BPAppDelegate.h"
 
 @interface BPFormulaPopoverViewController ()
 
@@ -42,7 +43,8 @@
 		[self.formulaTextView setString:NSLocalizedString(@"Formula_Popover_Error", nil)];
 	}
 	
-	float OSXVersion = [BPAppDelegateRef OSXVersion];
+  BPAppDelegate *appDelegate = (BPAppDelegate*)[[NSApplication sharedApplication] delegate];
+	float OSXVersion = [appDelegate OSXVersion];
 	
 	[self.formulaTitleLabel setTextColor:(OSXVersion >= 10.10 ? [NSColor blackColor] : [NSColor whiteColor])];
 	[self.formulaTextView   setTextColor:(OSXVersion >= 10.10 ? [NSColor blackColor] : [NSColor whiteColor])];

@@ -22,6 +22,7 @@
 #import "BPDoctorViewController.h"
 #import "BPHomebrewInterface.h"
 #import "NSFont+Appearance.h"
+#import "BPAppDelegate.h"
 
 @interface BPDoctorViewController ()
 
@@ -44,7 +45,7 @@
 }
 
 - (IBAction)runStopDoctor:(id)sender {
-	BPAppDelegate *appDelegate = BPAppDelegateRef;
+	BPAppDelegate *appDelegate = (BPAppDelegate*)[[NSApplication sharedApplication] delegate];
 	
 	if (appDelegate.isRunningBackgroundTask)
 	{
