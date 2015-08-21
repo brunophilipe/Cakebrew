@@ -182,10 +182,7 @@ NSString *const kBP_CACHE_DICT_DATA_KEY = @"BP_CACHE_DICT_DATA_KEY";
 
 - (void)cleanUp
 {
-    NSTask *brewTask = [BPHomebrewInterface sharedInterface].task;
-    if (brewTask && [brewTask isRunning]) {
-        [[BPHomebrewInterface sharedInterface].task terminate];
-    }
+  [[BPHomebrewInterface sharedInterface] cleanup];
 }
 
 #pragma - Homebrew Interface Delegate

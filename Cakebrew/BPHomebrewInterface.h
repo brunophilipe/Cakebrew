@@ -52,16 +52,16 @@ typedef NS_ENUM(NSInteger, BPListMode) {
 + (BPHomebrewInterface *)sharedInterface;
 
 /**
- *  Currently running task.
- */
-@property (strong, nonatomic) NSTask *task; // default nil;
-
-/**
  *  The delegate object.
  */
 @property (weak, nonatomic) id<BPHomebrewInterfaceDelegate> delegate;
 
 #pragma mark - Operations with live data callback block
+
+/**
+ *  Terminates all running tasks
+ */
+- (void)cleanup;
 
 /**
  *  Update Homebrew.

@@ -51,12 +51,13 @@ static NSString *cakebrewOutputIdentifier = @"+++++Cakebrew+++++";
 @interface BPHomebrewInterfaceListCallRepositories: BPHomebrewInterfaceListCall
 @end
 
-@interface BPHomebrewInterface ()
-
-@property BOOL systemHasAppNap;
+@interface BPHomebrewInterface () {
+  id activity;
+}
 
 @property (strong) NSString *path_cellar;
 @property (strong) NSString *path_shell;
+@property (strong) NSTask *task;
 
 @end
 
@@ -82,7 +83,6 @@ static NSString *cakebrewOutputIdentifier = @"+++++Cakebrew+++++";
 	if (self) {
 		[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updatedFileHandle:) name:NSFileHandleDataAvailableNotification object:nil];
 		[self setTask:nil];
-		[self setSystemHasAppNap:[[NSProcessInfo processInfo] respondsToSelector:@selector(beginActivityWithOptions:reason:)]];
 	}
 	return self;
 }
@@ -90,6 +90,36 @@ static NSString *cakebrewOutputIdentifier = @"+++++Cakebrew+++++";
 - (void)dealloc
 {
 	[[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
+- (void)cleanup
+{
+  [self.task terminate];
+}
+
+- (BOOL)systemHasAppNap
+{
+  static BOOL systemHasAppNap;
+  if (!systemHasAppNap) {
+    systemHasAppNap = [[NSProcessInfo processInfo] respondsToSelector:@selector(beginActivityWithOptions:reason:)];
+  }
+  return systemHasAppNap;
+}
+
+- (void)beginActivity
+{
+  if ([self systemHasAppNap]) {
+    activity = [[NSProcessInfo processInfo] beginActivityWithOptions:NSActivityUserInitiated
+                                                              reason:NSLocalizedString(@"Homebrew_AppNap_Task_Reason", nil)];
+    
+  }
+}
+
+- (void)endActivity
+{
+  if ([self systemHasAppNap]) {
+    [[NSProcessInfo processInfo] endActivity:activity];
+  }
 }
 
 - (BOOL)checkForHomebrew
@@ -225,11 +255,7 @@ static NSString *cakebrewOutputIdentifier = @"+++++Cakebrew+++++";
 	}
 	
 	operationUpdateBlock = block;
-	
-	id activity;
-	if (self.systemHasAppNap)
-		activity = [[NSProcessInfo processInfo] beginActivityWithOptions:NSActivityUserInitiated
-																  reason:NSLocalizedString(@"Homebrew_AppNap_Task_Reason", nil)];
+  [self beginActivity];
 	
 	self.task = [[NSTask alloc] init];
 	
@@ -264,8 +290,7 @@ static NSString *cakebrewOutputIdentifier = @"+++++Cakebrew+++++";
 	
 	block(taskDoneString);
 	
-	if (self.systemHasAppNap)
-		[[NSProcessInfo processInfo] endActivity:activity];
+  [self endActivity];
 	
 	return YES;
 }
@@ -293,9 +318,7 @@ static NSString *cakebrewOutputIdentifier = @"+++++Cakebrew+++++";
 	
 	if (!self.path_shell || !arguments) return nil;
 	
-	id activity;
-	if (self.systemHasAppNap)
-		activity = [[NSProcessInfo processInfo] beginActivityWithOptions:NSActivityUserInitiated reason:NSLocalizedString(@"Homebrew_AppNap_Task_Reason", nil)];
+  [self beginActivity];
 	
 	self.task = [[NSTask alloc] init];
 	
@@ -317,8 +340,7 @@ static NSString *cakebrewOutputIdentifier = @"+++++Cakebrew+++++";
 	
 	string_output = [self removeLoginShellOutputFromString:string_output];
 	
-	if (self.systemHasAppNap)
-		[[NSProcessInfo processInfo] endActivity:activity];
+  [self endActivity];
 	
 	if (!captureError) {
 		return string_output;
