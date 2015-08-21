@@ -122,30 +122,71 @@ static NSString *cakebrewOutputIdentifier = @"+++++Cakebrew+++++";
   }
 }
 
+- (NSTask *)taskWithArguments:(NSArray *)arguments
+{
+  NSTask *task = [[NSTask alloc] init];
+  [task setLaunchPath:self.path_shell];
+  [task setArguments:arguments];
+  return task;
+}
+
+- (void)getCurrentTasksOutput:(NSString **)output error:(NSString **)error useFileHandle:(BOOL)shouldUseFileHandle
+{
+  NSPipe *outputPipe = [NSPipe pipe];
+  NSPipe *errorPipe = [NSPipe pipe];
+  [self.task setStandardOutput:outputPipe];
+  [self.task setStandardInput:[NSPipe pipe]];
+  [self.task setStandardError:errorPipe];
+  
+  if (shouldUseFileHandle) {
+    NSFileHandle *outputFileHandle = [outputPipe fileHandleForReading];
+    [outputFileHandle waitForDataInBackgroundAndNotify];
+    
+    NSFileHandle *errorFileHandle = [errorPipe fileHandleForReading];
+    [errorFileHandle waitForDataInBackgroundAndNotify];
+  }
+  
+  @try {
+    [self.task launch];
+    [self.task waitUntilExit];
+  }
+  @catch (NSException *exception) {
+    NSLog(@"%@", exception);
+  }
+  
+  if (!shouldUseFileHandle) {
+    if (output) {
+      NSData *outputData = [[outputPipe fileHandleForReading] readDataToEndOfFile];
+      if ([outputData length]) {
+        *output = [[NSString alloc] initWithData:outputData encoding:NSUTF8StringEncoding];
+      }
+    }
+    
+    if (error) {
+      NSData *errorData = [[errorPipe fileHandleForReading] readDataToEndOfFile];
+      if ([errorData length]) {
+        *error = [[NSString alloc] initWithData:errorData encoding:NSUTF8StringEncoding];
+      }
+    }
+  }
+}
+
 - (BOOL)checkForHomebrew
 {
 	if (!self.path_shell) return NO;
 	
-	self.task = [[NSTask alloc] init];
-	[self.task setLaunchPath:self.path_shell];
-	[self.task setArguments:@[@"-l", @"-c", @"which brew"]];
+  self.task = [self taskWithArguments:@[@"-l", @"-c", @"which brew"]];
 	
-	NSPipe *pipe_output = [NSPipe pipe];
-	NSPipe *pipe_error = [NSPipe pipe];
-	[self.task setStandardOutput:pipe_output];
-	[self.task setStandardInput:[NSPipe pipe]];
-	[self.task setStandardError:pipe_error];
+  NSString *output = nil;
+  NSString *error  = nil;
+  
+  [self getCurrentTasksOutput:&output error:&error useFileHandle:NO];
+  
+	output = [self removeLoginShellOutputFromString:output];
 	
-	[self.task launch];
-	[self.task waitUntilExit];
+	NSLog(@"brew: %@", output);
 	
-	NSString *string_output;
-	string_output = [[NSString alloc] initWithData:[[pipe_output fileHandleForReading] readDataToEndOfFile] encoding:NSUTF8StringEncoding];
-	string_output = [self removeLoginShellOutputFromString:string_output];
-	
-	NSLog(@"brew: %@", string_output);
-	
-	return string_output.length != 0;
+	return output.length != 0;
 }
 
 - (void)setDelegate:(id<BPHomebrewInterfaceDelegate>)delegate
@@ -257,30 +298,15 @@ static NSString *cakebrewOutputIdentifier = @"+++++Cakebrew+++++";
 	operationUpdateBlock = block;
   [self beginActivity];
 	
-	self.task = [[NSTask alloc] init];
-	
-	[self.task setLaunchPath:self.path_shell];
-	[self.task setArguments:arguments];
-	
-	NSPipe *pipe_output = [NSPipe pipe];
-	NSPipe *pipe_error = [NSPipe pipe];
-	[self.task setStandardOutput:pipe_output];
-	[self.task setStandardInput:[NSPipe pipe]];
-	[self.task setStandardError:pipe_error];
-	
-	NSFileHandle *handle_output = [pipe_output fileHandleForReading];
-	[handle_output waitForDataInBackgroundAndNotify];
-	
-	NSFileHandle *handle_error = [pipe_error fileHandleForReading];
-	[handle_error waitForDataInBackgroundAndNotify];
+  self.task = [self taskWithArguments:arguments];
 	
 #ifdef DEBUG
-	block([NSString stringWithFormat:@"User Shell: %@\nCommand: %@\nThe outputs are going to be different if run from Xcode!!\nInstalling and upgrading formulas is not advised in DEBUG mode!\n\n", self.path_shell, [arguments componentsJoinedByString:@" "]]);
+  block([NSString stringWithFormat:@"User Shell: %@\nCommand: %@\nThe outputs are going to be different if run from Xcode!!\nInstalling and upgrading formulas is not advised in DEBUG mode!\n\n", self.path_shell, [arguments componentsJoinedByString:@" "]]);
 #endif
+
+  [self getCurrentTasksOutput:nil error:nil useFileHandle:YES];
 	
-	[self.task launch];
-	[self.task waitUntilExit];
-	
+
 	NSString *taskDoneString = [NSString stringWithFormat:@"%@ %@ %@!",
 								NSLocalizedString(@"Homebrew_Task_Finished", nil),
 								NSLocalizedString(@"Homebrew_Task_Finished_At", nil),
@@ -320,33 +346,22 @@ static NSString *cakebrewOutputIdentifier = @"+++++Cakebrew+++++";
 	
   [self beginActivity];
 	
-	self.task = [[NSTask alloc] init];
+  self.task = [self taskWithArguments:arguments];
 	
-	[self.task setLaunchPath:self.path_shell];
-	[self.task setArguments:arguments];
+  NSString *output = nil;
+  NSString *error  = nil;
+  
+  [self getCurrentTasksOutput:&output error:&error useFileHandle:NO];
 	
-	NSPipe *pipe_output = [NSPipe pipe];
-	NSPipe *pipe_error = [NSPipe pipe];
-	[self.task setStandardOutput:pipe_output];
-	[self.task setStandardInput:[NSPipe pipe]];
-	[self.task setStandardError:pipe_error];
-	
-	[self.task launch];
-	[self.task waitUntilExit];
-	
-	NSString *string_output, *string_error;
-	string_output = [[NSString alloc] initWithData:[[pipe_output fileHandleForReading] readDataToEndOfFile] encoding:NSUTF8StringEncoding];
-	string_error = [[NSString alloc] initWithData:[[pipe_error fileHandleForReading] readDataToEndOfFile] encoding:NSUTF8StringEncoding];
-	
-	string_output = [self removeLoginShellOutputFromString:string_output];
+	output = [self removeLoginShellOutputFromString:output];
 	
   [self endActivity];
 	
 	if (!captureError) {
-		return string_output;
+		return output;
 	} else {
-		string_error = [self removeLoginShellOutputFromString:string_error];
-		return [NSString stringWithFormat:@"%@\n%@", string_output, string_error];
+		error = [self removeLoginShellOutputFromString:error];
+		return [NSString stringWithFormat:@"%@\n%@", output, error];
 	}
 }
 
