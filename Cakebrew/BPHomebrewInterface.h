@@ -47,7 +47,7 @@ typedef NS_ENUM(NSInteger, BPListMode) {
 
 @end
 
-@interface BPHomebrewInterface : NSObject
+@interface BPHomebrewInterface : NSObject <BPFormulaDataProvider>
 
 + (BPHomebrewInterface *)sharedInterface;
 
@@ -155,10 +155,10 @@ typedef NS_ENUM(NSInteger, BPListMode) {
 /**
  *  Executes `brew info` for parameter formula name.
  *
- *  @param formula The name of the formula.
+ *  @param name The name of the formula.
  *
  *  @return The information for the parameter formula as output by Homebrew.
  */
-- (NSString*)informationForFormula:(NSString*)formula;
+- (NSString *)informationForFormulaName:(NSString *)name;
 
 @end

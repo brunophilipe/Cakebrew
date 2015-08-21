@@ -65,6 +65,16 @@
 		D26F6E7F19B8608B00F616C1 /* NSFont+Appearance.m in Sources */ = {isa = PBXBuildFile; fileRef = D26F6E7E19B8608B00F616C1 /* NSFont+Appearance.m */; };
 		D2B3A3AA19B9CBEC00DE23B5 /* BPFormulaeTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = D2B3A3A919B9CBEC00DE23B5 /* BPFormulaeTableView.m */; };
 		D2B3A3B019B9D7FC00DE23B5 /* BPFormulaeDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = D2B3A3AF19B9D7FC00DE23B5 /* BPFormulaeDataSource.m */; };
+		D2BBAB4B1B85EA7C00F21332 /* BPFormulaOption.m in Sources */ = {isa = PBXBuildFile; fileRef = D2BBAB4A1B85EA7C00F21332 /* BPFormulaOption.m */; };
+		D2BBAB4E1B863FAB00F21332 /* BPFormulaOption.m in Sources */ = {isa = PBXBuildFile; fileRef = D2BBAB4A1B85EA7C00F21332 /* BPFormulaOption.m */; };
+		D2BBAB681B87142F00F21332 /* brewInfo_acme.txt in Resources */ = {isa = PBXBuildFile; fileRef = D2BBAB621B87142F00F21332 /* brewInfo_acme.txt */; };
+		D2BBAB691B87142F00F21332 /* brewInfo_bfg.txt in Resources */ = {isa = PBXBuildFile; fileRef = D2BBAB631B87142F00F21332 /* brewInfo_bfg.txt */; };
+		D2BBAB6A1B87142F00F21332 /* brewInfo_fakeformula.txt in Resources */ = {isa = PBXBuildFile; fileRef = D2BBAB641B87142F00F21332 /* brewInfo_fakeformula.txt */; };
+		D2BBAB6B1B87142F00F21332 /* brewInfo_ffmpeg.txt in Resources */ = {isa = PBXBuildFile; fileRef = D2BBAB651B87142F00F21332 /* brewInfo_ffmpeg.txt */; };
+		D2BBAB6C1B87142F00F21332 /* brewInfo_mysql.txt in Resources */ = {isa = PBXBuildFile; fileRef = D2BBAB661B87142F00F21332 /* brewInfo_mysql.txt */; };
+		D2BBAB6D1B87142F00F21332 /* brewInfo_percona-server.txt in Resources */ = {isa = PBXBuildFile; fileRef = D2BBAB671B87142F00F21332 /* brewInfo_percona-server.txt */; };
+		D2BBAB6F1B87290B00F21332 /* brewInfo_bison.txt in Resources */ = {isa = PBXBuildFile; fileRef = D2BBAB6E1B87290B00F21332 /* brewInfo_bison.txt */; };
+		D2BBAB711B87377D00F21332 /* brewInfo_sbtenv.txt in Resources */ = {isa = PBXBuildFile; fileRef = D2BBAB701B87377D00F21332 /* brewInfo_sbtenv.txt */; };
 		D2F732F119190B75002B2512 /* NSString+URLValidation.m in Sources */ = {isa = PBXBuildFile; fileRef = D2F732F019190B75002B2512 /* NSString+URLValidation.m */; };
 /* End PBXBuildFile section */
 
@@ -184,6 +194,16 @@
 		D2B3A3A919B9CBEC00DE23B5 /* BPFormulaeTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BPFormulaeTableView.m; sourceTree = "<group>"; };
 		D2B3A3AE19B9D7FC00DE23B5 /* BPFormulaeDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BPFormulaeDataSource.h; sourceTree = "<group>"; };
 		D2B3A3AF19B9D7FC00DE23B5 /* BPFormulaeDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BPFormulaeDataSource.m; sourceTree = "<group>"; };
+		D2BBAB491B85EA7C00F21332 /* BPFormulaOption.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BPFormulaOption.h; path = Models/BPFormulaOption.h; sourceTree = "<group>"; };
+		D2BBAB4A1B85EA7C00F21332 /* BPFormulaOption.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BPFormulaOption.m; path = Models/BPFormulaOption.m; sourceTree = "<group>"; };
+		D2BBAB621B87142F00F21332 /* brewInfo_acme.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = brewInfo_acme.txt; sourceTree = "<group>"; };
+		D2BBAB631B87142F00F21332 /* brewInfo_bfg.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = brewInfo_bfg.txt; sourceTree = "<group>"; };
+		D2BBAB641B87142F00F21332 /* brewInfo_fakeformula.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = brewInfo_fakeformula.txt; sourceTree = "<group>"; };
+		D2BBAB651B87142F00F21332 /* brewInfo_ffmpeg.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = brewInfo_ffmpeg.txt; sourceTree = "<group>"; };
+		D2BBAB661B87142F00F21332 /* brewInfo_mysql.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = brewInfo_mysql.txt; sourceTree = "<group>"; };
+		D2BBAB671B87142F00F21332 /* brewInfo_percona-server.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "brewInfo_percona-server.txt"; sourceTree = "<group>"; };
+		D2BBAB6E1B87290B00F21332 /* brewInfo_bison.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = brewInfo_bison.txt; sourceTree = "<group>"; };
+		D2BBAB701B87377D00F21332 /* brewInfo_sbtenv.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = brewInfo_sbtenv.txt; sourceTree = "<group>"; };
 		D2F732EF19190B75002B2512 /* NSString+URLValidation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+URLValidation.h"; sourceTree = "<group>"; };
 		D2F732F019190B75002B2512 /* NSString+URLValidation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+URLValidation.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -323,6 +343,8 @@
 		15D5BEFB18EBD006001DDED7 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				D2BBAB491B85EA7C00F21332 /* BPFormulaOption.h */,
+				D2BBAB4A1B85EA7C00F21332 /* BPFormulaOption.m */,
 				1570BA5418EE50BD001C3C5C /* BPFormula.h */,
 				1570BA5518EE50BD001C3C5C /* BPFormula.m */,
 			);
@@ -410,6 +432,14 @@
 			isa = PBXGroup;
 			children = (
 				D212A5871B853069003000ED /* BPFormulaTests.m */,
+				D2BBAB701B87377D00F21332 /* brewInfo_sbtenv.txt */,
+				D2BBAB6E1B87290B00F21332 /* brewInfo_bison.txt */,
+				D2BBAB621B87142F00F21332 /* brewInfo_acme.txt */,
+				D2BBAB631B87142F00F21332 /* brewInfo_bfg.txt */,
+				D2BBAB641B87142F00F21332 /* brewInfo_fakeformula.txt */,
+				D2BBAB651B87142F00F21332 /* brewInfo_ffmpeg.txt */,
+				D2BBAB661B87142F00F21332 /* brewInfo_mysql.txt */,
+				D2BBAB671B87142F00F21332 /* brewInfo_percona-server.txt */,
 				D261C9C21B852FA300409803 /* Supporting Files */,
 			);
 			path = CakebrewTests;
@@ -547,6 +577,14 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D2BBAB691B87142F00F21332 /* brewInfo_bfg.txt in Resources */,
+				D2BBAB6B1B87142F00F21332 /* brewInfo_ffmpeg.txt in Resources */,
+				D2BBAB6D1B87142F00F21332 /* brewInfo_percona-server.txt in Resources */,
+				D2BBAB681B87142F00F21332 /* brewInfo_acme.txt in Resources */,
+				D2BBAB6A1B87142F00F21332 /* brewInfo_fakeformula.txt in Resources */,
+				D2BBAB6F1B87290B00F21332 /* brewInfo_bison.txt in Resources */,
+				D2BBAB711B87377D00F21332 /* brewInfo_sbtenv.txt in Resources */,
+				D2BBAB6C1B87142F00F21332 /* brewInfo_mysql.txt in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -594,6 +632,7 @@
 				D2F732F119190B75002B2512 /* NSString+URLValidation.m in Sources */,
 				15D2CFAB18F202B300B6D9F1 /* DCOAboutWindowController.m in Sources */,
 				150AEC511B3F999A00163767 /* BPInstallationWindowController.m in Sources */,
+				D2BBAB4B1B85EA7C00F21332 /* BPFormulaOption.m in Sources */,
 				150AEC4C1B3F999A00163767 /* BPDoctorViewController.m in Sources */,
 				150AEC551B3F999A00163767 /* BPUpdateViewController.m in Sources */,
 			);
@@ -608,6 +647,7 @@
 				D2682D011B8532B0003DE3D8 /* BPHomebrewManager.m in Sources */,
 				D212A5891B853132003000ED /* BPFormula.m in Sources */,
 				D2682D031B8535BD003DE3D8 /* BPAppDelegate.m in Sources */,
+				D2BBAB4E1B863FAB00F21332 /* BPFormulaOption.m in Sources */,
 				D2682D041B853664003DE3D8 /* DCOAboutWindowController.m in Sources */,
 				D212A5881B853069003000ED /* BPFormulaTests.m in Sources */,
 			);

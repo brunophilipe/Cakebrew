@@ -371,9 +371,9 @@ static NSString *cakebrewOutputIdentifier = @"+++++Cakebrew+++++";
 	}
 }
 
-- (NSString*)informationForFormula:(NSString*)formula
+- (NSString *)informationForFormulaName:(NSString *)name;
 {
-	return [self performBrewCommandWithArguments:@[@"info", formula]];
+	return [self performBrewCommandWithArguments:@[@"info", name]];
 }
 
 - (NSString*)removeLoginShellOutputFromString:(NSString*)string {

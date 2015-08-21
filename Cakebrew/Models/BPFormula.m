@@ -1,4 +1,4 @@
-//
+
 //	BPFormula.m
 //	Cakebrew – The Homebrew GUI App for OS X 
 //
@@ -20,8 +20,9 @@
 //
 
 #import "BPFormula.h"
-#import "BPHomebrewInterface.h"
+#import "BPFormulaOption.h"
 #import "BPHomebrewManager.h"
+#import "BPHomebrewInterface.h"
 
 NSString *const kBP_ENCODE_FORMULA_NAME = @"BP_ENCODE_FORMULA_NAME";
 NSString *const kBP_ENCODE_FORMULA_IVER = @"BP_ENCODE_FORMULA_IVER";
@@ -32,56 +33,49 @@ NSString *const kBP_ENCODE_FORMULA_DEPS = @"BP_ENCODE_FORMULA_DEPS";
 NSString *const kBP_ENCODE_FORMULA_INST = @"BP_ENCODE_FORMULA_INST";
 NSString *const kBP_ENCODE_FORMULA_CNFL = @"BP_ENCODE_FORMULA_CNFL";
 NSString *const kBP_ENCODE_FORMULA_SDSC = @"BP_ENCODE_FORMULA_SDSC";
+NSString *const kBP_ENCODE_FORMULA_OPTN = @"BP_ENCODE_FORMULA_OPTN";
 
 NSString *const kBPIdentifierDependencies = @"==> Dependencies";
 NSString *const kBPIdentifierOptions = @"==> Options";
 NSString *const kBPIdentifierCaveats = @"==> Caveats";
 
+NSString *const BPFormulaDidUpdateNotification = @"BPFormulaDidUpdateNotification";
+
 @interface BPFormula ()
 
-@property (strong) NSString *name;
-@property (strong) NSString *version;
-@property (strong) NSString *latestVersion;
-@property (strong) NSString *installPath;
-@property (strong) NSString *dependencies;
-@property (strong) NSString *conflicts;
-@property (strong) NSString *shortDescription;
-@property (strong) NSURL    *website;
-@property (strong) NSArray  *options;
+@property (copy, readwrite) NSString *name;
+@property (copy, readwrite) NSString *version;
+@property (copy, readwrite) NSString *latestVersion;
+@property (copy, readwrite) NSString *installPath;
+@property (copy, readwrite) NSString *dependencies;
+@property (copy, readwrite) NSString *conflicts;
+@property (copy, readwrite) NSString *shortDescription;
+@property (strong, readwrite) NSURL    *website;
+@property (strong, readwrite) NSArray  *options;
 
 @end
 
 @implementation BPFormula
-{
-	NSArray *_options;
-}
 
-+ (BPFormula*)formulaWithName:(NSString*)name version:(NSString*)version andLatestVersion:(NSString*)latestVersion
++ (instancetype)formulaWithName:(NSString*)name version:(NSString*)version andLatestVersion:(NSString*)latestVersion
 {
 	BPFormula *formula = [[BPFormula alloc] init];
 
 	if (formula) {
 		formula.name = name;
 		formula.version = version;
-        formula.latestVersion = latestVersion;
+    formula.latestVersion = latestVersion;
 	}
 
 	return formula;
 }
 
-+ (BPFormula*)formulaWithName:(NSString*)name andVersion:(NSString*)version
++ (instancetype)formulaWithName:(NSString*)name andVersion:(NSString*)version
 {
-	BPFormula *formula = [[BPFormula alloc] init];
-
-	if (formula) {
-		formula.name = name;
-		formula.version = version;
-	}
-
-	return formula;
+  return [BPFormula formulaWithName:name version:nil andLatestVersion:nil];
 }
 
-+ (BPFormula*)formulaWithName:(NSString*)name
++ (instancetype)formulaWithName:(NSString*)name
 {
 	return [BPFormula formulaWithName:name andVersion:nil];
 }
@@ -96,7 +90,7 @@ NSString *const kBPIdentifierCaveats = @"==> Caveats";
 	if (self.dependencies)		[aCoder encodeObject:self.dependencies		forKey:kBP_ENCODE_FORMULA_DEPS];
 	if (self.conflicts)			[aCoder encodeObject:self.conflicts			forKey:kBP_ENCODE_FORMULA_CNFL];
 	if (self.shortDescription)	[aCoder encodeObject:self.shortDescription	forKey:kBP_ENCODE_FORMULA_SDSC];
-
+  if (self.options)	[aCoder encodeObject:self.options	forKey:kBP_ENCODE_FORMULA_OPTN];
 	[aCoder encodeObject:@([self isInstalled]) forKey:kBP_ENCODE_FORMULA_INST];
 }
 
@@ -112,6 +106,7 @@ NSString *const kBPIdentifierCaveats = @"==> Caveats";
 		self.dependencies		= [aDecoder decodeObjectForKey:kBP_ENCODE_FORMULA_DEPS];
 		self.conflicts			= [aDecoder decodeObjectForKey:kBP_ENCODE_FORMULA_CNFL];
 		self.shortDescription	= [aDecoder decodeObjectForKey:kBP_ENCODE_FORMULA_CNFL];
+    self.options	= [aDecoder decodeObjectForKey:kBP_ENCODE_FORMULA_OPTN];
 	}
 	return self;
 }
@@ -133,6 +128,7 @@ NSString *const kBPIdentifierCaveats = @"==> Caveats";
 		formula->_dependencies		= [self->_dependencies		copy];
 		formula->_conflicts			= [self->_conflicts			copy];
 		formula->_shortDescription	= [self->_shortDescription	copy];
+    formula->_options = [self->_options copy];
     }
 	return formula;
 }
@@ -158,7 +154,7 @@ NSString *const kBPIdentifierCaveats = @"==> Caveats";
     NSArray *lines         = nil;
     NSUInteger lineIndex   = 0;
 
-	output = [[BPHomebrewInterface sharedInterface] informationForFormula:self.name];
+	output = [self.dataProvider informationForFormulaName:self.name];
 
 	if ([output isEqualToString:@""])
 	{
@@ -192,7 +188,7 @@ NSString *const kBPIdentifierCaveats = @"==> Caveats";
 	line = [lines objectAtIndex:lineIndex];
 	if ([line rangeOfString:@"Conflicts with:"].location != NSNotFound)
 	{
-		[self setConflicts:[line substringFromIndex:15]];
+		[self setConflicts:[line substringFromIndex:16]];
 		lineIndex++;
 		line = [lines objectAtIndex:lineIndex];
 	}
@@ -258,27 +254,28 @@ NSString *const kBPIdentifierCaveats = @"==> Caveats";
 			optionsString = [optionsString substringToIndex:range_cvts.location];
 		}
 
-		NSMutableDictionary __block *formulaOption = nil;
-
-		[optionsString enumerateLinesUsingBlock:^(NSString *match_line, BOOL *stop) {
-			if ([match_line hasPrefix:@"--"]) { // This is an option command
-				formulaOption = [NSMutableDictionary dictionaryWithCapacity:2];
-                [formulaOption setObject:match_line forKey:kBP_FORMULA_OPTION_COMMAND];
-			} else if (formulaOption) { // This is the option description
-				[formulaOption setObject:[match_line stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]] forKey:kBP_FORMULA_OPTION_DESCRIPTION];
-				[options addObject:formulaOption];
-				formulaOption = nil;
-			} else {
-				*stop = YES;
-			}
-		}];
+    BPFormulaOption __block *formulaOption = nil;
+    [optionsString enumerateLinesUsingBlock:^(NSString *line, BOOL *stop) {
+      if ([line hasPrefix:@"--"]) { // This is an option command
+        
+        formulaOption = [[BPFormulaOption alloc] init];
+        formulaOption.name = line;
+      } else if (formulaOption) { // This is the option description
+        formulaOption.explanation = [line stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+        [options addObject:formulaOption];
+        formulaOption = nil;
+      } else {
+        *stop = YES;
+      }
+    }];
 
 		[self setOptions:[options copy]];
 	} else {
 		[self setOptions:nil];
 	}
 
-	return YES;
+  [[NSNotificationCenter defaultCenter] postNotificationName:BPFormulaDidUpdateNotification object:self];
+  return YES;
 }
 
 - (BOOL)isInstalled
@@ -289,6 +286,11 @@ NSString *const kBPIdentifierCaveats = @"==> Caveats";
 - (BOOL)isOutdated
 {
 	return [[BPHomebrewManager sharedManager] statusForFormula:self] == kBPFormulaOutdated;
+}
+
+- (id<BPFormulaDataProvider>)dataProvider
+{
+  return [BPHomebrewInterface sharedInterface];
 }
 
 @end

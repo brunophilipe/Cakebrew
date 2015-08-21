@@ -29,9 +29,6 @@ extern NSString *const kBP_HOMEBREW_WEBSITE;
 
 extern NSString *const kBP_EXCEPTION_HOMEBREW_NOT_INSTALLED;
 
-extern NSString *const kBP_FORMULA_OPTION_COMMAND;
-extern NSString *const kBP_FORMULA_OPTION_DESCRIPTION;
-
 @interface BPAppDelegate : NSObject <NSApplicationDelegate>
 
 @property (assign) IBOutlet NSWindow *window;

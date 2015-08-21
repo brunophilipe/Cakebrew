@@ -28,7 +28,7 @@
 - (void)setFormula:(BPFormula *)formula
 {
 	_formula = formula;
-	NSString *string = [[BPHomebrewInterface sharedInterface] informationForFormula:[_formula performSelector:@selector(name)]];
+	NSString *string = [[BPHomebrewInterface sharedInterface] informationForFormulaName:[_formula performSelector:@selector(name)]];
 	if (string) {
 		[self.formulaTextView setString:string];
 		
