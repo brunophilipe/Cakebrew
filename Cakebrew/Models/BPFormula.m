@@ -59,7 +59,7 @@ NSString *const BPFormulaDidUpdateNotification = @"BPFormulaDidUpdateNotificatio
 
 + (instancetype)formulaWithName:(NSString*)name version:(NSString*)version andLatestVersion:(NSString*)latestVersion
 {
-	BPFormula *formula = [[BPFormula alloc] init];
+	BPFormula *formula = [[self alloc] init];
 
 	if (formula) {
 		formula.name = name;
@@ -72,12 +72,12 @@ NSString *const BPFormulaDidUpdateNotification = @"BPFormulaDidUpdateNotificatio
 
 + (instancetype)formulaWithName:(NSString*)name andVersion:(NSString*)version
 {
-  return [BPFormula formulaWithName:name version:nil andLatestVersion:nil];
+  return [self formulaWithName:name version:nil andLatestVersion:nil];
 }
 
 + (instancetype)formulaWithName:(NSString*)name
 {
-	return [BPFormula formulaWithName:name andVersion:nil];
+	return [self formulaWithName:name andVersion:nil];
 }
 
 - (void)encodeWithCoder:(NSCoder *)aCoder
@@ -154,7 +154,7 @@ NSString *const BPFormulaDidUpdateNotification = @"BPFormulaDidUpdateNotificatio
     NSArray *lines         = nil;
     NSUInteger lineIndex   = 0;
 
-	output = [self.dataProvider informationForFormulaName:self.name];
+	output = [[self dataProvider] informationForFormulaName:self.name];
 
 	if ([output isEqualToString:@""])
 	{

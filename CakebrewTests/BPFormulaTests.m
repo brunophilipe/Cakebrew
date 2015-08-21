@@ -51,24 +51,24 @@
 
 @end
 
-@interface BPFormula(Tests)
-- (id<BPFormulaDataProvider>)dataProvider;
+@interface BPCustomFormula : BPFormula
+
 @end
 
-@implementation BPFormula(Tests)
+@implementation BPCustomFormula
 - (id<BPFormulaDataProvider>)dataProvider
 {
   return [[BPFormulaDataProvider alloc] init];
 }
 @end
 
-static BPFormula *ffmpegFormula;
-static BPFormula *mysqlFormula;
-static BPFormula *perconaFormula;
-static BPFormula *acmeFormula;
-static BPFormula *bfgFormula;
-static BPFormula *bisonFormula;
-static BPFormula *sbtenvFormula;
+static BPCustomFormula *ffmpegFormula;
+static BPCustomFormula *mysqlFormula;
+static BPCustomFormula *perconaFormula;
+static BPCustomFormula *acmeFormula;
+static BPCustomFormula *bfgFormula;
+static BPCustomFormula *bisonFormula;
+static BPCustomFormula *sbtenvFormula;
 
 @interface BPFormulaTests : XCTestCase {
   BPFormula *formula;
@@ -86,32 +86,32 @@ static BPFormula *sbtenvFormula;
 - (void)setUp {
   [super setUp];
   if (!ffmpegFormula) {
-    ffmpegFormula = [BPFormula formulaWithName:@"ffmpeg"];
+    ffmpegFormula = [BPCustomFormula formulaWithName:@"ffmpeg"];
     [ffmpegFormula getInformation];
   }
   
   if (!mysqlFormula){
-    mysqlFormula = [BPFormula formulaWithName:@"mysql"];
+    mysqlFormula = [BPCustomFormula formulaWithName:@"mysql"];
     [mysqlFormula getInformation];
   }
   if (!perconaFormula) {
-    perconaFormula = [BPFormula formulaWithName:@"percona-server"];
+    perconaFormula = [BPCustomFormula formulaWithName:@"percona-server"];
     [perconaFormula getInformation];
   }
   if(!acmeFormula){
-    acmeFormula = [BPFormula formulaWithName:@"acme"];
+    acmeFormula = [BPCustomFormula formulaWithName:@"acme"];
     [acmeFormula getInformation];
   }
   if(!bfgFormula){
-    bfgFormula = [BPFormula formulaWithName:@"bfg"];
+    bfgFormula = [BPCustomFormula formulaWithName:@"bfg"];
     [bfgFormula getInformation];
   }
   if(!bisonFormula){
-    bisonFormula = [BPFormula formulaWithName:@"bison"];
+    bisonFormula = [BPCustomFormula formulaWithName:@"bison"];
     [bisonFormula getInformation];
   }
   if(!sbtenvFormula){
-    sbtenvFormula = [BPFormula formulaWithName:@"sbtenv"];
+    sbtenvFormula = [BPCustomFormula formulaWithName:@"sbtenv"];
     [sbtenvFormula getInformation];
   }
 }
@@ -131,7 +131,7 @@ static BPFormula *sbtenvFormula;
 
 - (void)testFormulaFullCopy
 {
-  formula = [BPFormula formulaWithName:@"fakeformula" version:@"1" andLatestVersion:@"2"];
+  formula = [BPCustomFormula formulaWithName:@"fakeformula" version:@"1" andLatestVersion:@"2"];
   [formula getInformation];
   BPFormula *copiedFormula = [formula copy];
   XCTAssertTrue([formula.name isEqualToString:copiedFormula.name] && [copiedFormula.name length] > 0, @"Name failed to copy");
