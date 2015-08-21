@@ -198,7 +198,9 @@
 
 - (void)finishTask
 {
-	[self.progressIndicator stopAnimation:nil];
+  dispatch_async(dispatch_get_main_queue(), ^(){
+    [self.progressIndicator stopAnimation:nil];
+  });
 	[self.okButton setEnabled:YES];
 	
 	[[NSApplication sharedApplication] requestUserAttention:NSInformationalRequest];
