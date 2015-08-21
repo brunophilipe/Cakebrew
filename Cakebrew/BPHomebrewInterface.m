@@ -45,9 +45,6 @@ static NSString *cakebrewOutputIdentifier = @"+++++Cakebrew+++++";
 @interface BPHomebrewInterfaceListCallUpgradeable : BPHomebrewInterfaceListCall
 @end
 
-@interface BPHomebrewInterfaceListCallSearch : BPHomebrewInterfaceListCall
-@end
-
 @interface BPHomebrewInterfaceListCallRepositories: BPHomebrewInterfaceListCall
 @end
 
@@ -598,15 +595,6 @@ static NSString *cakebrewOutputIdentifier = @"+++++Cakebrew+++++";
 	}
 	
 	return formula;
-}
-
-@end
-
-@implementation BPHomebrewInterfaceListCallSearch
-
-- (instancetype)initWithSearchParameter:(NSString*)param
-{
-	return (BPHomebrewInterfaceListCallSearch *)[super initWithArguments:@[@"search", param]];
 }
 
 @end
