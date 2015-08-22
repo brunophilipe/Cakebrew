@@ -154,6 +154,10 @@ NSString *const BPFormulaDidUpdateNotification = @"BPFormulaDidUpdateNotificatio
     NSArray *lines         = nil;
     NSUInteger lineIndex   = 0;
 
+  id<BPFormulaDataProvider> dataProvider = [self dataProvider];
+  if(![dataProvider respondsToSelector:@selector(informationForFormulaName:)]) {
+    return NO;
+  }
 	output = [[self dataProvider] informationForFormulaName:self.name];
 
 	if ([output isEqualToString:@""])
