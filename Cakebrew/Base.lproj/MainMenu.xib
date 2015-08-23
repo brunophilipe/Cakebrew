@@ -90,7 +90,7 @@ DQ
 </string>
                                 <modifierMask key="keyEquivalentModifierMask"/>
                                 <connections>
-                                    <action selector="installUninstallUpdate:" target="547" id="Fr2-ua-RsK"/>
+                                    <action selector="installFormula:" target="547" id="wOJ-Aj-tcg"/>
                                     <binding destination="547" name="enabled" keyPath="self.currentFormula" id="J1D-i3-vrU">
                                         <dictionary key="options">
                                             <string key="NSValueTransformerName">NSIsNotNil</string>
@@ -136,7 +136,7 @@ CA
 </string>
                                 <modifierMask key="keyEquivalentModifierMask"/>
                                 <connections>
-                                    <action selector="installUninstallUpdate:" target="547" id="fxx-FC-1i8"/>
+                                    <action selector="uninstallFormula:" target="547" id="60n-p5-vUn"/>
                                     <binding destination="547" name="enabled" keyPath="self.currentFormula" id="eUR-qe-OOt">
                                         <dictionary key="options">
                                             <string key="NSValueTransformerName">NSIsNotNil</string>
@@ -154,7 +154,7 @@ CA
                             </menuItem>
                             <menuItem title="Update Formula" keyEquivalent="r" id="4ab-Ns-Wry">
                                 <connections>
-                                    <action selector="installUninstallUpdate:" target="547" id="rLA-69-nJ2"/>
+                                    <action selector="upgradeSelectedFormulae:" target="547" id="Bb6-9M-scU"/>
                                     <binding destination="547" name="enabled" keyPath="self.currentFormula" id="x7H-Zr-6Sf">
                                         <dictionary key="options">
                                             <string key="NSValueTransformerName">NSIsNotNil</string>
@@ -554,6 +554,7 @@ CA
                         <constraints>
                             <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="115" id="olS-5g-fL0"/>
                         </constraints>
+                        <animations/>
                         <textFieldCell key="cell" controlSize="small" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="right" title="Loading..." id="3xE-6a-fkA">
                             <font key="font" metaFont="smallSystem"/>
                             <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
@@ -574,9 +575,10 @@ CA
                                             <rect key="frame" x="0.0" y="0.0" width="190" height="320"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <subviews>
-                                                <outlineView appearanceType="vibrantLight" verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" selectionHighlightStyle="sourceList" columnReordering="NO" multipleSelection="NO" autosaveColumns="NO" rowHeight="24" rowSizeStyle="systemDefault" viewBased="YES" indentationPerLevel="16" outlineTableColumn="LEF-be-VWM" id="h1z-c9-U0s" customClass="PXSourceList">
+                                                <outlineView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" selectionHighlightStyle="sourceList" columnReordering="NO" multipleSelection="NO" autosaveColumns="NO" rowHeight="24" rowSizeStyle="systemDefault" viewBased="YES" indentationPerLevel="16" outlineTableColumn="LEF-be-VWM" id="h1z-c9-U0s" customClass="PXSourceList">
                                                     <rect key="frame" x="0.0" y="0.0" width="190" height="0.0"/>
                                                     <autoresizingMask key="autoresizingMask"/>
+                                                    <animations/>
                                                     <size key="intercellSpacing" width="0.0" height="2"/>
                                                     <color key="backgroundColor" name="_sourceListBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                     <color key="gridColor" name="gridColor" catalog="System" colorSpace="catalog"/>
@@ -600,6 +602,7 @@ CA
                                                                     <subviews>
                                                                         <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="WEE-19-W7g">
                                                                             <rect key="frame" x="0.0" y="1" width="166" height="14"/>
+                                                                            <animations/>
                                                                             <textFieldCell key="cell" lineBreakMode="truncatingTail" sendsActionOnEndEditing="YES" title="HEADER CELL" id="KoT-TI-MgQ">
                                                                                 <font key="font" metaFont="smallSystemBold"/>
                                                                                 <color key="textColor" red="0.43921568630000002" green="0.4941176471" blue="0.54901960780000003" alpha="1" colorSpace="calibratedRGB"/>
@@ -607,6 +610,7 @@ CA
                                                                             </textFieldCell>
                                                                         </textField>
                                                                     </subviews>
+                                                                    <animations/>
                                                                     <connections>
                                                                         <outlet property="textField" destination="WEE-19-W7g" id="2BW-SK-dt7"/>
                                                                     </connections>
@@ -621,6 +625,7 @@ CA
                                                                                 <constraint firstAttribute="height" constant="14" id="Fnd-KD-Xnc"/>
                                                                                 <constraint firstAttribute="width" constant="17" id="lEn-kS-QYF"/>
                                                                             </constraints>
+                                                                            <animations/>
                                                                             <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="NSActionTemplate" id="As7-Xw-rr0"/>
                                                                         </imageView>
                                                                         <textField horizontalHuggingPriority="249" verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="UGv-FF-mH4">
@@ -628,6 +633,7 @@ CA
                                                                             <constraints>
                                                                                 <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="55" id="AQj-Dj-fy4"/>
                                                                             </constraints>
+                                                                            <animations/>
                                                                             <textFieldCell key="cell" lineBreakMode="truncatingTail" sendsActionOnEndEditing="YES" title="Table View Cell" id="zVW-Ch-xYV">
                                                                                 <font key="font" metaFont="system"/>
                                                                                 <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
@@ -640,6 +646,7 @@ CA
                                                                                 <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="15" id="fcz-mG-5yq"/>
                                                                                 <constraint firstAttribute="height" constant="14" id="tPu-WX-Z1t"/>
                                                                             </constraints>
+                                                                            <animations/>
                                                                         </customView>
                                                                     </subviews>
                                                                     <constraints>
@@ -651,6 +658,7 @@ CA
                                                                         <constraint firstAttribute="trailing" secondItem="NPs-Sj-pMf" secondAttribute="trailing" constant="4" id="tOM-Z3-lqK"/>
                                                                         <constraint firstAttribute="centerY" secondItem="rod-fH-u2L" secondAttribute="centerY" id="vMj-wt-2wR"/>
                                                                     </constraints>
+                                                                    <animations/>
                                                                     <connections>
                                                                         <outlet property="badgeView" destination="NPs-Sj-pMf" id="gfz-Xa-rJt"/>
                                                                         <outlet property="imageView" destination="rod-fH-u2L" id="BEf-zX-zQp"/>
@@ -666,15 +674,19 @@ CA
                                                     </connections>
                                                 </outlineView>
                                             </subviews>
+                                            <animations/>
                                             <nil key="backgroundColor"/>
                                         </clipView>
-                                        <scroller key="horizontalScroller" hidden="YES" verticalHuggingPriority="750" horizontal="YES" id="RBZ-Oo-6AK">
+                                        <animations/>
+                                        <scroller key="horizontalScroller" hidden="YES" wantsLayer="YES" verticalHuggingPriority="750" horizontal="YES" id="RBZ-Oo-6AK">
                                             <rect key="frame" x="1" y="119" width="238" height="15"/>
                                             <autoresizingMask key="autoresizingMask"/>
+                                            <animations/>
                                         </scroller>
-                                        <scroller key="verticalScroller" hidden="YES" verticalHuggingPriority="750" horizontal="NO" id="nSl-PP-Wwd">
+                                        <scroller key="verticalScroller" hidden="YES" wantsLayer="YES" verticalHuggingPriority="750" horizontal="NO" id="nSl-PP-Wwd">
                                             <rect key="frame" x="224" y="17" width="15" height="102"/>
                                             <autoresizingMask key="autoresizingMask"/>
+                                            <animations/>
                                         </scroller>
                                     </scrollView>
                                 </subviews>
@@ -684,6 +696,7 @@ CA
                                     <constraint firstItem="kTq-kk-rF0" firstAttribute="leading" secondItem="5HN-nB-TIW" secondAttribute="leading" id="lMU-O5-vkf"/>
                                     <constraint firstItem="kTq-kk-rF0" firstAttribute="top" secondItem="5HN-nB-TIW" secondAttribute="top" id="oTn-9K-lY9"/>
                                 </constraints>
+                                <animations/>
                             </customView>
                             <customView focusRingType="none" id="C6z-4a-AJ0">
                                 <rect key="frame" x="170" y="0.0" width="379" height="320"/>
@@ -691,24 +704,28 @@ CA
                                 <subviews>
                                     <tabView drawsBackground="NO" type="noTabsNoBorder" initialItem="aFR-nx-bHM" translatesAutoresizingMaskIntoConstraints="NO" id="79A-lZ-LEo">
                                         <rect key="frame" x="0.0" y="0.0" width="379" height="320"/>
+                                        <animations/>
                                         <font key="font" metaFont="system"/>
                                         <tabViewItems>
                                             <tabViewItem label="Formulae" identifier="1" id="aFR-nx-bHM">
                                                 <view key="view" id="JkQ-ZQ-ugA">
                                                     <rect key="frame" x="0.0" y="0.0" width="379" height="320"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                                    <animations/>
                                                 </view>
                                             </tabViewItem>
                                             <tabViewItem label="Doctor" identifier="2" id="WM9-6z-Jzl">
                                                 <view key="view" id="6fi-d1-4lx">
                                                     <rect key="frame" x="0.0" y="0.0" width="379" height="320"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                                    <animations/>
                                                 </view>
                                             </tabViewItem>
                                             <tabViewItem label="Update" identifier="3" id="yL4-oW-nIm">
                                                 <view key="view" id="p04-F1-40m">
                                                     <rect key="frame" x="0.0" y="0.0" width="379" height="320"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                                    <animations/>
                                                 </view>
                                             </tabViewItem>
                                         </tabViewItems>
@@ -720,8 +737,10 @@ CA
                                     <constraint firstItem="79A-lZ-LEo" firstAttribute="leading" secondItem="C6z-4a-AJ0" secondAttribute="leading" id="Rny-Ns-v82"/>
                                     <constraint firstAttribute="bottom" secondItem="79A-lZ-LEo" secondAttribute="bottom" id="uOK-XH-cAW"/>
                                 </constraints>
+                                <animations/>
                             </customView>
                         </subviews>
+                        <animations/>
                         <holdingPriorities>
                             <real value="250"/>
                             <real value="250"/>
@@ -730,16 +749,18 @@ CA
                     <customView translatesAutoresizingMaskIntoConstraints="NO" id="oZu-7K-rka" customClass="BPLoadingView">
                         <rect key="frame" x="0.0" y="22" width="570" height="320"/>
                         <subviews>
-                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="BeQ-gE-23J">
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="BeQ-gE-23J">
                                 <rect key="frame" x="253" y="168" width="64" height="18"/>
+                                <animations/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Loading" id="ipB-6a-BzS">
                                     <font key="font" metaFont="systemBold" size="15"/>
                                     <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>
-                            <progressIndicator horizontalHuggingPriority="750" verticalHuggingPriority="750" maxValue="100" doubleValue="1" bezeled="NO" indeterminate="YES" style="spinning" translatesAutoresizingMaskIntoConstraints="NO" id="drR-R6-CgK">
+                            <progressIndicator horizontalHuggingPriority="750" verticalHuggingPriority="750" misplaced="YES" maxValue="100" doubleValue="1" bezeled="NO" indeterminate="YES" style="spinning" translatesAutoresizingMaskIntoConstraints="NO" id="drR-R6-CgK">
                                 <rect key="frame" x="269" y="128" width="32" height="32"/>
+                                <animations/>
                             </progressIndicator>
                         </subviews>
                         <constraints>
@@ -748,6 +769,7 @@ CA
                             <constraint firstAttribute="centerX" secondItem="BeQ-gE-23J" secondAttribute="centerX" id="Uh1-Kd-1vh"/>
                             <constraint firstItem="drR-R6-CgK" firstAttribute="top" secondItem="BeQ-gE-23J" secondAttribute="bottom" constant="8" id="Y4M-L2-71J"/>
                         </constraints>
+                        <animations/>
                         <connections>
                             <outlet property="progressIndicator" destination="drR-R6-CgK" id="SU7-NU-Ldk"/>
                         </connections>
@@ -755,16 +777,18 @@ CA
                     <customView hidden="YES" translatesAutoresizingMaskIntoConstraints="NO" id="SfC-W7-8MF">
                         <rect key="frame" x="0.0" y="22" width="570" height="320"/>
                         <subviews>
-                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="maG-dP-mXL">
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="maG-dP-mXL">
                                 <rect key="frame" x="187" y="168" width="197" height="18"/>
+                                <animations/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Homebrew is not installed" id="Jfc-d9-61S">
                                     <font key="font" metaFont="systemBold" size="15"/>
                                     <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>
-                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="YjH-tX-oXi">
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="YjH-tX-oXi">
                                 <rect key="frame" x="159" y="143" width="252" height="17"/>
+                                <animations/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Please visit brew.sh to install Homebrew" id="kRZ-JR-SH6">
                                     <font key="font" metaFont="system"/>
                                     <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
@@ -778,6 +802,7 @@ CA
                             <constraint firstAttribute="centerX" secondItem="maG-dP-mXL" secondAttribute="centerX" id="i4M-xe-V2i"/>
                             <constraint firstItem="YjH-tX-oXi" firstAttribute="top" secondItem="maG-dP-mXL" secondAttribute="bottom" constant="8" id="x7w-ZX-54Y"/>
                         </constraints>
+                        <animations/>
                     </customView>
                 </subviews>
                 <constraints>
@@ -796,54 +821,8 @@ CA
                     <constraint firstAttribute="trailing" secondItem="tiK-fW-tE7" secondAttribute="trailing" constant="9" id="xmK-vF-ZX8"/>
                     <constraint firstItem="tiK-fW-tE7" firstAttribute="top" secondItem="SfC-W7-8MF" secondAttribute="bottom" constant="5" id="zGL-js-3Tn"/>
                 </constraints>
+                <animations/>
             </view>
-            <toolbar key="toolbar" implicitIdentifier="CE02E434-3FDB-4366-AA48-F261AF27DFA5" autosavesConfiguration="NO" allowsUserCustomization="NO" displayMode="iconAndLabel" sizeMode="small" id="646">
-                <allowedToolbarItems>
-                    <toolbarItem implicitItemIdentifier="NSToolbarSpaceItem" id="650"/>
-                    <toolbarItem implicitItemIdentifier="NSToolbarFlexibleSpaceItem" id="651"/>
-                    <toolbarItem implicitItemIdentifier="NSToolbarSeparatorItem" id="652"/>
-                    <toolbarItem implicitItemIdentifier="BF5BDA9C-ED89-4EC2-84F2-1F2CDF8A34F8" label="Install Formula" paletteLabel="Install Formula" tag="-1" image="download" autovalidates="NO" id="0v7-EY-eoL">
-                        <connections>
-                            <action selector="installUninstallUpdate:" target="547" id="96T-q3-CEe"/>
-                        </connections>
-                    </toolbarItem>
-                    <toolbarItem implicitItemIdentifier="B3E186A9-18ED-4C5C-B7AB-AC556C52E223" label="Update Homebrew" paletteLabel="Update Homebrew" tag="-1" image="globe" autovalidates="NO" id="Lvc-bU-Nmh">
-                        <connections>
-                            <action selector="updateHomebrew:" target="547" id="Q1c-Bg-I0n"/>
-                        </connections>
-                    </toolbarItem>
-                    <toolbarItem implicitItemIdentifier="F89846A3-9814-41E8-9C88-7BB170E6DB7F" label="More Information" paletteLabel="More Information" tag="-1" image="label" autovalidates="NO" id="UyW-JC-mM2">
-                        <connections>
-                            <action selector="showFormulaInfo:" target="547" id="gBY-KU-E7X"/>
-                        </connections>
-                    </toolbarItem>
-                    <toolbarItem implicitItemIdentifier="5F1B8DF2-E0AA-4377-B27C-BBECB85973C0" label="Search Formulae" paletteLabel="Search Formulae" id="hjv-gb-fjC">
-                        <nil key="toolTip"/>
-                        <size key="minSize" width="96" height="22"/>
-                        <size key="maxSize" width="96" height="22"/>
-                        <searchField key="view" wantsLayer="YES" verticalHuggingPriority="750" id="zLQ-g9-dpv">
-                            <rect key="frame" x="0.0" y="14" width="96" height="22"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                            <searchFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" borderStyle="bezel" placeholderString="" usesSingleLineMode="YES" bezelStyle="round" id="5Qx-kF-IcB">
-                                <font key="font" metaFont="system"/>
-                                <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
-                                <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                <connections>
-                                    <action selector="searchFormulasFieldDidChange:" target="547" id="X2R-f4-6Us"/>
-                                </connections>
-                            </searchFieldCell>
-                        </searchField>
-                    </toolbarItem>
-                </allowedToolbarItems>
-                <defaultToolbarItems>
-                    <toolbarItem reference="Lvc-bU-Nmh"/>
-                    <toolbarItem reference="651"/>
-                    <toolbarItem reference="0v7-EY-eoL"/>
-                    <toolbarItem reference="UyW-JC-mM2"/>
-                    <toolbarItem reference="652"/>
-                    <toolbarItem reference="hjv-gb-fjC"/>
-                </defaultToolbarItems>
-            </toolbar>
             <contentBorderThickness minY="22"/>
         </window>
         <menu title="Formula" id="dg5-kq-v1Y">
@@ -851,7 +830,7 @@ CA
                 <menuItem title="Install Formula" id="Lcb-tm-ATo">
                     <modifierMask key="keyEquivalentModifierMask"/>
                     <connections>
-                        <action selector="installUninstallUpdate:" target="547" id="dvF-X5-AFi"/>
+                        <action selector="installFormula:" target="547" id="efD-tb-gb9"/>
                         <binding destination="547" name="enabled" keyPath="self.currentFormula" id="Nz4-8w-2do">
                             <dictionary key="options">
                                 <string key="NSValueTransformerName">NSIsNotNil</string>
@@ -891,7 +870,7 @@ CA
                 <menuItem title="Uninstall Formula" id="i3A-Nx-qPJ">
                     <modifierMask key="keyEquivalentModifierMask"/>
                     <connections>
-                        <action selector="installUninstallUpdate:" target="547" id="fdc-Oc-upB"/>
+                        <action selector="uninstallFormula:" target="547" id="V1K-gg-pFF"/>
                         <binding destination="547" name="enabled" keyPath="self.currentFormula" id="EPT-Ql-qEN">
                             <dictionary key="options">
                                 <string key="NSValueTransformerName">NSIsNotNil</string>
@@ -910,7 +889,7 @@ CA
                 <menuItem title="Update Formula" id="Hhd-b7-GOc">
                     <modifierMask key="keyEquivalentModifierMask"/>
                     <connections>
-                        <action selector="installUninstallUpdate:" target="547" id="F9d-VX-scf"/>
+                        <action selector="upgradeSelectedFormulae:" target="547" id="D56-QQ-lYl"/>
                         <binding destination="547" name="enabled" keyPath="self.currentFormula" id="rXd-8V-ocd">
                             <dictionary key="options">
                                 <string key="NSValueTransformerName">NSIsNotNil</string>
@@ -980,15 +959,11 @@ CA
                 <outlet property="label_information" destination="tiK-fW-tE7" id="K14-X1-4bF"/>
                 <outlet property="menu_formula" destination="sBH-Ta-Jft" id="kCm-57-cUw"/>
                 <outlet property="scrollView_formulae" destination="YpG-G5-bXX" id="oFo-5A-rfO"/>
-                <outlet property="searchField" destination="zLQ-g9-dpv" id="KJG-rk-obd"/>
                 <outlet property="selectedFormulaView" destination="Nrf-M9-yac" id="l5Q-Fd-m5y"/>
                 <outlet property="sidebarController" destination="SGP-Ky-0Th" id="etb-bD-RB5"/>
                 <outlet property="splitView" destination="Exu-Zx-Kij" id="Bt8-rO-7vE"/>
                 <outlet property="tabView" destination="79A-lZ-LEo" id="ZHE-dc-ztv"/>
                 <outlet property="tableView_formulae" destination="swO-GD-dpc" id="pQg-F4-vgG"/>
-                <outlet property="toolbar" destination="646" id="8AI-ea-oZp"/>
-                <outlet property="toolbarButton_formulaInfo" destination="UyW-JC-mM2" id="4vY-ln-Est"/>
-                <outlet property="toolbarButton_installUninstall" destination="0v7-EY-eoL" id="PLe-Dn-jmR"/>
                 <outlet property="view" destination="372" id="773"/>
                 <outlet property="view_disablerLock" destination="SfC-W7-8MF" id="uGc-Al-iak"/>
                 <outlet property="view_loading" destination="oZu-7K-rka" id="si8-ZV-s8n"/>
@@ -1005,13 +980,14 @@ CA
                     <subviews>
                         <scrollView focusRingType="none" borderType="none" autohidesScrollers="YES" horizontalLineScroll="19" horizontalPageScroll="10" verticalLineScroll="19" verticalPageScroll="10" usesPredominantAxisScrolling="NO" horizontalScrollElasticity="none" scrollerKnobStyle="dark" translatesAutoresizingMaskIntoConstraints="NO" id="YpG-G5-bXX">
                             <rect key="frame" x="0.0" y="0.0" width="396" height="264"/>
-                            <clipView key="contentView" focusRingType="none" copiesOnScroll="NO" id="6nf-zO-0ou">
+                            <clipView key="contentView" focusRingType="none" misplaced="YES" copiesOnScroll="NO" id="6nf-zO-0ou">
                                 <rect key="frame" x="0.0" y="17" width="379" height="183"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <subviews>
                                     <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" alternatingRowBackgroundColors="YES" multipleSelection="NO" autosaveColumns="NO" headerView="pLZ-e2-9bs" id="swO-GD-dpc" customClass="BPFormulaeTableView">
                                         <rect key="frame" x="0.0" y="0.0" width="517" height="19"/>
                                         <autoresizingMask key="autoresizingMask"/>
+                                        <animations/>
                                         <size key="intercellSpacing" width="3" height="2"/>
                                         <color key="backgroundColor" white="1" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <color key="gridColor" name="gridColor" catalog="System" colorSpace="catalog"/>
@@ -1074,18 +1050,23 @@ CA
                                         </connections>
                                     </tableView>
                                 </subviews>
+                                <animations/>
                                 <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                             </clipView>
-                            <scroller key="horizontalScroller" verticalHuggingPriority="750" horizontal="YES" id="klu-B1-7Zh">
+                            <animations/>
+                            <scroller key="horizontalScroller" wantsLayer="YES" verticalHuggingPriority="750" horizontal="YES" id="klu-B1-7Zh">
                                 <rect key="frame" x="0.0" y="184" width="379" height="16"/>
                                 <autoresizingMask key="autoresizingMask"/>
+                                <animations/>
                             </scroller>
-                            <scroller key="verticalScroller" hidden="YES" verticalHuggingPriority="750" horizontal="NO" id="FFe-Uc-20x">
+                            <scroller key="verticalScroller" hidden="YES" wantsLayer="YES" verticalHuggingPriority="750" horizontal="NO" id="FFe-Uc-20x">
                                 <autoresizingMask key="autoresizingMask"/>
+                                <animations/>
                             </scroller>
                             <tableHeaderView key="headerView" id="pLZ-e2-9bs">
                                 <rect key="frame" x="0.0" y="0.0" width="517" height="17"/>
                                 <autoresizingMask key="autoresizingMask"/>
+                                <animations/>
                             </tableHeaderView>
                         </scrollView>
                     </subviews>
@@ -1095,12 +1076,15 @@ CA
                         <constraint firstAttribute="trailing" secondItem="YpG-G5-bXX" secondAttribute="trailing" id="UAl-9G-pyk"/>
                         <constraint firstAttribute="bottom" secondItem="YpG-G5-bXX" secondAttribute="bottom" id="bYd-VT-9sc"/>
                     </constraints>
+                    <animations/>
                 </customView>
                 <customView fixedFrame="YES" id="Nrf-M9-yac" userLabel="Selected Formula">
                     <rect key="frame" x="0.0" y="265" width="396" height="89"/>
                     <autoresizingMask key="autoresizingMask"/>
+                    <animations/>
                 </customView>
             </subviews>
+            <animations/>
             <holdingPriorities>
                 <real value="250"/>
                 <real value="243"/>
@@ -1111,8 +1095,5 @@ CA
     </objects>
     <resources>
         <image name="NSActionTemplate" width="14" height="14"/>
-        <image name="download" width="48" height="48"/>
-        <image name="globe" width="48" height="48"/>
-        <image name="label" width="48" height="48"/>
     </resources>
 </document>

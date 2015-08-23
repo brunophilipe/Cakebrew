@@ -23,6 +23,8 @@
 "Message_Shell_Invalid_Body" = "Please add your shell \"%@\" to the valid shells file at \"/etc/shells\" before trying again.";
 "Message_Tap_Title" = "Tapping Repository";
 "Message_Tap_Body" = "What repository would you like to tap?";
+"Message_Untap_Title" = "Untapping Repository";
+"Message_Untap_Body" = "Are you sure you want to untap the repository '%@'?";
 "Message_Update_Formulae_Title" = "Updating Formulae";
 "Message_Update_Formulae_Body" = "Are you sure you want to update these formulae: '%@'?";
 "Message_Update_All_Outdated_Title" = "Updating all Outdated";
@@ -57,6 +59,9 @@
 "Toolbar_Tap_Repo" = "Tap Repository";
 "Toolbar_Untap_Repo" = "Untap Repository";
 "Toolbar_Update_Selected" = "Update Selected";
+"Toolbar_More_Information" = "More Information";
+"Toolbar_Homebrew_Update" = "Update Homebrew";
+"Toolbar_Search" = "Search Formulae";
 
 "Sidebar_Info_Installed" = "These are the formulae already installed in your system.";
 "Sidebar_Info_Outdated" = "These formulae are already installed, but have an update available.";

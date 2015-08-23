@@ -100,7 +100,9 @@
 	operationWindowController.windowOperation = windowOperation;
 	operationWindowController.formulae = formulae;
 	operationWindowController.options = options;
-
+  [BPAppDelegateRef setRunningBackgroundTask:YES];
+  
+  
 	NSWindow *operationWindow = operationWindowController.window;
 
 	if ([[NSApp mainWindow] respondsToSelector:@selector(beginSheet:completionHandler:)]) {
