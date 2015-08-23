@@ -1,0 +1,10 @@
+sbtenv: stable 0.0.8, HEAD
+https://github.com/mazgi/sbtenv
+Not installed
+From: https://github.com/Homebrew/homebrew/blob/master/Library/Formula/sbtenv.rb
+==> Caveats
+To use Homebrew’s directories rather than ~/.sbtenv add to your profile:
+  export SBTENV_ROOT=/usr/local/var/sbtenv
+
+To enable shims and autocompletion add to your profile:
+  eval “$(sbtenv init -)”

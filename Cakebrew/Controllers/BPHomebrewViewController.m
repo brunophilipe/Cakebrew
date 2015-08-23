@@ -30,6 +30,7 @@
 #import "BPFormulaeDataSource.h"
 #import "BPSelectedFormulaViewController.h"
 #import "BPToolbar.h"
+#import "BPAppDelegate.h"
 
 typedef NS_ENUM(NSUInteger, HomeBrewTab) {
 	HomeBrewTabFormulae,
@@ -38,11 +39,11 @@ typedef NS_ENUM(NSUInteger, HomeBrewTab) {
 };
 
 @interface BPHomebrewViewController () <NSTableViewDelegate,
-										BPSideBarControllerDelegate,
-										BPSelectedFormulaViewControllerDelegate,
-										BPHomebrewManagerDelegate,
-                    BPToolbarProtocol,
-										NSMenuDelegate>
+BPSideBarControllerDelegate,
+BPSelectedFormulaViewControllerDelegate,
+BPHomebrewManagerDelegate,
+BPToolbarProtocol,
+NSMenuDelegate>
 
 @property (weak) BPAppDelegate *appDelegate;
 
@@ -118,7 +119,7 @@ typedef NS_ENUM(NSUInteger, HomeBrewTab) {
 	self.tableView_formulae.dataSource = self.formulaeDataSource;
 	self.tableView_formulae.delegate = self;
 	[self.tableView_formulae accessibilitySetOverrideValue:NSLocalizedString(@"Formulae", nil) forAttribute:NSAccessibilityDescriptionAttribute];
-
+	
 	//link formulae tableview
 	NSView *formulaeView = self.formulaeSplitView;
 	if ([[self.tabView tabViewItems] count] > HomeBrewTabFormulae) {
@@ -162,7 +163,7 @@ typedef NS_ENUM(NSUInteger, HomeBrewTab) {
 	
 	[self.splitView setMinSize:185.f ofSubviewAtIndex:0];
 	[self.splitView setMinSize:380.f ofSubviewAtIndex:1];
-	[self.splitView setDividerColor:kBPSidebarDividerColor];
+	[self.splitView setDividerColor:[NSColor colorWithCalibratedRed:0.835294 green:0.858824 blue:0.858824 alpha:1.0]];
 	[self.splitView setDividerThickness:1];
 	
 	[self.sidebarController setDelegate:self];
@@ -171,11 +172,11 @@ typedef NS_ENUM(NSUInteger, HomeBrewTab) {
 
 	[self.view_loading setHidden:NO];
 	[self.splitView setHidden:YES];
-  self.toolbar = [[BPToolbar alloc] initWithIdentifier:nil];
-  self.toolbar.delegate = self.toolbar;
-  self.toolbar.controller = self;
-  [[[self view] window] setToolbar:self.toolbar];
-  [self.toolbar lockItems];
+	self.toolbar = [[BPToolbar alloc] initWithIdentifier:nil];
+	self.toolbar.delegate = self.toolbar;
+	self.toolbar.controller = self;
+	[[[self view] window] setToolbar:self.toolbar];
+	[self.toolbar lockItems];
 
 	_appDelegate = BPAppDelegateRef;
 }
@@ -201,45 +202,45 @@ typedef NS_ENUM(NSUInteger, HomeBrewTab) {
 					   ofDividerAtIndex:0];
 	
 	if (selectedSidebarRow == FormulaeSideBarItemRepositories) { // Repositories sidebaritem
-    [self.toolbar configureForMode:BPToolbarModeTap];
+		[self.toolbar configureForMode:BPToolbarModeTap];
 		[self.formulaeSplitView setPosition:height
 						   ofDividerAtIndex:0];
 		
 		if (selectedIndex != -1) {
-      [self.toolbar configureForMode:BPToolbarModeUntap];
+			[self.toolbar configureForMode:BPToolbarModeUntap];
 		} else {
-      [self.toolbar configureForMode:BPToolbarModeTap];
+			[self.toolbar configureForMode:BPToolbarModeTap];
 		}
 	}
 	else if (selectedIndex == -1 || selectedSidebarRow > FormulaeSideBarItemToolsCategory)
 	{
-    [self.toolbar configureForMode:BPToolbarModeDefault];
+		[self.toolbar configureForMode:BPToolbarModeDefault];
 	}
 	else if ([[self.tableView_formulae selectedRowIndexes] count] > 1)
 	{
-    [self.toolbar configureForMode:BPToolbarModeUpdateMany];
+		[self.toolbar configureForMode:BPToolbarModeUpdateMany];
 	}
 	else
 	{
 		BPFormula *formula = [self .formulaeDataSource formulaAtIndex:selectedIndex];
 		
-    [self.toolbar configureForMode:BPToolbarModeInstall];
+		[self.toolbar configureForMode:BPToolbarModeInstall];
 		
 		switch ([[BPHomebrewManager sharedManager] statusForFormula:formula]) {
 			case kBPFormulaInstalled:
-        [self.toolbar configureForMode:BPToolbarModeUninstall];
+				[self.toolbar configureForMode:BPToolbarModeUninstall];
 				break;
 				
 			case kBPFormulaOutdated:
 				if (selectedSidebarRow == FormulaeSideBarItemOutdated) {
 					[self.toolbar configureForMode:BPToolbarModeUpdateSingle];
 				} else {
-          [self.toolbar configureForMode:BPToolbarModeUninstall];
+					[self.toolbar configureForMode:BPToolbarModeUninstall];
 				}
 				break;
 				
 			case kBPFormulaNotInstalled:
-        [self.toolbar configureForMode:BPToolbarModeInstall];
+				[self.toolbar configureForMode:BPToolbarModeInstall];
 				break;
 		}
 	}
@@ -326,8 +327,8 @@ typedef NS_ENUM(NSUInteger, HomeBrewTab) {
 		[self.view_loading setHidden:YES];
 		[self.splitView	   setHidden:NO];
 		
-    [self.toolbar configureForMode:BPToolbarModeDefault];
-    [self.toolbar unlockItems];
+		[self.toolbar configureForMode:BPToolbarModeDefault];
+		[self.toolbar unlockItems];
 		[self.formulaeDataSource refreshBackingArray];
 		[self.sidebarController refreshSidebarBadges];
 		
@@ -365,7 +366,7 @@ typedef NS_ENUM(NSUInteger, HomeBrewTab) {
 		[self.label_information setHidden:YES];
 		[self.view_loading setHidden:YES];
 		[self.splitView setHidden:YES];
-    [self.toolbar lockItems];
+		[self.toolbar lockItems];
 		
 		NSAlert *alert = [NSAlert alertWithMessageText:NSLocalizedString(@"Generic_Error", nil)
 										 defaultButton:NSLocalizedString(@"Message_No_Homebrew_Title", nil)
@@ -396,7 +397,7 @@ typedef NS_ENUM(NSUInteger, HomeBrewTab) {
 		[self.label_information setHidden:NO];
 		[self.splitView setHidden:NO];
 		
-    [self.toolbar unlockItems];
+		[self.toolbar unlockItems];
 		
 		[[BPHomebrewManager sharedManager] reloadFromInterfaceRebuildingCache:YES];
 	}
@@ -486,11 +487,11 @@ typedef NS_ENUM(NSUInteger, HomeBrewTab) {
 		[popover close];
 	}
 	NSInteger selectedIndex = [self.tableView_formulae selectedRow];
-  BPFormula *formula = [self selectedFormula];
-  if (!formula) {
-    return;
-  }
-  [self.formulaPopoverViewController setFormula:formula];
+	BPFormula *formula = [self selectedFormula];
+	if (!formula) {
+		return;
+	}
+	[self.formulaPopoverViewController setFormula:formula];
 	
 	NSRect anchorRect = [self.tableView_formulae rectOfRow:selectedIndex];
 	anchorRect.origin = [self.scrollView_formulae convertPoint:anchorRect.origin fromView:self.tableView_formulae];
@@ -503,69 +504,69 @@ typedef NS_ENUM(NSUInteger, HomeBrewTab) {
 
 - (IBAction)installFormula:(id)sender
 {
-  [self checkForBackgroundTask];
-  BPFormula *formula = [self selectedFormula];
-  if (!formula) {
-    return;
-  }
-  NSAlert *alert = [NSAlert alertWithMessageText:NSLocalizedString(@"Generic_Attention", nil)
-                                   defaultButton:NSLocalizedString(@"Generic_Yes", nil)
-                                 alternateButton:NSLocalizedString(@"Generic_Cancel", nil)
-                                     otherButton:nil
-                       informativeTextWithFormat:NSLocalizedString(@"Confirmation_Install_Formula", nil),formula.name];
-  [alert.window setTitle:NSLocalizedString(@"Cakebrew", nil)];
-  
-  if ([alert runModal] == NSAlertDefaultReturn) {
-    self.operationWindowController = [BPInstallationWindowController runWithOperation:kBPWindowOperationInstall
-                                                                             formulae:@[formula]
-                                                                              options:nil];
-  }
+	[self checkForBackgroundTask];
+	BPFormula *formula = [self selectedFormula];
+	if (!formula) {
+		return;
+	}
+	NSAlert *alert = [NSAlert alertWithMessageText:NSLocalizedString(@"Generic_Attention", nil)
+									 defaultButton:NSLocalizedString(@"Generic_Yes", nil)
+								   alternateButton:NSLocalizedString(@"Generic_Cancel", nil)
+									   otherButton:nil
+						 informativeTextWithFormat:NSLocalizedString(@"Confirmation_Install_Formula", nil),formula.name];
+	[alert.window setTitle:NSLocalizedString(@"Cakebrew", nil)];
+	
+	if ([alert runModal] == NSAlertDefaultReturn) {
+		self.operationWindowController = [BPInstallationWindowController runWithOperation:kBPWindowOperationInstall
+																				 formulae:@[formula]
+																				  options:nil];
+	}
 }
 
 - (IBAction)installFormulaWithOptions:(id)sender
 {
-  [self checkForBackgroundTask];
-  BPFormula *formula = [self selectedFormula];
-  if (!formula) {
-    return;
-  }
-  self.formulaOptionsWindowController = [BPFormulaOptionsWindowController runFormula:formula withCompletionBlock:^(NSArray *options) {
-    self.operationWindowController = [BPInstallationWindowController runWithOperation:kBPWindowOperationInstall
-                                                                             formulae:@[formula]
-                                                                              options:options];
-  }];
+	[self checkForBackgroundTask];
+	BPFormula *formula = [self selectedFormula];
+	if (!formula) {
+		return;
+	}
+	self.formulaOptionsWindowController = [BPFormulaOptionsWindowController runFormula:formula withCompletionBlock:^(NSArray *options) {
+		self.operationWindowController = [BPInstallationWindowController runWithOperation:kBPWindowOperationInstall
+																				 formulae:@[formula]
+																				  options:options];
+	}];
 }
 
 - (IBAction)uninstallFormula:(id)sender
 {
-  [self checkForBackgroundTask];
-  BPFormula *formula = [self selectedFormula];
-  if (!formula) {
-    return;
-  }
-  NSAlert *alert = [NSAlert alertWithMessageText:NSLocalizedString(@"Generic_Attention", nil)
-                                   defaultButton:NSLocalizedString(@"Generic_Yes", nil)
-                                 alternateButton:NSLocalizedString(@"Generic_Cancel", nil)
-                                     otherButton:nil
-                       informativeTextWithFormat:NSLocalizedString(@"Confirmation_Uninstall_Formula", nil),formula.name];
-  [alert.window setTitle:NSLocalizedString(@"Cakebrew", nil)];
-  
-  if ([alert runModal] == NSAlertDefaultReturn) {
-    self.operationWindowController = [BPInstallationWindowController runWithOperation:kBPWindowOperationUninstall
-                                                                             formulae:@[formula]
-                                                                              options:nil];
-  }
+	[self checkForBackgroundTask];
+	BPFormula *formula = [self selectedFormula];
+	if (!formula) {
+		return;
+	}
+	NSAlert *alert = [NSAlert alertWithMessageText:NSLocalizedString(@"Generic_Attention", nil)
+									 defaultButton:NSLocalizedString(@"Generic_Yes", nil)
+								   alternateButton:NSLocalizedString(@"Generic_Cancel", nil)
+									   otherButton:nil
+						 informativeTextWithFormat:NSLocalizedString(@"Confirmation_Uninstall_Formula", nil),formula.name];
+	[alert.window setTitle:NSLocalizedString(@"Cakebrew", nil)];
+	
+	if ([alert runModal] == NSAlertDefaultReturn) {
+		self.operationWindowController = [BPInstallationWindowController runWithOperation:kBPWindowOperationUninstall
+																				 formulae:@[formula]
+																				  options:nil];
+	}
 }
 
 - (IBAction)upgradeSelectedFormulae:(id)sender
 {
-  [self checkForBackgroundTask];
-  NSArray *selectedFormulae = [self selectedFormulae];
-  if (![selectedFormulae count]) {
-    return;
-  }
-  NSString *formulaNames = [[self selectedFormulaNames] componentsJoinedByString:@", "];
-
+	[self checkForBackgroundTask];
+	NSArray *selectedFormulae = [self selectedFormulae];
+	if (![selectedFormulae count]) {
+		return;
+	}
+	NSString *formulaNames = [[self selectedFormulaNames] componentsJoinedByString:@", "];
+	
 	
 	NSAlert *alert = [NSAlert alertWithMessageText:NSLocalizedString(@"Message_Update_Formulae_Title", nil)
 									 defaultButton:NSLocalizedString(@"Generic_Yes", nil)
@@ -576,81 +577,81 @@ typedef NS_ENUM(NSUInteger, HomeBrewTab) {
 	[alert.window setTitle:NSLocalizedString(@"Cakebrew", nil)];
 	if ([alert runModal] == NSAlertDefaultReturn)
 	{
-    self.operationWindowController = [BPInstallationWindowController runWithOperation:kBPWindowOperationUpgrade
-                                                                             formulae:selectedFormulae
-                                                                              options:nil];
+		self.operationWindowController = [BPInstallationWindowController runWithOperation:kBPWindowOperationUpgrade
+																				 formulae:selectedFormulae
+																				  options:nil];
 	}
 }
 
 
 - (IBAction)upgradeAllOutdatedFormulae:(id)sender
 {
-  [self checkForBackgroundTask];
-  
+	[self checkForBackgroundTask];
+	
 	NSAlert *alert = [NSAlert alertWithMessageText:NSLocalizedString(@"Message_Update_All_Outdated_Title", nil)
 									 defaultButton:NSLocalizedString(@"Generic_Yes", nil)
 								   alternateButton:NSLocalizedString(@"Generic_Cancel", nil)
 									   otherButton:nil
 						 informativeTextWithFormat:NSLocalizedString(@"Message_Update_All_Outdated_Body", nil)];
-
+	
 	[alert.window setTitle:NSLocalizedString(@"Cakebrew", nil)];
 	
 	if ([alert runModal] == NSAlertDefaultReturn) {
-    self.operationWindowController = [BPInstallationWindowController runWithOperation:kBPWindowOperationUpgrade
-                                                                             formulae:nil
-                                                                              options:nil];
+		self.operationWindowController = [BPInstallationWindowController runWithOperation:kBPWindowOperationUpgrade
+																				 formulae:nil
+																				  options:nil];
 	}
 }
 
 - (IBAction)tapRepository:(id)sender
 {
-  [self checkForBackgroundTask];
-  NSAlert *alert = [NSAlert alertWithMessageText:NSLocalizedString(@"Message_Tap_Title", nil)
-                                   defaultButton:NSLocalizedString(@"Generic_OK", nil)
-                                 alternateButton:NSLocalizedString(@"Generic_Cancel", nil)
-                                     otherButton:nil
-                       informativeTextWithFormat:NSLocalizedString(@"Message_Tap_Body", nil)];
-		
-  [alert.window setTitle:NSLocalizedString(@"Cakebrew", nil)];
-		
-  NSTextField *input = [[NSTextField alloc] initWithFrame:NSMakeRect(0,0,200,24)];
-  [alert setAccessoryView:input];
-		
-  NSInteger returnValue = [alert runModal];
-  if (returnValue == NSAlertDefaultReturn)
-  {
-    NSString* name = [input stringValue];
-    if ([name length] <= 0)
-    {
-      return;
-    }
-    BPFormula *lformula = [BPFormula formulaWithName:name];
-    self.operationWindowController = [BPInstallationWindowController runWithOperation:kBPWindowOperationTap
-                                                                             formulae:@[lformula]
-                                                                              options:nil];
-  }
+	[self checkForBackgroundTask];
+	NSAlert *alert = [NSAlert alertWithMessageText:NSLocalizedString(@"Message_Tap_Title", nil)
+									 defaultButton:NSLocalizedString(@"Generic_OK", nil)
+								   alternateButton:NSLocalizedString(@"Generic_Cancel", nil)
+									   otherButton:nil
+						 informativeTextWithFormat:NSLocalizedString(@"Message_Tap_Body", nil)];
+	
+	[alert.window setTitle:NSLocalizedString(@"Cakebrew", nil)];
+	
+	NSTextField *input = [[NSTextField alloc] initWithFrame:NSMakeRect(0,0,200,24)];
+	[alert setAccessoryView:input];
+	
+	NSInteger returnValue = [alert runModal];
+	if (returnValue == NSAlertDefaultReturn)
+	{
+		NSString* name = [input stringValue];
+		if ([name length] <= 0)
+		{
+			return;
+		}
+		BPFormula *lformula = [BPFormula formulaWithName:name];
+		self.operationWindowController = [BPInstallationWindowController runWithOperation:kBPWindowOperationTap
+																				 formulae:@[lformula]
+																				  options:nil];
+	}
 }
 
 - (IBAction)untapRepository:(id)sender
 {
-  [self checkForBackgroundTask];
-  BPFormula *formula = [self selectedFormula];
-  if (!formula) {
-    return;
-  }
-  NSAlert *alert = [NSAlert alertWithMessageText:NSLocalizedString(@"Message_Untap_Title", nil)
-                                   defaultButton:NSLocalizedString(@"Generic_OK", nil)
-                                 alternateButton:NSLocalizedString(@"Generic_Cancel", nil)
-                                     otherButton:nil
-                       informativeTextWithFormat:NSLocalizedString(@"Message_Untap_Body", nil), formula.name];
-		
-  [alert.window setTitle:NSLocalizedString(@"Cakebrew", nil)];
-  
-  if ([alert runModal] == NSAlertDefaultReturn) {
-    self.operationWindowController = [BPInstallationWindowController runWithOperation:kBPWindowOperationUntap
-                                                                             formulae:@[formula]
-                                                                              options:nil];
-  }
+	[self checkForBackgroundTask];
+	BPFormula *formula = [self selectedFormula];
+	if (!formula) {
+		return;
+	}
+	NSAlert *alert = [NSAlert alertWithMessageText:NSLocalizedString(@"Message_Untap_Title", nil)
+									 defaultButton:NSLocalizedString(@"Generic_OK", nil)
+								   alternateButton:NSLocalizedString(@"Generic_Cancel", nil)
+									   otherButton:nil
+						 informativeTextWithFormat:NSLocalizedString(@"Message_Untap_Body", nil), formula.name];
+	
+	[alert.window setTitle:NSLocalizedString(@"Cakebrew", nil)];
+	
+	if ([alert runModal] == NSAlertDefaultReturn) {
+		self.operationWindowController = [BPInstallationWindowController runWithOperation:kBPWindowOperationUntap
+																				 formulae:@[formula]
+																				  options:nil];
+	}
 }
 
 - (IBAction)updateHomebrew:(id)sender
@@ -661,31 +662,31 @@ typedef NS_ENUM(NSUInteger, HomeBrewTab) {
 
 - (IBAction)openSelectedFormulaWebsite:(id)sender
 {
-  BPFormula *formula = [self selectedFormula];
+	BPFormula *formula = [self selectedFormula];
 	if (!formula) {
-    return;
-  }
-  [[NSWorkspace sharedWorkspace] openURL:formula.website];
+		return;
+	}
+	[[NSWorkspace sharedWorkspace] openURL:formula.website];
 }
 
 - (void)performSearchWithString:(NSString *)searchPhrase
 {
-  if ([searchPhrase isEqualToString:@""])
-  {
-    [self setSearching:NO];
-    [self updateInfoLabelWithSidebarSelection];
-  }
-  else
-  {
-    [[BPHomebrewManager sharedManager] updateSearchWithName:searchPhrase];
-  }
-  
-  [self configureTableForListing:kBPListAll];
+	if ([searchPhrase isEqualToString:@""])
+	{
+		[self setSearching:NO];
+		[self updateInfoLabelWithSidebarSelection];
+	}
+	else
+	{
+		[[BPHomebrewManager sharedManager] updateSearchWithName:searchPhrase];
+	}
+	
+	[self configureTableForListing:kBPListAll];
 }
 
 - (IBAction)beginFormulaSearch:(id)sender
 {
-  [self.toolbar makeSearchFieldFirstResponder];
+	[self.toolbar makeSearchFieldFirstResponder];
 }
 
 - (IBAction)runHomebrewCleanup:(id)sender
@@ -697,29 +698,29 @@ typedef NS_ENUM(NSUInteger, HomeBrewTab) {
 
 - (void)checkForBackgroundTask
 {
-  if (_appDelegate.isRunningBackgroundTask)
-  {
-    [_appDelegate displayBackgroundWarning];
-    return;
-  }
+	if (_appDelegate.isRunningBackgroundTask)
+	{
+		[_appDelegate displayBackgroundWarning];
+		return;
+	}
 }
 
 - (BPFormula *)selectedFormula
 {
-  NSInteger selectedIndex = [self.tableView_formulae selectedRow];
-  return [self.formulaeDataSource formulaAtIndex:selectedIndex];
+	NSInteger selectedIndex = [self.tableView_formulae selectedRow];
+	return [self.formulaeDataSource formulaAtIndex:selectedIndex];
 }
 
 - (NSArray *)selectedFormulae
 {
-  NSIndexSet *selectedIndexes = [self.tableView_formulae selectedRowIndexes];
-  return [self.formulaeDataSource formulasAtIndexSet:selectedIndexes];
+	NSIndexSet *selectedIndexes = [self.tableView_formulae selectedRowIndexes];
+	return [self.formulaeDataSource formulasAtIndexSet:selectedIndexes];
 }
 
 - (NSArray *)selectedFormulaNames
 {
-  NSArray *formulas = [self selectedFormulae];
-  return [formulas valueForKeyPath:@"@unionOfObjects.name"];
+	NSArray *formulas = [self selectedFormulae];
+	return [formulas valueForKeyPath:@"@unionOfObjects.name"];
 }
 
 @end

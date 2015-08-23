@@ -21,6 +21,7 @@
 
 #import "BPFormulaOptionsWindowController.h"
 #import "BPFormula.h"
+#import "BPAppDelegate.h"
 
 //these constants must match arraycontroller in XIB (array controller + binding on table columns)
 static NSString * const kFormulaOptionCommand = @"formulaOptionCommand";
@@ -71,9 +72,9 @@ static NSString * const kFormulaOptionsTitleColumnId = @"title";
 	formulaOptionsWindowController.installWithOptionsBlock = completionBlock;
 	NSMutableArray *availableOptions = [[NSMutableArray alloc] init];
 	
-	for (id option in [formula options]) {
-		id optionCommand = [option objectForKey:kBP_FORMULA_OPTION_COMMAND];;
-		id optionDescription = [option objectForKey:kBP_FORMULA_OPTION_DESCRIPTION] ? : @"";
+	for (BPFormulaOption *option in [formula options]) {
+		id optionCommand = option.name;
+		id optionDescription = option.explanation ? : @"";
 		if (optionCommand) {
 			
 			// We want to be able to modify content of kWantsToInstallOption within table view

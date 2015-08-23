@@ -20,6 +20,7 @@
 //
 
 #import "BPToolbar.h"
+#import "BPAppDelegate.h"
 
 static NSString *kToolbarIdentifier = @"toolbarIdentifier";
 

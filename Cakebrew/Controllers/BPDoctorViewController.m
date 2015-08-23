@@ -22,6 +22,7 @@
 #import "BPDoctorViewController.h"
 #import "BPHomebrewInterface.h"
 #import "NSFont+Appearance.h"
+#import "BPAppDelegate.h"
 
 @interface BPDoctorViewController ()
 
