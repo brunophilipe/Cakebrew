@@ -135,13 +135,15 @@
   dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
     
     NSString __block *outputValue;
+    __weak BPInstallationWindowController *weakSelf = self;
     void (^displayTerminalOutput)(NSString *outputValue) = ^(NSString *output) {
+      BPInstallationWindowController *strongSelf = weakSelf;
       if (outputValue) {
         outputValue = [outputValue stringByAppendingString:output];
       } else {
         outputValue = output;
       }
-      [self.recordTextView performSelectorOnMainThread:@selector(setString:)
+      [strongSelf.recordTextView performSelectorOnMainThread:@selector(setString:)
                                             withObject:outputValue
                                          waitUntilDone:YES];
     };
