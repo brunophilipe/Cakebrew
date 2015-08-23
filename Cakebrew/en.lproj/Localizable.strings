@@ -72,7 +72,7 @@
 "Installation_Window_Operation_Update" = "Updating Formula:";
 "Installation_Window_Operation_Tap" = "Tapping Repo:";
 "Installation_Window_Operation_Untap" = "Untapping Repo:";
-"Installation_Window_Operation_Cleanup" = "Running Cleanup...";
+"Installation_Window_Operation_Cleanup" = "Running Cleanup…";
 "Installation_Window_All_Formulae" = "All Outdated Formulae";
 
 "Info_View_Multiple_Values" = "Multiple Values";

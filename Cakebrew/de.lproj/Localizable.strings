@@ -1,227 +1,222 @@
-/*
-  Localizable.strings
-  Cakebrew
-
-  Created by Bruno Philipe on 8/18/15.
-  Copyright (c) 2015 Bruno Philipe. All rights reserved.
-*/
-
 /* No comment provided by engineer. */
 "Cakebrew" = "Cakebrew";
 
 /* No comment provided by engineer. */
-"Confirmation_Install_Formula" = "Are you sure you want to install the formula '%@'?";
+"Confirmation_Install_Formula" = "Sind Sie sicher, dass Sie die Formel '%@' installieren möchten?";
 
 /* No comment provided by engineer. */
-"Confirmation_Tap_Repo" = "Are you sure you want to tap the repository '%@'?";
+"Confirmation_Tap_Repo" = "Sind Sie sicher, dass Sie das Repository '%@' tappen möchten?";
 
 /* No comment provided by engineer. */
-"Confirmation_Uninstall_Formula" = "Are you sure you want to uninstall the formula '%@'?";
+"Confirmation_Uninstall_Formula" = "Sind Sie sicher, dass Sie die Formel '%@' deinstallieren möchten?";
 
 /* No comment provided by engineer. */
-"Confirmation_Untap_Repo" = "Are you sure you want to untap the repository '%@'?";
+"Confirmation_Untap_Repo" = "Sind Sie sicher, dass Sie das Repository '%@' untappen möchten?";
 
 /* No comment provided by engineer. */
-"Confirmation_Update_Formula" = "Are you sure you want to update the selected formulae?";
+"Confirmation_Update_Formula" = "Sind Sie sicher, dass Sie die ausgewählten Formeln aktualisieren möchten?";
 
 /* No comment provided by engineer. */
-"Formula_Options_ClickForDetails" = "Click on option for details.";
+"Formula_Options_ClickForDetails" = "Klicken Sie auf eine Option für Details.";
 
 /* No comment provided by engineer. */
-"Formula_Options_Confirmation" = "Are you sure you want to install the formula %@ with the selected options?";
+"Formula_Options_Confirmation" = "Sind Sie sicher, dass Sie die Formel '$@' mit den ausgewählten Einstellungen installieren möchten?";
 
 /* No comment provided by engineer. */
-"Formula_Options_NoOptions" = "This formula has no installation options available.";
+"Formula_Options_NoOptions" = "Für diese Formel sind keine Installations-Möglichkeiten verfügbar.";
 
 /* No comment provided by engineer. */
-"Formula_Options_VoiceOver" = "Formula Options";
+"Formula_Options_VoiceOver" = "Formel-Einstellungen";
 
 /* No comment provided by engineer. */
-"Formula_Options_VoiceOver_Description" = "Option description is also available in the Formula Options table as a VoiceOver help for each row.";
+"Formula_Options_VoiceOver_Description" = "Eine Beschreibung der Einstellungen ist  in der Tabelle";
 
 /* No comment provided by engineer. */
-"Formula_Popover_Error" = "Error retrieving Formula information";
+"Formula_Popover_Error" = "Fehler beim Ermitteln der Informationen über die Formel";
 
 /* No comment provided by engineer. */
-"Formula_Popover_Title" = "Information for Formula: %@";
+"Formula_Popover_Title" = "Informationen über die Formel: %@";
 
 /* No comment provided by engineer. */
-"Formula_Status_Installed" = "Installed";
+"Formula_Status_Installed" = "Installiert";
 
 /* No comment provided by engineer. */
-"Formula_Status_Not_Installed" = "Not Installed";
+"Formula_Status_Not_Installed" = "Nicht installiert";
 
 /* No comment provided by engineer. */
-"Formula_Status_Outdated" = "Update Available";
+"Formula_Status_Outdated" = "Aktualisierung verfügbar";
 
 /* No comment provided by engineer. */
-"Generic_Attention" = "Attention!";
+"Formulae" = "Formeln";
 
 /* No comment provided by engineer. */
-"Generic_Cancel" = "Cancel";
+"Generic_Attention" = "Achtung!";
 
 /* No comment provided by engineer. */
-"Generic_Error" = "Error";
+"Generic_Cancel" = "Abbrechen";
+
+/* No comment provided by engineer. */
+"Generic_Error" = "Fehler";
 
 /* (No Commment) */
-"Generic_No" = "No";
+"Generic_No" = "Nein";
 
 /* No comment provided by engineer. */
-"Generic_OK" = "OK";
+"Generic_OK" = "Ok";
 
 /* No comment provided by engineer. */
-"Generic_Yes" = "Yes";
+"Generic_Yes" = "Ja";
 
 /* No comment provided by engineer. */
-"Homebrew_AppNap_Task_Reason" = "Running Homebrew task";
+"Homebrew_AppNap_Task_Reason" = "Führe Aufgabe mit Homebrew aus";
 
 /* No comment provided by engineer. */
-"Homebrew_Task_Finished" = "Task finished";
+"Homebrew_Task_Finished" = "Aufgabe abgeschlossen";
 
 /* No comment provided by engineer. */
-"Homebrew_Task_Finished_At" = "at";
+"Homebrew_Task_Finished_At" = "bei";
 
 /* No comment provided by engineer. */
-"Info_View_Formula_No_Conflicts" = "This formula has no known conflicts.";
+"Info_View_Formula_No_Conflicts" = "Für diese Formel sind keine Konflikte bekannt.";
 
 /* No comment provided by engineer. */
-"Info_View_Formula_No_Dependencies" = "This formula has no dependencies!";
+"Info_View_Formula_No_Dependencies" = "Diese Formel hat keine Abhängigkeiten.";
 
 /* No comment provided by engineer. */
-"Info_View_Formula_No_Description" = "No description provided.";
+"Info_View_Formula_No_Description" = "Keine Beschreibung angegeben.";
 
 /* No comment provided by engineer. */
-"Info_View_Formula_Not_Installed" = "Formula Not Installed.";
+"Info_View_Formula_Not_Installed" = "Formel nicht installiert.";
 
 /* No comment provided by engineer. */
-"Info_View_Multiple_Values" = "Multiple Values";
+"Info_View_Multiple_Values" = "Mehrere Werte";
 
 /* No comment provided by engineer. */
-"Installation_Window_All_Formulae" = "All Outdated Formulae";
+"Installation_Window_All_Formulae" = "Alle nicht aktuellen Formeln";
 
 /* No comment provided by engineer. */
-"Installation_Window_Operation_Cleanup" = "Running Cleanup...";
+"Installation_Window_Operation_Cleanup" = "Führe Cleanup aus";
 
 /* No comment provided by engineer. */
-"Installation_Window_Operation_Install" = "Installing Formula:";
+"Installation_Window_Operation_Install" = "Installiere Formel:";
 
 /* No comment provided by engineer. */
-"Installation_Window_Operation_Tap" = "Tapping Repo:";
+"Installation_Window_Operation_Tap" = "Tappe Repository:";
 
 /* No comment provided by engineer. */
-"Installation_Window_Operation_Uninstall" = "Uninstalling Formula:";
+"Installation_Window_Operation_Uninstall" = "Deinstalliere Formel:";
 
 /* No comment provided by engineer. */
-"Installation_Window_Operation_Untap" = "Untapping Repo:";
+"Installation_Window_Operation_Untap" = "Untappe Repository:";
 
 /* No comment provided by engineer. */
-"Installation_Window_Operation_Update" = "Updating Formula:";
+"Installation_Window_Operation_Update" = "Aktualisiere Formel:";
 
 /* No comment provided by engineer. */
-"Message_BGTask_Body" = "Sorry, a background task is already running. You can't perform two tasks at the same time.";
+"Message_BGTask_Body" = "Entschuldigung, es läuft bereits ein Prozess im Hintergrund. Sie können deshalb keinen zweiten Hintergrundprozess starten.";
 
 /* No comment provided by engineer. */
-"Message_BGTask_Title" = "Active background task!";
+"Message_BGTask_Title" = "Hintergrundprozess aktiv!";
 
 /* No comment provided by engineer. */
-"Message_No_Homebrew_Body" = "Homebrew was not found in your system. Please install Homebrew before using Cakebrew. You can click the button below to open Homebrew's website.";
+"Message_No_Homebrew_Body" = "In Ihrem System wurde keine Homebrew-Installation gefunden. Bitte installieren Sie Hombrew bevor Sie Cakebrew verwenden. Sie können den Button unten anklicken, um die Webseite von Homebrew zu öffnen.";
 
 /* No comment provided by engineer. */
-"Message_No_Homebrew_Title" = "Homebrew Website";
+"Message_No_Homebrew_Title" = "Webseite von Homebrew";
 
 /* No comment provided by engineer. */
-"Message_Shell_Invalid_Body" = "Please add your shell \"%@\" to the valid shells file at \"/etc/shells\" before trying again.";
+"Message_Shell_Invalid_Body" = "Bitte fügen Sie Ihre Shell (\"%@\") in der Datei \"/etc/shells\" hinzu und versuchen Sie es danach erneut.";
 
 /* No comment provided by engineer. */
-"Message_Shell_Invalid_Title" = "No Valid shell was found!";
+"Message_Shell_Invalid_Title" = "Keine gültige Shell gefunden!";
 
 /* No comment provided by engineer. */
-"Message_Tap_Body" = "What repository would you like to tap?";
+"Message_Tap_Body" = "Welches Repository möchten Sie tappen?";
 
 /* No comment provided by engineer. */
-"Message_Tap_Title" = "Tapping Repository";
+"Message_Tap_Title" = "Tappe Repository";
 
 /* No comment provided by engineer. */
-"Message_Update_All_Outdated_Body" = "Are you sure you want to update all outdated formulae?";
+"Message_Update_All_Outdated_Body" = "Sind Sie sicher, dass Sie alle nicht aktuellen Formeln aktualisieren möchten?";
 
 /* No comment provided by engineer. */
-"Message_Update_All_Outdated_Title" = "Updating all Outdated";
+"Message_Update_All_Outdated_Title" = "Aktualisiere alle nicht aktuellen Formeln";
 
 /* No comment provided by engineer. */
-"Message_Update_Formulae_Body" = "Are you sure you want to update these formulae: '%@'?";
+"Message_Update_Formulae_Body" = "Sind Sie sicher, dass Sie diese Formeln aktualisieren möchten? '%@'";
 
 /* No comment provided by engineer. */
-"Message_Update_Formulae_Title" = "Updating Formulae";
+"Message_Update_Formulae_Title" = "Aktualisiere Formeln";
 
 /* No comment provided by engineer. */
-"Sidebar_Group_Formulae" = "Formulae";
+"Sidebar_Group_Formulae" = "Formeln";
 
 /* No comment provided by engineer. */
 "Sidebar_Group_Tools" = "Tools";
 
 /* No comment provided by engineer. */
-"Sidebar_Info_All" = "These are all the formulae available for installation with Homebrew.";
+"Sidebar_Info_All" = "Dies sind alle Formeln, die in Ihrer Konfiguration über Homebrew installiert werden können.";
 
 /* No comment provided by engineer. */
-"Sidebar_Info_Doctor" = "The doctor is a Homebrew feature that detects the most common causes of errors.";
+"Sidebar_Info_Doctor" = "Doctor ist ein Feature von Homebrew, das die häufigsten Fehlerursachen erkennen kann.";
 
 /* No comment provided by engineer. */
-"Sidebar_Info_Installed" = "These are the formulae already installed in your system.";
+"Sidebar_Info_Installed" = "Diese Formeln sind bereits in Ihrem System installieren.";
 
 /* No comment provided by engineer. */
-"Sidebar_Info_Leaves" = "These formulae are not dependencies of any other formulae.";
+"Sidebar_Info_Leaves" = "Keine andere Formel ist von einer dieser Formeln abhängig (Blätter des Abhängigkeitsgraphs).";
 
 /* No comment provided by engineer. */
-"Sidebar_Info_Outdated" = "These formulae are already installed, but have an update available.";
+"Sidebar_Info_Outdated" = "Diese Formeln sind bereits installiert, aber sie sind nicht aktuell.";
 
 /* No comment provided by engineer. */
-"Sidebar_Info_Repos" = "These are the repositories you have tapped.";
+"Sidebar_Info_Repos" = "Dieses Repositorys sind getappt.";
 
 /* No comment provided by engineer. */
-"Sidebar_Info_SearchResults" = "These are the results of your search.";
+"Sidebar_Info_SearchResults" = "Ihre Suchergebnisse.";
 
 /* No comment provided by engineer. */
-"Sidebar_Info_Update" = "Updating Homebrew means fetching the latest info about the available formulae.";
+"Sidebar_Info_Update" = "Bei einem Update ermittelt Homebrew die aktuellsten Informationen für die verfügbaren Formeln.";
 
 /* No comment provided by engineer. */
-"Sidebar_Item_All" = "All Formulae";
+"Sidebar_Item_All" = "Alle Formeln";
 
 /* No comment provided by engineer. */
 "Sidebar_Item_Doctor" = "Doctor";
 
 /* No comment provided by engineer. */
-"Sidebar_Item_Installed" = "Installed";
+"Sidebar_Item_Installed" = "Installiert";
 
 /* No comment provided by engineer. */
-"Sidebar_Item_Leaves" = "Leaves";
+"Sidebar_Item_Leaves" = "Blätter";
 
 /* No comment provided by engineer. */
-"Sidebar_Item_Outdated" = "Outdated";
+"Sidebar_Item_Outdated" = "Nicht aktuell";
 
 /* No comment provided by engineer. */
-"Sidebar_Item_Repos" = "Repositories";
+"Sidebar_Item_Repos" = "Repositorys";
 
 /* No comment provided by engineer. */
-"Sidebar_Item_Update" = "Update";
+"Sidebar_Item_Update" = "Aktualisieren";
 
 /* No comment provided by engineer. */
 "Sidebar_VoiceOver_Tools" = "Tools";
 
 /* No comment provided by engineer. */
-"Toolbar_Install_Formula" = "Install Formula";
+"Toolbar_Install_Formula" = "Formel installieren";
 
 /* No comment provided by engineer. */
-"Toolbar_Tap_Repo" = "Tap Repository";
+"Toolbar_Tap_Repo" = "Repository tappen";
 
 /* No comment provided by engineer. */
-"Toolbar_Uninstall_Formula" = "Uninstall Formula";
+"Toolbar_Uninstall_Formula" = "Formel deinstallieren";
 
 /* No comment provided by engineer. */
-"Toolbar_Untap_Repo" = "Untap Repository";
+"Toolbar_Untap_Repo" = "Repository untappen";
 
 /* No comment provided by engineer. */
-"Toolbar_Update_Formula" = "Update Formula";
+"Toolbar_Update_Formula" = "Formel aktualisieren";
 
 /* No comment provided by engineer. */
-"Toolbar_Update_Selected" = "Update Selected";
+"Toolbar_Update_Selected" = "Ausgewählte Formeln aktualisieren";
 
