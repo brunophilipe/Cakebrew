@@ -69,24 +69,24 @@
 	
 	[self.recordTextView setFont:font];
 	self.windowTitleLabel.stringValue = messagesMap[@(self.windowOperation)] ?: @"";
-
+	
 	NSUInteger count = [self.formulae count];
-
-  if (count >= 1)
-  {
-    NSString *formulaeNames = [[self namesOfAllFormulae] componentsJoinedByString:@", "];
-    self.formulaNameLabel.stringValue = formulaeNames;
-  }
-  else {
-    if (self.windowOperation != kBPWindowOperationCleanup)
-    {
-      self.formulaNameLabel.stringValue = NSLocalizedString(@"Installation_Window_All_Formulae", nil);
-    }
-    else
-    {
-      self.formulaNameLabel.stringValue = @"";
-    }
-  }
+	
+	if (count >= 1)
+	{
+		NSString *formulaeNames = [[self namesOfAllFormulae] componentsJoinedByString:@", "];
+		self.formulaNameLabel.stringValue = formulaeNames;
+	}
+	else {
+		if (self.windowOperation != kBPWindowOperationCleanup)
+		{
+			self.formulaNameLabel.stringValue = NSLocalizedString(@"Installation_Window_All_Formulae", nil);
+		}
+		else
+		{
+			self.formulaNameLabel.stringValue = @"";
+		}
+	}
 }
 
 + (BPInstallationWindowController *)runWithOperation:(BPWindowOperation)windowOperation
@@ -98,11 +98,11 @@
 	operationWindowController.windowOperation = windowOperation;
 	operationWindowController.formulae = formulae;
 	operationWindowController.options = options;
-  [BPAppDelegateRef setRunningBackgroundTask:YES];
-  
-  
+	[BPAppDelegateRef setRunningBackgroundTask:YES];
+	
+	
 	NSWindow *operationWindow = operationWindowController.window;
-
+	
 	if ([[NSApp mainWindow] respondsToSelector:@selector(beginSheet:completionHandler:)]) {
 		[[NSApp mainWindow] beginSheet:operationWindow completionHandler:^(NSModalResponse returnCode) {
 			[BPAppDelegateRef setRunningBackgroundTask:NO];
@@ -115,7 +115,7 @@
 										  contextInfo:NULL];
 	}
 	[operationWindowController executeInstallation];
-
+	
 	return operationWindowController;
 }
 
@@ -132,79 +132,78 @@
 
 - (void)executeInstallation
 {
-  [self.okButton setEnabled:NO];
-  [self.progressIndicator startAnimation:nil];
-  dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
-    
-    NSString __block *outputValue;
-    __weak BPInstallationWindowController *weakSelf = self;
-    void (^displayTerminalOutput)(NSString *outputValue) = ^(NSString *output) {
-      BPInstallationWindowController *strongSelf = weakSelf;
-      if (outputValue) {
-        outputValue = [outputValue stringByAppendingString:output];
-      } else {
-        outputValue = output;
-      }
-      [strongSelf.recordTextView performSelectorOnMainThread:@selector(setString:)
-                                            withObject:outputValue
-                                         waitUntilDone:YES];
-    };
-    
-    BPHomebrewInterface *homebrewInterface = [BPHomebrewInterface sharedInterface];
-    if (self.windowOperation == kBPWindowOperationInstall)
-    {
-      NSString *name = [[self.formulae firstObject] name];
-      [homebrewInterface installFormula:name
-                            withOptions:self.options
-                         andReturnBlock:displayTerminalOutput];
-    }
-    else if (self.windowOperation == kBPWindowOperationUninstall)
-    {
-      NSString *name = [[self.formulae firstObject] name];
-      [homebrewInterface uninstallFormula:name
-                          withReturnBlock:displayTerminalOutput];
-    }
-    else if (self.windowOperation == kBPWindowOperationUpgrade)
-    {
-      if (self.formulae) {
-        NSArray *names = [self namesOfAllFormulae];
-        [homebrewInterface upgradeFormulae:names
-                           withReturnBlock:displayTerminalOutput];
-      } else {
-        //no parameter is necessary to upgrade all formulas; recycling API with empty string
-        [homebrewInterface upgradeFormulae:@[@""]
-                           withReturnBlock:displayTerminalOutput];
-      }
-    }
-    else if (self.windowOperation == kBPWindowOperationTap)
-    {
-      if (self.formulae) {
-        NSString *name = [[self.formulae firstObject] name];
-        [homebrewInterface tapRepository:name withReturnsBlock:displayTerminalOutput];
-      }
-    }
-    else if (self.windowOperation == kBPWindowOperationUntap)
-    {
-      if (self.formulae) {
-        NSString *name = [[self.formulae firstObject] name];
-        [[BPHomebrewInterface sharedInterface] untapRepository:name withReturnsBlock:displayTerminalOutput];
-      }
-    }
-    else if (self.windowOperation == kBPWindowOperationCleanup)
-    {
-      [[BPHomebrewInterface sharedInterface] runCleanupWithReturnBlock:displayTerminalOutput];
-    }
-    
-    [self finishTask];
-  });
+	[self.okButton setEnabled:NO];
+	[self.progressIndicator startAnimation:nil];
+	dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
+		
+		NSString __block *outputValue;
+		__weak BPInstallationWindowController *weakSelf = self;
+		void (^displayTerminalOutput)(NSString *outputValue) = ^(NSString *output) {
+			if (outputValue) {
+				outputValue = [outputValue stringByAppendingString:output];
+			} else {
+				outputValue = output;
+			}
+			[weakSelf.recordTextView performSelectorOnMainThread:@selector(setString:)
+													  withObject:outputValue
+												   waitUntilDone:YES];
+		};
+		
+		BPHomebrewInterface *homebrewInterface = [BPHomebrewInterface sharedInterface];
+		if (self.windowOperation == kBPWindowOperationInstall)
+		{
+			NSString *name = [[self.formulae firstObject] name];
+			[homebrewInterface installFormula:name
+								  withOptions:self.options
+							   andReturnBlock:displayTerminalOutput];
+		}
+		else if (self.windowOperation == kBPWindowOperationUninstall)
+		{
+			NSString *name = [[self.formulae firstObject] name];
+			[homebrewInterface uninstallFormula:name
+								withReturnBlock:displayTerminalOutput];
+		}
+		else if (self.windowOperation == kBPWindowOperationUpgrade)
+		{
+			if (self.formulae) {
+				NSArray *names = [self namesOfAllFormulae];
+				[homebrewInterface upgradeFormulae:names
+								   withReturnBlock:displayTerminalOutput];
+			} else {
+				//no parameter is necessary to upgrade all formulas; recycling API with empty string
+				[homebrewInterface upgradeFormulae:@[@""]
+								   withReturnBlock:displayTerminalOutput];
+			}
+		}
+		else if (self.windowOperation == kBPWindowOperationTap)
+		{
+			if (self.formulae) {
+				NSString *name = [[self.formulae firstObject] name];
+				[homebrewInterface tapRepository:name withReturnsBlock:displayTerminalOutput];
+			}
+		}
+		else if (self.windowOperation == kBPWindowOperationUntap)
+		{
+			if (self.formulae) {
+				NSString *name = [[self.formulae firstObject] name];
+				[[BPHomebrewInterface sharedInterface] untapRepository:name withReturnsBlock:displayTerminalOutput];
+			}
+		}
+		else if (self.windowOperation == kBPWindowOperationCleanup)
+		{
+			[[BPHomebrewInterface sharedInterface] runCleanupWithReturnBlock:displayTerminalOutput];
+		}
+		
+		[self finishTask];
+	});
 }
 
 
 - (void)finishTask
 {
-  dispatch_async(dispatch_get_main_queue(), ^(){
-    [self.progressIndicator stopAnimation:nil];
-  });
+	dispatch_async(dispatch_get_main_queue(), ^(){
+		[self.progressIndicator stopAnimation:nil];
+	});
 	[self.okButton setEnabled:YES];
 	
 	[[NSApplication sharedApplication] requestUserAttention:NSInformationalRequest];
