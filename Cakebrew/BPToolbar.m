@@ -46,6 +46,11 @@ static NSString *kToolbarItemMultiActionIdentifier = @"toolbarItemMultiAction";
 		float OSXVersion = BPAppDelegateRef.OSXVersion;
 		self.isFlat = OSXVersion >= 10.10;
 		
+		if (!self.isFlat)
+		{
+			[self setSizeMode:NSToolbarSizeModeSmall];
+		}
+		
 		[self configureForMode:BPToolbarModeDefault];
 		[self lockItems];
 	}
