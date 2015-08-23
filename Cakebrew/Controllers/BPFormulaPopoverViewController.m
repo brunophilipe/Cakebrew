@@ -31,6 +31,12 @@
 	NSString *string = [[BPHomebrewInterface sharedInterface] informationForFormula:[_formula performSelector:@selector(name)]];
 	if (string) {
 		[self.formulaTextView setString:string];
+		
+		// Recognize links in info text
+		[self.formulaTextView setEditable:YES];
+        [self.formulaTextView checkTextInDocument:nil];
+        [self.formulaTextView setEditable:NO];
+		
 		[self.formulaTitleLabel setStringValue:[NSString stringWithFormat:NSLocalizedString(@"Formula_Popover_Title", nil), [_formula performSelector:@selector(name)]]];
 	} else {
 		[self.formulaTextView setString:NSLocalizedString(@"Formula_Popover_Error", nil)];

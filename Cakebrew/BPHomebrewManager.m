@@ -24,6 +24,7 @@
 
 NSString *const kBP_CACHE_DICT_DATE_KEY = @"BP_CACHE_DICT_DATE_KEY";
 NSString *const kBP_CACHE_DICT_DATA_KEY = @"BP_CACHE_DICT_DATA_KEY";
+NSString *const kBPLastCacheBuildDate = @"LastCacheBuildDate";
 
 #define kBP_SECONDS_IN_A_DAY 86400
 
@@ -103,6 +104,12 @@ NSString *const kBP_CACHE_DICT_DATA_KEY = @"BP_CACHE_DICT_DATA_KEY";
  */
 - (BOOL)loadAllFormulaeCaches
 {
+  NSDate *lastCacheBuildDate = [[NSUserDefaults standardUserDefaults] objectForKey:kBPLastCacheBuildDate];
+  //if formulas were retrieved from database more than 24 hours ago
+  if (![[lastCacheBuildDate dateByAddingTimeInterval:3600*24] compare:[NSDate date]] == NSOrderedDescending) {
+    return NO;
+  }
+  
 	NSURL *cachesFolder = [BPAppDelegateRef urlForApplicationCachesFolder];
 
 	if (cachesFolder) {
@@ -138,6 +145,7 @@ NSString *const kBP_CACHE_DICT_DATA_KEY = @"BP_CACHE_DICT_DATA_KEY";
 			} else {
 				[[NSFileManager defaultManager] createFileAtPath:allFormulaeFile.relativePath contents:cacheData attributes:nil];
 			}
+      [[NSUserDefaults standardUserDefaults] setObject:[NSDate date] forKey:kBPLastCacheBuildDate];
 		} else {
 			NSLog(@"Could not store cache file. BPAppDelegate function returned nil!");
 		}
