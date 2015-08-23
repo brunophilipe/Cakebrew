@@ -61,6 +61,7 @@ static NSString *cakebrewOutputIdentifier = @"+++++Cakebrew+++++";
 @implementation BPHomebrewInterface
 {
 	void (^operationUpdateBlock)(NSString*);
+  BOOL systemHasAppNap;
 }
 
 + (BPHomebrewInterface *)sharedInterface
@@ -79,7 +80,8 @@ static NSString *cakebrewOutputIdentifier = @"+++++Cakebrew+++++";
 	self = [super init];
 	if (self) {
 		[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updatedFileHandle:) name:NSFileHandleDataAvailableNotification object:nil];
-		[self setTask:nil];
+    systemHasAppNap = [[NSProcessInfo processInfo] respondsToSelector:@selector(beginActivityWithOptions:reason:)];
+		
 	}
 	return self;
 }
@@ -94,18 +96,9 @@ static NSString *cakebrewOutputIdentifier = @"+++++Cakebrew+++++";
   [self.task terminate];
 }
 
-- (BOOL)systemHasAppNap
-{
-  static BOOL systemHasAppNap;
-  if (!systemHasAppNap) {
-    systemHasAppNap = [[NSProcessInfo processInfo] respondsToSelector:@selector(beginActivityWithOptions:reason:)];
-  }
-  return systemHasAppNap;
-}
-
 - (void)beginActivity
 {
-  if ([self systemHasAppNap]) {
+  if (systemHasAppNap) {
     activity = [[NSProcessInfo processInfo] beginActivityWithOptions:NSActivityUserInitiated
                                                               reason:NSLocalizedString(@"Homebrew_AppNap_Task_Reason", nil)];
     
@@ -114,7 +107,7 @@ static NSString *cakebrewOutputIdentifier = @"+++++Cakebrew+++++";
 
 - (void)endActivity
 {
-  if ([self systemHasAppNap]) {
+  if (systemHasAppNap) {
     [[NSProcessInfo processInfo] endActivity:activity];
   }
 }
