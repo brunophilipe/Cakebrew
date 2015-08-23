@@ -537,6 +537,7 @@
 					};
 					D261C9BF1B852FA300409803 = {
 						CreatedOnToolsVersion = 6.4;
+						TestTargetID = 1FE4FE53148E4CDD008EDE8B;
 					};
 				};
 			};
@@ -910,6 +911,7 @@
 		D261C9C81B852FA300409803 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
@@ -935,12 +937,14 @@
 				MACOSX_DEPLOYMENT_TARGET = 10.8;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Cakebrew.app/Contents/MacOS/Cakebrew";
 			};
 			name = Debug;
 		};
 		D261C9C91B852FA300409803 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
@@ -963,6 +967,7 @@
 				MACOSX_DEPLOYMENT_TARGET = 10.8;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Cakebrew.app/Contents/MacOS/Cakebrew";
 			};
 			name = Release;
 		};
