@@ -40,12 +40,12 @@ NSString *const kBP_CACHE_DICT_DATA_KEY = @"BP_CACHE_DICT_DATA_KEY";
 	{
         static dispatch_once_t once;
         static BPHomebrewManager *instance;
-        dispatch_once(&once, ^ { instance = [[BPHomebrewManager alloc] init]; });
+        dispatch_once(&once, ^ { instance = [[super allocWithZone:NULL] initUniqueInstance]; });
         return instance;
 	}
 }
 
-- (id)init
+- (instancetype)initUniqueInstance
 {
 	self = [super init];
 	if (self) {
@@ -54,12 +54,12 @@ NSString *const kBP_CACHE_DICT_DATA_KEY = @"BP_CACHE_DICT_DATA_KEY";
 	return self;
 }
 
-+ (id)allocWithZone:(NSZone *)zone
++ (instancetype)allocWithZone:(NSZone *)zone
 {
   return [self sharedManager];
 }
 
-- (id)copyWithZone:(NSZone *)zone
+- (instancetype)copyWithZone:(NSZone *)zone
 {
   return self;
 }

@@ -59,32 +59,32 @@ static NSString *cakebrewOutputIdentifier = @"+++++Cakebrew+++++";
 
 @implementation BPHomebrewInterface
 
-+ (BPHomebrewInterface *)sharedInterface
++ (instancetype)sharedInterface
 {
 	@synchronized(self)
 	{
 		static dispatch_once_t once;
 		static BPHomebrewInterface *instance;
-		dispatch_once(&once, ^ { instance = [[BPHomebrewInterface alloc] init]; });
+		dispatch_once(&once, ^ { instance = [[super allocWithZone:NULL] initUniqueInstance]; });
 		return instance;
 	}
 }
 
-- (id)init
+- (instancetype)initUniqueInstance
 {
-	self = [super init];
-	if (self) {
-	  _tasks = [[NSMutableDictionary alloc] init];
-	}
-	return self;
+  self = [super init];
+  if (self) {
+	_tasks = [[NSMutableDictionary alloc] init];
+  }
+  return self;
 }
 
-+ (id)allocWithZone:(NSZone *)zone
++ (instancetype)allocWithZone:(NSZone *)zone
 {
   return [self sharedInterface];
 }
 
-- (id)copyWithZone:(NSZone *)zone
+- (instancetype)copyWithZone:(NSZone *)zone
 {
   return self;
 }

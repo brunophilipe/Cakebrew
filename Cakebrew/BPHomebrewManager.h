@@ -49,7 +49,10 @@ typedef NS_ENUM(NSInteger, BPFormulaStatus) {
 
 @property (weak) id<BPHomebrewManagerDelegate> delegate;
 
-+ (BPHomebrewManager *)sharedManager;
++ (instancetype)sharedManager;
++ (instancetype)alloc __attribute__((unavailable("alloc not available, call sharedManager instead")));
+- (instancetype)init __attribute__((unavailable("init not available, call sharedManager instead")));
++ (instancetype)new __attribute__((unavailable("new not available, call sharedManager instead")));
 
 - (void)reloadFromInterfaceRebuildingCache:(BOOL)shouldRebuildCache;
 - (void)updateSearchWithName:(NSString *)name;

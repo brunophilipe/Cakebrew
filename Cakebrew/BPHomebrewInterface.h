@@ -50,7 +50,10 @@ typedef NS_ENUM(NSInteger, BPListMode) {
 
 @interface BPHomebrewInterface : NSObject <BPFormulaDataProvider>
 
-+ (BPHomebrewInterface *)sharedInterface;
++ (instancetype)sharedInterface;
++ (instancetype)alloc __attribute__((unavailable("alloc not available, call sharedInterface instead")));
+- (instancetype)init __attribute__((unavailable("init not available, call sharedInterface instead")));
++ (instancetype)new __attribute__((unavailable("new not available, call sharedInterface instead")));
 
 /**
  *  The delegate object.
