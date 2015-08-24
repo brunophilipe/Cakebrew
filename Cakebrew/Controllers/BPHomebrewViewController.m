@@ -223,9 +223,7 @@ NSMenuDelegate>
 	else
 	{
 		BPFormula *formula = [self .formulaeDataSource formulaAtIndex:selectedIndex];
-		
-		[self.toolbar configureForMode:BPToolbarModeInstall];
-		
+	  
 		switch ([[BPHomebrewManager sharedManager] statusForFormula:formula]) {
 			case kBPFormulaInstalled:
 				[self.toolbar configureForMode:BPToolbarModeUninstall];
@@ -657,7 +655,7 @@ NSMenuDelegate>
 - (IBAction)updateHomebrew:(id)sender
 {
 	[self.sidebarController.sidebar selectRowIndexes:[NSIndexSet indexSetWithIndex:FormulaeSideBarItemUpdate] byExtendingSelection:NO];
-	[self.updateViewController runStopUpdate:nil];
+	//[self.updateViewController runStopUpdate:nil];
 }
 
 - (IBAction)openSelectedFormulaWebsite:(id)sender

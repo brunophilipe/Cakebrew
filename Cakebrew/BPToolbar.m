@@ -51,8 +51,7 @@ static NSString *kToolbarItemMultiActionIdentifier = @"toolbarItemMultiAction";
 		{
 			[self setSizeMode:NSToolbarSizeModeSmall];
 		}
-		
-		[self configureForMode:BPToolbarModeDefault];
+		_currentMode = BPToolbarModeDefault;
 		[self lockItems];
 	}
 	return self;
@@ -60,6 +59,10 @@ static NSString *kToolbarItemMultiActionIdentifier = @"toolbarItemMultiAction";
 
 - (void)configureForMode:(BPToolbarMode)mode
 {
+	if (self.currentMode == mode) {
+	  return;
+	}
+	self.currentMode = mode;
 	NSToolbarItem *moreInfoItem = [self toolbarItemInformation];
 	if (mode == BPToolbarModeTap ||
 		mode == BPToolbarModeUntap ||
@@ -178,7 +181,6 @@ static NSString *kToolbarItemMultiActionIdentifier = @"toolbarItemMultiAction";
 	return @[kToolbarItemHomebrewUpdateIdentifier,
 			 NSToolbarFlexibleSpaceItemIdentifier,
 			 kToolbarItemMultiActionIdentifier,
-			 kToolbarItemInformationIdentifier,
 			 kToolbarItemSearchIdentifier,
 			 ];
 }
