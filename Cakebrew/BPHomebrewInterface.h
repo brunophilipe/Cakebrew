@@ -162,4 +162,13 @@ typedef NS_ENUM(NSInteger, BPListMode) {
  */
 - (NSString *)informationForFormulaName:(NSString *)name;
 
+/**
+ *
+ *  Checks if there is any non-terminated task in queue
+ *
+ *  @return YES if there is any task in background queue. No if the queue is empty
+  *
+ */
+- (BOOL)isRunningBackgroundTask;
+
 @end

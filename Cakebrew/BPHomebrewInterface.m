@@ -20,6 +20,7 @@
 //
 
 #import "BPHomebrewInterface.h"
+#import "BPTask.h"
 
 static NSString *cakebrewOutputIdentifier = @"+++++Cakebrew+++++";
 
@@ -48,21 +49,15 @@ static NSString *cakebrewOutputIdentifier = @"+++++Cakebrew+++++";
 @interface BPHomebrewInterfaceListCallRepositories: BPHomebrewInterfaceListCall
 @end
 
-@interface BPHomebrewInterface () {
-  id activity;
-}
+@interface BPHomebrewInterface () <BPTaskCompleted>
 
 @property (strong) NSString *path_cellar;
 @property (strong) NSString *path_shell;
-@property (strong) NSTask *task;
+@property (strong) NSMutableDictionary *tasks;
 
 @end
 
 @implementation BPHomebrewInterface
-{
-	void (^operationUpdateBlock)(NSString*);
-  BOOL systemHasAppNap;
-}
 
 + (BPHomebrewInterface *)sharedInterface
 {
@@ -79,104 +74,35 @@ static NSString *cakebrewOutputIdentifier = @"+++++Cakebrew+++++";
 {
 	self = [super init];
 	if (self) {
-		[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updatedFileHandle:) name:NSFileHandleDataAvailableNotification object:nil];
-    systemHasAppNap = [[NSProcessInfo processInfo] respondsToSelector:@selector(beginActivityWithOptions:reason:)];
-		
+	  _tasks = [[NSMutableDictionary alloc] init];
 	}
 	return self;
 }
 
-- (void)dealloc
-{
-	[[NSNotificationCenter defaultCenter] removeObserver:self];
-}
-
 - (void)cleanup
 {
-  [self.task terminate];
-}
-
-- (void)beginActivity
-{
-  if (systemHasAppNap) {
-    activity = [[NSProcessInfo processInfo] beginActivityWithOptions:NSActivityUserInitiated
-                                                              reason:NSLocalizedString(@"Homebrew_AppNap_Task_Reason", nil)];
-    
-  }
-}
-
-- (void)endActivity
-{
-  if (systemHasAppNap) {
-    [[NSProcessInfo processInfo] endActivity:activity];
-  }
-}
-
-- (NSTask *)taskWithArguments:(NSArray *)arguments
-{
-  NSTask *task = [[NSTask alloc] init];
-  [task setLaunchPath:self.path_shell];
-  [task setArguments:arguments];
-  return task;
-}
-
-- (void)getCurrentTasksOutput:(NSString **)output error:(NSString **)error useFileHandle:(BOOL)shouldUseFileHandle
-{
-  NSPipe *outputPipe = [NSPipe pipe];
-  NSPipe *errorPipe = [NSPipe pipe];
-  [self.task setStandardOutput:outputPipe];
-  [self.task setStandardInput:[NSPipe pipe]];
-  [self.task setStandardError:errorPipe];
+  [self.tasks enumerateKeysAndObjectsWithOptions:NSEnumerationConcurrent usingBlock:^(NSString *key, BPTask *task, BOOL *stop){
+	  [task cleanup];
+  }];
   
-  if (shouldUseFileHandle) {
-    NSFileHandle *outputFileHandle = [outputPipe fileHandleForReading];
-    [outputFileHandle waitForDataInBackgroundAndNotify];
-    
-    NSFileHandle *errorFileHandle = [errorPipe fileHandleForReading];
-    [errorFileHandle waitForDataInBackgroundAndNotify];
-  }
-  
-  @try {
-    [self.task launch];
-    [self.task waitUntilExit];
-  }
-  @catch (NSException *exception) {
-    NSLog(@"%@", exception);
-  }
-  
-  if (!shouldUseFileHandle) {
-    if (output) {
-      NSData *outputData = [[outputPipe fileHandleForReading] readDataToEndOfFile];
-      if ([outputData length]) {
-        *output = [[NSString alloc] initWithData:outputData encoding:NSUTF8StringEncoding];
-      }
-    }
-    
-    if (error) {
-      NSData *errorData = [[errorPipe fileHandleForReading] readDataToEndOfFile];
-      if ([errorData length]) {
-        *error = [[NSString alloc] initWithData:errorData encoding:NSUTF8StringEncoding];
-      }
-    }
-  }
+
 }
 
 - (BOOL)checkForHomebrew
 {
 	if (!self.path_shell) return NO;
 	
-  self.task = [self taskWithArguments:@[@"-l", @"-c", @"which brew"]];
-	
-  NSString *output = nil;
-  NSString *error  = nil;
+  BPTask *task = [[BPTask alloc] initWithPath:self.path_shell arguments:@[@"-l", @"-c", @"which brew"]];
+  task.delegate = self;
+  [task execute];
   
-  [self getCurrentTasksOutput:&output error:&error useFileHandle:NO];
-  
-	output = [self removeLoginShellOutputFromString:output];
-	
-	NSLog(@"brew: %@", output);
-	
-	return output.length != 0;
+  NSString *output = [task output];
+  output = [self removeLoginShellOutputFromString:output];
+#ifdef DEBUG
+  NSLog(@"brew: %@", output);
+#endif
+
+  return output.length != 0;
 }
 
 - (void)setDelegate:(id<BPHomebrewInterfaceDelegate>)delegate
@@ -278,6 +204,11 @@ static NSString *cakebrewOutputIdentifier = @"+++++Cakebrew+++++";
 	}
 }
 
+- (void)task:(BPTask *)task didFinishWithOutput:(NSString *)output error:(NSString *)error
+{
+  [self.tasks removeObjectForKey:[NSString stringWithFormat:@"%p",task]];
+}
+
 - (BOOL)performBrewCommandWithArguments:(NSArray*)arguments dataReturnBlock:(void (^)(NSString*))block
 {
 	arguments = [self formatArguments:arguments sendOutputId:NO];
@@ -287,17 +218,20 @@ static NSString *cakebrewOutputIdentifier = @"+++++Cakebrew+++++";
 		return NO;
 	}
 	
-	operationUpdateBlock = block;
-  [self beginActivity];
+  BPTask *task = [[BPTask alloc] initWithPath:self.path_shell arguments:arguments];
+  task.delegate = self;
+  [self.tasks setObject:task forKey:[NSString stringWithFormat:@"%p", task]];
+
+  task.updateBlock = block;
+  
+  
 	
-  self.task = [self taskWithArguments:arguments];
 	
 #ifdef DEBUG
   block([NSString stringWithFormat:@"User Shell: %@\nCommand: %@\nThe outputs are going to be different if run from Xcode!!\nInstalling and upgrading formulas is not advised in DEBUG mode!\n\n", self.path_shell, [arguments componentsJoinedByString:@" "]]);
 #endif
 
-  [self getCurrentTasksOutput:nil error:nil useFileHandle:YES];
-	
+  [task execute];
 
 	NSString *taskDoneString = [NSString stringWithFormat:@"%@ %@ %@!",
 								NSLocalizedString(@"Homebrew_Task_Finished", nil),
@@ -308,21 +242,12 @@ static NSString *cakebrewOutputIdentifier = @"+++++Cakebrew+++++";
 	
 	block(taskDoneString);
 	
-  [self endActivity];
-	
 	return YES;
 }
 
-- (void)updatedFileHandle:(NSNotification*)n
+- (BOOL)isRunningBackgroundTask
 {
-	NSFileHandle *fh = [n object];
-	NSData *data = [fh availableData];
-	[fh waitForDataInBackgroundAndNotify];
-	if (data && data.length > 0) {
-		dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
-			operationUpdateBlock([[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding]);
-		});
-	}
+  return (BOOL)[[self.tasks allKeys] count];
 }
 
 - (NSString*)performBrewCommandWithArguments:(NSArray*)arguments
@@ -332,29 +257,24 @@ static NSString *cakebrewOutputIdentifier = @"+++++Cakebrew+++++";
 
 - (NSString*)performBrewCommandWithArguments:(NSArray*)arguments captureError:(BOOL)captureError
 {
-	arguments = [self formatArguments:arguments sendOutputId:YES];
+  arguments = [self formatArguments:arguments sendOutputId:YES];
 	
-	if (!self.path_shell || !arguments) return nil;
+  BPTask *task = [[BPTask alloc] initWithPath:self.path_shell arguments:arguments];
+  task.delegate = self;
+  [task execute];
 	
-  [self beginActivity];
-	
-  self.task = [self taskWithArguments:arguments];
-	
-  NSString *output = nil;
-  NSString *error  = nil;
+  NSString *output = task.output;
+  output = [self removeLoginShellOutputFromString:output];
+
+  NSString *error = task.error;
+  error = [self removeLoginShellOutputFromString:error];
   
-  [self getCurrentTasksOutput:&output error:&error useFileHandle:NO];
-	
-	output = [self removeLoginShellOutputFromString:output];
-	
-  [self endActivity];
-	
-	if (!captureError) {
-		return output;
-	} else {
-		error = [self removeLoginShellOutputFromString:error];
-		return [NSString stringWithFormat:@"%@\n%@", output, error];
-	}
+  
+  if (!captureError) {
+	  return output;
+  } else {
+	  return [NSString stringWithFormat:@"%@\n%@", output, error];
+  }
 }
 
 #pragma mark - Operations that return on finish
