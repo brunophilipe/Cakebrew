@@ -1,0 +1,40 @@
+mysql: stable 5.6.26
+Open source relational database management system
+https://dev.mysql.com/doc/refman/5.6/en/
+Conflicts with: mariadb, mysql-cluster, mysql-connector-c, percona-server
+/usr/local/Cellar/mysql/5.6.21 (9621 files, 339M) *
+  Poured from bottle
+From: https://github.com/Homebrew/homebrew/blob/master/Library/Formula/mysql.rb
+==> Dependencies
+Build: cmake ✘
+Required: openssl ✘
+==> Options
+--universal
+	Build a universal binary
+--with-archive-storage-engine
+	Compile with the ARCHIVE storage engine enabled
+--with-blackhole-storage-engine
+	Compile with the BLACKHOLE storage engine enabled
+--with-debug
+	Build with debug support
+--with-embedded
+	Build the embedded server
+--with-local-infile
+	Build with local infile loading support
+--with-memcached
+	Enable innodb-memcached support
+--with-tests
+	Build with unit tests
+==> Caveats
+A "/etc/my.cnf" from another install may interfere with a Homebrew-built
+server starting up correctly.
+
+To connect:
+    mysql -uroot
+
+To have launchd start mysql at login:
+  ln -sfv /usr/local/opt/mysql/*.plist ~/Library/LaunchAgents
+Then to load mysql now:
+  launchctl load ~/Library/LaunchAgents/homebrew.mxcl.mysql.plist
+Or, if you don't want/need launchctl, you can just run:
+  mysql.server start

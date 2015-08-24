@@ -1,0 +1,5 @@
+bfg: stable 1.12.4
+Removes large files or passwords from Git history like git-filter-branch does, but faster.
+https://rtyley.github.io/bfg-repo-cleaner/
+Not installed
+From: https://github.com/Homebrew/homebrew/blob/master/Library/Formula/bfg.rb

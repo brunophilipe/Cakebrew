@@ -9,21 +9,6 @@
 #ifndef __BP_CAKEBREW__
 	#define __BP_CAKEBREW__
 
-	#import "BPAppDelegate.h"
-
-	#define NSColorFromRGB(rgbValue) [NSColor colorWithCalibratedRed:((float)((rgbValue & 0xFF0000) >> 16))/255.0 green:((float)((rgbValue & 0xFF00) >> 8))/255.0 blue:((float)(rgbValue & 0xFF))/255.0 alpha:1.0]
-
-	#define kBPSidebarHeaderColor NSColorFromRGB(0x707e8b)
-	#define kBPSidebarItemColor NSColorFromRGB(0x262626)
-	#define kBPSidebarDividerColor NSColorFromRGB(0xd5dbe3)
-	#define kBPViewBorderColor NSColorFromRGB(0x999999)
-	#define kBPViewBackgroundColor NSColorFromRGB(0xc6c6c6)
-	#define kBPDetailBackgroundColor NSColorFromRGB(0x97aac6)
-
-	#define BPAppDelegateRef ((BPAppDelegate*)[[NSApplication sharedApplication] delegate])
-
-	#define kBP_CAKEBREW_URL [NSURL URLWithString:kBP_HOMEBREW_WEBSITE]
-
 	#ifndef MAC_OS_X_VERSION_10_10
 		#define NSVisualEffectsView NSView
 	#endif

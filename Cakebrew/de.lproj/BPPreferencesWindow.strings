@@ -1,0 +1,24 @@
+/* Class = "NSBox"; title = "Box"; ObjectID = "1S6-SI-uPn"; */
+"1S6-SI-uPn.title" = "Box";
+
+/* Class = "NSButtonCell"; title = "Enable Proxy"; ObjectID = "1fd-WJ-NfP"; */
+"1fd-WJ-NfP.title" = "Proxy aktivieren";
+
+/* Class = "NSButtonCell"; title = "Save"; ObjectID = "1tf-08-6hw"; */
+"1tf-08-6hw.title" = "Speichern";
+
+/* Class = "IBBindingConnection"; ibShadowedIsNilPlaceholder = "http://<user>:<password>@<proxyhost>:<proxyport>"; ObjectID = "YP5-Jo-XSN"; */
+"YP5-Jo-XSN.ibShadowedIsNilPlaceholder" = "http://:@:";
+
+/* Class = "NSSecureTextFieldCell"; placeholderString = "http://<user>:<password>@<proxyhost>:<proxyport>"; ObjectID = "Znf-tJ-UWY"; */
+"Znf-tJ-UWY.placeholderString" = "http://:@:";
+
+/* Class = "NSTextFieldCell"; title = "Please insert your proxy URL below. You should get this information from your network manager."; ObjectID = "dfE-IM-SSk"; */
+"dfE-IM-SSk.title" = "Bitte geben Sie hier die URL ihres Proxys ein. Fragen Sie nötigenfalls Ihren Netzwerkadministrator um Rat.";
+
+/* Class = "NSTextFieldCell"; title = "Proxy Settings"; ObjectID = "u9T-va-Rk7"; */
+"u9T-va-Rk7.title" = "Proxy-Einstellungen";
+
+/* Class = "NSWindow"; title = "Preferences"; ObjectID = "x9D-0i-ikH"; */
+"x9D-0i-ikH.title" = "Einstellungen";
+

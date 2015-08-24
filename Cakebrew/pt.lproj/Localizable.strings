@@ -23,6 +23,8 @@
 "Message_Shell_Invalid_Body" = "Favor adicionar seu shell \"%@\" à lista de shells válidos do sistema em \"/etc/shells\".";
 "Message_Tap_Title" = "Adicionando (Tapping) Repositório";
 "Message_Tap_Body" = "Qual repositório você deseja adicionar?";
+"Message_Untap_Title" = "Untapping Repository";
+"Message_Untap_Body" = "Tem certeza que deseja remover o repositório '%@'?";
 "Message_Update_Formulae_Title" = "Atualizando Fórmulas";
 "Message_Update_Formulae_Body" = "Tem certeza que deseja atualizar estas fórmulas: '%@'?";
 "Message_Update_All_Outdated_Title" = "Atualizando todas as Desatualizadas";
@@ -57,6 +59,9 @@
 "Toolbar_Tap_Repo" = "Adicionar Repositório";
 "Toolbar_Untap_Repo" = "remover Repositório";
 "Toolbar_Update_Selected" = "Atualizar Selecionadas";
+"Toolbar_More_Information" = "Mais Informações";
+"Toolbar_Homebrew_Update" = "Atualizar Homebrew";
+"Toolbar_Search" = "Buscar Fórmulas";
 
 "Sidebar_Info_Installed" = "Estas fórmulas estão atualmente instaladas em seu sistema.";
 "Sidebar_Info_Outdated" = "Estas fórmulas estão instaladas, Mas possuem atualizações disponíveis.";
@@ -72,7 +77,7 @@
 "Installation_Window_Operation_Update" = "Atualizando Fórmula:";
 "Installation_Window_Operation_Tap" = "Adiconando Repositório:";
 "Installation_Window_Operation_Untap" = "Removendo Repositório:";
-"Installation_Window_Operation_Cleanup" = "Executando Cleanup...";
+"Installation_Window_Operation_Cleanup" = "Executando Cleanup…";
 "Installation_Window_All_Formulae" = "Todas as Fórmulas desatualizadas";
 
 "Info_View_Multiple_Values" = "Múltiplos Valores";

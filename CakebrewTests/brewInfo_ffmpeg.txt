@@ -1,0 +1,88 @@
+ffmpeg: stable 2.7.2, HEAD
+Play, record, convert, and stream audio and video
+https://ffmpeg.org/
+Not installed
+From: https://github.com/Homebrew/homebrew/blob/master/Library/Formula/ffmpeg.rb
+==> Dependencies
+Build: pkg-config ✔, texi2html ✘, yasm ✘
+Recommended: x264 ✘, lame ✘, libvo-aacenc ✘, xvid ✘
+Optional: faac ✘, fontconfig ✘, freetype ✘, theora ✘, libvorbis ✘, libvpx ✘, rtmpdump ✘, opencore-amr ✘, libass ✘, openjpeg ✘, speex ✘, schroedinger ✘, fdk-aac ✘, opus ✘, frei0r ✘, libcaca ✘, libbluray ✘, libsoxr ✘, libquvi ✘, libvidstab ✘, x265 ✘, openssl ✘, libssh ✘, webp ✘, zeromq ✘
+==> Options
+--with-faac
+	Build with faac support
+--with-fdk-aac
+	Enable the Fraunhofer FDK AAC library
+--with-ffplay
+	Enable FFplay media player
+--with-fontconfig
+	Build with fontconfig support
+--with-freetype
+	Build with freetype support
+--with-frei0r
+	Build with frei0r support
+--with-libass
+	Enable ASS/SSA subtitle format
+--with-libbluray
+	Build with libbluray support
+--with-libcaca
+	Build with libcaca support
+--with-libquvi
+		Build with libquvi support
+--with-libsoxr
+	Enable the soxr resample library
+--with-libssh
+	Enable SFTP protocol via libssh
+--with-libvidstab
+	Enable vid.stab support for video stabilization
+--with-libvorbis
+	Build with libvorbis support
+--with-libvpx
+	Build with libvpx support
+--with-opencore-amr
+	Enable Opencore AMR NR/WB audio format
+--with-openjpeg
+	Enable JPEG 2000 image format
+--with-openssl
+	Enable SSL support
+--with-opus
+	Build with opus support
+--with-rtmpdump
+	Enable RTMP protocol
+--with-schroedinger
+	Enable Dirac video format
+--with-speex
+	Build with speex support
+--with-theora
+	Build with theora support
+--with-tools
+	Enable additional FFmpeg tools
+--with-webp
+	Enable using libwebp to encode WEBP images
+--with-x265
+	Enable x265 encoder
+--with-zeromq
+	Enable using libzeromq to receive commands sent through a libzeromq client
+--without-lame
+	Disable MP3 encoder
+--without-libvo-aacenc
+	Disable VisualOn AAC encoder
+--without-qtkit
+	Disable deprecated QuickTime framework
+--without-x264
+	Disable H.264 encoder
+--without-xvid
+	Disable Xvid MPEG-4 video encoder
+--HEAD
+	Install HEAD version
+==> Caveats
+FFmpeg has been built without libfaac for licensing reasons;
+libvo-aacenc is used by default.
+To install with libfaac, you can:
+  brew reinstall ffmpeg --with-faac
+
+You can also use the experimental FFmpeg encoder, libfdk-aac, or
+libvo_aacenc to encode AAC audio:
+  ffmpeg -i input.wav -c:a aac -strict experimental output.m4a
+Or:
+  brew reinstall ffmpeg --with-fdk-aac
+  ffmpeg -i input.wav -c:a libfdk_aac output.m4a

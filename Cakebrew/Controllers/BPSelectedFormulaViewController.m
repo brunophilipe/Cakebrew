@@ -38,6 +38,7 @@
 {
 	if ([self.formulaDependenciesLabel respondsToSelector:@selector(preferredMaxLayoutWidth)])
 	{
+		self.formulaDescriptionLabel.preferredMaxLayoutWidth = self.formulaDescriptionLabel.frame.size.width;
 		self.formulaDependenciesLabel.preferredMaxLayoutWidth	= self.formulaDependenciesLabel.frame.size.width;
 		self.formulaConflictsLabel.preferredMaxLayoutWidth		= self.formulaConflictsLabel.frame.size.width;
 		self.formulaVersionLabel.preferredMaxLayoutWidth		= self.formulaVersionLabel.frame.size.width;
