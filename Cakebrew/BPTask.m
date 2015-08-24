@@ -84,7 +84,7 @@ static BOOL systemHasAppNap;
 
 - (void)configureStandardError
 {
-  
+  errorPipe = [NSPipe pipe];
   [self.task setStandardError:errorPipe];
 }
 
@@ -102,10 +102,8 @@ static BOOL systemHasAppNap;
 
 - (void)configureErrorFileHandle
 {
-  errorPipe = [NSPipe pipe];
   errorFileHandle = [errorPipe fileHandleForReading];
   if ([self shouldUsePartialUpdates] ) {
-	
 	[errorFileHandle waitForDataInBackgroundAndNotify];
 	[[NSNotificationCenter defaultCenter] addObserver:self
 											 selector:@selector(updatedFileHandle:)
