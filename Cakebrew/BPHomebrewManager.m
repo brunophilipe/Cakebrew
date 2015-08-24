@@ -54,6 +54,16 @@ NSString *const kBP_CACHE_DICT_DATA_KEY = @"BP_CACHE_DICT_DATA_KEY";
 	return self;
 }
 
++ (id)allocWithZone:(NSZone *)zone
+{
+  return [self sharedManager];
+}
+
+- (id)copyWithZone:(NSZone *)zone
+{
+  return self;
+}
+
 - (void)dealloc
 {
 	[[NSNotificationCenter defaultCenter] removeObserver:self];

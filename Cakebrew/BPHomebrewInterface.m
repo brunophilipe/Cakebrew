@@ -79,6 +79,16 @@ static NSString *cakebrewOutputIdentifier = @"+++++Cakebrew+++++";
 	return self;
 }
 
++ (id)allocWithZone:(NSZone *)zone
+{
+  return [self sharedInterface];
+}
+
+- (id)copyWithZone:(NSZone *)zone
+{
+  return self;
+}
+
 - (void)cleanup
 {
   [self.tasks enumerateKeysAndObjectsWithOptions:NSEnumerationConcurrent usingBlock:^(NSString *key, BPTask *task, BOOL *stop){
