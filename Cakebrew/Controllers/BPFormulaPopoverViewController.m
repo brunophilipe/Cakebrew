@@ -7,9 +7,9 @@
 //
 
 #import "BPFormulaPopoverViewController.h"
-#import "NSFont+Appearance.h"
 #import "BPFormula.h"
 #import "BPHomebrewInterface.h"
+#import "BPStyle.h"
 
 @interface BPFormulaPopoverViewController ()
 
@@ -19,27 +19,29 @@
 
 - (void)awakeFromNib
 {
-	NSFont *font = [NSFont bp_defaultFixedWidthFont];
+	NSFont *font = [BPStyle defaultFixedWidthFont];
 	[self.formulaTextView setFont:font];
-	[self.formulaTextView setTextColor:[NSColor blackColor]];
+	[self.formulaTextView setTextColor:[BPStyle popoverTextViewColor]];
 	[self.formulaPopover setContentViewController:self];
+	[self.formulaTitleLabel setTextColor:[BPStyle popoverTitleColor]];
 }
 
 - (void)setFormula:(BPFormula *)formula
 {
 	_formula = formula;
-	NSString *string = [[BPHomebrewInterface sharedInterface] informationForFormula:[_formula performSelector:@selector(name)]];
+	NSString *string = [[BPHomebrewInterface sharedInterface] informationForFormulaName:[_formula performSelector:@selector(name)]];
 	if (string) {
 		[self.formulaTextView setString:string];
+		
+		// Recognize links in info text
+		[self.formulaTextView setEditable:YES];
+        [self.formulaTextView checkTextInDocument:nil];
+        [self.formulaTextView setEditable:NO];
+		
 		[self.formulaTitleLabel setStringValue:[NSString stringWithFormat:NSLocalizedString(@"Formula_Popover_Title", nil), [_formula performSelector:@selector(name)]]];
 	} else {
 		[self.formulaTextView setString:NSLocalizedString(@"Formula_Popover_Error", nil)];
 	}
-	
-	float OSXVersion = [BPAppDelegateRef OSXVersion];
-	
-	[self.formulaTitleLabel setTextColor:(OSXVersion >= 10.10 ? [NSColor blackColor] : [NSColor whiteColor])];
-	[self.formulaTextView   setTextColor:(OSXVersion >= 10.10 ? [NSColor blackColor] : [NSColor whiteColor])];
 }
 
 - (NSString *)nibName

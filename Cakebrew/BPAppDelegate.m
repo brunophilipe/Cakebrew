@@ -22,13 +22,9 @@
 #import "BPHomebrewManager.h"
 #import "DCOAboutWindowController.h"
 #import "BPPreferencesWindowController.h"
+#import "BPAppDelegate.h"
 
-NSString *const kBP_HOMEBREW_PROXY_KEY = @"BP_HOMEBREW_PROXY_KEY";
-NSString *const kBP_HOMEBREW_PROXY_ENABLE_KEY = @"BP_HOMEBREW_PROXY_ENABLE_KEY";
 NSString *const kBP_HOMEBREW_WEBSITE = @"https://www.cakebrew.com";
-
-NSString *const kBP_FORMULA_OPTION_COMMAND = @"BP_FORMULA_OPTION_COMMAND";
-NSString *const kBP_FORMULA_OPTION_DESCRIPTION = @"BP_FORMULA_OPTION_DESCRIPTION";
 
 
 @interface BPAppDelegate ()
@@ -56,7 +52,7 @@ NSString *const kBP_FORMULA_OPTION_DESCRIPTION = @"BP_FORMULA_OPTION_DESCRIPTION
 {
 	if (!_aboutWindowController){
 		_aboutWindowController = [[DCOAboutWindowController alloc] init];
-		[_aboutWindowController setAppWebsiteURL:kBP_CAKEBREW_URL];
+		[_aboutWindowController setAppWebsiteURL:[NSURL URLWithString:kBP_HOMEBREW_WEBSITE]];
 	}
 	return _aboutWindowController;
 }
@@ -143,38 +139,11 @@ NSString *const kBP_FORMULA_OPTION_DESCRIPTION = @"BP_FORMULA_OPTION_DESCRIPTION
 
 - (IBAction)openWebsite:(id)sender
 {
-	[[NSWorkspace sharedWorkspace] openURL:kBP_CAKEBREW_URL];
+	[[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:kBP_HOMEBREW_WEBSITE]];
 }
 
 - (IBAction)showPreferencesWindow:(id)sender {
 	[self.preferencesWindowController showWindow:nil];
-}
-
-- (float)OSXVersion
-{
-	float osxVersion;
-	if (floor(NSAppKitVersionNumber) <= NSAppKitVersionNumber10_6) {
-		//10.6.x or earlier systems
-		osxVersion = 10.06;
-		NSLog(@"Mac OSX Snow Leopard");
-	} else if (floor(NSAppKitVersionNumber) <= NSAppKitVersionNumber10_7) {
-		/* On a 10.7 - 10.7.x system */
-		osxVersion = 10.07;
-		NSLog(@"Mac OSX Lion");
-	} else if (floor(NSAppKitVersionNumber) <= NSAppKitVersionNumber10_8) {
-		/* On a 10.8 - 10.8.x system */
-		osxVersion = 10.08;
-		NSLog(@"Mac OSX Moutain Lion");
-	} else if (floor(NSAppKitVersionNumber) <= NSAppKitVersionNumber10_9) {
-		/* 10.9 or later system */
-		osxVersion = 10.09;
-		NSLog(@"Mac OSX: Mavericks");
-	} else {
-		/* 10.9 or later system */
-		osxVersion = 10.10;
-		NSLog(@"Mac OSX: Yosemite or Later");
-	}
-	return osxVersion;
 }
 
 @end

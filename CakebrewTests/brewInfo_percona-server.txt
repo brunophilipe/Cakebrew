@@ -1,0 +1,33 @@
+percona-server: stable 5.6.25-73.1
+Drop-in MySQL replacement
+https://www.percona.com
+Conflicts with: mariadb, mysql, mysql-cluster, mysql-connector-c, mysql-connector-c
+Not installed
+From: https://github.com/Homebrew/homebrew/blob/master/Library/Formula/percona-server.rb
+==> Dependencies
+Build: cmake ✘
+Required: openssl ✘
+==> Options
+--universal
+	Build a universal binary
+--with-embedded
+	Build the embedded server
+--with-local-infile
+	Build with local infile loading support
+--with-memcached
+	Build with InnoDB Memcached plugin
+--with-tests
+	Build with unit tests
+==> Caveats
+A "/etc/my.cnf" from another install may interfere with a Homebrew-built
+server starting up correctly.
+
+To connect:
+    mysql -uroot
+
+To have launchd start percona-server at login:
+  ln -sfv /usr/local/opt/percona-server/*.plist ~/Library/LaunchAgents
+Then to load percona-server now:
+  launchctl load ~/Library/LaunchAgents/homebrew.mxcl.percona-server.plist
+Or, if you don't want/need launchctl, you can just run:
+  mysql.server start

@@ -21,7 +21,8 @@
 
 #import "BPUpdateViewController.h"
 #import "BPHomebrewInterface.h"
-#import "NSFont+Appearance.h"
+#import "BPStyle.h"
+#import "BPAppDelegate.h"
 
 @interface BPUpdateViewController ()
 
@@ -34,7 +35,7 @@
 @implementation BPUpdateViewController
 
 - (void)awakeFromNib {
-	NSFont *font = [NSFont bp_defaultFixedWidthFont];
+	NSFont *font = [BPStyle defaultFixedWidthFont];
 	[self.updateTextView setFont:font];
 	self.isPerformingUpdate = NO;
 }

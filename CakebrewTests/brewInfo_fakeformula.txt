@@ -1,0 +1,66 @@
+acme: stable 0.91, devel 0.93
+Crossassembler for multiple environments
+https://web.archive.org/web/20150520143433/https://www.esw-heim.tu-clausthal.de/~marco/smorbrod/acme/
+Conflicts with: mariadb, mysql-cluster, mysql-connector-c, percona-server
+/usr/local/Cellar/mysql/5.6.21 (9621 files, 339M) *
+  Poured from bottle
+From: https://github.com/Homebrew/homebrew/blob/master/Library/Formula/mysql.rb
+==> Dependencies
+Build: xz ✘, pkg-config ✔, intltool ✘, itstool ✘, autoconf ✔, automake ✘, libtool ✘, gtk-doc ✘, yelp-tools ✘, gnome-common ✘, bison ✘
+Required: gtksourceview3 ✘, libxml2 ✘, libgda ✘, gdl ✘, vte3 ✘, hicolor-icon-theme ✘, gnome-icon-theme ✘, shared-mime-info ✘
+Recommended: vala ✘, autogen ✘
+==> Options
+--with-fdk-aac
+	Enable the Fraunhofer FDK AAC library
+--with-ffplay
+	Enable FFplay media player
+--with-freetype
+	Build with freetype support
+--with-frei0r
+	Build with frei0r support
+--with-libass
+	Enable ASS/SSA subtitle format
+--with-libbluray
+	Build with libbluray support
+--with-libcaca
+	Build with libcaca support
+--with-libquvi
+	Build with libquvi support
+--with-libvidstab
+	Enable vid.stab support for video stabilization
+--with-libvo-aacenc
+	Enable VisualOn AAC encoder
+--with-libvorbis
+	Build with libvorbis support
+--with-libvpx
+	Build with libvpx support
+--with-opencore-amr
+	Enable Opencore AMR NR/WB audio format
+--with-openjpeg
+	Enable JPEG 2000 image format
+--with-openssl
+	Enable SSL support
+--with-opus
+	Build with opus support
+--with-rtmpdump
+	Enable RTMP protocol
+--with-schroedinger
+	Enable Dirac video format
+--with-speex
+	Build with speex support
+--with-theora
+	Build with theora support
+--with-tools
+	Enable additional FFmpeg tools
+--with-x265
+	Enable x265 encoder
+--without-faac
+	Build without faac support
+--without-lame
+	Disable MP3 encoder
+--without-x264
+	Disable H.264 encoder
+--without-xvid
+	Disable Xvid MPEG-4 video encoder
+--HEAD
+	install HEAD version

@@ -21,7 +21,8 @@
 
 #import "BPDoctorViewController.h"
 #import "BPHomebrewInterface.h"
-#import "NSFont+Appearance.h"
+#import "BPAppDelegate.h"
+#import "BPStyle.h"
 
 @interface BPDoctorViewController ()
 
@@ -34,7 +35,7 @@
 @implementation BPDoctorViewController
 
 - (void)awakeFromNib {
-	NSFont *font = [NSFont bp_defaultFixedWidthFont];
+	NSFont *font = [BPStyle defaultFixedWidthFont];
 	[self.doctorTextView setFont:font];
 	self.isPerformingDoctor = NO;
 }

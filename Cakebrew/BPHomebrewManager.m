@@ -21,6 +21,7 @@
 
 #import "BPHomebrewManager.h"
 #import "BPHomebrewInterface.h"
+#import "BPAppDelegate.h"
 
 NSString *const kBP_CACHE_DICT_DATE_KEY = @"BP_CACHE_DICT_DATE_KEY";
 NSString *const kBP_CACHE_DICT_DATA_KEY = @"BP_CACHE_DICT_DATA_KEY";
@@ -107,15 +108,23 @@ NSString *const kBP_CACHE_DICT_DATA_KEY = @"BP_CACHE_DICT_DATA_KEY";
 
 	if (cachesFolder) {
 		NSURL *allFormulaeFile = [cachesFolder URLByAppendingPathComponent:@"allFormulae.cache.bin"];
-		NSDictionary *cacheDict = nil;// = @{kBP_CACHE_DICT_DATE_KEY: [NSDate date], kBP_CACHE_DICT_DATA_KEY: self.formulae_all};
+		NSDictionary *cacheDict = nil;
 
 		if ([[NSFileManager defaultManager] fileExistsAtPath:allFormulaeFile.relativePath])
 		{
 			cacheDict = [NSKeyedUnarchiver unarchiveObjectWithFile:allFormulaeFile.relativePath];
 			NSDate *storageDate = [cacheDict objectForKey:kBP_CACHE_DICT_DATE_KEY];
-			if ([(NSDate*)[storageDate dateByAddingTimeInterval:3600*24] compare:[NSDate date]] == NSOrderedDescending) {
+
+			if ([[NSDate date] timeIntervalSinceDate:storageDate] >= 3600*24)
+			{
 				self.formulae_all = [cacheDict objectForKey:kBP_CACHE_DICT_DATA_KEY];
 			}
+			else
+			{
+				// Remove old cache
+				[[NSFileManager defaultManager] removeItemAtURL:allFormulaeFile error:nil];
+			}
+			
 			return self.formulae_all != nil;
 		}
 	}
@@ -126,11 +135,24 @@ NSString *const kBP_CACHE_DICT_DATA_KEY = @"BP_CACHE_DICT_DATA_KEY";
 
 - (void)storeAllFormulaeCaches
 {
-	if (self.formulae_all) {
+	if (self.formulae_all)
+	{
 		NSURL *cachesFolder = [BPAppDelegateRef urlForApplicationCachesFolder];
 		if (cachesFolder) {
 			NSURL *allFormulaeFile = [cachesFolder URLByAppendingPathComponent:@"allFormulae.cache.bin"];
-			NSDictionary *cacheDict = @{kBP_CACHE_DICT_DATE_KEY: [NSDate date], kBP_CACHE_DICT_DATA_KEY: self.formulae_all};
+			NSDate *storageDate = nil;
+			
+			NSDictionary *lastCacheDict = [NSKeyedUnarchiver unarchiveObjectWithFile:allFormulaeFile.relativePath];
+			if (lastCacheDict)
+			{
+				storageDate = [lastCacheDict objectForKey:kBP_CACHE_DICT_DATE_KEY];
+			}
+			else
+			{
+				storageDate = [NSDate date];
+			}
+			
+			NSDictionary *cacheDict = @{kBP_CACHE_DICT_DATE_KEY: storageDate, kBP_CACHE_DICT_DATA_KEY: self.formulae_all};
 			NSData *cacheData = [NSKeyedArchiver archivedDataWithRootObject:cacheDict];
 
 			if ([[NSFileManager defaultManager] fileExistsAtPath:allFormulaeFile.relativePath]) {

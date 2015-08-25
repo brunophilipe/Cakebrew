@@ -1,6 +1,6 @@
 //
 //	AppDelegate.h
-//	Cakebrew – The Homebrew GUI App for OS X 
+//	Cakebrew – The Homebrew GUI App for OS X
 //
 //	Created by Vincent Saluzzo on 06/12/11.
 //	Copyright (c) 2014 Bruno Philipe. All rights reserved.
@@ -21,16 +21,11 @@
 
 #import <Cocoa/Cocoa.h>
 
+#define BPAppDelegateRef ((BPAppDelegate*)[[NSApplication sharedApplication] delegate])
+
 extern NSString *const kBP_HOMEBREW_PATH;
 extern NSString *const kBP_HOMEBREW_PATH_KEY;
-extern NSString *const kBP_HOMEBREW_PROXY_KEY;
-extern NSString *const kBP_HOMEBREW_PROXY_ENABLE_KEY;
 extern NSString *const kBP_HOMEBREW_WEBSITE;
-
-extern NSString *const kBP_EXCEPTION_HOMEBREW_NOT_INSTALLED;
-
-extern NSString *const kBP_FORMULA_OPTION_COMMAND;
-extern NSString *const kBP_FORMULA_OPTION_DESCRIPTION;
 
 @interface BPAppDelegate : NSObject <NSApplicationDelegate>
 
@@ -45,7 +40,5 @@ extern NSString *const kBP_FORMULA_OPTION_DESCRIPTION;
 - (IBAction)showPreferencesWindow:(id)sender;
 
 - (void)displayBackgroundWarning;
-
-- (float)OSXVersion;
 
 @end

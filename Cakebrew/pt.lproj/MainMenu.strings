@@ -84,7 +84,7 @@
 "3gj-Tz-gwl.title" = "Pular para Seleção";
 
 /* Class = "NSTextFieldCell"; title = "Carregando..."; ObjectID = "3xE-6a-fkA"; */
-"3xE-6a-fkA.title" = "Carregando...";
+"3xE-6a-fkA.title" = "Carregando…";
 
 /* Class = "NSMenuItem"; title = "Atualizar Fórmula"; ObjectID = "4ab-Ns-Wry"; */
 "4ab-Ns-Wry.title" = "Atualizar Fórmula";
@@ -206,8 +206,8 @@
 /* Class = "NSMenuItem"; title = "Parar de Falar"; ObjectID = "NrN-pe-J7E"; */
 "NrN-pe-J7E.title" = "Parar de Falar";
 
-/* Class = "NSMenuItem"; title = "Brew Cleanup…"; ObjectID = "OKR-gG-lsa"; */
-"OKR-gG-lsa.title" = "Brew Cleanup…";
+/* Class = "NSMenuItem"; title = "Executar \"brew cleanup\"…"; ObjectID = "OKR-gG-lsa"; */
+"OKR-gG-lsa.title" = "Executar \"brew cleanup\"…";
 
 /* Class = "NSMenuItem"; title = "Buscar e Substituir…"; ObjectID = "OSn-ju-y85"; */
 "OSn-ju-y85.title" = "Buscar e Substituir…";
@@ -234,7 +234,7 @@
 "Uzy-PF-4ct.title" = "Buscar Próximo";
 
 /* Class = "NSMenuItem"; title = "Instalar Fórmula com Opções..."; ObjectID = "Vio-Nc-WTc"; */
-"Vio-Nc-WTc.title" = "Instalar Fórmula com Opções...";
+"Vio-Nc-WTc.title" = "Instalar Fórmula com Opções…";
 
 /* Class = "NSTextFieldCell"; title = "Text Cell"; ObjectID = "VzS-XQ-BoP"; */
 "VzS-XQ-BoP.title" = "Text Cell";
@@ -243,7 +243,7 @@
 "WM9-6z-Jzl.label" = "Doutor";
 
 /* Class = "NSMenuItem"; title = "Instalar Fórmula com Opções..."; ObjectID = "X74-Yx-eRm"; */
-"X74-Yx-eRm.title" = "Instalar Fórmula com Opções...";
+"X74-Yx-eRm.title" = "Instalar Fórmula com Opções…";
 
 /* Class = "NSMenu"; title = "Ortografia"; ObjectID = "X7p-5G-5Dv"; */
 "X7p-5G-5Dv.title" = "Ortografia";

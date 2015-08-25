@@ -155,11 +155,13 @@ static NSString *cakebrewOutputIdentifier = @"+++++Cakebrew+++++";
 	{
 		static NSAlert *alert = nil;
 		if (!alert)
+		{
 			alert = [NSAlert alertWithMessageText:NSLocalizedString(@"Message_Shell_Invalid_Title", nil)
 									defaultButton:NSLocalizedString(@"Generic_OK", nil)
 								  alternateButton:nil
 									  otherButton:nil
 						informativeTextWithFormat:NSLocalizedString(@"Message_Shell_Invalid_Body", nil), userShell];
+		}
 		[alert performSelectorOnMainThread:@selector(runModal) withObject:nil waitUntilDone:YES];
 		
 		NSLog(@"No valid shell found...");
@@ -371,9 +373,9 @@ static NSString *cakebrewOutputIdentifier = @"+++++Cakebrew+++++";
 	}
 }
 
-- (NSString*)informationForFormula:(NSString*)formula
+- (NSString *)informationForFormulaName:(NSString *)name;
 {
-	return [self performBrewCommandWithArguments:@[@"info", formula]];
+	return [self performBrewCommandWithArguments:@[@"info", name]];
 }
 
 - (NSString*)removeLoginShellOutputFromString:(NSString*)string {
