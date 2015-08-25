@@ -128,19 +128,29 @@ unichar SPACE_CHARACTER = 0x0020;
 {
   unichar key = [[event charactersIgnoringModifiers] characterAtIndex:0];
   
-  if (key == SPACE_CHARACTER && self.selectedRow != -1) {
-	
-	//On yosemite or later viewcontroller is part of responder chain
-	if (floor(NSAppKitVersionNumber) >= NSAppKitVersionNumber10_10) {
-	  [NSApp sendAction:@selector(showFormulaInfo:) to:nil from:self];
-	} else {
-	  
-	  if ([self.delegate respondsToSelector:@selector(showFormulaInfo:)]) {
-		[self.delegate performSelector:@selector(showFormulaInfo:) withObject:nil];
-	  }
-	}
+  if (self.selectedRow == -1) {
+	[super keyDown:event];
+	return;
+  }
+  
+  if (key == SPACE_CHARACTER) {
+	[self spaceBarPressed];
   } else {
 	[super keyDown:event];
+  }
+}
+
+- (void)spaceBarPressed
+{
+  //On yosemite or later viewcontroller is part of responder chain
+  if (floor(NSAppKitVersionNumber) >= NSAppKitVersionNumber10_10) {
+	
+	[NSApp sendAction:@selector(showFormulaInfo:) to:nil from:self];
+  } else {
+	
+	if ([self.delegate respondsToSelector:@selector(showFormulaInfo:)]) {
+	  [self.delegate performSelector:@selector(showFormulaInfo:) withObject:nil];
+	}
   }
 }
 
