@@ -56,6 +56,7 @@
 @end
 
 @implementation BPCustomFormula
+
 - (id<BPFormulaDataProvider>)dataProvider
 {
 	return [[BPFormulaDataProvider alloc] init];
@@ -87,7 +88,8 @@ static BPCustomFormula *bisonFormula;
 static BPCustomFormula *sbtenvFormula;
 
 @interface BPFormulaTests : XCTestCase {
-	BPFormula *formula;
+  BPFormula *formula;
+  BOOL notificationUpdateFired;
 }
 @end
 
@@ -288,11 +290,23 @@ static BPCustomFormula *sbtenvFormula;
 
 - (void)testFormulaObserverAddition
 {
-  BPCustomNotificationFormula *notificationFormula = [BPCustomNotificationFormula formulaWithName:@"abcde"];
-  XCTAssertTrue(notificationFormula->observerAdded);
-  BPCustomNotificationFormula *formulaCopy = [notificationFormula copy];
+  BPCustomNotificationFormula *observerFormula = [BPCustomNotificationFormula formulaWithName:@"acme"];
+  XCTAssertTrue(observerFormula->observerAdded);
+  BPCustomNotificationFormula *formulaCopy = [observerFormula copy];
   XCTAssertTrue(formulaCopy->observerAdded);
 }
 
+- (void)notificationCatcher:(NSNotification *)notification
+{
+  notificationUpdateFired = YES;
+}
+
+- (void)testFormulaNotificationUpdate
+{
+  BPCustomFormula *notificationFormula = [BPCustomFormula formulaWithName:@"acme"];
+  [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(notificationCatcher:) name:BPFormulaDidUpdateNotification object:notificationFormula];
+  [notificationFormula setNeedsInformation:YES];
+  XCTAssertTrue(self->notificationUpdateFired);
+}
 
 @end
