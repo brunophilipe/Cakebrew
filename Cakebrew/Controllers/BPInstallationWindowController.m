@@ -22,7 +22,7 @@
 #import "BPInstallationWindowController.h"
 #import "BPHomebrewInterface.h"
 #import "BPHomebrewManager.h"
-#import "NSFont+Appearance.h"
+#import "BPStyle.h"
 #import "BPAppDelegate.h"
 
 @interface BPInstallationWindowController ()
@@ -66,7 +66,7 @@
 - (void)setupUI
 {
 	NSDictionary *messagesMap = [self.class sharedTaskMessagesMap];
-	NSFont *font = [NSFont bp_defaultFixedWidthFont];
+	NSFont *font = [BPStyle defaultFixedWidthFont];
 	
 	[self.recordTextView setFont:font];
 	self.windowTitleLabel.stringValue = messagesMap[@(self.windowOperation)] ?: @"";

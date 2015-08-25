@@ -63,7 +63,10 @@
 		D2682D031B8535BD003DE3D8 /* BPAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FE4FE6B148E4CDD008EDE8B /* BPAppDelegate.m */; };
 		D2682D041B853664003DE3D8 /* DCOAboutWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 15D2CFA918F202B300B6D9F1 /* DCOAboutWindowController.m */; };
 		D2682D051B853669003DE3D8 /* BPPreferencesWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 150AEC451B3F999A00163767 /* BPPreferencesWindowController.m */; };
-		D26F6E7F19B8608B00F616C1 /* NSFont+Appearance.m in Sources */ = {isa = PBXBuildFile; fileRef = D26F6E7E19B8608B00F616C1 /* NSFont+Appearance.m */; };
+		D2A3A82D1B8C9F5200D05469 /* BPStyle.m in Sources */ = {isa = PBXBuildFile; fileRef = D2A3A82A1B8C9F5200D05469 /* BPStyle.m */; };
+		D2A3A82E1B8C9F5200D05469 /* BPStyle.m in Sources */ = {isa = PBXBuildFile; fileRef = D2A3A82A1B8C9F5200D05469 /* BPStyle.m */; };
+		D2A3A82F1B8C9F5200D05469 /* BPUtilities.m in Sources */ = {isa = PBXBuildFile; fileRef = D2A3A82C1B8C9F5200D05469 /* BPUtilities.m */; };
+		D2A3A8301B8C9F5200D05469 /* BPUtilities.m in Sources */ = {isa = PBXBuildFile; fileRef = D2A3A82C1B8C9F5200D05469 /* BPUtilities.m */; };
 		D2B3A3AA19B9CBEC00DE23B5 /* BPFormulaeTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = D2B3A3A919B9CBEC00DE23B5 /* BPFormulaeTableView.m */; };
 		D2B3A3B019B9D7FC00DE23B5 /* BPFormulaeDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = D2B3A3AF19B9D7FC00DE23B5 /* BPFormulaeDataSource.m */; };
 		D2BBAB4B1B85EA7C00F21332 /* BPFormulaOption.m in Sources */ = {isa = PBXBuildFile; fileRef = D2BBAB4A1B85EA7C00F21332 /* BPFormulaOption.m */; };
@@ -201,8 +204,10 @@
 		D212A5871B853069003000ED /* BPFormulaTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BPFormulaTests.m; sourceTree = "<group>"; };
 		D261C9C01B852FA300409803 /* CakebrewTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CakebrewTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		D261C9C31B852FA300409803 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		D26F6E7D19B8608B00F616C1 /* NSFont+Appearance.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSFont+Appearance.h"; path = "../NSFont+Appearance.h"; sourceTree = "<group>"; };
-		D26F6E7E19B8608B00F616C1 /* NSFont+Appearance.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSFont+Appearance.m"; path = "../NSFont+Appearance.m"; sourceTree = "<group>"; };
+		D2A3A8291B8C9F5200D05469 /* BPStyle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BPStyle.h; sourceTree = "<group>"; };
+		D2A3A82A1B8C9F5200D05469 /* BPStyle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BPStyle.m; sourceTree = "<group>"; };
+		D2A3A82B1B8C9F5200D05469 /* BPUtilities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BPUtilities.h; sourceTree = "<group>"; };
+		D2A3A82C1B8C9F5200D05469 /* BPUtilities.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BPUtilities.m; sourceTree = "<group>"; };
 		D2B3A3A819B9CBEC00DE23B5 /* BPFormulaeTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BPFormulaeTableView.h; sourceTree = "<group>"; };
 		D2B3A3A919B9CBEC00DE23B5 /* BPFormulaeTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BPFormulaeTableView.m; sourceTree = "<group>"; };
 		D2B3A3AE19B9D7FC00DE23B5 /* BPFormulaeDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BPFormulaeDataSource.h; sourceTree = "<group>"; };
@@ -415,6 +420,10 @@
 		1FE4FE5E148E4CDD008EDE8B /* Cakebrew */ = {
 			isa = PBXGroup;
 			children = (
+				D2A3A8291B8C9F5200D05469 /* BPStyle.h */,
+				D2A3A82A1B8C9F5200D05469 /* BPStyle.m */,
+				D2A3A82B1B8C9F5200D05469 /* BPUtilities.h */,
+				D2A3A82C1B8C9F5200D05469 /* BPUtilities.m */,
 				1FE4FE6A148E4CDD008EDE8B /* BPAppDelegate.h */,
 				1FE4FE6B148E4CDD008EDE8B /* BPAppDelegate.m */,
 				1FE4FE6D148E4CDD008EDE8B /* MainMenu.xib */,
@@ -476,8 +485,6 @@
 		D2F732EE19190B75002B2512 /* Categories */ = {
 			isa = PBXGroup;
 			children = (
-				D26F6E7D19B8608B00F616C1 /* NSFont+Appearance.h */,
-				D26F6E7E19B8608B00F616C1 /* NSFont+Appearance.m */,
 				D2F732EF19190B75002B2512 /* NSString+URLValidation.h */,
 				D2F732F019190B75002B2512 /* NSString+URLValidation.m */,
 			);
@@ -634,10 +641,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				15D28A121AE1BD27005C8A3E /* BPTimedDispatch.m in Sources */,
+				D2A3A82F1B8C9F5200D05469 /* BPUtilities.m in Sources */,
 				150AEC4D1B3F999A00163767 /* BPFormulaOptionsWindowController.m in Sources */,
 				150AEC531B3F999A00163767 /* BPSelectedFormulaViewController.m in Sources */,
 				150AEC541B3F999A00163767 /* BPSideBarController.m in Sources */,
-				D26F6E7F19B8608B00F616C1 /* NSFont+Appearance.m in Sources */,
 				15D5BEFA18EBC56E001DDED7 /* DMSplitView.m in Sources */,
 				1570BA5618EE50BD001C3C5C /* BPFormula.m in Sources */,
 				15CEFC631AB335B2005CF54A /* BPLoadingView.m in Sources */,
@@ -654,6 +661,7 @@
 				D2B3A3B019B9D7FC00DE23B5 /* BPFormulaeDataSource.m in Sources */,
 				D2F732F119190B75002B2512 /* NSString+URLValidation.m in Sources */,
 				15D2CFAB18F202B300B6D9F1 /* DCOAboutWindowController.m in Sources */,
+				D2A3A82D1B8C9F5200D05469 /* BPStyle.m in Sources */,
 				150AEC511B3F999A00163767 /* BPInstallationWindowController.m in Sources */,
 				D2BBAB4B1B85EA7C00F21332 /* BPFormulaOption.m in Sources */,
 				150AEC4C1B3F999A00163767 /* BPDoctorViewController.m in Sources */,
@@ -671,7 +679,9 @@
 				D212A5891B853132003000ED /* BPFormula.m in Sources */,
 				D2682D031B8535BD003DE3D8 /* BPAppDelegate.m in Sources */,
 				D2BBAB4E1B863FAB00F21332 /* BPFormulaOption.m in Sources */,
+				D2A3A8301B8C9F5200D05469 /* BPUtilities.m in Sources */,
 				D2682D041B853664003DE3D8 /* DCOAboutWindowController.m in Sources */,
+				D2A3A82E1B8C9F5200D05469 /* BPStyle.m in Sources */,
 				D212A5881B853069003000ED /* BPFormulaTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

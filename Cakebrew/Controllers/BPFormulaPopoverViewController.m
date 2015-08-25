@@ -7,10 +7,9 @@
 //
 
 #import "BPFormulaPopoverViewController.h"
-#import "NSFont+Appearance.h"
 #import "BPFormula.h"
 #import "BPHomebrewInterface.h"
-#import "BPAppDelegate.h"
+#import "BPStyle.h"
 
 @interface BPFormulaPopoverViewController ()
 
@@ -20,7 +19,7 @@
 
 - (void)awakeFromNib
 {
-	NSFont *font = [NSFont bp_defaultFixedWidthFont];
+	NSFont *font = [BPStyle defaultFixedWidthFont];
 	[self.formulaTextView setFont:font];
 	[self.formulaTextView setTextColor:[NSColor blackColor]];
 	[self.formulaPopover setContentViewController:self];
@@ -43,10 +42,8 @@
 		[self.formulaTextView setString:NSLocalizedString(@"Formula_Popover_Error", nil)];
 	}
 	
-	float OSXVersion = [BPAppDelegateRef OSXVersion];
-	
-	[self.formulaTitleLabel setTextColor:(OSXVersion >= 10.10 ? [NSColor blackColor] : [NSColor whiteColor])];
-	[self.formulaTextView   setTextColor:(OSXVersion >= 10.10 ? [NSColor blackColor] : [NSColor whiteColor])];
+	[self.formulaTitleLabel setTextColor:[BPStyle popoverTitleColor]];
+	[self.formulaTextView   setTextColor:[BPStyle popoverTextViewColor]];
 }
 
 - (NSString *)nibName
