@@ -13,3 +13,7 @@
 		#define NSVisualEffectsView NSView
 	#endif
 #endif
+
+#ifndef NSAppKitVersionNumber10_10
+#define NSAppKitVersionNumber10_10 1343
+#endif
