@@ -51,8 +51,11 @@
 
 @end
 
-@interface BPCustomFormula : BPFormula
-
+@interface BPCustomFormula : BPFormula {
+@public
+  BOOL observerAdded;
+}
+- (void)addObserver:(NSObject *)observer forKeyPath:(NSString *)keyPath options:(NSKeyValueObservingOptions)options context:(void *)context;
 @end
 
 @implementation BPCustomFormula
@@ -61,16 +64,6 @@
 {
 	return [[BPFormulaDataProvider alloc] init];
 }
-@end
-
-@interface BPCustomNotificationFormula : BPCustomFormula {
-  @public
-  BOOL observerAdded;
-}
-- (void)addObserver:(NSObject *)observer forKeyPath:(NSString *)keyPath options:(NSKeyValueObservingOptions)options context:(void *)context;
-@end
-
-@implementation BPCustomNotificationFormula
 - (void)addObserver:(NSObject *)observer forKeyPath:(NSString *)keyPath
 			options:(NSKeyValueObservingOptions)options
 			context:(void *)context{
@@ -89,20 +82,13 @@ static BPCustomFormula *sbtenvFormula;
 
 @interface BPFormulaTests : XCTestCase {
   BPFormula *formula;
-  BOOL notificationUpdateFired;
 }
 @end
 
 
 @implementation BPFormulaTests
 
-//+ (void)setUp {
-//{
-//
-//}
-
-- (void)setUp {
-	[super setUp];
++ (void)initialize {
 	if (!ffmpegFormula) {
 		ffmpegFormula = [BPCustomFormula formulaWithName:@"ffmpeg"];
 		[ffmpegFormula setNeedsInformation:YES];
@@ -290,23 +276,23 @@ static BPCustomFormula *sbtenvFormula;
 
 - (void)testFormulaObserverAddition
 {
-  BPCustomNotificationFormula *observerFormula = [BPCustomNotificationFormula formulaWithName:@"acme"];
+  BPCustomFormula *observerFormula = [BPCustomFormula formulaWithName:@"acme"];
   XCTAssertTrue(observerFormula->observerAdded);
-  BPCustomNotificationFormula *formulaCopy = [observerFormula copy];
+  BPCustomFormula *formulaCopy = [observerFormula copy];
   XCTAssertTrue(formulaCopy->observerAdded);
-}
-
-- (void)notificationCatcher:(NSNotification *)notification
-{
-  notificationUpdateFired = YES;
 }
 
 - (void)testFormulaNotificationUpdate
 {
-  BPCustomFormula *notificationFormula = [BPCustomFormula formulaWithName:@"acme"];
-  [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(notificationCatcher:) name:BPFormulaDidUpdateNotification object:notificationFormula];
-  [notificationFormula setNeedsInformation:YES];
-  XCTAssertTrue(self->notificationUpdateFired);
+  BPCustomFormula *customFormula = [BPCustomFormula formulaWithName:@"acme"];
+  XCTestExpectation *expectation = [self expectationForNotification:BPFormulaDidUpdateNotification
+															 object:customFormula
+															handler:^BOOL(NSNotification *notification){
+	  [expectation fulfill];
+	  return YES;
+  }];
+  [customFormula setNeedsInformation:YES];
+  [self waitForExpectationsWithTimeout:0.5 handler:nil];
 }
 
 @end
