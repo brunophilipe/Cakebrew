@@ -31,6 +31,7 @@
 #import "BPSelectedFormulaViewController.h"
 #import "BPToolbar.h"
 #import "BPAppDelegate.h"
+#import "BPStyle.h"
 
 typedef NS_ENUM(NSUInteger, HomeBrewTab) {
 	HomeBrewTabFormulae,
@@ -163,7 +164,7 @@ NSMenuDelegate>
 	
 	[self.splitView setMinSize:185.f ofSubviewAtIndex:0];
 	[self.splitView setMinSize:380.f ofSubviewAtIndex:1];
-	[self.splitView setDividerColor:[NSColor colorWithCalibratedRed:0.835294 green:0.858824 blue:0.858824 alpha:1.0]];
+	[self.splitView setDividerColor:[BPStyle sidebarDividerColor]];
 	[self.splitView setDividerThickness:1];
 	
 	[self.sidebarController setDelegate:self];

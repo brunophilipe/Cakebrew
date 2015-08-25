@@ -41,6 +41,4 @@ extern NSString *const kBP_HOMEBREW_WEBSITE;
 
 - (void)displayBackgroundWarning;
 
-- (float)OSXVersion;
-
 @end

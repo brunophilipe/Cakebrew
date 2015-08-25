@@ -7,11 +7,10 @@
 //
 
 #import "BPFormulaPopoverViewController.h"
-#import "NSFont+Appearance.h"
 #import "BPFormula.h"
 #import "BPHomebrewInterface.h"
-#import "BPAppDelegate.h"
 #import "BPTimedDispatch.h"
+#import "BPStyle.h"
 
 @interface BPFormulaPopoverViewController ()
 
@@ -23,28 +22,38 @@
 
 - (void)awakeFromNib
 {
-	NSFont *font = [NSFont bp_defaultFixedWidthFont];
+	NSFont *font = [BPStyle defaultFixedWidthFont];
 	[self.formulaTextView setFont:font];
-	[self.formulaTextView setTextColor:[NSColor blackColor]];
+	[self.formulaTextView setTextColor:[BPStyle popoverTextViewColor]];
 	[self.formulaPopover setContentViewController:self];
 	[self setTimedDispatch:[BPTimedDispatch new]];
+	[self.formulaTitleLabel setTextColor:[BPStyle popoverTitleColor]];
 }
 
 - (void)setFormula:(BPFormula *)formula
 {
+	if (_formula) {
+	  [[NSNotificationCenter defaultCenter] removeObserver:self
+													  name:BPFormulaDidUpdateNotification
+													object:_formula];
+	}
+  
 	_formula = formula;
+
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateView:)
 												 name:BPFormulaDidUpdateNotification
 											   object:formula];
 
-	[self displayConsoleInformationForFormulae];
+	dispatch_async(dispatch_get_main_queue(), ^{
+	  [self displayConsoleInformationForFormulae];
+	});
 	[self.timedDispatch scheduleDispatchAfterTimeInterval:0.3
 												  inQueue:dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0)
 												ofBlock:^{
 
 												  [_formula setNeedsInformation:YES];
 												}];
-	
+
 }
 
 - (NSString *)nibName
