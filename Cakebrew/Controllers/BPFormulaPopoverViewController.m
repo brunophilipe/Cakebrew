@@ -21,8 +21,9 @@
 {
 	NSFont *font = [BPStyle defaultFixedWidthFont];
 	[self.formulaTextView setFont:font];
-	[self.formulaTextView setTextColor:[NSColor blackColor]];
+	[self.formulaTextView setTextColor:[BPStyle popoverTextViewColor]];
 	[self.formulaPopover setContentViewController:self];
+	[self.formulaTitleLabel setTextColor:[BPStyle popoverTitleColor]];
 }
 
 - (void)setFormula:(BPFormula *)formula
@@ -41,9 +42,6 @@
 	} else {
 		[self.formulaTextView setString:NSLocalizedString(@"Formula_Popover_Error", nil)];
 	}
-	
-	[self.formulaTitleLabel setTextColor:[BPStyle popoverTitleColor]];
-	[self.formulaTextView   setTextColor:[BPStyle popoverTextViewColor]];
 }
 
 - (NSString *)nibName
