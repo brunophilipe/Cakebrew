@@ -35,6 +35,7 @@ NSString *const kBP_ENCODE_FORMULA_DEPS = @"BP_ENCODE_FORMULA_DEPS";
 NSString *const kBP_ENCODE_FORMULA_INST = @"BP_ENCODE_FORMULA_INST";
 NSString *const kBP_ENCODE_FORMULA_CNFL = @"BP_ENCODE_FORMULA_CNFL";
 NSString *const kBP_ENCODE_FORMULA_SDSC = @"BP_ENCODE_FORMULA_SDSC";
+NSString *const kBP_ENCODE_FORMULA_INFO = @"BP_ENCODE_FORMULA_INFO";
 NSString *const kBP_ENCODE_FORMULA_OPTN = @"BP_ENCODE_FORMULA_OPTN";
 
 NSString *const kBPIdentifierDependencies = @"==> Dependencies";
@@ -52,6 +53,7 @@ NSString *const BPFormulaDidUpdateNotification = @"BPFormulaDidUpdateNotificatio
 @property (copy, readwrite) NSString *dependencies;
 @property (copy, readwrite) NSString *conflicts;
 @property (copy, readwrite) NSString *shortDescription;
+@property (copy, readwrite) NSString *information;
 @property (strong, readwrite) NSURL    *website;
 @property (strong, readwrite) NSArray  *options;
 
@@ -93,6 +95,7 @@ NSString *const BPFormulaDidUpdateNotification = @"BPFormulaDidUpdateNotificatio
 	if (self.dependencies)		[aCoder encodeObject:self.dependencies		forKey:kBP_ENCODE_FORMULA_DEPS];
 	if (self.conflicts)			[aCoder encodeObject:self.conflicts			forKey:kBP_ENCODE_FORMULA_CNFL];
 	if (self.shortDescription)	[aCoder encodeObject:self.shortDescription	forKey:kBP_ENCODE_FORMULA_SDSC];
+	if (self.information)		[aCoder encodeObject:self.information		forKey:kBP_ENCODE_FORMULA_INFO];
 	if (self.options)			[aCoder encodeObject:self.options			forKey:kBP_ENCODE_FORMULA_OPTN];
 	[aCoder encodeObject:@([self isInstalled]) forKey:kBP_ENCODE_FORMULA_INST];
 }
@@ -109,6 +112,7 @@ NSString *const BPFormulaDidUpdateNotification = @"BPFormulaDidUpdateNotificatio
 		self.dependencies		= [aDecoder decodeObjectForKey:kBP_ENCODE_FORMULA_DEPS];
 		self.conflicts			= [aDecoder decodeObjectForKey:kBP_ENCODE_FORMULA_CNFL];
 		self.shortDescription	= [aDecoder decodeObjectForKey:kBP_ENCODE_FORMULA_CNFL];
+		self.information		= [aDecoder decodeObjectForKey:kBP_ENCODE_FORMULA_INFO];
 		self.options			= [aDecoder decodeObjectForKey:kBP_ENCODE_FORMULA_OPTN];
 		[self commonInit];
 	}
@@ -140,6 +144,7 @@ NSString *const BPFormulaDidUpdateNotification = @"BPFormulaDidUpdateNotificatio
 		formula->_dependencies		= [self->_dependencies		copy];
 		formula->_conflicts			= [self->_conflicts			copy];
 		formula->_shortDescription	= [self->_shortDescription	copy];
+		formula->_information		= [self->_information		copy];
 		formula->_options			= [self->_options			copy];
 		[formula addObserver:formula forKeyPath:NSStringFromSelector(@selector(needsInformation))
 					 options:NSKeyValueObservingOptionNew
@@ -190,13 +195,17 @@ NSString *const BPFormulaDidUpdateNotification = @"BPFormulaDidUpdateNotificatio
 
 	id<BPFormulaDataProvider> dataProvider = [self dataProvider];
 	if(![dataProvider respondsToSelector:@selector(informationForFormulaName:)]) {
+		_needsInformation = NO;
 		return NO;
 	}
 	output = [[self dataProvider] informationForFormulaName:self.name];
-
+	
+	self.information = output;
+  
 	if ([output isEqualToString:@""])
 	{
-		return YES;
+	  _needsInformation = NO;
+	  return YES;
 	}
 
 	lines = [output componentsSeparatedByString:@"\n"];
