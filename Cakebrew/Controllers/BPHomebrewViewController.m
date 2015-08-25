@@ -655,7 +655,7 @@ NSMenuDelegate>
 - (IBAction)updateHomebrew:(id)sender
 {
 	[self.sidebarController.sidebar selectRowIndexes:[NSIndexSet indexSetWithIndex:FormulaeSideBarItemUpdate] byExtendingSelection:NO];
-	//[self.updateViewController runStopUpdate:nil];
+	[self.updateViewController runStopUpdate:nil];
 }
 
 - (IBAction)openSelectedFormulaWebsite:(id)sender
