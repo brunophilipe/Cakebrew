@@ -18,7 +18,7 @@
 
 @interface BPSelectedFormulaViewController : NSViewController
 
-@property (weak, nonatomic) NSArray *formulae;
+@property (strong, nonatomic) NSArray *formulae;
 
 @property (weak) id<BPSelectedFormulaViewControllerDelegate> delegate;
 

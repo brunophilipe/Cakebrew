@@ -29,9 +29,7 @@
 
 - (void)dealloc
 {
-	[[NSNotificationCenter defaultCenter] removeObserver:self
-													name:NSViewFrameDidChangeNotification
-												  object:self.view];
+  [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 - (void)updatePreferedWidth:(id)sender
@@ -54,8 +52,34 @@
 
 - (void)setFormulae:(NSArray *)formulae
 {
-	_formulae = formulae;
+  for (BPFormula *formula in _formulae) {
+	[[NSNotificationCenter defaultCenter] removeObserver:self
+													name:BPFormulaDidUpdateNotification
+												  object:formula];
+  }
+  _formulae = formulae;
+  for (BPFormula *formula in formulae) {
+	[[NSNotificationCenter defaultCenter] addObserver:self
+											 selector:@selector(updateFormulaInformation:)
+												 name:BPFormulaDidUpdateNotification
+											   object:formula];
+  }
+  [self displayInformationForFormulae];
+  [self.timedDispatch scheduleDispatchAfterTimeInterval:0.3
+												inQueue:dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0)
+												ofBlock:^
+   {
+	 BPFormula *formula = [self.formulae firstObject];
+	 [formula setNeedsInformation:YES];
+   }];
+}
+
+- (void)updateFormulaInformation:(NSNotification *)notification
+{
+  dispatch_async(dispatch_get_main_queue(), ^{
 	[self displayInformationForFormulae];
+  });
+
 }
 
 - (void)displayInformationForFormulae
@@ -77,12 +101,6 @@
 	{
 		BPFormula *formula = [self.formulae firstObject];
 		
-		[self.timedDispatch scheduleDispatchAfterTimeInterval:0.3
-													  inQueue:dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0)
-													  ofBlock:^
-		{
-			[formula getInformation];
-			
 			if (formula.isInstalled)
 			{
 				if ([formula.installPath length])
@@ -139,8 +157,6 @@
 			{
 				[self.delegate selectedFormulaViewDidUpdateFormulaInfoForFormula:formula];
 			}
-		}];
-	}
 	
 	if ([self.formulae count] > 1)
 	{
@@ -150,5 +166,5 @@
 		[self.formulaVersionLabel setStringValue:multipleString];
 	}
 }
-
+}
 @end

@@ -41,6 +41,7 @@ extern NSString *const BPFormulaDidUpdateNotification;
 @property (nonatomic, strong, readonly) NSURL    *website;
 @property (nonatomic, strong, readonly) NSArray  *options;
 
+@property BOOL needsInformation;
 
 + (instancetype)formulaWithName:(NSString*)name version:(NSString*)version andLatestVersion:(NSString*)latestVersion;
 + (instancetype)formulaWithName:(NSString*)name andVersion:(NSString*)version;
@@ -53,12 +54,6 @@ extern NSString *const BPFormulaDidUpdateNotification;
  */
 - (NSString*)installedName;
 
-/**
- *  Retrieves and updates the formula info with the information from the 'brew info' command.
- *
- *  @return `YES` if the process succeeded, or `NO` otherwise.
- */
-- (BOOL)getInformation;
 
 /**
  *  @return `YES` if the formula is installed, or `NO` otherwise.
