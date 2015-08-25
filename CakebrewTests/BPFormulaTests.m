@@ -62,6 +62,22 @@
 }
 @end
 
+@interface BPCustomNotificationFormula : BPCustomFormula {
+  @public
+  BOOL observerAdded;
+}
+- (void)addObserver:(NSObject *)observer forKeyPath:(NSString *)keyPath options:(NSKeyValueObservingOptions)options context:(void *)context;
+@end
+
+@implementation BPCustomNotificationFormula
+- (void)addObserver:(NSObject *)observer forKeyPath:(NSString *)keyPath
+			options:(NSKeyValueObservingOptions)options
+			context:(void *)context{
+  observerAdded = YES;
+  [super addObserver:observer forKeyPath:keyPath options:options context:context];
+}
+@end
+
 static BPCustomFormula *ffmpegFormula;
 static BPCustomFormula *mysqlFormula;
 static BPCustomFormula *perconaFormula;
@@ -87,32 +103,32 @@ static BPCustomFormula *sbtenvFormula;
 	[super setUp];
 	if (!ffmpegFormula) {
 		ffmpegFormula = [BPCustomFormula formulaWithName:@"ffmpeg"];
-		[ffmpegFormula getInformation];
+		[ffmpegFormula setNeedsInformation:YES];
 	}
 	
 	if (!mysqlFormula){
 		mysqlFormula = [BPCustomFormula formulaWithName:@"mysql"];
-		[mysqlFormula getInformation];
+		[mysqlFormula setNeedsInformation:YES];
 	}
 	if (!perconaFormula) {
 		perconaFormula = [BPCustomFormula formulaWithName:@"percona-server"];
-		[perconaFormula getInformation];
+		[perconaFormula setNeedsInformation:YES];
 	}
 	if(!acmeFormula){
 		acmeFormula = [BPCustomFormula formulaWithName:@"acme"];
-		[acmeFormula getInformation];
+		[acmeFormula setNeedsInformation:YES];
 	}
 	if(!bfgFormula){
 		bfgFormula = [BPCustomFormula formulaWithName:@"bfg"];
-		[bfgFormula getInformation];
+		[bfgFormula setNeedsInformation:YES];
 	}
 	if(!bisonFormula){
 		bisonFormula = [BPCustomFormula formulaWithName:@"bison"];
-		[bisonFormula getInformation];
+		[bisonFormula setNeedsInformation:YES];
 	}
 	if(!sbtenvFormula){
 		sbtenvFormula = [BPCustomFormula formulaWithName:@"sbtenv"];
-		[sbtenvFormula getInformation];
+		[sbtenvFormula setNeedsInformation:YES];
 	}
 }
 
@@ -132,7 +148,7 @@ static BPCustomFormula *sbtenvFormula;
 - (void)testFormulaFullCopy
 {
 	formula = [BPCustomFormula formulaWithName:@"fakeformula" version:@"1" andLatestVersion:@"2"];
-	[formula getInformation];
+	[formula setNeedsInformation:YES];
 	BPFormula *copiedFormula = [formula copy];
 	XCTAssertTrue([formula.name isEqualToString:copiedFormula.name] && [copiedFormula.name length] > 0, @"Name failed to copy");
 	XCTAssertTrue([formula.version isEqualToString:copiedFormula.version] && [copiedFormula.version length] > 0, @"Version failed to copy");
@@ -268,6 +284,14 @@ static BPCustomFormula *sbtenvFormula;
 	}
 	
 	
+}
+
+- (void)testFormulaObserverAddition
+{
+  BPCustomNotificationFormula *notificationFormula = [BPCustomNotificationFormula formulaWithName:@"abcde"];
+  XCTAssertTrue(notificationFormula->observerAdded);
+  BPCustomNotificationFormula *formulaCopy = [notificationFormula copy];
+  XCTAssertTrue(formulaCopy->observerAdded);
 }
 
 
