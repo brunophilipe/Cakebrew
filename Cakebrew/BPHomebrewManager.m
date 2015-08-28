@@ -23,8 +23,8 @@
 #import "BPHomebrewInterface.h"
 #import "BPAppDelegate.h"
 
-NSString *const kBP_CACHE_DICT_DATE_KEY = @"BP_CACHE_DICT_DATE_KEY";
-NSString *const kBP_CACHE_DICT_DATA_KEY = @"BP_CACHE_DICT_DATA_KEY";
+NSString *const kBPCacheLastUpdateKey = @"BPCacheLastUpdateKey";
+NSString *const kBPCacheDataKey	= @"BPCacheDataKey";
 
 #define kBP_SECONDS_IN_A_DAY 86400
 
@@ -105,32 +105,38 @@ NSString *const kBP_CACHE_DICT_DATA_KEY = @"BP_CACHE_DICT_DATA_KEY";
 - (BOOL)loadAllFormulaeCaches
 {
 	NSURL *cachesFolder = [BPAppDelegateRef urlForApplicationCachesFolder];
-
-	if (cachesFolder) {
-		NSURL *allFormulaeFile = [cachesFolder URLByAppendingPathComponent:@"allFormulae.cache.bin"];
+	NSURL *allFormulaeFile = [cachesFolder URLByAppendingPathComponent:@"allFormulae.cache.bin"];
+	BOOL shouldLoadCache = NO;
+	
+	if ([[NSUserDefaults standardUserDefaults] objectForKey:kBPCacheLastUpdateKey])
+	{
+		NSDate *storageDate = [NSDate dateWithTimeIntervalSince1970:[[NSUserDefaults standardUserDefaults]
+																	 integerForKey:kBPCacheLastUpdateKey]];
+		
+		if ([[NSDate date] timeIntervalSinceDate:storageDate] <= 3600*24)
+		{
+			shouldLoadCache = YES;
+		}
+	}
+	
+	if (shouldLoadCache && allFormulaeFile)
+	{
 		NSDictionary *cacheDict = nil;
-
+		
 		if ([[NSFileManager defaultManager] fileExistsAtPath:allFormulaeFile.relativePath])
 		{
 			cacheDict = [NSKeyedUnarchiver unarchiveObjectWithFile:allFormulaeFile.relativePath];
-			NSDate *storageDate = [cacheDict objectForKey:kBP_CACHE_DICT_DATE_KEY];
-
-			if ([[NSDate date] timeIntervalSinceDate:storageDate] >= 3600*24)
-			{
-				self.formulae_all = [cacheDict objectForKey:kBP_CACHE_DICT_DATA_KEY];
-			}
-			else
-			{
-				// Remove old cache
-				[[NSFileManager defaultManager] removeItemAtURL:allFormulaeFile error:nil];
-			}
-			
-			return self.formulae_all != nil;
+			self.formulae_all = [cacheDict objectForKey:kBPCacheDataKey];
 		}
 	}
-
-	NSLog(@"Could not load cache file. -[BPAppDelegate urlForApplicationCachesFolder] returned nil!");
-	return NO;
+	else
+	{
+		// Delete all cache data
+		[[NSFileManager defaultManager] removeItemAtURL:allFormulaeFile error:nil];
+		[[NSUserDefaults standardUserDefaults] removeObjectForKey:kBPCacheLastUpdateKey];
+	}
+	
+	return self.formulae_all != nil;
 }
 
 - (void)storeAllFormulaeCaches
@@ -138,29 +144,35 @@ NSString *const kBP_CACHE_DICT_DATA_KEY = @"BP_CACHE_DICT_DATA_KEY";
 	if (self.formulae_all)
 	{
 		NSURL *cachesFolder = [BPAppDelegateRef urlForApplicationCachesFolder];
-		if (cachesFolder) {
+		if (cachesFolder)
+		{
 			NSURL *allFormulaeFile = [cachesFolder URLByAppendingPathComponent:@"allFormulae.cache.bin"];
-			NSDate *storageDate = nil;
-			
-			NSDictionary *lastCacheDict = [NSKeyedUnarchiver unarchiveObjectWithFile:allFormulaeFile.relativePath];
-			if (lastCacheDict)
+			NSDate *storageDate = [NSDate date];
+
+			if ([[NSUserDefaults standardUserDefaults] objectForKey:kBPCacheLastUpdateKey])
 			{
-				storageDate = [lastCacheDict objectForKey:kBP_CACHE_DICT_DATE_KEY];
+				storageDate = [NSDate dateWithTimeIntervalSince1970:[[NSUserDefaults standardUserDefaults]
+																	 integerForKey:kBPCacheLastUpdateKey]];
+			}
+			
+			NSDictionary *cacheDict = @{kBPCacheDataKey: self.formulae_all};
+			NSData *cacheData = [NSKeyedArchiver archivedDataWithRootObject:cacheDict];
+
+			if ([[NSFileManager defaultManager] fileExistsAtPath:allFormulaeFile.relativePath])
+			{
+				[cacheData writeToURL:allFormulaeFile atomically:YES];
 			}
 			else
 			{
-				storageDate = [NSDate date];
+				[[NSFileManager defaultManager] createFileAtPath:allFormulaeFile.relativePath
+														contents:cacheData attributes:nil];
 			}
 			
-			NSDictionary *cacheDict = @{kBP_CACHE_DICT_DATE_KEY: storageDate, kBP_CACHE_DICT_DATA_KEY: self.formulae_all};
-			NSData *cacheData = [NSKeyedArchiver archivedDataWithRootObject:cacheDict];
-
-			if ([[NSFileManager defaultManager] fileExistsAtPath:allFormulaeFile.relativePath]) {
-				[cacheData writeToURL:allFormulaeFile atomically:YES];
-			} else {
-				[[NSFileManager defaultManager] createFileAtPath:allFormulaeFile.relativePath contents:cacheData attributes:nil];
-			}
-		} else {
+			[[NSUserDefaults standardUserDefaults] setInteger:[storageDate timeIntervalSince1970]
+													   forKey:kBPCacheLastUpdateKey];
+		}
+		else
+		{
 			NSLog(@"Could not store cache file. BPAppDelegate function returned nil!");
 		}
 	}

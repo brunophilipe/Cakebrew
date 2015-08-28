@@ -269,6 +269,9 @@ static NSString *cakebrewOutputIdentifier = @"+++++Cakebrew+++++";
 	if (self.systemHasAppNap)
 		[[NSProcessInfo processInfo] endActivity:activity];
 	
+	operationUpdateBlock = nil;
+	self.task = nil;
+	
 	return YES;
 }
 
