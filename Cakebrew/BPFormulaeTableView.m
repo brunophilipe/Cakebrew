@@ -121,24 +121,36 @@ unichar SPACE_CHARACTER = 0x0020;
 	}
 }
 
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wundeclared-selector"
 
-- (void)keyDown:(NSEvent *)event
+
+- (BOOL)performKeyEquivalent:(NSEvent *)theEvent
 {
-  unichar key = [[event charactersIgnoringModifiers] characterAtIndex:0];
+  id responder = [[self window] firstResponder];
+
+  if (responder != self) {
+	return [super performKeyEquivalent:theEvent];
+  }
   
   if (self.selectedRow == -1) {
-	[super keyDown:event];
-	return;
+	return NO;
   }
   
-  if (key == SPACE_CHARACTER) {
-	[self spaceBarPressed];
-  } else {
-	[super keyDown:event];
+  NSUInteger numberOfPressedCharacters = [[theEvent charactersIgnoringModifiers] length];
+  NSEventType eventType = [theEvent type];
+  
+  if (eventType == NSKeyDown && numberOfPressedCharacters == 1) {
+	unichar key = [[theEvent charactersIgnoringModifiers] characterAtIndex:0];
+	if (key == SPACE_CHARACTER) {
+	  [self spaceBarPressed];
+	}
   }
+
+  return NO;
 }
+
+
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wundeclared-selector"
 
 - (void)spaceBarPressed
 {
