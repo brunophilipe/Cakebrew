@@ -62,7 +62,7 @@ NSString *const kBP_HOMEBREW_WEBSITE = @"https://www.cakebrew.com";
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification
 {
-	PFMoveToApplicationsFolderIfNecessary();
+	PFMoveToApplicationsFolderIfNecessary(); 
 	[self setupSignalHandler];
 	[[BPHomebrewManager sharedManager] reloadFromInterfaceRebuildingCache:NO];
 }
