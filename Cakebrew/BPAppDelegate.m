@@ -41,6 +41,31 @@ NSString *const kBP_HOMEBREW_WEBSITE = @"https://www.cakebrew.com";
 
 @implementation BPAppDelegate
 
+#if DEBUG
+static BOOL isRunningTests(void)
+{
+  NSDictionary* environment = [[NSProcessInfo processInfo] environment];
+  NSString* injectBundle = environment[@"XCInjectBundle"];
+  NSString* pathExtension = [injectBundle pathExtension];
+  
+  return ([pathExtension isEqualToString:@"octest"] ||
+		  [pathExtension isEqualToString:@"xctest"]);
+}
+#endif
+
++ (void)load
+{
+#if !DEBUG
+  PFMoveToApplicationsFolderIfNecessary();
+#else
+  if(!isRunningTests()) {
+	PFMoveToApplicationsFolderIfNecessary();
+  }
+#endif
+}
+
+
+
 - (BPPreferencesWindowController *)preferencesWindowController
 {
 	if (!_preferencesWindowController) {
@@ -62,7 +87,6 @@ NSString *const kBP_HOMEBREW_WEBSITE = @"https://www.cakebrew.com";
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification
 {
-	PFMoveToApplicationsFolderIfNecessary(); 
 	[self setupSignalHandler];
 	[[BPHomebrewManager sharedManager] reloadFromInterfaceRebuildingCache:NO];
 }
