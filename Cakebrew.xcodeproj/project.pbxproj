@@ -64,6 +64,7 @@
 		D2682D041B853664003DE3D8 /* DCOAboutWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 15D2CFA918F202B300B6D9F1 /* DCOAboutWindowController.m */; };
 		D2682D051B853669003DE3D8 /* BPPreferencesWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 150AEC451B3F999A00163767 /* BPPreferencesWindowController.m */; };
 		D26F6E7F19B8608B00F616C1 /* NSFont+Appearance.m in Sources */ = {isa = PBXBuildFile; fileRef = D26F6E7E19B8608B00F616C1 /* NSFont+Appearance.m */; };
+		D2860C151B97127500F1F64B /* PFMoveApplication.m in Sources */ = {isa = PBXBuildFile; fileRef = D2CC8C951B90EEC300F763DF /* PFMoveApplication.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		D2B3A3AA19B9CBEC00DE23B5 /* BPFormulaeTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = D2B3A3A919B9CBEC00DE23B5 /* BPFormulaeTableView.m */; };
 		D2B3A3B019B9D7FC00DE23B5 /* BPFormulaeDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = D2B3A3AF19B9D7FC00DE23B5 /* BPFormulaeDataSource.m */; };
 		D2BBAB4B1B85EA7C00F21332 /* BPFormulaOption.m in Sources */ = {isa = PBXBuildFile; fileRef = D2BBAB4A1B85EA7C00F21332 /* BPFormulaOption.m */; };
@@ -82,16 +83,6 @@
 		D2CC8CA71B90F04C00F763DF /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D2CC8CA61B90F04C00F763DF /* Security.framework */; };
 		D2F732F119190B75002B2512 /* NSString+URLValidation.m in Sources */ = {isa = PBXBuildFile; fileRef = D2F732F019190B75002B2512 /* NSString+URLValidation.m */; };
 /* End PBXBuildFile section */
-
-/* Begin PBXContainerItemProxy section */
-		D261C9C61B852FA300409803 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 1FE4FE4B148E4CDD008EDE8B /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 1FE4FE53148E4CDD008EDE8B;
-			remoteInfo = Cakebrew;
-		};
-/* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
 		1570BA6018EF9B0F001C3C5C /* CopyFiles */ = {
@@ -562,7 +553,6 @@
 			buildRules = (
 			);
 			dependencies = (
-				D261C9C71B852FA300409803 /* PBXTargetDependency */,
 			);
 			name = CakebrewTests;
 			productName = CakebrewTests;
@@ -584,7 +574,6 @@
 					};
 					D261C9BF1B852FA300409803 = {
 						CreatedOnToolsVersion = 6.4;
-						TestTargetID = 1FE4FE53148E4CDD008EDE8B;
 					};
 				};
 			};
@@ -735,6 +724,7 @@
 			files = (
 				D2682D021B8532B6003DE3D8 /* BPHomebrewInterface.m in Sources */,
 				D2682D051B853669003DE3D8 /* BPPreferencesWindowController.m in Sources */,
+				D2860C151B97127500F1F64B /* PFMoveApplication.m in Sources */,
 				D2682D011B8532B0003DE3D8 /* BPHomebrewManager.m in Sources */,
 				D212A5891B853132003000ED /* BPFormula.m in Sources */,
 				D2682D031B8535BD003DE3D8 /* BPAppDelegate.m in Sources */,
@@ -745,14 +735,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXTargetDependency section */
-		D261C9C71B852FA300409803 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 1FE4FE53148E4CDD008EDE8B /* Cakebrew */;
-			targetProxy = D261C9C61B852FA300409803 /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		15D28A161AE332DB005C8A3E /* DCOAboutWindow.xib */ = {
@@ -1012,7 +994,6 @@
 		D261C9C81B852FA300409803 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
@@ -1035,17 +1016,15 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				INFOPLIST_FILE = CakebrewTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
-				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				MACOSX_DEPLOYMENT_TARGET = 10.8;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Cakebrew.app/Contents/MacOS/Cakebrew";
 			};
 			name = Debug;
 		};
 		D261C9C91B852FA300409803 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
@@ -1065,10 +1044,9 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				INFOPLIST_FILE = CakebrewTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
-				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				MACOSX_DEPLOYMENT_TARGET = 10.8;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Cakebrew.app/Contents/MacOS/Cakebrew";
 			};
 			name = Release;
 		};
