@@ -146,33 +146,6 @@ NSString *const kBP_HOMEBREW_WEBSITE = @"https://www.cakebrew.com";
 	[self.preferencesWindowController showWindow:nil];
 }
 
-- (float)OSXVersion
-{
-	float osxVersion;
-	if (floor(NSAppKitVersionNumber) <= NSAppKitVersionNumber10_6) {
-		//10.6.x or earlier systems
-		osxVersion = 10.06;
-		NSLog(@"Mac OSX Snow Leopard");
-	} else if (floor(NSAppKitVersionNumber) <= NSAppKitVersionNumber10_7) {
-		/* On a 10.7 - 10.7.x system */
-		osxVersion = 10.07;
-		NSLog(@"Mac OSX Lion");
-	} else if (floor(NSAppKitVersionNumber) <= NSAppKitVersionNumber10_8) {
-		/* On a 10.8 - 10.8.x system */
-		osxVersion = 10.08;
-		NSLog(@"Mac OSX Moutain Lion");
-	} else if (floor(NSAppKitVersionNumber) <= NSAppKitVersionNumber10_9) {
-		/* 10.9 or later system */
-		osxVersion = 10.09;
-		NSLog(@"Mac OSX: Mavericks");
-	} else {
-		/* 10.9 or later system */
-		osxVersion = 10.10;
-		NSLog(@"Mac OSX: Yosemite or Later");
-	}
-	return osxVersion;
-}
-
 @end
 
 @implementation BPAppDelegate (SignalHandler)

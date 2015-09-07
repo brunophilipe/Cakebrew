@@ -20,7 +20,7 @@
 //
 
 #import "BPToolbar.h"
-#import "BPAppDelegate.h"
+#import "BPStyle.h"
 
 static NSString *kToolbarIdentifier = @"toolbarIdentifier";
 
@@ -33,7 +33,6 @@ static NSString *kToolbarItemMultiActionIdentifier = @"toolbarItemMultiAction";
 @interface BPToolbar() <NSTextFieldDelegate>
 
 @property (assign) BPToolbarMode currentMode;
-@property BOOL isFlat;
 
 @end
 
@@ -44,13 +43,9 @@ static NSString *kToolbarItemMultiActionIdentifier = @"toolbarItemMultiAction";
 	self = [super initWithIdentifier:kToolbarIdentifier];
 	if (self)
 	{
-		float OSXVersion = BPAppDelegateRef.OSXVersion;
-		self.isFlat = OSXVersion >= 10.10;
-		
-		if (!self.isFlat)
-		{
-			[self setSizeMode:NSToolbarSizeModeSmall];
-		}
+
+		NSToolbarSizeMode mode = [BPStyle toolbarSize];
+		[self setSizeMode:mode];
 		
 		[self configureForMode:BPToolbarModeDefault];
 		[self lockItems];
@@ -68,13 +63,13 @@ static NSString *kToolbarItemMultiActionIdentifier = @"toolbarItemMultiAction";
 	{
 		//will force toolbar to show empty nonclickable item
 		[self reconfigureItem:moreInfoItem
-					imageName:nil
+						image:nil
 						label:nil
 					   action:nil];
   
 	} else {
 		[self reconfigureItem:moreInfoItem
-					imageName:self.isFlat ? @"label_flat" : @"label.icns"
+						image:[BPStyle toolbarImageForMoreInformation]
 						label:NSLocalizedString(@"Toolbar_More_Information", nil)
 					   action:@selector(showFormulaInfo:)];
 	}
@@ -84,49 +79,49 @@ static NSString *kToolbarItemMultiActionIdentifier = @"toolbarItemMultiAction";
 	switch (mode) {
 		case BPToolbarModeDefault:
 			[self reconfigureItem:multiActionItem
-						imageName:nil
+							image:nil
 							label:nil
 						   action:nil];
 			break;
 			
 		case BPToolbarModeInstall:
 			[self reconfigureItem:multiActionItem
-						imageName:self.isFlat ? @"download_flat" : @"download.icns"
+							image:[BPStyle toolbarImageForInstall]
 							label:NSLocalizedString(@"Toolbar_Install_Formula", nil)
 						   action:@selector(installFormula:)];
 			break;
 			
 		case BPToolbarModeUninstall:
 			[self reconfigureItem:multiActionItem
-						imageName:self.isFlat ? @"delete_flat" : @"delete.icns"
+							image:[BPStyle toolbarImageForUninstall]
 							label:NSLocalizedString(@"Toolbar_Uninstall_Formula", nil)
 						   action:@selector(uninstallFormula:)];
 			break;
 			
 		case BPToolbarModeTap:
 			[self reconfigureItem:multiActionItem
-						imageName:self.isFlat ? @"download_flat" : @"download.icns"
+							image:[BPStyle toolbarImageForTap]
 							label:NSLocalizedString(@"Toolbar_Tap_Repo", nil)
 						   action:@selector(tapRepository:)];
 			break;
 			
 		case BPToolbarModeUntap:
 			[self reconfigureItem:multiActionItem
-						imageName:self.isFlat ? @"delete_flat" : @"delete.icns"
+							image:[BPStyle toolbarImageForUntap]
 							label:NSLocalizedString(@"Toolbar_Untap_Repo", nil)
 						   action:@selector(untapRepository:)];
 			break;
 			
 		case BPToolbarModeUpdateSingle:
 			[self reconfigureItem:multiActionItem
-						imageName:self.isFlat ? @"reload_flat" : @"reload.icns"
+							image:[BPStyle toolbarImageForUpdate]
 							label:NSLocalizedString(@"Toolbar_Update_Formula", nil)
 						   action:@selector(upgradeSelectedFormulae:)];
 			break;
 			
 		case BPToolbarModeUpdateMany:
 			[self reconfigureItem:multiActionItem
-						imageName:self.isFlat ? @"reload_flat" : @"reload.icns"
+							image:[BPStyle toolbarImageForUpdate]
 							label:NSLocalizedString(@"Toolbar_Update_Selected", nil)
 						   action:@selector(upgradeSelectedFormulae:)];
 			break;
@@ -225,7 +220,7 @@ static NSString *kToolbarItemMultiActionIdentifier = @"toolbarItemMultiAction";
 	static NSToolbarItem* toolbarItemHomebrewUpdate = nil;
 	if (!toolbarItemHomebrewUpdate) {
 		toolbarItemHomebrewUpdate = [self toolbarItemWithIdentifier:kToolbarItemHomebrewUpdateIdentifier
-															   icon:self.isFlat ? @"globe_flat" : @"globe.icns"
+															  image:[BPStyle toolbarImageForUpgrade]
 															  label:NSLocalizedString(@"Toolbar_Homebrew_Update", nil)
 															 action:@selector(updateHomebrew:)];
 	}
@@ -237,7 +232,7 @@ static NSString *kToolbarItemMultiActionIdentifier = @"toolbarItemMultiAction";
 	static NSToolbarItem* toolbarItemInformation = nil;
 	if (!toolbarItemInformation) {
 		toolbarItemInformation = [self toolbarItemWithIdentifier:kToolbarItemInformationIdentifier
-															icon:self.isFlat ? @"label_flat" : @"label.icns"
+														   image:[BPStyle toolbarImageForMoreInformation]
 														   label:NSLocalizedString(@"Toolbar_More_Information", nil)
 														  action:@selector(showFormulaInfo:)];
 	}
@@ -250,7 +245,7 @@ static NSString *kToolbarItemMultiActionIdentifier = @"toolbarItemMultiAction";
 	static NSToolbarItem* toolbarItemMultiAction = nil;
 	if (!toolbarItemMultiAction) {
 		toolbarItemMultiAction = [self toolbarItemWithIdentifier:kToolbarItemMultiActionIdentifier
-															icon:nil
+															image:nil
 														   label:nil
 														  action:nil];
 	}
@@ -275,12 +270,12 @@ static NSString *kToolbarItemMultiActionIdentifier = @"toolbarItemMultiAction";
 }
 
 - (NSToolbarItem *)toolbarItemWithIdentifier:(NSString *)identifier
-										icon:(NSString *)iconName
+									   image:(NSImage *)image
 									   label:(NSString *)label
 									  action:(SEL)action
 {
 	NSToolbarItem *item = [[NSToolbarItem alloc] initWithItemIdentifier:identifier];
-	item.image = [NSImage imageNamed:iconName];
+	item.image = image;
 	item.label = label;
 	item.paletteLabel = label;
 	item.action = action;
@@ -289,15 +284,13 @@ static NSString *kToolbarItemMultiActionIdentifier = @"toolbarItemMultiAction";
 	return item;
 }
 
-- (void)reconfigureItem:(NSToolbarItem *)item imageName:(NSString *)imageName label:(NSString *)label action:(SEL)action
+- (void)reconfigureItem:(NSToolbarItem *)item image:(NSImage *)image label:(NSString *)label action:(SEL)action
 {
-	if (imageName)
+	if (!image)
 	{
-		item.image = [NSImage imageNamed:imageName];
-	}
-	else
-	{
-		item.image = [NSImage imageWithSize:NSMakeSize(32, 32) flipped:NO drawingHandler:nil];
+	  item.image = [NSImage imageWithSize:NSMakeSize(32, 32) flipped:NO drawingHandler:nil];
+	} else {
+	  item.image = image;
 	}
 	
 	item.label = label;
