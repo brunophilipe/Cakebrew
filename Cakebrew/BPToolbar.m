@@ -29,7 +29,6 @@ static NSString *kToolbarItemInformationIdentifier = @"toolbarItemInformation";
 static NSString *kToolbarItemSearchIdentifier = @"toolbarItemSearch";
 static NSString *kToolbarItemMultiActionIdentifier = @"toolbarItemMultiAction";
 
-
 @interface BPToolbar() <NSTextFieldDelegate>
 
 @property (assign) BPToolbarMode currentMode;
@@ -43,7 +42,6 @@ static NSString *kToolbarItemMultiActionIdentifier = @"toolbarItemMultiAction";
 	self = [super initWithIdentifier:kToolbarIdentifier];
 	if (self)
 	{
-
 		NSToolbarSizeMode mode = [BPStyle toolbarSize];
 		[self setSizeMode:mode];
 		
@@ -139,8 +137,6 @@ static NSString *kToolbarItemMultiActionIdentifier = @"toolbarItemMultiAction";
 		[self updateToolbarItemsWithTarget:controller];
 	}
 }
-
-
 
 - (void)updateToolbarItemsWithTarget:(id)target
 {

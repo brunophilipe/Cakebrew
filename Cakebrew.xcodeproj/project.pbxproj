@@ -254,6 +254,8 @@
 		1540FA3618ED099F00334A5C /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				D2C1B1001B821A2A00FFC2CA /* BPToolbar.h */,
+				D2C1B1011B821A2A00FFC2CA /* BPToolbar.m */,
 				D2B3A3A819B9CBEC00DE23B5 /* BPFormulaeTableView.h */,
 				D2B3A3A919B9CBEC00DE23B5 /* BPFormulaeTableView.m */,
 				15C34CBD19512DE100B92E36 /* BPAutoScrollTextView.h */,
@@ -267,8 +269,6 @@
 		15A974AB1968A3C900621C35 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				D2C1B1001B821A2A00FFC2CA /* BPToolbar.h */,
-				D2C1B1011B821A2A00FFC2CA /* BPToolbar.m */,
 				15D28A191AE332E6005C8A3E /* BPDoctorView.xib */,
 				150AEC381B3F999A00163767 /* BPDoctorViewController.h */,
 				150AEC391B3F999A00163767 /* BPDoctorViewController.m */,
