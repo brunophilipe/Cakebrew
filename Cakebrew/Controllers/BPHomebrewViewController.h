@@ -47,8 +47,6 @@ typedef NS_ENUM(NSUInteger, BPWindowOperation) {
 @property (weak) IBOutlet DMSplitView              *splitView;
 @property (weak) IBOutlet NSTabView                *tabView;
 @property (weak) IBOutlet NSTextField              *label_information;
-@property (weak) IBOutlet NSView				    *view_disablerLock;
-@property (weak) IBOutlet NSView				    *view_loading;
 @property (weak) IBOutlet NSMenu                   *menu_formula;
 
 // Cocoa bindings

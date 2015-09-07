@@ -143,6 +143,7 @@ static NSString *kToolbarItemMultiActionIdentifier = @"toolbarItemMultiAction";
 	NSDictionary *supportedItems = [self customToolbarItems];
 	[supportedItems enumerateKeysAndObjectsUsingBlock:^(id key, NSToolbarItem *object, BOOL *stop) {
 		[object setTarget:target];
+		[object setEnabled:target != nil]; //Disables the searchbox toolbar item
 	}];
 }
 
