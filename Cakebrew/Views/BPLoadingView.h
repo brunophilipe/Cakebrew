@@ -10,6 +10,4 @@
 
 @interface BPLoadingView : NSView
 
-@property (strong) IBOutlet NSProgressIndicator *progressIndicator;
-
 @end

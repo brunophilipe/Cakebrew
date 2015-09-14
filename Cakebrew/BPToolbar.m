@@ -29,7 +29,6 @@ static NSString *kToolbarItemInformationIdentifier = @"toolbarItemInformation";
 static NSString *kToolbarItemSearchIdentifier = @"toolbarItemSearch";
 static NSString *kToolbarItemMultiActionIdentifier = @"toolbarItemMultiAction";
 
-
 @interface BPToolbar() <NSTextFieldDelegate>
 
 @property (assign) BPToolbarMode currentMode;
@@ -144,13 +143,12 @@ static NSString *kToolbarItemMultiActionIdentifier = @"toolbarItemMultiAction";
 	}
 }
 
-
-
 - (void)updateToolbarItemsWithTarget:(id)target
 {
 	NSDictionary *supportedItems = [self customToolbarItems];
 	[supportedItems enumerateKeysAndObjectsUsingBlock:^(id key, NSToolbarItem *object, BOOL *stop) {
 		[object setTarget:target];
+		[object setEnabled:target != nil]; //Disables the searchbox toolbar item
 	}];
 }
 

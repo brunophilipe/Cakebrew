@@ -13,6 +13,7 @@ NSString * const kColumnIdentifierLatestVersion = @"LatestVersion";
 NSString * const kColumnIdentifierStatus = @"Status";
 NSString * const kColumnIdentifierName = @"Name";
 
+unichar SPACE_CHARACTER = 0x0020;
 
 @implementation BPFormulaeTableView
 
@@ -119,6 +120,60 @@ NSString * const kColumnIdentifierName = @"Name";
 		@finally {}
 	}
 }
+
+
+
+- (BOOL)performKeyEquivalent:(NSEvent *)theEvent
+{
+	id responder = [[self window] firstResponder];
+	
+	if (responder != self)
+	{
+		return [super performKeyEquivalent:theEvent];
+	}
+	
+	if (self.selectedRow == -1)
+	{
+		return NO;
+	}
+	
+	NSUInteger numberOfPressedCharacters = [[theEvent charactersIgnoringModifiers] length];
+	NSEventType eventType = [theEvent type];
+	
+	if (eventType == NSKeyDown && numberOfPressedCharacters == 1)
+	{
+		unichar key = [[theEvent charactersIgnoringModifiers] characterAtIndex:0];
+		if (key == SPACE_CHARACTER)
+		{
+			[self spaceBarPressed];
+			return YES;
+		}
+	}
+	
+	return NO;
+}
+
+
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wundeclared-selector"
+
+- (void)spaceBarPressed
+{
+	//On yosemite or later viewcontroller is part of responder chain
+	if (floor(NSAppKitVersionNumber) >= NSAppKitVersionNumber10_10)
+	{
+		[NSApp sendAction:@selector(showFormulaInfo:) to:nil from:self];
+	}
+	else
+	{
+		if ([self.delegate respondsToSelector:@selector(showFormulaInfo:)])
+		{
+			[self.delegate performSelector:@selector(showFormulaInfo:) withObject:nil];
+		}
+	}
+}
+
+#pragma clang diagnostic pop
 
 - (void)dealloc
 {

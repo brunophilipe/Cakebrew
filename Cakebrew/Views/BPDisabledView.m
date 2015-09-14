@@ -1,26 +1,21 @@
 //
-//  BPLoadingView.m
-//  Cakebrew
+//  BPDisabledView.m
 //
-//  Created by Bruno Philipe on 3/13/15.
-//  Copyright (c) 2015 Bruno Philipe. All rights reserved.
+//
+//  Created by Marek Hrusovsky on 26/08/15.
+//
 //
 
-#import "BPLoadingView.h"
+#import "BPDisabledView.h"
 
-@interface BPLoadingView()
+@interface BPDisabledView()
 
 @property (strong) IBOutlet NSView *view;
-@property (weak) IBOutlet NSProgressIndicator *progressIndicator;
 
 @end
 
-@implementation BPLoadingView
 
-- (void)awakeFromNib
-{
-	[self.progressIndicator startAnimation:nil];
-}
+@implementation BPDisabledView
 
 - (instancetype)initWithFrame:(NSRect)frameRect
 {
@@ -42,9 +37,8 @@
 
 - (void)commonInit
 {
-	NSNib *nib = [[NSNib alloc] initWithNibNamed:@"Loading" bundle:nil];
+	NSNib *nib = [[NSNib alloc] initWithNibNamed:@"Disabled" bundle:nil];
 	[nib instantiateWithOwner:self topLevelObjects:NULL];
-	self.view.frame = self.bounds;
 	[self addSubview:self.view];
 	
 	self.view.translatesAutoresizingMaskIntoConstraints = NO;
@@ -65,5 +59,6 @@
 									   multiplier:1.0
 										 constant:0.0];
 }
+
 
 @end

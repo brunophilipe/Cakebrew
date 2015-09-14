@@ -32,6 +32,8 @@
 #import "BPToolbar.h"
 #import "BPAppDelegate.h"
 #import "BPStyle.h"
+#import "BPLoadingView.h"
+#import "BPDisabledView.h"
 
 typedef NS_ENUM(NSUInteger, HomeBrewTab) {
 	HomeBrewTabFormulae,
@@ -61,7 +63,9 @@ NSMenuDelegate>
 @property (strong, nonatomic) BPDoctorViewController			*doctorViewController;
 @property (strong, nonatomic) BPFormulaPopoverViewController	*formulaPopoverViewController;
 @property (strong, nonatomic) BPSelectedFormulaViewController	*selectedFormulaeViewController;
-@property (strong, nonatomic) BPToolbar                *toolbar;
+@property (strong, nonatomic) BPToolbar							*toolbar;
+@property (strong, nonatomic) BPDisabledView					*disabledView;
+@property (strong, nonatomic) BPLoadingView						*loadingView;
 
 @property (weak, nonatomic) IBOutlet NSSplitView *formulaeSplitView;
 @property (weak, nonatomic) IBOutlet NSView		 *selectedFormulaView;
@@ -170,16 +174,60 @@ NSMenuDelegate>
 	[self.sidebarController setDelegate:self];
 	[self.sidebarController refreshSidebarBadges];
 	[self.sidebarController configureSidebarSettings];
-
-	[self.view_loading setHidden:NO];
+	
 	[self.splitView setHidden:YES];
+	
+	[self addToolbar];
+	[self addLoadingView];
+	
+	_appDelegate = BPAppDelegateRef;
+}
+
+- (void)addToolbar
+{
 	self.toolbar = [[BPToolbar alloc] initWithIdentifier:nil];
 	self.toolbar.delegate = self.toolbar;
 	self.toolbar.controller = self;
 	[[[self view] window] setToolbar:self.toolbar];
 	[self.toolbar lockItems];
+}
 
-	_appDelegate = BPAppDelegateRef;
+- (void)addDisabledView
+{
+	NSView *disabledView = [[BPDisabledView alloc] initWithFrame:NSZeroRect];
+	disabledView.translatesAutoresizingMaskIntoConstraints = NO;
+	[self.view addSubview:disabledView];
+	[self.view addConstraints:[NSLayoutConstraint
+							   constraintsWithVisualFormat:@"V:|-0-[view]-0-|"
+							   options:0
+							   metrics:nil
+							   views:@{@"view": disabledView}]];
+	
+	[self.view addConstraints:[NSLayoutConstraint
+							   constraintsWithVisualFormat:@"H:|-0-[view]-0-|"
+							   options:0
+							   metrics:nil
+							   views:@{@"view": disabledView}]];
+	self.disabledView = (BPDisabledView *)disabledView;
+}
+
+- (void)addLoadingView
+{
+	NSView *loadingView = [[BPLoadingView alloc] initWithFrame:NSZeroRect];
+	loadingView.translatesAutoresizingMaskIntoConstraints = NO;
+	[self.view addSubview:loadingView];
+	[self.view addConstraints:[NSLayoutConstraint
+							   constraintsWithVisualFormat:@"V:|-0-[view]-0-|"
+							   options:0
+							   metrics:nil
+							   views:@{@"view": loadingView}]];
+	
+	[self.view addConstraints:[NSLayoutConstraint
+							   constraintsWithVisualFormat:@"H:|-0-[view]-0-|"
+							   options:0
+							   metrics:nil
+							   views:@{@"view": loadingView}]];
+	self.loadingView = (BPLoadingView *)loadingView;
 }
 
 - (void)dealloc
@@ -316,6 +364,9 @@ NSMenuDelegate>
 
 - (void)homebrewManagerFinishedUpdating:(BPHomebrewManager *)manager
 {
+	[self.loadingView removeFromSuperview];
+	self.loadingView = nil;
+	
 	if (self.isHomebrewInstalled)
 	{
 		[[self.tableView_formulae menu] cancelTracking];
@@ -323,8 +374,8 @@ NSMenuDelegate>
 		self.currentFormula = nil;
 		self.selectedFormulaeViewController.formulae = nil;
 		
-		[self.view_loading setHidden:YES];
-		[self.splitView	   setHidden:NO];
+		[self.splitView			setHidden:NO];
+		[self.label_information setHidden:NO];
 		
 		[self.toolbar configureForMode:BPToolbarModeDefault];
 		[self.toolbar unlockItems];
@@ -360,10 +411,8 @@ NSMenuDelegate>
 	
 	if (yesOrNo)
 	{
-		[self.view_disablerLock setHidden:NO];
-		[self.view_disablerLock setWantsLayer:YES];
+		[self addDisabledView];
 		[self.label_information setHidden:YES];
-		[self.view_loading setHidden:YES];
 		[self.splitView setHidden:YES];
 		[self.toolbar lockItems];
 		
@@ -392,7 +441,8 @@ NSMenuDelegate>
 	}
 	else
 	{
-		[self.view_disablerLock setHidden:YES];
+		[self.disabledView removeFromSuperview];
+		self.disabledView = nil;
 		[self.label_information setHidden:NO];
 		[self.splitView setHidden:NO];
 		
