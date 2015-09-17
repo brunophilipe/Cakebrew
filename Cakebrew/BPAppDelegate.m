@@ -110,14 +110,24 @@ NSString *const kBP_HOMEBREW_WEBSITE = @"https://www.cakebrew.com";
 	NSError *error = nil;
 	NSURL *path = [[NSFileManager defaultManager] URLForDirectory:NSCachesDirectory inDomain:NSUserDomainMask appropriateForURL:nil create:YES error:&error];
 
-	if (error) return nil;
+	if (error)
+	{
+		NSLog(@"Error finding caches directory: %@", path);
+		return nil;
+	}
+	
 	error = nil;
 
 	path = [path URLByAppendingPathComponent:@"com.brunophilipe.Cakebrew/"];
 
 	[[NSFileManager defaultManager] createDirectoryAtPath:path.relativePath withIntermediateDirectories:YES attributes:nil error:&error];
 
-	if (error) return nil;
+	if (error)
+	{
+		NSLog(@"Error creating Cakebrew cache directory: %@", path);
+		return nil;
+	}
+	
 	error = nil;
 
 	return path;
