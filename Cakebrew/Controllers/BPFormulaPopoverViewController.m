@@ -38,6 +38,8 @@
         [self.formulaTextView checkTextInDocument:nil];
         [self.formulaTextView setEditable:NO];
 		
+		[self.formulaTextView scrollToBeginningOfDocument:nil];
+		
 		[self.formulaTitleLabel setStringValue:[NSString stringWithFormat:NSLocalizedString(@"Formula_Popover_Title", nil), [_formula performSelector:@selector(name)]]];
 	} else {
 		[self.formulaTextView setString:NSLocalizedString(@"Formula_Popover_Error", nil)];
