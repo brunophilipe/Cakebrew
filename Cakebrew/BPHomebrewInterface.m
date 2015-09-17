@@ -94,8 +94,6 @@ static NSString *cakebrewOutputIdentifier = @"+++++Cakebrew+++++";
 	[self.tasks enumerateKeysAndObjectsWithOptions:NSEnumerationConcurrent usingBlock:^(NSString *key, BPTask *task, BOOL *stop){
 		[task cleanup];
 	}];
-	
-	
 }
 
 - (BOOL)checkForHomebrew
@@ -165,6 +163,10 @@ static NSString *cakebrewOutputIdentifier = @"+++++Cakebrew+++++";
 		return nil;
 	}
 	
+#ifdef DEBUG
+	NSLog(@"User Shell: %@", userShell);
+#endif
+	
 	return userShell;
 }
 
@@ -233,12 +235,17 @@ static NSString *cakebrewOutputIdentifier = @"+++++Cakebrew+++++";
 	[self.tasks setObject:task forKey:[NSString stringWithFormat:@"%p", task]];
 	
 	task.updateBlock = block;
-	
-	
-	
-	
+
 #ifdef DEBUG
-	block([NSString stringWithFormat:@"User Shell: %@\nCommand: %@\nThe outputs are going to be different if run from Xcode!!\nInstalling and upgrading formulas is not advised in DEBUG mode!\n\n", self.path_shell, [arguments componentsJoinedByString:@" "]]);
+	block([NSString stringWithFormat:@"\
+User Shell: %@\n\
+Command: %@\n\
+OS X Version: %@\n\n\
+The outputs are going to be different if run from Xcode!!\n\
+Installing and upgrading formulas is not advised in DEBUG mode!\n\n",
+		   self.path_shell,
+		   [arguments componentsJoinedByString:@" "],
+		   [[NSProcessInfo processInfo] operatingSystemVersionString]]);
 #endif
 	
 	[task execute];
