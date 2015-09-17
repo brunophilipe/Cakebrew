@@ -137,9 +137,9 @@ static NSString *kToolbarItemMultiActionIdentifier = @"toolbarItemMultiAction";
 
 - (void)setController:(id)controller
 {
-	if (_controller != controller) {
+	if (_controller != controller)
+	{
 		_controller = controller;
-		[self updateToolbarItemsWithTarget:controller];
 	}
 }
 
