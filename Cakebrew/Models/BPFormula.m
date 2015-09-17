@@ -24,6 +24,8 @@
 #import "BPHomebrewManager.h"
 #import "BPHomebrewInterface.h"
 
+static void * BPFormulaContext = &BPFormulaContext;
+
 NSString *const kBP_ENCODE_FORMULA_NAME = @"BP_ENCODE_FORMULA_NAME";
 NSString *const kBP_ENCODE_FORMULA_IVER = @"BP_ENCODE_FORMULA_IVER";
 NSString *const kBP_ENCODE_FORMULA_LVER = @"BP_ENCODE_FORMULA_LVER";
@@ -33,6 +35,7 @@ NSString *const kBP_ENCODE_FORMULA_DEPS = @"BP_ENCODE_FORMULA_DEPS";
 NSString *const kBP_ENCODE_FORMULA_INST = @"BP_ENCODE_FORMULA_INST";
 NSString *const kBP_ENCODE_FORMULA_CNFL = @"BP_ENCODE_FORMULA_CNFL";
 NSString *const kBP_ENCODE_FORMULA_SDSC = @"BP_ENCODE_FORMULA_SDSC";
+NSString *const kBP_ENCODE_FORMULA_INFO = @"BP_ENCODE_FORMULA_INFO";
 NSString *const kBP_ENCODE_FORMULA_OPTN = @"BP_ENCODE_FORMULA_OPTN";
 
 NSString *const kBPIdentifierDependencies = @"==> Dependencies";
@@ -50,6 +53,7 @@ NSString *const BPFormulaDidUpdateNotification = @"BPFormulaDidUpdateNotificatio
 @property (copy, readwrite) NSString *dependencies;
 @property (copy, readwrite) NSString *conflicts;
 @property (copy, readwrite) NSString *shortDescription;
+@property (copy, readwrite) NSString *information;
 @property (strong, readwrite) NSURL    *website;
 @property (strong, readwrite) NSArray  *options;
 
@@ -65,6 +69,7 @@ NSString *const BPFormulaDidUpdateNotification = @"BPFormulaDidUpdateNotificatio
 		formula.name = name;
 		formula.version = version;
 		formula.latestVersion = latestVersion;
+		[formula commonInit];
 	}
 	
 	return formula;
@@ -90,11 +95,12 @@ NSString *const BPFormulaDidUpdateNotification = @"BPFormulaDidUpdateNotificatio
 	if (self.dependencies)		[aCoder encodeObject:self.dependencies		forKey:kBP_ENCODE_FORMULA_DEPS];
 	if (self.conflicts)			[aCoder encodeObject:self.conflicts			forKey:kBP_ENCODE_FORMULA_CNFL];
 	if (self.shortDescription)	[aCoder encodeObject:self.shortDescription	forKey:kBP_ENCODE_FORMULA_SDSC];
+	if (self.information)		[aCoder encodeObject:self.information		forKey:kBP_ENCODE_FORMULA_INFO];
 	if (self.options)			[aCoder encodeObject:self.options			forKey:kBP_ENCODE_FORMULA_OPTN];
 	[aCoder encodeObject:@([self isInstalled]) forKey:kBP_ENCODE_FORMULA_INST];
 }
 
-- (id)initWithCoder:(NSCoder *)aDecoder
+- (instancetype)initWithCoder:(NSCoder *)aDecoder
 {
 	self = [super init];
 	if (self) {
@@ -106,12 +112,22 @@ NSString *const BPFormulaDidUpdateNotification = @"BPFormulaDidUpdateNotificatio
 		self.dependencies		= [aDecoder decodeObjectForKey:kBP_ENCODE_FORMULA_DEPS];
 		self.conflicts			= [aDecoder decodeObjectForKey:kBP_ENCODE_FORMULA_CNFL];
 		self.shortDescription	= [aDecoder decodeObjectForKey:kBP_ENCODE_FORMULA_CNFL];
+		self.information		= [aDecoder decodeObjectForKey:kBP_ENCODE_FORMULA_INFO];
 		self.options			= [aDecoder decodeObjectForKey:kBP_ENCODE_FORMULA_OPTN];
+		[self commonInit];
 	}
 	return self;
 }
 
-- (id)copyWithZone:(NSZone *)zone
+- (void)commonInit
+{
+	[self addObserver:self
+		   forKeyPath:NSStringFromSelector(@selector(needsInformation))
+			  options:NSKeyValueObservingOptionNew
+			  context:BPFormulaContext];
+}
+
+- (instancetype)copyWithZone:(NSZone *)zone
 {
 	/*
 	 * Following best practices as suggested by:
@@ -128,7 +144,11 @@ NSString *const BPFormulaDidUpdateNotification = @"BPFormulaDidUpdateNotificatio
 		formula->_dependencies		= [self->_dependencies		copy];
 		formula->_conflicts			= [self->_conflicts			copy];
 		formula->_shortDescription	= [self->_shortDescription	copy];
+		formula->_information		= [self->_information		copy];
 		formula->_options			= [self->_options			copy];
+		[formula addObserver:formula forKeyPath:NSStringFromSelector(@selector(needsInformation))
+					 options:NSKeyValueObservingOptionNew
+					 context:BPFormulaContext];
 	}
 	return formula;
 }
@@ -147,26 +167,61 @@ NSString *const BPFormulaDidUpdateNotification = @"BPFormulaDidUpdateNotificatio
 	}
 }
 
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
+{
+	if (context == BPFormulaContext)
+	{
+		if ([object isEqualTo:self])
+		{
+			if ([keyPath isEqualToString:NSStringFromSelector(@selector(needsInformation))])
+			{
+				if (self.needsInformation)
+				{
+					[self getInformation];
+				}
+			}
+		}
+	}
+	else
+	{
+		@try
+		{
+			[super observeValueForKeyPath:keyPath ofObject:object change:change context:context];
+		}
+		@catch (NSException *exception) {}
+		@finally {}
+	}
+}
+
 - (BOOL)getInformation
 {
 	NSString *line         = nil;
 	NSString *output       = nil;
 	NSArray *lines         = nil;
 	NSUInteger lineIndex   = 0;
-
-	id<BPFormulaDataProvider> dataProvider = [self dataProvider];
-	if(![dataProvider respondsToSelector:@selector(informationForFormulaName:)]) {
-		return NO;
+	
+	if (!self.information)
+	{
+		id<BPFormulaDataProvider> dataProvider = [self dataProvider];
+		
+		if (![dataProvider respondsToSelector:@selector(informationForFormulaName:)])
+		{
+			_needsInformation = NO;
+			return NO;
+		}
+		self.information = [[self dataProvider] informationForFormulaName:self.name];
 	}
-	output = [[self dataProvider] informationForFormulaName:self.name];
-
+	
+	output = self.information;
+	
 	if ([output isEqualToString:@""])
 	{
+		_needsInformation = NO;
 		return YES;
 	}
-
+	
 	lines = [output componentsSeparatedByString:@"\n"];
-
+	
 	lineIndex = 0;
 	line = [lines objectAtIndex:lineIndex];
 	[self setLatestVersion:[line substringFromIndex:[line rangeOfString:@":"].location+2]];
@@ -178,7 +233,7 @@ NSString *const BPFormulaDidUpdateNotification = @"BPFormulaDidUpdateNotificatio
 	if (url == nil)
 	{
 		[self setShortDescription:line];
-
+		
 		lineIndex = 2;
 		line = [lines objectAtIndex:lineIndex];
 		[self setWebsite:[NSURL URLWithString:line]];
@@ -196,7 +251,7 @@ NSString *const BPFormulaDidUpdateNotification = @"BPFormulaDidUpdateNotificatio
 		lineIndex++;
 		line = [lines objectAtIndex:lineIndex];
 	}
-
+	
 	if (![line isEqualToString:@"Not installed"])
 	{
 		if ([line isEqualToString:@""]) { //keg-only formual has no path
@@ -206,11 +261,11 @@ NSString *const BPFormulaDidUpdateNotification = @"BPFormulaDidUpdateNotificatio
 			[self setInstallPath:line];
 		}
 	}
-
+	
 	NSRange range_deps = [output rangeOfString:kBPIdentifierDependencies];
 	NSRange range_opts = [output rangeOfString:kBPIdentifierOptions];
 	NSRange range_cvts = [output rangeOfString:kBPIdentifierCaveats];
-
+	
 	// Find dependencies
 	if (range_deps.location != NSNotFound)
 	{
@@ -222,9 +277,9 @@ NSString *const BPFormulaDidUpdateNotification = @"BPFormulaDidUpdateNotificatio
 		} else {
 			range_deps.length = [output length] - range_deps.location;
 		}
-
+		
 		NSMutableString __block *dependencies = nil;
-
+		
 		[output enumerateSubstringsInRange:range_deps
 								   options:NSStringEnumerationByLines usingBlock:^(NSString *substring,
 																				   NSRange substringRange,
@@ -240,24 +295,24 @@ NSString *const BPFormulaDidUpdateNotification = @"BPFormulaDidUpdateNotificatio
 				 [dependencies appendFormat:@"; %@", substring];
 			 }
 		 }];
-
+		
 		[self setDependencies:[dependencies copy]];
 	} else {
 		[self setDependencies:nil];
 	}
-
+	
 	// Find options
 	if (range_opts.location != NSNotFound)
 	{
 		NSString *optionsString = [output substringFromIndex:range_opts.length+range_opts.location+1];
 		NSMutableArray *options = [NSMutableArray arrayWithCapacity:10];
-
+		
 		range_cvts = [optionsString rangeOfString:kBPIdentifierCaveats];
-
+		
 		if (range_cvts.location != NSNotFound) {
 			optionsString = [optionsString substringToIndex:range_cvts.location];
 		}
-
+		
 		BPFormulaOption __block *formulaOption = nil;
 		[optionsString enumerateLinesUsingBlock:^(NSString *line, BOOL *stop) {
 			if ([line hasPrefix:@"--"]) { // This is an option command
@@ -271,12 +326,14 @@ NSString *const BPFormulaDidUpdateNotification = @"BPFormulaDidUpdateNotificatio
 				*stop = YES;
 			}
 		}];
-
+		
 		[self setOptions:[options copy]];
 	} else {
 		[self setOptions:nil];
 	}
-
+	
+	_needsInformation = NO;
+	
 	[[NSNotificationCenter defaultCenter] postNotificationName:BPFormulaDidUpdateNotification object:self];
 	return YES;
 }
@@ -291,9 +348,21 @@ NSString *const BPFormulaDidUpdateNotification = @"BPFormulaDidUpdateNotificatio
 	return [[BPHomebrewManager sharedManager] statusForFormula:self] == kBPFormulaOutdated;
 }
 
+- (NSString*)description
+{
+	return [NSString stringWithFormat:@"%@ <%p> name:%@ version:%@ latestVerson:%@", NSStringFromClass([self class]), self, self.name, self.version, self.latestVersion];
+}
+
 - (id<BPFormulaDataProvider>)dataProvider
 {
 	return [BPHomebrewInterface sharedInterface];
+}
+
+- (void)dealloc
+{
+	[self removeObserver:self
+			  forKeyPath:NSStringFromSelector(@selector(needsInformation))
+				 context:BPFormulaContext];
 }
 
 @end

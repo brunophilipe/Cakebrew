@@ -1,6 +1,6 @@
 //
 //	BrewInterface.h
-//	Cakebrew – The Homebrew GUI App for OS X 
+//	Cakebrew – The Homebrew GUI App for OS X
 //
 //	Created by Vincent Saluzzo on 06/12/11.
 //	Copyright (c) 2014 Bruno Philipe. All rights reserved.
@@ -25,8 +25,8 @@
 
 typedef NS_ENUM(NSInteger, BPListMode) {
 	kBPListAll,
-    kBPListInstalled,
-    kBPListLeaves,
+	kBPListInstalled,
+	kBPListLeaves,
 	kBPListOutdated,
 	kBPListSearch, /* Don't call -[BPHomebrewInterface listMode:] with this parameter. */
 	kBPListRepositories
@@ -50,12 +50,10 @@ typedef NS_ENUM(NSInteger, BPListMode) {
 
 @interface BPHomebrewInterface : NSObject <BPFormulaDataProvider>
 
-+ (BPHomebrewInterface *)sharedInterface;
-
-/**
- *  Currently running task.
- */
-@property (strong, nonatomic) NSTask *task; // default nil;
++ (instancetype)sharedInterface;
++ (instancetype)alloc __attribute__((unavailable("alloc not available, call sharedInterface instead")));
+- (instancetype)init __attribute__((unavailable("init not available, call sharedInterface instead")));
++ (instancetype)new __attribute__((unavailable("new not available, call sharedInterface instead")));
 
 /**
  *  The delegate object.
@@ -63,6 +61,11 @@ typedef NS_ENUM(NSInteger, BPListMode) {
 @property (weak, nonatomic) id<BPHomebrewInterfaceDelegate> delegate;
 
 #pragma mark - Operations with live data callback block
+
+/**
+ *  Terminates all running tasks
+ */
+- (void)cleanup;
 
 /**
  *  Update Homebrew.
@@ -161,5 +164,14 @@ typedef NS_ENUM(NSInteger, BPListMode) {
  *  @return The information for the parameter formula as output by Homebrew.
  */
 - (NSString *)informationForFormulaName:(NSString *)name;
+
+/**
+ *
+ *  Checks if there is any non-terminated task in queue
+ *
+ *  @return YES if there is any task in background queue. No if the queue is empty
+ *
+ */
+- (BOOL)isRunningBackgroundTask;
 
 @end

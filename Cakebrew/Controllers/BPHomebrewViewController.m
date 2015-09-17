@@ -272,9 +272,7 @@ NSMenuDelegate>
 	else
 	{
 		BPFormula *formula = [self .formulaeDataSource formulaAtIndex:selectedIndex];
-		
-		[self.toolbar configureForMode:BPToolbarModeInstall];
-		
+
 		switch ([[BPHomebrewManager sharedManager] statusForFormula:formula]) {
 			case kBPFormulaInstalled:
 				[self.toolbar configureForMode:BPToolbarModeUninstall];

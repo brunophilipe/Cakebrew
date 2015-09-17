@@ -45,6 +45,7 @@ static NSString *kToolbarItemMultiActionIdentifier = @"toolbarItemMultiAction";
 		NSToolbarSizeMode mode = [BPStyle toolbarSize];
 		[self setSizeMode:mode];
 		
+		_currentMode = BPToolbarModeInitial;
 		[self configureForMode:BPToolbarModeDefault];
 		[self lockItems];
 	}
@@ -53,6 +54,10 @@ static NSString *kToolbarItemMultiActionIdentifier = @"toolbarItemMultiAction";
 
 - (void)configureForMode:(BPToolbarMode)mode
 {
+	if (self.currentMode == mode) {
+		return;
+	}
+	self.currentMode = mode;
 	NSToolbarItem *moreInfoItem = [self toolbarItemInformation];
 	if (mode == BPToolbarModeTap ||
 		mode == BPToolbarModeUntap ||
@@ -132,9 +137,9 @@ static NSString *kToolbarItemMultiActionIdentifier = @"toolbarItemMultiAction";
 
 - (void)setController:(id)controller
 {
-	if (_controller != controller) {
+	if (_controller != controller)
+	{
 		_controller = controller;
-		[self updateToolbarItemsWithTarget:controller];
 	}
 }
 
@@ -150,11 +155,13 @@ static NSString *kToolbarItemMultiActionIdentifier = @"toolbarItemMultiAction";
 - (void)lockItems
 {
 	[self updateToolbarItemsWithTarget:nil];
+	[self validateVisibleItems];
 }
 
 - (void)unlockItems
 {
 	[self updateToolbarItemsWithTarget:_controller];
+	[self validateVisibleItems];
 }
 
 - (NSToolbarItem *)toolbar:(NSToolbar *)toolbar itemForItemIdentifier:(NSString *)itemIdentifier willBeInsertedIntoToolbar:(BOOL)flag
@@ -242,7 +249,7 @@ static NSString *kToolbarItemMultiActionIdentifier = @"toolbarItemMultiAction";
 	static NSToolbarItem* toolbarItemMultiAction = nil;
 	if (!toolbarItemMultiAction) {
 		toolbarItemMultiAction = [self toolbarItemWithIdentifier:kToolbarItemMultiActionIdentifier
-															image:nil
+														   image:nil
 														   label:nil
 														  action:nil];
 	}
@@ -291,7 +298,7 @@ static NSString *kToolbarItemMultiActionIdentifier = @"toolbarItemMultiAction";
 	{
 	  item.image = [NSImage imageWithSize:NSMakeSize(32, 32) flipped:NO drawingHandler:staticBlock];
 	} else {
-	  item.image = image;
+		item.image = image;
 	}
 	
 	item.label = label;

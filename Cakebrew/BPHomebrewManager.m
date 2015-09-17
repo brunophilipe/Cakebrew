@@ -1,6 +1,6 @@
 //
 //	BPHomebrewManager.m
-//	Cakebrew – The Homebrew GUI App for OS X 
+//	Cakebrew – The Homebrew GUI App for OS X
 //
 //	Created by Bruno Philipe on 4/3/14.
 //	Copyright (c) 2014 Bruno Philipe. All rights reserved.
@@ -36,21 +36,31 @@ NSString *const kBPCacheDataKey	= @"BPCacheDataKey";
 
 + (BPHomebrewManager *)sharedManager
 {
-    @synchronized(self)
+	@synchronized(self)
 	{
         static dispatch_once_t once;
         static BPHomebrewManager *instance;
-        dispatch_once(&once, ^ { instance = [[BPHomebrewManager alloc] init]; });
+        dispatch_once(&once, ^ { instance = [[super allocWithZone:NULL] initUniqueInstance]; });
         return instance;
 	}
 }
 
-- (id)init
+- (instancetype)initUniqueInstance
 {
 	self = [super init];
 	if (self) {
 		
 	}
+	return self;
+}
+
++ (instancetype)allocWithZone:(NSZone *)zone
+{
+	return [self sharedManager];
+}
+
+- (instancetype)copyWithZone:(NSZone *)zone
+{
 	return self;
 }
 
@@ -61,37 +71,37 @@ NSString *const kBPCacheDataKey	= @"BPCacheDataKey";
 
 - (void)reloadFromInterfaceRebuildingCache:(BOOL)shouldRebuildCache;
 {
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
+	dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
 		[[BPHomebrewInterface sharedInterface] setDelegate:self];
 		
-        [self setFormulae_installed:[[BPHomebrewInterface sharedInterface] listMode:kBPListInstalled]];
-        [self setFormulae_leaves:[[BPHomebrewInterface sharedInterface] listMode:kBPListLeaves]];
-        [self setFormulae_outdated:[[BPHomebrewInterface sharedInterface] listMode:kBPListOutdated]];
-        [self setFormulae_repositories:[[BPHomebrewInterface sharedInterface] listMode:kBPListRepositories]];
-
-        if (![self loadAllFormulaeCaches] || shouldRebuildCache) {
+		[self setFormulae_installed:[[BPHomebrewInterface sharedInterface] listMode:kBPListInstalled]];
+		[self setFormulae_leaves:[[BPHomebrewInterface sharedInterface] listMode:kBPListLeaves]];
+		[self setFormulae_outdated:[[BPHomebrewInterface sharedInterface] listMode:kBPListOutdated]];
+		[self setFormulae_repositories:[[BPHomebrewInterface sharedInterface] listMode:kBPListRepositories]];
+		
+		if (![self loadAllFormulaeCaches] || shouldRebuildCache) {
 			[self setFormulae_all:[[BPHomebrewInterface sharedInterface] listMode:kBPListAll]];
 			[self storeAllFormulaeCaches];
-        }
+		}
 		
 		dispatch_async(dispatch_get_main_queue(), ^{
 			[self.delegate homebrewManagerFinishedUpdating:self];
 		});
-    });
+	});
 }
 
 - (void)updateSearchWithName:(NSString *)name
 {
 	NSMutableArray *array = [NSMutableArray array];
 	NSRange range;
-
+	
 	for (BPFormula *formula in _formulae_all) {
 		range = [[formula name] rangeOfString:name options:NSCaseInsensitiveSearch];
 		if (range.location != NSNotFound) {
 			[array addObject:formula];
 		}
 	}
-
+	
 	_formulae_search = [array copy];
 	
 	dispatch_async(dispatch_get_main_queue(), ^{
@@ -148,7 +158,7 @@ NSString *const kBPCacheDataKey	= @"BPCacheDataKey";
 		{
 			NSURL *allFormulaeFile = [cachesFolder URLByAppendingPathComponent:@"allFormulae.cache.bin"];
 			NSDate *storageDate = [NSDate date];
-
+			
 			if ([[NSUserDefaults standardUserDefaults] objectForKey:kBPCacheLastUpdateKey])
 			{
 				storageDate = [NSDate dateWithTimeIntervalSince1970:[[NSUserDefaults standardUserDefaults]
@@ -157,7 +167,7 @@ NSString *const kBPCacheDataKey	= @"BPCacheDataKey";
 			
 			NSDictionary *cacheDict = @{kBPCacheDataKey: self.formulae_all};
 			NSData *cacheData = [NSKeyedArchiver archivedDataWithRootObject:cacheDict];
-
+			
 			if ([[NSFileManager defaultManager] fileExistsAtPath:allFormulaeFile.relativePath])
 			{
 				[cacheData writeToURL:allFormulaeFile atomically:YES];
@@ -181,7 +191,7 @@ NSString *const kBPCacheDataKey	= @"BPCacheDataKey";
 - (NSInteger)searchForFormula:(BPFormula*)formula inArray:(NSArray*)array
 {
 	NSUInteger index = 0;
-
+	
 	for (BPFormula* item in array)
 	{
 		if ([[item installedName] isEqualToString:[formula installedName]])
@@ -191,7 +201,7 @@ NSString *const kBPCacheDataKey	= @"BPCacheDataKey";
 		
 		index++;
 	}
-
+	
 	return -1;
 }
 
@@ -216,10 +226,7 @@ NSString *const kBPCacheDataKey	= @"BPCacheDataKey";
 
 - (void)cleanUp
 {
-    NSTask *brewTask = [BPHomebrewInterface sharedInterface].task;
-    if (brewTask && [brewTask isRunning]) {
-        [[BPHomebrewInterface sharedInterface].task terminate];
-    }
+	[[BPHomebrewInterface sharedInterface] cleanup];
 }
 
 #pragma - Homebrew Interface Delegate

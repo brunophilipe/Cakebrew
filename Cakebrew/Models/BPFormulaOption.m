@@ -29,8 +29,7 @@ static NSString *const kBPFormulaOptionExplanationKey = @"formulaOptionExplanati
 	[aCoder encodeObject:self.explanation forKey:kBPFormulaOptionExplanationKey];
 }
 
-
-- (id)copyWithZone:(NSZone *)zone
+- (instancetype)copyWithZone:(NSZone *)zone
 {
 	BPFormulaOption *option = [[[self class] allocWithZone:zone] init];
 	if (option)

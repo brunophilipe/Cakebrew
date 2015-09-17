@@ -37,6 +37,7 @@
 @interface BPToolbar : NSToolbar <NSToolbarDelegate>
 
 typedef NS_ENUM(NSUInteger, BPToolbarMode) {
+	BPToolbarModeInitial,
 	BPToolbarModeDefault,
 	BPToolbarModeInstall,
 	BPToolbarModeUninstall,

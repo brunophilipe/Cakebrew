@@ -50,13 +50,10 @@ typedef NS_ENUM(NSUInteger, BPWindowOperation) {
 @property (weak) IBOutlet NSMenu                   *menu_formula;
 
 // Cocoa bindings
-@property (strong, nonatomic) NSString *formulaMenuTitle;
 @property BOOL enableUpgradeFormulasMenu;
-
 @property (copy) BPFormula *currentFormula;
 
 - (BOOL)isHomebrewInstalled;
-
 
 - (IBAction)showFormulaInfo:(id)sender;
 - (IBAction)installFormulaWithOptions:(id)sender;
