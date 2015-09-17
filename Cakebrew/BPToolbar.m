@@ -298,7 +298,7 @@ static NSString *kToolbarItemMultiActionIdentifier = @"toolbarItemMultiAction";
 	{
 	  item.image = [NSImage imageWithSize:NSMakeSize(32, 32) flipped:NO drawingHandler:staticBlock];
 	} else {
-		item.image = image;
+	  item.image = image;
 	}
 	
 	item.label = label;

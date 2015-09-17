@@ -164,7 +164,7 @@ static NSString *cakebrewOutputIdentifier = @"+++++Cakebrew+++++";
 	}
 	
 #ifdef DEBUG
-	NSLog(@"User Shell: %@", userShell);
+	NSLog(@"shell: %@", userShell);
 #endif
 	
 	return userShell;
