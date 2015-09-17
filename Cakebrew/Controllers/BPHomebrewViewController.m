@@ -185,7 +185,7 @@ NSMenuDelegate>
 
 - (void)addToolbar
 {
-	self.toolbar = [[BPToolbar alloc] initWithIdentifier:nil];
+	self.toolbar = [[BPToolbar alloc] initWithIdentifier:@"MainToolbar"];
 	self.toolbar.delegate = self.toolbar;
 	self.toolbar.controller = self;
 	[[[self view] window] setToolbar:self.toolbar];

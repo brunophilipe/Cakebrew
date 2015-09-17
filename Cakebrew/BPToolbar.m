@@ -29,7 +29,7 @@ static NSString *kToolbarItemInformationIdentifier = @"toolbarItemInformation";
 static NSString *kToolbarItemSearchIdentifier = @"toolbarItemSearch";
 static NSString *kToolbarItemMultiActionIdentifier = @"toolbarItemMultiAction";
 
-@interface BPToolbar() <NSTextFieldDelegate>
+@interface BPToolbar() <NSSearchFieldDelegate>
 
 @property (assign) BPToolbarMode currentMode;
 
@@ -283,9 +283,13 @@ static NSString *kToolbarItemMultiActionIdentifier = @"toolbarItemMultiAction";
 
 - (void)reconfigureItem:(NSToolbarItem *)item image:(NSImage *)image label:(NSString *)label action:(SEL)action
 {
+	static BOOL (^staticBlock)(NSRect) = ^BOOL(NSRect dstRect) {
+		return YES;
+	};
+	
 	if (!image)
 	{
-	  item.image = [NSImage imageWithSize:NSMakeSize(32, 32) flipped:NO drawingHandler:nil];
+	  item.image = [NSImage imageWithSize:NSMakeSize(32, 32) flipped:NO drawingHandler:staticBlock];
 	} else {
 	  item.image = image;
 	}
