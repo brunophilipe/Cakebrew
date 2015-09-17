@@ -23,17 +23,17 @@
 
 static BOOL systemHasAppNap;
 
-@interface BPTask() {
-  id activity;
-  NSPipe *outputPipe;
-  NSPipe *errorPipe;
-  NSPipe *inputPipe;
-  NSFileHandle *outputFileHandle;
-  NSFileHandle *errorFileHandle;
-  NSMutableData *outputData;
-  NSMutableData *errorData;
-  void (^operationUpdateBlock)(NSString*);
-  
+@interface BPTask()
+{
+	id activity;
+	NSPipe *outputPipe;
+	NSPipe *errorPipe;
+	NSPipe *inputPipe;
+	NSFileHandle *outputFileHandle;
+	NSFileHandle *errorFileHandle;
+	NSMutableData *outputData;
+	NSMutableData *errorData;
+	void (^operationUpdateBlock)(NSString*);
 }
 
 @property (strong) NSTask *task;
@@ -46,184 +46,185 @@ static BOOL systemHasAppNap;
 
 + (void)load
 {
-  systemHasAppNap = [[NSProcessInfo processInfo] respondsToSelector:@selector(beginActivityWithOptions:reason:)];
+	systemHasAppNap = [[NSProcessInfo processInfo] respondsToSelector:@selector(beginActivityWithOptions:reason:)];
 }
 
 - (instancetype)initWithPath:(NSString *)path arguments:(NSArray *)arguments
 {
-  self = [super init];
-  if (self) {
-	_task = [self taskWithPath:path arguments:arguments];
-	[[NSNotificationCenter defaultCenter] addObserver:self
-											 selector:@selector(taskDidTerminate:)
-												 name:NSTaskDidTerminateNotification object:_task];
-	outputData = [[NSMutableData alloc] init];
-	errorData = [[NSMutableData alloc] init];
-  }
-  return self;
+	self = [super init];
+	if (self)
+	{
+		_task = [self taskWithPath:path arguments:arguments];
+		[[NSNotificationCenter defaultCenter] addObserver:self
+												 selector:@selector(taskDidTerminate:)
+													 name:NSTaskDidTerminateNotification object:_task];
+		outputData = [[NSMutableData alloc] init];
+		errorData = [[NSMutableData alloc] init];
+	}
+	return self;
 }
 
 - (NSTask *)taskWithPath:(NSString *)path arguments:(NSArray *)arguments
 {
-  NSTask *task = [[NSTask alloc] init];
-  [task setLaunchPath:path];
-  [task setArguments:arguments];
-  return task;
+	NSTask *task = [[NSTask alloc] init];
+	[task setLaunchPath:path];
+	[task setArguments:arguments];
+	return task;
 }
 
 - (BOOL)shouldUsePartialUpdates
 {
-  return (BOOL)self.updateBlock;
+	return (BOOL)self.updateBlock;
 }
 
 - (void)configureStandardOutput
 {
-  outputPipe = [NSPipe pipe];
-  [self.task setStandardOutput:outputPipe];
+	outputPipe = [NSPipe pipe];
+	[self.task setStandardOutput:outputPipe];
 }
 
 - (void)configureStandardError
 {
-  errorPipe = [NSPipe pipe];
-  [self.task setStandardError:errorPipe];
+	errorPipe = [NSPipe pipe];
+	[self.task setStandardError:errorPipe];
 }
 
 - (void)configureOutputFileHandle
 {
-  outputFileHandle = [outputPipe fileHandleForReading];
-  if ([self shouldUsePartialUpdates]) {
-	[outputFileHandle waitForDataInBackgroundAndNotify];
-	[[NSNotificationCenter defaultCenter] addObserver:self
-											 selector:@selector(updatedFileHandle:)
-												 name:NSFileHandleDataAvailableNotification
-											   object:outputFileHandle];
-  }
+	outputFileHandle = [outputPipe fileHandleForReading];
+	if ([self shouldUsePartialUpdates]) {
+		[outputFileHandle waitForDataInBackgroundAndNotify];
+		[[NSNotificationCenter defaultCenter] addObserver:self
+												 selector:@selector(updatedFileHandle:)
+													 name:NSFileHandleDataAvailableNotification
+												   object:outputFileHandle];
+	}
 }
 
 - (void)configureErrorFileHandle
 {
-  errorFileHandle = [errorPipe fileHandleForReading];
-  if ([self shouldUsePartialUpdates] ) {
-	[errorFileHandle waitForDataInBackgroundAndNotify];
-	[[NSNotificationCenter defaultCenter] addObserver:self
-											 selector:@selector(updatedFileHandle:)
-												 name:NSFileHandleDataAvailableNotification
-											   object:errorFileHandle];
-  }
+	errorFileHandle = [errorPipe fileHandleForReading];
+	if ([self shouldUsePartialUpdates] ) {
+		[errorFileHandle waitForDataInBackgroundAndNotify];
+		[[NSNotificationCenter defaultCenter] addObserver:self
+												 selector:@selector(updatedFileHandle:)
+													 name:NSFileHandleDataAvailableNotification
+												   object:errorFileHandle];
+	}
 }
 
 - (void)processStandardOutput
 {
-  if(![self shouldUsePartialUpdates]) {
-	NSData *data = [outputFileHandle readDataToEndOfFile];
-	if ([data length]) {
+	if(![self shouldUsePartialUpdates]) {
+		NSData *data = [outputFileHandle readDataToEndOfFile];
+		if ([data length]) {
 	  self.output = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-	}
-	
-  } else {
-	if ([outputData length]) {
+		}
+		
+	} else {
+		if ([outputData length]) {
 	  self.output = [[NSString alloc] initWithData:outputData encoding:NSUTF8StringEncoding];
+		}
 	}
-  }
 }
 
 - (void)processStandardError
 {
-  if(![self shouldUsePartialUpdates]) {
-	NSData *data = [errorFileHandle readDataToEndOfFile];
-	if ([data length]) {
+	if(![self shouldUsePartialUpdates]) {
+		NSData *data = [errorFileHandle readDataToEndOfFile];
+		if ([data length]) {
 	  self.error = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-	}
-  } else {
-	if ([errorData length]) {
+		}
+	} else {
+		if ([errorData length]) {
 	  self.error = [[NSString alloc] initWithData:errorData encoding:NSUTF8StringEncoding];
+		}
 	}
-  }
 }
 
 - (void)execute
 {
-  [self configureStandardOutput];
-  [self configureStandardError];
-  [self configureErrorFileHandle];
-  [self configureOutputFileHandle];
-  [self beginActivity];
-  @try {
-	[self.task launch];
-	[self.task waitUntilExit]; //this makes sure that we stay in the same run loop (thread); needed for notifications
-  }
-  @catch (NSException *exception) {
-	NSLog(@"Exception: %@", exception);
-	[self cleanup];
-  }
+	[self configureStandardOutput];
+	[self configureStandardError];
+	[self configureErrorFileHandle];
+	[self configureOutputFileHandle];
+	[self beginActivity];
+	@try {
+		[self.task launch];
+		[self.task waitUntilExit]; //this makes sure that we stay in the same run loop (thread); needed for notifications
+	}
+	@catch (NSException *exception) {
+		NSLog(@"Exception: %@", exception);
+		[self cleanup];
+	}
 }
 
 - (void)updatedFileHandle:(NSNotification*)notification
 {
-  NSFileHandle *fileHandle = [notification object];
-  NSData *data = [fileHandle availableData];
-  if (fileHandle == outputFileHandle) {
-	[outputData appendData:data];
-  }
-  if (fileHandle == errorFileHandle) {
-	[errorData appendData:data];
-  }
-  [fileHandle waitForDataInBackgroundAndNotify];
-  if (data && data.length > 0) {
-	dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
-		self.updateBlock([[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding]);
-	});
-  }
+	NSFileHandle *fileHandle = [notification object];
+	NSData *data = [fileHandle availableData];
+	if (fileHandle == outputFileHandle) {
+		[outputData appendData:data];
+	}
+	if (fileHandle == errorFileHandle) {
+		[errorData appendData:data];
+	}
+	[fileHandle waitForDataInBackgroundAndNotify];
+	if (data && data.length > 0) {
+		dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
+			self.updateBlock([[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding]);
+		});
+	}
 }
 
 - (void)taskDidTerminate:(NSNotification *)notification
 {
-  [self processStandardOutput];
-  [self processStandardError];
-  [[NSNotificationCenter defaultCenter] removeObserver:self
-												  name:NSTaskDidTerminateNotification
-												object:self.task];
-  [self endActivity];
-  if (self.delegate) {
-	if([self.delegate respondsToSelector:@selector(task:didFinishWithOutput:error:)]) {
+	[self processStandardOutput];
+	[self processStandardError];
+	[[NSNotificationCenter defaultCenter] removeObserver:self
+													name:NSTaskDidTerminateNotification
+												  object:self.task];
+	[self endActivity];
+	if (self.delegate) {
+		if([self.delegate respondsToSelector:@selector(task:didFinishWithOutput:error:)]) {
 	  [self.delegate task:self didFinishWithOutput:self.output error:self.error];
+		}
 	}
-  }
 }
 
 - (void)beginActivity
 {
-  if (systemHasAppNap) {
-	activity = [[NSProcessInfo processInfo] beginActivityWithOptions:NSActivityUserInitiated
-															  reason:NSLocalizedString(@"Homebrew_AppNap_Task_Reason", nil)];
-	
-  }
+	if (systemHasAppNap)
+	{
+		activity = [[NSProcessInfo processInfo] beginActivityWithOptions:NSActivityUserInitiated
+																  reason:NSLocalizedString(@"Homebrew_AppNap_Task_Reason", nil)];
+	}
 }
 
 - (void)endActivity
 {
-  if (systemHasAppNap) {
-	[[NSProcessInfo processInfo] endActivity:activity];
-	activity = nil;
-  }
-  
+	if (systemHasAppNap)
+	{
+		[[NSProcessInfo processInfo] endActivity:activity];
+		activity = nil;
+	}
 }
 
 - (void)cleanup
 {
-  [self.task terminate];
-  [self endActivity];
-  outputData = nil;
-  errorData = nil;
-  outputFileHandle = nil;
-  errorFileHandle = nil;
-  [[NSNotificationCenter defaultCenter] removeObserver:self];
+	[self.task terminate];
+	[self endActivity];
+	outputData = nil;
+	errorData = nil;
+	outputFileHandle = nil;
+	errorFileHandle = nil;
+	[[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 - (void)dealloc
 {
-  self.updateBlock = nil;
-  [self cleanup];
+	self.updateBlock = nil;
+	[self cleanup];
 }
 
 

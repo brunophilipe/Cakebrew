@@ -72,47 +72,47 @@ static NSString *cakebrewOutputIdentifier = @"+++++Cakebrew+++++";
 
 - (instancetype)initUniqueInstance
 {
-  self = [super init];
-  if (self) {
-	_tasks = [[NSMutableDictionary alloc] init];
-  }
-  return self;
+	self = [super init];
+	if (self) {
+		_tasks = [[NSMutableDictionary alloc] init];
+	}
+	return self;
 }
 
 + (instancetype)allocWithZone:(NSZone *)zone
 {
-  return [self sharedInterface];
+	return [self sharedInterface];
 }
 
 - (instancetype)copyWithZone:(NSZone *)zone
 {
-  return self;
+	return self;
 }
 
 - (void)cleanup
 {
-  [self.tasks enumerateKeysAndObjectsWithOptions:NSEnumerationConcurrent usingBlock:^(NSString *key, BPTask *task, BOOL *stop){
-	  [task cleanup];
-  }];
-  
-
+	[self.tasks enumerateKeysAndObjectsWithOptions:NSEnumerationConcurrent usingBlock:^(NSString *key, BPTask *task, BOOL *stop){
+		[task cleanup];
+	}];
+	
+	
 }
 
 - (BOOL)checkForHomebrew
 {
 	if (!self.path_shell) return NO;
 	
-  BPTask *task = [[BPTask alloc] initWithPath:self.path_shell arguments:@[@"-l", @"-c", @"which brew"]];
-  task.delegate = self;
-  [task execute];
-  
-  NSString *output = [task output];
-  output = [self removeLoginShellOutputFromString:output];
+	BPTask *task = [[BPTask alloc] initWithPath:self.path_shell arguments:@[@"-l", @"-c", @"which brew"]];
+	task.delegate = self;
+	[task execute];
+	
+	NSString *output = [task output];
+	output = [self removeLoginShellOutputFromString:output];
 #ifdef DEBUG
-  NSLog(@"brew: %@", output);
+	NSLog(@"brew: %@", output);
 #endif
-
-  return output.length != 0;
+	
+	return output.length != 0;
 }
 
 - (void)setDelegate:(id<BPHomebrewInterfaceDelegate>)delegate
@@ -216,7 +216,7 @@ static NSString *cakebrewOutputIdentifier = @"+++++Cakebrew+++++";
 
 - (void)task:(BPTask *)task didFinishWithOutput:(NSString *)output error:(NSString *)error
 {
-  [self.tasks removeObjectForKey:[NSString stringWithFormat:@"%p",task]];
+	[self.tasks removeObjectForKey:[NSString stringWithFormat:@"%p",task]];
 }
 
 - (BOOL)performBrewCommandWithArguments:(NSArray*)arguments dataReturnBlock:(void (^)(NSString*))block
@@ -228,21 +228,21 @@ static NSString *cakebrewOutputIdentifier = @"+++++Cakebrew+++++";
 		return NO;
 	}
 	
-  BPTask *task = [[BPTask alloc] initWithPath:self.path_shell arguments:arguments];
-  task.delegate = self;
-  [self.tasks setObject:task forKey:[NSString stringWithFormat:@"%p", task]];
-
-  task.updateBlock = block;
-  
-  
+	BPTask *task = [[BPTask alloc] initWithPath:self.path_shell arguments:arguments];
+	task.delegate = self;
+	[self.tasks setObject:task forKey:[NSString stringWithFormat:@"%p", task]];
+	
+	task.updateBlock = block;
+	
+	
 	
 	
 #ifdef DEBUG
-  block([NSString stringWithFormat:@"User Shell: %@\nCommand: %@\nThe outputs are going to be different if run from Xcode!!\nInstalling and upgrading formulas is not advised in DEBUG mode!\n\n", self.path_shell, [arguments componentsJoinedByString:@" "]]);
+	block([NSString stringWithFormat:@"User Shell: %@\nCommand: %@\nThe outputs are going to be different if run from Xcode!!\nInstalling and upgrading formulas is not advised in DEBUG mode!\n\n", self.path_shell, [arguments componentsJoinedByString:@" "]]);
 #endif
-
-  [task execute];
-
+	
+	[task execute];
+	
 	NSString *taskDoneString = [NSString stringWithFormat:@"%@ %@ %@!",
 								NSLocalizedString(@"Homebrew_Task_Finished", nil),
 								NSLocalizedString(@"Homebrew_Task_Finished_At", nil),
@@ -257,7 +257,7 @@ static NSString *cakebrewOutputIdentifier = @"+++++Cakebrew+++++";
 
 - (BOOL)isRunningBackgroundTask
 {
-  return (BOOL)[[self.tasks allKeys] count];
+	return (BOOL)[[self.tasks allKeys] count];
 }
 
 - (NSString*)performBrewCommandWithArguments:(NSArray*)arguments
@@ -267,24 +267,24 @@ static NSString *cakebrewOutputIdentifier = @"+++++Cakebrew+++++";
 
 - (NSString*)performBrewCommandWithArguments:(NSArray*)arguments captureError:(BOOL)captureError
 {
-  arguments = [self formatArguments:arguments sendOutputId:YES];
+	arguments = [self formatArguments:arguments sendOutputId:YES];
 	
-  BPTask *task = [[BPTask alloc] initWithPath:self.path_shell arguments:arguments];
-  task.delegate = self;
-  [task execute];
+	BPTask *task = [[BPTask alloc] initWithPath:self.path_shell arguments:arguments];
+	task.delegate = self;
+	[task execute];
 	
-  NSString *output = task.output;
-  output = [self removeLoginShellOutputFromString:output];
-
-  NSString *error = task.error;
-  error = [self removeLoginShellOutputFromString:error];
-  
-  
-  if (!captureError) {
-	  return output;
-  } else {
-	  return [NSString stringWithFormat:@"%@\n%@", output, error];
-  }
+	NSString *output = task.output;
+	output = [self removeLoginShellOutputFromString:output];
+	
+	NSString *error = task.error;
+	error = [self removeLoginShellOutputFromString:error];
+	
+	
+	if (!captureError) {
+		return output;
+	} else {
+		return [NSString stringWithFormat:@"%@\n%@", output, error];
+	}
 }
 
 #pragma mark - Operations that return on finish

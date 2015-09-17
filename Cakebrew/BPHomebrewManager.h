@@ -1,6 +1,6 @@
 //
 //	BPHomebrewManager.h
-//	Cakebrew – The Homebrew GUI App for OS X 
+//	Cakebrew – The Homebrew GUI App for OS X
 //
 //	Created by Bruno Philipe on 4/3/14.
 //	Copyright (c) 2014 Bruno Philipe. All rights reserved.
@@ -25,9 +25,9 @@
 @class BPHomebrewManager;
 
 typedef NS_ENUM(NSInteger, BPFormulaStatus) {
-    kBPFormulaNotInstalled,
-    kBPFormulaInstalled,
-    kBPFormulaOutdated,
+	kBPFormulaNotInstalled,
+	kBPFormulaInstalled,
+	kBPFormulaOutdated,
 };
 
 @protocol BPHomebrewManagerDelegate <NSObject>

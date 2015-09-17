@@ -32,28 +32,29 @@
 
 - (void)setFormula:(BPFormula *)formula
 {
-	if (_formula) {
-	  [[NSNotificationCenter defaultCenter] removeObserver:self
-													  name:BPFormulaDidUpdateNotification
-													object:_formula];
+	if (_formula)
+	{
+		[[NSNotificationCenter defaultCenter] removeObserver:self
+														name:BPFormulaDidUpdateNotification
+													  object:_formula];
 	}
-  
+	
 	_formula = formula;
-
+	
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateView:)
 												 name:BPFormulaDidUpdateNotification
 											   object:formula];
-
+	
 	dispatch_async(dispatch_get_main_queue(), ^{
-	  [self displayConsoleInformationForFormulae];
+		[self displayConsoleInformationForFormulae];
 	});
+
 	[self.timedDispatch scheduleDispatchAfterTimeInterval:0.3
 												  inQueue:dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0)
-												ofBlock:^{
-
-												  [_formula setNeedsInformation:YES];
-												}];
-
+												  ofBlock:^{
+													  [_formula setNeedsInformation:YES];
+												  }];
+	
 }
 
 - (NSString *)nibName
@@ -63,29 +64,29 @@
 
 - (void)updateView:(NSNotification *)notification
 {
-  dispatch_async(dispatch_get_main_queue(), ^{
-	[self displayConsoleInformationForFormulae];
-  });
+	dispatch_async(dispatch_get_main_queue(), ^{
+		[self displayConsoleInformationForFormulae];
+	});
 }
 
 - (void)displayConsoleInformationForFormulae
 {
-  NSString *string = self.formula.information;
-  if (string) {
-	[self.formulaTextView setString:string];
-	
-	// Recognize links in info text
-	[self.formulaTextView setEditable:YES];
-	[self.formulaTextView checkTextInDocument:nil];
-	[self.formulaTextView setEditable:NO];
-	
-	[self.formulaTitleLabel setStringValue:[NSString stringWithFormat:NSLocalizedString(@"Formula_Popover_Title", nil), [_formula performSelector:@selector(name)]]];
-  }
+	NSString *string = self.formula.information;
+	if (string) {
+		[self.formulaTextView setString:string];
+		
+		// Recognize links in info text
+		[self.formulaTextView setEditable:YES];
+		[self.formulaTextView checkTextInDocument:nil];
+		[self.formulaTextView setEditable:NO];
+		
+		[self.formulaTitleLabel setStringValue:[NSString stringWithFormat:NSLocalizedString(@"Formula_Popover_Title", nil), [_formula performSelector:@selector(name)]]];
+	}
 }
 
 - (void)dealloc
 {
-  [[NSNotificationCenter defaultCenter] removeObserver:self];
+	[[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 @end

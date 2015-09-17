@@ -1,6 +1,6 @@
 //
 //	BrewInterface.h
-//	Cakebrew – The Homebrew GUI App for OS X 
+//	Cakebrew – The Homebrew GUI App for OS X
 //
 //	Created by Vincent Saluzzo on 06/12/11.
 //	Copyright (c) 2014 Bruno Philipe. All rights reserved.
@@ -25,8 +25,8 @@
 
 typedef NS_ENUM(NSInteger, BPListMode) {
 	kBPListAll,
-    kBPListInstalled,
-    kBPListLeaves,
+	kBPListInstalled,
+	kBPListLeaves,
 	kBPListOutdated,
 	kBPListSearch, /* Don't call -[BPHomebrewInterface listMode:] with this parameter. */
 	kBPListRepositories
@@ -170,7 +170,7 @@ typedef NS_ENUM(NSInteger, BPListMode) {
  *  Checks if there is any non-terminated task in queue
  *
  *  @return YES if there is any task in background queue. No if the queue is empty
-  *
+ *
  */
 - (BOOL)isRunningBackgroundTask;
 
