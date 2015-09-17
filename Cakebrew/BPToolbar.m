@@ -44,7 +44,7 @@ static NSString *kToolbarItemMultiActionIdentifier = @"toolbarItemMultiAction";
 	{
 		NSToolbarSizeMode mode = [BPStyle toolbarSize];
 		[self setSizeMode:mode];
-	  
+		
 		_currentMode = BPToolbarModeInitial;
 		[self configureForMode:BPToolbarModeDefault];
 		[self lockItems];
@@ -55,7 +55,7 @@ static NSString *kToolbarItemMultiActionIdentifier = @"toolbarItemMultiAction";
 - (void)configureForMode:(BPToolbarMode)mode
 {
 	if (self.currentMode == mode) {
-	  return;
+		return;
 	}
 	self.currentMode = mode;
 	NSToolbarItem *moreInfoItem = [self toolbarItemInformation];
@@ -249,7 +249,7 @@ static NSString *kToolbarItemMultiActionIdentifier = @"toolbarItemMultiAction";
 	static NSToolbarItem* toolbarItemMultiAction = nil;
 	if (!toolbarItemMultiAction) {
 		toolbarItemMultiAction = [self toolbarItemWithIdentifier:kToolbarItemMultiActionIdentifier
-															image:nil
+														   image:nil
 														   label:nil
 														  action:nil];
 	}
@@ -292,9 +292,9 @@ static NSString *kToolbarItemMultiActionIdentifier = @"toolbarItemMultiAction";
 {
 	if (!image)
 	{
-	  item.image = [NSImage imageWithSize:NSMakeSize(32, 32) flipped:NO drawingHandler:nil];
+		item.image = [NSImage imageWithSize:NSMakeSize(32, 32) flipped:NO drawingHandler:nil];
 	} else {
-	  item.image = image;
+		item.image = image;
 	}
 	
 	item.label = label;

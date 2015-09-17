@@ -121,10 +121,10 @@ NSString *const BPFormulaDidUpdateNotification = @"BPFormulaDidUpdateNotificatio
 
 - (void)commonInit
 {
-  [self addObserver:self
-		 forKeyPath:NSStringFromSelector(@selector(needsInformation))
-			options:NSKeyValueObservingOptionNew
-			context:BPFormulaContext];
+	[self addObserver:self
+		   forKeyPath:NSStringFromSelector(@selector(needsInformation))
+			  options:NSKeyValueObservingOptionNew
+			  context:BPFormulaContext];
 }
 
 - (instancetype)copyWithZone:(NSZone *)zone
@@ -169,21 +169,28 @@ NSString *const BPFormulaDidUpdateNotification = @"BPFormulaDidUpdateNotificatio
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
 {
-  if (context == BPFormulaContext) {
-	if ([object isEqualTo:self]) {
-	  if([keyPath isEqualToString:NSStringFromSelector(@selector(needsInformation))]) {
-		if (self.needsInformation) {
-			[self getInformation];
+	if (context == BPFormulaContext)
+	{
+		if ([object isEqualTo:self])
+		{
+			if ([keyPath isEqualToString:NSStringFromSelector(@selector(needsInformation))])
+			{
+				if (self.needsInformation)
+				{
+					[self getInformation];
+				}
+			}
 		}
-	  }
 	}
-  } else {
-	@try {
-	  [super observeValueForKeyPath:keyPath ofObject:object change:change context:context];
+	else
+	{
+		@try
+		{
+			[super observeValueForKeyPath:keyPath ofObject:object change:change context:context];
+		}
+		@catch (NSException *exception) {}
+		@finally {}
 	}
-	@catch (NSException *exception) {}
-	@finally {}
-  }
 }
 
 - (BOOL)getInformation
@@ -192,24 +199,29 @@ NSString *const BPFormulaDidUpdateNotification = @"BPFormulaDidUpdateNotificatio
 	NSString *output       = nil;
 	NSArray *lines         = nil;
 	NSUInteger lineIndex   = 0;
-
-	id<BPFormulaDataProvider> dataProvider = [self dataProvider];
-	if(![dataProvider respondsToSelector:@selector(informationForFormulaName:)]) {
-		_needsInformation = NO;
-		return NO;
-	}
-	output = [[self dataProvider] informationForFormulaName:self.name];
 	
-	self.information = output;
-  
+	if (!self.information)
+	{
+		id<BPFormulaDataProvider> dataProvider = [self dataProvider];
+		
+		if (![dataProvider respondsToSelector:@selector(informationForFormulaName:)])
+		{
+			_needsInformation = NO;
+			return NO;
+		}
+		self.information = [[self dataProvider] informationForFormulaName:self.name];
+	}
+	
+	output = self.information;
+	
 	if ([output isEqualToString:@""])
 	{
-	  _needsInformation = NO;
-	  return YES;
+		_needsInformation = NO;
+		return YES;
 	}
-
+	
 	lines = [output componentsSeparatedByString:@"\n"];
-
+	
 	lineIndex = 0;
 	line = [lines objectAtIndex:lineIndex];
 	[self setLatestVersion:[line substringFromIndex:[line rangeOfString:@":"].location+2]];
@@ -221,7 +233,7 @@ NSString *const BPFormulaDidUpdateNotification = @"BPFormulaDidUpdateNotificatio
 	if (url == nil)
 	{
 		[self setShortDescription:line];
-
+		
 		lineIndex = 2;
 		line = [lines objectAtIndex:lineIndex];
 		[self setWebsite:[NSURL URLWithString:line]];
@@ -239,7 +251,7 @@ NSString *const BPFormulaDidUpdateNotification = @"BPFormulaDidUpdateNotificatio
 		lineIndex++;
 		line = [lines objectAtIndex:lineIndex];
 	}
-
+	
 	if (![line isEqualToString:@"Not installed"])
 	{
 		if ([line isEqualToString:@""]) { //keg-only formual has no path
@@ -249,11 +261,11 @@ NSString *const BPFormulaDidUpdateNotification = @"BPFormulaDidUpdateNotificatio
 			[self setInstallPath:line];
 		}
 	}
-
+	
 	NSRange range_deps = [output rangeOfString:kBPIdentifierDependencies];
 	NSRange range_opts = [output rangeOfString:kBPIdentifierOptions];
 	NSRange range_cvts = [output rangeOfString:kBPIdentifierCaveats];
-
+	
 	// Find dependencies
 	if (range_deps.location != NSNotFound)
 	{
@@ -265,9 +277,9 @@ NSString *const BPFormulaDidUpdateNotification = @"BPFormulaDidUpdateNotificatio
 		} else {
 			range_deps.length = [output length] - range_deps.location;
 		}
-
+		
 		NSMutableString __block *dependencies = nil;
-
+		
 		[output enumerateSubstringsInRange:range_deps
 								   options:NSStringEnumerationByLines usingBlock:^(NSString *substring,
 																				   NSRange substringRange,
@@ -283,24 +295,24 @@ NSString *const BPFormulaDidUpdateNotification = @"BPFormulaDidUpdateNotificatio
 				 [dependencies appendFormat:@"; %@", substring];
 			 }
 		 }];
-
+		
 		[self setDependencies:[dependencies copy]];
 	} else {
 		[self setDependencies:nil];
 	}
-
+	
 	// Find options
 	if (range_opts.location != NSNotFound)
 	{
 		NSString *optionsString = [output substringFromIndex:range_opts.length+range_opts.location+1];
 		NSMutableArray *options = [NSMutableArray arrayWithCapacity:10];
-
+		
 		range_cvts = [optionsString rangeOfString:kBPIdentifierCaveats];
-
+		
 		if (range_cvts.location != NSNotFound) {
 			optionsString = [optionsString substringToIndex:range_cvts.location];
 		}
-
+		
 		BPFormulaOption __block *formulaOption = nil;
 		[optionsString enumerateLinesUsingBlock:^(NSString *line, BOOL *stop) {
 			if ([line hasPrefix:@"--"]) { // This is an option command
@@ -314,14 +326,14 @@ NSString *const BPFormulaDidUpdateNotification = @"BPFormulaDidUpdateNotificatio
 				*stop = YES;
 			}
 		}];
-
+		
 		[self setOptions:[options copy]];
 	} else {
 		[self setOptions:nil];
 	}
-  
+	
 	_needsInformation = NO;
-  
+	
 	[[NSNotificationCenter defaultCenter] postNotificationName:BPFormulaDidUpdateNotification object:self];
 	return YES;
 }
@@ -338,7 +350,7 @@ NSString *const BPFormulaDidUpdateNotification = @"BPFormulaDidUpdateNotificatio
 
 - (NSString*)description
 {
-  return [NSString stringWithFormat:@"%@ <%p> name:%@ version:%@ latestVerson:%@", NSStringFromClass([self class]), self, self.name, self.version, self.latestVersion];
+	return [NSString stringWithFormat:@"%@ <%p> name:%@ version:%@ latestVerson:%@", NSStringFromClass([self class]), self, self.name, self.version, self.latestVersion];
 }
 
 - (id<BPFormulaDataProvider>)dataProvider
@@ -348,9 +360,9 @@ NSString *const BPFormulaDidUpdateNotification = @"BPFormulaDidUpdateNotificatio
 
 - (void)dealloc
 {
-  [self removeObserver:self
-			forKeyPath:NSStringFromSelector(@selector(needsInformation))
-			   context:BPFormulaContext];
+	[self removeObserver:self
+			  forKeyPath:NSStringFromSelector(@selector(needsInformation))
+				 context:BPFormulaContext];
 }
 
 @end
