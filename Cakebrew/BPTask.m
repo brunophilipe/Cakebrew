@@ -79,7 +79,7 @@ static BOOL systemHasAppNap;
 
 - (BOOL)shouldUsePartialUpdates
 {
-	return (BOOL)self.updateBlock;
+	return self.updateBlock != nil;
 }
 
 - (void)configureStandardOutput
