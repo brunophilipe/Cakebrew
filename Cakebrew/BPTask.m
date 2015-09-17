@@ -66,6 +66,11 @@ static BOOL systemHasAppNap;
 
 - (NSTask *)taskWithPath:(NSString *)path arguments:(NSArray *)arguments
 {
+	if (!path)
+	{
+		return nil;
+	}
+	
 	NSTask *task = [[NSTask alloc] init];
 	[task setLaunchPath:path];
 	[task setArguments:arguments];
