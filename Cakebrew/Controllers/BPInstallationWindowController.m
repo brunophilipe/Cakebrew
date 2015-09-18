@@ -208,7 +208,11 @@
 	[self.okButton setEnabled:YES];
 	
 	[[NSApplication sharedApplication] requestUserAttention:NSInformationalRequest];
-	[[[NSApplication sharedApplication] dockTile] setBadgeLabel:@"●"];
+	
+	if (![[NSApplication sharedApplication] isActive])
+	{
+		[[[NSApplication sharedApplication] dockTile] setBadgeLabel:@"●"];
+	}
 	
 	NSUserNotification *userNotification = [NSUserNotification new];
 	[userNotification setTitle:[NSLocalizedString(@"Homebrew_Task_Finished", nil) capitalizedString]];
