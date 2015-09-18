@@ -19,7 +19,7 @@
 
 - (void)awakeFromNib
 {
-	[self.progressIndicator startAnimation:nil];
+	[self.progressIndicator startAnimation:self];
 }
 
 - (instancetype)initWithFrame:(NSRect)frameRect

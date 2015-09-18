@@ -77,6 +77,7 @@ NSString *const kBP_HOMEBREW_WEBSITE = @"https://www.cakebrew.com";
 	}
 	
 	[[NSUserNotificationCenter defaultUserNotificationCenter] removeAllDeliveredNotifications];
+	[[[NSApplication sharedApplication] dockTile] setBadgeLabel:nil];
 
 	return YES;
 }
