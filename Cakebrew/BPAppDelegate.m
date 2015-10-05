@@ -28,7 +28,7 @@
 NSString *const kBP_HOMEBREW_WEBSITE = @"https://www.cakebrew.com";
 
 
-@interface BPAppDelegate ()
+@interface BPAppDelegate () <NSUserNotificationCenterDelegate>
 
 @property (nonatomic, strong) DCOAboutWindowController *aboutWindowController;
 @property (nonatomic, strong) BPPreferencesWindowController *preferencesWindowController;
@@ -65,8 +65,12 @@ NSString *const kBP_HOMEBREW_WEBSITE = @"https://www.cakebrew.com";
 #ifndef DEBUG
 	PFMoveToApplicationsFolderIfNecessary();
 #endif
+	
 	[self setupSignalHandler];
+	
 	[[BPHomebrewManager sharedManager] reloadFromInterfaceRebuildingCache:NO];
+	
+	[[NSUserNotificationCenter defaultUserNotificationCenter] setDelegate:self];
 }
 
 - (BOOL)applicationShouldHandleReopen:(NSApplication *)sender hasVisibleWindows:(BOOL)flag
@@ -76,8 +80,7 @@ NSString *const kBP_HOMEBREW_WEBSITE = @"https://www.cakebrew.com";
 		[self.window makeKeyAndOrderFront:self];
 	}
 	
-	[[NSUserNotificationCenter defaultUserNotificationCenter] removeAllDeliveredNotifications];
-	[[[NSApplication sharedApplication] dockTile] setBadgeLabel:nil];
+	[self cleanupTaskAlerts];
 
 	return YES;
 }
@@ -86,6 +89,12 @@ NSString *const kBP_HOMEBREW_WEBSITE = @"https://www.cakebrew.com";
 {
 	[[BPHomebrewManager sharedManager] cleanUp];
 	return NSTerminateNow;
+}
+
+- (void)cleanupTaskAlerts
+{
+	[[NSUserNotificationCenter defaultUserNotificationCenter] removeAllDeliveredNotifications];
+	[[[NSApplication sharedApplication] dockTile] setBadgeLabel:nil];
 }
 
 - (NSURL*)urlForApplicationSupportFolder
@@ -159,6 +168,14 @@ NSString *const kBP_HOMEBREW_WEBSITE = @"https://www.cakebrew.com";
 
 - (IBAction)showPreferencesWindow:(id)sender {
 	[self.preferencesWindowController showWindow:nil];
+}
+
+#pragma mark - User Notification Center Delegate
+
+- (void)userNotificationCenter:(NSUserNotificationCenter *)center
+	   didActivateNotification:(NSUserNotification *)notification
+{
+	[self cleanupTaskAlerts];
 }
 
 @end
