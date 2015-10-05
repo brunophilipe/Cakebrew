@@ -22,7 +22,7 @@ Cakebrew was based on a project by [vincentsaluzzo](https://github.com/vincentsa
 
 ## Download
 
-[Download Now – Version 1.1.2](https://www.cakebrew.com)
+[Download Now – Version 1.1.3](https://www.cakebrew.com)
 
 ## Problems using ZSH?
 
@@ -35,6 +35,7 @@ As of now, the following languages are supported:
 
 * English
 * Portuguese
+* German
 
 If you wish to contribute by translating Cakebrew to your language, please open a [new issue in GitHub](https://github.com/brunophilipe/Cakebrew/issues).
 
