@@ -581,7 +581,7 @@ CA
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                     <subviews>
                                                         <outlineView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" selectionHighlightStyle="sourceList" columnReordering="NO" multipleSelection="NO" autosaveColumns="NO" rowHeight="24" rowSizeStyle="systemDefault" viewBased="YES" indentationPerLevel="16" outlineTableColumn="LEF-be-VWM" id="h1z-c9-U0s" customClass="PXSourceList">
-                                                            <rect key="frame" x="0.0" y="0.0" width="190" height="320"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="190" height="0.0"/>
                                                             <autoresizingMask key="autoresizingMask"/>
                                                             <animations/>
                                                             <size key="intercellSpacing" width="0.0" height="2"/>
@@ -710,13 +710,13 @@ CA
                                         <autoresizingMask key="autoresizingMask"/>
                                         <subviews>
                                             <tabView drawsBackground="NO" type="noTabsNoBorder" initialItem="aFR-nx-bHM" translatesAutoresizingMaskIntoConstraints="NO" id="79A-lZ-LEo">
-                                                <rect key="frame" x="0.0" y="0.0" width="379" height="322"/>
+                                                <rect key="frame" x="0.0" y="2" width="379" height="320"/>
                                                 <animations/>
                                                 <font key="font" metaFont="system"/>
                                                 <tabViewItems>
                                                     <tabViewItem label="Formulae" identifier="1" id="aFR-nx-bHM">
                                                         <view key="view" id="JkQ-ZQ-ugA">
-                                                            <rect key="frame" x="0.0" y="0.0" width="379" height="322"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="379" height="320"/>
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                             <animations/>
                                                         </view>
@@ -743,7 +743,7 @@ CA
                                             <constraint firstAttribute="trailing" secondItem="79A-lZ-LEo" secondAttribute="trailing" id="DiK-dq-xEg"/>
                                             <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="379" id="RVp-VU-41k"/>
                                             <constraint firstItem="79A-lZ-LEo" firstAttribute="leading" secondItem="C6z-4a-AJ0" secondAttribute="leading" id="Rny-Ns-v82"/>
-                                            <constraint firstAttribute="bottom" secondItem="79A-lZ-LEo" secondAttribute="bottom" id="uOK-XH-cAW"/>
+                                            <constraint firstAttribute="bottom" secondItem="79A-lZ-LEo" secondAttribute="bottom" constant="2" id="uOK-XH-cAW"/>
                                         </constraints>
                                         <animations/>
                                     </customView>
