@@ -27,6 +27,7 @@
 		1594D13C1B8A6D1A00F764FA /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 15D2CFAC18F202D000B6D9F1 /* QuartzCore.framework */; };
 		15A00B411B8406FB00528486 /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 15A00B401B8406FB00528486 /* Credits.rtf */; };
 		15B23A2C18F5003600714212 /* dsa_pub.pem in Resources */ = {isa = PBXBuildFile; fileRef = 15B23A2B18F5003600714212 /* dsa_pub.pem */; };
+		15BBA18E1BD031C9002C0127 /* BPBackgroundView.m in Sources */ = {isa = PBXBuildFile; fileRef = 15BBA18D1BD031C9002C0127 /* BPBackgroundView.m */; settings = {ASSET_TAGS = (); }; };
 		15C34CBF19512DE100B92E36 /* BPAutoScrollTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 15C34CBE19512DE100B92E36 /* BPAutoScrollTextView.m */; };
 		15CEFC631AB335B2005CF54A /* BPLoadingView.m in Sources */ = {isa = PBXBuildFile; fileRef = 15CEFC621AB335B2005CF54A /* BPLoadingView.m */; };
 		15D28A121AE1BD27005C8A3E /* BPTimedDispatch.m in Sources */ = {isa = PBXBuildFile; fileRef = 15D28A111AE1BD27005C8A3E /* BPTimedDispatch.m */; };
@@ -49,7 +50,6 @@
 		15D5BEF218EBB3FB001DDED7 /* label.icns in Resources */ = {isa = PBXBuildFile; fileRef = 15D5BEEF18EBB3FB001DDED7 /* label.icns */; };
 		15D5BEF318EBB3FB001DDED7 /* plus.icns in Resources */ = {isa = PBXBuildFile; fileRef = 15D5BEF018EBB3FB001DDED7 /* plus.icns */; };
 		15D5BEF518EBB430001DDED7 /* search.icns in Resources */ = {isa = PBXBuildFile; fileRef = 15D5BEF418EBB430001DDED7 /* search.icns */; };
-		15D5BEFA18EBC56E001DDED7 /* DMSplitView.m in Sources */ = {isa = PBXBuildFile; fileRef = 15D5BEF918EBC56E001DDED7 /* DMSplitView.m */; };
 		1FE4FE59148E4CDD008EDE8B /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1FE4FE58148E4CDD008EDE8B /* Cocoa.framework */; };
 		1FE4FE63148E4CDD008EDE8B /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 1FE4FE61148E4CDD008EDE8B /* InfoPlist.strings */; };
 		1FE4FE65148E4CDD008EDE8B /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FE4FE64148E4CDD008EDE8B /* main.m */; };
@@ -151,6 +151,8 @@
 		15A00B4C1B84072700528486 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/BPUpdateView.strings; sourceTree = "<group>"; };
 		15B23A2818F4F21E00714212 /* Sparkle.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Sparkle.framework; path = Cakebrew/Frameworks/Sparkle.framework; sourceTree = "<group>"; };
 		15B23A2B18F5003600714212 /* dsa_pub.pem */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = dsa_pub.pem; sourceTree = "<group>"; };
+		15BBA18C1BD031C9002C0127 /* BPBackgroundView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BPBackgroundView.h; path = Views/BPBackgroundView.h; sourceTree = "<group>"; };
+		15BBA18D1BD031C9002C0127 /* BPBackgroundView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BPBackgroundView.m; path = Views/BPBackgroundView.m; sourceTree = "<group>"; };
 		15C34CBD19512DE100B92E36 /* BPAutoScrollTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BPAutoScrollTextView.h; path = Views/BPAutoScrollTextView.h; sourceTree = "<group>"; };
 		15C34CBE19512DE100B92E36 /* BPAutoScrollTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BPAutoScrollTextView.m; path = Views/BPAutoScrollTextView.m; sourceTree = "<group>"; };
 		15CEFC611AB335B2005CF54A /* BPLoadingView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BPLoadingView.h; path = Views/BPLoadingView.h; sourceTree = "<group>"; };
@@ -186,8 +188,6 @@
 		15D5BEEF18EBB3FB001DDED7 /* label.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = label.icns; sourceTree = "<group>"; };
 		15D5BEF018EBB3FB001DDED7 /* plus.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = plus.icns; sourceTree = "<group>"; };
 		15D5BEF418EBB430001DDED7 /* search.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = search.icns; sourceTree = "<group>"; };
-		15D5BEF818EBC56E001DDED7 /* DMSplitView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DMSplitView.h; sourceTree = "<group>"; };
-		15D5BEF918EBC56E001DDED7 /* DMSplitView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DMSplitView.m; sourceTree = "<group>"; };
 		1FE4FE54148E4CDD008EDE8B /* Cakebrew.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Cakebrew.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1FE4FE58148E4CDD008EDE8B /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		1FE4FE5B148E4CDD008EDE8B /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
@@ -304,6 +304,8 @@
 				D2C427881B8E055B001C1F80 /* BPDisabledView.m */,
 				D2C3E02C1B8E15B2000D89BB /* Disabled.xib */,
 				D2C3E02F1B8E15D5000D89BB /* Loading.xib */,
+				15BBA18C1BD031C9002C0127 /* BPBackgroundView.h */,
+				15BBA18D1BD031C9002C0127 /* BPBackgroundView.m */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -394,18 +396,8 @@
 				D2CC8C7F1B90EEC300F763DF /* LetsMove */,
 				15D28A0F1AE1BCFE005C8A3E /* BPTimedDispatch */,
 				15D2CFA618F202B300B6D9F1 /* DCOAboutWindow */,
-				15D5BEF718EBC56E001DDED7 /* DMSplitView */,
 			);
 			path = Libraries;
-			sourceTree = "<group>";
-		};
-		15D5BEF718EBC56E001DDED7 /* DMSplitView */ = {
-			isa = PBXGroup;
-			children = (
-				15D5BEF818EBC56E001DDED7 /* DMSplitView.h */,
-				15D5BEF918EBC56E001DDED7 /* DMSplitView.m */,
-			);
-			path = DMSplitView;
 			sourceTree = "<group>";
 		};
 		15D5BEFB18EBD006001DDED7 /* Models */ = {
@@ -719,12 +711,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				15BBA18E1BD031C9002C0127 /* BPBackgroundView.m in Sources */,
 				15D28A121AE1BD27005C8A3E /* BPTimedDispatch.m in Sources */,
 				D2A3A82F1B8C9F5200D05469 /* BPUtilities.m in Sources */,
 				150AEC4D1B3F999A00163767 /* BPFormulaOptionsWindowController.m in Sources */,
 				150AEC531B3F999A00163767 /* BPSelectedFormulaViewController.m in Sources */,
 				150AEC541B3F999A00163767 /* BPSideBarController.m in Sources */,
-				15D5BEFA18EBC56E001DDED7 /* DMSplitView.m in Sources */,
 				1570BA5618EE50BD001C3C5C /* BPFormula.m in Sources */,
 				15CEFC631AB335B2005CF54A /* BPLoadingView.m in Sources */,
 				D2C4278B1B8E055B001C1F80 /* BPDisabledView.m in Sources */,

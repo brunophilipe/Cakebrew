@@ -165,12 +165,6 @@ NSMenuDelegate>
 											  metrics:nil
 											  views:@{@"view": selectedFormulaView}]];
 	
-	
-	[self.splitView setMinSize:185.f ofSubviewAtIndex:0];
-	[self.splitView setMinSize:380.f ofSubviewAtIndex:1];
-	[self.splitView setDividerColor:[BPStyle sidebarDividerColor]];
-	[self.splitView setDividerThickness:1];
-	
 	[self.sidebarController setDelegate:self];
 	[self.sidebarController refreshSidebarBadges];
 	[self.sidebarController configureSidebarSettings];
