@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="7706" systemVersion="14D136" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="8191" systemVersion="15A284" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="7706"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="8191"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="BPFormulaPopoverViewController">
@@ -28,6 +28,7 @@
                             <textView editable="NO" importsGraphics="NO" richText="NO" findStyle="bar" verticallyResizable="YES" linkDetection="YES" id="KOw-qb-3MZ">
                                 <rect key="frame" x="0.0" y="0.0" width="410" height="183"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <animations/>
                                 <color key="backgroundColor" white="1" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <size key="minSize" width="410" height="183"/>
                                 <size key="maxSize" width="463" height="10000000"/>
@@ -36,19 +37,24 @@
                                 <size key="maxSize" width="463" height="10000000"/>
                             </textView>
                         </subviews>
+                        <animations/>
                         <color key="backgroundColor" white="1" alpha="0.0" colorSpace="calibratedWhite"/>
                     </clipView>
+                    <animations/>
                     <scroller key="horizontalScroller" hidden="YES" verticalHuggingPriority="750" doubleValue="1" horizontal="YES" id="dT9-vb-MNw">
                         <rect key="frame" x="-100" y="-100" width="87" height="18"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <animations/>
                     </scroller>
                     <scroller key="verticalScroller" verticalHuggingPriority="750" doubleValue="1" horizontal="NO" id="mef-LU-qLe">
                         <rect key="frame" x="394" y="0.0" width="16" height="183"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <animations/>
                     </scroller>
                 </scrollView>
                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="n0f-q2-2qU">
                     <rect key="frame" x="18" y="211" width="414" height="19"/>
+                    <animations/>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" title="Information" id="wJR-yK-fGq">
                         <font key="font" metaFont="system" size="16"/>
                         <color key="textColor" name="alternateSelectedControlTextColor" catalog="System" colorSpace="catalog"/>
@@ -65,6 +71,7 @@
                 <constraint firstAttribute="trailing" secondItem="n0f-q2-2qU" secondAttribute="trailing" constant="20" id="nu5-5l-y1L"/>
                 <constraint firstItem="jo9-lu-3Cb" firstAttribute="leading" secondItem="MFK-ap-Jgu" secondAttribute="leading" constant="20" id="pEn-UV-Os1"/>
             </constraints>
+            <animations/>
         </customView>
         <viewController id="pX0-YT-Vdk" userLabel="Popover View Controller">
             <connections>

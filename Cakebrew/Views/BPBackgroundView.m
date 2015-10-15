@@ -44,7 +44,9 @@
 {
 	if (!self.backgroundColor)
 	{
-		[self setBackgroundColor:[NSColor controlBackgroundColor]];
+		[self setBackgroundColor:[NSColor controlColor]];
+		[self setWantsLayer:YES];
+
 	}
 }
 

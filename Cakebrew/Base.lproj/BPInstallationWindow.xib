@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="8191" systemVersion="14F27" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="8191" systemVersion="15A284" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <deployment identifier="macosx"/>
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="8191"/>
@@ -27,11 +27,12 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="xUs-SB-m17">
-                        <rect key="frame" x="18" y="227" width="151" height="19"/>
+                        <rect key="frame" x="18" y="227" width="148" height="19"/>
                         <constraints>
                             <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="50" id="qLo-KE-ffA"/>
                             <constraint firstAttribute="height" constant="19" id="qpv-23-dae"/>
                         </constraints>
+                        <animations/>
                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Uninstalling Formula:" id="P2p-fh-Ixz">
                             <font key="font" metaFont="system" size="15"/>
                             <color key="textColor" white="0.34557481750000002" alpha="1" colorSpace="calibratedWhite"/>
@@ -39,10 +40,11 @@
                         </textFieldCell>
                     </textField>
                     <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="357-7Y-dv7">
-                        <rect key="frame" x="173" y="227" width="289" height="19"/>
+                        <rect key="frame" x="170" y="227" width="292" height="19"/>
                         <constraints>
                             <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="19" id="OSk-0y-zjZ"/>
                         </constraints>
+                        <animations/>
                         <textFieldCell key="cell" allowsUndo="NO" sendsActionOnEndEditing="YES" title="formula" id="L1M-vW-tCK">
                             <font key="font" metaFont="system" size="15"/>
                             <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
@@ -58,6 +60,7 @@
                                 <textView editable="NO" importsGraphics="NO" richText="NO" findStyle="bar" verticallyResizable="YES" allowsNonContiguousLayout="YES" id="coD-Fc-WwQ" customClass="BPAutoScrollTextView">
                                     <rect key="frame" x="0.0" y="0.0" width="438" height="162"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                    <animations/>
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     <size key="minSize" width="438" height="162"/>
                                     <size key="maxSize" width="463" height="10000000"/>
@@ -69,18 +72,22 @@
                                     </userDefinedRuntimeAttributes>
                                 </textView>
                             </subviews>
+                            <animations/>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         </clipView>
                         <constraints>
                             <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="164" id="ZWj-zJ-C6O"/>
                         </constraints>
+                        <animations/>
                         <scroller key="horizontalScroller" verticalHuggingPriority="750" doubleValue="1" horizontal="YES" id="Tgf-4H-u03">
                             <rect key="frame" x="1" y="147" width="438" height="16"/>
                             <autoresizingMask key="autoresizingMask"/>
+                            <animations/>
                         </scroller>
                         <scroller key="verticalScroller" verticalHuggingPriority="750" doubleValue="1" horizontal="NO" id="Sdu-Tz-xV9">
-                            <rect key="frame" x="424" y="1" width="15" height="162"/>
+                            <rect key="frame" x="423" y="1" width="16" height="162"/>
                             <autoresizingMask key="autoresizingMask"/>
+                            <animations/>
                         </scroller>
                     </scrollView>
                     <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="peQ-d6-b4t">
@@ -88,6 +95,7 @@
                         <constraints>
                             <constraint firstAttribute="width" constant="47" id="Lmm-SJ-ohI"/>
                         </constraints>
+                        <animations/>
                         <buttonCell key="cell" type="push" title="OK" bezelStyle="rounded" alignment="center" enabled="NO" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="atZ-M7-fU1">
                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                             <font key="font" metaFont="system"/>
@@ -101,6 +109,7 @@ DQ
                     </button>
                     <progressIndicator horizontalHuggingPriority="750" verticalHuggingPriority="750" maxValue="100" displayedWhenStopped="NO" bezeled="NO" indeterminate="YES" controlSize="small" style="spinning" translatesAutoresizingMaskIntoConstraints="NO" id="Z86-NA-teS">
                         <rect key="frame" x="20" y="16" width="16" height="16"/>
+                        <animations/>
                     </progressIndicator>
                 </subviews>
                 <constraints>
@@ -118,6 +127,7 @@ DQ
                     <constraint firstItem="7kc-mk-6lT" firstAttribute="top" secondItem="357-7Y-dv7" secondAttribute="bottom" constant="8" id="lAs-Qt-qsU"/>
                     <constraint firstAttribute="bottom" secondItem="Z86-NA-teS" secondAttribute="bottom" constant="16" id="yvE-hP-5SE"/>
                 </constraints>
+                <animations/>
             </view>
         </window>
     </objects>

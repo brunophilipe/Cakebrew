@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="8191" systemVersion="14F27" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="8191" systemVersion="15A284" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <deployment identifier="macosx"/>
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="8191"/>
@@ -22,7 +22,8 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="OxS-Oo-N62">
-                        <rect key="frame" x="18" y="146" width="94" height="17"/>
+                        <rect key="frame" x="18" y="146" width="92" height="17"/>
+                        <animations/>
                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Proxy Settings" id="u9T-va-Rk7">
                             <font key="font" metaFont="system"/>
                             <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
@@ -31,12 +32,14 @@
                     </textField>
                     <box verticalHuggingPriority="750" title="Box" boxType="separator" titlePosition="noTitle" translatesAutoresizingMaskIntoConstraints="NO" id="1S6-SI-uPn">
                         <rect key="frame" x="20" y="142" width="428" height="5"/>
+                        <animations/>
                         <color key="borderColor" white="0.0" alpha="0.41999999999999998" colorSpace="calibratedWhite"/>
                         <color key="fillColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <font key="titleFont" metaFont="system"/>
                     </box>
                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="7cx-UZ-Ag8">
                         <rect key="frame" x="30" y="107" width="412" height="28"/>
+                        <animations/>
                         <textFieldCell key="cell" controlSize="small" sendsActionOnEndEditing="YES" title="Please insert your proxy URL below. You should get this information from your network manager." id="dfE-IM-SSk">
                             <font key="font" metaFont="smallSystem"/>
                             <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
@@ -44,7 +47,8 @@
                         </textFieldCell>
                     </textField>
                     <button translatesAutoresizingMaskIntoConstraints="NO" id="F7o-tT-ZvP">
-                        <rect key="frame" x="30" y="53" width="103" height="18"/>
+                        <rect key="frame" x="30" y="53" width="101" height="18"/>
+                        <animations/>
                         <buttonCell key="cell" type="check" title="Enable Proxy" bezelStyle="regularSquare" imagePosition="left" inset="2" id="1fd-WJ-NfP">
                             <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                             <font key="font" metaFont="system"/>
@@ -59,6 +63,7 @@
                             <constraint firstAttribute="height" constant="10" id="Rec-ly-WLQ"/>
                             <constraint firstAttribute="width" constant="10" id="agq-g0-XdR"/>
                         </constraints>
+                        <animations/>
                         <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="NSInvalidDataFreestandingTemplate" id="PpG-3K-3TW"/>
                         <connections>
                             <binding destination="-2" name="hidden" keyPath="containsValidProxyString" id="i9P-7g-mcT"/>
@@ -69,6 +74,7 @@
                         <constraints>
                             <constraint firstAttribute="width" constant="62" id="f7g-Z0-LdF"/>
                         </constraints>
+                        <animations/>
                         <buttonCell key="cell" type="push" title="Save" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="1tf-08-6hw">
                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                             <font key="font" metaFont="system"/>
@@ -79,6 +85,7 @@
                     </button>
                     <secureTextField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="H2K-bm-aOS">
                         <rect key="frame" x="32" y="77" width="408" height="22"/>
+                        <animations/>
                         <secureTextFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" placeholderString="http://&lt;user&gt;:&lt;password&gt;@&lt;proxyhost&gt;:&lt;proxyport&gt;" drawsBackground="YES" usesSingleLineMode="YES" id="Znf-tJ-UWY">
                             <font key="font" metaFont="system"/>
                             <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
@@ -117,6 +124,7 @@
                     <constraint firstItem="H2K-bm-aOS" firstAttribute="leading" secondItem="ghP-Qf-sYl" secondAttribute="leading" constant="32" id="rXy-vd-rt2"/>
                     <constraint firstAttribute="trailing" secondItem="HKA-rP-iRf" secondAttribute="trailing" constant="20" id="woR-yF-RYG"/>
                 </constraints>
+                <animations/>
             </view>
         </window>
     </objects>
