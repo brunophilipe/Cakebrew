@@ -203,7 +203,16 @@
 "Sidebar_VoiceOver_Tools" = "Tools";
 
 /* No comment provided by engineer. */
+"Toolbar_Homebrew_Update" = "Homebrew aktualisieren";
+
+/* No comment provided by engineer. */
 "Toolbar_Install_Formula" = "Formel installieren";
+
+/* No comment provided by engineer. */
+"Toolbar_More_Information" = "Weitere Informationen";
+
+/* No comment provided by engineer. */
+"Toolbar_Search" = "Formeln durchsuchen";
 
 /* No comment provided by engineer. */
 "Toolbar_Tap_Repo" = "Repository tappen";
@@ -219,4 +228,3 @@
 
 /* No comment provided by engineer. */
 "Toolbar_Update_Selected" = "Ausgewählte Formeln aktualisieren";
-
