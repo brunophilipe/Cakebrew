@@ -200,7 +200,6 @@
 		1FE4FE6B148E4CDD008EDE8B /* BPAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BPAppDelegate.m; sourceTree = "<group>"; };
 		1FE4FE75148E4D43008EDE8B /* BPHomebrewInterface.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BPHomebrewInterface.h; sourceTree = "<group>"; };
 		1FE4FE76148E4D43008EDE8B /* BPHomebrewInterface.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BPHomebrewInterface.m; sourceTree = "<group>"; };
-		D21016DF1B90FEF000CC4184 /* sk */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = sk; path = sk.lproj/MoveApplication.strings; sourceTree = "<group>"; };
 		D212A5871B853069003000ED /* BPFormulaTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BPFormulaTests.m; sourceTree = "<group>"; };
 		D23620DF1B8B3094006D293D /* BPTask.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BPTask.h; sourceTree = "<group>"; };
 		D23620E01B8B3094006D293D /* BPTask.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BPTask.m; sourceTree = "<group>"; };
@@ -234,32 +233,14 @@
 		D2C3E0371B8E15E4000D89BB /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Disabled.strings; sourceTree = "<group>"; };
 		D2C427871B8E055B001C1F80 /* BPDisabledView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BPDisabledView.h; path = Views/BPDisabledView.h; sourceTree = "<group>"; };
 		D2C427881B8E055B001C1F80 /* BPDisabledView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BPDisabledView.m; path = Views/BPDisabledView.m; sourceTree = "<group>"; };
-		D2CC8C821B90EEC300F763DF /* ca */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ca; path = ca.lproj/MoveApplication.strings; sourceTree = "<group>"; };
-		D2CC8C831B90EEC300F763DF /* cs */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = cs; path = cs.lproj/MoveApplication.strings; sourceTree = "<group>"; };
-		D2CC8C841B90EEC300F763DF /* da */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = da; path = da.lproj/MoveApplication.strings; sourceTree = "<group>"; };
 		D2CC8C851B90EEC300F763DF /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/MoveApplication.strings; sourceTree = "<group>"; };
 		D2CC8C8A1B90EEC300F763DF /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/MoveApplication.strings; sourceTree = "<group>"; };
 		D2CC8C8B1B90EEC300F763DF /* es */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/MoveApplication.strings; sourceTree = "<group>"; };
 		D2CC8C8C1B90EEC300F763DF /* fr */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/MoveApplication.strings; sourceTree = "<group>"; };
-		D2CC8C8D1B90EEC300F763DF /* hu */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = hu; path = hu.lproj/MoveApplication.strings; sourceTree = "<group>"; };
-		D2CC8C8E1B90EEC300F763DF /* it */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = it; path = it.lproj/MoveApplication.strings; sourceTree = "<group>"; };
-		D2CC8C8F1B90EEC300F763DF /* ja */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/MoveApplication.strings; sourceTree = "<group>"; };
-		D2CC8C901B90EEC300F763DF /* ko */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/MoveApplication.strings; sourceTree = "<group>"; };
-		D2CC8C911B90EEC300F763DF /* mk */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = mk; path = mk.lproj/MoveApplication.strings; sourceTree = "<group>"; };
-		D2CC8C921B90EEC300F763DF /* nb */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = nb; path = nb.lproj/MoveApplication.strings; sourceTree = "<group>"; };
-		D2CC8C931B90EEC300F763DF /* nl */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/MoveApplication.strings; sourceTree = "<group>"; };
 		D2CC8C941B90EEC300F763DF /* PFMoveApplication.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PFMoveApplication.h; sourceTree = "<group>"; };
 		D2CC8C951B90EEC300F763DF /* PFMoveApplication.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PFMoveApplication.m; sourceTree = "<group>"; };
-		D2CC8C961B90EEC300F763DF /* pl */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = pl; path = pl.lproj/MoveApplication.strings; sourceTree = "<group>"; };
 		D2CC8C971B90EEC300F763DF /* pt */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = pt; path = pt.lproj/MoveApplication.strings; sourceTree = "<group>"; };
-		D2CC8C981B90EEC300F763DF /* pt_BR */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = pt_BR; path = pt_BR.lproj/MoveApplication.strings; sourceTree = "<group>"; };
 		D2CC8C991B90EEC300F763DF /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
-		D2CC8C9A1B90EEC300F763DF /* ru */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/MoveApplication.strings; sourceTree = "<group>"; };
-		D2CC8C9B1B90EEC300F763DF /* sr */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = sr; path = sr.lproj/MoveApplication.strings; sourceTree = "<group>"; };
-		D2CC8C9C1B90EEC300F763DF /* sv */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = sv; path = sv.lproj/MoveApplication.strings; sourceTree = "<group>"; };
-		D2CC8C9D1B90EEC300F763DF /* tr */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = tr; path = tr.lproj/MoveApplication.strings; sourceTree = "<group>"; };
-		D2CC8C9E1B90EEC300F763DF /* zh_CN */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = zh_CN; path = zh_CN.lproj/MoveApplication.strings; sourceTree = "<group>"; };
-		D2CC8C9F1B90EEC300F763DF /* zh_TW */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = zh_TW; path = zh_TW.lproj/MoveApplication.strings; sourceTree = "<group>"; };
 		D2CC8CA61B90F04C00F763DF /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		D2F732EF19190B75002B2512 /* NSString+URLValidation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+URLValidation.h"; sourceTree = "<group>"; };
 		D2F732F019190B75002B2512 /* NSString+URLValidation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+URLValidation.m"; sourceTree = "<group>"; };
@@ -606,27 +587,11 @@
 				Base,
 				pt,
 				de,
-				ca,
-				cs,
-				da,
 				es,
 				fr,
-				hu,
-				it,
-				ja,
-				ko,
-				mk,
-				nb,
-				nl,
-				pl,
 				pt_BR,
-				ru,
-				sr,
-				sv,
-				tr,
 				zh_CN,
 				zh_TW,
-				sk,
 			);
 			mainGroup = 1FE4FE49148E4CDD008EDE8B;
 			productRefGroup = 1FE4FE55148E4CDD008EDE8B /* Products */;
@@ -900,30 +865,11 @@
 		D2CC8C811B90EEC300F763DF /* MoveApplication.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
-				D2CC8C821B90EEC300F763DF /* ca */,
-				D2CC8C831B90EEC300F763DF /* cs */,
-				D2CC8C841B90EEC300F763DF /* da */,
 				D2CC8C851B90EEC300F763DF /* de */,
 				D2CC8C8A1B90EEC300F763DF /* en */,
 				D2CC8C8B1B90EEC300F763DF /* es */,
 				D2CC8C8C1B90EEC300F763DF /* fr */,
-				D2CC8C8D1B90EEC300F763DF /* hu */,
-				D2CC8C8E1B90EEC300F763DF /* it */,
-				D2CC8C8F1B90EEC300F763DF /* ja */,
-				D2CC8C901B90EEC300F763DF /* ko */,
-				D2CC8C911B90EEC300F763DF /* mk */,
-				D2CC8C921B90EEC300F763DF /* nb */,
-				D2CC8C931B90EEC300F763DF /* nl */,
-				D2CC8C961B90EEC300F763DF /* pl */,
 				D2CC8C971B90EEC300F763DF /* pt */,
-				D2CC8C981B90EEC300F763DF /* pt_BR */,
-				D2CC8C9A1B90EEC300F763DF /* ru */,
-				D2CC8C9B1B90EEC300F763DF /* sr */,
-				D2CC8C9C1B90EEC300F763DF /* sv */,
-				D2CC8C9D1B90EEC300F763DF /* tr */,
-				D2CC8C9E1B90EEC300F763DF /* zh_CN */,
-				D2CC8C9F1B90EEC300F763DF /* zh_TW */,
-				D21016DF1B90FEF000CC4184 /* sk */,
 			);
 			name = MoveApplication.strings;
 			sourceTree = "<group>";
