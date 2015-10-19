@@ -1,0 +1,24 @@
+
+/* Class = "NSBox"; title = "Box"; ObjectID = "1S6-SI-uPn"; */
+"1S6-SI-uPn.title" = "盒子";
+
+/* Class = "NSButtonCell"; title = "Enable Proxy"; ObjectID = "1fd-WJ-NfP"; */
+"1fd-WJ-NfP.title" = "可用代理";
+
+/* Class = "NSButtonCell"; title = "Save"; ObjectID = "1tf-08-6hw"; */
+"1tf-08-6hw.title" = "保存";
+
+/* Class = "BindingConnection"; ibShadowedIsNilPlaceholder = "http://<user>:<password>@<proxyhost>:<proxyport>"; ObjectID = "YP5-Jo-XSN"; */
+"YP5-Jo-XSN.ibShadowedIsNilPlaceholder" = "http://<user>:<password>@<proxyhost>:<proxyport>";
+
+/* Class = "NSSecureTextFieldCell"; placeholderString = "http://<user>:<password>@<proxyhost>:<proxyport>"; ObjectID = "Znf-tJ-UWY"; */
+"Znf-tJ-UWY.placeholderString" = "http://<user>:<password>@<proxyhost>:<proxyport>";
+
+/* Class = "NSTextFieldCell"; title = "Please insert your proxy URL below. You should get this information from your network manager."; ObjectID = "dfE-IM-SSk"; */
+"dfE-IM-SSk.title" = "请在下面插入您的代理URL。你可以从你的网络管理得到这个信息。";
+
+/* Class = "NSTextFieldCell"; title = "Proxy Settings"; ObjectID = "u9T-va-Rk7"; */
+"u9T-va-Rk7.title" = "代理设置";
+
+/* Class = "NSWindow"; title = "Preferences"; ObjectID = "x9D-0i-ikH"; */
+"x9D-0i-ikH.title" = "偏好";
