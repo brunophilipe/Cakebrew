@@ -22,7 +22,7 @@ Cakebrew was based on a project by [vincentsaluzzo](https://github.com/vincentsa
 
 ## Download
 
-[Download Now – Version 1.1.4](https://www.cakebrew.com/#download)
+[Download Now – Version 1.1.5](https://www.cakebrew.com/#download)
 
 ## Problems using ZSH?
 
