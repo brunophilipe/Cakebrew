@@ -53,5 +53,6 @@ typedef NS_ENUM(NSUInteger, BPToolbarMode) {
 - (void)lockItems;
 - (void)unlockItems;
 - (void)makeSearchFieldFirstResponder;
+- (NSSearchField*)searchField;
 
 @end

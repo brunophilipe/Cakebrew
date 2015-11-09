@@ -12,7 +12,6 @@
 		150AEC4E1B3F999A00163767 /* BPFormulaPopoverViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 150AEC3D1B3F999A00163767 /* BPFormulaPopoverViewController.m */; };
 		150AEC4F1B3F999A00163767 /* BPHomebrewViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 150AEC3F1B3F999A00163767 /* BPHomebrewViewController.m */; };
 		150AEC511B3F999A00163767 /* BPInstallationWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 150AEC431B3F999A00163767 /* BPInstallationWindowController.m */; };
-		150AEC521B3F999A00163767 /* BPPreferencesWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 150AEC451B3F999A00163767 /* BPPreferencesWindowController.m */; };
 		150AEC531B3F999A00163767 /* BPSelectedFormulaViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 150AEC471B3F999A00163767 /* BPSelectedFormulaViewController.m */; };
 		150AEC541B3F999A00163767 /* BPSideBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 150AEC491B3F999A00163767 /* BPSideBarController.m */; };
 		150AEC551B3F999A00163767 /* BPUpdateViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 150AEC4B1B3F999A00163767 /* BPUpdateViewController.m */; };
@@ -36,7 +35,6 @@
 		15D28A1A1AE332EA005C8A3E /* BPFormulaOptionsWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 15D28A1C1AE332EA005C8A3E /* BPFormulaOptionsWindow.xib */; };
 		15D28A1D1AE332EF005C8A3E /* BPFormulaPopoverView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 15D28A1F1AE332EF005C8A3E /* BPFormulaPopoverView.xib */; };
 		15D28A201AE332F4005C8A3E /* BPInstallationWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 15D28A221AE332F4005C8A3E /* BPInstallationWindow.xib */; };
-		15D28A231AE332F9005C8A3E /* BPPreferencesWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 15D28A251AE332F9005C8A3E /* BPPreferencesWindow.xib */; };
 		15D28A261AE332FD005C8A3E /* BPSelectedFormula.xib in Resources */ = {isa = PBXBuildFile; fileRef = 15D28A281AE332FD005C8A3E /* BPSelectedFormula.xib */; };
 		15D28A291AE33301005C8A3E /* BPUpdateView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 15D28A2B1AE33301005C8A3E /* BPUpdateView.xib */; };
 		15D28A2E1AE33453005C8A3E /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 15D28A301AE33453005C8A3E /* Localizable.strings */; };
@@ -64,7 +62,6 @@
 		D2682D021B8532B6003DE3D8 /* BPHomebrewInterface.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FE4FE76148E4D43008EDE8B /* BPHomebrewInterface.m */; };
 		D2682D031B8535BD003DE3D8 /* BPAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FE4FE6B148E4CDD008EDE8B /* BPAppDelegate.m */; };
 		D2682D041B853664003DE3D8 /* DCOAboutWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 15D2CFA918F202B300B6D9F1 /* DCOAboutWindowController.m */; };
-		D2682D051B853669003DE3D8 /* BPPreferencesWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 150AEC451B3F999A00163767 /* BPPreferencesWindowController.m */; };
 		D2860C151B97127500F1F64B /* PFMoveApplication.m in Sources */ = {isa = PBXBuildFile; fileRef = D2CC8C951B90EEC300F763DF /* PFMoveApplication.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		D2A3A82D1B8C9F5200D05469 /* BPStyle.m in Sources */ = {isa = PBXBuildFile; fileRef = D2A3A82A1B8C9F5200D05469 /* BPStyle.m */; };
 		D2A3A82E1B8C9F5200D05469 /* BPStyle.m in Sources */ = {isa = PBXBuildFile; fileRef = D2A3A82A1B8C9F5200D05469 /* BPStyle.m */; };
@@ -117,8 +114,6 @@
 		150AEC3F1B3F999A00163767 /* BPHomebrewViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BPHomebrewViewController.m; path = Controllers/BPHomebrewViewController.m; sourceTree = "<group>"; };
 		150AEC421B3F999A00163767 /* BPInstallationWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BPInstallationWindowController.h; path = Controllers/BPInstallationWindowController.h; sourceTree = "<group>"; };
 		150AEC431B3F999A00163767 /* BPInstallationWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BPInstallationWindowController.m; path = Controllers/BPInstallationWindowController.m; sourceTree = "<group>"; };
-		150AEC441B3F999A00163767 /* BPPreferencesWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BPPreferencesWindowController.h; path = Controllers/BPPreferencesWindowController.h; sourceTree = "<group>"; };
-		150AEC451B3F999A00163767 /* BPPreferencesWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BPPreferencesWindowController.m; path = Controllers/BPPreferencesWindowController.m; sourceTree = "<group>"; };
 		150AEC461B3F999A00163767 /* BPSelectedFormulaViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BPSelectedFormulaViewController.h; path = Controllers/BPSelectedFormulaViewController.h; sourceTree = "<group>"; };
 		150AEC471B3F999A00163767 /* BPSelectedFormulaViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BPSelectedFormulaViewController.m; path = Controllers/BPSelectedFormulaViewController.m; sourceTree = "<group>"; };
 		150AEC481B3F999A00163767 /* BPSideBarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BPSideBarController.h; path = Controllers/BPSideBarController.h; sourceTree = "<group>"; };
@@ -146,7 +141,6 @@
 		15A00B471B84072700528486 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/BPFormulaOptionsWindow.strings; sourceTree = "<group>"; };
 		15A00B481B84072700528486 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/BPFormulaPopoverView.strings; sourceTree = "<group>"; };
 		15A00B491B84072700528486 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/BPInstallationWindow.strings; sourceTree = "<group>"; };
-		15A00B4A1B84072700528486 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/BPPreferencesWindow.strings; sourceTree = "<group>"; };
 		15A00B4B1B84072700528486 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/BPSelectedFormula.strings; sourceTree = "<group>"; };
 		15A00B4C1B84072700528486 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/BPUpdateView.strings; sourceTree = "<group>"; };
 		15B23A2818F4F21E00714212 /* Sparkle.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Sparkle.framework; path = Cakebrew/Frameworks/Sparkle.framework; sourceTree = "<group>"; };
@@ -165,7 +159,6 @@
 		15D28A1B1AE332EA005C8A3E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/BPFormulaOptionsWindow.xib; sourceTree = "<group>"; };
 		15D28A1E1AE332EF005C8A3E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/BPFormulaPopoverView.xib; sourceTree = "<group>"; };
 		15D28A211AE332F4005C8A3E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/BPInstallationWindow.xib; sourceTree = "<group>"; };
-		15D28A241AE332F9005C8A3E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/BPPreferencesWindow.xib; sourceTree = "<group>"; };
 		15D28A271AE332FD005C8A3E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/BPSelectedFormula.xib; sourceTree = "<group>"; };
 		15D28A2A1AE33301005C8A3E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/BPUpdateView.xib; sourceTree = "<group>"; };
 		15D28A331AE3433F005C8A3E /* pt */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = pt; path = pt.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -175,7 +168,6 @@
 		15D28A391AE3433F005C8A3E /* pt */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = pt; path = pt.lproj/BPFormulaOptionsWindow.strings; sourceTree = "<group>"; };
 		15D28A3A1AE3433F005C8A3E /* pt */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = pt; path = pt.lproj/BPFormulaPopoverView.strings; sourceTree = "<group>"; };
 		15D28A3B1AE3433F005C8A3E /* pt */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = pt; path = pt.lproj/BPInstallationWindow.strings; sourceTree = "<group>"; };
-		15D28A3C1AE34340005C8A3E /* pt */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = pt; path = pt.lproj/BPPreferencesWindow.strings; sourceTree = "<group>"; };
 		15D28A3E1AE34340005C8A3E /* pt */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = pt; path = pt.lproj/BPUpdateView.strings; sourceTree = "<group>"; };
 		15D2CFA118F1E71800B6D9F1 /* reload.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = reload.icns; sourceTree = "<group>"; };
 		15D2CFA318F1EAD200B6D9F1 /* globe.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = globe.icns; sourceTree = "<group>"; };
@@ -310,9 +302,6 @@
 				15D28A221AE332F4005C8A3E /* BPInstallationWindow.xib */,
 				150AEC421B3F999A00163767 /* BPInstallationWindowController.h */,
 				150AEC431B3F999A00163767 /* BPInstallationWindowController.m */,
-				15D28A251AE332F9005C8A3E /* BPPreferencesWindow.xib */,
-				150AEC441B3F999A00163767 /* BPPreferencesWindowController.h */,
-				150AEC451B3F999A00163767 /* BPPreferencesWindowController.m */,
 				15D28A281AE332FD005C8A3E /* BPSelectedFormula.xib */,
 				150AEC461B3F999A00163767 /* BPSelectedFormulaViewController.h */,
 				150AEC471B3F999A00163767 /* BPSelectedFormulaViewController.m */,
@@ -611,7 +600,6 @@
 			files = (
 				D2CC8CA11B90EEC300F763DF /* MoveApplication.strings in Resources */,
 				15D5BEF318EBB3FB001DDED7 /* plus.icns in Resources */,
-				15D28A231AE332F9005C8A3E /* BPPreferencesWindow.xib in Resources */,
 				15A00B411B8406FB00528486 /* Credits.rtf in Resources */,
 				15D28A171AE332E6005C8A3E /* BPDoctorView.xib in Resources */,
 				1FE4FE63148E4CDD008EDE8B /* InfoPlist.strings in Resources */,
@@ -687,7 +675,6 @@
 				D2C4278B1B8E055B001C1F80 /* BPDisabledView.m in Sources */,
 				1FE4FE65148E4CDD008EDE8B /* main.m in Sources */,
 				150AEC4E1B3F999A00163767 /* BPFormulaPopoverViewController.m in Sources */,
-				150AEC521B3F999A00163767 /* BPPreferencesWindowController.m in Sources */,
 				D2CC8CA41B90EEC300F763DF /* PFMoveApplication.m in Sources */,
 				D2C1B1021B821A2A00FFC2CA /* BPToolbar.m in Sources */,
 				1570BA3618EE0A66001C3C5C /* BPHomebrewManager.m in Sources */,
@@ -713,7 +700,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				D2682D021B8532B6003DE3D8 /* BPHomebrewInterface.m in Sources */,
-				D2682D051B853669003DE3D8 /* BPPreferencesWindowController.m in Sources */,
 				D2860C151B97127500F1F64B /* PFMoveApplication.m in Sources */,
 				D2682D011B8532B0003DE3D8 /* BPHomebrewManager.m in Sources */,
 				D228335A1BA71B9900E44C82 /* BPTask.m in Sources */,
@@ -778,16 +764,6 @@
 				15A00B491B84072700528486 /* de */,
 			);
 			name = BPInstallationWindow.xib;
-			sourceTree = "<group>";
-		};
-		15D28A251AE332F9005C8A3E /* BPPreferencesWindow.xib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				15D28A241AE332F9005C8A3E /* Base */,
-				15D28A3C1AE34340005C8A3E /* pt */,
-				15A00B4A1B84072700528486 /* de */,
-			);
-			name = BPPreferencesWindow.xib;
 			sourceTree = "<group>";
 		};
 		15D28A281AE332FD005C8A3E /* BPSelectedFormula.xib */ = {

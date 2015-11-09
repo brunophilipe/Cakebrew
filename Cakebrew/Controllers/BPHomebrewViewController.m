@@ -304,43 +304,45 @@ NSMenuDelegate>
 	FormulaeSideBarItem selectedSidebarRow = [self.sidebarController.sidebar selectedRow];
 	NSString *message = nil;
 	
-	switch (selectedSidebarRow)
-	{
-		case FormulaeSideBarItemInstalled: // Installed Formulae
-			message = NSLocalizedString(@"Sidebar_Info_Installed", nil);
-			break;
-			
-		case FormulaeSideBarItemOutdated: // Outdated Formulae
-			message = NSLocalizedString(@"Sidebar_Info_Outdated", nil);
-			break;
-			
-		case FormulaeSideBarItemAll: // All Formulae
-			message = NSLocalizedString(@"Sidebar_Info_All", nil);
-			break;
-			
-		case FormulaeSideBarItemLeaves:	// Leaves
-			message = NSLocalizedString(@"Sidebar_Info_Leaves", nil);
-			break;
-			
-		case FormulaeSideBarItemRepositories: // Repositories
-			message = NSLocalizedString(@"Sidebar_Info_Repos", nil);
-			break;
-			
-		case FormulaeSideBarItemDoctor: // Doctor
-			message = NSLocalizedString(@"Sidebar_Info_Doctor", nil);
-			break;
-			
-		case FormulaeSideBarItemUpdate: // Update Tool
-			message = NSLocalizedString(@"Sidebar_Info_Update", nil);
-			break;
-			
-		default:
-			break;
-	}
-	
 	if (self.isSearching)
 	{
 		message = NSLocalizedString(@"Sidebar_Info_SearchResults", nil);
+	}
+	else
+	{
+		switch (selectedSidebarRow)
+		{
+			case FormulaeSideBarItemInstalled: // Installed Formulae
+				message = NSLocalizedString(@"Sidebar_Info_Installed", nil);
+				break;
+				
+			case FormulaeSideBarItemOutdated: // Outdated Formulae
+				message = NSLocalizedString(@"Sidebar_Info_Outdated", nil);
+				break;
+				
+			case FormulaeSideBarItemAll: // All Formulae
+				message = NSLocalizedString(@"Sidebar_Info_All", nil);
+				break;
+				
+			case FormulaeSideBarItemLeaves:	// Leaves
+				message = NSLocalizedString(@"Sidebar_Info_Leaves", nil);
+				break;
+				
+			case FormulaeSideBarItemRepositories: // Repositories
+				message = NSLocalizedString(@"Sidebar_Info_Repos", nil);
+				break;
+				
+			case FormulaeSideBarItemDoctor: // Doctor
+				message = NSLocalizedString(@"Sidebar_Info_Doctor", nil);
+				break;
+				
+			case FormulaeSideBarItemUpdate: // Update Tool
+				message = NSLocalizedString(@"Sidebar_Info_Update", nil);
+				break;
+				
+			default:
+				break;
+		}
 	}
 	
 	[self updateInfoLabelWithText:message];
@@ -392,9 +394,7 @@ NSMenuDelegate>
 
 - (void)homebrewManager:(BPHomebrewManager *)manager didUpdateSearchResults:(NSArray *)searchResults
 {
-	[self setSearching:YES];
-	[self configureTableForListing:kBPListSearch];
-	[self.sidebarController.sidebar selectRowIndexes:[NSIndexSet indexSetWithIndex:FormulaeSideBarItemAll] byExtendingSelection:NO];
+	[self loadSearchResults];
 }
 
 - (void)homebrewManager:(BPHomebrewManager *)manager shouldDisplayNoBrewMessage:(BOOL)yesOrNo
@@ -444,6 +444,23 @@ NSMenuDelegate>
 	}
 }
 
+#pragma mark - Search Mode
+
+- (void)loadSearchResults
+{
+	[self setSearching:YES];
+	[self configureTableForListing:kBPListSearch];
+	[self.sidebarController.sidebar selectRowIndexes:[NSIndexSet indexSetWithIndex:FormulaeSideBarItemAll]
+								byExtendingSelection:NO];
+}
+
+- (void)endSearchAndCleanup
+{
+	[self.toolbar.searchField setStringValue:@""];
+	[self setSearching:NO];
+	[self updateInfoLabelWithSidebarSelection];
+}
+
 #pragma mark - NSTableView Delegate
 
 - (void)tableViewSelectionDidChange:(NSNotification *)notification
@@ -464,6 +481,11 @@ NSMenuDelegate>
 {
 	NSUInteger tabIndex = HomeBrewTabFormulae;
 	NSInteger selectedSidebarRow = [self.sidebarController.sidebar selectedRow];
+	
+	if ([self isSearching])
+	{
+		[self endSearchAndCleanup];
+	}
 	
 	if (selectedSidebarRow >= 0)
 		_lastSelectedSidebarIndex = selectedSidebarRow;
@@ -637,7 +659,8 @@ NSMenuDelegate>
 	
 	[alert.window setTitle:NSLocalizedString(@"Cakebrew", nil)];
 	
-	if ([alert runModal] == NSAlertDefaultReturn) {
+	if ([alert runModal] == NSAlertDefaultReturn)
+	{
 		self.operationWindowController = [BPInstallationWindowController runWithOperation:kBPWindowOperationUpgrade
 																				 formulae:nil
 																				  options:nil];
@@ -677,9 +700,12 @@ NSMenuDelegate>
 {
 	[self checkForBackgroundTask];
 	BPFormula *formula = [self selectedFormula];
-	if (!formula) {
+	
+	if (!formula)
+	{
 		return;
 	}
+	
 	NSAlert *alert = [NSAlert alertWithMessageText:NSLocalizedString(@"Message_Untap_Title", nil)
 									 defaultButton:NSLocalizedString(@"Generic_OK", nil)
 								   alternateButton:NSLocalizedString(@"Generic_Cancel", nil)
@@ -688,7 +714,8 @@ NSMenuDelegate>
 	
 	[alert.window setTitle:NSLocalizedString(@"Cakebrew", nil)];
 	
-	if ([alert runModal] == NSAlertDefaultReturn) {
+	if ([alert runModal] == NSAlertDefaultReturn)
+	{
 		self.operationWindowController = [BPInstallationWindowController runWithOperation:kBPWindowOperationUntap
 																				 formulae:@[formula]
 																				  options:nil];
@@ -714,9 +741,7 @@ NSMenuDelegate>
 {
 	if ([searchPhrase isEqualToString:@""])
 	{
-		[self setSearching:NO];
-		[self updateInfoLabelWithSidebarSelection];
-		[self configureTableForListing:kBPListAll];
+		[self endSearchAndCleanup];
 	}
 	else
 	{

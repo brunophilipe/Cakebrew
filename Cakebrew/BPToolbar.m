@@ -32,6 +32,7 @@ static NSString *kToolbarItemMultiActionIdentifier = @"toolbarItemMultiAction";
 @interface BPToolbar() <NSSearchFieldDelegate>
 
 @property (assign) BPToolbarMode currentMode;
+@property (strong) NSSearchField *searchField;
 
 @end
 
@@ -54,11 +55,14 @@ static NSString *kToolbarItemMultiActionIdentifier = @"toolbarItemMultiAction";
 
 - (void)configureForMode:(BPToolbarMode)mode
 {
-	if (self.currentMode == mode) {
+	if (self.currentMode == mode)
+	{
 		return;
 	}
+	
 	self.currentMode = mode;
 	NSToolbarItem *moreInfoItem = [self toolbarItemInformation];
+	
 	if (mode == BPToolbarModeTap ||
 		mode == BPToolbarModeUntap ||
 		mode == BPToolbarModeUpdateMany ||
@@ -70,7 +74,9 @@ static NSString *kToolbarItemMultiActionIdentifier = @"toolbarItemMultiAction";
 						label:nil
 					   action:nil];
   
-	} else {
+	}
+	else
+ {
 		[self reconfigureItem:moreInfoItem
 						image:[BPStyle toolbarImageForMoreInformation]
 						label:NSLocalizedString(@"Toolbar_More_Information", nil)
@@ -167,13 +173,15 @@ static NSString *kToolbarItemMultiActionIdentifier = @"toolbarItemMultiAction";
 - (NSToolbarItem *)toolbar:(NSToolbar *)toolbar itemForItemIdentifier:(NSString *)itemIdentifier willBeInsertedIntoToolbar:(BOOL)flag
 {
 	NSDictionary *supportedItems = [self customToolbarItems];
-	if (![supportedItems objectForKey:itemIdentifier]){
+	if (![supportedItems objectForKey:itemIdentifier])
+	{
 		return nil;
 	}
 	return supportedItems[itemIdentifier];
 }
 
-- (NSArray *)toolbarDefaultItemIdentifiers:(NSToolbar *)toolbar{
+- (NSArray *)toolbarDefaultItemIdentifiers:(NSToolbar *)toolbar
+{
 	return @[kToolbarItemHomebrewUpdateIdentifier,
 			 NSToolbarFlexibleSpaceItemIdentifier,
 			 kToolbarItemMultiActionIdentifier,
@@ -182,7 +190,8 @@ static NSString *kToolbarItemMultiActionIdentifier = @"toolbarItemMultiAction";
 			 ];
 }
 
-- (NSArray *)toolbarAllowedItemIdentifiers:(NSToolbar *)toolbar{
+- (NSArray *)toolbarAllowedItemIdentifiers:(NSToolbar *)toolbar
+{
 	NSArray *systemToolbarItems = [self systemToolbarItems];
 	NSArray *customToolbarItems = @[kToolbarItemHomebrewUpdateIdentifier,
 									kToolbarItemInformationIdentifier,
@@ -195,7 +204,8 @@ static NSString *kToolbarItemMultiActionIdentifier = @"toolbarItemMultiAction";
 - (NSArray *)systemToolbarItems
 {
 	static NSArray *systemToolbarItems = nil;
-	if (!systemToolbarItems) {
+	if (!systemToolbarItems)
+	{
 		systemToolbarItems =  @[
 								NSToolbarSpaceItemIdentifier,
 								NSToolbarFlexibleSpaceItemIdentifier,
@@ -208,7 +218,8 @@ static NSString *kToolbarItemMultiActionIdentifier = @"toolbarItemMultiAction";
 - (NSDictionary *)customToolbarItems
 {
 	static NSDictionary *customToolbarItems = nil;
-	if (!customToolbarItems) {
+	if (!customToolbarItems)
+	{
 		customToolbarItems =  @{
 								kToolbarItemHomebrewUpdateIdentifier : [self toolbarItemHomebrewUpdate],
 								kToolbarItemInformationIdentifier : [self toolbarItemInformation],
@@ -222,7 +233,8 @@ static NSString *kToolbarItemMultiActionIdentifier = @"toolbarItemMultiAction";
 - (NSToolbarItem *)toolbarItemHomebrewUpdate
 {
 	static NSToolbarItem* toolbarItemHomebrewUpdate = nil;
-	if (!toolbarItemHomebrewUpdate) {
+	if (!toolbarItemHomebrewUpdate)
+	{
 		toolbarItemHomebrewUpdate = [self toolbarItemWithIdentifier:kToolbarItemHomebrewUpdateIdentifier
 															  image:[BPStyle toolbarImageForUpgrade]
 															  label:NSLocalizedString(@"Toolbar_Homebrew_Update", nil)
@@ -234,7 +246,8 @@ static NSString *kToolbarItemMultiActionIdentifier = @"toolbarItemMultiAction";
 - (NSToolbarItem *)toolbarItemInformation
 {
 	static NSToolbarItem* toolbarItemInformation = nil;
-	if (!toolbarItemInformation) {
+	if (!toolbarItemInformation)
+	{
 		toolbarItemInformation = [self toolbarItemWithIdentifier:kToolbarItemInformationIdentifier
 														   image:[BPStyle toolbarImageForMoreInformation]
 														   label:NSLocalizedString(@"Toolbar_More_Information", nil)
@@ -247,7 +260,8 @@ static NSString *kToolbarItemMultiActionIdentifier = @"toolbarItemMultiAction";
 - (NSToolbarItem *)toolbarItemMultiAction
 {
 	static NSToolbarItem* toolbarItemMultiAction = nil;
-	if (!toolbarItemMultiAction) {
+	if (!toolbarItemMultiAction)
+	{
 		toolbarItemMultiAction = [self toolbarItemWithIdentifier:kToolbarItemMultiActionIdentifier
 														   image:nil
 														   label:nil
@@ -258,17 +272,22 @@ static NSString *kToolbarItemMultiActionIdentifier = @"toolbarItemMultiAction";
 
 
 
-- (NSToolbarItem *)toolbarItemSearch {
+- (NSToolbarItem *)toolbarItemSearch
+{
 	static NSToolbarItem* item = nil;
-	if (!item) {
+	if (!item)
+	{
 		item = [[NSToolbarItem alloc] initWithItemIdentifier:kToolbarItemSearchIdentifier];
 		item.label = NSLocalizedString(@"Toolbar_Search", nil);
 		item.paletteLabel = NSLocalizedString(@"Toolbar_Search", nil);
 		item.action = @selector(performSearchWithString:);
-		NSSearchField *searchField = [[NSSearchField alloc] initWithFrame:NSZeroRect];
-		searchField.delegate = self;
-		searchField.continuous = YES;
-		[item setView:searchField];
+		
+		self.searchField = [[NSSearchField alloc] initWithFrame:NSZeroRect];
+		self.searchField.delegate = self;
+		self.searchField.continuous = YES;
+		[self.searchField setRecentsAutosaveName:@"RecentSearches"];
+		
+		[item setView:self.searchField];
 	}
 	return item;
 }
