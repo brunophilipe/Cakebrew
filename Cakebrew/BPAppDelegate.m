@@ -156,6 +156,24 @@ NSString *const kBP_HOMEBREW_WEBSITE = @"https://www.cakebrew.com";
 	[alert runModal];
 }
 
+- (void)requestUserAttentionWithMessageTitle:(NSString*)title andDescription:(NSString*)desc
+{
+	[[NSApplication sharedApplication] requestUserAttention:NSInformationalRequest];
+	
+	if (![[NSApplication sharedApplication] isActive])
+	{
+		[[[NSApplication sharedApplication] dockTile] setBadgeLabel:@"●"];
+	}
+	
+	NSUserNotification *userNotification = [NSUserNotification new];
+	[userNotification setTitle:title];
+	[userNotification setSubtitle:desc];
+	
+	[[NSUserNotificationCenter defaultUserNotificationCenter] scheduleNotification:userNotification];
+}
+
+#pragma mark - IBActions
+
 - (IBAction)showAboutWindow:(id)sender
 {
 	[self.aboutWindowController showWindow:nil];

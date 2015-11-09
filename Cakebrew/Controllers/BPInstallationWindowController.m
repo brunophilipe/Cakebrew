@@ -136,7 +136,6 @@
 	[self.okButton setEnabled:NO];
 	[self.progressIndicator startAnimation:nil];
 	dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
-		
 		NSString __block *outputValue;
 		__weak BPInstallationWindowController *weakSelf = self;
 		void (^displayTerminalOutput)(NSString *outputValue) = ^(NSString *output) {
@@ -204,23 +203,15 @@
 {
 	dispatch_async(dispatch_get_main_queue(), ^(){
 		[self.progressIndicator stopAnimation:nil];
+		[self.okButton setEnabled:YES];
+		
+		NSString *title = [NSLocalizedString(@"Homebrew_Task_Finished", nil) capitalizedString];
+		NSString *desc = [NSString stringWithFormat:@"%@ %@",
+						  self.windowTitleLabel.stringValue,
+						  self.formulaNameLabel.stringValue];
+		
+		[BPAppDelegateRef requestUserAttentionWithMessageTitle:title andDescription:desc];
 	});
-	[self.okButton setEnabled:YES];
-	
-	[[NSApplication sharedApplication] requestUserAttention:NSInformationalRequest];
-	
-	if (![[NSApplication sharedApplication] isActive])
-	{
-		[[[NSApplication sharedApplication] dockTile] setBadgeLabel:@"●"];
-	}
-	
-	NSUserNotification *userNotification = [NSUserNotification new];
-	[userNotification setTitle:[NSLocalizedString(@"Homebrew_Task_Finished", nil) capitalizedString]];
-	[userNotification setSubtitle:[NSString stringWithFormat:@"%@ %@",
-								   self.windowTitleLabel.stringValue,
-								   self.formulaNameLabel.stringValue]];
-	
-	[[NSUserNotificationCenter defaultUserNotificationCenter] scheduleNotification:userNotification];
 }
 
 - (IBAction)okAction:(id)sender

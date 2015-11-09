@@ -98,3 +98,6 @@
 "Sidebar_Item_Update" = "Atualizar";
 
 "Sidebar_VoiceOver_Tools" = "Ferramentas";
+
+"Notification_Doctor" = "Homebrew Doctor";
+"Notification_Update" = "Atualizar Homebrew";

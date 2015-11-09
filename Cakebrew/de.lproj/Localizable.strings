@@ -228,3 +228,9 @@
 
 /* No comment provided by engineer. */
 "Toolbar_Update_Selected" = "Ausgewählte Formeln aktualisieren";
+
+/* No comment provided by engineer. */
+"Notification_Doctor" = "Homebrew Doctor";
+
+/* No comment provided by engineer. */
+"Notification_Update" = "Homebrew aktualisieren";

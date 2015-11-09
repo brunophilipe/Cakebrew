@@ -40,5 +40,6 @@ extern NSString *const kBP_HOMEBREW_WEBSITE;
 - (IBAction)showPreferencesWindow:(id)sender;
 
 - (void)displayBackgroundWarning;
+- (void)requestUserAttentionWithMessageTitle:(NSString*)title andDescription:(NSString*)desc;
 
 @end
