@@ -102,7 +102,7 @@ NSString *const kBPCacheDataKey	= @"BPCacheDataKey";
 		}
 	}
 	
-	_formulae_search = [array copy];
+	_formulae_search = array;
 	
 	dispatch_async(dispatch_get_main_queue(), ^{
 		[self.delegate homebrewManager:self didUpdateSearchResults:_formulae_search];

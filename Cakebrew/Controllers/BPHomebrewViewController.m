@@ -238,13 +238,13 @@ NSMenuDelegate>
 	
 	[self.selectedFormulaeViewController setFormulae:selectedFormulae];
 	
-	
 	CGFloat height = [self.formulaeSplitView bounds].size.height;
 	CGFloat preferedHeightOfSelectedFormulaView = 120.f;
 	[self.formulaeSplitView setPosition:height - preferedHeightOfSelectedFormulaView
 					   ofDividerAtIndex:0];
 	
-	if (selectedSidebarRow == FormulaeSideBarItemRepositories) { // Repositories sidebaritem
+	if (selectedSidebarRow == FormulaeSideBarItemRepositories) // Repositories (Taps) sidebaritem
+	{
 		[self.toolbar configureForMode:BPToolbarModeTap];
 		[self.formulaeSplitView setPosition:height
 						   ofDividerAtIndex:0];
@@ -290,8 +290,8 @@ NSMenuDelegate>
 - (void)configureTableForListing:(BPListMode)mode
 {
 	[self.tableView_formulae deselectAll:nil];
-	[self.tableView_formulae setMode:mode];
 	[self.formulaeDataSource setMode:mode];
+	[self.tableView_formulae setMode:mode];
 	[self.tableView_formulae reloadData];
 	[self updateInterfaceItems];
 }
@@ -393,10 +393,8 @@ NSMenuDelegate>
 - (void)homebrewManager:(BPHomebrewManager *)manager didUpdateSearchResults:(NSArray *)searchResults
 {
 	[self setSearching:YES];
-	
-	[self.sidebarController.sidebar selectRowIndexes:[NSIndexSet indexSetWithIndex:FormulaeSideBarItemAll] byExtendingSelection:NO];
-	
 	[self configureTableForListing:kBPListSearch];
+	[self.sidebarController.sidebar selectRowIndexes:[NSIndexSet indexSetWithIndex:FormulaeSideBarItemAll] byExtendingSelection:NO];
 }
 
 - (void)homebrewManager:(BPHomebrewManager *)manager shouldDisplayNoBrewMessage:(BOOL)yesOrNo
@@ -464,7 +462,7 @@ NSMenuDelegate>
 
 - (void)sourceListSelectionDidChange
 {
-	NSUInteger tabIndex = 0;
+	NSUInteger tabIndex = HomeBrewTabFormulae;
 	NSInteger selectedSidebarRow = [self.sidebarController.sidebar selectedRow];
 	
 	if (selectedSidebarRow >= 0)
@@ -718,13 +716,12 @@ NSMenuDelegate>
 	{
 		[self setSearching:NO];
 		[self updateInfoLabelWithSidebarSelection];
+		[self configureTableForListing:kBPListAll];
 	}
 	else
 	{
 		[[BPHomebrewManager sharedManager] updateSearchWithName:searchPhrase];
 	}
-	
-	[self configureTableForListing:kBPListAll];
 }
 
 - (IBAction)beginFormulaSearch:(id)sender
