@@ -21,7 +21,6 @@
 
 #import "BPHomebrewManager.h"
 #import "DCOAboutWindowController.h"
-#import "BPPreferencesWindowController.h"
 #import "BPAppDelegate.h"
 #import "PFMoveApplication.h"
 
@@ -31,7 +30,6 @@ NSString *const kBP_HOMEBREW_WEBSITE = @"https://www.cakebrew.com";
 @interface BPAppDelegate () <NSUserNotificationCenterDelegate>
 
 @property (nonatomic, strong) DCOAboutWindowController *aboutWindowController;
-@property (nonatomic, strong) BPPreferencesWindowController *preferencesWindowController;
 
 @end
 
@@ -40,14 +38,6 @@ NSString *const kBP_HOMEBREW_WEBSITE = @"https://www.cakebrew.com";
 @end
 
 @implementation BPAppDelegate
-
-- (BPPreferencesWindowController *)preferencesWindowController
-{
-	if (!_preferencesWindowController) {
-		_preferencesWindowController = [[BPPreferencesWindowController alloc] init];
-	}
-	return _preferencesWindowController;
-}
 
 - (DCOAboutWindowController *)aboutWindowController
 {
@@ -182,10 +172,6 @@ NSString *const kBP_HOMEBREW_WEBSITE = @"https://www.cakebrew.com";
 - (IBAction)openWebsite:(id)sender
 {
 	[[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:kBP_HOMEBREW_WEBSITE]];
-}
-
-- (IBAction)showPreferencesWindow:(id)sender {
-	[self.preferencesWindowController showWindow:nil];
 }
 
 #pragma mark - User Notification Center Delegate
