@@ -81,6 +81,10 @@ NSString *const kBP_HOMEBREW_WEBSITE = @"https://www.cakebrew.com";
 	return NSTerminateNow;
 }
 
+- (BOOL)applicationShouldTerminateAfterLastWindowClosed:(NSApplication *)sender {
+	return YES;
+}
+
 - (void)cleanupTaskAlerts
 {
 	[[NSUserNotificationCenter defaultUserNotificationCenter] removeAllDeliveredNotifications];
