@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="8191" systemVersion="15A284" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="9531" systemVersion="15D21" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="8191"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="9531"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="NSApplication">
@@ -546,7 +546,7 @@ CA
             <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
             <windowCollectionBehavior key="collectionBehavior" fullScreenPrimary="YES"/>
             <rect key="contentRect" x="629" y="349" width="570" height="342"/>
-            <rect key="screenRect" x="0.0" y="0.0" width="1280" height="777"/>
+            <rect key="screenRect" x="0.0" y="0.0" width="1440" height="877"/>
             <value key="minSize" type="size" width="570" height="342"/>
             <view key="contentView" id="372">
                 <rect key="frame" x="0.0" y="0.0" width="570" height="342"/>
@@ -555,35 +555,22 @@ CA
                     <customView translatesAutoresizingMaskIntoConstraints="NO" id="Fdz-An-2On">
                         <rect key="frame" x="0.0" y="0.0" width="570" height="342"/>
                         <subviews>
-                            <textField hidden="YES" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="tiK-fW-tE7">
-                                <rect key="frame" x="444" y="4" width="119" height="14"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="115" id="olS-5g-fL0"/>
-                                </constraints>
-                                <animations/>
-                                <textFieldCell key="cell" controlSize="small" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="right" title="No selection" id="3xE-6a-fkA">
-                                    <font key="font" metaFont="smallSystem"/>
-                                    <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
-                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                </textFieldCell>
-                            </textField>
                             <splitView hidden="YES" autosaveName="MainSplitView" dividerStyle="thin" vertical="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Exu-Zx-Kij">
-                                <rect key="frame" x="0.0" y="20" width="570" height="322"/>
+                                <rect key="frame" x="0.0" y="0.0" width="570" height="342"/>
                                 <subviews>
                                     <customView id="5HN-nB-TIW">
-                                        <rect key="frame" x="0.0" y="0.0" width="190" height="322"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="190" height="342"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <subviews>
                                             <scrollView borderType="none" autohidesScrollers="YES" horizontalLineScroll="26" horizontalPageScroll="10" verticalLineScroll="26" verticalPageScroll="10" usesPredominantAxisScrolling="NO" horizontalScrollElasticity="none" verticalScrollElasticity="none" translatesAutoresizingMaskIntoConstraints="NO" id="kTq-kk-rF0">
-                                                <rect key="frame" x="0.0" y="2" width="190" height="320"/>
+                                                <rect key="frame" x="0.0" y="2" width="190" height="340"/>
                                                 <clipView key="contentView" drawsBackground="NO" id="RhN-kh-4Xx">
-                                                    <rect key="frame" x="0.0" y="0.0" width="190" height="320"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="190" height="340"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                     <subviews>
                                                         <outlineView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" selectionHighlightStyle="sourceList" columnReordering="NO" multipleSelection="NO" autosaveColumns="NO" rowHeight="24" rowSizeStyle="systemDefault" viewBased="YES" indentationPerLevel="16" outlineTableColumn="LEF-be-VWM" id="h1z-c9-U0s" customClass="PXSourceList">
-                                                            <rect key="frame" x="0.0" y="0.0" width="190" height="0.0"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="190" height="340"/>
                                                             <autoresizingMask key="autoresizingMask"/>
-                                                            <animations/>
                                                             <size key="intercellSpacing" width="0.0" height="2"/>
                                                             <color key="backgroundColor" name="_sourceListBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                             <color key="gridColor" name="gridColor" catalog="System" colorSpace="catalog"/>
@@ -607,7 +594,6 @@ CA
                                                                             <subviews>
                                                                                 <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="WEE-19-W7g">
                                                                                     <rect key="frame" x="0.0" y="1" width="166" height="14"/>
-                                                                                    <animations/>
                                                                                     <textFieldCell key="cell" lineBreakMode="truncatingTail" sendsActionOnEndEditing="YES" title="HEADER CELL" id="KoT-TI-MgQ">
                                                                                         <font key="font" metaFont="smallSystemBold"/>
                                                                                         <color key="textColor" red="0.43921568630000002" green="0.4941176471" blue="0.54901960780000003" alpha="1" colorSpace="calibratedRGB"/>
@@ -615,7 +601,6 @@ CA
                                                                                     </textFieldCell>
                                                                                 </textField>
                                                                             </subviews>
-                                                                            <animations/>
                                                                             <connections>
                                                                                 <outlet property="textField" destination="WEE-19-W7g" id="2BW-SK-dt7"/>
                                                                             </connections>
@@ -630,7 +615,6 @@ CA
                                                                                         <constraint firstAttribute="height" constant="14" id="Fnd-KD-Xnc"/>
                                                                                         <constraint firstAttribute="width" constant="17" id="lEn-kS-QYF"/>
                                                                                     </constraints>
-                                                                                    <animations/>
                                                                                     <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="NSActionTemplate" id="As7-Xw-rr0"/>
                                                                                 </imageView>
                                                                                 <textField horizontalHuggingPriority="249" verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="UGv-FF-mH4">
@@ -638,7 +622,6 @@ CA
                                                                                     <constraints>
                                                                                         <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="55" id="AQj-Dj-fy4"/>
                                                                                     </constraints>
-                                                                                    <animations/>
                                                                                     <textFieldCell key="cell" lineBreakMode="truncatingTail" sendsActionOnEndEditing="YES" title="Table View Cell" id="zVW-Ch-xYV">
                                                                                         <font key="font" metaFont="system"/>
                                                                                         <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
@@ -651,7 +634,6 @@ CA
                                                                                         <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="15" id="fcz-mG-5yq"/>
                                                                                         <constraint firstAttribute="height" constant="14" id="tPu-WX-Z1t"/>
                                                                                     </constraints>
-                                                                                    <animations/>
                                                                                 </customView>
                                                                             </subviews>
                                                                             <constraints>
@@ -663,7 +645,6 @@ CA
                                                                                 <constraint firstAttribute="trailing" secondItem="NPs-Sj-pMf" secondAttribute="trailing" constant="4" id="tOM-Z3-lqK"/>
                                                                                 <constraint firstAttribute="centerY" secondItem="rod-fH-u2L" secondAttribute="centerY" id="vMj-wt-2wR"/>
                                                                             </constraints>
-                                                                            <animations/>
                                                                             <connections>
                                                                                 <outlet property="badgeView" destination="NPs-Sj-pMf" id="gfz-Xa-rJt"/>
                                                                                 <outlet property="imageView" destination="rod-fH-u2L" id="BEf-zX-zQp"/>
@@ -679,19 +660,15 @@ CA
                                                             </connections>
                                                         </outlineView>
                                                     </subviews>
-                                                    <animations/>
                                                     <nil key="backgroundColor"/>
                                                 </clipView>
-                                                <animations/>
                                                 <scroller key="horizontalScroller" hidden="YES" verticalHuggingPriority="750" horizontal="YES" id="RBZ-Oo-6AK">
                                                     <rect key="frame" x="1" y="119" width="238" height="15"/>
                                                     <autoresizingMask key="autoresizingMask"/>
-                                                    <animations/>
                                                 </scroller>
                                                 <scroller key="verticalScroller" hidden="YES" verticalHuggingPriority="750" horizontal="NO" id="nSl-PP-Wwd">
                                                     <rect key="frame" x="224" y="17" width="15" height="102"/>
                                                     <autoresizingMask key="autoresizingMask"/>
-                                                    <animations/>
                                                 </scroller>
                                             </scrollView>
                                         </subviews>
@@ -703,36 +680,31 @@ CA
                                             <constraint firstItem="kTq-kk-rF0" firstAttribute="leading" secondItem="5HN-nB-TIW" secondAttribute="leading" id="lMU-O5-vkf"/>
                                             <constraint firstItem="kTq-kk-rF0" firstAttribute="top" secondItem="5HN-nB-TIW" secondAttribute="top" id="oTn-9K-lY9"/>
                                         </constraints>
-                                        <animations/>
                                     </customView>
                                     <customView focusRingType="none" id="C6z-4a-AJ0">
-                                        <rect key="frame" x="191" y="0.0" width="379" height="322"/>
+                                        <rect key="frame" x="191" y="0.0" width="379" height="342"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <subviews>
                                             <tabView drawsBackground="NO" type="noTabsNoBorder" initialItem="aFR-nx-bHM" translatesAutoresizingMaskIntoConstraints="NO" id="79A-lZ-LEo">
-                                                <rect key="frame" x="0.0" y="2" width="379" height="320"/>
-                                                <animations/>
+                                                <rect key="frame" x="0.0" y="2" width="379" height="340"/>
                                                 <font key="font" metaFont="system"/>
                                                 <tabViewItems>
                                                     <tabViewItem label="Formulae" identifier="1" id="aFR-nx-bHM">
                                                         <view key="view" id="JkQ-ZQ-ugA">
-                                                            <rect key="frame" x="0.0" y="0.0" width="379" height="320"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="379" height="340"/>
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                                            <animations/>
                                                         </view>
                                                     </tabViewItem>
                                                     <tabViewItem label="Doctor" identifier="2" id="WM9-6z-Jzl">
                                                         <view key="view" id="6fi-d1-4lx">
                                                             <rect key="frame" x="0.0" y="0.0" width="379" height="322"/>
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                                            <animations/>
                                                         </view>
                                                     </tabViewItem>
                                                     <tabViewItem label="Update" identifier="3" id="yL4-oW-nIm">
                                                         <view key="view" id="p04-F1-40m">
                                                             <rect key="frame" x="0.0" y="0.0" width="379" height="322"/>
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                                            <animations/>
                                                         </view>
                                                     </tabViewItem>
                                                 </tabViewItems>
@@ -745,10 +717,8 @@ CA
                                             <constraint firstItem="79A-lZ-LEo" firstAttribute="leading" secondItem="C6z-4a-AJ0" secondAttribute="leading" id="Rny-Ns-v82"/>
                                             <constraint firstAttribute="bottom" secondItem="79A-lZ-LEo" secondAttribute="bottom" constant="2" id="uOK-XH-cAW"/>
                                         </constraints>
-                                        <animations/>
                                     </customView>
                                 </subviews>
-                                <animations/>
                                 <holdingPriorities>
                                     <real value="330"/>
                                     <real value="250"/>
@@ -757,13 +727,10 @@ CA
                         </subviews>
                         <constraints>
                             <constraint firstItem="Exu-Zx-Kij" firstAttribute="top" secondItem="Fdz-An-2On" secondAttribute="top" id="30V-kY-DWU"/>
-                            <constraint firstAttribute="trailing" secondItem="tiK-fW-tE7" secondAttribute="trailing" constant="9" id="98D-Xm-9Ft"/>
-                            <constraint firstAttribute="bottom" secondItem="Exu-Zx-Kij" secondAttribute="bottom" constant="20" id="ISt-mC-eww"/>
+                            <constraint firstAttribute="bottom" secondItem="Exu-Zx-Kij" secondAttribute="bottom" id="ISt-mC-eww"/>
                             <constraint firstAttribute="trailing" secondItem="Exu-Zx-Kij" secondAttribute="trailing" id="Sen-En-LL8"/>
                             <constraint firstItem="Exu-Zx-Kij" firstAttribute="leading" secondItem="Fdz-An-2On" secondAttribute="leading" id="a4E-HV-jUq"/>
-                            <constraint firstItem="tiK-fW-tE7" firstAttribute="top" secondItem="Exu-Zx-Kij" secondAttribute="bottom" constant="2" id="dHe-up-mv2"/>
                         </constraints>
-                        <animations/>
                     </customView>
                 </subviews>
                 <constraints>
@@ -772,9 +739,7 @@ CA
                     <constraint firstAttribute="bottom" secondItem="Fdz-An-2On" secondAttribute="bottom" id="WbD-5Y-FPg"/>
                     <constraint firstItem="Fdz-An-2On" firstAttribute="top" secondItem="372" secondAttribute="top" id="f1Z-Le-i9Q"/>
                 </constraints>
-                <animations/>
             </view>
-            <contentBorderThickness minY="22"/>
         </window>
         <menu title="Formula" id="dg5-kq-v1Y">
             <items>
@@ -907,7 +872,6 @@ CA
         <viewController title="HomebrewController" nibName="MainMenu" id="547" userLabel="Homebrew Controller" customClass="BPHomebrewViewController">
             <connections>
                 <outlet property="formulaeSplitView" destination="hkt-Ff-Ha2" id="PSG-Ga-xEa"/>
-                <outlet property="label_information" destination="tiK-fW-tE7" id="K14-X1-4bF"/>
                 <outlet property="menu_formula" destination="sBH-Ta-Jft" id="kCm-57-cUw"/>
                 <outlet property="scrollView_formulae" destination="YpG-G5-bXX" id="oFo-5A-rfO"/>
                 <outlet property="selectedFormulaView" destination="Nrf-M9-yac" id="l5Q-Fd-m5y"/>
@@ -936,7 +900,6 @@ CA
                                     <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" alternatingRowBackgroundColors="YES" multipleSelection="NO" autosaveColumns="NO" headerView="pLZ-e2-9bs" id="swO-GD-dpc" customClass="BPFormulaeTableView">
                                         <rect key="frame" x="0.0" y="0.0" width="517" height="241"/>
                                         <autoresizingMask key="autoresizingMask"/>
-                                        <animations/>
                                         <size key="intercellSpacing" width="3" height="2"/>
                                         <color key="backgroundColor" white="1" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <color key="gridColor" name="gridColor" catalog="System" colorSpace="catalog"/>
@@ -999,23 +962,18 @@ CA
                                         </connections>
                                     </tableView>
                                 </subviews>
-                                <animations/>
                                 <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                             </clipView>
-                            <animations/>
                             <scroller key="horizontalScroller" verticalHuggingPriority="750" horizontal="YES" id="klu-B1-7Zh">
                                 <rect key="frame" x="0.0" y="184" width="379" height="16"/>
                                 <autoresizingMask key="autoresizingMask"/>
-                                <animations/>
                             </scroller>
                             <scroller key="verticalScroller" hidden="YES" verticalHuggingPriority="750" horizontal="NO" id="FFe-Uc-20x">
                                 <autoresizingMask key="autoresizingMask"/>
-                                <animations/>
                             </scroller>
                             <tableHeaderView key="headerView" id="pLZ-e2-9bs">
                                 <rect key="frame" x="0.0" y="0.0" width="517" height="23"/>
                                 <autoresizingMask key="autoresizingMask"/>
-                                <animations/>
                             </tableHeaderView>
                         </scrollView>
                     </subviews>
@@ -1025,15 +983,12 @@ CA
                         <constraint firstAttribute="trailing" secondItem="YpG-G5-bXX" secondAttribute="trailing" id="UAl-9G-pyk"/>
                         <constraint firstAttribute="bottom" secondItem="YpG-G5-bXX" secondAttribute="bottom" id="bYd-VT-9sc"/>
                     </constraints>
-                    <animations/>
                 </customView>
                 <customView fixedFrame="YES" id="Nrf-M9-yac" userLabel="Selected Formula">
                     <rect key="frame" x="0.0" y="265" width="396" height="89"/>
                     <autoresizingMask key="autoresizingMask"/>
-                    <animations/>
                 </customView>
             </subviews>
-            <animations/>
             <holdingPriorities>
                 <real value="250"/>
                 <real value="243"/>
