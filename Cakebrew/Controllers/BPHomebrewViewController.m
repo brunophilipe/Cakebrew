@@ -297,63 +297,6 @@ NSMenuDelegate>
 }
 
 
-#pragma mark – Footer Information Label
-
-- (void)updateInfoLabelWithSidebarSelection
-{
-	FormulaeSideBarItem selectedSidebarRow = [self.sidebarController.sidebar selectedRow];
-	NSString *message = nil;
-	
-	switch (selectedSidebarRow)
-	{
-		case FormulaeSideBarItemInstalled: // Installed Formulae
-			message = NSLocalizedString(@"Sidebar_Info_Installed", nil);
-			break;
-			
-		case FormulaeSideBarItemOutdated: // Outdated Formulae
-			message = NSLocalizedString(@"Sidebar_Info_Outdated", nil);
-			break;
-			
-		case FormulaeSideBarItemAll: // All Formulae
-			message = NSLocalizedString(@"Sidebar_Info_All", nil);
-			break;
-			
-		case FormulaeSideBarItemLeaves:	// Leaves
-			message = NSLocalizedString(@"Sidebar_Info_Leaves", nil);
-			break;
-			
-		case FormulaeSideBarItemRepositories: // Repositories
-			message = NSLocalizedString(@"Sidebar_Info_Repos", nil);
-			break;
-			
-		case FormulaeSideBarItemDoctor: // Doctor
-			message = NSLocalizedString(@"Sidebar_Info_Doctor", nil);
-			break;
-			
-		case FormulaeSideBarItemUpdate: // Update Tool
-			message = NSLocalizedString(@"Sidebar_Info_Update", nil);
-			break;
-			
-		default:
-			break;
-	}
-	
-	if (self.isSearching)
-	{
-		message = NSLocalizedString(@"Sidebar_Info_SearchResults", nil);
-	}
-	
-	[self updateInfoLabelWithText:message];
-}
-
-- (void)updateInfoLabelWithText:(NSString*)message
-{
-	if (message)
-	{
-		[self.label_information setStringValue:message];
-	}
-}
-
 #pragma mark - Homebrew Manager Delegate
 
 - (void)homebrewManagerFinishedUpdating:(BPHomebrewManager *)manager
@@ -369,7 +312,6 @@ NSMenuDelegate>
 		self.selectedFormulaeViewController.formulae = nil;
 		
 		[self.splitView			setHidden:NO];
-		[self.label_information setHidden:NO];
 		
 		[self.toolbar configureForMode:BPToolbarModeDefault];
 		[self.toolbar unlockItems];
@@ -406,7 +348,6 @@ NSMenuDelegate>
 	if (yesOrNo)
 	{
 		[self addDisabledView];
-		[self.label_information setHidden:YES];
 		[self.splitView setHidden:YES];
 		[self.toolbar lockItems];
 		
@@ -437,7 +378,6 @@ NSMenuDelegate>
 	{
 		[self.disabledView removeFromSuperview];
 		self.disabledView = nil;
-		[self.label_information setHidden:NO];
 		[self.splitView setHidden:NO];
 		
 		[self.toolbar unlockItems];
@@ -508,8 +448,6 @@ NSMenuDelegate>
 		default:
 			break;
 	}
-	
-	[self updateInfoLabelWithSidebarSelection];
 	
 	[self.tabView selectTabViewItemAtIndex:tabIndex];
 }
@@ -717,7 +655,6 @@ NSMenuDelegate>
 	if ([searchPhrase isEqualToString:@""])
 	{
 		[self setSearching:NO];
-		[self updateInfoLabelWithSidebarSelection];
 	}
 	else
 	{

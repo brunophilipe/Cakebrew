@@ -18,6 +18,8 @@
 @property (strong, nonatomic) PXSourceListItem *allFormulaeSidebarItem;
 @property (strong, nonatomic) PXSourceListItem *leavesFormulaeSidebarItem;
 @property (strong, nonatomic) PXSourceListItem *repositoriesFormulaeSidebarItem;
+@property (strong, nonatomic) PXSourceListItem *doctorSidebarItem;
+@property (strong, nonatomic) PXSourceListItem *updateSidebarItem;
 
 @end
 
@@ -34,7 +36,7 @@
 
 - (void)buildSidebarTree
 {
-	PXSourceListItem *item, *parent;
+	PXSourceListItem *parent;
 	_rootSidebarCategory = [PXSourceListItem itemWithTitle:@"" identifier:@"root"];
 	
 	parent = [PXSourceListItem itemWithTitle:NSLocalizedString(@"Sidebar_Group_Formulae", nil) identifier:@"group"];
@@ -63,15 +65,15 @@
 	parent = [PXSourceListItem itemWithTitle:NSLocalizedString(@"Sidebar_Group_Tools", nil) identifier:@"group"];
 	[_rootSidebarCategory addChildItem:parent];  //FormulaeSideBarItemToolsCategory = 6,
 	
-	item = [PXSourceListItem itemWithTitle:NSLocalizedString(@"Sidebar_Item_Doctor", nil) identifier:@"item"];
-	[item setBadgeValue:@(-1)];
-	[item setIcon:[NSImage imageNamed:@"doctorTemplate"]];
-	[parent addChildItem:item];  //FormulaeSideBarItemDoctor = 7,
+	_doctorSidebarItem = [PXSourceListItem itemWithTitle:NSLocalizedString(@"Sidebar_Item_Doctor", nil) identifier:@"item"];
+	[_doctorSidebarItem setBadgeValue:@(-1)];
+	[_doctorSidebarItem setIcon:[NSImage imageNamed:@"doctorTemplate"]];
+	[parent addChildItem:_doctorSidebarItem];  //FormulaeSideBarItemDoctor = 7,
 	
-	item = [PXSourceListItem itemWithTitle:NSLocalizedString(@"Sidebar_Item_Update", nil) identifier:@"item"];
-	[item setBadgeValue:@(-1)];
-	[item setIcon:[NSImage imageNamed:@"updateTemplate"]];
-	[parent addChildItem:item];  //FormulaeSideBarItemUpdate = 8,
+	_updateSidebarItem = [PXSourceListItem itemWithTitle:NSLocalizedString(@"Sidebar_Item_Update", nil) identifier:@"item"];
+	[_updateSidebarItem setBadgeValue:@(-1)];
+	[_updateSidebarItem setIcon:[NSImage imageNamed:@"updateTemplate"]];
+	[parent addChildItem:_updateSidebarItem];  //FormulaeSideBarItemUpdate = 8,
 }
 
 - (void)configureSidebarSettings
@@ -129,10 +131,12 @@
 {
 	PXSourceListTableCellView *cellView = nil;
 	
-	if ([[(PXSourceListItem*)item identifier] isEqualToString:@"group"])
-		cellView = [aSourceList makeViewWithIdentifier:@"HeaderCell" owner:nil];
-	else
-		cellView = [aSourceList makeViewWithIdentifier:@"MainCell" owner:nil];
+	if ([[(PXSourceListItem*)item identifier] isEqualToString:@"group"]) {
+	  cellView = [aSourceList makeViewWithIdentifier:@"HeaderCell" owner:nil];
+	}
+	else {
+	  cellView = [aSourceList makeViewWithIdentifier:@"MainCell" owner:nil];
+	}
 	
 	PXSourceListItem *sourceListItem = item;
 	cellView.textField.stringValue = sourceListItem.title;
@@ -141,14 +145,17 @@
 	{
 		cellView.badgeView.badgeValue = (NSUInteger) sourceListItem.badgeValue.integerValue;
 	}
-	else
-	{
+	else {
 		[cellView.badgeView setHidden:YES];
 	}
 	
-	if (sourceListItem.icon)
-		[cellView.imageView setImage:sourceListItem.icon];
+  
+	if (sourceListItem.icon) {
+	  [cellView.imageView setImage:sourceListItem.icon];
+	}
 	
+	[self addToolTipForItem:item view:cellView];
+  
 	[cellView.badgeView calcSize];
 	
 	return cellView;
@@ -159,6 +166,27 @@
 	if ([self.delegate respondsToSelector:@selector(sourceListSelectionDidChange)]) {
 		[self.delegate sourceListSelectionDidChange];
 	}
+}
+
+- (void)addToolTipForItem:(id)item view:(NSView *)view
+{
+  NSString *tooltip;
+  if ([item  isEqual:self.instaledFormulaeSidebarItem]) {
+	tooltip = NSLocalizedString(@"Sidebar_Info_Installed", nil);
+  } else if ([item  isEqual:self.outdatedFormulaeSidebarItem]) {
+	tooltip = NSLocalizedString(@"Sidebar_Info_Outdated", nil);
+  } else if ([item  isEqual:self.allFormulaeSidebarItem]) {
+	tooltip = NSLocalizedString(@"Sidebar_Info_All", nil);
+  } else if ([item  isEqual:self.leavesFormulaeSidebarItem]) {
+	tooltip = NSLocalizedString(@"Sidebar_Info_Leaves", nil);
+  } else if ([item  isEqual:self.repositoriesFormulaeSidebarItem]) {
+	tooltip = NSLocalizedString(@"Sidebar_Info_Repos", nil);
+  } else if ([item  isEqual:self.updateSidebarItem]) {
+	tooltip = NSLocalizedString(@"Sidebar_Info_Update", nil);
+  } else if ([item  isEqual:self.doctorSidebarItem]) {
+	tooltip = NSLocalizedString(@"Sidebar_Info_Doctor", nil);
+  }
+  view.toolTip = tooltip;
 }
 
 #pragma mark - Actions
