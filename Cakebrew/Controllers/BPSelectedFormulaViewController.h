@@ -7,7 +7,7 @@
 //
 
 #import <Cocoa/Cocoa.h>
-
+#import "BPViewController.h"
 #import "BPFormula.h"
 
 @protocol BPSelectedFormulaViewControllerDelegate <NSObject>
@@ -16,11 +16,11 @@
 
 @end
 
-@interface BPSelectedFormulaViewController : NSViewController
+@interface BPSelectedFormulaViewController : BPViewController
 
 @property (strong, nonatomic) NSArray *formulae;
 
-@property (weak) id<BPSelectedFormulaViewControllerDelegate> delegate;
+@property (weak) IBOutlet id<BPSelectedFormulaViewControllerDelegate> delegate;
 
 @property (weak) IBOutlet NSTextField *formulaDescriptionLabel;
 @property (weak) IBOutlet NSTextField *formulaPathLabel;

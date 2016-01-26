@@ -62,14 +62,12 @@ NSMenuDelegate>
 @property (strong, nonatomic) BPUpdateViewController			*updateViewController;
 @property (strong, nonatomic) BPDoctorViewController			*doctorViewController;
 @property (strong, nonatomic) BPFormulaPopoverViewController	*formulaPopoverViewController;
-@property (strong, nonatomic) BPSelectedFormulaViewController	*selectedFormulaeViewController;
 @property (strong, nonatomic) BPToolbar							*toolbar;
 @property (strong, nonatomic) BPDisabledView					*disabledView;
 @property (strong, nonatomic) BPLoadingView						*loadingView;
 
 @property (weak, nonatomic) IBOutlet NSSplitView *formulaeSplitView;
-@property (weak, nonatomic) IBOutlet NSView		 *selectedFormulaView;
-
+@property (strong, nonatomic) IBOutlet BPSelectedFormulaViewController	*selectedFormulaeViewController;
 
 @end
 
@@ -147,24 +145,7 @@ NSMenuDelegate>
 		NSTabViewItem *doctorTab = [self.tabView tabViewItemAtIndex:HomeBrewTabDoctor];
 		[doctorTab setView:doctorView];
 	}
-	
-	
-	NSView *selectedFormulaView = [self.selectedFormulaeViewController view];
-	[self.selectedFormulaView addSubview:selectedFormulaView];
-	selectedFormulaView.translatesAutoresizingMaskIntoConstraints = NO;
-	
-	[self.selectedFormulaView addConstraints:[NSLayoutConstraint
-											  constraintsWithVisualFormat:@"V:|-0-[view]-0-|"
-											  options:0
-											  metrics:nil
-											  views:@{@"view": selectedFormulaView}]];
-	
-	[self.selectedFormulaView addConstraints:[NSLayoutConstraint
-											  constraintsWithVisualFormat:@"H:|-0-[view]-0-|"
-											  options:0
-											  metrics:nil
-											  views:@{@"view": selectedFormulaView}]];
-	
+		
 	[self.sidebarController setDelegate:self];
 	[self.sidebarController refreshSidebarBadges];
 	[self.sidebarController configureSidebarSettings];

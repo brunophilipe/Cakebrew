@@ -19,6 +19,7 @@
 
 - (void)awakeFromNib
 {
+	[super awakeFromNib];
 	[[NSNotificationCenter defaultCenter] addObserver:self
 											 selector:@selector(updatePreferedWidth:)
 												 name:NSViewFrameDidChangeNotification
