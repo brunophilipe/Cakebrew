@@ -42,15 +42,16 @@ typedef NS_ENUM(NSUInteger, HomeBrewTab) {
 };
 
 @interface BPHomebrewViewController () <NSTableViewDelegate,
-BPSideBarControllerDelegate,
 BPSelectedFormulaViewControllerDelegate,
 BPHomebrewManagerDelegate,
 BPToolbarProtocol,
-NSMenuDelegate>
+NSMenuDelegate> {
+  
+}
 
 @property (weak) BPAppDelegate *appDelegate;
-
-@property NSInteger lastSelectedSidebarIndex;
+@property (nonatomic, assign) FormulaeSideBarItem selectedSidebarIndex;
+@property (nonatomic, copy) NSString *toolbarText;
 
 @property (getter=isSearching)			BOOL searching;
 @property (getter=isHomebrewInstalled)	BOOL homebrewInstalled;
@@ -77,6 +78,7 @@ NSMenuDelegate>
 {
 	BPHomebrewManager *_homebrewManager;
 }
+@synthesize selectedSidebarIndex = _selectedSidebarIndex;
 
 - (BPFormulaPopoverViewController *)formulaPopoverViewController
 {
@@ -115,6 +117,7 @@ NSMenuDelegate>
 	[self.selectedFormulaeViewController setDelegate:self];
 	
 	self.homebrewInstalled = YES;
+	_selectedSidebarIndex = FormulaeSideBarItemInstalled;
 }
 
 
@@ -229,9 +232,16 @@ NSMenuDelegate>
 	[_homebrewManager setDelegate:nil];
 }
 
+- (void)clearCurrentSelection
+{
+  [[self.tableView_formulae menu] cancelTracking];
+  [self.tableView_formulae deselectAll:self];
+  self.selectedFormulaeViewController.formulae = nil;
+}
+
 - (void)updateInterfaceItems
 {
-	NSInteger selectedSidebarRow	= [self.sidebarController.sidebar selectedRow];
+	NSInteger selectedSidebarRow	= [self selectedSidebarIndex];
 	NSInteger selectedIndex			= [self.tableView_formulae selectedRow];
 	NSIndexSet *selectedRows		= [self.tableView_formulae selectedRowIndexes];
 	NSArray *selectedFormulae		= [self.formulaeDataSource formulasAtIndexSet:selectedRows];
@@ -289,13 +299,62 @@ NSMenuDelegate>
 
 - (void)configureTableForListing:(BPListMode)mode
 {
-	[self.tableView_formulae deselectAll:nil];
+	[self clearCurrentSelection];
 	[self.tableView_formulae setMode:mode];
 	[self.formulaeDataSource setMode:mode];
 	[self.tableView_formulae reloadData];
 	[self updateInterfaceItems];
 }
 
+- (NSString *)toolbarText
+{
+  NSString *message = nil;
+  if (self.isSearching) {
+	message = NSLocalizedString(@"Sidebar_Info_SearchResults", nil);
+  } else {
+	FormulaeSideBarItem selectedSidebarRow = [self selectedSidebarIndex];
+	
+	switch (selectedSidebarRow)
+	{
+	  case FormulaeSideBarItemInstalled: // Installed Formulae
+		message = NSLocalizedString(@"Sidebar_Info_Installed", nil);
+		break;
+		
+	  case FormulaeSideBarItemOutdated: // Outdated Formulae
+		message = NSLocalizedString(@"Sidebar_Info_Outdated", nil);
+		break;
+		
+	  case FormulaeSideBarItemAll: // All Formulae
+		message = NSLocalizedString(@"Sidebar_Info_All", nil);
+		break;
+		
+	  case FormulaeSideBarItemLeaves:	// Leaves
+		message = NSLocalizedString(@"Sidebar_Info_Leaves", nil);
+		break;
+		
+	  case FormulaeSideBarItemRepositories: // Repositories
+		message = NSLocalizedString(@"Sidebar_Info_Repos", nil);
+		break;
+		
+	  case FormulaeSideBarItemDoctor: // Doctor
+		message = NSLocalizedString(@"Sidebar_Info_Doctor", nil);
+		break;
+		
+	  case FormulaeSideBarItemUpdate: // Update Tool
+		message = NSLocalizedString(@"Sidebar_Info_Update", nil);
+		break;
+		
+	  default:
+		break;
+	}
+  }
+  return message;
+}
+
++ (NSSet *)keyPathsForValuesAffectingToolbarText
+{
+  return [NSSet setWithArray:@[@"searching", @"selectedSidebarIndex"]];
+}
 
 #pragma mark - Homebrew Manager Delegate
 
@@ -306,37 +365,24 @@ NSMenuDelegate>
 	
 	if (self.isHomebrewInstalled)
 	{
-		[[self.tableView_formulae menu] cancelTracking];
-		
-		self.currentFormula = nil;
-		self.selectedFormulaeViewController.formulae = nil;
-		
-		[self.splitView			setHidden:NO];
-		
+		[self clearCurrentSelection];
+		[self.splitView	setHidden:NO];
+		[self.label_information setHidden:NO];
 		[self.toolbar configureForMode:BPToolbarModeDefault];
 		[self.toolbar unlockItems];
 		[self.formulaeDataSource refreshBackingArray];
-		[self.sidebarController refreshSidebarBadges];
-		
-		// Used after unlocking the app when inserting custom homebrew installation path
-		BOOL shouldReselectFirstRow = ([self.sidebarController.sidebar selectedRow] < 0);
-		
-		[self.sidebarController.sidebar reloadData];
-		
 		[self setEnableUpgradeFormulasMenu:([[BPHomebrewManager sharedManager] formulae_outdated].count > 0)];
-		
-		if (shouldReselectFirstRow)
-			[self.sidebarController.sidebar selectRowIndexes:[NSIndexSet indexSetWithIndex:FormulaeSideBarItemInstalled] byExtendingSelection:NO];
-		else
-			[self.sidebarController.sidebar selectRowIndexes:[NSIndexSet indexSetWithIndex:(NSUInteger)_lastSelectedSidebarIndex] byExtendingSelection:NO];
+		[self setSelectedSidebarIndex:FormulaeSideBarItemInstalled];
+		[[NSNotificationCenter defaultCenter] postNotificationName:@"BPHomebrewDidUpate" object:nil];
 	}
 }
 
 - (void)homebrewManager:(BPHomebrewManager *)manager didUpdateSearchResults:(NSArray *)searchResults
 {
-	[self setSearching:YES];
 	
-	[self.sidebarController.sidebar selectRowIndexes:[NSIndexSet indexSetWithIndex:FormulaeSideBarItemAll] byExtendingSelection:NO];
+	
+	[self setSelectedSidebarIndex:FormulaeSideBarItemAll];
+	[self setSearching:YES];
 	
 	[self configureTableForListing:kBPListSearch];
 }
@@ -348,6 +394,7 @@ NSMenuDelegate>
 	if (yesOrNo)
 	{
 		[self addDisabledView];
+		[self.label_information setHidden:YES];
 		[self.splitView setHidden:YES];
 		[self.toolbar lockItems];
 		
@@ -378,6 +425,7 @@ NSMenuDelegate>
 	{
 		[self.disabledView removeFromSuperview];
 		self.disabledView = nil;
+		[self.label_information setHidden:NO];
 		[self.splitView setHidden:NO];
 		
 		[self.toolbar unlockItems];
@@ -398,58 +446,6 @@ NSMenuDelegate>
 - (void)selectedFormulaViewDidUpdateFormulaInfoForFormula:(BPFormula *)formula
 {
 	if (formula) [self setCurrentFormula:formula];
-}
-
-#pragma mark - BPSideBarDelegate Delegate
-
-- (void)sourceListSelectionDidChange
-{
-	NSUInteger tabIndex = 0;
-	NSInteger selectedSidebarRow = [self.sidebarController.sidebar selectedRow];
-	
-	if (selectedSidebarRow >= 0)
-		_lastSelectedSidebarIndex = selectedSidebarRow;
-	
-	[self.tableView_formulae deselectAll:nil];
-	[self setCurrentFormula:nil];
-	
-	[self updateInterfaceItems];
-	
-	switch (selectedSidebarRow)
-	{
-		case FormulaeSideBarItemInstalled: // Installed Formulae
-			[self configureTableForListing:kBPListInstalled];
-			break;
-			
-		case FormulaeSideBarItemOutdated: // Outdated Formulae
-			[self configureTableForListing:kBPListOutdated];
-			break;
-			
-		case FormulaeSideBarItemAll: // All Formulae
-			[self configureTableForListing:kBPListAll];
-			break;
-			
-		case FormulaeSideBarItemLeaves:	// Leaves
-			[self configureTableForListing:kBPListLeaves];
-			break;
-			
-		case FormulaeSideBarItemRepositories: // Repositories
-			[self configureTableForListing:kBPListRepositories];
-			break;
-			
-		case FormulaeSideBarItemDoctor: // Doctor
-			tabIndex = HomeBrewTabDoctor;
-			break;
-			
-		case FormulaeSideBarItemUpdate: // Update Tool
-			tabIndex = HomeBrewTabUpdate;
-			break;
-			
-		default:
-			break;
-	}
-	
-	[self.tabView selectTabViewItemAtIndex:tabIndex];
 }
 
 #pragma mark - NSMenu Delegate
@@ -637,7 +633,7 @@ NSMenuDelegate>
 
 - (IBAction)updateHomebrew:(id)sender
 {
-	[self.sidebarController.sidebar selectRowIndexes:[NSIndexSet indexSetWithIndex:FormulaeSideBarItemUpdate] byExtendingSelection:NO];
+	[self setSelectedSidebarIndex:FormulaeSideBarItemUpdate];
 	[self.updateViewController runStopUpdate:nil];
 }
 
@@ -676,6 +672,11 @@ NSMenuDelegate>
 																			  options:nil];
 }
 
+- (IBAction)selectSideBarRowWithSenderTag:(id)sender
+{
+  [self setSelectedSidebarIndex:[sender tag]];
+}
+
 - (void)checkForBackgroundTask
 {
 	if (_appDelegate.isRunningBackgroundTask)
@@ -683,6 +684,55 @@ NSMenuDelegate>
 		[_appDelegate displayBackgroundWarning];
 		return;
 	}
+}
+
+- (void)setSelectedSidebarIndex:(FormulaeSideBarItem)selectedSidebarIndex
+{
+	NSUInteger tabIndex = HomeBrewTabFormulae;
+	[self clearCurrentSelection];
+	[self updateInterfaceItems];
+	[self setSearching:NO];
+  
+	switch (selectedSidebarIndex)
+	{
+	  case FormulaeSideBarItemInstalled: // Installed Formulae
+		[self configureTableForListing:kBPListInstalled];
+		break;
+		
+	  case FormulaeSideBarItemOutdated: // Outdated Formulae
+		[self configureTableForListing:kBPListOutdated];
+		break;
+		
+	  case FormulaeSideBarItemAll: // All Formulae
+		[self configureTableForListing:kBPListAll];
+		break;
+		
+	  case FormulaeSideBarItemLeaves:	// Leaves
+		[self configureTableForListing:kBPListLeaves];
+		break;
+		
+	  case FormulaeSideBarItemRepositories: // Repositories
+		[self configureTableForListing:kBPListRepositories];
+		break;
+		
+	  case FormulaeSideBarItemDoctor: // Doctor
+		tabIndex = HomeBrewTabDoctor;
+		break;
+		
+	  case FormulaeSideBarItemUpdate: // Update Tool
+		tabIndex = HomeBrewTabUpdate;
+		break;
+		
+	  default:
+		break;
+	}
+	[self.tabView selectTabViewItemAtIndex:tabIndex];
+	_selectedSidebarIndex = selectedSidebarIndex;
+}
+
+- (FormulaeSideBarItem)selectedSidebarIndex
+{
+  return _selectedSidebarIndex;
 }
 
 - (BPFormula *)selectedFormula

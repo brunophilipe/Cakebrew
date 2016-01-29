@@ -25,6 +25,21 @@
 
 @implementation BPSideBarController
 
+- (void)awakeFromNib
+{
+  [self.sidebar reloadData];
+  [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(update)
+											   name:@"BPHomebrewDidUpate"
+											 object:nil];
+  NSAssert([[self selectedIndexKeyPath] length] > 0, @"XIB doesn't contain keyPath.");
+  [self bind:@"selectedIndex"
+	toObject:[self selectedIndexTarget]
+ withKeyPath:[self selectedIndexKeyPath]
+	 options:@{NSRaisesForNotApplicableKeysBindingOption: @NO}];
+  [self.sidebar accessibilitySetOverrideValue:NSLocalizedString(@"Sidebar_VoiceOver_Tools", nil) forAttribute:NSAccessibilityDescriptionAttribute];
+  [self refreshSidebarBadges];
+}
+
 - (instancetype)init
 {
 	self = [super init];
@@ -76,10 +91,9 @@
 	[parent addChildItem:_updateSidebarItem];  //FormulaeSideBarItemUpdate = 8,
 }
 
-- (void)configureSidebarSettings
+- (void)update
 {
-	[self.sidebar selectRowIndexes:[NSIndexSet indexSetWithIndex:FormulaeSideBarItemInstalled] byExtendingSelection:NO];
-	[self.sidebar accessibilitySetOverrideValue:NSLocalizedString(@"Sidebar_VoiceOver_Tools", nil) forAttribute:NSAccessibilityDescriptionAttribute];
+  [self refreshSidebarBadges];
 }
 
 - (void)refreshSidebarBadges
@@ -163,9 +177,10 @@
 
 - (void)sourceListSelectionDidChange:(NSNotification *)notification
 {
-	if ([self.delegate respondsToSelector:@selector(sourceListSelectionDidChange)]) {
-		[self.delegate sourceListSelectionDidChange];
-	}
+  if ([self.sidebar selectedRow] >= FormulaeSideBarItemInstalled &&
+	  [self.sidebar selectedRow] <= FormulaeSideBarItemUpdate) {
+	[[self selectedIndexTarget] setValue:@([self.sidebar selectedRow]) forKey:[self selectedIndexKeyPath]];
+  }
 }
 
 - (void)addToolTipForItem:(id)item view:(NSView *)view
@@ -189,11 +204,20 @@
   view.toolTip = tooltip;
 }
 
-#pragma mark - Actions
-
-- (IBAction)selectSideBarRowWithSenderTag:(id)sender
+- (FormulaeSideBarItem)selectedIndex
 {
-	[self.sidebar selectRowIndexes:[NSIndexSet indexSetWithIndex:[sender tag]] byExtendingSelection:NO];
+  return [self.sidebar selectedRow];
+}
+
+- (void)setSelectedIndex:(FormulaeSideBarItem)selectedIndex
+{
+  [self.sidebar selectRowIndexes:[NSIndexSet indexSetWithIndex:selectedIndex] byExtendingSelection:NO];
+}
+
+- (void)dealloc
+{
+  [[NSNotificationCenter defaultCenter] removeObserver:self];
+  [self unbind:@"selectedIndex"];
 }
 
 @end

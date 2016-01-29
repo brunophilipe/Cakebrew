@@ -460,44 +460,44 @@ CA
                         <items>
                             <menuItem title="Installed Formulae" tag="1" keyEquivalent="1" id="8gP-gb-YtQ">
                                 <connections>
-                                    <action selector="selectSideBarRowWithSenderTag:" target="SGP-Ky-0Th" id="Cet-wG-7MQ"/>
+                                    <action selector="selectSideBarRowWithSenderTag:" target="547" id="VEg-Zq-3TK"/>
                                     <binding destination="547" name="enabled" keyPath="self.isHomebrewInstalled" id="6cc-n7-VsC"/>
                                 </connections>
                             </menuItem>
                             <menuItem title="Outdated Formulae" tag="2" keyEquivalent="2" id="KUc-5l-twA">
                                 <connections>
-                                    <action selector="selectSideBarRowWithSenderTag:" target="SGP-Ky-0Th" id="c5K-Fg-jvj"/>
+                                    <action selector="selectSideBarRowWithSenderTag:" target="547" id="EiO-Sc-sJe"/>
                                     <binding destination="547" name="enabled" keyPath="self.isHomebrewInstalled" id="nxa-lg-Pas"/>
                                 </connections>
                             </menuItem>
                             <menuItem title="All Formulae" tag="3" keyEquivalent="3" id="zam-2s-isx">
                                 <connections>
-                                    <action selector="selectSideBarRowWithSenderTag:" target="SGP-Ky-0Th" id="opC-R1-TQR"/>
+                                    <action selector="selectSideBarRowWithSenderTag:" target="547" id="KzE-0o-yBm"/>
                                     <binding destination="547" name="enabled" keyPath="self.isHomebrewInstalled" id="FJZ-kb-M6F"/>
                                 </connections>
                             </menuItem>
                             <menuItem title="Leaves" tag="4" keyEquivalent="4" id="M9N-PI-gBO">
                                 <connections>
-                                    <action selector="selectSideBarRowWithSenderTag:" target="SGP-Ky-0Th" id="Uhl-lk-qPT"/>
+                                    <action selector="selectSideBarRowWithSenderTag:" target="547" id="ev9-CW-T1d"/>
                                     <binding destination="547" name="enabled" keyPath="self.isHomebrewInstalled" id="ZMY-TV-Vtp"/>
                                 </connections>
                             </menuItem>
                             <menuItem title="Repositories" tag="5" keyEquivalent="5" id="dXD-3s-NhA">
                                 <connections>
-                                    <action selector="selectSideBarRowWithSenderTag:" target="SGP-Ky-0Th" id="s3g-8g-eFB"/>
+                                    <action selector="selectSideBarRowWithSenderTag:" target="547" id="8Fv-h9-cgL"/>
                                     <binding destination="547" name="enabled" keyPath="self.isHomebrewInstalled" id="Y5h-D2-XfT"/>
                                 </connections>
                             </menuItem>
                             <menuItem isSeparatorItem="YES" id="kEe-QJ-gfj"/>
                             <menuItem title="Doctor" tag="7" keyEquivalent="6" id="eI9-b4-Rmg">
                                 <connections>
-                                    <action selector="selectSideBarRowWithSenderTag:" target="SGP-Ky-0Th" id="DMG-th-yEC"/>
+                                    <action selector="selectSideBarRowWithSenderTag:" target="547" id="Lr3-Kt-gBF"/>
                                     <binding destination="547" name="enabled" keyPath="self.isHomebrewInstalled" id="xxS-YX-gBx"/>
                                 </connections>
                             </menuItem>
                             <menuItem title="Update" tag="8" keyEquivalent="7" id="8Vh-lk-gYe">
                                 <connections>
-                                    <action selector="selectSideBarRowWithSenderTag:" target="SGP-Ky-0Th" id="fUp-dE-WjG"/>
+                                    <action selector="selectSideBarRowWithSenderTag:" target="547" id="JaG-f5-Tnn"/>
                                     <binding destination="547" name="enabled" keyPath="self.isHomebrewInstalled" id="HeO-ww-Vvq"/>
                                 </connections>
                             </menuItem>
@@ -555,21 +555,35 @@ CA
                     <customView translatesAutoresizingMaskIntoConstraints="NO" id="Fdz-An-2On">
                         <rect key="frame" x="0.0" y="0.0" width="570" height="342"/>
                         <subviews>
+                            <textField hidden="YES" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="tiK-fW-tE7">
+                                <rect key="frame" x="444" y="4" width="119" height="14"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="115" id="olS-5g-fL0"/>
+                                </constraints>
+                                <textFieldCell key="cell" controlSize="small" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="right" title="No selection" id="3xE-6a-fkA">
+                                    <font key="font" metaFont="smallSystem"/>
+                                    <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                                <connections>
+                                    <binding destination="547" name="value" keyPath="self.toolbarText" id="rkl-Tq-mi8"/>
+                                </connections>
+                            </textField>
                             <splitView hidden="YES" autosaveName="MainSplitView" dividerStyle="thin" vertical="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Exu-Zx-Kij">
-                                <rect key="frame" x="0.0" y="0.0" width="570" height="342"/>
+                                <rect key="frame" x="0.0" y="20" width="570" height="322"/>
                                 <subviews>
                                     <customView id="5HN-nB-TIW">
-                                        <rect key="frame" x="0.0" y="0.0" width="190" height="342"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="190" height="322"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <subviews>
                                             <scrollView borderType="none" autohidesScrollers="YES" horizontalLineScroll="26" horizontalPageScroll="10" verticalLineScroll="26" verticalPageScroll="10" usesPredominantAxisScrolling="NO" horizontalScrollElasticity="none" verticalScrollElasticity="none" translatesAutoresizingMaskIntoConstraints="NO" id="kTq-kk-rF0">
-                                                <rect key="frame" x="0.0" y="2" width="190" height="340"/>
+                                                <rect key="frame" x="0.0" y="2" width="190" height="320"/>
                                                 <clipView key="contentView" drawsBackground="NO" id="RhN-kh-4Xx">
-                                                    <rect key="frame" x="0.0" y="0.0" width="190" height="340"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="190" height="320"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                     <subviews>
                                                         <outlineView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" selectionHighlightStyle="sourceList" columnReordering="NO" multipleSelection="NO" autosaveColumns="NO" rowHeight="24" rowSizeStyle="systemDefault" viewBased="YES" indentationPerLevel="16" outlineTableColumn="LEF-be-VWM" id="h1z-c9-U0s" customClass="PXSourceList">
-                                                            <rect key="frame" x="0.0" y="0.0" width="190" height="340"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="190" height="0.0"/>
                                                             <autoresizingMask key="autoresizingMask"/>
                                                             <size key="intercellSpacing" width="0.0" height="2"/>
                                                             <color key="backgroundColor" name="_sourceListBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -682,16 +696,16 @@ CA
                                         </constraints>
                                     </customView>
                                     <customView focusRingType="none" id="C6z-4a-AJ0">
-                                        <rect key="frame" x="191" y="0.0" width="379" height="342"/>
+                                        <rect key="frame" x="191" y="0.0" width="379" height="322"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <subviews>
                                             <tabView drawsBackground="NO" type="noTabsNoBorder" initialItem="aFR-nx-bHM" translatesAutoresizingMaskIntoConstraints="NO" id="79A-lZ-LEo">
-                                                <rect key="frame" x="0.0" y="2" width="379" height="340"/>
+                                                <rect key="frame" x="0.0" y="2" width="379" height="320"/>
                                                 <font key="font" metaFont="system"/>
                                                 <tabViewItems>
                                                     <tabViewItem label="Formulae" identifier="1" id="aFR-nx-bHM">
                                                         <view key="view" id="JkQ-ZQ-ugA">
-                                                            <rect key="frame" x="0.0" y="0.0" width="379" height="340"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="379" height="320"/>
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                         </view>
                                                     </tabViewItem>
@@ -727,9 +741,11 @@ CA
                         </subviews>
                         <constraints>
                             <constraint firstItem="Exu-Zx-Kij" firstAttribute="top" secondItem="Fdz-An-2On" secondAttribute="top" id="30V-kY-DWU"/>
-                            <constraint firstAttribute="bottom" secondItem="Exu-Zx-Kij" secondAttribute="bottom" id="ISt-mC-eww"/>
+                            <constraint firstAttribute="trailing" secondItem="tiK-fW-tE7" secondAttribute="trailing" constant="9" id="98D-Xm-9Ft"/>
+                            <constraint firstAttribute="bottom" secondItem="Exu-Zx-Kij" secondAttribute="bottom" constant="20" id="ISt-mC-eww"/>
                             <constraint firstAttribute="trailing" secondItem="Exu-Zx-Kij" secondAttribute="trailing" id="Sen-En-LL8"/>
                             <constraint firstItem="Exu-Zx-Kij" firstAttribute="leading" secondItem="Fdz-An-2On" secondAttribute="leading" id="a4E-HV-jUq"/>
+                            <constraint firstItem="tiK-fW-tE7" firstAttribute="top" secondItem="Exu-Zx-Kij" secondAttribute="bottom" constant="2" id="dHe-up-mv2"/>
                         </constraints>
                     </customView>
                 </subviews>
@@ -740,6 +756,7 @@ CA
                     <constraint firstItem="Fdz-An-2On" firstAttribute="top" secondItem="372" secondAttribute="top" id="f1Z-Le-i9Q"/>
                 </constraints>
             </view>
+            <contentBorderThickness minY="22"/>
         </window>
         <menu title="Formula" id="dg5-kq-v1Y">
             <items>
@@ -864,14 +881,19 @@ CA
             </connections>
         </customObject>
         <customObject id="SGP-Ky-0Th" customClass="BPSideBarController">
+            <userDefinedRuntimeAttributes>
+                <userDefinedRuntimeAttribute type="string" keyPath="selectedIndexKeyPath" value="selectedSidebarIndex"/>
+            </userDefinedRuntimeAttributes>
             <connections>
                 <outlet property="delegate" destination="547" id="a4R-ai-ZRe"/>
+                <outlet property="selectedIndexTarget" destination="547" id="gkA-xt-hcg"/>
                 <outlet property="sidebar" destination="h1z-c9-U0s" id="CEM-3v-TUM"/>
             </connections>
         </customObject>
         <viewController title="HomebrewController" nibName="MainMenu" id="547" userLabel="Homebrew Controller" customClass="BPHomebrewViewController">
             <connections>
                 <outlet property="formulaeSplitView" destination="hkt-Ff-Ha2" id="PSG-Ga-xEa"/>
+                <outlet property="label_information" destination="tiK-fW-tE7" id="K14-X1-4bF"/>
                 <outlet property="menu_formula" destination="sBH-Ta-Jft" id="kCm-57-cUw"/>
                 <outlet property="scrollView_formulae" destination="YpG-G5-bXX" id="oFo-5A-rfO"/>
                 <outlet property="selectedFormulaView" destination="Nrf-M9-yac" id="l5Q-Fd-m5y"/>

@@ -28,13 +28,11 @@ typedef NS_ENUM(NSUInteger, FormulaeSideBarItem)
 
 @interface BPSideBarController : NSObject <PXSourceListDataSource, PXSourceListDelegate>
 
+@property (weak) id <BPSideBarControllerDelegate>delegate;
 @property (assign) IBOutlet PXSourceList *sidebar;
+@property (nonatomic, assign) FormulaeSideBarItem selectedIndex;
+@property (nonatomic, copy) NSString *selectedIndexKeyPath;
+@property (nonatomic) IBOutlet id selectedIndexTarget;
 
-@property (weak) IBOutlet id <BPSideBarControllerDelegate>delegate;
-
-- (void)refreshSidebarBadges;
-- (void)configureSidebarSettings;
-
-- (IBAction)selectSideBarRowWithSenderTag:(id)sender;
 
 @end
