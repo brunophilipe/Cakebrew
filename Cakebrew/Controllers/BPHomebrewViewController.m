@@ -167,10 +167,7 @@ NSMenuDelegate> {
 											  options:0
 											  metrics:nil
 											  views:@{@"view": selectedFormulaView}]];
-	
-	[self.sidebarController setDelegate:self];
-	[self.sidebarController refreshSidebarBadges];
-	[self.sidebarController configureSidebarSettings];
+
 	
 	[self.splitView setHidden:YES];
 	
