@@ -84,6 +84,14 @@
   return nil;
 }
 
+- (BPRepository *)repositoryAtIndex:(NSInteger)index
+{
+  if ([self.formulaeArray count] > index && index >= 0) {
+	return [self.formulaeArray objectAtIndex:index];
+  }
+  return nil;
+}
+
 - (NSArray *)formulasAtIndexSet:(NSIndexSet *)indexSet
 {
   if (indexSet.count > 0 && [self.formulaeArray count] > indexSet.lastIndex) {
@@ -103,8 +111,10 @@
     if ([columnIdentifer isEqualToString:kColumnIdentifierName]) {
 			if ([element isKindOfClass:[BPFormula class]]) {
 				return [(BPFormula*)element name];
+			} else if ([element isKindOfClass:[BPRepository class]]) {
+				return [(BPRepository*)element name];
 			} else {
-				return element;
+			  return element;
 			}
     } else if ([columnIdentifer isEqualToString:kColumnIdentifierVersion]) {
 			if ([element isKindOfClass:[BPFormula class]]) {

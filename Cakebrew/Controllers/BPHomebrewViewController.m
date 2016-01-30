@@ -34,11 +34,13 @@
 #import "BPStyle.h"
 #import "BPLoadingView.h"
 #import "BPDisabledView.h"
+#import "BPRepository.h"
 
 typedef NS_ENUM(NSUInteger, HomeBrewTab) {
 	HomeBrewTabFormulae,
 	HomeBrewTabDoctor,
-	HomeBrewTabUpdate
+	HomeBrewTabUpdate,
+	HomeBrewTabRepository
 };
 
 @interface BPHomebrewViewController () <NSTableViewDelegate,
@@ -125,8 +127,13 @@ NSMenuDelegate> {
 {
 	self.formulaeDataSource = [[BPFormulaeDataSource alloc] initWithMode:kBPListAll];
 	self.tableView_formulae.dataSource = self.formulaeDataSource;
+	self.repositoryTableView.dataSource = self.formulaeDataSource;
 	self.tableView_formulae.delegate = self;
-	[self.tableView_formulae accessibilitySetOverrideValue:NSLocalizedString(@"Formulae", nil) forAttribute:NSAccessibilityDescriptionAttribute];
+	self.repositoryTableView.delegate = self;
+	[self.tableView_formulae accessibilitySetOverrideValue:NSLocalizedString(@"Formulae", nil)
+											  forAttribute:NSAccessibilityDescriptionAttribute];
+	[self.repositoryTableView accessibilitySetOverrideValue:NSLocalizedString(@"Repository", nil)
+											   forAttribute:NSAccessibilityDescriptionAttribute];
 	
 	//link formulae tableview
 	NSView *formulaeView = self.formulaeSplitView;
@@ -150,7 +157,13 @@ NSMenuDelegate> {
 		NSTabViewItem *doctorTab = [self.tabView tabViewItemAtIndex:HomeBrewTabDoctor];
 		[doctorTab setView:doctorView];
 	}
-	
+  
+	//link formulae tableview
+	NSView *embeddedRepositoryView = [[self.repositoryTableView superview] superview];//(NSScrollView *) //(NSClipView *)
+	if ([[self.tabView tabViewItems] count] > HomeBrewTabRepository) {
+	  NSTabViewItem *formulaeTab = [self.tabView tabViewItemAtIndex:HomeBrewTabRepository];
+	  [formulaeTab setView:embeddedRepositoryView];
+	}
 	
 	NSView *selectedFormulaView = [self.selectedFormulaeViewController view];
 	[self.selectedFormulaView addSubview:selectedFormulaView];
@@ -233,65 +246,96 @@ NSMenuDelegate> {
 {
   [[self.tableView_formulae menu] cancelTracking];
   [self.tableView_formulae deselectAll:self];
+  [self.repositoryTableView deselectAll:self];
   self.selectedFormulaeViewController.formulae = nil;
 }
 
 - (void)updateInterfaceItems
 {
-	NSInteger selectedSidebarRow	= [self selectedSidebarIndex];
-	NSInteger selectedIndex			= [self.tableView_formulae selectedRow];
-	NSIndexSet *selectedRows		= [self.tableView_formulae selectedRowIndexes];
-	NSArray *selectedFormulae		= [self.formulaeDataSource formulasAtIndexSet:selectedRows];
-	
-	[self.selectedFormulaeViewController setFormulae:selectedFormulae];
-	
-	
-	CGFloat height = [self.formulaeSplitView bounds].size.height;
-	CGFloat preferedHeightOfSelectedFormulaView = 120.f;
-	[self.formulaeSplitView setPosition:height - preferedHeightOfSelectedFormulaView
-					   ofDividerAtIndex:0];
-	
-	if (selectedSidebarRow == FormulaeSideBarItemRepositories) { // Repositories sidebaritem
-		[self.toolbar configureForMode:BPToolbarModeTap];
-		[self.formulaeSplitView setPosition:height
-						   ofDividerAtIndex:0];
-		
-		if (selectedIndex != -1) {
-			[self.toolbar configureForMode:BPToolbarModeUntap];
-		} else {
-			[self.toolbar configureForMode:BPToolbarModeTap];
-		}
-	}
-	else if (selectedIndex == -1 || selectedSidebarRow > FormulaeSideBarItemToolsCategory)
-	{
-		[self.toolbar configureForMode:BPToolbarModeDefault];
-	}
-	else if ([[self.tableView_formulae selectedRowIndexes] count] > 1)
-	{
-		[self.toolbar configureForMode:BPToolbarModeUpdateMany];
-	}
-	else
-	{
-		BPFormula *formula = [self .formulaeDataSource formulaAtIndex:selectedIndex];
+  switch ([self selectedSidebarIndex]) {
+	case FormulaeSideBarItemInstalled:
+	  [self updateInterfaceForFormulaeTab];
+	  break;
+	case FormulaeSideBarItemLeaves:
+	  [self updateInterfaceForFormulaeTab];
+	  break;
+	case FormulaeSideBarItemOutdated:
+	  [self updateInterfaceForFormulaeTab];
+	  break;
+	case FormulaeSideBarItemUpdate:
+	  [self updateInterfaceForUpdateTab];
+	  break;
+	case FormulaeSideBarItemDoctor:
+	  [self updateInterfaceForDoctorTab];
+	  break;
+	case FormulaeSideBarItemRepositories:
+	  [self updateInterfaceForRepositoryTab];
+	  break;
+	default:
+	  [self updateInterfaceForFormulaeTab];
+	  break;
+  }
+}
 
-		switch ([[BPHomebrewManager sharedManager] statusForFormula:formula]) {
+- (void)updateInterfaceForDoctorTab
+{
+  [self.toolbar configureForMode:BPToolbarModeDefault];
+}
+
+- (void)updateInterfaceForRepositoryTab
+{
+  NSInteger selectedIndex = [self.repositoryTableView selectedRow];
+  
+  if (selectedIndex != -1) {
+	[self.toolbar configureForMode:BPToolbarModeUntap];
+  } else {
+	[self.toolbar configureForMode:BPToolbarModeTap];
+  }
+}
+
+- (void)updateInterfaceForFormulaeTab
+{
+  NSInteger selectedIndex			= [self.tableView_formulae selectedRow];
+  NSIndexSet *selectedRows		= [self.tableView_formulae selectedRowIndexes];
+  NSArray *selectedFormulae		= [self.formulaeDataSource formulasAtIndexSet:selectedRows];
+  
+  CGFloat height = [self.formulaeSplitView bounds].size.height;
+  CGFloat preferedHeightOfSelectedFormulaView = 120.f;
+  [self.formulaeSplitView setPosition:height - preferedHeightOfSelectedFormulaView
+					 ofDividerAtIndex:0];
+
+  if (selectedIndex == -1) {
+	[self.toolbar configureForMode:BPToolbarModeDefault];
+  } else if ([[self.tableView_formulae selectedRowIndexes] count] > 1) {
+	[self.toolbar configureForMode:BPToolbarModeUpdateMany];
+  } else {
+	NSInteger selectedSidebarRow	= [self selectedSidebarIndex];
+	BPFormula *formula = [self.formulaeDataSource formulaAtIndex:selectedIndex];
+	
+	switch ([[BPHomebrewManager sharedManager] statusForFormula:formula]) {
 			case kBPFormulaInstalled:
-				[self.toolbar configureForMode:BPToolbarModeUninstall];
-				break;
-				
+		[self.toolbar configureForMode:BPToolbarModeUninstall];
+		break;
+		
 			case kBPFormulaOutdated:
-				if (selectedSidebarRow == FormulaeSideBarItemOutdated) {
-					[self.toolbar configureForMode:BPToolbarModeUpdateSingle];
-				} else {
-					[self.toolbar configureForMode:BPToolbarModeUninstall];
-				}
-				break;
-				
-			case kBPFormulaNotInstalled:
-				[self.toolbar configureForMode:BPToolbarModeInstall];
-				break;
+		if (selectedSidebarRow == FormulaeSideBarItemOutdated) {
+		  [self.toolbar configureForMode:BPToolbarModeUpdateSingle];
+		} else {
+		  [self.toolbar configureForMode:BPToolbarModeUninstall];
 		}
+		break;
+		
+			case kBPFormulaNotInstalled:
+		[self.toolbar configureForMode:BPToolbarModeInstall];
+		break;
 	}
+  }
+  [self.selectedFormulaeViewController setFormulae:selectedFormulae];
+}
+
+- (void)updateInterfaceForUpdateTab
+{
+  [self.toolbar configureForMode:BPToolbarModeDefault];
 }
 
 - (void)configureTableForListing:(BPListMode)mode
@@ -301,6 +345,14 @@ NSMenuDelegate> {
 	[self.formulaeDataSource setMode:mode];
 	[self.tableView_formulae reloadData];
 	[self updateInterfaceItems];
+}
+
+- (void)configureRepositoryTable
+{
+  [self clearCurrentSelection];
+  [self.formulaeDataSource setMode:kBPListRepositories];
+  [self.repositoryTableView reloadData];
+  [self updateInterfaceItems];
 }
 
 - (NSString *)toolbarText
@@ -367,9 +419,9 @@ NSMenuDelegate> {
 		[self.label_information setHidden:NO];
 		[self.toolbar configureForMode:BPToolbarModeDefault];
 		[self.toolbar unlockItems];
-		[self.formulaeDataSource refreshBackingArray];
 		[self setEnableUpgradeFormulasMenu:([[BPHomebrewManager sharedManager] formulae_outdated].count > 0)];
 		[self setSelectedSidebarIndex:FormulaeSideBarItemInstalled];
+		[self.formulaeDataSource refreshBackingArray];
 		[[NSNotificationCenter defaultCenter] postNotificationName:@"BPHomebrewDidUpate" object:nil];
 	}
 }
@@ -599,9 +651,9 @@ NSMenuDelegate> {
 		{
 			return;
 		}
-		BPFormula *lformula = [BPFormula formulaWithName:name];
+		BPRepository *repository = [BPRepository repositoryWithName:name];
 		self.operationWindowController = [BPInstallationWindowController runWithOperation:kBPWindowOperationTap
-																				 formulae:@[lformula]
+																				 formulae:@[repository]
 																				  options:nil];
 	}
 }
@@ -609,21 +661,21 @@ NSMenuDelegate> {
 - (IBAction)untapRepository:(id)sender
 {
 	[self checkForBackgroundTask];
-	BPFormula *formula = [self selectedFormula];
-	if (!formula) {
+	BPRepository *repository = [self selectedRepository];
+	if (!repository) {
 		return;
 	}
 	NSAlert *alert = [NSAlert alertWithMessageText:NSLocalizedString(@"Message_Untap_Title", nil)
 									 defaultButton:NSLocalizedString(@"Generic_OK", nil)
 								   alternateButton:NSLocalizedString(@"Generic_Cancel", nil)
 									   otherButton:nil
-						 informativeTextWithFormat:NSLocalizedString(@"Message_Untap_Body", nil), formula.name];
+						 informativeTextWithFormat:NSLocalizedString(@"Message_Untap_Body", nil), repository.name];
 	
 	[alert.window setTitle:NSLocalizedString(@"Cakebrew", nil)];
 	
 	if ([alert runModal] == NSAlertDefaultReturn) {
 		self.operationWindowController = [BPInstallationWindowController runWithOperation:kBPWindowOperationUntap
-																				 formulae:@[formula]
+																				 formulae:@[repository]
 																				  options:nil];
 	}
 }
@@ -687,7 +739,6 @@ NSMenuDelegate> {
 {
 	NSUInteger tabIndex = HomeBrewTabFormulae;
 	[self clearCurrentSelection];
-	[self updateInterfaceItems];
 	[self setSearching:NO];
   
 	switch (selectedSidebarIndex)
@@ -709,7 +760,8 @@ NSMenuDelegate> {
 		break;
 		
 	  case FormulaeSideBarItemRepositories: // Repositories
-		[self configureTableForListing:kBPListRepositories];
+		[self configureRepositoryTable];
+		tabIndex = HomeBrewTabRepository;
 		break;
 		
 	  case FormulaeSideBarItemDoctor: // Doctor
@@ -725,6 +777,7 @@ NSMenuDelegate> {
 	}
 	[self.tabView selectTabViewItemAtIndex:tabIndex];
 	_selectedSidebarIndex = selectedSidebarIndex;
+	[self updateInterfaceItems];
 }
 
 - (FormulaeSideBarItem)selectedSidebarIndex
@@ -743,6 +796,13 @@ NSMenuDelegate> {
 	NSIndexSet *selectedIndexes = [self.tableView_formulae selectedRowIndexes];
 	return [self.formulaeDataSource formulasAtIndexSet:selectedIndexes];
 }
+
+- (BPRepository *)selectedRepository
+{
+  NSInteger selectedIndex = [self.repositoryTableView selectedRow];
+  return [self.formulaeDataSource repositoryAtIndex:selectedIndex];
+}
+
 
 - (NSArray *)selectedFormulaNames
 {

@@ -711,13 +711,19 @@ CA
                                                     </tabViewItem>
                                                     <tabViewItem label="Doctor" identifier="2" id="WM9-6z-Jzl">
                                                         <view key="view" id="6fi-d1-4lx">
-                                                            <rect key="frame" x="0.0" y="0.0" width="379" height="322"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="379" height="320"/>
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                         </view>
                                                     </tabViewItem>
                                                     <tabViewItem label="Update" identifier="3" id="yL4-oW-nIm">
                                                         <view key="view" id="p04-F1-40m">
-                                                            <rect key="frame" x="0.0" y="0.0" width="379" height="322"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="379" height="320"/>
+                                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                                        </view>
+                                                    </tabViewItem>
+                                                    <tabViewItem label="Repository" identifier="4" id="wbp-0D-eNz">
+                                                        <view key="view" id="42D-Dg-VYG">
+                                                            <rect key="frame" x="0.0" y="0.0" width="379" height="320"/>
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                         </view>
                                                     </tabViewItem>
@@ -895,6 +901,7 @@ CA
                 <outlet property="formulaeSplitView" destination="hkt-Ff-Ha2" id="PSG-Ga-xEa"/>
                 <outlet property="label_information" destination="tiK-fW-tE7" id="K14-X1-4bF"/>
                 <outlet property="menu_formula" destination="sBH-Ta-Jft" id="kCm-57-cUw"/>
+                <outlet property="repositoryTableView" destination="UjN-dL-7o3" id="loG-BO-Hgw"/>
                 <outlet property="scrollView_formulae" destination="YpG-G5-bXX" id="oFo-5A-rfO"/>
                 <outlet property="selectedFormulaView" destination="Nrf-M9-yac" id="l5Q-Fd-m5y"/>
                 <outlet property="sidebarController" destination="SGP-Ky-0Th" id="etb-bD-RB5"/>
@@ -1015,9 +1022,55 @@ CA
                 <real value="250"/>
                 <real value="243"/>
             </holdingPriorities>
-            <point key="canvasLocation" x="469" y="762"/>
+            <point key="canvasLocation" x="309" y="722"/>
         </splitView>
         <userDefaultsController representsSharedInstance="YES" id="Bum-pn-dFZ"/>
+        <scrollView borderType="none" autohidesScrollers="YES" horizontalLineScroll="19" horizontalPageScroll="10" verticalLineScroll="19" verticalPageScroll="10" usesPredominantAxisScrolling="NO" horizontalScrollElasticity="none" scrollerKnobStyle="dark" id="Tiq-MO-haF">
+            <rect key="frame" x="0.0" y="0.0" width="499" height="157"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+            <clipView key="contentView" focusRingType="none" copiesOnScroll="NO" id="Mhq-Gz-SPt">
+                <rect key="frame" x="0.0" y="0.0" width="499" height="157"/>
+                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                <subviews>
+                    <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" alternatingRowBackgroundColors="YES" multipleSelection="NO" autosaveColumns="NO" headerView="dbL-up-TUl" id="UjN-dL-7o3">
+                        <rect key="frame" x="0.0" y="0.0" width="499" height="134"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <size key="intercellSpacing" width="3" height="2"/>
+                        <color key="backgroundColor" white="0.34999999999999998" alpha="0.0" colorSpace="calibratedWhite"/>
+                        <color key="gridColor" name="gridColor" catalog="System" colorSpace="catalog"/>
+                        <tableColumns>
+                            <tableColumn identifier="Name" editable="NO" width="494" minWidth="40" maxWidth="1000" id="2sw-c6-6kq">
+                                <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left" title="Name">
+                                    <font key="font" metaFont="smallSystem"/>
+                                    <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="headerColor" catalog="System" colorSpace="catalog"/>
+                                </tableHeaderCell>
+                                <textFieldCell key="dataCell" lineBreakMode="truncatingTail" selectable="YES" editable="YES" alignment="left" title="Text Cell" id="TLa-Mx-Lkh">
+                                    <font key="font" metaFont="system"/>
+                                    <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                                <tableColumnResizingMask key="resizingMask" userResizable="YES"/>
+                            </tableColumn>
+                        </tableColumns>
+                    </tableView>
+                </subviews>
+                <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
+            </clipView>
+            <scroller key="horizontalScroller" hidden="YES" verticalHuggingPriority="750" horizontal="YES" id="J0f-BA-CbY">
+                <rect key="frame" x="0.0" y="141" width="499" height="16"/>
+                <autoresizingMask key="autoresizingMask"/>
+            </scroller>
+            <scroller key="verticalScroller" hidden="YES" verticalHuggingPriority="750" horizontal="NO" id="BIt-ii-D4P">
+                <rect key="frame" x="224" y="17" width="15" height="102"/>
+                <autoresizingMask key="autoresizingMask"/>
+            </scroller>
+            <tableHeaderView key="headerView" id="dbL-up-TUl">
+                <rect key="frame" x="0.0" y="0.0" width="499" height="23"/>
+                <autoresizingMask key="autoresizingMask"/>
+            </tableHeaderView>
+            <point key="canvasLocation" x="119.5" y="254.5"/>
+        </scrollView>
     </objects>
     <resources>
         <image name="NSActionTemplate" width="14" height="14"/>

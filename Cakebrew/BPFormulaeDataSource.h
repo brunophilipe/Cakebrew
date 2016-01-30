@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "BPHomebrewInterface.h"
 #import "BPFormula.h"
+#import "BPRepository.h"
 
 @interface BPFormulaeDataSource : NSObject <NSTableViewDataSource>
 
@@ -16,6 +17,7 @@
 
 - (instancetype)initWithMode:(BPListMode)aMode;
 - (BPFormula *)formulaAtIndex:(NSInteger)index;
+- (BPRepository *)repositoryAtIndex:(NSInteger)index;
 - (NSArray *)formulasAtIndexSet:(NSIndexSet *)indexSet;
 - (void)refreshBackingArray;
 @end

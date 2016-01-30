@@ -41,6 +41,7 @@ typedef NS_ENUM(NSUInteger, BPWindowOperation) {
 
 @property (weak) IBOutlet BPSideBarController      *sidebarController;
 @property (weak) IBOutlet BPFormulaeTableView      *tableView_formulae;
+@property (weak) IBOutlet NSTableView			   *repositoryTableView;
 @property (weak) IBOutlet NSScrollView             *scrollView_formulae;
 @property (weak) IBOutlet NSSplitView              *splitView;
 @property (weak) IBOutlet NSTabView                *tabView;

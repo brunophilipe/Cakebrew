@@ -58,6 +58,7 @@ typedef NS_ENUM(NSInteger, BPFormulaStatus) {
 - (void)updateSearchWithName:(NSString *)name;
 
 - (BPFormulaStatus)statusForFormula:(BPFormula*)formula;
+- (BOOL)leaveStatusForFormula:(BPFormula*)formula;
 
 - (void)cleanUp;
 

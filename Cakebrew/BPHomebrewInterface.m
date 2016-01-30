@@ -21,6 +21,7 @@
 
 #import "BPHomebrewInterface.h"
 #import "BPTask.h"
+#import "BPRepository.h"
 
 static NSString *cakebrewOutputIdentifier = @"+++++Cakebrew+++++";
 
@@ -448,7 +449,7 @@ Installing and upgrading formulas is not advised in DEBUG mode!\n\n",
 	NSMutableArray *formulae = [NSMutableArray arrayWithCapacity:array.count];
 	
 	for (NSString *item in array) {
-		BPFormula *formula = [self parseFormulaItem:item];
+		id formula = [self parseFormulaItem:item];
 		if (formula) {
 			[formulae addObject:formula];
 		}
@@ -536,6 +537,11 @@ Installing and upgrading formulas is not advised in DEBUG mode!\n\n",
 - (instancetype)init
 {
 	return (BPHomebrewInterfaceListCallRepositories *)[super initWithArguments:@[@"tap"]];
+}
+
+- (BPRepository *)parseFormulaItem:(NSString *)item
+{
+  return [BPRepository repositoryWithName:item];
 }
 
 @end

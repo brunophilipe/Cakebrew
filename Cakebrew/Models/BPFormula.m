@@ -348,6 +348,11 @@ NSString *const BPFormulaDidUpdateNotification = @"BPFormulaDidUpdateNotificatio
 	return [[BPHomebrewManager sharedManager] statusForFormula:self] == kBPFormulaOutdated;
 }
 
+- (BOOL)isLeave
+{
+  return [[BPHomebrewManager sharedManager] leaveStatusForFormula:self];
+}
+
 - (NSString*)description
 {
 	return [NSString stringWithFormat:@"%@ <%p> name:%@ version:%@ latestVerson:%@", NSStringFromClass([self class]), self, self.name, self.version, self.latestVersion];

@@ -67,4 +67,9 @@ extern NSString *const BPFormulaDidUpdateNotification;
  */
 - (BOOL)isOutdated;
 
+/**
+ *  @return `YES` if the formula is leave (does not depend on other formula), or `NO` otherwise.
+ */
+- (BOOL)isLeave;
+
 @end

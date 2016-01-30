@@ -88,14 +88,6 @@ unichar SPACE_CHARACTER = 0x0020;
 			[self setAllowsMultipleSelection:NO];
 			break;
 			
-		case kBPListRepositories:
-			titleWidth = (NSInteger)(totalWidth * 0.99);
-			[[self tableColumnWithIdentifier:kColumnIdentifierVersion] setHidden:YES];
-			[[self tableColumnWithIdentifier:kColumnIdentifierLatestVersion] setHidden:YES];
-			[[self tableColumnWithIdentifier:kColumnIdentifierStatus] setHidden:YES];
-			[self setAllowsMultipleSelection:NO];
-			break;
-			
 		default:
 			break;
 	}

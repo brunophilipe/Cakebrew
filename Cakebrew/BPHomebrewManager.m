@@ -22,6 +22,7 @@
 #import "BPHomebrewManager.h"
 #import "BPHomebrewInterface.h"
 #import "BPAppDelegate.h"
+#import "BPRepository.h"
 
 NSString *const kBPCacheLastUpdateKey = @"BPCacheLastUpdateKey";
 NSString *const kBPCacheDataKey	= @"BPCacheDataKey";
@@ -223,6 +224,13 @@ NSString *const kBPCacheDataKey	= @"BPCacheDataKey";
 		return kBPFormulaNotInstalled;
 	}
 }
+
+
+- (BOOL)leaveStatusForFormula:(BPFormula*)formula
+{
+  return [self searchForFormula:formula inArray:self.formulae_leaves] >= 0 ? YES : NO;
+}
+
 
 - (void)cleanUp
 {
