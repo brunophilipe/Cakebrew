@@ -501,34 +501,32 @@ Installing and upgrading formulas is not advised in DEBUG mode!\n\n",
 
 - (instancetype)init
 {
-	return (BPHomebrewInterfaceListCallUpgradeable *)[super initWithArguments:@[@"outdated", @"--verbose"]];
+	return (BPHomebrewInterfaceListCallUpgradeable *)[super initWithArguments:@[@"outdated", @"--json=v1"]];
 }
 
-- (BPFormula *)parseFormulaItem:(NSString *)item
+- (NSArray *)parseData:(NSString *)string
 {
-	static NSString *regexString = @"(\\S+)\\s\\((.*)\\)";
-	
-	BPFormula __block *formula = nil;
-	NSError *error = nil;
-	NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:regexString options:NSRegularExpressionCaseInsensitive error:&error];
-	
-	[regex enumerateMatchesInString:item options:0 range:NSMakeRange(0, [item length]) usingBlock:^(NSTextCheckingResult *result, NSMatchingFlags flags, BOOL *stop) {
-		if (result.resultType == NSTextCheckingTypeRegularExpression)
-		{
-			NSRange lastRange = [result rangeAtIndex:[result numberOfRanges]-1];
-			NSArray *versionsTuple = [[[[item substringWithRange:lastRange] componentsSeparatedByString:@","] lastObject] componentsSeparatedByString:@"<"];
-			formula = [BPFormula formulaWithName:[item substringWithRange:[result rangeAtIndex:1]]
-										 version:[[versionsTuple firstObject] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]]
-								andLatestVersion:[[versionsTuple lastObject] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]]];
-		}
-	}];
-	
-	if (!formula) {
-		formula = [BPFormula formulaWithName:item];
+  NSMutableArray *formulae = [NSMutableArray array];
+  NSData *data = [string dataUsingEncoding:NSUTF8StringEncoding];
+  NSError *error;
+  id object = [NSJSONSerialization JSONObjectWithData:data options:0 error:&error];
+  if (!error) {
+	if ([object isKindOfClass:[NSArray class]]) {
+	  for (NSDictionary *item in object) {
+		  NSString *name = item[@"name"];
+		  NSString *installedVersion = [item[@"installed_versions"] firstObject];
+		  NSString *latestVersion = item[@"current_version"];
+		  BPFormula *formula = [BPFormula formulaWithName:name version:installedVersion andLatestVersion:latestVersion];
+		  if (formula) {
+			[formulae addObject:formula];
+		  }
+	  }
 	}
-	
-	return formula;
+  }
+  
+  return formulae;
 }
+
 
 @end
 
