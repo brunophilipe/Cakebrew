@@ -77,7 +77,7 @@ NSString *const BPFormulaDidUpdateNotification = @"BPFormulaDidUpdateNotificatio
 
 + (instancetype)formulaWithName:(NSString*)name andVersion:(NSString*)version
 {
-	return [self formulaWithName:name version:nil andLatestVersion:nil];
+	return [self formulaWithName:name version:version andLatestVersion:nil];
 }
 
 + (instancetype)formulaWithName:(NSString*)name
