@@ -33,7 +33,7 @@ extern NSString *const BPFormulaDidUpdateNotification;
 
 @property (copy, readonly) NSString *name;
 @property (copy, readonly) NSString *version;
-@property (copy, readonly) NSString *latestVersion;
+@property (nonatomic, copy, readonly) NSString *latestVersion;
 @property (copy, readonly) NSString *information;
 @property (nonatomic, copy, readonly) NSString *installPath;
 @property (nonatomic, copy, readonly) NSString *dependencies;
@@ -41,13 +41,12 @@ extern NSString *const BPFormulaDidUpdateNotification;
 @property (nonatomic, copy, readonly) NSString *shortDescription;
 @property (nonatomic, strong, readonly) NSURL    *website;
 @property (nonatomic, strong, readonly) NSArray  *options;
-
+@property (assign, readonly, getter=isLeave) BOOL leave; //installed + does not depend on other
+@property (assign, readonly, getter=isInstalled) BOOL installed; //installed + does not depend on other
 
 @property BOOL needsInformation;
 
-+ (instancetype)formulaWithName:(NSString*)name version:(NSString*)version andLatestVersion:(NSString*)latestVersion;
-+ (instancetype)formulaWithName:(NSString*)name andVersion:(NSString*)version;
-+ (instancetype)formulaWithName:(NSString*)name;
++ (instancetype)formulaWithName:(NSString *)name;
 
 /**
  *  The short name for the formula. Useful for taps. Returns the remaining substring after the last slash character.
@@ -56,20 +55,31 @@ extern NSString *const BPFormulaDidUpdateNotification;
  */
 - (NSString*)installedName;
 
-
-/**
- *  @return `YES` if the formula is installed, or `NO` otherwise.
- */
-- (BOOL)isInstalled;
-
-/**
- *  @return `YES` if the formula is installed and outdated, or `NO` otherwise.
- */
 - (BOOL)isOutdated;
+- (NSString *)status;
 
-/**
- *  @return `YES` if the formula is leave (does not depend on other formula), or `NO` otherwise.
- */
-- (BOOL)isLeave;
+
+- (void)mergeWithFormula:(BPFormula *)formula;
+- (BOOL)isEqualToFormula:(BPFormula *)formula;
 
 @end
+
+@protocol BPFormulaBuilder <NSObject>
+
+@required
+@property (assign) NSString *name;
+
+@optional
+@property (copy) NSString *version;
+@property (copy) NSString *latestVersion;
+@property BOOL leave;
+@property BOOL installed;
+
+@end
+
+@interface BPFormula(BPFormulaBuilder) <BPFormulaBuilder>
+
++ (instancetype)build:(void(^)(id<BPFormulaBuilder>builder))buildBlock;
+
+@end
+

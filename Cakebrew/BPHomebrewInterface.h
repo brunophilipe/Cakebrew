@@ -28,7 +28,6 @@ typedef NS_ENUM(NSInteger, BPListMode) {
 	kBPListInstalled,
 	kBPListLeaves,
 	kBPListOutdated,
-	kBPListSearch, /* Don't call -[BPHomebrewInterface listMode:] with this parameter. */
 	kBPListRepositories
 };
 
@@ -154,7 +153,7 @@ typedef NS_ENUM(NSInteger, BPListMode) {
  *
  *  @return List of BPFormula objects.
  */
-- (NSArray*)listMode:(BPListMode)mode;
+- (NSMutableArray *)listMode:(BPListMode)mode;
 
 /**
  *  Executes `brew info` for parameter formula name.

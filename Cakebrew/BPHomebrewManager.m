@@ -74,50 +74,82 @@ NSString *const kBPCacheDataKey	= @"BPCacheDataKey";
 {
 	dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
 		[[BPHomebrewInterface sharedInterface] setDelegate:self];
-		
-		[self setFormulae_installed:[[BPHomebrewInterface sharedInterface] listMode:kBPListInstalled]];
-		[self setFormulae_leaves:[[BPHomebrewInterface sharedInterface] listMode:kBPListLeaves]];
-		[self setFormulae_outdated:[[BPHomebrewInterface sharedInterface] listMode:kBPListOutdated]];
-		[self setFormulae_repositories:[[BPHomebrewInterface sharedInterface] listMode:kBPListRepositories]];
-		
-		if (![self loadAllFormulaeCaches] || shouldRebuildCache) {
-			[self setFormulae_all:[[BPHomebrewInterface sharedInterface] listMode:kBPListAll]];
-			[self storeAllFormulaeCaches];
+	  
+#ifdef DEBUG
+		NSDate *startDate = [NSDate date];
+#endif
+		NSArray *installed = [[BPHomebrewInterface sharedInterface] listMode:kBPListInstalled];
+		[self setInstalledFormulaeCount:[installed count]];
+		NSMutableDictionary *mutDictionary = [NSMutableDictionary dictionaryWithCapacity:[installed count]];
+		for (BPFormula *formula in installed) {
+		  mutDictionary[[formula name]] = formula;
 		}
 		
+		NSArray *leaves = [[BPHomebrewInterface sharedInterface] listMode:kBPListLeaves];
+		[self setLeavesFormulaeCount:[leaves count]];
+		for (BPFormula *formula in leaves) {
+		  if ([mutDictionary objectForKey:[formula name]]) {
+			[formula mergeWithFormula:mutDictionary[[formula name]]];
+			mutDictionary[[formula name]] =  formula;
+		  }
+		}
+
+		NSArray *outdated = [[BPHomebrewInterface sharedInterface] listMode:kBPListOutdated];
+		[self setOutdatedFormulaeCount:[outdated count]];
+		for (BPFormula *formula in outdated) {
+		  if ([mutDictionary objectForKey:[formula name]]) {
+			[formula mergeWithFormula:mutDictionary[[formula name]]];
+			mutDictionary[[formula name]] =  formula;
+		  }
+		}
+		
+	  
+		
+		NSArray *repositories = [[BPHomebrewInterface sharedInterface] listMode:kBPListRepositories];
+		[self setFormulae_repositories:repositories];
+		[self setRepositoriesFormulaeCount:[repositories count]];
+	  
+		NSMutableArray *allFormulae;
+		if (!shouldRebuildCache) {
+			allFormulae = [self loadAllFormulaeCaches];
+		}
+		if (!allFormulae) {
+			allFormulae = [[BPHomebrewInterface sharedInterface] listMode:kBPListAll];
+		}
+	  
+		for (NSUInteger index = 0;index < [allFormulae count]; index++) {
+		  BPFormula *formula = [mutDictionary objectForKey:[allFormulae[index] name]];
+		  if (formula) {
+			[allFormulae replaceObjectAtIndex:index withObject:formula];
+		  }
+		}
+		
+		[self setFormulae_all:allFormulae];
+		[self setAllFormulaeCount:[allFormulae count]];
+	  
+		if (shouldRebuildCache) {
+		  [self storeAllFormulaeCaches];
+		}
+#ifdef DEBUG
+		NSLog(@"Formula reload time:%f seconds", [[NSDate date] timeIntervalSinceDate:startDate]);
+#endif
+	  
 		dispatch_async(dispatch_get_main_queue(), ^{
 			[self.delegate homebrewManagerFinishedUpdating:self];
 		});
 	});
 }
 
-- (void)updateSearchWithName:(NSString *)name
-{
-	NSMutableArray *array = [NSMutableArray array];
-	NSRange range;
-	
-	for (BPFormula *formula in _formulae_all) {
-		range = [[formula name] rangeOfString:name options:NSCaseInsensitiveSearch];
-		if (range.location != NSNotFound) {
-			[array addObject:formula];
-		}
-	}
-	
-	_formulae_search = [array copy];
-	
-	dispatch_async(dispatch_get_main_queue(), ^{
-		[self.delegate homebrewManager:self didUpdateSearchResults:_formulae_search];
-	});
-}
 
 /**
- Returns `YES` if cache exists, was created less than 24 hours ago and was loaded successfully. Otherwise returns `NO`.
+ Returns cache if it was created less than 24 hours ago and it was loaded successfully. Otherwise returns nil.
  */
-- (BOOL)loadAllFormulaeCaches
+- (NSMutableArray *)loadAllFormulaeCaches
 {
 	NSURL *cachesFolder = [BPAppDelegateRef urlForApplicationCachesFolder];
 	NSURL *allFormulaeFile = [cachesFolder URLByAppendingPathComponent:@"allFormulae.cache.bin"];
 	BOOL shouldLoadCache = NO;
+	NSMutableArray *mutCachedAllFormulae = nil;
 	
 	if ([[NSUserDefaults standardUserDefaults] objectForKey:kBPCacheLastUpdateKey])
 	{
@@ -137,7 +169,7 @@ NSString *const kBPCacheDataKey	= @"BPCacheDataKey";
 		if ([[NSFileManager defaultManager] fileExistsAtPath:allFormulaeFile.relativePath])
 		{
 			cacheDict = [NSKeyedUnarchiver unarchiveObjectWithFile:allFormulaeFile.relativePath];
-			self.formulae_all = [cacheDict objectForKey:kBPCacheDataKey];
+			mutCachedAllFormulae = [[cacheDict objectForKey:kBPCacheDataKey] mutableCopy];
 		}
 	}
 	else
@@ -147,7 +179,7 @@ NSString *const kBPCacheDataKey	= @"BPCacheDataKey";
 		[[NSUserDefaults standardUserDefaults] removeObjectForKey:kBPCacheLastUpdateKey];
 	}
 	
-	return self.formulae_all != nil;
+	return mutCachedAllFormulae;
 }
 
 - (void)storeAllFormulaeCaches
@@ -188,49 +220,6 @@ NSString *const kBPCacheDataKey	= @"BPCacheDataKey";
 		}
 	}
 }
-
-- (NSInteger)searchForFormula:(BPFormula*)formula inArray:(NSArray*)array
-{
-	NSUInteger index = 0;
-	
-	for (BPFormula* item in array)
-	{
-		if ([[item installedName] isEqualToString:[formula installedName]])
-		{
-			return index;
-		}
-		
-		index++;
-	}
-	
-	return -1;
-}
-
-- (BPFormulaStatus)statusForFormula:(BPFormula*)formula
-{
-	if ([self searchForFormula:formula inArray:self.formulae_installed] >= 0)
-	{
-		if ([self searchForFormula:formula inArray:self.formulae_outdated] >= 0)
-		{
-			return kBPFormulaOutdated;
-		}
-		else
-		{
-			return kBPFormulaInstalled;
-		}
-	}
-	else
-	{
-		return kBPFormulaNotInstalled;
-	}
-}
-
-
-- (BOOL)leaveStatusForFormula:(BPFormula*)formula
-{
-  return [self searchForFormula:formula inArray:self.formulae_leaves] >= 0 ? YES : NO;
-}
-
 
 - (void)cleanUp
 {

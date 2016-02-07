@@ -53,9 +53,8 @@ unichar SPACE_CHARACTER = 0x0020;
 			break;
 			
 		case kBPListInstalled:
-			titleWidth = (NSInteger)(totalWidth * 0.4);
-			[[self tableColumnWithIdentifier:kColumnIdentifierVersion] setHidden:NO];
-			[[self tableColumnWithIdentifier:kColumnIdentifierVersion] setWidth:(totalWidth-titleWidth)*0.95];
+			titleWidth = (NSInteger)(totalWidth * 0.99);
+			[[self tableColumnWithIdentifier:kColumnIdentifierVersion] setHidden:YES];
 			[[self tableColumnWithIdentifier:kColumnIdentifierLatestVersion] setHidden:YES];
 			[[self tableColumnWithIdentifier:kColumnIdentifierStatus] setHidden:YES];
 			[self setAllowsMultipleSelection:NO];
@@ -78,16 +77,7 @@ unichar SPACE_CHARACTER = 0x0020;
 			[[self tableColumnWithIdentifier:kColumnIdentifierStatus] setHidden:YES];
 			[self setAllowsMultipleSelection:YES];
 			break;
-			
-		case kBPListSearch:
-			titleWidth = (NSInteger)(totalWidth - 90);
-			[[self tableColumnWithIdentifier:kColumnIdentifierVersion] setHidden:YES];
-			[[self tableColumnWithIdentifier:kColumnIdentifierLatestVersion] setHidden:YES];
-			[[self tableColumnWithIdentifier:kColumnIdentifierStatus] setHidden:NO];
-			[[self tableColumnWithIdentifier:kColumnIdentifierStatus] setWidth:(totalWidth-titleWidth)*0.90];
-			[self setAllowsMultipleSelection:NO];
-			break;
-			
+		
 		default:
 			break;
 	}

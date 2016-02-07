@@ -27,7 +27,6 @@
 #import "BPInstallationWindowController.h"
 #import "BPUpdateViewController.h"
 #import "BPDoctorViewController.h"
-#import "BPFormulaeDataSource.h"
 #import "BPSelectedFormulaViewController.h"
 #import "BPToolbar.h"
 #import "BPAppDelegate.h"
@@ -54,12 +53,11 @@ NSMenuDelegate> {
 @property (weak) BPAppDelegate *appDelegate;
 @property (nonatomic, assign) FormulaeSideBarItem selectedSidebarIndex;
 @property (nonatomic, copy) NSString *toolbarText;
+@property (nonatomic, copy) NSString *searchText;
 
 @property (getter=isSearching)			BOOL searching;
 @property (getter=isHomebrewInstalled)	BOOL homebrewInstalled;
 
-
-@property (strong, nonatomic) BPFormulaeDataSource				*formulaeDataSource;
 @property (strong, nonatomic) BPFormulaOptionsWindowController	*formulaOptionsWindowController;
 @property (strong, nonatomic) BPInstallationWindowController	*operationWindowController;
 @property (strong, nonatomic) BPUpdateViewController			*updateViewController;
@@ -72,6 +70,8 @@ NSMenuDelegate> {
 
 @property (weak, nonatomic) IBOutlet NSSplitView *formulaeSplitView;
 @property (weak, nonatomic) IBOutlet NSView		 *selectedFormulaView;
+@property (weak, nonatomic) IBOutlet NSArrayController *formulaArrayController;
+@property (weak, nonatomic) IBOutlet NSArrayController *repositoryArrayController;
 
 
 @end
@@ -119,15 +119,13 @@ NSMenuDelegate> {
 	[self.selectedFormulaeViewController setDelegate:self];
 	
 	self.homebrewInstalled = YES;
+	self.searchText = @"";
 	_selectedSidebarIndex = FormulaeSideBarItemInstalled;
 }
 
 
 - (void)awakeFromNib
 {
-	self.formulaeDataSource = [[BPFormulaeDataSource alloc] initWithMode:kBPListAll];
-	self.tableView_formulae.dataSource = self.formulaeDataSource;
-	self.repositoryTableView.dataSource = self.formulaeDataSource;
 	self.tableView_formulae.delegate = self;
 	self.repositoryTableView.delegate = self;
 	[self.tableView_formulae accessibilitySetOverrideValue:NSLocalizedString(@"Formulae", nil)
@@ -295,9 +293,8 @@ NSMenuDelegate> {
 
 - (void)updateInterfaceForFormulaeTab
 {
-  NSInteger selectedIndex			= [self.tableView_formulae selectedRow];
-  NSIndexSet *selectedRows		= [self.tableView_formulae selectedRowIndexes];
-  NSArray *selectedFormulae		= [self.formulaeDataSource formulasAtIndexSet:selectedRows];
+  NSInteger selectedIndex		= [self.tableView_formulae selectedRow];
+  NSArray *selectedFormulae		= [self.formulaArrayController selectedObjects];
   
   CGFloat height = [self.formulaeSplitView bounds].size.height;
   CGFloat preferedHeightOfSelectedFormulaView = 120.f;
@@ -310,24 +307,21 @@ NSMenuDelegate> {
 	[self.toolbar configureForMode:BPToolbarModeUpdateMany];
   } else {
 	NSInteger selectedSidebarRow	= [self selectedSidebarIndex];
-	BPFormula *formula = [self.formulaeDataSource formulaAtIndex:selectedIndex];
+	BPFormula *formula = [selectedFormulae firstObject];
 	
-	switch ([[BPHomebrewManager sharedManager] statusForFormula:formula]) {
-			case kBPFormulaInstalled:
-		[self.toolbar configureForMode:BPToolbarModeUninstall];
-		break;
-		
-			case kBPFormulaOutdated:
+	if (formula.isInstalled) {
+	  if (formula.isOutdated) {
 		if (selectedSidebarRow == FormulaeSideBarItemOutdated) {
 		  [self.toolbar configureForMode:BPToolbarModeUpdateSingle];
 		} else {
 		  [self.toolbar configureForMode:BPToolbarModeUninstall];
 		}
-		break;
-		
-			case kBPFormulaNotInstalled:
-		[self.toolbar configureForMode:BPToolbarModeInstall];
-		break;
+	  } else {
+		[self.toolbar configureForMode:BPToolbarModeUninstall];
+	  }
+	
+	} else {
+	  [self.toolbar configureForMode:BPToolbarModeInstall];
 	}
   }
   [self.selectedFormulaeViewController setFormulae:selectedFormulae];
@@ -342,7 +336,6 @@ NSMenuDelegate> {
 {
 	[self clearCurrentSelection];
 	[self.tableView_formulae setMode:mode];
-	[self.formulaeDataSource setMode:mode];
 	[self.tableView_formulae reloadData];
 	[self updateInterfaceItems];
 }
@@ -350,7 +343,6 @@ NSMenuDelegate> {
 - (void)configureRepositoryTable
 {
   [self clearCurrentSelection];
-  [self.formulaeDataSource setMode:kBPListRepositories];
   [self.repositoryTableView reloadData];
   [self updateInterfaceItems];
 }
@@ -402,7 +394,7 @@ NSMenuDelegate> {
 
 + (NSSet *)keyPathsForValuesAffectingToolbarText
 {
-  return [NSSet setWithArray:@[@"searching", @"selectedSidebarIndex"]];
+  return [NSSet setWithArray:@[@"searching", @"selectedSidebarIndex", @"searchText"]];
 }
 
 #pragma mark - Homebrew Manager Delegate
@@ -419,21 +411,12 @@ NSMenuDelegate> {
 		[self.label_information setHidden:NO];
 		[self.toolbar configureForMode:BPToolbarModeDefault];
 		[self.toolbar unlockItems];
-		[self setEnableUpgradeFormulasMenu:([[BPHomebrewManager sharedManager] formulae_outdated].count > 0)];
+		[self setEnableUpgradeFormulasMenu:([[BPHomebrewManager sharedManager] outdatedFormulaeCount] > 0)];
 		[self setSelectedSidebarIndex:FormulaeSideBarItemInstalled];
-		[self.formulaeDataSource refreshBackingArray];
+		self.formulaArrayController.content = [[BPHomebrewManager sharedManager] formulae_all];
+		self.repositoryArrayController.content = [[BPHomebrewManager sharedManager] formulae_repositories];
 		[[NSNotificationCenter defaultCenter] postNotificationName:@"BPHomebrewDidUpate" object:nil];
 	}
-}
-
-- (void)homebrewManager:(BPHomebrewManager *)manager didUpdateSearchResults:(NSArray *)searchResults
-{
-	
-	
-	[self setSelectedSidebarIndex:FormulaeSideBarItemAll];
-	[self setSearching:YES];
-	
-	[self configureTableForListing:kBPListSearch];
 }
 
 - (void)homebrewManager:(BPHomebrewManager *)manager shouldDisplayNoBrewMessage:(BOOL)yesOrNo
@@ -494,7 +477,11 @@ NSMenuDelegate> {
 
 - (void)selectedFormulaViewDidUpdateFormulaInfoForFormula:(BPFormula *)formula
 {
-	if (formula) [self setCurrentFormula:formula];
+  
+  if (formula) {
+	[self setCurrentFormula:formula];
+	[self.tableView_formulae reloadData];
+  }
 }
 
 #pragma mark - NSMenu Delegate
@@ -697,16 +684,49 @@ NSMenuDelegate> {
 
 - (void)performSearchWithString:(NSString *)searchPhrase
 {
+	self.searchText = searchPhrase;
 	if ([searchPhrase isEqualToString:@""])
 	{
 		[self setSearching:NO];
+	} else {
+	  [self setSearching:YES];
 	}
-	else
-	{
-		[[BPHomebrewManager sharedManager] updateSearchWithName:searchPhrase];
+	[self updateFilteredPredicate];
+}
+
+- (void)updateFilteredPredicate
+{
+  NSPredicate *formulaPredicate, *repositoryPredicate;
+  NSString *formulaFormat, *repositoryFormat;
+  switch (self.selectedSidebarIndex)
+  {
+	case FormulaeSideBarItemInstalled: // Installed Formulae
+	  formulaFormat = [NSString stringWithFormat:@"(isInstalled = YES)"];
+	  break;
+	case FormulaeSideBarItemOutdated: // Outdated Formulae
+	  formulaFormat = [NSString stringWithFormat:@"(isOutdated = YES)"];
+	  break;
+	case FormulaeSideBarItemLeaves:	// Leaves
+	  formulaFormat = [NSString stringWithFormat:@"(isLeave = YES)"];
+	  break;
+	default:
+	  break;
+  }
+  if ([self.searchText length]) {
+	if ([formulaFormat length]) {
+	  formulaFormat = [formulaFormat stringByAppendingString:@" AND "];
 	}
-	
-	[self configureTableForListing:kBPListAll];
+	formulaFormat = [formulaFormat stringByAppendingFormat:@"(name contains[cd] '%@')", self.searchText];
+	repositoryFormat = [@"" stringByAppendingFormat:@"(name contains[cd] '%@')", self.searchText];
+  }
+  if (formulaFormat) {
+	formulaPredicate = [NSPredicate predicateWithFormat:formulaFormat];
+  }
+  if (repositoryFormat) {
+	repositoryPredicate = [NSPredicate predicateWithFormat:repositoryFormat];
+  }
+  [self.formulaArrayController setFilterPredicate:formulaPredicate];
+  [self.repositoryArrayController setFilterPredicate:repositoryPredicate];
 }
 
 - (IBAction)beginFormulaSearch:(id)sender
@@ -739,8 +759,6 @@ NSMenuDelegate> {
 {
 	NSUInteger tabIndex = HomeBrewTabFormulae;
 	[self clearCurrentSelection];
-	[self setSearching:NO];
-  
 	switch (selectedSidebarIndex)
 	{
 	  case FormulaeSideBarItemInstalled: // Installed Formulae
@@ -775,8 +793,10 @@ NSMenuDelegate> {
 	  default:
 		break;
 	}
+	
 	[self.tabView selectTabViewItemAtIndex:tabIndex];
 	_selectedSidebarIndex = selectedSidebarIndex;
+	[self updateFilteredPredicate];
 	[self updateInterfaceItems];
 }
 
@@ -787,20 +807,17 @@ NSMenuDelegate> {
 
 - (BPFormula *)selectedFormula
 {
-	NSInteger selectedIndex = [self.tableView_formulae selectedRow];
-	return [self.formulaeDataSource formulaAtIndex:selectedIndex];
+	return [[self.formulaArrayController selectedObjects] firstObject];
 }
 
 - (NSArray *)selectedFormulae
 {
-	NSIndexSet *selectedIndexes = [self.tableView_formulae selectedRowIndexes];
-	return [self.formulaeDataSource formulasAtIndexSet:selectedIndexes];
+	return [self.formulaArrayController selectedObjects];
 }
 
 - (BPRepository *)selectedRepository
 {
-  NSInteger selectedIndex = [self.repositoryTableView selectedRow];
-  return [self.formulaeDataSource repositoryAtIndex:selectedIndex];
+  return [[self.repositoryArrayController selectedObjects] firstObject];
 }
 
 

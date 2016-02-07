@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="9531" systemVersion="15D21" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="9532" systemVersion="15D21" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="9531"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="9532"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="NSApplication">
@@ -898,9 +898,11 @@ CA
         </customObject>
         <viewController title="HomebrewController" nibName="MainMenu" id="547" userLabel="Homebrew Controller" customClass="BPHomebrewViewController">
             <connections>
+                <outlet property="formulaArrayController" destination="sdb-jz-KhO" id="oMO-oq-seB"/>
                 <outlet property="formulaeSplitView" destination="hkt-Ff-Ha2" id="PSG-Ga-xEa"/>
                 <outlet property="label_information" destination="tiK-fW-tE7" id="K14-X1-4bF"/>
                 <outlet property="menu_formula" destination="sBH-Ta-Jft" id="kCm-57-cUw"/>
+                <outlet property="repositoryArrayController" destination="wGr-49-008" id="G6o-vN-lEE"/>
                 <outlet property="repositoryTableView" destination="UjN-dL-7o3" id="loG-BO-Hgw"/>
                 <outlet property="scrollView_formulae" destination="YpG-G5-bXX" id="oFo-5A-rfO"/>
                 <outlet property="selectedFormulaView" destination="Nrf-M9-yac" id="l5Q-Fd-m5y"/>
@@ -945,6 +947,13 @@ CA
                                                     <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                 </textFieldCell>
                                                 <tableColumnResizingMask key="resizingMask" userResizable="YES"/>
+                                                <connections>
+                                                    <binding destination="sdb-jz-KhO" name="value" keyPath="arrangedObjects.name" id="ueC-vT-2Wl">
+                                                        <dictionary key="options">
+                                                            <bool key="NSConditionallySetsEditable" value="YES"/>
+                                                        </dictionary>
+                                                    </binding>
+                                                </connections>
                                             </tableColumn>
                                             <tableColumn identifier="Version" editable="NO" width="115" minWidth="40" maxWidth="1000" id="h5d-xc-Jih">
                                                 <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left" title="Version">
@@ -958,6 +967,13 @@ CA
                                                     <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                 </textFieldCell>
                                                 <tableColumnResizingMask key="resizingMask" userResizable="YES"/>
+                                                <connections>
+                                                    <binding destination="sdb-jz-KhO" name="value" keyPath="arrangedObjects.version" id="q4K-iE-GDH">
+                                                        <dictionary key="options">
+                                                            <bool key="NSConditionallySetsEditable" value="YES"/>
+                                                        </dictionary>
+                                                    </binding>
+                                                </connections>
                                             </tableColumn>
                                             <tableColumn identifier="LatestVersion" editable="NO" width="115" minWidth="40" maxWidth="1000" id="ba4-r8-kgo">
                                                 <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left" title="Latest Version">
@@ -971,6 +987,13 @@ CA
                                                     <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                 </textFieldCell>
                                                 <tableColumnResizingMask key="resizingMask" userResizable="YES"/>
+                                                <connections>
+                                                    <binding destination="sdb-jz-KhO" name="value" keyPath="arrangedObjects.latestVersion" id="Nya-Ji-X1b">
+                                                        <dictionary key="options">
+                                                            <bool key="NSConditionallySetsEditable" value="YES"/>
+                                                        </dictionary>
+                                                    </binding>
+                                                </connections>
                                             </tableColumn>
                                             <tableColumn identifier="Status" editable="NO" width="115" minWidth="40" maxWidth="1000" id="JRi-Nr-5hA">
                                                 <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left" title="Status">
@@ -984,6 +1007,13 @@ CA
                                                     <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                 </textFieldCell>
                                                 <tableColumnResizingMask key="resizingMask" userResizable="YES"/>
+                                                <connections>
+                                                    <binding destination="sdb-jz-KhO" name="value" keyPath="arrangedObjects.status" id="FjT-6J-Trv">
+                                                        <dictionary key="options">
+                                                            <bool key="NSConditionallySetsEditable" value="YES"/>
+                                                        </dictionary>
+                                                    </binding>
+                                                </connections>
                                             </tableColumn>
                                         </tableColumns>
                                         <connections>
@@ -1024,6 +1054,12 @@ CA
             </holdingPriorities>
             <point key="canvasLocation" x="309" y="722"/>
         </splitView>
+        <arrayController objectClassName="BPFormula" editable="NO" avoidsEmptySelection="NO" id="sdb-jz-KhO" userLabel="Formula Array Controller">
+            <declaredKeys>
+                <string>name</string>
+            </declaredKeys>
+        </arrayController>
+        <arrayController objectClassName="BPRepository" editable="NO" avoidsEmptySelection="NO" id="wGr-49-008" userLabel="Repository Array Controller"/>
         <userDefaultsController representsSharedInstance="YES" id="Bum-pn-dFZ"/>
         <scrollView borderType="none" autohidesScrollers="YES" horizontalLineScroll="19" horizontalPageScroll="10" verticalLineScroll="19" verticalPageScroll="10" usesPredominantAxisScrolling="NO" horizontalScrollElasticity="none" scrollerKnobStyle="dark" id="Tiq-MO-haF">
             <rect key="frame" x="0.0" y="0.0" width="499" height="157"/>
@@ -1051,6 +1087,13 @@ CA
                                     <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                                 <tableColumnResizingMask key="resizingMask" userResizable="YES"/>
+                                <connections>
+                                    <binding destination="wGr-49-008" name="value" keyPath="arrangedObjects.name" id="Gnn-XC-D23">
+                                        <dictionary key="options">
+                                            <bool key="NSConditionallySetsEditable" value="YES"/>
+                                        </dictionary>
+                                    </binding>
+                                </connections>
                             </tableColumn>
                         </tableColumns>
                     </tableView>

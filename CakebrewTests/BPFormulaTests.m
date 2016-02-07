@@ -126,7 +126,11 @@ static BPCustomFormula *sbtenvFormula;
 
 - (void)testFormulaCreation
 {
-	formula = [BPFormula formulaWithName:@"abcde" version:@"1" andLatestVersion:@"2"];
+  formula = [BPFormula build:^(id<BPFormulaBuilder> builder) {
+	[builder setName:@"abcde"];
+	[builder setVersion:@"1"];
+	[builder setLatestVersion:@"2"];
+		}];
 	XCTAssertNotNil(formula, @"Formula failed to initialize");
 	XCTAssertTrue([formula.name isEqualToString:@"abcde"], @"Formula has invalid name");
 	XCTAssertTrue([formula.version isEqualToString:@"1"], @"Formula has invalid name");
@@ -135,7 +139,11 @@ static BPCustomFormula *sbtenvFormula;
 
 - (void)testFormulaFullCopy
 {
-	formula = [BPCustomFormula formulaWithName:@"fakeformula" version:@"1" andLatestVersion:@"2"];
+  formula = [BPCustomFormula build:^(id<BPFormulaBuilder> builder) {
+	[builder setName:@"fakeformula"];
+	[builder setVersion:@"1"];
+	[builder setLatestVersion:@"2"];
+		}];
 	[formula setNeedsInformation:YES];
 	BPFormula *copiedFormula = [formula copy];
 	XCTAssertTrue([formula.name isEqualToString:copiedFormula.name] && [copiedFormula.name length] > 0, @"Name failed to copy");

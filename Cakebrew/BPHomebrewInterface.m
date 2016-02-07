@@ -30,7 +30,7 @@ static NSString *cakebrewOutputIdentifier = @"+++++Cakebrew+++++";
 @property (strong, readonly) NSArray *arguments;
 
 - (instancetype)initWithArguments:(NSArray *)arguments;
-- (NSArray *)parseData:(NSString *)data;
+- (NSMutableArray *)parseData:(NSString *)data;
 - (BPFormula *)parseFormulaItem:(NSString *)item;
 
 @end
@@ -297,7 +297,7 @@ Installing and upgrading formulas is not advised in DEBUG mode!\n\n",
 
 #pragma mark - Operations that return on finish
 
-- (NSArray*)listMode:(BPListMode)mode
+- (NSMutableArray *)listMode:(BPListMode)mode
 {
 	BPHomebrewInterfaceListCall *listCall = nil;
 	
@@ -441,7 +441,7 @@ Installing and upgrading formulas is not advised in DEBUG mode!\n\n",
 	return self;
 }
 
-- (NSArray *)parseData:(NSString *)data
+- (NSMutableArray *)parseData:(NSString *)data
 {
 	NSMutableArray *array = [[data componentsSeparatedByString:@"\n"] mutableCopy];
 	[array removeLastObject];
@@ -468,13 +468,16 @@ Installing and upgrading formulas is not advised in DEBUG mode!\n\n",
 
 - (instancetype)init
 {
-	return (BPHomebrewInterfaceListCallInstalled *)[super initWithArguments:@[@"list", @"--versions"]];
+	return (BPHomebrewInterfaceListCallInstalled *)[super initWithArguments:@[@"list", @"--full-name"]]; //doesn't work with 2 params e.g. full-name + versions (full name prefered due to tap name consistency)
 }
 
 - (BPFormula *)parseFormulaItem:(NSString *)item
 {
-	NSArray *aux = [item componentsSeparatedByString:@" "];
-	return [BPFormula formulaWithName:[aux firstObject] andVersion:[aux lastObject]];
+  NSArray *aux = [item componentsSeparatedByString:@" "];
+  return [BPFormula build:^(id<BPFormulaBuilder> builder) {
+	[builder setName:[aux firstObject]];
+	[builder setInstalled:YES];
+		}];
 }
 
 @end
@@ -495,6 +498,16 @@ Installing and upgrading formulas is not advised in DEBUG mode!\n\n",
 	return (BPHomebrewInterfaceListCallLeaves *)[super initWithArguments:@[@"leaves"]];
 }
 
+- (BPFormula *)parseFormulaItem:(NSString *)item
+{
+  NSArray *aux = [item componentsSeparatedByString:@" "];
+  return [BPFormula build:^(id<BPFormulaBuilder> builder) {
+	[builder setName:[aux firstObject]];
+	[builder setLeave:YES];
+	[builder setInstalled:YES];
+		}];
+}
+
 @end
 
 @implementation BPHomebrewInterfaceListCallUpgradeable
@@ -504,7 +517,7 @@ Installing and upgrading formulas is not advised in DEBUG mode!\n\n",
 	return (BPHomebrewInterfaceListCallUpgradeable *)[super initWithArguments:@[@"outdated", @"--json=v1"]];
 }
 
-- (NSArray *)parseData:(NSString *)string
+- (NSMutableArray *)parseData:(NSString *)string
 {
   NSMutableArray *formulae = [NSMutableArray array];
   NSData *data = [string dataUsingEncoding:NSUTF8StringEncoding];
@@ -513,13 +526,18 @@ Installing and upgrading formulas is not advised in DEBUG mode!\n\n",
   if (!error) {
 	if ([object isKindOfClass:[NSArray class]]) {
 	  for (NSDictionary *item in object) {
-		  NSString *name = item[@"name"];
-		  NSString *installedVersion = [item[@"installed_versions"] firstObject];
-		  NSString *latestVersion = item[@"current_version"];
-		  BPFormula *formula = [BPFormula formulaWithName:name version:installedVersion andLatestVersion:latestVersion];
-		  if (formula) {
-			[formulae addObject:formula];
-		  }
+		NSString *name = item[@"name"];
+		NSString *installedVersion = [item[@"installed_versions"] firstObject];
+		NSString *latestVersion = item[@"current_version"];
+		BPFormula *formula = [BPFormula build:^(id<BPFormulaBuilder> builder) {
+		  [builder setName:name];
+		  [builder setVersion:installedVersion];
+		  [builder setLatestVersion:latestVersion];
+		  [builder setInstalled:YES];
+		}];
+		if (formula) {
+		  [formulae addObject:formula];
+		}
 	  }
 	}
   }

@@ -65,12 +65,13 @@
 												   object:formula];
 	}
 	[self displayInformationForFormulae];
+	__weak BPFormula *weakFormula = [self.formulae firstObject];
 	[self.timedDispatch scheduleDispatchAfterTimeInterval:0.3
 												  inQueue:dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0)
 												  ofBlock:^
 	 {
-		 BPFormula *formula = [self.formulae firstObject];
-		 [formula setNeedsInformation:YES];
+		 BPFormula *strongFormula = weakFormula;
+		 [strongFormula setNeedsInformation:YES];
 	 }];
 }
 

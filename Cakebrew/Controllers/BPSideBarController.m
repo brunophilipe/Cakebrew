@@ -98,11 +98,11 @@
 
 - (void)refreshSidebarBadges
 {
-	self.instaledFormulaeSidebarItem.badgeValue		= @([[[BPHomebrewManager sharedManager] formulae_installed] count]);
-	self.outdatedFormulaeSidebarItem.badgeValue		= @([[[BPHomebrewManager sharedManager] formulae_outdated] count]);
-	self.allFormulaeSidebarItem.badgeValue			= @([[[BPHomebrewManager sharedManager] formulae_all] count]);
-	self.leavesFormulaeSidebarItem.badgeValue		= @([[[BPHomebrewManager sharedManager] formulae_leaves] count]);
-	self.repositoriesFormulaeSidebarItem.badgeValue = @([[[BPHomebrewManager sharedManager] formulae_repositories] count]);
+	self.instaledFormulaeSidebarItem.badgeValue		= @([[BPHomebrewManager sharedManager] installedFormulaeCount]);
+	self.outdatedFormulaeSidebarItem.badgeValue		= @([[BPHomebrewManager sharedManager] outdatedFormulaeCount]);
+	self.allFormulaeSidebarItem.badgeValue			= @([[BPHomebrewManager sharedManager] allFormulaeCount]);
+	self.leavesFormulaeSidebarItem.badgeValue		= @([[BPHomebrewManager sharedManager] leavesFormulaeCount]);
+	self.repositoriesFormulaeSidebarItem.badgeValue = @([[BPHomebrewManager sharedManager] repositoriesFormulaeCount]);
 }
 
 #pragma mark - PXSourceList Data Source

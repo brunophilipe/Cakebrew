@@ -37,12 +37,15 @@ NSString *const kBP_ENCODE_FORMULA_CNFL = @"BP_ENCODE_FORMULA_CNFL";
 NSString *const kBP_ENCODE_FORMULA_SDSC = @"BP_ENCODE_FORMULA_SDSC";
 NSString *const kBP_ENCODE_FORMULA_INFO = @"BP_ENCODE_FORMULA_INFO";
 NSString *const kBP_ENCODE_FORMULA_OPTN = @"BP_ENCODE_FORMULA_OPTN";
+NSString *const kBP_ENCODE_FORMULA_LEAV = @"BP_ENCODE_FORMULA_LEAV";
 
 NSString *const kBPIdentifierDependencies = @"==> Dependencies";
 NSString *const kBPIdentifierOptions = @"==> Options";
 NSString *const kBPIdentifierCaveats = @"==> Caveats";
 
 NSString *const BPFormulaDidUpdateNotification = @"BPFormulaDidUpdateNotification";
+
+
 
 @interface BPFormula ()
 
@@ -56,33 +59,32 @@ NSString *const BPFormulaDidUpdateNotification = @"BPFormulaDidUpdateNotificatio
 @property (copy, readwrite) NSString *information;
 @property (strong, readwrite) NSURL    *website;
 @property (strong, readwrite) NSArray  *options;
+@property (assign, readwrite, getter=isLeave) BOOL leave; //installed + does not depend on other
+@property (assign, readwrite, getter=isInstalled) BOOL installed; //installed + does not depend on other
 
 @end
 
 @implementation BPFormula
 
-+ (instancetype)formulaWithName:(NSString*)name version:(NSString*)version andLatestVersion:(NSString*)latestVersion
+- (instancetype)init
 {
-	BPFormula *formula = [[self alloc] init];
-	
-	if (formula) {
-		formula.name = name;
-		formula.version = version;
-		formula.latestVersion = latestVersion;
-		[formula commonInit];
-	}
-	
-	return formula;
+  return [self initWithName:@"Unknown"];
 }
 
-+ (instancetype)formulaWithName:(NSString*)name andVersion:(NSString*)version
+- (instancetype)initWithName:(NSString *)name
 {
-	return [self formulaWithName:name version:version andLatestVersion:nil];
+  self = [super init];
+  if (self) {
+	_name = [name copy];
+	[self commonInit];
+  }
+  
+  return self;
 }
 
 + (instancetype)formulaWithName:(NSString*)name
 {
-	return [self formulaWithName:name andVersion:nil];
+	return [[self alloc] initWithName:name];
 }
 
 - (void)encodeWithCoder:(NSCoder *)aCoder
@@ -97,16 +99,17 @@ NSString *const BPFormulaDidUpdateNotification = @"BPFormulaDidUpdateNotificatio
 	if (self.shortDescription)	[aCoder encodeObject:self.shortDescription	forKey:kBP_ENCODE_FORMULA_SDSC];
 	if (self.information)		[aCoder encodeObject:self.information		forKey:kBP_ENCODE_FORMULA_INFO];
 	if (self.options)			[aCoder encodeObject:self.options			forKey:kBP_ENCODE_FORMULA_OPTN];
-	[aCoder encodeObject:@([self isInstalled]) forKey:kBP_ENCODE_FORMULA_INST];
+	if (self.leave)				[aCoder encodeObject:@(self.leave)			forKey:kBP_ENCODE_FORMULA_LEAV];
+	if (self.installed)			[aCoder encodeObject:@(self.installed)		forKey:kBP_ENCODE_FORMULA_INST];
 }
 
 - (instancetype)initWithCoder:(NSCoder *)aDecoder
 {
-	self = [super init];
+	self = [self init];
 	if (self) {
 		self.name				= [aDecoder decodeObjectForKey:kBP_ENCODE_FORMULA_NAME];
-		self.version			= [aDecoder decodeObjectForKey:kBP_ENCODE_FORMULA_IVER];
-		self.latestVersion		= [aDecoder decodeObjectForKey:kBP_ENCODE_FORMULA_LVER];
+//		self.version			= [aDecoder decodeObjectForKey:kBP_ENCODE_FORMULA_IVER]; -> commented we need fresh value from brew not from archive
+//		self.latestVersion		= [aDecoder decodeObjectForKey:kBP_ENCODE_FORMULA_LVER]; -> commented we need fresh value from brew not from archive
 		self.installPath		= [aDecoder decodeObjectForKey:kBP_ENCODE_FORMULA_PATH];
 		self.website			= [aDecoder decodeObjectForKey:kBP_ENCODE_FORMULA_WURL];
 		self.dependencies		= [aDecoder decodeObjectForKey:kBP_ENCODE_FORMULA_DEPS];
@@ -114,7 +117,8 @@ NSString *const BPFormulaDidUpdateNotification = @"BPFormulaDidUpdateNotificatio
 		self.shortDescription	= [aDecoder decodeObjectForKey:kBP_ENCODE_FORMULA_CNFL];
 		self.information		= [aDecoder decodeObjectForKey:kBP_ENCODE_FORMULA_INFO];
 		self.options			= [aDecoder decodeObjectForKey:kBP_ENCODE_FORMULA_OPTN];
-		[self commonInit];
+//		self.leave				= [[aDecoder decodeObjectForKey:kBP_ENCODE_FORMULA_LEAV] boolValue]; -> commented we need fresh value from brew not from archive
+//		self.installed			= [[aDecoder decodeObjectForKey:kBP_ENCODE_FORMULA_INST] boolValue]; -> commented we need fresh value from brew not from archive
 	}
 	return self;
 }
@@ -146,9 +150,8 @@ NSString *const BPFormulaDidUpdateNotification = @"BPFormulaDidUpdateNotificatio
 		formula->_shortDescription	= [self->_shortDescription	copy];
 		formula->_information		= [self->_information		copy];
 		formula->_options			= [self->_options			copy];
-		[formula addObserver:formula forKeyPath:NSStringFromSelector(@selector(needsInformation))
-					 options:NSKeyValueObservingOptionNew
-					 context:BPFormulaContext];
+		formula->_leave				= self->_leave;
+		formula->_installed			= self->_installed;
 	}
 	return formula;
 }
@@ -224,7 +227,10 @@ NSString *const BPFormulaDidUpdateNotification = @"BPFormulaDidUpdateNotificatio
 	
 	lineIndex = 0;
 	line = [lines objectAtIndex:lineIndex];
-	[self setLatestVersion:[line substringFromIndex:[line rangeOfString:@":"].location+2]];
+	
+	dispatch_async(dispatch_get_main_queue(), ^{ //we have to do this on main thread due to tableview scrolling
+	  [self setLatestVersion:[line substringFromIndex:[line rangeOfString:@":"].location+2]];
+	});
 	
 	lineIndex = 1;
 	line = [lines objectAtIndex:lineIndex];
@@ -338,24 +344,39 @@ NSString *const BPFormulaDidUpdateNotification = @"BPFormulaDidUpdateNotificatio
 	return YES;
 }
 
-- (BOOL)isInstalled
-{
-	return [[BPHomebrewManager sharedManager] statusForFormula:self] != kBPFormulaNotInstalled;
-}
-
 - (BOOL)isOutdated
 {
-	return [[BPHomebrewManager sharedManager] statusForFormula:self] == kBPFormulaOutdated;
-}
-
-- (BOOL)isLeave
-{
-  return [[BPHomebrewManager sharedManager] leaveStatusForFormula:self];
+  if (self.latestVersion && self.version) {
+  return ![self.version isEqualToString:self.latestVersion];
+  }
+  return NO;
 }
 
 - (NSString*)description
 {
-	return [NSString stringWithFormat:@"%@ <%p> name:%@ version:%@ latestVerson:%@", NSStringFromClass([self class]), self, self.name, self.version, self.latestVersion];
+	return [NSString stringWithFormat:@"%@ <%p> name:%@ version:%@ latestVerson:%@ isLeave:%d", NSStringFromClass([self class]), self, self.name, self.version, self.latestVersion, self.isLeave];
+}
+
+- (NSString *)status
+{
+  if (self.isInstalled) {
+	if (self.isOutdated) {
+	  return NSLocalizedString(@"Formula_Status_Outdated", nil);
+	} else {
+	  return NSLocalizedString(@"Formula_Status_Installed", nil);
+	}
+  } else {
+	return NSLocalizedString(@"Formula_Status_Not_Installed", nil);
+  }
+  return @"";
+}
+
+- (void)mergeWithFormula:(BPFormula *)formula
+{
+  if (formula.version) {[self setVersion:formula.version];}
+  if (formula.latestVersion) {[self setLatestVersion:formula.latestVersion];}
+  if (formula.isLeave) {[self setLeave:YES];}
+  if (formula.isInstalled) {[self setInstalled:YES];}
 }
 
 - (id<BPFormulaDataProvider>)dataProvider
@@ -363,11 +384,47 @@ NSString *const BPFormulaDidUpdateNotification = @"BPFormulaDidUpdateNotificatio
 	return [BPHomebrewInterface sharedInterface];
 }
 
+- (BOOL)isEqualToFormula:(BPFormula *)formula
+{
+  BOOL haveEqualNames = (!self.name && !formula.name) || [self.name isEqualToString:formula.name];;
+  
+  return haveEqualNames;
+}
+
+- (BOOL)isEqual:(id)object
+{
+  if (self == object) {
+	return YES;
+  }
+  
+  if (![object isKindOfClass:[BPFormula class]]) {
+	return NO;
+  }
+  
+  return [self isEqualToFormula:(BPFormula *)object];
+}
+
+
+- (NSUInteger)hash
+{
+  return [self.name hash];
+}
+
 - (void)dealloc
 {
 	[self removeObserver:self
 			  forKeyPath:NSStringFromSelector(@selector(needsInformation))
 				 context:BPFormulaContext];
+}
+
+@end
+
+@implementation BPFormula(BPFormulaBuilder)
+
++ (instancetype)build:(void(^)(id<BPFormulaBuilder>builder))buildBlock {
+  BPFormula* formula = [[BPFormula alloc] init];
+  if (buildBlock) buildBlock(formula);
+  return formula;
 }
 
 @end

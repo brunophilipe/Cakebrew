@@ -33,19 +33,19 @@ typedef NS_ENUM(NSInteger, BPFormulaStatus) {
 @protocol BPHomebrewManagerDelegate <NSObject>
 
 - (void)homebrewManagerFinishedUpdating:(BPHomebrewManager*)manager;
-- (void)homebrewManager:(BPHomebrewManager *)manager didUpdateSearchResults:(NSArray *)searchResults;
 - (void)homebrewManager:(BPHomebrewManager *)manager shouldDisplayNoBrewMessage:(BOOL)yesOrNo;
 
 @end
 
 @interface BPHomebrewManager : NSObject
 
-@property (strong) NSArray *formulae_installed;
-@property (strong) NSArray *formulae_outdated;
+@property NSUInteger installedFormulaeCount;
+@property NSUInteger outdatedFormulaeCount;
 @property (strong) NSArray *formulae_all;
-@property (strong) NSArray *formulae_leaves;
-@property (strong) NSArray *formulae_search;
+@property NSUInteger allFormulaeCount;
+@property NSUInteger leavesFormulaeCount;
 @property (strong) NSArray *formulae_repositories;
+@property NSUInteger repositoriesFormulaeCount;
 
 @property (weak) id<BPHomebrewManagerDelegate> delegate;
 
@@ -55,10 +55,6 @@ typedef NS_ENUM(NSInteger, BPFormulaStatus) {
 + (instancetype)new __attribute__((unavailable("new not available, call sharedManager instead")));
 
 - (void)reloadFromInterfaceRebuildingCache:(BOOL)shouldRebuildCache;
-- (void)updateSearchWithName:(NSString *)name;
-
-- (BPFormulaStatus)statusForFormula:(BPFormula*)formula;
-- (BOOL)leaveStatusForFormula:(BPFormula*)formula;
 
 - (void)cleanUp;
 
