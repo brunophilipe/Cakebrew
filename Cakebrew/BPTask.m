@@ -172,12 +172,8 @@ static BOOL systemHasAppNap;
 	}
 }
 
-int count = 0;
-
 - (void)updatedFileHandle:(NSNotification*)notification
-{
-	NSLog(@"%d", count++);
-	
+{	
 	NSFileHandle *fileHandle = [notification object];
 	NSData *data = [fileHandle availableData];
 	if (fileHandle == outputFileHandle) {
