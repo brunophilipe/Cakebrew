@@ -2,7 +2,7 @@
 
 The Homebrew GUI App for OS X
 
-[![Build Status](https://travis-ci.org/brunophilipe/Cakebrew.svg?branch=master)](https://travis-ci.org/brunophilipe/Cakebrew)
+[![Build Status](https://travis-ci.org/brunophilipe/Cakebrew.svg?branch=dev)](https://travis-ci.org/brunophilipe/Cakebrew)
 
 ## About
 
