@@ -123,12 +123,12 @@ static BOOL systemHasAppNap;
 	if(![self shouldUsePartialUpdates]) {
 		NSData *data = [outputFileHandle readDataToEndOfFile];
 		if ([data length]) {
-	  self.output = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+			self.output = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
 		}
 		
 	} else {
 		if ([outputData length]) {
-	  self.output = [[NSString alloc] initWithData:outputData encoding:NSUTF8StringEncoding];
+			self.output = [[NSString alloc] initWithData:outputData encoding:NSUTF8StringEncoding];
 		}
 	}
 }
@@ -138,11 +138,11 @@ static BOOL systemHasAppNap;
 	if(![self shouldUsePartialUpdates]) {
 		NSData *data = [errorFileHandle readDataToEndOfFile];
 		if ([data length]) {
-	  self.error = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+			self.error = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
 		}
 	} else {
 		if ([errorData length]) {
-	  self.error = [[NSString alloc] initWithData:errorData encoding:NSUTF8StringEncoding];
+			self.error = [[NSString alloc] initWithData:errorData encoding:NSUTF8StringEncoding];
 		}
 	}
 }
@@ -192,7 +192,7 @@ static BOOL systemHasAppNap;
 	[self endActivity];
 	if (self.delegate) {
 		if([self.delegate respondsToSelector:@selector(task:didFinishWithOutput:error:)]) {
-	  [self.delegate task:self didFinishWithOutput:self.output error:self.error];
+			[self.delegate task:self didFinishWithOutput:self.output error:self.error];
 		}
 	}
 }
