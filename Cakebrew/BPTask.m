@@ -105,7 +105,7 @@ static BOOL systemHasAppNap;
 		outputHandlerObserver = [[NSNotificationCenter defaultCenter] addObserverForName:NSFileHandleDataAvailableNotification
 																				  object:outputFileHandle
 																				   queue:[NSOperationQueue currentQueue]
-																			  usingBlock:^(NSNotification * _Nonnull note) {
+																			  usingBlock:^(NSNotification *note) {
 																				  [self updatedFileHandle:note];
 																			  }];
 	}
@@ -120,7 +120,7 @@ static BOOL systemHasAppNap;
 		errorHandlerObserver = [[NSNotificationCenter defaultCenter] addObserverForName:NSFileHandleDataAvailableNotification
 																				 object:errorFileHandle
 																				  queue:[NSOperationQueue currentQueue]
-																			 usingBlock:^(NSNotification * _Nonnull note) {
+																			 usingBlock:^(NSNotification *note) {
 																				 [self updatedFileHandle:note];
 																			 }];
 	}
@@ -173,7 +173,7 @@ static BOOL systemHasAppNap;
 }
 
 - (void)updatedFileHandle:(NSNotification*)notification
-{	
+{
 	NSFileHandle *fileHandle = [notification object];
 	NSData *data = [fileHandle availableData];
 	if (fileHandle == outputFileHandle) {
