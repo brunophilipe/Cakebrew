@@ -223,7 +223,12 @@ static NSString *cakebrewOutputIdentifier = @"+++++Cakebrew+++++";
 
 - (BOOL)performBrewCommandWithArguments:(NSArray*)arguments dataReturnBlock:(void (^)(NSString*))block
 {
-	arguments = [self formatArguments:arguments sendOutputId:NO];
+	return [self performBrewCommandWithArguments:arguments wrapsSynchronousRequest:NO dataReturnBlock:block];
+}
+
+- (BOOL)performBrewCommandWithArguments:(NSArray*)arguments wrapsSynchronousRequest:(BOOL)isSynchronous dataReturnBlock:(void (^)(NSString*))block
+{
+	arguments = [self formatArguments:arguments sendOutputId:isSynchronous];
 	
 	if (!self.path_shell || !arguments)
 	{
@@ -237,15 +242,18 @@ static NSString *cakebrewOutputIdentifier = @"+++++Cakebrew+++++";
 	task.updateBlock = block;
 
 #ifdef DEBUG
-	block([NSString stringWithFormat:@"\
-User Shell: %@\n\
-Command: %@\n\
-OS X Version: %@\n\n\
-The outputs are going to be different if run from Xcode!!\n\
-Installing and upgrading formulas is not advised in DEBUG mode!\n\n",
-		   self.path_shell,
-		   [arguments componentsJoinedByString:@" "],
-		   [[NSProcessInfo processInfo] operatingSystemVersionString]]);
+	if (!isSynchronous)
+	{
+		block([NSString stringWithFormat:@"\
+			   User Shell: %@\n\
+			   Command: %@\n\
+			   OS X Version: %@\n\n\
+			   The outputs are going to be different if run from Xcode!!\n\
+			   Installing and upgrading formulas is not advised in DEBUG mode!\n\n",
+			   self.path_shell,
+			   [arguments componentsJoinedByString:@" "],
+			   [[NSProcessInfo processInfo] operatingSystemVersionString]]);
+	}
 #endif
 	
 	[task execute];
@@ -294,6 +302,21 @@ Installing and upgrading formulas is not advised in DEBUG mode!\n\n",
 	}
 }
 
+/**
+ * This method performs a brew command in an asynchronous mode so that long chunks of data can be returned,
+ * but to the callee it behaves like a synchronous call.
+ */
+- (NSString*)performWrappedBrewCommandWithArguments:(NSArray*)arguments
+{
+	NSMutableString *output = [NSMutableString new];
+	
+	[self performBrewCommandWithArguments:arguments wrapsSynchronousRequest:YES dataReturnBlock:^(NSString *partialOutput) {
+			[output appendString:partialOutput];
+	}];
+	
+	return [self removeLoginShellOutputFromString:output];
+}
+
 #pragma mark - Operations that return on finish
 
 - (NSArray*)listMode:(BPListMode)mode
@@ -325,7 +348,7 @@ Installing and upgrading formulas is not advised in DEBUG mode!\n\n",
 			return nil;
 	}
 	
-	NSString *string = [self performBrewCommandWithArguments:listCall.arguments];
+	NSString *string = [self performWrappedBrewCommandWithArguments:listCall.arguments];
 	
 	if (string)
 	{

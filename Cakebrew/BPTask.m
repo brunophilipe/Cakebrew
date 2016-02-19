@@ -33,6 +33,8 @@ static BOOL systemHasAppNap;
 	NSFileHandle *errorFileHandle;
 	NSMutableData *outputData;
 	NSMutableData *errorData;
+	NSObject *outputHandlerObserver;
+	NSObject *errorHandlerObserver;
 	void (^operationUpdateBlock)(NSString*);
 }
 
@@ -97,24 +99,30 @@ static BOOL systemHasAppNap;
 - (void)configureOutputFileHandle
 {
 	outputFileHandle = [outputPipe fileHandleForReading];
-	if ([self shouldUsePartialUpdates]) {
+	if ([self shouldUsePartialUpdates])
+	{
 		[outputFileHandle waitForDataInBackgroundAndNotify];
-		[[NSNotificationCenter defaultCenter] addObserver:self
-												 selector:@selector(updatedFileHandle:)
-													 name:NSFileHandleDataAvailableNotification
-												   object:outputFileHandle];
+		outputHandlerObserver = [[NSNotificationCenter defaultCenter] addObserverForName:NSFileHandleDataAvailableNotification
+																				  object:outputFileHandle
+																				   queue:[NSOperationQueue currentQueue]
+																			  usingBlock:^(NSNotification * _Nonnull note) {
+																				  [self updatedFileHandle:note];
+																			  }];
 	}
 }
 
 - (void)configureErrorFileHandle
 {
 	errorFileHandle = [errorPipe fileHandleForReading];
-	if ([self shouldUsePartialUpdates] ) {
+	if ([self shouldUsePartialUpdates] )
+	{
 		[errorFileHandle waitForDataInBackgroundAndNotify];
-		[[NSNotificationCenter defaultCenter] addObserver:self
-												 selector:@selector(updatedFileHandle:)
-													 name:NSFileHandleDataAvailableNotification
-												   object:errorFileHandle];
+		errorHandlerObserver = [[NSNotificationCenter defaultCenter] addObserverForName:NSFileHandleDataAvailableNotification
+																				 object:errorFileHandle
+																				  queue:[NSOperationQueue currentQueue]
+																			 usingBlock:^(NSNotification * _Nonnull note) {
+																				 [self updatedFileHandle:note];
+																			 }];
 	}
 }
 
@@ -151,8 +159,8 @@ static BOOL systemHasAppNap;
 {
 	[self configureStandardOutput];
 	[self configureStandardError];
-	[self configureErrorFileHandle];
 	[self configureOutputFileHandle];
+	[self configureErrorFileHandle];
 	[self beginActivity];
 	@try {
 		[self.task launch];
@@ -164,8 +172,12 @@ static BOOL systemHasAppNap;
 	}
 }
 
+int count = 0;
+
 - (void)updatedFileHandle:(NSNotification*)notification
 {
+	NSLog(@"%d", count++);
+	
 	NSFileHandle *fileHandle = [notification object];
 	NSData *data = [fileHandle availableData];
 	if (fileHandle == outputFileHandle) {
@@ -189,9 +201,19 @@ static BOOL systemHasAppNap;
 	[[NSNotificationCenter defaultCenter] removeObserver:self
 													name:NSTaskDidTerminateNotification
 												  object:self.task];
+	
+	[[NSNotificationCenter defaultCenter] removeObserver:outputHandlerObserver];
+	[[NSNotificationCenter defaultCenter] removeObserver:errorHandlerObserver];
+	
+	outputHandlerObserver = nil;
+	errorHandlerObserver = nil;
+	
 	[self endActivity];
-	if (self.delegate) {
-		if([self.delegate respondsToSelector:@selector(task:didFinishWithOutput:error:)]) {
+	
+	if (self.delegate)
+	{
+		if ([self.delegate respondsToSelector:@selector(task:didFinishWithOutput:error:)])
+		{
 			[self.delegate task:self didFinishWithOutput:self.output error:self.error];
 		}
 	}
@@ -219,11 +241,17 @@ static BOOL systemHasAppNap;
 {
 	[self.task terminate];
 	[self endActivity];
+	
 	outputData = nil;
 	errorData = nil;
 	outputFileHandle = nil;
 	errorFileHandle = nil;
-	[[NSNotificationCenter defaultCenter] removeObserver:self];
+	
+	[[NSNotificationCenter defaultCenter] removeObserver:outputHandlerObserver];
+	[[NSNotificationCenter defaultCenter] removeObserver:errorHandlerObserver];
+	
+	outputHandlerObserver = nil;
+	errorHandlerObserver = nil;
 }
 
 - (void)dealloc
