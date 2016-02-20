@@ -22,7 +22,6 @@
 #import "BPHomebrewManager.h"
 #import "DCOAboutWindowController.h"
 #import "BPAppDelegate.h"
-#import "PFMoveApplication.h"
 
 NSString *const kBP_HOMEBREW_WEBSITE = @"https://www.cakebrew.com";
 
@@ -51,11 +50,7 @@ NSString *const kBP_HOMEBREW_WEBSITE = @"https://www.cakebrew.com";
 #pragma mark - NSApplicationDelegate
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification
-{
-#ifndef DEBUG
-	PFMoveToApplicationsFolderIfNecessary();
-#endif
-	
+{	
 	[self setupSignalHandler];
 	
 	[[BPHomebrewManager sharedManager] reloadFromInterfaceRebuildingCache:NO];

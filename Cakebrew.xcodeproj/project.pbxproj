@@ -64,7 +64,6 @@
 		D2682D021B8532B6003DE3D8 /* BPHomebrewInterface.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FE4FE76148E4D43008EDE8B /* BPHomebrewInterface.m */; };
 		D2682D031B8535BD003DE3D8 /* BPAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FE4FE6B148E4CDD008EDE8B /* BPAppDelegate.m */; };
 		D2682D041B853664003DE3D8 /* DCOAboutWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 15D2CFA918F202B300B6D9F1 /* DCOAboutWindowController.m */; };
-		D2860C151B97127500F1F64B /* PFMoveApplication.m in Sources */ = {isa = PBXBuildFile; fileRef = D2CC8C951B90EEC300F763DF /* PFMoveApplication.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		D2A3A82D1B8C9F5200D05469 /* BPStyle.m in Sources */ = {isa = PBXBuildFile; fileRef = D2A3A82A1B8C9F5200D05469 /* BPStyle.m */; };
 		D2A3A82E1B8C9F5200D05469 /* BPStyle.m in Sources */ = {isa = PBXBuildFile; fileRef = D2A3A82A1B8C9F5200D05469 /* BPStyle.m */; };
 		D2A3A82F1B8C9F5200D05469 /* BPUtilities.m in Sources */ = {isa = PBXBuildFile; fileRef = D2A3A82C1B8C9F5200D05469 /* BPUtilities.m */; };
@@ -85,8 +84,6 @@
 		D2C3E02A1B8E15B2000D89BB /* Disabled.xib in Resources */ = {isa = PBXBuildFile; fileRef = D2C3E02C1B8E15B2000D89BB /* Disabled.xib */; };
 		D2C3E02D1B8E15D5000D89BB /* Loading.xib in Resources */ = {isa = PBXBuildFile; fileRef = D2C3E02F1B8E15D5000D89BB /* Loading.xib */; };
 		D2C4278B1B8E055B001C1F80 /* BPDisabledView.m in Sources */ = {isa = PBXBuildFile; fileRef = D2C427881B8E055B001C1F80 /* BPDisabledView.m */; };
-		D2CC8CA11B90EEC300F763DF /* MoveApplication.strings in Resources */ = {isa = PBXBuildFile; fileRef = D2CC8C811B90EEC300F763DF /* MoveApplication.strings */; };
-		D2CC8CA41B90EEC300F763DF /* PFMoveApplication.m in Sources */ = {isa = PBXBuildFile; fileRef = D2CC8C951B90EEC300F763DF /* PFMoveApplication.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		D2CC8CA71B90F04C00F763DF /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D2CC8CA61B90F04C00F763DF /* Security.framework */; };
 		D2F732F119190B75002B2512 /* NSString+URLValidation.m in Sources */ = {isa = PBXBuildFile; fileRef = D2F732F019190B75002B2512 /* NSString+URLValidation.m */; };
 /* End PBXBuildFile section */
@@ -233,14 +230,6 @@
 		D2C3E0371B8E15E4000D89BB /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Disabled.strings; sourceTree = "<group>"; };
 		D2C427871B8E055B001C1F80 /* BPDisabledView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BPDisabledView.h; path = Views/BPDisabledView.h; sourceTree = "<group>"; };
 		D2C427881B8E055B001C1F80 /* BPDisabledView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BPDisabledView.m; path = Views/BPDisabledView.m; sourceTree = "<group>"; };
-		D2CC8C851B90EEC300F763DF /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/MoveApplication.strings; sourceTree = "<group>"; };
-		D2CC8C8A1B90EEC300F763DF /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/MoveApplication.strings; sourceTree = "<group>"; };
-		D2CC8C8B1B90EEC300F763DF /* es */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/MoveApplication.strings; sourceTree = "<group>"; };
-		D2CC8C8C1B90EEC300F763DF /* fr */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/MoveApplication.strings; sourceTree = "<group>"; };
-		D2CC8C941B90EEC300F763DF /* PFMoveApplication.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PFMoveApplication.h; sourceTree = "<group>"; };
-		D2CC8C951B90EEC300F763DF /* PFMoveApplication.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PFMoveApplication.m; sourceTree = "<group>"; };
-		D2CC8C971B90EEC300F763DF /* pt */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = pt; path = pt.lproj/MoveApplication.strings; sourceTree = "<group>"; };
-		D2CC8C991B90EEC300F763DF /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		D2CC8CA61B90F04C00F763DF /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		D2F732EF19190B75002B2512 /* NSString+URLValidation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+URLValidation.h"; sourceTree = "<group>"; };
 		D2F732F019190B75002B2512 /* NSString+URLValidation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+URLValidation.m"; sourceTree = "<group>"; };
@@ -374,7 +363,6 @@
 		15D5BEF618EBC56E001DDED7 /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
-				D2CC8C7F1B90EEC300F763DF /* LetsMove */,
 				15D28A0F1AE1BCFE005C8A3E /* BPTimedDispatch */,
 				15D2CFA618F202B300B6D9F1 /* DCOAboutWindow */,
 			);
@@ -501,17 +489,6 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		D2CC8C7F1B90EEC300F763DF /* LetsMove */ = {
-			isa = PBXGroup;
-			children = (
-				D2CC8C811B90EEC300F763DF /* MoveApplication.strings */,
-				D2CC8C941B90EEC300F763DF /* PFMoveApplication.h */,
-				D2CC8C951B90EEC300F763DF /* PFMoveApplication.m */,
-				D2CC8C991B90EEC300F763DF /* README.md */,
-			);
-			path = LetsMove;
-			sourceTree = "<group>";
-		};
 		D2F732EE19190B75002B2512 /* Categories */ = {
 			isa = PBXGroup;
 			children = (
@@ -609,7 +586,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D2CC8CA11B90EEC300F763DF /* MoveApplication.strings in Resources */,
 				15D5BEF318EBB3FB001DDED7 /* plus.icns in Resources */,
 				15A00B411B8406FB00528486 /* Credits.rtf in Resources */,
 				15D28A171AE332E6005C8A3E /* BPDoctorView.xib in Resources */,
@@ -687,7 +663,6 @@
 				D2C4278B1B8E055B001C1F80 /* BPDisabledView.m in Sources */,
 				1FE4FE65148E4CDD008EDE8B /* main.m in Sources */,
 				150AEC4E1B3F999A00163767 /* BPFormulaPopoverViewController.m in Sources */,
-				D2CC8CA41B90EEC300F763DF /* PFMoveApplication.m in Sources */,
 				D2C1B1021B821A2A00FFC2CA /* BPToolbar.m in Sources */,
 				1570BA3618EE0A66001C3C5C /* BPHomebrewManager.m in Sources */,
 				1FE4FE6C148E4CDD008EDE8B /* BPAppDelegate.m in Sources */,
@@ -713,7 +688,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				D2682D021B8532B6003DE3D8 /* BPHomebrewInterface.m in Sources */,
-				D2860C151B97127500F1F64B /* PFMoveApplication.m in Sources */,
 				D2682D011B8532B0003DE3D8 /* BPHomebrewManager.m in Sources */,
 				D228335A1BA71B9900E44C82 /* BPTask.m in Sources */,
 				D212A5891B853132003000ED /* BPFormula.m in Sources */,
@@ -860,18 +834,6 @@
 			);
 			name = Loading.xib;
 			path = Views;
-			sourceTree = "<group>";
-		};
-		D2CC8C811B90EEC300F763DF /* MoveApplication.strings */ = {
-			isa = PBXVariantGroup;
-			children = (
-				D2CC8C851B90EEC300F763DF /* de */,
-				D2CC8C8A1B90EEC300F763DF /* en */,
-				D2CC8C8B1B90EEC300F763DF /* es */,
-				D2CC8C8C1B90EEC300F763DF /* fr */,
-				D2CC8C971B90EEC300F763DF /* pt */,
-			);
-			name = MoveApplication.strings;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
