@@ -34,6 +34,7 @@
 #import "BPStyle.h"
 #import "BPLoadingView.h"
 #import "BPDisabledView.h"
+#import "BPBundleWindowController.h"
 
 typedef NS_ENUM(NSUInteger, HomeBrewTab) {
 	HomeBrewTabFormulae,
@@ -46,7 +47,8 @@ BPSideBarControllerDelegate,
 BPSelectedFormulaViewControllerDelegate,
 BPHomebrewManagerDelegate,
 BPToolbarProtocol,
-NSMenuDelegate>
+NSMenuDelegate,
+NSOpenSavePanelDelegate>
 
 @property (weak) BPAppDelegate *appDelegate;
 
@@ -58,7 +60,7 @@ NSMenuDelegate>
 
 @property (strong, nonatomic) BPFormulaeDataSource				*formulaeDataSource;
 @property (strong, nonatomic) BPFormulaOptionsWindowController	*formulaOptionsWindowController;
-@property (strong, nonatomic) BPInstallationWindowController	*operationWindowController;
+@property (strong, nonatomic) NSWindowController				*operationWindowController;
 @property (strong, nonatomic) BPUpdateViewController			*updateViewController;
 @property (strong, nonatomic) BPDoctorViewController			*doctorViewController;
 @property (strong, nonatomic) BPFormulaPopoverViewController	*formulaPopoverViewController;
@@ -761,6 +763,50 @@ NSMenuDelegate>
 																			  options:nil];
 }
 
+- (IBAction)runHomebrewExport:(id)sender
+{
+	NSSavePanel *savePanel = [NSSavePanel savePanel];
+	[savePanel setNameFieldLabel:@"Export To:"];
+	[savePanel setPrompt:@"Export"];
+	[savePanel setNameFieldStringValue:@"Brewfile"];
+	
+	[savePanel beginSheetModalForWindow:[NSApp mainWindow] completionHandler:^(NSInteger result) {
+		NSURL *fileURL = [savePanel URL];
+		
+		if (fileURL && result)
+		{
+			dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)),
+						   dispatch_get_main_queue(), ^{
+							   self.operationWindowController = [BPBundleWindowController runExportOperationWithFile:fileURL];
+						   });
+		}
+	}];
+}
+
+- (IBAction)runHomebrewImport:(id)sender
+{
+	NSOpenPanel *openPanel = [NSOpenPanel openPanel];
+	[openPanel setNameFieldLabel:@"Import From:"];
+	[openPanel setPrompt:@"Import"];
+	[openPanel setNameFieldStringValue:@"Brewfile"];
+	[openPanel setAllowsMultipleSelection:NO];
+	[openPanel setCanChooseDirectories:NO];
+	[openPanel setCanChooseFiles:YES];
+	[openPanel setDelegate:self];
+	
+	[openPanel beginSheetModalForWindow:[NSApp mainWindow] completionHandler:^(NSInteger result) {
+		NSURL *fileURL = [openPanel URL];
+		
+		if (fileURL && result)
+		{
+			dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)),
+						   dispatch_get_main_queue(), ^{
+							   self.operationWindowController = [BPBundleWindowController runImportOperationWithFile:fileURL];
+						   });
+		}
+	}];
+}
+
 - (void)checkForBackgroundTask
 {
 	if (_appDelegate.isRunningBackgroundTask)
@@ -786,6 +832,13 @@ NSMenuDelegate>
 {
 	NSArray *formulas = [self selectedFormulae];
 	return [formulas valueForKeyPath:@"@unionOfObjects.name"];
+}
+
+#pragma mark - OPen Save Panels Delegate
+
+- (BOOL)panel:(id)sender shouldEnableURL:(NSURL *)url
+{
+	return [[[url pathComponents] lastObject] isEqualToString:@"Brewfile"];
 }
 
 @end

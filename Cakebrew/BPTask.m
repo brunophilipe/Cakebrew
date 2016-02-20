@@ -155,7 +155,7 @@ static BOOL systemHasAppNap;
 	}
 }
 
-- (void)execute
+- (int)execute
 {
 	[self configureStandardOutput];
 	[self configureStandardError];
@@ -165,10 +165,14 @@ static BOOL systemHasAppNap;
 	@try {
 		[self.task launch];
 		[self.task waitUntilExit]; //this makes sure that we stay in the same run loop (thread); needed for notifications
+		
+		return [self.task terminationStatus];
 	}
 	@catch (NSException *exception) {
 		NSLog(@"Exception: %@", exception);
 		[self cleanup];
+		
+		return -1;
 	}
 }
 

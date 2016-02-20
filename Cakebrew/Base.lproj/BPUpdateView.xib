@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="8191" systemVersion="15A284" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="9532" systemVersion="15D21" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="8191"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="9532"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="BPUpdateViewController">
@@ -27,7 +27,6 @@
                             <textView editable="NO" importsGraphics="NO" richText="NO" findStyle="bar" verticallyResizable="YES" id="qO9-DU-DCD" customClass="BPAutoScrollTextView">
                                 <rect key="frame" x="0.0" y="0.0" width="400" height="284"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                <animations/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <size key="minSize" width="400" height="284"/>
                                 <size key="maxSize" width="463" height="10000000"/>
@@ -36,28 +35,23 @@
                                 <size key="maxSize" width="463" height="10000000"/>
                             </textView>
                         </subviews>
-                        <animations/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </clipView>
-                    <animations/>
                     <scroller key="horizontalScroller" hidden="YES" verticalHuggingPriority="750" doubleValue="1" horizontal="YES" id="Stm-IA-jgk">
                         <rect key="frame" x="-100" y="-100" width="87" height="18"/>
                         <autoresizingMask key="autoresizingMask"/>
-                        <animations/>
                     </scroller>
                     <scroller key="verticalScroller" verticalHuggingPriority="750" doubleValue="1" horizontal="NO" id="D7a-Q3-Xgj">
                         <rect key="frame" x="385" y="1" width="16" height="284"/>
                         <autoresizingMask key="autoresizingMask"/>
-                        <animations/>
                     </scroller>
                 </scrollView>
-                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="ovx-vH-lDR">
+                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" preferredMaxLayoutWidth="146" translatesAutoresizingMaskIntoConstraints="NO" id="ovx-vH-lDR">
                     <rect key="frame" x="5" y="291" width="150" height="24"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="24" id="PlI-WB-g5L"/>
                         <constraint firstAttribute="width" constant="146" id="lof-y8-L9D"/>
                     </constraints>
-                    <animations/>
                     <textFieldCell key="cell" controlSize="mini" allowsUndo="NO" sendsActionOnEndEditing="YES" title="You should update homebrew at least once every 24 hours." id="xJf-gA-oo0">
                         <font key="font" metaFont="miniSystem"/>
                         <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
@@ -66,7 +60,6 @@
                 </textField>
                 <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="wIZ-rp-y6N">
                     <rect key="frame" x="202" y="292" width="65" height="19"/>
-                    <animations/>
                     <buttonCell key="cell" type="roundRect" title="Clear Log" bezelStyle="roundedRect" alignment="center" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="EE6-5g-Jos">
                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                         <font key="font" metaFont="smallSystem"/>
@@ -79,7 +72,6 @@
                 </button>
                 <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="dWd-Zo-8Vf">
                     <rect key="frame" x="275" y="292" width="113" height="19"/>
-                    <animations/>
                     <buttonCell key="cell" type="roundRect" title="Update Homebrew" bezelStyle="roundedRect" alignment="center" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="MVF-cn-lfW">
                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                         <font key="font" metaFont="smallSystem"/>
@@ -95,7 +87,6 @@
                 </button>
                 <progressIndicator wantsLayer="YES" horizontalHuggingPriority="750" verticalHuggingPriority="750" maxValue="100" displayedWhenStopped="NO" bezeled="NO" indeterminate="YES" controlSize="small" style="spinning" translatesAutoresizingMaskIntoConstraints="NO" id="J7C-5S-Vor">
                     <rect key="frame" x="178" y="293" width="16" height="16"/>
-                    <animations/>
                 </progressIndicator>
             </subviews>
             <constraints>
@@ -112,7 +103,6 @@
                 <constraint firstItem="J7C-5S-Vor" firstAttribute="top" secondItem="tCl-LR-g5d" secondAttribute="top" constant="11" id="pqs-fs-Th8"/>
                 <constraint firstItem="wIZ-rp-y6N" firstAttribute="top" secondItem="tCl-LR-g5d" secondAttribute="top" constant="9" id="tuX-70-X1c"/>
             </constraints>
-            <animations/>
         </view>
     </objects>
 </document>

@@ -21,6 +21,8 @@
 		1570BA5618EE50BD001C3C5C /* BPFormula.m in Sources */ = {isa = PBXBuildFile; fileRef = 1570BA5518EE50BD001C3C5C /* BPFormula.m */; };
 		1570EFAF1B2B91170075453A /* Sparkle.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 15B23A2818F4F21E00714212 /* Sparkle.framework */; };
 		1570EFB01B2B91170075453A /* Sparkle.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 15B23A2818F4F21E00714212 /* Sparkle.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		15715F611C78050B00AE0E66 /* BPBundleWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 15715F5F1C78050B00AE0E66 /* BPBundleWindow.xib */; };
+		15715F641C78053300AE0E66 /* BPBundleWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 15715F631C78053300AE0E66 /* BPBundleWindowController.m */; };
 		158370B918F2471500176C9C /* PXSourceList.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 158370B818F2471500176C9C /* PXSourceList.framework */; };
 		158370BA18F2472100176C9C /* PXSourceList.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 158370B818F2471500176C9C /* PXSourceList.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		1594D13C1B8A6D1A00F764FA /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 15D2CFAC18F202D000B6D9F1 /* QuartzCore.framework */; };
@@ -128,6 +130,12 @@
 		1570BA3518EE0A66001C3C5C /* BPHomebrewManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BPHomebrewManager.m; sourceTree = "<group>"; };
 		1570BA5418EE50BD001C3C5C /* BPFormula.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BPFormula.h; path = Models/BPFormula.h; sourceTree = "<group>"; };
 		1570BA5518EE50BD001C3C5C /* BPFormula.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BPFormula.m; path = Models/BPFormula.m; sourceTree = "<group>"; };
+		15715F601C78050B00AE0E66 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/BPBundleWindow.xib; sourceTree = "<group>"; };
+		15715F621C78053300AE0E66 /* BPBundleWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BPBundleWindowController.h; sourceTree = "<group>"; };
+		15715F631C78053300AE0E66 /* BPBundleWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BPBundleWindowController.m; sourceTree = "<group>"; };
+		15715F661C78D3C600AE0E66 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/BPBundleWindow.strings; sourceTree = "<group>"; };
+		15715F681C78D3C800AE0E66 /* pt */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = pt; path = pt.lproj/BPBundleWindow.strings; sourceTree = "<group>"; };
+		15715F6A1C78D3CC00AE0E66 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/BPBundleWindow.strings; sourceTree = "<group>"; };
 		158370B818F2471500176C9C /* PXSourceList.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PXSourceList.framework; path = Cakebrew/Frameworks/PXSourceList.framework; sourceTree = "<group>"; };
 		15A00B3C1B84000600528486 /* pt */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = pt; path = pt.lproj/MainMenu.strings; sourceTree = "<group>"; };
 		15A00B3D1B84002E00528486 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
@@ -286,6 +294,9 @@
 		15A974AB1968A3C900621C35 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				15715F5F1C78050B00AE0E66 /* BPBundleWindow.xib */,
+				15715F621C78053300AE0E66 /* BPBundleWindowController.h */,
+				15715F631C78053300AE0E66 /* BPBundleWindowController.m */,
 				15D28A191AE332E6005C8A3E /* BPDoctorView.xib */,
 				150AEC381B3F999A00163767 /* BPDoctorViewController.h */,
 				150AEC391B3F999A00163767 /* BPDoctorViewController.m */,
@@ -622,6 +633,7 @@
 				15D28A291AE33301005C8A3E /* BPUpdateView.xib in Resources */,
 				D2C3E02A1B8E15B2000D89BB /* Disabled.xib in Resources */,
 				15D2CFBA18F20A8200B6D9F1 /* LICENSE in Resources */,
+				15715F611C78050B00AE0E66 /* BPBundleWindow.xib in Resources */,
 				15D5BEF218EBB3FB001DDED7 /* label.icns in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -689,6 +701,7 @@
 				15D2CFAB18F202B300B6D9F1 /* DCOAboutWindowController.m in Sources */,
 				D2A3A82D1B8C9F5200D05469 /* BPStyle.m in Sources */,
 				150AEC511B3F999A00163767 /* BPInstallationWindowController.m in Sources */,
+				15715F641C78053300AE0E66 /* BPBundleWindowController.m in Sources */,
 				D2BBAB4B1B85EA7C00F21332 /* BPFormulaOption.m in Sources */,
 				150AEC4C1B3F999A00163767 /* BPDoctorViewController.m in Sources */,
 				150AEC551B3F999A00163767 /* BPUpdateViewController.m in Sources */,
@@ -716,6 +729,17 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
+		15715F5F1C78050B00AE0E66 /* BPBundleWindow.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				15715F601C78050B00AE0E66 /* Base */,
+				15715F661C78D3C600AE0E66 /* en */,
+				15715F681C78D3C800AE0E66 /* pt */,
+				15715F6A1C78D3CC00AE0E66 /* de */,
+			);
+			name = BPBundleWindow.xib;
+			sourceTree = "<group>";
+		};
 		15D28A161AE332DB005C8A3E /* DCOAboutWindow.xib */ = {
 			isa = PBXVariantGroup;
 			children = (

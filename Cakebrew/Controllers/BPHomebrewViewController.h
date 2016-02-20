@@ -61,5 +61,7 @@ typedef NS_ENUM(NSUInteger, BPWindowOperation) {
 - (IBAction)openSelectedFormulaWebsite:(id)sender;
 - (IBAction)beginFormulaSearch:(id)sender;
 - (IBAction)runHomebrewCleanup:(id)sender;
+- (IBAction)runHomebrewExport:(id)sender;
+- (IBAction)runHomebrewImport:(id)sender;
 
 @end

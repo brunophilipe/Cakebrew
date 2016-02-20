@@ -22,6 +22,13 @@
 #import "BPHomebrewInterface.h"
 #import "BPTask.h"
 
+#define kDEBUG_WARNING @"\
+User Shell: %@\n\
+Command: %@\n\
+OS X Version: %@\n\n\
+The outputs are going to be different if run from Xcode!!\n\
+Installing and upgrading formulas is not advised in DEBUG mode!\n\n"
+
 static NSString *cakebrewOutputIdentifier = @"+++++Cakebrew+++++";
 
 @interface BPHomebrewInterfaceListCall : NSObject
@@ -139,8 +146,10 @@ static NSString *cakebrewOutputIdentifier = @"+++++Cakebrew+++++";
 	
 	// avoid executing stuff like /sbin/nologin as a shell
 	BOOL isValidShell = NO;
-	for (NSString *validShell in [[NSString stringWithContentsOfFile:@"/etc/shells" encoding:NSUTF8StringEncoding error:nil] componentsSeparatedByCharactersInSet:[NSCharacterSet newlineCharacterSet]]) {
-		if ([[validShell stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]] isEqualToString:userShell]) {
+	for (NSString *validShell in [[NSString stringWithContentsOfFile:@"/etc/shells" encoding:NSUTF8StringEncoding error:nil] componentsSeparatedByCharactersInSet:[NSCharacterSet newlineCharacterSet]])
+	{
+		if ([[validShell stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]] isEqualToString:userShell])
+		{
 			isValidShell = YES;
 			break;
 		}
@@ -244,22 +253,18 @@ static NSString *cakebrewOutputIdentifier = @"+++++Cakebrew+++++";
 #ifdef DEBUG
 	if (!isSynchronous)
 	{
-		block([NSString stringWithFormat:@"\
-			   User Shell: %@\n\
-			   Command: %@\n\
-			   OS X Version: %@\n\n\
-			   The outputs are going to be different if run from Xcode!!\n\
-			   Installing and upgrading formulas is not advised in DEBUG mode!\n\n",
+		block([NSString stringWithFormat:kDEBUG_WARNING,
 			   self.path_shell,
 			   [arguments componentsJoinedByString:@" "],
 			   [[NSProcessInfo processInfo] operatingSystemVersionString]]);
 	}
 #endif
 	
-	[task execute];
+	int status = [task execute];
 	
-	NSString *taskDoneString = [NSString stringWithFormat:@"%@ %@ %@!",
+	NSString *taskDoneString = [NSString stringWithFormat:@"%@:(%d) %@ %@!",
 								NSLocalizedString(@"Homebrew_Task_Finished", nil),
+								status,
 								NSLocalizedString(@"Homebrew_Task_Finished_At", nil),
 								[NSDateFormatter localizedStringFromDate:[NSDate date]
 															   dateStyle:NSDateFormatterShortStyle
@@ -267,12 +272,12 @@ static NSString *cakebrewOutputIdentifier = @"+++++Cakebrew+++++";
 	
 	block(taskDoneString);
 	
-	return YES;
+	return status == 0;
 }
 
 - (BOOL)isRunningBackgroundTask
 {
-	return (BOOL)[[self.tasks allKeys] count];
+	return [[self.tasks allKeys] count] > 0;
 }
 
 - (NSString*)performBrewCommandWithArguments:(NSArray*)arguments
@@ -436,6 +441,47 @@ static NSString *cakebrewOutputIdentifier = @"+++++Cakebrew+++++";
 	BOOL val = [self performBrewCommandWithArguments:@[@"doctor"] dataReturnBlock:block];
 	[self sendDelegateFormulaeUpdatedCall];
 	return val;
+}
+
+- (NSError*)runBrewExportToolWithPath:(NSString*)path
+{
+	NSString *output = [self performBrewCommandWithArguments:@[@"bundle",
+															   @"dump",
+															   @"--force",
+															   [NSString stringWithFormat:@"--file=%@", path]]
+												captureError:YES];
+	
+	[self sendDelegateFormulaeUpdatedCall];
+	
+	if ([output length] == 0)
+	{
+		return nil;
+	}
+	else
+	{
+		__block NSError *error = nil;
+		
+		[output enumerateLinesUsingBlock:^(NSString *line, BOOL *stop) {
+			if ([line hasPrefix:@"Error:"] || [line hasPrefix:@"fatal:"])
+			{
+				error = [NSError errorWithDomain:@"Cakebrew"
+								   code:2701
+							   userInfo:@{NSLocalizedDescriptionKey: line}];
+				
+				*stop = YES;
+			}
+		}];
+		
+		return error;
+	}
+}
+
+- (BOOL)runBrewImportToolWithPath:(NSString*)path withReturnsBlock:(void (^)(NSString *))block
+{
+	NSArray *arguments = @[@"bundle", [NSString stringWithFormat:@"--file=%@", path]];
+	[self sendDelegateFormulaeUpdatedCall];
+	return [self performBrewCommandWithArguments:arguments
+								 dataReturnBlock:block];
 }
 
 - (void)sendDelegateFormulaeUpdatedCall

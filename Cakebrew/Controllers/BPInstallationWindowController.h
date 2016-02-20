@@ -30,4 +30,11 @@
                                             formulae:(NSArray *)formulae
                                              options:(NSArray *)options;
 
++ (BPInstallationWindowController *)runWithOperation:(BPWindowOperation)windowOperation
+											formulae:(NSArray *)formulae
+											 options:(NSArray *)options
+										  completion:(void (^)(BOOL))completionBlock;
+
+- (void)setCompletionBlock:(void (^)(BOOL))completionBlock;
+
 @end

@@ -37,6 +37,9 @@
 @property (strong, nonatomic) NSArray *formulae;
 @property (strong, nonatomic) NSArray *options;
 
+@property BOOL operationStatus;
+@property (nonatomic, copy) void (^completionBlock)(BOOL);
+
 @end
 
 @implementation BPInstallationWindowController
@@ -88,17 +91,28 @@
 			self.formulaNameLabel.stringValue = @"";
 		}
 	}
+	
+	[self setOperationStatus:NO];
 }
 
 + (BPInstallationWindowController *)runWithOperation:(BPWindowOperation)windowOperation
 											formulae:(NSArray *)formulae
 											 options:(NSArray *)options
 {
+	return [self runWithOperation:windowOperation formulae:formulae options:options completion:nil];
+}
+
++ (BPInstallationWindowController *)runWithOperation:(BPWindowOperation)windowOperation
+											formulae:(NSArray *)formulae
+											 options:(NSArray *)options
+										  completion:(void (^)(BOOL))completionBlock
+{
 	BPInstallationWindowController *operationWindowController;
 	operationWindowController = [[BPInstallationWindowController alloc] initWithWindowNibName:@"BPInstallationWindow"];
 	operationWindowController.windowOperation = windowOperation;
 	operationWindowController.formulae = formulae;
 	operationWindowController.options = options;
+	operationWindowController.completionBlock = completionBlock;
 	[BPAppDelegateRef setRunningBackgroundTask:YES];
 	
 	
@@ -106,7 +120,7 @@
 	
 	if ([[NSApp mainWindow] respondsToSelector:@selector(beginSheet:completionHandler:)]) {
 		[[NSApp mainWindow] beginSheet:operationWindow completionHandler:^(NSModalResponse returnCode) {
-			[BPAppDelegateRef setRunningBackgroundTask:NO];
+			[operationWindowController cleanupAfterTask];
 		}];
 	} else {
 		[[NSApplication sharedApplication] beginSheet:operationWindow
@@ -123,7 +137,17 @@
 - (void)windowOperationSheetDidEnd:(NSWindow *)sheet returnCode:(NSInteger)returnCode contextInfo:(void *)contextInfo;
 {
 	[sheet orderOut:self];
+	[self cleanupAfterTask];
+}
+
+- (void)cleanupAfterTask
+{
 	[BPAppDelegateRef setRunningBackgroundTask:NO];
+	
+	if (self.completionBlock)
+	{
+		self.completionBlock(self.operationStatus);
+	}
 }
 
 - (NSArray*)namesOfAllFormulae
@@ -135,13 +159,18 @@
 {
 	[self.okButton setEnabled:NO];
 	[self.progressIndicator startAnimation:nil];
+	
 	dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
 		NSString __block *outputValue;
 		__weak BPInstallationWindowController *weakSelf = self;
+		
 		void (^displayTerminalOutput)(NSString *outputValue) = ^(NSString *output) {
-			if (outputValue) {
+			if (outputValue)
+			{
 				outputValue = [outputValue stringByAppendingString:output];
-			} else {
+			}
+			else
+			{
 				outputValue = output;
 			}
 			[weakSelf.recordTextView performSelectorOnMainThread:@selector(setString:)
@@ -153,45 +182,51 @@
 		if (self.windowOperation == kBPWindowOperationInstall)
 		{
 			NSString *name = [[self.formulae firstObject] name];
-			[homebrewInterface installFormula:name
-								  withOptions:self.options
-							   andReturnBlock:displayTerminalOutput];
+			self.operationStatus = [homebrewInterface installFormula:name
+														 withOptions:self.options
+													  andReturnBlock:displayTerminalOutput];
 		}
 		else if (self.windowOperation == kBPWindowOperationUninstall)
 		{
 			NSString *name = [[self.formulae firstObject] name];
-			[homebrewInterface uninstallFormula:name
-								withReturnBlock:displayTerminalOutput];
+			self.operationStatus = [homebrewInterface uninstallFormula:name
+													   withReturnBlock:displayTerminalOutput];
 		}
 		else if (self.windowOperation == kBPWindowOperationUpgrade)
 		{
-			if (self.formulae) {
+			if (self.formulae)
+			{
 				NSArray *names = [self namesOfAllFormulae];
-				[homebrewInterface upgradeFormulae:names
-								   withReturnBlock:displayTerminalOutput];
-			} else {
+				self.operationStatus = [homebrewInterface upgradeFormulae:names
+														  withReturnBlock:displayTerminalOutput];
+			}
+			else
+			{
 				//no parameter is necessary to upgrade all formulas; recycling API with empty string
-				[homebrewInterface upgradeFormulae:@[@""]
-								   withReturnBlock:displayTerminalOutput];
+				self.operationStatus = [homebrewInterface upgradeFormulae:@[@""]
+														  withReturnBlock:displayTerminalOutput];
 			}
 		}
 		else if (self.windowOperation == kBPWindowOperationTap)
 		{
-			if (self.formulae) {
+			if (self.formulae)
+			{
 				NSString *name = [[self.formulae firstObject] name];
-				[homebrewInterface tapRepository:name withReturnsBlock:displayTerminalOutput];
+				self.operationStatus = [homebrewInterface tapRepository:name withReturnsBlock:displayTerminalOutput];
 			}
 		}
 		else if (self.windowOperation == kBPWindowOperationUntap)
 		{
-			if (self.formulae) {
+			if (self.formulae)
+			{
 				NSString *name = [[self.formulae firstObject] name];
-				[[BPHomebrewInterface sharedInterface] untapRepository:name withReturnsBlock:displayTerminalOutput];
+				self.operationStatus = [[BPHomebrewInterface sharedInterface] untapRepository:name
+																			 withReturnsBlock:displayTerminalOutput];
 			}
 		}
 		else if (self.windowOperation == kBPWindowOperationCleanup)
 		{
-			[[BPHomebrewInterface sharedInterface] runCleanupWithReturnBlock:displayTerminalOutput];
+			self.operationStatus = [[BPHomebrewInterface sharedInterface] runCleanupWithReturnBlock:displayTerminalOutput];
 		}
 		
 		[self finishTask];
@@ -217,10 +252,15 @@
 - (IBAction)okAction:(id)sender
 {
 	self.recordTextView.string = @"";
+	
 	NSWindow *mainWindow = [NSApp mainWindow];
-	if ([mainWindow respondsToSelector:@selector(endSheet:)]) {
+	
+	if ([mainWindow respondsToSelector:@selector(endSheet:)])
+	{
 		[mainWindow endSheet:self.window];
-	} else {
+	}
+	else
+	{
 		[[NSApplication sharedApplication] endSheet:self.window];
 	}
 }

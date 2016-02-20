@@ -30,7 +30,7 @@
 
 - (instancetype)initWithPath:(NSString *)path
 				   arguments:(NSArray *)arguments;
-- (void)execute;
+- (int)execute;
 - (void)cleanup;
 
 @property (nonatomic, copy) void (^updateBlock)(NSString *);

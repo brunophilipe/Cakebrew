@@ -145,6 +145,25 @@ typedef NS_ENUM(NSInteger, BPListMode) {
  */
 - (BOOL)runDoctorWithReturnBlock:(void (^)(NSString*))block;
 
+/**
+ *  Runs Homebrew bundle dump tool. Will request instalation of Homebrew-Bundle tap if it is not already tapped.
+ *
+ *  @param path The path where to export the dump file.
+ *
+ *  @return `nil` on success (no output), or the error in case something goes wrong.
+ */
+- (NSError*)runBrewExportToolWithPath:(NSString*)path;
+
+/**
+ *  Runs Homebrew bundle import tool. Will request instalation of Homebrew-Bundle tap if it is not already tapped.
+ *
+ *  @param path The path where to export the dump file.
+ *  @param block Data callback block. This block will be called with new data to be diplayed while the process runs.
+ *
+ *  @return `YES` on success, `NO` otherwise.
+ */
+- (BOOL)runBrewImportToolWithPath:(NSString*)path withReturnsBlock:(void (^)(NSString *))block;
+
 #pragma mark - Operations that return on finish
 
 /**
@@ -164,6 +183,8 @@ typedef NS_ENUM(NSInteger, BPListMode) {
  *  @return The information for the parameter formula as output by Homebrew.
  */
 - (NSString *)informationForFormulaName:(NSString *)name;
+
+#pragma mark – Utilities
 
 /**
  *
