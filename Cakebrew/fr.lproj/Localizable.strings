@@ -1,0 +1,243 @@
+/* No comment provided by engineer. */
+"Cakebrew" = "Cakebrew";
+
+/* No comment provided by engineer. */
+"Confirmation_Install_Formula" = "Êtes-vous sûr de vouloir installer la formule « %@ » ?";
+
+/* (No Commment) */
+"Confirmation_Tap_Repo" = "Êtes-vous sûr de vouloir ajouter le dépôt « %@ » ?";
+
+/* No comment provided by engineer. */
+"Confirmation_Uninstall_Formula" = "Êtes-vous sûr de vouloir désinstaller la formule « %@ » ?";
+
+/* (No Commment) */
+"Confirmation_Untap_Repo" = "Êtes-vous sûr de vouloir supprimer le dépôt « %@ » ?";
+
+/* (No Commment) */
+"Confirmation_Update_Formula" = "Êtes-vous sûr de vouloir mettre à jour ces formules ?";
+
+/* No comment provided by engineer. */
+"Formula_Options_ClickForDetails" = "Sélectionnez une option pour voir plus de détails.";
+
+/* No comment provided by engineer. */
+"Formula_Options_Confirmation" = "Êtes-vous sûr de vouloir installer la formule « %@ » avec les options sélectionnées ?";
+
+/* No comment provided by engineer. */
+"Formula_Options_NoOptions" = "Cette formule n'a pas d'options.";
+
+/* No comment provided by engineer. */
+"Formula_Options_VoiceOver" = "Options de la formule";
+
+/* No comment provided by engineer. */
+"Formula_Options_VoiceOver_Description" = "Les descriptions d'options sont aussi accessibles via l'aide VoiceOver pour chaque ligne de la liste d'options.";
+
+/* (No Commment) */
+"Formula_Popover_Error" = "Une erreur est survenue en essayant de retrouver les informations de cette formule";
+
+/* No comment provided by engineer. */
+"Formula_Popover_Title" = "Informations pour la formule : %@";
+
+/* No comment provided by engineer. */
+"Formula_Status_Installed" = "Installée";
+
+/* No comment provided by engineer. */
+"Formula_Status_Not_Installed" = "Non installée";
+
+/* No comment provided by engineer. */
+"Formula_Status_Outdated" = "Mise à jour disponible";
+
+/* No comment provided by engineer. */
+"Formulae" = "Formules";
+
+/* No comment provided by engineer. */
+"Generic_Attention" = "Attention !";
+
+/* No comment provided by engineer. */
+"Generic_Cancel" = "Annuler";
+
+/* No comment provided by engineer. */
+"Generic_Error" = "Erreur";
+
+/* (No Commment) */
+"Generic_No" = "Non";
+
+/* No comment provided by engineer. */
+"Generic_OK" = "Ok";
+
+/* No comment provided by engineer. */
+"Generic_Yes" = "Oui";
+
+/* No comment provided by engineer. */
+"Homebrew_AppNap_Task_Reason" = "Exécuter une tâche avec Homebrew";
+
+/* No comment provided by engineer. */
+"Homebrew_Task_Finished" = "Tâche terminée";
+
+/* No comment provided by engineer. */
+"Homebrew_Task_Finished_At" = "à";
+
+/* No comment provided by engineer. */
+"Info_View_Formula_No_Conflicts" = "Cette formule n'a pas de conflits connus.";
+
+/* No comment provided by engineer. */
+"Info_View_Formula_No_Dependencies" = "Cette formule n'a pas de prérequis !";
+
+/* No comment provided by engineer. */
+"Info_View_Formula_No_Description" = "Pas de description.";
+
+/* No comment provided by engineer. */
+"Info_View_Formula_Not_Installed" = "Formule non installée.";
+
+/* No comment provided by engineer. */
+"Info_View_Multiple_Values" = "Plusieurs valeurs";
+
+/* No comment provided by engineer. */
+"Installation_Window_All_Formulae" = "Toutes les formules en attente de mise à jour";
+
+/* No comment provided by engineer. */
+"Installation_Window_Operation_Cleanup" = "Nettoyage en cours…";
+
+/* No comment provided by engineer. */
+"Installation_Window_Operation_Install" = "Installation en cours de la formule :";
+
+/* No comment provided by engineer. */
+"Installation_Window_Operation_Tap" = "Ajout en cours du dépôt :";
+
+/* No comment provided by engineer. */
+"Installation_Window_Operation_Uninstall" = "Désinstallation en cours de la formule :";
+
+/* No comment provided by engineer. */
+"Installation_Window_Operation_Untap" = "Suppression en cours du dépôt :";
+
+/* No comment provided by engineer. */
+"Installation_Window_Operation_Update" = "Mise à jour en cours de la formule :";
+
+/* No comment provided by engineer. */
+"Message_BGTask_Body" = "Désolé, une tâche de fond est déjà en cours d'exécution. Vous ne pouvez pas exécuter deux tâches en même temps.";
+
+/* No comment provided by engineer. */
+"Message_BGTask_Title" = "Tâche de fond active !";
+
+/* No comment provided by engineer. */
+"Message_No_Homebrew_Body" = "Homebrew n'est pas présent sur votre système. Veuillez installer Homebrew avant d'utiliser Cakebrew. Vous pouvez cliquer sur le bouton ci-dessous pour aller sur le site web de Homebrew.";
+
+/* No comment provided by engineer. */
+"Message_No_Homebrew_Title" = "Site web de Homebrew";
+
+/* No comment provided by engineer. */
+"Message_Shell_Invalid_Body" = "Veuillez ajouter votre shell « %@ » dans le fichier des shells valides à « /etc/shells » et essayez à nouveau.";
+
+/* No comment provided by engineer. */
+"Message_Shell_Invalid_Title" = "Aucun shell valide n'a été trouvé !";
+
+/* No comment provided by engineer. */
+"Message_Tap_Body" = "Quel dépôt voulez-vous ajouter ?";
+
+/* No comment provided by engineer. */
+"Message_Tap_Title" = "Ajout en cours du dépôt";
+
+/* No comment provided by engineer. */
+"Message_Untap_Body" = "Êtes-vous sûr de vouloir supprimer le dépôt « %@ » ?";
+
+/* No comment provided by engineer. */
+"Message_Untap_Title" = "Suppression en cours du dépôt";
+
+/* No comment provided by engineer. */
+"Message_Update_All_Outdated_Body" = "Êtes-vous sûr de vouloir mettre à jour toutes les formules ?";
+
+/* No comment provided by engineer. */
+"Message_Update_All_Outdated_Title" = "Mettre à jour toutes les formules";
+
+/* No comment provided by engineer. */
+"Message_Update_Formulae_Body" = "Êtes-vous sûr de vouloir mettre à jour les formules : %@ ?";
+
+/* No comment provided by engineer. */
+"Message_Update_Formulae_Title" = "Mise à jour en cours des formules";
+
+/* (No Commment) */
+"Notification_Doctor" = "Outil de diagnostique";
+
+/* No comment provided by engineer. */
+"Notification_Update" = "Mettre à jour Homebrew";
+
+/* No comment provided by engineer. */
+"Sidebar_Group_Formulae" = "Formules";
+
+/* No comment provided by engineer. */
+"Sidebar_Group_Tools" = "Outils";
+
+/* No comment provided by engineer. */
+"Sidebar_Info_All" = "Formules disponibles avec Homebrew.";
+
+/* No comment provided by engineer. */
+"Sidebar_Info_Doctor" = "L'outil de diagnostique permet de détecter les erreurs les plus fréquentes.";
+
+/* No comment provided by engineer. */
+"Sidebar_Info_Installed" = "Formules déjà installées sur votre système.";
+
+/* No comment provided by engineer. */
+"Sidebar_Info_Leaves" = "Formules qui ne sont utilisées par aucune autre formule.";
+
+/* No comment provided by engineer. */
+"Sidebar_Info_Outdated" = "Formules déjà installées, mais une mise à jour est disponible.";
+
+/* No comment provided by engineer. */
+"Sidebar_Info_Repos" = "Dépôts que vous avez ajoutés.";
+
+/* No comment provided by engineer. */
+"Sidebar_Info_SearchResults" = "Résultats de la recherche.";
+
+/* No comment provided by engineer. */
+"Sidebar_Info_Update" = "Mettre à jour Hombrew permet de mettre à jour les informations de toutes les formules disponibles.";
+
+/* No comment provided by engineer. */
+"Sidebar_Item_All" = "Toutes les formules";
+
+/* No comment provided by engineer. */
+"Sidebar_Item_Doctor" = "Diagnostique";
+
+/* No comment provided by engineer. */
+"Sidebar_Item_Installed" = "Installées";
+
+/* No comment provided by engineer. */
+"Sidebar_Item_Leaves" = "Feuilles";
+
+/* No comment provided by engineer. */
+"Sidebar_Item_Outdated" = "En attente de mise à jour";
+
+/* No comment provided by engineer. */
+"Sidebar_Item_Repos" = "Dépôts";
+
+/* No comment provided by engineer. */
+"Sidebar_Item_Update" = "Mettre à jour";
+
+/* No comment provided by engineer. */
+"Sidebar_VoiceOver_Tools" = "Outils";
+
+/* No comment provided by engineer. */
+"Toolbar_Homebrew_Update" = "Mettre à jour Homebrew";
+
+/* No comment provided by engineer. */
+"Toolbar_Install_Formula" = "Installer une formule";
+
+/* No comment provided by engineer. */
+"Toolbar_More_Information" = "Plus d'informations";
+
+/* No comment provided by engineer. */
+"Toolbar_Search" = "Rechercher des formules";
+
+/* No comment provided by engineer. */
+"Toolbar_Tap_Repo" = "Ajouter un dépôt";
+
+/* No comment provided by engineer. */
+"Toolbar_Uninstall_Formula" = "Désinstaller une formule";
+
+/* No comment provided by engineer. */
+"Toolbar_Untap_Repo" = "Supprimer un dépôt";
+
+/* No comment provided by engineer. */
+"Toolbar_Update_Formula" = "Mettre à jour une formule";
+
+/* No comment provided by engineer. */
+"Toolbar_Update_Selected" = "Mettre à jour les formules sélectionnées";
+

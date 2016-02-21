@@ -1,0 +1,9 @@
+/* Class = "NSButtonCell"; title = "Clear Log"; ObjectID = "AlR-6d-ju7"; */
+"AlR-6d-ju7.title" = "Effacer l'affichage";
+
+/* Class = "NSTextFieldCell"; title = "Homebrew Doctor"; ObjectID = "UHp-GH-2qP"; */
+"UHp-GH-2qP.title" = "Outil de diagnostique";
+
+/* Class = "NSButtonCell"; title = "Run Doctor"; ObjectID = "YyI-zq-THZ"; */
+"YyI-zq-THZ.title" = "Lancer le diagnostique";
+

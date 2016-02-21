@@ -1,0 +1,24 @@
+/* Class = "NSTextFieldCell"; placeholderString = "Description for selected option."; ObjectID = "G5n-5T-DoK"; */
+"G5n-5T-DoK.placeholderString" = "Description de l'option sélectionnée";
+
+/* Class = "NSWindow"; title = "Window"; ObjectID = "QvC-M9-y7g"; */
+"QvC-M9-y7g.title" = "Fenêtre";
+
+/* Class = "NSTextFieldCell"; title = "formula"; ObjectID = "XpC-iP-E4w"; */
+"XpC-iP-E4w.title" = "formule";
+
+/* Class = "NSTableColumn"; headerCell.title = "Options"; ObjectID = "XqV-53-e7D"; */
+"XqV-53-e7D.headerCell.title" = "Options";
+
+/* Class = "NSTextFieldCell"; title = "Text"; ObjectID = "YvH-f1-0Cw"; */
+"YvH-f1-0Cw.title" = "Texte";
+
+/* Class = "NSButtonCell"; title = "Cancel"; ObjectID = "dCD-PS-P4J"; */
+"dCD-PS-P4J.title" = "Annuler";
+
+/* Class = "NSButtonCell"; title = "Install"; ObjectID = "hgj-Zo-s73"; */
+"hgj-Zo-s73.title" = "Installer";
+
+/* Class = "NSTextFieldCell"; title = "Picking Options for Formula:"; ObjectID = "idS-tT-jie"; */
+"idS-tT-jie.title" = "Options pour la formule :";
+
