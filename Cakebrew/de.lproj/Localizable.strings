@@ -161,7 +161,7 @@
 "Sidebar_Info_Doctor" = "Doctor ist ein Feature von Homebrew, das die häufigsten Fehlerursachen erkennen kann.";
 
 /* No comment provided by engineer. */
-"Sidebar_Info_Installed" = "Diese Formeln sind bereits in Ihrem System installieren.";
+"Sidebar_Info_Installed" = "Diese Formeln sind bereits auf Ihrem System installiert.";
 
 /* No comment provided by engineer. */
 "Sidebar_Info_Leaves" = "Keine andere Formel ist von einer dieser Formeln abhängig (Blätter des Abhängigkeitsgraphs).";
