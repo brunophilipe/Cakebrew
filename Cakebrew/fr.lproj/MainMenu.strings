@@ -56,7 +56,7 @@
 "24.title" = "Fenêtre";
 
 /* Class = "NSMenu"; title = "AMainMenu"; ObjectID = "29"; */
-"29.title" = "Menu principal";
+"29.title" = "AMainMenu";
 
 /* Class = "NSMenuItem"; title = "Cakebrew"; ObjectID = "56"; */
 "56.title" = "Cakebrew";
