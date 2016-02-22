@@ -1,0 +1,107 @@
+/* 
+  Localizable.strings
+  Cakebrew
+
+  Created by Bruno Philipe on 4/18/15.
+  Copyright (c) 2015 Bruno Philipe. All rights reserved.
+*/
+
+
+"Cakebrew" = "Cakebrew";
+
+"Generic_OK" = "确定";
+"Generic_Cancel" = "取消";
+"Generic_Error" = "错误";
+"Generic_Attention" = "警告!";
+"Generic_Yes" = "是";
+"Generic_No" = "否";
+
+"Message_BGTask_Title" = "激活后台任务!";
+"Message_BGTask_Body" = "对不起，后台任务已在运行。您不能同时执行两个任务。";
+"Message_No_Homebrew_Title" = "Homebrew网站";
+"Message_No_Homebrew_Body" = "Homebrew没有在你的系统中找到。请在使用Cakebrew之前安装Homebrew。您可以点击下面的按钮来打开自制的网站。";
+"Message_Shell_Invalid_Title" = "没有找到有效的shell!";
+"Message_Shell_Invalid_Body" = "重试前请增加shell \"%@\" 到 \"/etc/shells\" 的有效shell文件中.";
+"Message_Tap_Title" = "Tapping Repository";
+"Message_Tap_Body" = "What repository would you like to tap?";
+"Message_Untap_Title" = "Untapping Repository";
+"Message_Untap_Body" = "Are you sure you want to untap the repository '%@'?";
+"Message_Update_Formulae_Title" = "Formulae更新中";
+"Message_Update_Formulae_Body" = "你确定想更新这些formulae: '%@'?";
+"Message_Update_All_Outdated_Title" = "更新所有过期的formulae";
+"Message_Update_All_Outdated_Body" = "你确定想更新所有过期的formulae?";
+
+"Confirmation_Install_Formula" = "你确定想安装这个formula '%@'?";
+"Confirmation_Uninstall_Formula" = "你确定想卸载这个formula '%@'?";
+"Confirmation_Update_Formula" = "你确定想更新这个选中的formulae?";
+"Confirmation_Tap_Repo" = "Are you sure you want to tap the repository '%@'?";
+"Confirmation_Untap_Repo" = "Are you sure you want to untap the repository '%@'?";
+
+"Formula_Status_Installed" = "已安装";
+"Formula_Status_Not_Installed" = "未安装";
+"Formula_Status_Outdated" = "更新可用";
+
+"Formula_Options_ClickForDetails" = "点击查看详情.";
+"Formula_Options_NoOptions" = "这个formula没有可用的安装选项.";
+"Formula_Options_VoiceOver_Description" = "在Formula选项表里为每一行选项描述提供了VoiceOver帮助.";
+"Formula_Options_VoiceOver" = "Formula选项";
+"Formula_Options_Confirmation" = "你确定想安装选中选项的formula %@ 吗?";
+
+"Formula_Popover_Title" = "Formula的信息: %@";
+"Formula_Popover_Error" = "检索Formula信息出错";
+
+"Homebrew_Task_Finished" = "任务完成";
+"Homebrew_Task_Finished_At" = "at";
+"Homebrew_AppNap_Task_Reason" = "正在运行Homebrew任务";
+
+"Toolbar_Install_Formula" = "安装Formula";
+"Toolbar_Uninstall_Formula" = "卸载Formula";
+"Toolbar_Update_Formula" = "更新Formula";
+"Toolbar_Tap_Repo" = "Tap Repository";
+"Toolbar_Untap_Repo" = "Untap Repository";
+"Toolbar_Update_Selected" = "更新选中的";
+"Toolbar_More_Information" = "更多信息";
+"Toolbar_Homebrew_Update" = "更新Homebrew";
+"Toolbar_Search" = "搜索Formulae";
+
+"Sidebar_Info_Installed" = "这些formulae已经安装在你的系统中.";
+"Sidebar_Info_Outdated" = "这些formulae已经安装，但有一个可用的更新.";
+"Sidebar_Info_All" = "这是所有Homebrew可供安装的formulae.";
+"Sidebar_Info_Leaves" = "这些formulae没有依赖其他的formulae.";
+"Sidebar_Info_Repos" = "These are the repositories you have tapped.";
+"Sidebar_Info_Doctor" = "医生是一个Homebrew检测引起错误最常见的原因的功能.";
+"Sidebar_Info_Update" = "更新Homebrew意味着拉取关于可用formulae的最新信息.";
+"Sidebar_Info_SearchResults" = "这是您搜索的结果.";
+
+"Installation_Window_Operation_Install" = "正在安装 Formula:";
+"Installation_Window_Operation_Uninstall" = "正在卸载 Formula:";
+"Installation_Window_Operation_Update" = "正在更新 Formula:";
+"Installation_Window_Operation_Tap" = "Tapping Repo:";
+"Installation_Window_Operation_Untap" = "Untapping Repo:";
+"Installation_Window_Operation_Cleanup" = "清理运行中…";
+"Installation_Window_All_Formulae" = "所有过期的Formulae";
+
+"Info_View_Multiple_Values" = "多值";
+"Info_View_Formula_Not_Installed" = "Formula未安装.";
+"Info_View_Formula_No_Dependencies" = "这个formula没有依赖!";
+"Info_View_Formula_No_Conflicts" = "这个formula目前没有冲突.";
+"Info_View_Formula_No_Description" = "没有提供描述.";
+
+"Sidebar_Group_Formulae" = "Formulae";
+"Sidebar_Group_Tools" = "工具";
+
+"Sidebar_Item_Installed" = "已安装";
+"Sidebar_Item_Outdated" = "过期";
+"Sidebar_Item_All" = "所有Formulae";
+"Sidebar_Item_Leaves" = "树叶";
+"Sidebar_Item_Repos" = "仓库";
+"Sidebar_Item_Doctor" = "医生";
+"Sidebar_Item_Update" = "更新";
+
+"Sidebar_VoiceOver_Tools" = "工具";
+
+"Notification_Doctor" = "Homebrew医生";
+"Notification_Update" = "更新Homebrew";
+
+
+

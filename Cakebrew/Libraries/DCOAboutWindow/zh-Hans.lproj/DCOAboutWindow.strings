@@ -1,0 +1,15 @@
+
+/* Class = "NSTextFieldCell"; title = "Label"; ObjectID = "4ND-5E-RVg"; */
+"4ND-5E-RVg.title" = "标签";
+
+/* Class = "NSTextFieldCell"; title = "Label"; ObjectID = "LaQ-kj-zXn"; */
+"LaQ-kj-zXn.title" = "标签";
+
+/* Class = "NSButtonCell"; title = "Acknowledgements"; ObjectID = "Wky-VX-jr0"; */
+"Wky-VX-jr0.title" = "致谢";
+
+/* Class = "NSButtonCell"; title = "Visit the %@ Website"; ObjectID = "eyI-Cm-PGX"; */
+"eyI-Cm-PGX.title" = "访问 %@ 网站";
+
+/* Class = "NSTextFieldCell"; title = "Label"; ObjectID = "wUa-DZ-OPf"; */
+"wUa-DZ-OPf.title" = "标签";

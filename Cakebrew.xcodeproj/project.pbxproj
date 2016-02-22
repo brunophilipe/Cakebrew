@@ -104,6 +104,18 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		0A2230A71C7A85D90050BF71 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
+		0A2230A81C7A85E20050BF71 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		0A2230AA1C7A86CC0050BF71 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/MainMenu.strings"; sourceTree = "<group>"; };
+		0A2230AC1C7A87300050BF71 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/BPUpdateView.strings"; sourceTree = "<group>"; };
+		0A2230AE1C7A87800050BF71 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/BPSelectedFormula.strings"; sourceTree = "<group>"; };
+		0A2230B01C7A880D0050BF71 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/BPInstallationWindow.strings"; sourceTree = "<group>"; };
+		0A2230B21C7A88380050BF71 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/BPFormulaPopoverView.strings"; sourceTree = "<group>"; };
+		0A2230B41C7A885A0050BF71 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/BPFormulaOptionsWindow.strings"; sourceTree = "<group>"; };
+		0A2230B61C7A887E0050BF71 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/BPDoctorView.strings"; sourceTree = "<group>"; };
+		0A2230B81C7A889E0050BF71 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Loading.strings"; sourceTree = "<group>"; };
+		0A2230BA1C7A88BE0050BF71 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Disabled.strings"; sourceTree = "<group>"; };
+		0A2230BC1C7A88ED0050BF71 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/DCOAboutWindow.strings"; sourceTree = "<group>"; };
 		150AEC381B3F999A00163767 /* BPDoctorViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BPDoctorViewController.h; path = Controllers/BPDoctorViewController.h; sourceTree = "<group>"; };
 		150AEC391B3F999A00163767 /* BPDoctorViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BPDoctorViewController.m; path = Controllers/BPDoctorViewController.m; sourceTree = "<group>"; };
 		150AEC3A1B3F999A00163767 /* BPFormulaOptionsWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BPFormulaOptionsWindowController.h; path = Controllers/BPFormulaOptionsWindowController.h; sourceTree = "<group>"; };
@@ -585,6 +597,7 @@
 				pt_BR,
 				zh_CN,
 				zh_TW,
+				"zh-Hans",
 			);
 			mainGroup = 1FE4FE49148E4CDD008EDE8B;
 			productRefGroup = 1FE4FE55148E4CDD008EDE8B /* Products */;
@@ -739,6 +752,7 @@
 				15D28A371AE3433F005C8A3E /* pt */,
 				15A00B451B84072700528486 /* de */,
 				F752F5541C79875500C0DEFE /* fr */,
+				0A2230BC1C7A88ED0050BF71 /* zh-Hans */,
 			);
 			name = DCOAboutWindow.xib;
 			sourceTree = "<group>";
@@ -750,6 +764,7 @@
 				15D28A381AE3433F005C8A3E /* pt */,
 				15A00B461B84072700528486 /* de */,
 				F752F5551C79875500C0DEFE /* fr */,
+				0A2230B61C7A887E0050BF71 /* zh-Hans */,
 			);
 			name = BPDoctorView.xib;
 			sourceTree = "<group>";
@@ -761,6 +776,7 @@
 				15D28A391AE3433F005C8A3E /* pt */,
 				15A00B471B84072700528486 /* de */,
 				F752F54B1C79875400C0DEFE /* fr */,
+				0A2230B41C7A885A0050BF71 /* zh-Hans */,
 			);
 			name = BPFormulaOptionsWindow.xib;
 			sourceTree = "<group>";
@@ -772,6 +788,7 @@
 				15D28A3A1AE3433F005C8A3E /* pt */,
 				15A00B481B84072700528486 /* de */,
 				F752F5511C79875500C0DEFE /* fr */,
+				0A2230B21C7A88380050BF71 /* zh-Hans */,
 			);
 			name = BPFormulaPopoverView.xib;
 			sourceTree = "<group>";
@@ -783,6 +800,7 @@
 				15D28A3B1AE3433F005C8A3E /* pt */,
 				15A00B491B84072700528486 /* de */,
 				F752F54F1C79875400C0DEFE /* fr */,
+				0A2230B01C7A880D0050BF71 /* zh-Hans */,
 			);
 			name = BPInstallationWindow.xib;
 			sourceTree = "<group>";
@@ -794,6 +812,7 @@
 				150AEC571B3FA58D00163767 /* pt */,
 				15A00B4B1B84072700528486 /* de */,
 				F752F54C1C79875400C0DEFE /* fr */,
+				0A2230AE1C7A87800050BF71 /* zh-Hans */,
 			);
 			name = BPSelectedFormula.xib;
 			sourceTree = "<group>";
@@ -805,6 +824,7 @@
 				15D28A3E1AE34340005C8A3E /* pt */,
 				15A00B4C1B84072700528486 /* de */,
 				F752F54D1C79875400C0DEFE /* fr */,
+				0A2230AC1C7A87300050BF71 /* zh-Hans */,
 			);
 			name = BPUpdateView.xib;
 			sourceTree = "<group>";
@@ -816,6 +836,7 @@
 				15A00B3E1B84003F00528486 /* en */,
 				15A00B421B84072700528486 /* de */,
 				F752F5501C79875400C0DEFE /* fr */,
+				0A2230A81C7A85E20050BF71 /* zh-Hans */,
 			);
 			name = Localizable.strings;
 			sourceTree = "<group>";
@@ -827,6 +848,7 @@
 				15A00B3D1B84002E00528486 /* en */,
 				15A00B431B84072700528486 /* de */,
 				F752F54E1C79875400C0DEFE /* fr */,
+				0A2230A71C7A85D90050BF71 /* zh-Hans */,
 			);
 			name = InfoPlist.strings;
 			sourceTree = "<group>";
@@ -838,6 +860,7 @@
 				15A00B3C1B84000600528486 /* pt */,
 				15A00B441B84072700528486 /* de */,
 				F752F5521C79875500C0DEFE /* fr */,
+				0A2230AA1C7A86CC0050BF71 /* zh-Hans */,
 			);
 			name = MainMenu.xib;
 			sourceTree = "<group>";
@@ -849,6 +872,7 @@
 				D2C3E0351B8E15E2000D89BB /* pt */,
 				D2C3E0371B8E15E4000D89BB /* de */,
 				F752F5531C79875500C0DEFE /* fr */,
+				0A2230BA1C7A88BE0050BF71 /* zh-Hans */,
 			);
 			name = Disabled.xib;
 			path = Views;
@@ -861,6 +885,7 @@
 				D2C3E0311B8E15D7000D89BB /* pt */,
 				D2C3E0331B8E15DC000D89BB /* de */,
 				F752F54A1C79875400C0DEFE /* fr */,
+				0A2230B81C7A889E0050BF71 /* zh-Hans */,
 			);
 			name = Loading.xib;
 			path = Views;
