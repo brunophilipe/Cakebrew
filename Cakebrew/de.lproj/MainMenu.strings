@@ -1,12 +1,3 @@
-/* Class = "NSMenuItem"; title = "Formula Website "; ObjectID = "0oV-it-p68"; */
-"0oV-it-p68.title" = "Webseite zur Formel";
-
-/* Class = "NSToolbarItem"; label = "Install Formula"; ObjectID = "0v7-EY-eoL"; */
-"0v7-EY-eoL.label" = "Formel installieren";
-
-/* Class = "NSToolbarItem"; paletteLabel = "Install Formula"; ObjectID = "0v7-EY-eoL"; */
-"0v7-EY-eoL.paletteLabel" = "Formel installieren";
-
 /* Class = "NSMenuItem"; title = "Smart Copy/Paste"; ObjectID = "2P3-U9-uO0"; */
 "2P3-U9-uO0.title" = "Intelligentes Kopieren/Einfügen";
 
@@ -16,8 +7,8 @@
 /* Class = "NSMenuItem"; title = "Jump to Selection"; ObjectID = "3gj-Tz-gwl"; */
 "3gj-Tz-gwl.title" = "Zur Auswahl springen";
 
-/* Class = "NSTextFieldCell"; title = "Loading..."; ObjectID = "3xE-6a-fkA"; */
-"3xE-6a-fkA.title" = "Lade…";
+/* Class = "NSTextFieldCell"; title = "No selection"; ObjectID = "3xE-6a-fkA"; */
+"3xE-6a-fkA.title" = "Nichts ausgewählt";
 
 /* Class = "NSMenuItem"; title = "Update Formula"; ObjectID = "4ab-Ns-Wry"; */
 "4ab-Ns-Wry.title" = "Formel aktualisieren";
@@ -41,7 +32,7 @@
 "8wr-BZ-YYu.title" = "Suchen";
 
 /* Class = "NSMenuItem"; title = "Formula Website"; ObjectID = "9Fv-tF-1qy"; */
-"9Fv-tF-1qy.title" = "Webseite der Formel";
+"9Fv-tF-1qy.title" = "Formel Webseite";
 
 /* Class = "NSMenuItem"; title = "Edit"; ObjectID = "9Xg-s6-Icq"; */
 "9Xg-s6-Icq.title" = "Bearbeiten";
@@ -57,9 +48,6 @@
 
 /* Class = "NSMenu"; title = "Window"; ObjectID = "24"; */
 "24.title" = "Fenster";
-
-/* Class = "NSMenu"; title = "AMainMenu"; ObjectID = "29"; */
-"29.title" = "AMainMenu";
 
 /* Class = "NSMenuItem"; title = "Cakebrew"; ObjectID = "56"; */
 "56.title" = "Cakebrew";
@@ -106,6 +94,9 @@
 /* Class = "NSMenuItem"; title = "Cakebrew Help"; ObjectID = "492"; */
 "492.title" = "Cakebrew-Hilfe";
 
+/* Class = "NSTableColumn"; headerCell.title = "Name"; ObjectID = "A78-TI-Q8X"; */
+"A78-TI-Q8X.headerCell.title" = "Name";
+
 /* Class = "NSMenuItem"; title = "Text Replacement"; ObjectID = "BcF-eP-c6m"; */
 "BcF-eP-c6m.title" = "Text ersetzen";
 
@@ -139,6 +130,9 @@
 /* Class = "NSMenuItem"; title = "Capitalize"; ObjectID = "GVv-as-Pfq"; */
 "GVv-as-Pfq.title" = "Anfangsbuchstaben großschreiben";
 
+/* Class = "NSMenuItem"; title = "Export Brew Installation…"; ObjectID = "Gbv-K1-deL"; */
+"Gbv-K1-deL.title" = "Exportiere Brew Installation...";
+
 /* Class = "NSMenuItem"; title = "Undo"; ObjectID = "H1C-ip-FlF"; */
 "H1C-ip-FlF.title" = "Widerrufen";
 
@@ -154,23 +148,17 @@
 /* Class = "NSTableColumn"; headerCell.title = "Status"; ObjectID = "JRi-Nr-5hA"; */
 "JRi-Nr-5hA.headerCell.title" = "Status";
 
-/* Class = "NSTextFieldCell"; title = "Homebrew is not installed"; ObjectID = "Jfc-d9-61S"; */
-"Jfc-d9-61S.title" = "Homebrew ist nicht installiert";
-
 /* Class = "NSMenuItem"; title = "Outdated Formulae"; ObjectID = "KUc-5l-twA"; */
 "KUc-5l-twA.title" = "Veraltete Formeln";
+
+/* Class = "NSMenuItem"; title = "Import Brew Installation…"; ObjectID = "LU8-D3-Wwe"; */
+"LU8-D3-Wwe.title" = "Importiere Brew Installation...";
 
 /* Class = "NSMenu"; title = "Edit"; ObjectID = "LYP-iZ-WcV"; */
 "LYP-iZ-WcV.title" = "Bearbeiten";
 
 /* Class = "NSMenuItem"; title = "Install Formula"; ObjectID = "Lcb-tm-ATo"; */
 "Lcb-tm-ATo.title" = "Formel installieren";
-
-/* Class = "NSToolbarItem"; label = "Update Homebrew"; ObjectID = "Lvc-bU-Nmh"; */
-"Lvc-bU-Nmh.label" = "Homebrew aktualisieren";
-
-/* Class = "NSToolbarItem"; paletteLabel = "Update Homebrew"; ObjectID = "Lvc-bU-Nmh"; */
-"Lvc-bU-Nmh.paletteLabel" = "Homebrew aktualisieren";
 
 /* Class = "NSMenuItem"; title = "Leaves"; ObjectID = "M9N-PI-gBO"; */
 "M9N-PI-gBO.title" = "Blätter";
@@ -191,7 +179,7 @@
 "NrN-pe-J7E.title" = "Sprachausgabe beenden";
 
 /* Class = "NSMenuItem"; title = "Brew Cleanup…"; ObjectID = "OKR-gG-lsa"; */
-"OKR-gG-lsa.title" = "Brew Cleanup…";
+"OKR-gG-lsa.title" = "Brew aufräumen…";
 
 /* Class = "NSMenuItem"; title = "Find and Replace…"; ObjectID = "OSn-ju-y85"; */
 "OSn-ju-y85.title" = "Suchen und Ersetzen…";
@@ -204,12 +192,6 @@
 
 /* Class = "NSMenuItem"; title = "Find Previous"; ObjectID = "UWA-Fh-fH5"; */
 "UWA-Fh-fH5.title" = "Vorheriges suchen";
-
-/* Class = "NSToolbarItem"; label = "More Information"; ObjectID = "UyW-JC-mM2"; */
-"UyW-JC-mM2.label" = "Weitere Informationen";
-
-/* Class = "NSToolbarItem"; paletteLabel = "More Information"; ObjectID = "UyW-JC-mM2"; */
-"UyW-JC-mM2.paletteLabel" = "Weitere Informationen";
 
 /* Class = "NSMenuItem"; title = "Find Next"; ObjectID = "Uzy-PF-4ct"; */
 "Uzy-PF-4ct.title" = "Nächstes suchen";
@@ -232,6 +214,9 @@
 /* Class = "NSMenuItem"; title = "Make Upper Case"; ObjectID = "ZI1-yX-Bb1"; */
 "ZI1-yX-Bb1.title" = "Großschreiben";
 
+/* Class = "NSMenuItem"; title = "View"; ObjectID = "ZNi-97-e1J"; */
+"ZNi-97-e1J.title" = "Ansicht";
+
 /* Class = "NSMenuItem"; title = "Speech"; ObjectID = "Zen-la-cAG"; */
 "Zen-la-cAG.title" = "Sprachausgabe";
 
@@ -242,7 +227,7 @@
 "aQ6-GZ-1Wd.title" = "Kleinschreiben";
 
 /* Class = "NSMenuItem"; title = "Tools"; ObjectID = "b3s-t3-YFx"; */
-"b3s-t3-YFx.title" = "Tools";
+"b3s-t3-YFx.title" = "Werkzeuge";
 
 /* Class = "NSTableColumn"; headerCell.title = "Latest Version"; ObjectID = "ba4-r8-kgo"; */
 "ba4-r8-kgo.headerCell.title" = "Aktuellste Version";
@@ -283,20 +268,8 @@
 /* Class = "NSTableColumn"; headerCell.title = "Version"; ObjectID = "h5d-xc-Jih"; */
 "h5d-xc-Jih.headerCell.title" = "Version";
 
-/* Class = "NSToolbarItem"; label = "Search Formulae"; ObjectID = "hjv-gb-fjC"; */
-"hjv-gb-fjC.label" = "Formeln suchen";
-
-/* Class = "NSToolbarItem"; paletteLabel = "Search Formulae"; ObjectID = "hjv-gb-fjC"; */
-"hjv-gb-fjC.paletteLabel" = "Formeln suchen";
-
 /* Class = "NSMenuItem"; title = "Uninstall Formula"; ObjectID = "i3A-Nx-qPJ"; */
 "i3A-Nx-qPJ.title" = "Formel deinstallieren";
-
-/* Class = "NSTextFieldCell"; title = "Loading"; ObjectID = "ipB-6a-BzS"; */
-"ipB-6a-BzS.title" = "Laden";
-
-/* Class = "NSTextFieldCell"; title = "Please visit brew.sh to install Homebrew"; ObjectID = "kRZ-JR-SH6"; */
-"kRZ-JR-SH6.title" = "Bitte besuchen Sie brew.sh, um Homebrew zu installieren";
 
 /* Class = "NSMenu"; title = "Tools"; ObjectID = "lOM-6G-bAo"; */
 "lOM-6G-bAo.title" = "Tools";
@@ -308,13 +281,16 @@
 "mwc-hE-3i2.title" = "Ansicht";
 
 /* Class = "NSMenuItem"; title = "Data Detectors"; ObjectID = "oBx-PH-cgq"; */
-"oBx-PH-cgq.title" = "Data Detectors";
+"oBx-PH-cgq.title" = "Datenerkennung";
 
 /* Class = "NSMenu"; title = "Formula"; ObjectID = "sBH-Ta-Jft"; */
 "sBH-Ta-Jft.title" = "Formel";
 
+/* Class = "NSMenuItem"; title = "Close"; ObjectID = "sTI-da-gJ4"; */
+"sTI-da-gJ4.title" = "Schließen";
+
 /* Class = "NSMenuItem"; title = "Visit Website"; ObjectID = "seZ-rp-Anf"; */
-"seZ-rp-Anf.title" = "Webseite öffnen";
+"seZ-rp-Anf.title" = "Webseite besuchen";
 
 /* Class = "NSMenuItem"; title = "Check Document Now"; ObjectID = "ugl-Oh-kYV"; */
 "ugl-Oh-kYV.title" = "Dokument jetzt überprüfen";

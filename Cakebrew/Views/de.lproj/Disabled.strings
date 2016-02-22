@@ -1,6 +1,6 @@
-
 /* Class = "NSTextFieldCell"; title = "Homebrew is not installed"; ObjectID = "RHr-Q0-PYi"; */
-"RHr-Q0-PYi.title" = "Homebrew is not installed";
+"RHr-Q0-PYi.title" = "Homebrew ist nicht installiert";
 
 /* Class = "NSTextFieldCell"; title = "Please visit brew.sh to install Homebrew"; ObjectID = "sdR-dW-MDv"; */
-"sdR-dW-MDv.title" = "Please visit brew.sh to install Homebrew";
+"sdR-dW-MDv.title" = "Bitte besuchen Sie brew.sh um Homebrew zu installieren";
+

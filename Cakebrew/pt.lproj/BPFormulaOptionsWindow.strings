@@ -1,4 +1,3 @@
-
 /* Class = "NSTextFieldCell"; placeholderString = "Description for selected option."; ObjectID = "G5n-5T-DoK"; */
 "G5n-5T-DoK.placeholderString" = "Descrição do ítem selecionado.";
 
@@ -22,3 +21,4 @@
 
 /* Class = "NSTextFieldCell"; title = "Picking Options for Formula:"; ObjectID = "idS-tT-jie"; */
 "idS-tT-jie.title" = "Escolhendo Opções para Fórmula:";
+

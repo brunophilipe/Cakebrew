@@ -59,7 +59,7 @@
 "58.title" = "关于Cakebrew";
 
 /* Class = "NSMenuItem"; title = "Preferences…"; ObjectID = "129"; */
-"129.title" = "偏好…";
+"129.title" = "偏好设置…";
 
 /* Class = "NSMenu"; title = "Services"; ObjectID = "130"; */
 "130.title" = "服务";
@@ -74,13 +74,13 @@
 "136.title" = "退出Cakebrew";
 
 /* Class = "NSMenuItem"; title = "Hide Others"; ObjectID = "145"; */
-"145.title" = "隐藏其它";
+"145.title" = "隐藏其他";
 
 /* Class = "NSMenuItem"; title = "Show All"; ObjectID = "150"; */
-"150.title" = "显示全部";
+"150.title" = "全部显示";
 
 /* Class = "NSMenuItem"; title = "Zoom"; ObjectID = "239"; */
-"239.title" = "缩放窗口";
+"239.title" = "缩放";
 
 /* Class = "NSWindow"; title = "Cakebrew"; ObjectID = "371"; */
 "371.title" = "Cakebrew";
@@ -119,7 +119,7 @@
 "DpP-yi-xdi.title" = "搜索Formula";
 
 /* Class = "NSMenuItem"; title = "Start Speaking"; ObjectID = "EBJ-Ce-8OO"; */
-"EBJ-Ce-8OO.title" = "开始拼写";
+"EBJ-Ce-8OO.title" = "开始朗读";
 
 /* Class = "NSMenuItem"; title = "Upgrade Selected Formulae"; ObjectID = "Ep8-j6-m5Q"; */
 "Ep8-j6-m5Q.title" = "升级选中Formulae";
@@ -128,7 +128,7 @@
 "Eud-wi-dvG.title" = "语音";
 
 /* Class = "NSMenuItem"; title = "Capitalize"; ObjectID = "GVv-as-Pfq"; */
-"GVv-as-Pfq.title" = "大写";
+"GVv-as-Pfq.title" = "首字母大写";
 
 /* Class = "NSMenuItem"; title = "Undo"; ObjectID = "H1C-ip-FlF"; */
 "H1C-ip-FlF.title" = "撤销";
@@ -161,7 +161,7 @@
 "MQL-Vg-ECI.title" = "显示替换";
 
 /* Class = "NSMenuItem"; title = "Select All"; ObjectID = "MTR-Uj-kDH"; */
-"MTR-Uj-kDH.title" = "选中全部";
+"MTR-Uj-kDH.title" = "全选";
 
 /* Class = "NSMenuItem"; title = "Correct Spelling Automatically"; ObjectID = "NlA-Cw-rt3"; */
 "NlA-Cw-rt3.title" = "自动纠正拼写";
@@ -176,7 +176,7 @@
 "OKR-gG-lsa.title" = "Brew清理中…";
 
 /* Class = "NSMenuItem"; title = "Find and Replace…"; ObjectID = "OSn-ju-y85"; */
-"OSn-ju-y85.title" = "查找和替换…";
+"OSn-ju-y85.title" = "查找与替换…";
 
 /* Class = "NSMenuItem"; title = "Uninstall Formula"; ObjectID = "Tzv-5t-RhL"; */
 "Tzv-5t-RhL.title" = "卸载Formula";
@@ -280,11 +280,14 @@
 /* Class = "NSMenu"; title = "Formula"; ObjectID = "sBH-Ta-Jft"; */
 "sBH-Ta-Jft.title" = "Formula";
 
+/* Class = "NSMenuItem"; title = "Close"; ObjectID = "sTI-da-gJ4"; */
+"sTI-da-gJ4.title" = "关闭";
+
 /* Class = "NSMenuItem"; title = "Visit Website"; ObjectID = "seZ-rp-Anf"; */
 "seZ-rp-Anf.title" = "访问网站";
 
 /* Class = "NSMenuItem"; title = "Check Document Now"; ObjectID = "ugl-Oh-kYV"; */
-"ugl-Oh-kYV.title" = "立即检索文稿";
+"ugl-Oh-kYV.title" = "立即检查文稿";
 
 /* Class = "NSMenuItem"; title = "Check for Updates…"; ObjectID = "v4F-qE-2u0"; */
 "v4F-qE-2u0.title" = "检查更新…";

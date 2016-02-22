@@ -165,7 +165,8 @@ NSString *const kBP_HOMEBREW_WEBSITE = @"https://www.cakebrew.com";
 
 - (IBAction)showAboutWindow:(id)sender
 {
-	[self.aboutWindowController showWindow:nil];
+	[self.aboutWindowController showWindow:sender];
+	[self.aboutWindowController.window becomeFirstResponder];
 }
 
 - (IBAction)openWebsite:(id)sender

@@ -528,6 +528,11 @@ CA
                                     <action selector="performZoom:" target="-1" id="240"/>
                                 </connections>
                             </menuItem>
+                            <menuItem title="Close" keyEquivalent="w" id="sTI-da-gJ4">
+                                <connections>
+                                    <action selector="performClose:" target="-1" id="2g5-Xk-iFH"/>
+                                </connections>
+                            </menuItem>
                             <menuItem isSeparatorItem="YES" id="92">
                                 <modifierMask key="keyEquivalentModifierMask" command="YES"/>
                             </menuItem>

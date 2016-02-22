@@ -1,6 +1,3 @@
-/* Class = "NSMenuItem"; title = "Formula Website "; ObjectID = "0oV-it-p68"; */
-"0oV-it-p68.title" = "Site web de la formule";
-
 /* Class = "NSTextFieldCell"; title = "Text Cell"; ObjectID = "2Ce-cm-oqR"; */
 "2Ce-cm-oqR.title" = "Text Cell";
 
@@ -309,6 +306,9 @@
 
 /* Class = "NSMenu"; title = "Formula"; ObjectID = "sBH-Ta-Jft"; */
 "sBH-Ta-Jft.title" = "Formule";
+
+/* Class = "NSMenuItem"; title = "Close"; ObjectID = "sTI-da-gJ4"; */
+"sTI-da-gJ4.title" = "Fermer";
 
 /* Class = "NSMenuItem"; title = "Visit Website"; ObjectID = "seZ-rp-Anf"; */
 "seZ-rp-Anf.title" = "Visiter le site web";

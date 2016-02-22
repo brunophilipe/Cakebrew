@@ -1,5 +1,5 @@
 /* Class = "NSTextFieldCell"; placeholderString = "Description for selected option."; ObjectID = "G5n-5T-DoK"; */
-"G5n-5T-DoK.placeholderString" = "Beschreibung für die ausgewählte Option";
+"G5n-5T-DoK.placeholderString" = "Beschreibung für die ausgewählte Option.";
 
 /* Class = "NSWindow"; title = "Window"; ObjectID = "QvC-M9-y7g"; */
 "QvC-M9-y7g.title" = "Fenster";
@@ -9,9 +9,6 @@
 
 /* Class = "NSTableColumn"; headerCell.title = "Options"; ObjectID = "XqV-53-e7D"; */
 "XqV-53-e7D.headerCell.title" = "Einstellungen";
-
-/* Class = "NSTextFieldCell"; title = "Text"; ObjectID = "YvH-f1-0Cw"; */
-"YvH-f1-0Cw.title" = "";
 
 /* Class = "NSButtonCell"; title = "Cancel"; ObjectID = "dCD-PS-P4J"; */
 "dCD-PS-P4J.title" = "Abbrechen";
