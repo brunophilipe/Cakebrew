@@ -32,12 +32,12 @@
                 <rect key="frame" x="0.0" y="0.0" width="360" height="272"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="eDs-sG-t9C">
+                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="eDs-sG-t9C">
                         <rect key="frame" x="18" y="229" width="145" height="19"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="141" id="hqd-u1-jMQ"/>
                         </constraints>
-                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Homebrew Bundle" id="UHp-GH-2qP">
+                        <textFieldCell key="cell" sendsActionOnEndEditing="YES" title="Homebrew Bundle" id="UHp-GH-2qP">
                             <font key="font" metaFont="system" size="16"/>
                             <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
@@ -83,9 +83,9 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="200"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
             <subviews>
-                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="9zS-0g-Z1h">
+                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="9zS-0g-Z1h">
                     <rect key="frame" x="-2" y="183" width="87" height="17"/>
-                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Exporting File" id="Kyw-ca-xgs">
+                    <textFieldCell key="cell" sendsActionOnEndEditing="YES" title="Exporting File" id="Kyw-ca-xgs">
                         <font key="font" metaFont="system"/>
                         <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
@@ -130,15 +130,15 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="246"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
             <subviews>
-                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="MrV-gC-8cN">
+                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="MrV-gC-8cN">
                     <rect key="frame" x="-2" y="229" width="88" height="17"/>
-                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Importing File" id="UQX-gO-pze">
+                    <textFieldCell key="cell" sendsActionOnEndEditing="YES" title="Importing File" id="UQX-gO-pze">
                         <font key="font" metaFont="system"/>
                         <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
                 </textField>
-                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="u5h-l0-ogc">
+                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="u5h-l0-ogc">
                     <rect key="frame" x="-2" y="207" width="379" height="14"/>
                     <textFieldCell key="cell" controlSize="small" sendsActionOnEndEditing="YES" title="Please wait while the file is imported." id="NRz-0t-Pn6">
                         <font key="font" metaFont="smallSystem"/>
@@ -173,7 +173,7 @@
                         <autoresizingMask key="autoresizingMask"/>
                     </scroller>
                     <scroller key="verticalScroller" verticalHuggingPriority="750" doubleValue="1" horizontal="NO" id="kWU-xo-ZeM">
-                        <rect key="frame" x="358" y="1" width="16" height="197"/>
+                        <rect key="frame" x="359" y="1" width="15" height="197"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </scroller>
                 </scrollView>
