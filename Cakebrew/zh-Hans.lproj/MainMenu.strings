@@ -1,6 +1,3 @@
-/* Class = "NSTextFieldCell"; title = "Text Cell"; ObjectID = "2Ce-cm-oqR"; */
-"2Ce-cm-oqR.title" = "Text Cell";
-
 /* Class = "NSMenuItem"; title = "Smart Copy/Paste"; ObjectID = "2P3-U9-uO0"; */
 "2P3-U9-uO0.title" = "智能拷贝/粘贴";
 
@@ -52,9 +49,6 @@
 /* Class = "NSMenu"; title = "Window"; ObjectID = "24"; */
 "24.title" = "窗口";
 
-/* Class = "NSMenu"; title = "AMainMenu"; ObjectID = "29"; */
-"29.title" = "AMainMenu";
-
 /* Class = "NSMenuItem"; title = "Cakebrew"; ObjectID = "56"; */
 "56.title" = "Cakebrew";
 
@@ -65,7 +59,7 @@
 "58.title" = "关于Cakebrew";
 
 /* Class = "NSMenuItem"; title = "Preferences…"; ObjectID = "129"; */
-"129.title" = "偏好设置…";
+"129.title" = "偏好…";
 
 /* Class = "NSMenu"; title = "Services"; ObjectID = "130"; */
 "130.title" = "服务";
@@ -80,13 +74,13 @@
 "136.title" = "退出Cakebrew";
 
 /* Class = "NSMenuItem"; title = "Hide Others"; ObjectID = "145"; */
-"145.title" = "隐藏其他";
+"145.title" = "隐藏其它";
 
 /* Class = "NSMenuItem"; title = "Show All"; ObjectID = "150"; */
-"150.title" = "全部显示";
+"150.title" = "显示全部";
 
 /* Class = "NSMenuItem"; title = "Zoom"; ObjectID = "239"; */
-"239.title" = "缩放";
+"239.title" = "缩放窗口";
 
 /* Class = "NSWindow"; title = "Cakebrew"; ObjectID = "371"; */
 "371.title" = "Cakebrew";
@@ -100,14 +94,8 @@
 /* Class = "NSMenuItem"; title = "Cakebrew Help"; ObjectID = "492"; */
 "492.title" = "Cakebrew帮助";
 
-/* Class = "NSViewController"; title = "HomebrewController"; ObjectID = "547"; */
-"547.title" = "HomebrewController";
-
 /* Class = "NSTableColumn"; headerCell.title = "Name"; ObjectID = "A78-TI-Q8X"; */
 "A78-TI-Q8X.headerCell.title" = "名字";
-
-/* Class = "NSTextFieldCell"; title = "Text Cell"; ObjectID = "BFf-kE-eTe"; */
-"BFf-kE-eTe.title" = "Text Cell";
 
 /* Class = "NSMenuItem"; title = "Text Replacement"; ObjectID = "BcF-eP-c6m"; */
 "BcF-eP-c6m.title" = "文本替换";
@@ -122,7 +110,7 @@
 "DNi-yY-5Ha.title" = "查找所选内容";
 
 /* Class = "NSMenuItem"; title = "Upgrade All Formulae"; ObjectID = "DdP-fd-ccO"; */
-"DdP-fd-ccO.title" = "升级所以Formulae";
+"DdP-fd-ccO.title" = "升级全部Formulae";
 
 /* Class = "NSMenuItem"; title = "Substitutions"; ObjectID = "Dki-FU-69n"; */
 "Dki-FU-69n.title" = "替换";
@@ -131,7 +119,7 @@
 "DpP-yi-xdi.title" = "搜索Formula";
 
 /* Class = "NSMenuItem"; title = "Start Speaking"; ObjectID = "EBJ-Ce-8OO"; */
-"EBJ-Ce-8OO.title" = "开始朗读";
+"EBJ-Ce-8OO.title" = "开始拼写";
 
 /* Class = "NSMenuItem"; title = "Upgrade Selected Formulae"; ObjectID = "Ep8-j6-m5Q"; */
 "Ep8-j6-m5Q.title" = "升级选中Formulae";
@@ -140,7 +128,7 @@
 "Eud-wi-dvG.title" = "语音";
 
 /* Class = "NSMenuItem"; title = "Capitalize"; ObjectID = "GVv-as-Pfq"; */
-"GVv-as-Pfq.title" = "首字母大写";
+"GVv-as-Pfq.title" = "大写";
 
 /* Class = "NSMenuItem"; title = "Undo"; ObjectID = "H1C-ip-FlF"; */
 "H1C-ip-FlF.title" = "撤销";
@@ -160,9 +148,6 @@
 /* Class = "NSMenuItem"; title = "Outdated Formulae"; ObjectID = "KUc-5l-twA"; */
 "KUc-5l-twA.title" = "过期的Formulae";
 
-/* Class = "NSTextFieldCell"; title = "HEADER CELL"; ObjectID = "KoT-TI-MgQ"; */
-"KoT-TI-MgQ.title" = "HEADER CELL";
-
 /* Class = "NSMenu"; title = "Edit"; ObjectID = "LYP-iZ-WcV"; */
 "LYP-iZ-WcV.title" = "编辑";
 
@@ -176,7 +161,7 @@
 "MQL-Vg-ECI.title" = "显示替换";
 
 /* Class = "NSMenuItem"; title = "Select All"; ObjectID = "MTR-Uj-kDH"; */
-"MTR-Uj-kDH.title" = "全选";
+"MTR-Uj-kDH.title" = "选中全部";
 
 /* Class = "NSMenuItem"; title = "Correct Spelling Automatically"; ObjectID = "NlA-Cw-rt3"; */
 "NlA-Cw-rt3.title" = "自动纠正拼写";
@@ -188,16 +173,13 @@
 "NrN-pe-J7E.title" = "停止朗读";
 
 /* Class = "NSMenuItem"; title = "Brew Cleanup…"; ObjectID = "OKR-gG-lsa"; */
-"OKR-gG-lsa.title" = "Brew Cleanup…";
+"OKR-gG-lsa.title" = "Brew清理中…";
 
 /* Class = "NSMenuItem"; title = "Find and Replace…"; ObjectID = "OSn-ju-y85"; */
-"OSn-ju-y85.title" = "查找与替换…";
+"OSn-ju-y85.title" = "查找和替换…";
 
 /* Class = "NSMenuItem"; title = "Uninstall Formula"; ObjectID = "Tzv-5t-RhL"; */
 "Tzv-5t-RhL.title" = "卸载Formula";
-
-/* Class = "NSTextFieldCell"; title = "Text Cell"; ObjectID = "UBt-HC-zPr"; */
-"UBt-HC-zPr.title" = "Text Cell";
 
 /* Class = "NSMenuItem"; title = "Check Spelling While Typing"; ObjectID = "UOm-zM-WGz"; */
 "UOm-zM-WGz.title" = "键入时检查拼写";
@@ -211,9 +193,6 @@
 /* Class = "NSMenuItem"; title = "Install Formula with Options..."; ObjectID = "Vio-Nc-WTc"; */
 "Vio-Nc-WTc.title" = "Install Formula with Options...";
 
-/* Class = "NSTextFieldCell"; title = "Text Cell"; ObjectID = "VzS-XQ-BoP"; */
-"VzS-XQ-BoP.title" = "Text Cell";
-
 /* Class = "NSTabViewItem"; label = "Doctor"; ObjectID = "WM9-6z-Jzl"; */
 "WM9-6z-Jzl.label" = "医生";
 
@@ -221,7 +200,7 @@
 "X7p-5G-5Dv.title" = "拼写";
 
 /* Class = "NSMenuItem"; title = "Install Formula with Options…"; ObjectID = "X74-Yx-eRm"; */
-"X74-Yx-eRm.title" = "Install Formula with Options…";
+"X74-Yx-eRm.title" = "Install Formula with Options...";
 
 /* Class = "NSMenuItem"; title = "Copy"; ObjectID = "XSL-d4-pFI"; */
 "XSL-d4-pFI.title" = "拷贝";
@@ -304,11 +283,8 @@
 /* Class = "NSMenuItem"; title = "Visit Website"; ObjectID = "seZ-rp-Anf"; */
 "seZ-rp-Anf.title" = "访问网站";
 
-/* Class = "NSTextFieldCell"; title = "Text Cell"; ObjectID = "uGY-87-ubc"; */
-"uGY-87-ubc.title" = "Text Cell";
-
 /* Class = "NSMenuItem"; title = "Check Document Now"; ObjectID = "ugl-Oh-kYV"; */
-"ugl-Oh-kYV.title" = "立即检查文稿";
+"ugl-Oh-kYV.title" = "立即检索文稿";
 
 /* Class = "NSMenuItem"; title = "Check for Updates…"; ObjectID = "v4F-qE-2u0"; */
 "v4F-qE-2u0.title" = "检查更新…";
@@ -319,9 +295,6 @@
 /* Class = "NSTabViewItem"; label = "Update"; ObjectID = "yL4-oW-nIm"; */
 "yL4-oW-nIm.label" = "更新";
 
-/* Class = "NSTextFieldCell"; title = "Table View Cell"; ObjectID = "zVW-Ch-xYV"; */
-"zVW-Ch-xYV.title" = "Table View Cell";
-
 /* Class = "NSMenuItem"; title = "All Formulae"; ObjectID = "zam-2s-isx"; */
-"zam-2s-isx.title" = "所有Formulae";
+"zam-2s-isx.title" = "全部Formulae";
 

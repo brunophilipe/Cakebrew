@@ -2,25 +2,25 @@
 "Cakebrew" = "Cakebrew";
 
 /* No comment provided by engineer. */
-"Confirmation_Install_Formula" = "你确定想安装这个formula '%@'?";
+"Confirmation_Install_Formula" = "你确定你想安装'%@'这个formula?";
 
 /* (No Commment) */
-"Confirmation_Tap_Repo" = "Are you sure you want to tap the repository '%@'?";
+"Confirmation_Tap_Repo" = "你确定你想tap'%@'这个仓库?";
 
 /* No comment provided by engineer. */
-"Confirmation_Uninstall_Formula" = "你确定想卸载这个formula '%@'?";
+"Confirmation_Uninstall_Formula" = "你确定你想卸载'%@'这个formula?";
 
 /* (No Commment) */
-"Confirmation_Untap_Repo" = "Are you sure you want to untap the repository '%@'?";
+"Confirmation_Untap_Repo" = "你确定你想untap'%@'这个仓库?";
 
 /* (No Commment) */
-"Confirmation_Update_Formula" = "你确定想更新这个选中的formulae?";
+"Confirmation_Update_Formula" = "你确定你想更新选择的formula?";
 
 /* No comment provided by engineer. */
-"Formula_Options_ClickForDetails" = "点击查看详情.";
+"Formula_Options_ClickForDetails" = "点击选项查看详情";
 
 /* No comment provided by engineer. */
-"Formula_Options_Confirmation" = "你确定想安装选中选项的formula %@ 吗?";
+"Formula_Options_Confirmation" = "你确定你想安装'%@'这个formula?";
 
 /* No comment provided by engineer. */
 "Formula_Options_NoOptions" = "这个formula没有可用的安装选项.";
@@ -47,6 +47,9 @@
 "Formula_Status_Outdated" = "更新可用";
 
 /* No comment provided by engineer. */
+"Formulae" = "Formulae";
+
+/* No comment provided by engineer. */
 "Generic_Attention" = "警告!";
 
 /* No comment provided by engineer. */
@@ -65,7 +68,7 @@
 "Generic_Yes" = "是";
 
 /* No comment provided by engineer. */
-"Homebrew_AppNap_Task_Reason" = "正在运行Homebrew任务";
+"Homebrew_AppNap_Task_Reason" = "Homebrew任务运行中";
 
 /* No comment provided by engineer. */
 "Homebrew_Task_Finished" = "任务完成";
@@ -95,19 +98,19 @@
 "Installation_Window_Operation_Cleanup" = "清理运行中…";
 
 /* No comment provided by engineer. */
-"Installation_Window_Operation_Install" = "正在安装 Formula:";
+"Installation_Window_Operation_Install" = "Formula安装中:";
 
 /* No comment provided by engineer. */
 "Installation_Window_Operation_Tap" = "Tapping Repo:";
 
 /* No comment provided by engineer. */
-"Installation_Window_Operation_Uninstall" = "正在卸载 Formula:";
+"Installation_Window_Operation_Uninstall" = "Formula卸载中:";
 
 /* No comment provided by engineer. */
 "Installation_Window_Operation_Untap" = "Untapping Repo:";
 
 /* No comment provided by engineer. */
-"Installation_Window_Operation_Update" = "正在更新 Formula:";
+"Installation_Window_Operation_Update" = "Formulae更新中:";
 
 /* No comment provided by engineer. */
 "Message_BGTask_Body" = "对不起，后台任务已在运行。您不能同时执行两个任务。";
@@ -122,7 +125,7 @@
 "Message_No_Homebrew_Title" = "Homebrew网站";
 
 /* No comment provided by engineer. */
-"Message_Shell_Invalid_Body" = "重试前请增加shell \"%@\" 到 \"/etc/shells\" 的有效shell文件中.";
+"Message_Shell_Invalid_Body" = "请在重试前增加你的shell\"%@\"到在\"/etc/shells\"的有效shell文件";
 
 /* No comment provided by engineer. */
 "Message_Shell_Invalid_Title" = "没有找到有效的shell!";
@@ -151,12 +154,6 @@
 /* No comment provided by engineer. */
 "Message_Update_Formulae_Title" = "Formulae更新中";
 
-/* (No Commment) */
-"Notification_Doctor" = "Homebrew医生";
-
-/* No comment provided by engineer. */
-"Notification_Update" = "更新Homebrew";
-
 /* No comment provided by engineer. */
 "Sidebar_Group_Formulae" = "Formulae";
 
@@ -182,13 +179,13 @@
 "Sidebar_Info_Repos" = "These are the repositories you have tapped.";
 
 /* No comment provided by engineer. */
-"Sidebar_Info_SearchResults" = "这是您搜索的结果.";
+"Sidebar_Info_SearchResults" = "下面是你搜索的结果";
 
 /* No comment provided by engineer. */
-"Sidebar_Info_Update" = "更新Homebrew意味着拉取关于可用formulae的最新信息.";
+"Sidebar_Info_Update" = "更新Homebrew标书拉取最新的可用formulae信息";
 
 /* No comment provided by engineer. */
-"Sidebar_Item_All" = "所有Formulae";
+"Sidebar_Item_All" = "全部Formulae";
 
 /* No comment provided by engineer. */
 "Sidebar_Item_Doctor" = "医生";
@@ -236,5 +233,5 @@
 "Toolbar_Update_Formula" = "更新Formula";
 
 /* No comment provided by engineer. */
-"Toolbar_Update_Selected" = "更新选中的";
+"Toolbar_Update_Selected" = "更新所选";
 
