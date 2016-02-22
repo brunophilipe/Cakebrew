@@ -87,7 +87,6 @@
 		D2CC8CA71B90F04C00F763DF /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D2CC8CA61B90F04C00F763DF /* Security.framework */; };
 		D2F732F119190B75002B2512 /* NSString+URLValidation.m in Sources */ = {isa = PBXBuildFile; fileRef = D2F732F019190B75002B2512 /* NSString+URLValidation.m */; };
 		F752F5591C79875600C0DEFE /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = F752F55B1C79875600C0DEFE /* InfoPlist.strings */; };
-		F752F55E1C79875600C0DEFE /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = F752F5601C79875600C0DEFE /* Localizable.strings */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -249,7 +248,6 @@
 		F752F5551C79875500C0DEFE /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/BPDoctorView.strings; sourceTree = "<group>"; };
 		F752F5561C79875500C0DEFE /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/BPBundleWindow.strings; sourceTree = "<group>"; };
 		F752F55A1C79875600C0DEFE /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		F752F55F1C79875600C0DEFE /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Localizable.strings; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -501,7 +499,6 @@
 		D261C9C21B852FA300409803 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				F752F5601C79875600C0DEFE /* Localizable.strings */,
 				F752F55B1C79875600C0DEFE /* InfoPlist.strings */,
 				D261C9C31B852FA300409803 /* Info.plist */,
 			);
@@ -642,7 +639,6 @@
 				D2BBAB6D1B87142F00F21332 /* brewInfo_percona-server.txt in Resources */,
 				D2BBAB681B87142F00F21332 /* brewInfo_acme.txt in Resources */,
 				D2BBAB6A1B87142F00F21332 /* brewInfo_fakeformula.txt in Resources */,
-				F752F55E1C79875600C0DEFE /* Localizable.strings in Resources */,
 				D2BBAB6F1B87290B00F21332 /* brewInfo_bison.txt in Resources */,
 				D2BBAB711B87377D00F21332 /* brewInfo_sbtenv.txt in Resources */,
 				F752F5591C79875600C0DEFE /* InfoPlist.strings in Resources */,
@@ -876,14 +872,6 @@
 				F752F55A1C79875600C0DEFE /* fr */,
 			);
 			name = InfoPlist.strings;
-			sourceTree = "<group>";
-		};
-		F752F5601C79875600C0DEFE /* Localizable.strings */ = {
-			isa = PBXVariantGroup;
-			children = (
-				F752F55F1C79875600C0DEFE /* fr */,
-			);
-			name = Localizable.strings;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
