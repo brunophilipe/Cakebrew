@@ -122,19 +122,15 @@
 			if ([element isKindOfClass:[BPFormula class]]) {
 				switch ([[BPHomebrewManager sharedManager] statusForFormula:element]) {
 					case kBPFormulaInstalled:
-						return NSLocalizedString(@"Formula_Status_Installed", nil);
+						return [NSImage imageNamed:NSImageNameStatusAvailable];
             
 					case kBPFormulaNotInstalled:
-						return NSLocalizedString(@"Formula_Status_Not_Installed", nil);
+						return [NSImage imageNamed:NSImageNameStatusNone];
             
 					case kBPFormulaOutdated:
-						return NSLocalizedString(@"Formula_Status_Outdated", nil);
-            
-					default:
-						return @"";
+						return [NSImage imageNamed:NSImageNameStatusPartiallyAvailable];
+
 				}
-			} else {
-				return element;
 			}
 		}
   }

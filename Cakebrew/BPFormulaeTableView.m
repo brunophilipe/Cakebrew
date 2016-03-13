@@ -41,6 +41,9 @@ unichar SPACE_CHARACTER = 0x0020;
 	
 	//OUR superview is NSClipView
 	totalWidth = [[self superview] frame].size.width;
+
+	// Reserve the space for status column
+	totalWidth -= 30.0;
 	
 	switch (self.mode) {
 		case kBPListAll:
@@ -48,7 +51,6 @@ unichar SPACE_CHARACTER = 0x0020;
 			[[self tableColumnWithIdentifier:kColumnIdentifierVersion] setHidden:YES];
 			[[self tableColumnWithIdentifier:kColumnIdentifierLatestVersion] setHidden:YES];
 			[[self tableColumnWithIdentifier:kColumnIdentifierStatus] setHidden:NO];
-			[[self tableColumnWithIdentifier:kColumnIdentifierStatus] setWidth:(totalWidth-titleWidth)*0.90];
 			[self setAllowsMultipleSelection:NO];
 			break;
 			
@@ -57,7 +59,7 @@ unichar SPACE_CHARACTER = 0x0020;
 			[[self tableColumnWithIdentifier:kColumnIdentifierVersion] setHidden:NO];
 			[[self tableColumnWithIdentifier:kColumnIdentifierVersion] setWidth:(totalWidth-titleWidth)*0.95];
 			[[self tableColumnWithIdentifier:kColumnIdentifierLatestVersion] setHidden:YES];
-			[[self tableColumnWithIdentifier:kColumnIdentifierStatus] setHidden:YES];
+			[[self tableColumnWithIdentifier:kColumnIdentifierStatus] setHidden:NO];
 			[self setAllowsMultipleSelection:NO];
 			break;
 			
@@ -65,7 +67,7 @@ unichar SPACE_CHARACTER = 0x0020;
 			titleWidth = (NSInteger)(totalWidth * 0.99);
 			[[self tableColumnWithIdentifier:kColumnIdentifierVersion] setHidden:YES];
 			[[self tableColumnWithIdentifier:kColumnIdentifierLatestVersion] setHidden:YES];
-			[[self tableColumnWithIdentifier:kColumnIdentifierStatus] setHidden:YES];
+			[[self tableColumnWithIdentifier:kColumnIdentifierStatus] setHidden:NO];
 			[self setAllowsMultipleSelection:NO];
 			break;
 			
@@ -75,7 +77,7 @@ unichar SPACE_CHARACTER = 0x0020;
 			[[self tableColumnWithIdentifier:kColumnIdentifierVersion] setWidth:(totalWidth-titleWidth)*0.48];
 			[[self tableColumnWithIdentifier:kColumnIdentifierLatestVersion] setHidden:NO];
 			[[self tableColumnWithIdentifier:kColumnIdentifierLatestVersion] setWidth:(totalWidth-titleWidth)*0.48];
-			[[self tableColumnWithIdentifier:kColumnIdentifierStatus] setHidden:YES];
+			[[self tableColumnWithIdentifier:kColumnIdentifierStatus] setHidden:NO];
 			[self setAllowsMultipleSelection:YES];
 			break;
 			
@@ -84,7 +86,6 @@ unichar SPACE_CHARACTER = 0x0020;
 			[[self tableColumnWithIdentifier:kColumnIdentifierVersion] setHidden:YES];
 			[[self tableColumnWithIdentifier:kColumnIdentifierLatestVersion] setHidden:YES];
 			[[self tableColumnWithIdentifier:kColumnIdentifierStatus] setHidden:NO];
-			[[self tableColumnWithIdentifier:kColumnIdentifierStatus] setWidth:(totalWidth-titleWidth)*0.90];
 			[self setAllowsMultipleSelection:NO];
 			break;
 			
