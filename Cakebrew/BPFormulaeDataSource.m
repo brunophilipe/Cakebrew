@@ -114,7 +114,7 @@
 			}
 		} else if ([columnIdentifer isEqualToString:kColumnIdentifierLatestVersion]) {
 			if ([element isKindOfClass:[BPFormula class]]) {
-				return [(BPFormula*)element latestVersion];
+				return [(BPFormula*)element shortLatestVersion];
 			} else {
 				return element;
 			}
