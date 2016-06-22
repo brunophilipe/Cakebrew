@@ -65,7 +65,8 @@ NSString *const BPFormulaDidUpdateNotification = @"BPFormulaDidUpdateNotificatio
 {
 	BPFormula *formula = [[self alloc] init];
 	
-	if (formula) {
+	if (formula)
+	{
 		formula.name = name;
 		formula.version = version;
 		formula.latestVersion = latestVersion;
@@ -103,7 +104,8 @@ NSString *const BPFormulaDidUpdateNotification = @"BPFormulaDidUpdateNotificatio
 - (instancetype)initWithCoder:(NSCoder *)aDecoder
 {
 	self = [super init];
-	if (self) {
+	if (self)
+	{
 		self.name				= [aDecoder decodeObjectForKey:kBP_ENCODE_FORMULA_NAME];
 		self.version			= [aDecoder decodeObjectForKey:kBP_ENCODE_FORMULA_IVER];
 		self.latestVersion		= [aDecoder decodeObjectForKey:kBP_ENCODE_FORMULA_LVER];
@@ -146,6 +148,7 @@ NSString *const BPFormulaDidUpdateNotification = @"BPFormulaDidUpdateNotificatio
 		formula->_shortDescription	= [self->_shortDescription	copy];
 		formula->_information		= [self->_information		copy];
 		formula->_options			= [self->_options			copy];
+		
 		[formula addObserver:formula forKeyPath:NSStringFromSelector(@selector(needsInformation))
 					 options:NSKeyValueObservingOptionNew
 					 context:BPFormulaContext];
@@ -189,7 +192,6 @@ NSString *const BPFormulaDidUpdateNotification = @"BPFormulaDidUpdateNotificatio
 			[super observeValueForKeyPath:keyPath ofObject:object change:change context:context];
 		}
 		@catch (NSException *exception) {}
-		@finally {}
 	}
 }
 

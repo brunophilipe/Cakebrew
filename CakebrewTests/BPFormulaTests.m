@@ -53,7 +53,7 @@
 
 @interface BPCustomFormula : BPFormula {
 @public
-  BOOL observerAdded;
+	BOOL observerAdded;
 }
 - (void)addObserver:(NSObject *)observer forKeyPath:(NSString *)keyPath options:(NSKeyValueObservingOptions)options context:(void *)context;
 @end
@@ -67,8 +67,8 @@
 - (void)addObserver:(NSObject *)observer forKeyPath:(NSString *)keyPath
 			options:(NSKeyValueObservingOptions)options
 			context:(void *)context{
-  observerAdded = YES;
-  [super addObserver:observer forKeyPath:keyPath options:options context:context];
+	observerAdded = YES;
+	[super addObserver:observer forKeyPath:keyPath options:options context:context];
 }
 @end
 
@@ -81,7 +81,7 @@ static BPCustomFormula *bisonFormula;
 static BPCustomFormula *sbtenvFormula;
 
 @interface BPFormulaTests : XCTestCase {
-  BPFormula *formula;
+	BPFormula *formula;
 }
 @end
 
@@ -145,29 +145,29 @@ static BPCustomFormula *sbtenvFormula;
 	XCTAssertTrue([formula.shortDescription isEqualToString:copiedFormula.shortDescription] && [copiedFormula.shortDescription length] > 0, @"ShortDescription failed to copy");
 	XCTAssertTrue([formula.dependencies isEqualToString:copiedFormula.dependencies] && [copiedFormula.dependencies length] > 0, @"Dependencies failed to copy");
 	XCTAssertTrue([formula.conflicts isEqualToString:copiedFormula.conflicts] && [copiedFormula.conflicts length] > 0, @"Conflicts failed to copy");
-  	XCTAssertTrue([formula.installPath isEqualToString:copiedFormula.installPath] && [copiedFormula.installPath length] > 0, @"Instal path failed to copy");
-  	XCTAssertTrue([formula.information isEqualToString:copiedFormula.information] && [copiedFormula.information length] > 0, @"Console information failed to copy");
+	XCTAssertTrue([formula.installPath isEqualToString:copiedFormula.installPath] && [copiedFormula.installPath length] > 0, @"Instal path failed to copy");
+	XCTAssertTrue([formula.information isEqualToString:copiedFormula.information] && [copiedFormula.information length] > 0, @"Console information failed to copy");
 	XCTAssertEqual([copiedFormula.options count], 27, @"Number of formula options does not match");
 }
 
 
 - (void)testFormulaConsoleInformation
 {
-  BPFormulaDataProvider *provider = [[BPFormulaDataProvider alloc] init];
-  NSString *ffmpegOutput = [provider informationForFormulaName:@"ffmpeg"];
-  XCTAssertEqualObjects(ffmpegFormula.information, ffmpegOutput);
-  NSString *mysqlOutput = [provider informationForFormulaName:@"mysql"];
-  XCTAssertEqualObjects(mysqlFormula.information, mysqlOutput);
-  NSString *acmeOutput = [provider informationForFormulaName:@"acme"];
-  XCTAssertEqualObjects(acmeFormula.information, acmeOutput);
-  NSString *bfgOutput = [provider informationForFormulaName:@"bfg"];
-  XCTAssertEqualObjects(bfgFormula.information, bfgOutput);
-  NSString *perconaOutput = [provider informationForFormulaName:@"percona-server"];
-  XCTAssertEqualObjects(perconaFormula.information, perconaOutput);
-  NSString *bisonOutput = [provider informationForFormulaName:@"bison"];
-  XCTAssertEqualObjects(bisonFormula.information, bisonOutput);
-  NSString *sbtenvOutput = [provider informationForFormulaName:@"sbtenv"];
-  XCTAssertEqualObjects(sbtenvFormula.information, sbtenvOutput);
+	BPFormulaDataProvider *provider = [[BPFormulaDataProvider alloc] init];
+	NSString *ffmpegOutput = [provider informationForFormulaName:@"ffmpeg"];
+	XCTAssertEqualObjects(ffmpegFormula.information, ffmpegOutput);
+	NSString *mysqlOutput = [provider informationForFormulaName:@"mysql"];
+	XCTAssertEqualObjects(mysqlFormula.information, mysqlOutput);
+	NSString *acmeOutput = [provider informationForFormulaName:@"acme"];
+	XCTAssertEqualObjects(acmeFormula.information, acmeOutput);
+	NSString *bfgOutput = [provider informationForFormulaName:@"bfg"];
+	XCTAssertEqualObjects(bfgFormula.information, bfgOutput);
+	NSString *perconaOutput = [provider informationForFormulaName:@"percona-server"];
+	XCTAssertEqualObjects(perconaFormula.information, perconaOutput);
+	NSString *bisonOutput = [provider informationForFormulaName:@"bison"];
+	XCTAssertEqualObjects(bisonFormula.information, bisonOutput);
+	NSString *sbtenvOutput = [provider informationForFormulaName:@"sbtenv"];
+	XCTAssertEqualObjects(sbtenvFormula.information, sbtenvOutput);
 }
 
 - (void)testFormulaWebsite
@@ -297,23 +297,23 @@ static BPCustomFormula *sbtenvFormula;
 
 - (void)testFormulaObserverAddition
 {
-  BPCustomFormula *observerFormula = [BPCustomFormula formulaWithName:@"acme"];
-  XCTAssertTrue(observerFormula->observerAdded);
-  BPCustomFormula *formulaCopy = [observerFormula copy];
-  XCTAssertTrue(formulaCopy->observerAdded);
+	BPCustomFormula *observerFormula = [BPCustomFormula formulaWithName:@"acme"];
+	XCTAssertTrue(observerFormula->observerAdded);
+	BPCustomFormula *formulaCopy = [observerFormula copy];
+	XCTAssertTrue(formulaCopy->observerAdded);
 }
 
 - (void)testFormulaNotificationUpdate
 {
-  BPCustomFormula *customFormula = [BPCustomFormula formulaWithName:@"acme"];
-  XCTestExpectation *expectation = [self expectationForNotification:BPFormulaDidUpdateNotification
-															 object:customFormula
-															handler:^BOOL(NSNotification *notification){
-	  [expectation fulfill];
-	  return YES;
-  }];
-  [customFormula setNeedsInformation:YES];
-  [self waitForExpectationsWithTimeout:0.5 handler:nil];
+	BPCustomFormula *customFormula = [BPCustomFormula formulaWithName:@"acme"];
+	XCTestExpectation *expectation = [self expectationForNotification:BPFormulaDidUpdateNotification
+															   object:customFormula
+															  handler:^BOOL(NSNotification *notification){
+																  [expectation fulfill];
+																  return YES;
+															  }];
+	[customFormula setNeedsInformation:YES];
+	[self waitForExpectationsWithTimeout:0.5 handler:nil];
 }
 
 @end
