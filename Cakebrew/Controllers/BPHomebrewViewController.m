@@ -450,10 +450,10 @@ NSOpenSavePanelDelegate>
 
 - (void)loadSearchResults
 {
-	[self setSearching:YES];
-	[self configureTableForListing:kBPListSearch];
 	[self.sidebarController.sidebar selectRowIndexes:[NSIndexSet indexSetWithIndex:FormulaeSideBarItemAll]
 								byExtendingSelection:NO];
+	[self setSearching:YES];
+	[self configureTableForListing:kBPListSearch];
 }
 
 - (void)endSearchAndCleanup

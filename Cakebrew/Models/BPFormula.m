@@ -353,6 +353,24 @@ NSString *const BPFormulaDidUpdateNotification = @"BPFormulaDidUpdateNotificatio
 	return [NSString stringWithFormat:@"%@ <%p> name:%@ version:%@ latestVerson:%@", NSStringFromClass([self class]), self, self.name, self.version, self.latestVersion];
 }
 
+- (NSString*)shortLatestVersion
+{
+	NSArray *components = [[self latestVersion] componentsSeparatedByString:@" "];
+	NSUInteger count = [components count];
+	
+	if (3 == count || 4 == count)
+	{
+		// New Version, like: stable 1.6.23 (bottled), HEAD
+		// We take only the second component, like: 1.6.23
+		
+		return [components objectAtIndex:1];
+	}
+	else
+	{
+		return [self latestVersion];
+	}
+}
+
 - (id<BPFormulaDataProvider>)dataProvider
 {
 	return [BPHomebrewInterface sharedInterface];

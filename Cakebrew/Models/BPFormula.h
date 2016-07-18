@@ -34,6 +34,7 @@ extern NSString *const BPFormulaDidUpdateNotification;
 @property (copy, readonly) NSString *name;
 @property (copy, readonly) NSString *version;
 @property (copy, readonly) NSString *latestVersion;
+@property (copy, readonly) NSString *shortLatestVersion;
 @property (copy, readonly) NSString *information;
 @property (nonatomic, copy, readonly) NSString *installPath;
 @property (nonatomic, copy, readonly) NSString *dependencies;
