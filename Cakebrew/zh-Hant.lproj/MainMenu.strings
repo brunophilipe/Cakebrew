@@ -108,7 +108,7 @@
 "9hc-sq-AFZ.title" = "Spelling and Grammar";
 
 /* Class = "NSTableColumn"; headerCell.title = "Name"; ObjectID = "A78-TI-Q8X"; */
-"A78-TI-Q8X.headerCell.title" = "Name";
+"A78-TI-Q8X.headerCell.title" = "名稱";
 
 /* Class = "NSTextFieldCell"; title = "Text Cell"; ObjectID = "BFf-kE-eTe"; */
 "BFf-kE-eTe.title" = "Text Cell";
@@ -162,7 +162,7 @@
 "JPI-0A-NvM.title" = "Paste";
 
 /* Class = "NSTableColumn"; headerCell.title = "Status"; ObjectID = "JRi-Nr-5hA"; */
-"JRi-Nr-5hA.headerCell.title" = "Status";
+"JRi-Nr-5hA.headerCell.title" = "狀態";
 
 /* Class = "NSMenuItem"; title = "Outdated Formulae"; ObjectID = "KUc-5l-twA"; */
 "KUc-5l-twA.title" = "Outdated Formulae";
@@ -255,7 +255,7 @@
 "b3s-t3-YFx.title" = "Tools";
 
 /* Class = "NSTableColumn"; headerCell.title = "Latest Version"; ObjectID = "ba4-r8-kgo"; */
-"ba4-r8-kgo.headerCell.title" = "Latest Version";
+"ba4-r8-kgo.headerCell.title" = "最新版本";
 
 /* Class = "NSMenuItem"; title = "Smart Dashes"; ObjectID = "bv4-X8-jgK"; */
 "bv4-X8-jgK.title" = "Smart Dashes";
@@ -291,7 +291,7 @@
 "h1A-B0-MNB.title" = "Delete";
 
 /* Class = "NSTableColumn"; headerCell.title = "Version"; ObjectID = "h5d-xc-Jih"; */
-"h5d-xc-Jih.headerCell.title" = "Version";
+"h5d-xc-Jih.headerCell.title" = "版本";
 
 /* Class = "NSMenuItem"; title = "Uninstall Formula"; ObjectID = "i3A-Nx-qPJ"; */
 "i3A-Nx-qPJ.title" = "Uninstall Formula";

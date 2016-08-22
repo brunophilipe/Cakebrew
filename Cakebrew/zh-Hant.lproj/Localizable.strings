@@ -1,11 +1,3 @@
-/*
-  Localizable.strings
-  Cakebrew
-
-  Created by Bruno Philipe on 4/18/15.
-  Copyright (c) 2015 Bruno Philipe. All rights reserved.
-*/
-
 "Cakebrew" = "Cakebrew";
 
 "Generic_OK" = "OK";
@@ -36,9 +28,9 @@
 "Confirmation_Tap_Repo" = "Are you sure you want to tap the repository '%@'?";
 "Confirmation_Untap_Repo" = "Are you sure you want to untap the repository '%@'?";
 
-"Formula_Status_Installed" = "Installed";
-"Formula_Status_Not_Installed" = "Not Installed";
-"Formula_Status_Outdated" = "Update Available";
+"Formula_Status_Installed" = "已安裝";
+"Formula_Status_Not_Installed" = "未安裝";
+"Formula_Status_Outdated" = "有新版本";
 
 "Formula_Options_ClickForDetails" = "Click on option for details.";
 "Formula_Options_NoOptions" = "This formula has no installation options available.";
@@ -53,24 +45,24 @@
 "Homebrew_Task_Finished_At" = "at";
 "Homebrew_AppNap_Task_Reason" = "Running Homebrew task";
 
-"Toolbar_Install_Formula" = "Install Formula";
-"Toolbar_Uninstall_Formula" = "Uninstall Formula";
-"Toolbar_Update_Formula" = "Update Formula";
-"Toolbar_Tap_Repo" = "Tap Repository";
-"Toolbar_Untap_Repo" = "Untap Repository";
-"Toolbar_Update_Selected" = "Update Selected";
-"Toolbar_More_Information" = "More Information";
-"Toolbar_Homebrew_Update" = "Update Homebrew";
-"Toolbar_Search" = "Search Formulae";
+"Toolbar_Install_Formula" = "安裝套件";
+"Toolbar_Uninstall_Formula" = "移除套件";
+"Toolbar_Update_Formula" = "更新套件";
+"Toolbar_Tap_Repo" = "新增安裝來源";
+"Toolbar_Untap_Repo" = "移除安裝來源";
+"Toolbar_Update_Selected" = "更新已選項目";
+"Toolbar_More_Information" = "更多資訊";
+"Toolbar_Homebrew_Update" = "更新 Homebrew";
+"Toolbar_Search" = "搜尋套件";
 
-"Sidebar_Info_Installed" = "These are the formulae already installed in your system.";
-"Sidebar_Info_Outdated" = "These formulae are already installed, but have an update available.";
-"Sidebar_Info_All" = "These are all the formulae available for installation with Homebrew.";
-"Sidebar_Info_Leaves" = "These formulae are not dependencies of any other formulae.";
-"Sidebar_Info_Repos" = "These are the repositories you have tapped.";
-"Sidebar_Info_Doctor" = "The doctor is a Homebrew feature that detects the most common causes of errors.";
-"Sidebar_Info_Update" = "Updating Homebrew means fetching the latest info about the available formulae.";
-"Sidebar_Info_SearchResults" = "These are the results of your search.";
+"Sidebar_Info_Installed" = "已安裝於系統中的套件";
+"Sidebar_Info_Outdated" = "有提供更新的套件";
+"Sidebar_Info_All" = "所有可安裝的套件";
+"Sidebar_Info_Leaves" = "沒有其他軟體依賴這些套件運作，可供單獨移除";
+"Sidebar_Info_Repos" = "已設定的安裝來源";
+"Sidebar_Info_Doctor" = "Homebrew 醫生是用來檢查常見問題的（Homebrew 內建）功能";
+"Sidebar_Info_Update" = "更新 Homebrew 的套件清單";
+"Sidebar_Info_SearchResults" = "這些是搜尋結果";
 
 "Installation_Window_Operation_Install" = "Installing Formula:";
 "Installation_Window_Operation_Uninstall" = "Uninstalling Formula:";
@@ -86,18 +78,18 @@
 "Info_View_Formula_No_Conflicts" = "This formula has no known conflicts.";
 "Info_View_Formula_No_Description" = "No description provided.";
 
-"Sidebar_Group_Formulae" = "Formulae";
-"Sidebar_Group_Tools" = "Tools";
+"Sidebar_Group_Formulae" = "套件";
+"Sidebar_Group_Tools" = "工具";
 
-"Sidebar_Item_Installed" = "Installed";
-"Sidebar_Item_Outdated" = "Outdated";
-"Sidebar_Item_All" = "All Formulae";
-"Sidebar_Item_Leaves" = "Leaves";
-"Sidebar_Item_Repos" = "Repositories";
-"Sidebar_Item_Doctor" = "Doctor";
-"Sidebar_Item_Update" = "Update";
+"Sidebar_Item_Installed" = "已安裝";
+"Sidebar_Item_Outdated" = "有新版本";
+"Sidebar_Item_All" = "所有套件";
+"Sidebar_Item_Leaves" = "可單獨移除";
+"Sidebar_Item_Repos" = "來源";
+"Sidebar_Item_Doctor" = "Homebrew 醫生";
+"Sidebar_Item_Update" = "更新";
 
-"Sidebar_VoiceOver_Tools" = "Tools";
+"Sidebar_VoiceOver_Tools" = "工具";
 
 "Notification_Doctor" = "Homebrew Doctor";
 "Notification_Update" = "Update Homebrew";

@@ -1,9 +1,9 @@
 
 /* Class = "NSButtonCell"; title = "Clear Log"; ObjectID = "EE6-5g-Jos"; */
-"EE6-5g-Jos.title" = "Clear Log";
+"EE6-5g-Jos.title" = "清除顯示紀錄";
 
 /* Class = "NSButtonCell"; title = "Update Homebrew"; ObjectID = "MVF-cn-lfW"; */
-"MVF-cn-lfW.title" = "Update Homebrew";
+"MVF-cn-lfW.title" = "更新 Homebrew";
 
 /* Class = "NSTextFieldCell"; title = "You should update homebrew at least once every 24 hours."; ObjectID = "xJf-gA-oo0"; */
-"xJf-gA-oo0.title" = "You should update homebrew at least once every 24 hours.";
+"xJf-gA-oo0.title" = "建議每 24 小時更新 Homebrew 一次";
