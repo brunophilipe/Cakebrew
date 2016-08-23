@@ -1,11 +1,11 @@
 "Cakebrew" = "Cakebrew";
 
-"Generic_OK" = "OK";
-"Generic_Cancel" = "Cancel";
-"Generic_Error" = "Error";
-"Generic_Attention" = "Attention!";
-"Generic_Yes" = "Yes";
-"Generic_No" = "No";
+"Generic_OK" = "好";
+"Generic_Cancel" = "取消";
+"Generic_Error" = "錯誤";
+"Generic_Attention" = "注意!";
+"Generic_Yes" = "是";
+"Generic_No" = "否";
 
 "Message_BGTask_Title" = "Active background task!";
 "Message_BGTask_Body" = "Sorry, a background task is already running. You can't perform two tasks at the same time.";
@@ -22,11 +22,11 @@
 "Message_Update_All_Outdated_Title" = "Updating all Outdated";
 "Message_Update_All_Outdated_Body" = "Are you sure you want to update all outdated formulae?";
 
-"Confirmation_Install_Formula" = "Are you sure you want to install the formula '%@'?";
-"Confirmation_Uninstall_Formula" = "Are you sure you want to uninstall the formula '%@'?";
-"Confirmation_Update_Formula" = "Are you sure you want to update the selected formulae?";
-"Confirmation_Tap_Repo" = "Are you sure you want to tap the repository '%@'?";
-"Confirmation_Untap_Repo" = "Are you sure you want to untap the repository '%@'?";
+"Confirmation_Install_Formula" = "確定要安裝套件 %@ ?";
+"Confirmation_Uninstall_Formula" = "確定要移除套件 %@ ?";
+"Confirmation_Update_Formula" = "確定要更新選取的套件?";
+"Confirmation_Tap_Repo" = "確定要新增安裝來源 %@ ?";
+"Confirmation_Untap_Repo" = "確定要移除安裝來源 %@ ?";
 
 "Formula_Status_Installed" = "已安裝";
 "Formula_Status_Not_Installed" = "未安裝";
@@ -38,12 +38,12 @@
 "Formula_Options_VoiceOver" = "Formula Options";
 "Formula_Options_Confirmation" = "Are you sure you want to install the formula %@ with the selected options?";
 
-"Formula_Popover_Title" = "Information for Formula: %@";
-"Formula_Popover_Error" = "Error retrieving Formula information";
+"Formula_Popover_Title" = "套件資訊: %@";
+"Formula_Popover_Error" = "發生錯誤";
 
-"Homebrew_Task_Finished" = "Task finished";
-"Homebrew_Task_Finished_At" = "at";
-"Homebrew_AppNap_Task_Reason" = "Running Homebrew task";
+"Homebrew_Task_Finished" = "執行完成";
+"Homebrew_Task_Finished_At" = "於";
+"Homebrew_AppNap_Task_Reason" = "Homebrew 執行中";
 
 "Toolbar_Install_Formula" = "安裝套件";
 "Toolbar_Uninstall_Formula" = "移除套件";
@@ -64,13 +64,13 @@
 "Sidebar_Info_Update" = "更新 Homebrew 的套件清單";
 "Sidebar_Info_SearchResults" = "這些是搜尋結果";
 
-"Installation_Window_Operation_Install" = "Installing Formula:";
-"Installation_Window_Operation_Uninstall" = "Uninstalling Formula:";
-"Installation_Window_Operation_Update" = "Updating Formula:";
-"Installation_Window_Operation_Tap" = "Tapping Repo:";
-"Installation_Window_Operation_Untap" = "Untapping Repo:";
-"Installation_Window_Operation_Cleanup" = "Running Cleanup…";
-"Installation_Window_All_Formulae" = "All Outdated Formulae";
+"Installation_Window_Operation_Install" = "安裝套件:";
+"Installation_Window_Operation_Uninstall" = "移除套件:";
+"Installation_Window_Operation_Update" = "更新套件:";
+"Installation_Window_Operation_Tap" = "新增安裝來源:";
+"Installation_Window_Operation_Untap" = "移除安裝來源:";
+"Installation_Window_Operation_Cleanup" = "清理中...";
+"Installation_Window_All_Formulae" = "所有可更新的套件";
 
 "Info_View_Multiple_Values" = "多項資訊";
 "Info_View_Formula_Not_Installed" = "未安裝";
@@ -91,5 +91,5 @@
 
 "Sidebar_VoiceOver_Tools" = "工具";
 
-"Notification_Doctor" = "Homebrew Doctor";
-"Notification_Update" = "Update Homebrew";
+"Notification_Doctor" = "Homebrew 醫生";
+"Notification_Update" = "更新 Homebrew";
