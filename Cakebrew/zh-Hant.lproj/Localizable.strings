@@ -72,11 +72,11 @@
 "Installation_Window_Operation_Cleanup" = "Running Cleanup…";
 "Installation_Window_All_Formulae" = "All Outdated Formulae";
 
-"Info_View_Multiple_Values" = "Multiple Values";
-"Info_View_Formula_Not_Installed" = "Formula Not Installed.";
-"Info_View_Formula_No_Dependencies" = "This formula has no dependencies!";
-"Info_View_Formula_No_Conflicts" = "This formula has no known conflicts.";
-"Info_View_Formula_No_Description" = "No description provided.";
+"Info_View_Multiple_Values" = "多項資訊";
+"Info_View_Formula_Not_Installed" = "未安裝";
+"Info_View_Formula_No_Dependencies" = "不需要安裝其它套件!";
+"Info_View_Formula_No_Conflicts" = "沒有與其他套件衝突";
+"Info_View_Formula_No_Description" = "沒有相關說明";
 
 "Sidebar_Group_Formulae" = "套件";
 "Sidebar_Group_Tools" = "工具";
