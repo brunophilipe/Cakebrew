@@ -1,15 +1,15 @@
 
 /* Class = "NSMenuItem"; title = "Bring All to Front"; ObjectID = "5"; */
-"5.title" = "Bring All to Front";
+"5.title" = "將此程式所有視窗移至最前";
 
 /* Class = "NSMenuItem"; title = "Window"; ObjectID = "19"; */
-"19.title" = "Window";
+"19.title" = "視窗";
 
 /* Class = "NSMenuItem"; title = "Minimize"; ObjectID = "23"; */
-"23.title" = "Minimize";
+"23.title" = "縮到最小";
 
 /* Class = "NSMenu"; title = "Window"; ObjectID = "24"; */
-"24.title" = "Window";
+"24.title" = "視窗";
 
 /* Class = "NSMenu"; title = "AMainMenu"; ObjectID = "29"; */
 "29.title" = "AMainMenu";
@@ -21,91 +21,91 @@
 "57.title" = "Cakebrew";
 
 /* Class = "NSMenuItem"; title = "About Cakebrew"; ObjectID = "58"; */
-"58.title" = "About Cakebrew";
+"58.title" = "關於 Cakebrew";
 
 /* Class = "NSMenuItem"; title = "Preferences…"; ObjectID = "129"; */
-"129.title" = "Preferences…";
+"129.title" = "偏好設定...";
 
 /* Class = "NSMenu"; title = "Services"; ObjectID = "130"; */
-"130.title" = "Services";
+"130.title" = "服務";
 
 /* Class = "NSMenuItem"; title = "Services"; ObjectID = "131"; */
-"131.title" = "Services";
+"131.title" = "服務";
 
 /* Class = "NSMenuItem"; title = "Hide Cakebrew"; ObjectID = "134"; */
-"134.title" = "Hide Cakebrew";
+"134.title" = "隱藏 Cakebrew";
 
 /* Class = "NSMenuItem"; title = "Quit Cakebrew"; ObjectID = "136"; */
-"136.title" = "Quit Cakebrew";
+"136.title" = "結束 Cakebrew";
 
 /* Class = "NSMenuItem"; title = "Hide Others"; ObjectID = "145"; */
-"145.title" = "Hide Others";
+"145.title" = "隱藏其他";
 
 /* Class = "NSMenuItem"; title = "Show All"; ObjectID = "150"; */
-"150.title" = "Show All";
+"150.title" = "顯示全部";
 
 /* Class = "NSMenuItem"; title = "Zoom"; ObjectID = "239"; */
-"239.title" = "Zoom";
+"239.title" = "縮放";
 
 /* Class = "NSWindow"; title = "Cakebrew"; ObjectID = "371"; */
 "371.title" = "Cakebrew";
 
 /* Class = "NSMenuItem"; title = "Help"; ObjectID = "490"; */
-"490.title" = "Help";
+"490.title" = "輔助說明";
 
 /* Class = "NSMenu"; title = "Help"; ObjectID = "491"; */
-"491.title" = "Help";
+"491.title" = "輔助說明";
 
 /* Class = "NSMenuItem"; title = "Cakebrew Help"; ObjectID = "492"; */
-"492.title" = "Cakebrew Help";
+"492.title" = "Cakebrew 輔助說明";
 
 /* Class = "NSViewController"; title = "HomebrewController"; ObjectID = "547"; */
 "547.title" = "HomebrewController";
 
 /* Class = "NSMenuItem"; title = "Formula Website "; ObjectID = "0oV-it-p68"; */
-"0oV-it-p68.title" = "Formula Website ";
+"0oV-it-p68.title" = "前往套件網站";
 
 /* Class = "NSTextFieldCell"; title = "Text Cell"; ObjectID = "2Ce-cm-oqR"; */
 "2Ce-cm-oqR.title" = "Text Cell";
 
 /* Class = "NSMenuItem"; title = "Smart Copy/Paste"; ObjectID = "2P3-U9-uO0"; */
-"2P3-U9-uO0.title" = "Smart Copy/Paste";
+"2P3-U9-uO0.title" = "智慧型拷貝/貼上";
 
 /* Class = "NSMenuItem"; title = "Smart Quotes"; ObjectID = "2Vq-Ue-Jgo"; */
-"2Vq-Ue-Jgo.title" = "Smart Quotes";
+"2Vq-Ue-Jgo.title" = "智慧型引號";
 
 /* Class = "NSMenuItem"; title = "Jump to Selection"; ObjectID = "3gj-Tz-gwl"; */
-"3gj-Tz-gwl.title" = "Jump to Selection";
+"3gj-Tz-gwl.title" = "跳至所選範圍";
 
 /* Class = "NSTextFieldCell"; title = "No selection"; ObjectID = "3xE-6a-fkA"; */
-"3xE-6a-fkA.title" = "No selection";
+"3xE-6a-fkA.title" = "未選取";
 
 /* Class = "NSMenuItem"; title = "Update Formula"; ObjectID = "4ab-Ns-Wry"; */
-"4ab-Ns-Wry.title" = "Update Formula";
+"4ab-Ns-Wry.title" = "更新套件";
 
 /* Class = "NSMenuItem"; title = "Transformations"; ObjectID = "5Ae-Ee-ok4"; */
-"5Ae-Ee-ok4.title" = "Transformations";
+"5Ae-Ee-ok4.title" = "轉換";
 
 /* Class = "NSMenuItem"; title = "Cut"; ObjectID = "5IY-wu-LBL"; */
-"5IY-wu-LBL.title" = "Cut";
+"5IY-wu-LBL.title" = "剪下";
 
 /* Class = "NSMenuItem"; title = "Update"; ObjectID = "8Vh-lk-gYe"; */
-"8Vh-lk-gYe.title" = "Update";
+"8Vh-lk-gYe.title" = "更新 Homebrew";
 
 /* Class = "NSMenuItem"; title = "Installed Formulae"; ObjectID = "8gP-gb-YtQ"; */
-"8gP-gb-YtQ.title" = "Installed Formulae";
+"8gP-gb-YtQ.title" = "已安裝套件";
 
 /* Class = "NSMenu"; title = "Find"; ObjectID = "8wr-BZ-YYu"; */
-"8wr-BZ-YYu.title" = "Find";
+"8wr-BZ-YYu.title" = "尋找";
 
 /* Class = "NSMenuItem"; title = "Formula Website"; ObjectID = "9Fv-tF-1qy"; */
-"9Fv-tF-1qy.title" = "Formula Website";
+"9Fv-tF-1qy.title" = "開啟套件網站";
 
 /* Class = "NSMenuItem"; title = "Edit"; ObjectID = "9Xg-s6-Icq"; */
-"9Xg-s6-Icq.title" = "Edit";
+"9Xg-s6-Icq.title" = "編輯";
 
 /* Class = "NSMenuItem"; title = "Spelling and Grammar"; ObjectID = "9hc-sq-AFZ"; */
-"9hc-sq-AFZ.title" = "Spelling and Grammar";
+"9hc-sq-AFZ.title" = "拼字和文法";
 
 /* Class = "NSTableColumn"; headerCell.title = "Name"; ObjectID = "A78-TI-Q8X"; */
 "A78-TI-Q8X.headerCell.title" = "名稱";
@@ -114,226 +114,226 @@
 "BFf-kE-eTe.title" = "Text Cell";
 
 /* Class = "NSMenuItem"; title = "Text Replacement"; ObjectID = "BcF-eP-c6m"; */
-"BcF-eP-c6m.title" = "Text Replacement";
+"BcF-eP-c6m.title" = "取代";
 
 /* Class = "NSMenuItem"; title = "Check Grammar With Spelling"; ObjectID = "Bu5-tT-t6q"; */
-"Bu5-tT-t6q.title" = "Check Grammar With Spelling";
+"Bu5-tT-t6q.title" = "拼字和文法檢查";
 
 /* Class = "NSMenu"; title = "Transformations"; ObjectID = "Clj-ps-Iag"; */
-"Clj-ps-Iag.title" = "Transformations";
+"Clj-ps-Iag.title" = "轉換";
 
 /* Class = "NSMenuItem"; title = "Use Selection for Find"; ObjectID = "DNi-yY-5Ha"; */
-"DNi-yY-5Ha.title" = "Use Selection for Find";
+"DNi-yY-5Ha.title" = "使用所選範圍尋找";
 
 /* Class = "NSMenuItem"; title = "Upgrade All Formulae"; ObjectID = "DdP-fd-ccO"; */
-"DdP-fd-ccO.title" = "Upgrade All Formulae";
+"DdP-fd-ccO.title" = "更新所有套件";
 
 /* Class = "NSMenuItem"; title = "Substitutions"; ObjectID = "Dki-FU-69n"; */
-"Dki-FU-69n.title" = "Substitutions";
+"Dki-FU-69n.title" = "取代";
 
 /* Class = "NSMenuItem"; title = "Search for Formula"; ObjectID = "DpP-yi-xdi"; */
-"DpP-yi-xdi.title" = "Search for Formula";
+"DpP-yi-xdi.title" = "尋找套件";
 
 /* Class = "NSMenuItem"; title = "Start Speaking"; ObjectID = "EBJ-Ce-8OO"; */
-"EBJ-Ce-8OO.title" = "Start Speaking";
+"EBJ-Ce-8OO.title" = "開始朗讀";
 
 /* Class = "NSMenuItem"; title = "Upgrade Selected Formulae"; ObjectID = "Ep8-j6-m5Q"; */
-"Ep8-j6-m5Q.title" = "Upgrade Selected Formulae";
+"Ep8-j6-m5Q.title" = "更新選取的套件";
 
 /* Class = "NSMenu"; title = "Speech"; ObjectID = "Eud-wi-dvG"; */
-"Eud-wi-dvG.title" = "Speech";
+"Eud-wi-dvG.title" = "語音";
 
 /* Class = "NSMenuItem"; title = "Capitalize"; ObjectID = "GVv-as-Pfq"; */
-"GVv-as-Pfq.title" = "Capitalize";
+"GVv-as-Pfq.title" = "首字大寫";
 
 /* Class = "NSMenuItem"; title = "Export Brew Installation…"; ObjectID = "Gbv-K1-deL"; */
-"Gbv-K1-deL.title" = "Export Brew Installation…";
+"Gbv-K1-deL.title" = "匯出 Homebrew 安裝清單...";
 
 /* Class = "NSMenuItem"; title = "Undo"; ObjectID = "H1C-ip-FlF"; */
-"H1C-ip-FlF.title" = "Undo";
+"H1C-ip-FlF.title" = "還原";
 
 /* Class = "NSMenuItem"; title = "Update Formula"; ObjectID = "Hhd-b7-GOc"; */
-"Hhd-b7-GOc.title" = "Update Formula";
+"Hhd-b7-GOc.title" = "更新套件";
 
 /* Class = "NSMenuItem"; title = "Redo"; ObjectID = "J92-AZ-XUi"; */
-"J92-AZ-XUi.title" = "Redo";
+"J92-AZ-XUi.title" = "重作";
 
 /* Class = "NSMenuItem"; title = "Paste"; ObjectID = "JPI-0A-NvM"; */
-"JPI-0A-NvM.title" = "Paste";
+"JPI-0A-NvM.title" = "貼上";
 
 /* Class = "NSTableColumn"; headerCell.title = "Status"; ObjectID = "JRi-Nr-5hA"; */
 "JRi-Nr-5hA.headerCell.title" = "狀態";
 
 /* Class = "NSMenuItem"; title = "Outdated Formulae"; ObjectID = "KUc-5l-twA"; */
-"KUc-5l-twA.title" = "Outdated Formulae";
+"KUc-5l-twA.title" = "有新版本的套件";
 
 /* Class = "NSTextFieldCell"; title = "HEADER CELL"; ObjectID = "KoT-TI-MgQ"; */
 "KoT-TI-MgQ.title" = "HEADER CELL";
 
 /* Class = "NSMenuItem"; title = "Import Brew Installation…"; ObjectID = "LU8-D3-Wwe"; */
-"LU8-D3-Wwe.title" = "Import Brew Installation…";
+"LU8-D3-Wwe.title" = "匯入 Homebrew 安裝清單...";
 
 /* Class = "NSMenu"; title = "Edit"; ObjectID = "LYP-iZ-WcV"; */
-"LYP-iZ-WcV.title" = "Edit";
+"LYP-iZ-WcV.title" = "編輯";
 
 /* Class = "NSMenuItem"; title = "Install Formula"; ObjectID = "Lcb-tm-ATo"; */
-"Lcb-tm-ATo.title" = "Install Formula";
+"Lcb-tm-ATo.title" = "安裝套件";
 
 /* Class = "NSMenuItem"; title = "Leaves"; ObjectID = "M9N-PI-gBO"; */
-"M9N-PI-gBO.title" = "Leaves";
+"M9N-PI-gBO.title" = "可單獨移除的套件";
 
 /* Class = "NSMenuItem"; title = "Show Substitutions"; ObjectID = "MQL-Vg-ECI"; */
-"MQL-Vg-ECI.title" = "Show Substitutions";
+"MQL-Vg-ECI.title" = "顯示替代視窗";
 
 /* Class = "NSMenuItem"; title = "Select All"; ObjectID = "MTR-Uj-kDH"; */
-"MTR-Uj-kDH.title" = "Select All";
+"MTR-Uj-kDH.title" = "全選";
 
 /* Class = "NSMenuItem"; title = "Correct Spelling Automatically"; ObjectID = "NlA-Cw-rt3"; */
-"NlA-Cw-rt3.title" = "Correct Spelling Automatically";
+"NlA-Cw-rt3.title" = "自動更正拼字";
 
 /* Class = "NSMenuItem"; title = "Formula"; ObjectID = "NmF-5a-a6b"; */
-"NmF-5a-a6b.title" = "Formula";
+"NmF-5a-a6b.title" = "套件";
 
 /* Class = "NSMenuItem"; title = "Stop Speaking"; ObjectID = "NrN-pe-J7E"; */
-"NrN-pe-J7E.title" = "Stop Speaking";
+"NrN-pe-J7E.title" = "停止朗讀";
 
 /* Class = "NSMenuItem"; title = "Brew Cleanup…"; ObjectID = "OKR-gG-lsa"; */
-"OKR-gG-lsa.title" = "Brew Cleanup…";
+"OKR-gG-lsa.title" = "執行 Homebrew 清理...";
 
 /* Class = "NSMenuItem"; title = "Find and Replace…"; ObjectID = "OSn-ju-y85"; */
-"OSn-ju-y85.title" = "Find and Replace…";
+"OSn-ju-y85.title" = "尋找與取代...";
 
 /* Class = "NSMenuItem"; title = "Uninstall Formula"; ObjectID = "Tzv-5t-RhL"; */
-"Tzv-5t-RhL.title" = "Uninstall Formula";
+"Tzv-5t-RhL.title" = "移除套件";
 
 /* Class = "NSTextFieldCell"; title = "Text Cell"; ObjectID = "UBt-HC-zPr"; */
 "UBt-HC-zPr.title" = "Text Cell";
 
 /* Class = "NSMenuItem"; title = "Check Spelling While Typing"; ObjectID = "UOm-zM-WGz"; */
-"UOm-zM-WGz.title" = "Check Spelling While Typing";
+"UOm-zM-WGz.title" = "在輸入時同步檢查拼字";
 
 /* Class = "NSMenuItem"; title = "Find Previous"; ObjectID = "UWA-Fh-fH5"; */
-"UWA-Fh-fH5.title" = "Find Previous";
+"UWA-Fh-fH5.title" = "尋找上一個";
 
 /* Class = "NSMenuItem"; title = "Find Next"; ObjectID = "Uzy-PF-4ct"; */
-"Uzy-PF-4ct.title" = "Find Next";
+"Uzy-PF-4ct.title" = "尋找下一個";
 
 /* Class = "NSMenuItem"; title = "Install Formula with Options..."; ObjectID = "Vio-Nc-WTc"; */
-"Vio-Nc-WTc.title" = "Install Formula with Options...";
+"Vio-Nc-WTc.title" = "顯示套件安裝設定...";
 
 /* Class = "NSTextFieldCell"; title = "Text Cell"; ObjectID = "VzS-XQ-BoP"; */
 "VzS-XQ-BoP.title" = "Text Cell";
 
 /* Class = "NSTabViewItem"; label = "Doctor"; ObjectID = "WM9-6z-Jzl"; */
-"WM9-6z-Jzl.label" = "Doctor";
+"WM9-6z-Jzl.label" = "Homebrew 醫生";
 
 /* Class = "NSMenuItem"; title = "Install Formula with Options…"; ObjectID = "X74-Yx-eRm"; */
-"X74-Yx-eRm.title" = "Install Formula with Options…";
+"X74-Yx-eRm.title" = "顯示套件安裝設定...";
 
 /* Class = "NSMenu"; title = "Spelling"; ObjectID = "X7p-5G-5Dv"; */
-"X7p-5G-5Dv.title" = "Spelling";
+"X7p-5G-5Dv.title" = "拼字";
 
 /* Class = "NSMenuItem"; title = "Copy"; ObjectID = "XSL-d4-pFI"; */
-"XSL-d4-pFI.title" = "Copy";
+"XSL-d4-pFI.title" = "拷貝";
 
 /* Class = "NSMenuItem"; title = "Make Upper Case"; ObjectID = "ZI1-yX-Bb1"; */
-"ZI1-yX-Bb1.title" = "Make Upper Case";
+"ZI1-yX-Bb1.title" = "大寫";
 
 /* Class = "NSMenuItem"; title = "View"; ObjectID = "ZNi-97-e1J"; */
-"ZNi-97-e1J.title" = "View";
+"ZNi-97-e1J.title" = "顯示方式";
 
 /* Class = "NSMenuItem"; title = "Speech"; ObjectID = "Zen-la-cAG"; */
-"Zen-la-cAG.title" = "Speech";
+"Zen-la-cAG.title" = "語音";
 
 /* Class = "NSTabViewItem"; label = "Formulae"; ObjectID = "aFR-nx-bHM"; */
-"aFR-nx-bHM.label" = "Formulae";
+"aFR-nx-bHM.label" = "套件";
 
 /* Class = "NSMenuItem"; title = "Make Lower Case"; ObjectID = "aQ6-GZ-1Wd"; */
-"aQ6-GZ-1Wd.title" = "Make Lower Case";
+"aQ6-GZ-1Wd.title" = "小寫";
 
 /* Class = "NSMenuItem"; title = "Tools"; ObjectID = "b3s-t3-YFx"; */
-"b3s-t3-YFx.title" = "Tools";
+"b3s-t3-YFx.title" = "工具";
 
 /* Class = "NSTableColumn"; headerCell.title = "Latest Version"; ObjectID = "ba4-r8-kgo"; */
 "ba4-r8-kgo.headerCell.title" = "最新版本";
 
 /* Class = "NSMenuItem"; title = "Smart Dashes"; ObjectID = "bv4-X8-jgK"; */
-"bv4-X8-jgK.title" = "Smart Dashes";
+"bv4-X8-jgK.title" = "智慧型破折號";
 
 /* Class = "NSMenuItem"; title = "Show Spelling and Grammar"; ObjectID = "cbL-gM-Pkc"; */
-"cbL-gM-Pkc.title" = "Show Spelling and Grammar";
+"cbL-gM-Pkc.title" = "顯示拼字和文法檢查";
 
 /* Class = "NSMenuItem"; title = "Find"; ObjectID = "cdk-eL-aT2"; */
-"cdk-eL-aT2.title" = "Find";
+"cdk-eL-aT2.title" = "尋找";
 
 /* Class = "NSMenuItem"; title = "Repositories"; ObjectID = "dXD-3s-NhA"; */
-"dXD-3s-NhA.title" = "Repositories";
+"dXD-3s-NhA.title" = "安裝來源";
 
 /* Class = "NSMenu"; title = "Formula"; ObjectID = "dg5-kq-v1Y"; */
-"dg5-kq-v1Y.title" = "Formula";
+"dg5-kq-v1Y.title" = "套件";
 
 /* Class = "NSMenu"; title = "Substitutions"; ObjectID = "e0a-Xf-LW1"; */
-"e0a-Xf-LW1.title" = "Substitutions";
+"e0a-Xf-LW1.title" = "取代";
 
 /* Class = "NSMenuItem"; title = "Doctor"; ObjectID = "eI9-b4-Rmg"; */
-"eI9-b4-Rmg.title" = "Doctor";
+"eI9-b4-Rmg.title" = "Homebrew 醫生";
 
 /* Class = "NSMenuItem"; title = "More Information"; ObjectID = "eus-Jb-JjS"; */
-"eus-Jb-JjS.title" = "More Information";
+"eus-Jb-JjS.title" = "更多資訊";
 
 /* Class = "NSMenuItem"; title = "Install Formula"; ObjectID = "fhF-VX-squ"; */
-"fhF-VX-squ.title" = "Install Formula";
+"fhF-VX-squ.title" = "安裝套件";
 
 /* Class = "NSMenuItem"; title = "More Information"; ObjectID = "gxx-2S-F5T"; */
-"gxx-2S-F5T.title" = "More Information";
+"gxx-2S-F5T.title" = "更多資訊";
 
 /* Class = "NSMenuItem"; title = "Delete"; ObjectID = "h1A-B0-MNB"; */
-"h1A-B0-MNB.title" = "Delete";
+"h1A-B0-MNB.title" = "刪除";
 
 /* Class = "NSTableColumn"; headerCell.title = "Version"; ObjectID = "h5d-xc-Jih"; */
 "h5d-xc-Jih.headerCell.title" = "版本";
 
 /* Class = "NSMenuItem"; title = "Uninstall Formula"; ObjectID = "i3A-Nx-qPJ"; */
-"i3A-Nx-qPJ.title" = "Uninstall Formula";
+"i3A-Nx-qPJ.title" = "移除套件";
 
 /* Class = "NSMenu"; title = "Tools"; ObjectID = "lOM-6G-bAo"; */
-"lOM-6G-bAo.title" = "Tools";
+"lOM-6G-bAo.title" = "工具";
 
 /* Class = "NSMenuItem"; title = "Smart Links"; ObjectID = "mB7-mH-abu"; */
-"mB7-mH-abu.title" = "Smart Links";
+"mB7-mH-abu.title" = "智慧型連結";
 
 /* Class = "NSMenu"; title = "View"; ObjectID = "mwc-hE-3i2"; */
-"mwc-hE-3i2.title" = "View";
+"mwc-hE-3i2.title" = "顯示方式";
 
 /* Class = "NSMenuItem"; title = "Data Detectors"; ObjectID = "oBx-PH-cgq"; */
-"oBx-PH-cgq.title" = "Data Detectors";
+"oBx-PH-cgq.title" = "資料偵測器";
 
 /* Class = "NSMenu"; title = "Formula"; ObjectID = "sBH-Ta-Jft"; */
-"sBH-Ta-Jft.title" = "Formula";
+"sBH-Ta-Jft.title" = "套件";
 
 /* Class = "NSMenuItem"; title = "Close"; ObjectID = "sTI-da-gJ4"; */
-"sTI-da-gJ4.title" = "Close";
+"sTI-da-gJ4.title" = "關閉";
 
 /* Class = "NSMenuItem"; title = "Visit Website"; ObjectID = "seZ-rp-Anf"; */
-"seZ-rp-Anf.title" = "Visit Website";
+"seZ-rp-Anf.title" = "開啟網站";
 
 /* Class = "NSTextFieldCell"; title = "Text Cell"; ObjectID = "uGY-87-ubc"; */
 "uGY-87-ubc.title" = "Text Cell";
 
 /* Class = "NSMenuItem"; title = "Check Document Now"; ObjectID = "ugl-Oh-kYV"; */
-"ugl-Oh-kYV.title" = "Check Document Now";
+"ugl-Oh-kYV.title" = "立即檢查文件";
 
 /* Class = "NSMenuItem"; title = "Check for Updates…"; ObjectID = "v4F-qE-2u0"; */
-"v4F-qE-2u0.title" = "Check for Updates…";
+"v4F-qE-2u0.title" = "檢查更新...";
 
 /* Class = "NSMenuItem"; title = "Find…"; ObjectID = "yCR-di-3ZT"; */
-"yCR-di-3ZT.title" = "Find…";
+"yCR-di-3ZT.title" = "尋找";
 
 /* Class = "NSTabViewItem"; label = "Update"; ObjectID = "yL4-oW-nIm"; */
-"yL4-oW-nIm.label" = "Update";
+"yL4-oW-nIm.label" = "更新";
 
 /* Class = "NSTextFieldCell"; title = "Table View Cell"; ObjectID = "zVW-Ch-xYV"; */
 "zVW-Ch-xYV.title" = "Table View Cell";
 
 /* Class = "NSMenuItem"; title = "All Formulae"; ObjectID = "zam-2s-isx"; */
-"zam-2s-isx.title" = "All Formulae";
+"zam-2s-isx.title" = "所有套件";

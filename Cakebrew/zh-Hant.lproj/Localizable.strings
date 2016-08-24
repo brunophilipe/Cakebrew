@@ -7,20 +7,20 @@
 "Generic_Yes" = "是";
 "Generic_No" = "否";
 
-"Message_BGTask_Title" = "Active background task!";
-"Message_BGTask_Body" = "Sorry, a background task is already running. You can't perform two tasks at the same time.";
-"Message_No_Homebrew_Title" = "Homebrew Website";
-"Message_No_Homebrew_Body" = "Homebrew was not found in your system. Please install Homebrew before using Cakebrew. You can click the button below to open Homebrew's website.";
-"Message_Shell_Invalid_Title" = "No Valid shell was found!";
-"Message_Shell_Invalid_Body" = "Please add your shell \"%@\" to the valid shells file at \"/etc/shells\" before trying again.";
-"Message_Tap_Title" = "Tapping Repository";
-"Message_Tap_Body" = "What repository would you like to tap?";
-"Message_Untap_Title" = "Untapping Repository";
-"Message_Untap_Body" = "Are you sure you want to untap the repository '%@'?";
-"Message_Update_Formulae_Title" = "Updating Formulae";
-"Message_Update_Formulae_Body" = "Are you sure you want to update these formulae: '%@'?";
-"Message_Update_All_Outdated_Title" = "Updating all Outdated";
-"Message_Update_All_Outdated_Body" = "Are you sure you want to update all outdated formulae?";
+"Message_BGTask_Title" = "背景執行";
+"Message_BGTask_Body" = "抱歉，正在執行背景作業，無法同時執行多個動作";
+"Message_No_Homebrew_Title" = "Homebrew 網站";
+"Message_No_Homebrew_Body" = "尚未安裝 Homebrew，請先至 Homebrew 網站下載安裝";
+"Message_Shell_Invalid_Title" = "沒有可用的 Shell";
+"Message_Shell_Invalid_Body" = "請將 shell \"%@\" 加入 \"/etc/shells\" 再繼續";
+"Message_Tap_Title" = "新增安裝來源";
+"Message_Tap_Body" = "要新增哪一個安裝來源?";
+"Message_Untap_Title" = "移除安裝來源";
+"Message_Untap_Body" = "確定要移除安裝來源 %@ ?";
+"Message_Update_Formulae_Title" = "更新套件";
+"Message_Update_Formulae_Body" = "確定要更新套件 %@ ?";
+"Message_Update_All_Outdated_Title" = "安裝所有更新";
+"Message_Update_All_Outdated_Body" = "確定要安裝所有更新?";
 
 "Confirmation_Install_Formula" = "確定要安裝套件 %@ ?";
 "Confirmation_Uninstall_Formula" = "確定要移除套件 %@ ?";
@@ -85,9 +85,9 @@
 "Sidebar_Item_Outdated" = "有新版本";
 "Sidebar_Item_All" = "所有套件";
 "Sidebar_Item_Leaves" = "可單獨移除";
-"Sidebar_Item_Repos" = "來源";
+"Sidebar_Item_Repos" = "安裝來源";
 "Sidebar_Item_Doctor" = "Homebrew 醫生";
-"Sidebar_Item_Update" = "更新";
+"Sidebar_Item_Update" = "更新 Homebrew";
 
 "Sidebar_VoiceOver_Tools" = "工具";
 
