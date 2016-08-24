@@ -1,24 +1,24 @@
 
 /* Class = "NSTextFieldCell"; title = "Exporting File"; ObjectID = "Kyw-ca-xgs"; */
-"Kyw-ca-xgs.title" = "Exporting File";
+"Kyw-ca-xgs.title" = "匯出安裝清單";
 
 /* Class = "NSTextFieldCell"; title = "Please wait while the file is imported."; ObjectID = "NRz-0t-Pn6"; */
-"NRz-0t-Pn6.title" = "Please wait while the file is imported.";
+"NRz-0t-Pn6.title" = "請稍候";
 
 /* Class = "NSTextFieldCell"; title = "Homebrew Bundle"; ObjectID = "UHp-GH-2qP"; */
-"UHp-GH-2qP.title" = "Homebrew Bundle";
+"UHp-GH-2qP.title" = "Homebrew 清單";
 
 /* Class = "NSTextFieldCell"; title = "Importing File"; ObjectID = "UQX-gO-pze"; */
-"UQX-gO-pze.title" = "Importing File";
+"UQX-gO-pze.title" = "匯入安裝清單";
 
 /* Class = "NSTextFieldCell"; title = "Please wait while the file is generated."; ObjectID = "Vid-Aa-KXl"; */
-"Vid-Aa-KXl.title" = "Please wait while the file is generated.";
+"Vid-Aa-KXl.title" = "請稍候";
 
 /* Class = "NSWindow"; title = "Window"; ObjectID = "akb-99-UTb"; */
-"akb-99-UTb.title" = "Window";
+"akb-99-UTb.title" = "視窗";
 
 /* Class = "NSTextFieldCell"; title = "Export Successful"; ObjectID = "lO8-qv-x07"; */
-"lO8-qv-x07.title" = "Export Successful";
+"lO8-qv-x07.title" = "匯出成功";
 
 /* Class = "NSButtonCell"; title = "Close"; ObjectID = "xSx-yq-DSQ"; */
-"xSx-yq-DSQ.title" = "Close";
+"xSx-yq-DSQ.title" = "關閉";

@@ -1,12 +1,12 @@
 
 /* Class = "NSTextFieldCell"; title = "formula"; ObjectID = "L1M-vW-tCK"; */
-"L1M-vW-tCK.title" = "formula";
+"L1M-vW-tCK.title" = "套件";
 
 /* Class = "NSTextFieldCell"; title = "Uninstalling Formula:"; ObjectID = "P2p-fh-Ixz"; */
-"P2p-fh-Ixz.title" = "Uninstalling Formula:";
+"P2p-fh-Ixz.title" = "移除套件:";
 
 /* Class = "NSWindow"; title = "Window"; ObjectID = "QvC-M9-y7g"; */
-"QvC-M9-y7g.title" = "Window";
+"QvC-M9-y7g.title" = "視窗";
 
 /* Class = "NSButtonCell"; title = "OK"; ObjectID = "atZ-M7-fU1"; */
-"atZ-M7-fU1.title" = "OK";
+"atZ-M7-fU1.title" = "確定";

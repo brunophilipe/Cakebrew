@@ -32,11 +32,11 @@
 "Formula_Status_Not_Installed" = "未安裝";
 "Formula_Status_Outdated" = "有新版本";
 
-"Formula_Options_ClickForDetails" = "Click on option for details.";
-"Formula_Options_NoOptions" = "This formula has no installation options available.";
-"Formula_Options_VoiceOver_Description" = "Option description is also available in the Formula Options table as a VoiceOver help for each row.";
-"Formula_Options_VoiceOver" = "Formula Options";
-"Formula_Options_Confirmation" = "Are you sure you want to install the formula %@ with the selected options?";
+"Formula_Options_ClickForDetails" = "點選安裝設定看詳細說明";
+"Formula_Options_NoOptions" = "此套件未提供其他安裝設定";
+"Formula_Options_VoiceOver_Description" = "每一個套件的安裝設定皆有提供 VoiceOver 協助";
+"Formula_Options_VoiceOver" = "安裝設定";
+"Formula_Options_Confirmation" = "確定要使用選擇的設定安裝 %@ ?";
 
 "Formula_Popover_Title" = "套件資訊: %@";
 "Formula_Popover_Error" = "發生錯誤";
