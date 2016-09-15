@@ -176,12 +176,26 @@ CA
                                     </binding>
                                 </connections>
                             </menuItem>
-                            <menuItem isSeparatorItem="YES" id="VHD-ME-jwg"/>
-                            <menuItem title="List Installed Dependents…" id="1oV-FR-hDc">
+                            <menuItem isSeparatorItem="YES" id="Co2-VP-o4m"/>
+                            <menuItem title="List Installed Dependents" id="XQ4-Qf-yNu">
                                 <modifierMask key="keyEquivalentModifierMask"/>
+                                <connections>
+                                    <binding destination="547" name="enabled" keyPath="self.currentFormula" id="tFb-bf-hZ9">
+                                        <dictionary key="options">
+                                            <string key="NSValueTransformerName">NSIsNotNil</string>
+                                        </dictionary>
+                                    </binding>
+                                </connections>
                             </menuItem>
-                            <menuItem title="List All Dependents…" alternate="YES" id="bVs-6z-fSA">
+                            <menuItem title="List All Dependents" alternate="YES" id="Jwb-Ou-88s">
                                 <modifierMask key="keyEquivalentModifierMask" option="YES"/>
+                                <connections>
+                                    <binding destination="547" name="enabled" keyPath="self.currentFormula" id="v50-yf-XH4">
+                                        <dictionary key="options">
+                                            <string key="NSValueTransformerName">NSIsNotNil</string>
+                                        </dictionary>
+                                    </binding>
+                                </connections>
                             </menuItem>
                             <menuItem isSeparatorItem="YES" id="woh-IT-iqR"/>
                             <menuItem title="Formula Website" keyEquivalent="w" id="9Fv-tF-1qy">
@@ -871,11 +885,25 @@ CA
                     </connections>
                 </menuItem>
                 <menuItem isSeparatorItem="YES" id="lEK-nB-Jb8"/>
-                <menuItem title="List Installed Dependents…" id="BkF-Mg-ZeH">
+                <menuItem title="List Installed Dependents" id="AfR-gI-2dx">
                     <modifierMask key="keyEquivalentModifierMask"/>
+                    <connections>
+                        <binding destination="547" name="enabled" keyPath="self.currentFormula" id="Nyj-LF-LEN">
+                            <dictionary key="options">
+                                <string key="NSValueTransformerName">NSIsNotNil</string>
+                            </dictionary>
+                        </binding>
+                    </connections>
                 </menuItem>
-                <menuItem title="List All Dependents…" alternate="YES" id="4bc-sH-fTA">
+                <menuItem title="List All Dependents" alternate="YES" id="iWj-fw-6Uv">
                     <modifierMask key="keyEquivalentModifierMask" option="YES"/>
+                    <connections>
+                        <binding destination="547" name="enabled" keyPath="self.currentFormula" id="ymL-NB-Bea">
+                            <dictionary key="options">
+                                <string key="NSValueTransformerName">NSIsNotNil</string>
+                            </dictionary>
+                        </binding>
+                    </connections>
                 </menuItem>
                 <menuItem isSeparatorItem="YES" id="TJR-Og-aBm"/>
                 <menuItem title="Formula Website " keyEquivalent="w" id="0oV-it-p68">
