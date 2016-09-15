@@ -834,7 +834,7 @@ NSOpenSavePanelDelegate>
 	return [formulas valueForKeyPath:@"@unionOfObjects.name"];
 }
 
-#pragma mark - OPen Save Panels Delegate
+#pragma mark - Open Save Panels Delegate
 
 - (BOOL)panel:(id)sender shouldEnableURL:(NSURL *)url
 {
