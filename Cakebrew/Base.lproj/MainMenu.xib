@@ -227,7 +227,7 @@ CA
                                     <binding destination="547" name="enabled" keyPath="self.enableUpgradeFormulasMenu" id="ngn-Rt-iDY"/>
                                 </connections>
                             </menuItem>
-                            <menuItem title="Upgrade All Formulae" keyEquivalent="u" id="DdP-fd-ccO">
+                            <menuItem title="Upgrade All Formulae" alternate="YES" keyEquivalent="u" id="DdP-fd-ccO">
                                 <modifierMask key="keyEquivalentModifierMask" option="YES" command="YES"/>
                                 <connections>
                                     <action selector="upgradeAllOutdatedFormulae:" target="547" id="aHB-0Y-WgM"/>
