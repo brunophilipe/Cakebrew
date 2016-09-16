@@ -180,6 +180,7 @@ CA
                             <menuItem title="List Installed Dependents" id="XQ4-Qf-yNu">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                                 <connections>
+                                    <action selector="showFormulaDependents:" target="547" id="Aji-4i-MXk"/>
                                     <binding destination="547" name="enabled" keyPath="self.currentFormula" id="tFb-bf-hZ9">
                                         <dictionary key="options">
                                             <string key="NSValueTransformerName">NSIsNotNil</string>
@@ -190,6 +191,7 @@ CA
                             <menuItem title="List All Dependents" alternate="YES" id="Jwb-Ou-88s">
                                 <modifierMask key="keyEquivalentModifierMask" option="YES"/>
                                 <connections>
+                                    <action selector="showFormulaDependents:" target="547" id="6Qv-Wh-Vgn"/>
                                     <binding destination="547" name="enabled" keyPath="self.currentFormula" id="v50-yf-XH4">
                                         <dictionary key="options">
                                             <string key="NSValueTransformerName">NSIsNotNil</string>
@@ -888,6 +890,7 @@ CA
                 <menuItem title="List Installed Dependents" id="AfR-gI-2dx">
                     <modifierMask key="keyEquivalentModifierMask"/>
                     <connections>
+                        <action selector="showFormulaDependents:" target="547" id="De6-IT-2Rg"/>
                         <binding destination="547" name="enabled" keyPath="self.currentFormula" id="Nyj-LF-LEN">
                             <dictionary key="options">
                                 <string key="NSValueTransformerName">NSIsNotNil</string>
@@ -898,6 +901,7 @@ CA
                 <menuItem title="List All Dependents" alternate="YES" id="iWj-fw-6Uv">
                     <modifierMask key="keyEquivalentModifierMask" option="YES"/>
                     <connections>
+                        <action selector="showFormulaDependents:" target="547" id="LHf-bf-KnP"/>
                         <binding destination="547" name="enabled" keyPath="self.currentFormula" id="ymL-NB-Bea">
                             <dictionary key="options">
                                 <string key="NSValueTransformerName">NSIsNotNil</string>

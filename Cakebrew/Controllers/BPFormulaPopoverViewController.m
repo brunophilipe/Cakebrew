@@ -28,6 +28,7 @@
 	[self.formulaPopover setContentViewController:self];
 	[self setTimedDispatch:[BPTimedDispatch new]];
 	[self.formulaTitleLabel setTextColor:[BPStyle popoverTitleColor]];
+	[self setInfoType:kBPFormulaInfoTypeGeneral];
 }
 
 - (void)setFormula:(BPFormula *)formula
@@ -41,19 +42,33 @@
 	
 	_formula = formula;
 	
-	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateView:)
-												 name:BPFormulaDidUpdateNotification
-											   object:formula];
-	
-	dispatch_async(dispatch_get_main_queue(), ^{
-		[self displayConsoleInformationForFormulae];
-	});
+	switch ([self infoType])
+	{
+		case kBPFormulaInfoTypeGeneral:
+		{
+			[self.formulaTitleLabel setStringValue:[NSString stringWithFormat:NSLocalizedString(@"Formula_Popover_Title", nil), [_formula name]]];
 
-	[self.timedDispatch scheduleDispatchAfterTimeInterval:0.3
-												  inQueue:dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0)
-												  ofBlock:^{
-													  [_formula setNeedsInformation:YES];
-												  }];
+			[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateView:)
+														 name:BPFormulaDidUpdateNotification
+													   object:formula];
+
+			dispatch_async(dispatch_get_main_queue(), ^{
+				[self displayConsoleInformationForFormula];
+			});
+
+			[self.timedDispatch scheduleDispatchAfterTimeInterval:0.3
+														  inQueue:dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0)
+														  ofBlock:^{
+															  [_formula setNeedsInformation:YES];
+														  }];
+		}
+		break;
+
+		case kBPFormulaInfoTypeInstalledDependents:
+		case kBPFormulaInfoTypeAllDependents:
+			[self displayDependentsInformationForFormula];
+			break;
+	}
 	
 }
 
@@ -65,14 +80,15 @@
 - (void)updateView:(NSNotification *)notification
 {
 	dispatch_async(dispatch_get_main_queue(), ^{
-		[self displayConsoleInformationForFormulae];
+		[self displayConsoleInformationForFormula];
 	});
 }
 
-- (void)displayConsoleInformationForFormulae
+- (void)displayConsoleInformationForFormula
 {
 	NSString *string = self.formula.information;
 	if (string) {
+		[self.progressIndicator stopAnimation:nil];
 		[self.formulaTextView setString:string];
 		
 		// Recognize links in info text
@@ -81,8 +97,46 @@
 		[self.formulaTextView setEditable:NO];
 		
 		[self.formulaTextView scrollToBeginningOfDocument:nil];
-		
-		[self.formulaTitleLabel setStringValue:[NSString stringWithFormat:NSLocalizedString(@"Formula_Popover_Title", nil), [_formula performSelector:@selector(name)]]];
+	}
+}
+
+- (void)displayDependentsInformationForFormula
+{
+	NSString *name = [self.formula name];
+
+	[self.formulaTextView setString:@""];
+	[self.progressIndicator startAnimation:nil];
+
+	if (self.infoType == kBPFormulaInfoTypeInstalledDependents)
+	{
+		[self.formulaTitleLabel setStringValue:[NSString stringWithFormat:NSLocalizedString(@"Formula_Installed_Dependents_Title", nil), name]];
+
+		dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
+			NSString *string = [[BPHomebrewInterface sharedInterface] dependantsForFormulaName:name onlyInstalled:YES];
+
+			dispatch_async(dispatch_get_main_queue(), ^{
+				[self.progressIndicator stopAnimation:nil];
+				[self.formulaTextView setString:string];
+				[self.formulaTextView scrollToBeginningOfDocument:nil];
+				[self.formulaTextView setNeedsDisplay:YES];
+			});
+		});
+	}
+	else if (self.infoType == kBPFormulaInfoTypeAllDependents)
+	{
+		[self.formulaTitleLabel setStringValue:[NSString stringWithFormat:NSLocalizedString(@"Formula_All_Dependents_Title", nil), name]];
+
+		dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
+			NSString *string = [[BPHomebrewInterface sharedInterface] dependantsForFormulaName:name onlyInstalled:NO];
+
+			dispatch_async(dispatch_get_main_queue(), ^{
+				[self.progressIndicator stopAnimation:nil];
+				[self.formulaTextView setString:string];
+				[self.formulaTextView scrollToBeginningOfDocument:nil];
+				[self.formulaTextView setNeedsDisplay:YES];
+			});
+
+		});
 	}
 }
 

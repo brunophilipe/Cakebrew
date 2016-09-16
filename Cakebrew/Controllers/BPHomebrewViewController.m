@@ -446,6 +446,32 @@ NSOpenSavePanelDelegate>
 	}
 }
 
+- (void)showFormulaInfoForCurrentlySelectedFormulaUsingInfoType:(BPFormulaInfoType)type
+{
+	NSPopover *popover = self.formulaPopoverViewController.formulaPopover;
+	if ([popover isShown])
+	{
+		[popover close];
+	}
+	NSInteger selectedIndex = [self.tableView_formulae selectedRow];
+	BPFormula *formula = [self selectedFormula];
+
+	if (!formula)
+	{
+		return;
+	}
+
+	[self.formulaPopoverViewController setInfoType:type];
+	[self.formulaPopoverViewController setFormula:formula];
+
+	NSRect anchorRect = [self.tableView_formulae rectOfRow:selectedIndex];
+	anchorRect.origin = [self.scrollView_formulae convertPoint:anchorRect.origin fromView:self.tableView_formulae];
+
+	[popover showRelativeToRect:anchorRect
+						 ofView:self.scrollView_formulae
+				  preferredEdge:NSMaxXEdge];
+}
+
 #pragma mark - Search Mode
 
 - (void)loadSearchResults
@@ -547,25 +573,24 @@ NSOpenSavePanelDelegate>
 
 - (IBAction)showFormulaInfo:(id)sender
 {
-	NSPopover *popover = self.formulaPopoverViewController.formulaPopover;
-	if ([popover isShown]) {
-		[popover close];
-	}
-	NSInteger selectedIndex = [self.tableView_formulae selectedRow];
-	BPFormula *formula = [self selectedFormula];
-	if (!formula) {
-		return;
-	}
-	[self.formulaPopoverViewController setFormula:formula];
-	
-	NSRect anchorRect = [self.tableView_formulae rectOfRow:selectedIndex];
-	anchorRect.origin = [self.scrollView_formulae convertPoint:anchorRect.origin fromView:self.tableView_formulae];
-	
-	[popover showRelativeToRect:anchorRect
-						 ofView:self.scrollView_formulae
-				  preferredEdge:NSMaxXEdge];
+	[self showFormulaInfoForCurrentlySelectedFormulaUsingInfoType:kBPFormulaInfoTypeGeneral];
 }
 
+- (IBAction)showFormulaDependents:(id)sender
+{
+	BOOL onlyInstalledFormulae = YES;
+
+	if ([sender isKindOfClass:[NSMenuItem class]])
+	{
+		onlyInstalledFormulae = ![sender isAlternate];
+	}
+
+	BPFormulaInfoType type = onlyInstalledFormulae ?
+								kBPFormulaInfoTypeInstalledDependents :
+								kBPFormulaInfoTypeAllDependents;
+
+	[self showFormulaInfoForCurrentlySelectedFormulaUsingInfoType:type];
+}
 
 - (IBAction)installFormula:(id)sender
 {

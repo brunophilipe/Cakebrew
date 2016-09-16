@@ -37,6 +37,10 @@
 /* No comment provided by engineer. */
 "Formula_Popover_Title" = "Informações para Fórmula: %@";
 
+"Formula_Installed_Dependents_Title" = "Dependentes Instalados da Formula: %@";
+"Formula_All_Dependents_Title" = "Todos Dependentes da Formula: %@";
+
+
 /* No comment provided by engineer. */
 "Formula_Status_Installed" = "Instalada";
 

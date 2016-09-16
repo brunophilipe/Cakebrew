@@ -49,6 +49,9 @@
 "Formula_Popover_Title" = "Information for Formula: %@";
 "Formula_Popover_Error" = "Error retrieving Formula information";
 
+"Formula_Installed_Dependents_Title" = "Installed Dependents of Formula: %@";
+"Formula_All_Dependents_Title" = "All Dependents of Formula: %@";
+
 "Homebrew_Task_Finished" = "Task finished";
 "Homebrew_Task_Finished_At" = "at";
 "Homebrew_AppNap_Task_Reason" = "Running Homebrew task";

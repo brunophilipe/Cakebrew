@@ -370,6 +370,20 @@ static NSString *cakebrewOutputIdentifier = @"+++++Cakebrew+++++";
 	return [self performBrewCommandWithArguments:@[@"info", name]];
 }
 
+- (NSString *)dependantsForFormulaName:(NSString *)name onlyInstalled:(BOOL)onlyInstalled
+{
+	NSMutableArray *arguments = [NSMutableArray arrayWithObject:@"uses"];
+
+	if (onlyInstalled)
+	{
+		[arguments addObject:@"--installed"];
+	}
+
+	[arguments addObject:name];
+
+	return [self performBrewCommandWithArguments:arguments];
+}
+
 - (NSString*)removeLoginShellOutputFromString:(NSString*)string {
 	if (string) {
 		NSRange range = [string rangeOfString:cakebrewOutputIdentifier];

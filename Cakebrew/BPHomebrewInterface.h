@@ -184,6 +184,16 @@ typedef NS_ENUM(NSInteger, BPListMode) {
  */
 - (NSString *)informationForFormulaName:(NSString *)name;
 
+/**
+ *  Executes `brew uses` for parameter formula name.
+ *
+ *  @param name The name of the formula.
+ *  @param onlyInstalled If should only show installed dependents.
+ *
+ *  @return The list of dependents for the parameter formula as output by Homebrew.
+ */
+- (NSString *)dependantsForFormulaName:(NSString *)name onlyInstalled:(BOOL)onlyInstalled;
+
 #pragma mark – Utilities
 
 /**
