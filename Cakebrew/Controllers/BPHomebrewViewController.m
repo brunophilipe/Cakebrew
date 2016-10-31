@@ -35,6 +35,7 @@
 #import "BPLoadingView.h"
 #import "BPDisabledView.h"
 #import "BPBundleWindowController.h"
+#import "BPTask.h"
 
 typedef NS_ENUM(NSUInteger, HomeBrewTab) {
 	HomeBrewTabFormulae,
@@ -69,8 +70,9 @@ NSOpenSavePanelDelegate>
 @property (strong, nonatomic) BPDisabledView					*disabledView;
 @property (strong, nonatomic) BPLoadingView						*loadingView;
 
-@property (weak, nonatomic) IBOutlet NSSplitView *formulaeSplitView;
-@property (weak, nonatomic) IBOutlet NSView		 *selectedFormulaView;
+@property (weak) IBOutlet NSSplitView			*formulaeSplitView;
+@property (weak) IBOutlet NSView				*selectedFormulaView;
+@property (weak) IBOutlet NSProgressIndicator	*backgroundActivityIndicator;
 
 
 @end
@@ -117,8 +119,22 @@ NSOpenSavePanelDelegate>
 	[self.selectedFormulaeViewController setDelegate:self];
 	
 	self.homebrewInstalled = YES;
+
+	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didReceiveBackgroundActivityNotification:) name:kDidBeginBackgroundActivityNotification object:nil];
+	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didReceiveBackgroundActivityNotification:) name:kDidEndBackgroundActivityNotification object:nil];
 }
 
+- (void)didReceiveBackgroundActivityNotification:(NSNotification*)notification
+{
+	if ([[notification name] isEqualToString:kDidBeginBackgroundActivityNotification])
+	{
+		[[self backgroundActivityIndicator] startAnimation:self];
+	}
+	else if ([[notification name] isEqualToString:kDidEndBackgroundActivityNotification])
+	{
+		[[self backgroundActivityIndicator] stopAnimation:self];
+	}
+}
 
 - (void)awakeFromNib
 {
@@ -229,6 +245,8 @@ NSOpenSavePanelDelegate>
 - (void)dealloc
 {
 	[_homebrewManager setDelegate:nil];
+
+	[[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 - (void)updateInterfaceItems

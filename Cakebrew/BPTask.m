@@ -23,6 +23,9 @@
 
 static BOOL systemHasAppNap;
 
+NSString *const kDidBeginBackgroundActivityNotification	= @"DidBeginBackgroundActivityNotification";
+NSString *const kDidEndBackgroundActivityNotification	= @"DidEndBackgroundActivityNotification";
+
 @interface BPTask()
 {
 	id activity;
@@ -225,6 +228,8 @@ static BOOL systemHasAppNap;
 	{
 		activity = [[NSProcessInfo processInfo] beginActivityWithOptions:NSActivityUserInitiated
 																  reason:NSLocalizedString(@"Homebrew_AppNap_Task_Reason", nil)];
+
+		[[NSNotificationCenter defaultCenter] postNotificationName:kDidBeginBackgroundActivityNotification object:self];
 	}
 }
 
@@ -234,6 +239,8 @@ static BOOL systemHasAppNap;
 	{
 		[[NSProcessInfo processInfo] endActivity:activity];
 		activity = nil;
+
+		[[NSNotificationCenter defaultCenter] postNotificationName:kDidEndBackgroundActivityNotification object:self];
 	}
 }
 

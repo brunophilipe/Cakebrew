@@ -20,6 +20,10 @@
 //
 
 #import <Foundation/Foundation.h>
+
+extern NSString *const kDidBeginBackgroundActivityNotification;
+extern NSString *const kDidEndBackgroundActivityNotification;
+
 @class BPTask;
 
 @protocol BPTaskCompleted <NSObject>
