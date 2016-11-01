@@ -22,7 +22,9 @@ Cakebrew was based on a project by [vincentsaluzzo](https://github.com/vincentsa
 
 ## Download
 
-[Download Now – Version 1.1.5](https://www.cakebrew.com/#download)
+[Download Now – Version 1.2.1](https://www.cakebrew.com/#download)
+
+Alternatively, [it can be installed via homebrew cask](https://github.com/brunophilipe/Cakebrew/issues/148), with `brew cask install cakebrew`.
 
 ## Problems using ZSH?
 
@@ -36,6 +38,7 @@ As of now, the following languages are supported:
 * English
 * Portuguese
 * German
+* Chinese (Simplified)
 
 If you wish to contribute by translating Cakebrew to your language, please open a [new issue in GitHub](https://github.com/brunophilipe/Cakebrew/issues).
 
