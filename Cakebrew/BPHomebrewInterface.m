@@ -184,7 +184,7 @@ static NSString *cakebrewOutputIdentifier = @"+++++Cakebrew+++++";
 	NSString __block *path = [[NSUserDefaults standardUserDefaults] objectForKey:@"BPBrewCellarPath"];
 	
 	if (!path) {
-		NSString *brew_config = [self performBrewCommandWithArguments:@[@"config"]];
+		NSString *brew_config = [self performWrappedBrewCommandWithArguments:@[@"config"]];
 		
 		[brew_config enumerateLinesUsingBlock:^(NSString *line, BOOL *stop) {
 			if ([line hasPrefix:@"HOMEBREW_CELLAR"]) {
@@ -280,43 +280,22 @@ static NSString *cakebrewOutputIdentifier = @"+++++Cakebrew+++++";
 	return [[self.tasks allKeys] count] > 0;
 }
 
-- (NSString*)performBrewCommandWithArguments:(NSArray*)arguments
-{
-	return [self performBrewCommandWithArguments:arguments captureError:NO];
-}
-
-- (NSString*)performBrewCommandWithArguments:(NSArray*)arguments captureError:(BOOL)captureError
-{
-	arguments = [self formatArguments:arguments sendOutputId:YES];
-	
-	BPTask *task = [[BPTask alloc] initWithPath:self.path_shell arguments:arguments];
-	task.delegate = self;
-	[task execute];
-	
-	NSString *output = task.output;
-	output = [self removeLoginShellOutputFromString:output];
-	
-	NSString *error = task.error;
-	error = [self removeLoginShellOutputFromString:error];
-	
-	
-	if (!captureError) {
-		return output;
-	} else {
-		return [NSString stringWithFormat:@"%@\n%@", output, error];
-	}
-}
-
 /**
  * This method performs a brew command in an asynchronous mode so that long chunks of data can be returned,
  * but to the callee it behaves like a synchronous call.
+ *
+ * Note: Synchronous tasks were deprecated and removed completely in Nov 1st, 2016 due to numerous bugs. All
+ * "synchronous" tasks should use this method instead.
  */
 - (NSString*)performWrappedBrewCommandWithArguments:(NSArray*)arguments
 {
 	NSMutableString *output = [NSMutableString new];
 	
-	[self performBrewCommandWithArguments:arguments wrapsSynchronousRequest:YES dataReturnBlock:^(NSString *partialOutput) {
-			[output appendString:partialOutput];
+	[self performBrewCommandWithArguments:arguments
+				  wrapsSynchronousRequest:YES
+						  dataReturnBlock:^(NSString *partialOutput)
+	{
+		[output appendString:partialOutput];
 	}];
 	
 	return [self removeLoginShellOutputFromString:output];
@@ -367,7 +346,7 @@ static NSString *cakebrewOutputIdentifier = @"+++++Cakebrew+++++";
 
 - (NSString *)informationForFormulaName:(NSString *)name;
 {
-	return [self performBrewCommandWithArguments:@[@"info", name]];
+	return [self performWrappedBrewCommandWithArguments:@[@"info", name]];
 }
 
 - (NSString *)dependantsForFormulaName:(NSString *)name onlyInstalled:(BOOL)onlyInstalled
@@ -381,7 +360,7 @@ static NSString *cakebrewOutputIdentifier = @"+++++Cakebrew+++++";
 
 	[arguments addObject:name];
 
-	return [self performBrewCommandWithArguments:arguments];
+	return [self performWrappedBrewCommandWithArguments:arguments];
 }
 
 - (NSString*)removeLoginShellOutputFromString:(NSString*)string {
@@ -459,11 +438,10 @@ static NSString *cakebrewOutputIdentifier = @"+++++Cakebrew+++++";
 
 - (NSError*)runBrewExportToolWithPath:(NSString*)path
 {
-	NSString *output = [self performBrewCommandWithArguments:@[@"bundle",
-															   @"dump",
-															   @"--force",
-															   [NSString stringWithFormat:@"--file=%@", path]]
-												captureError:YES];
+	NSString *output = [self performWrappedBrewCommandWithArguments:@[@"bundle",
+																	  @"dump",
+																	  @"--force",
+																	  [NSString stringWithFormat:@"--file=%@", path]]];
 	
 	[self sendDelegateFormulaeUpdatedCall];
 	
