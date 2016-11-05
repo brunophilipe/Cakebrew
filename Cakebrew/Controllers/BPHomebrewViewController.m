@@ -255,19 +255,20 @@ NSOpenSavePanelDelegate>
 	NSInteger selectedIndex			= [self.tableView_formulae selectedRow];
 	NSIndexSet *selectedRows		= [self.tableView_formulae selectedRowIndexes];
 	NSArray *selectedFormulae		= [self.formulaeDataSource formulasAtIndexSet:selectedRows];
-	
-	[self.selectedFormulaeViewController setFormulae:selectedFormulae];
-	
+
 	CGFloat height = [self.formulaeSplitView bounds].size.height;
 	CGFloat preferedHeightOfSelectedFormulaView = 120.f;
 	[self.formulaeSplitView setPosition:height - preferedHeightOfSelectedFormulaView
 					   ofDividerAtIndex:0];
+
+	BOOL showFormulaInfo = YES;
 	
 	if (selectedSidebarRow == FormulaeSideBarItemRepositories) // Repositories (Taps) sidebaritem
 	{
+		showFormulaInfo = false;
+
 		[self.toolbar configureForMode:BPToolbarModeTap];
-		[self.formulaeSplitView setPosition:height
-						   ofDividerAtIndex:0];
+
 		
 		if (selectedIndex != -1) {
 			[self.toolbar configureForMode:BPToolbarModeUntap];
@@ -304,6 +305,16 @@ NSOpenSavePanelDelegate>
 				[self.toolbar configureForMode:BPToolbarModeInstall];
 				break;
 		}
+	}
+
+	if (showFormulaInfo)
+	{
+		[self.selectedFormulaView setHidden:NO];
+		[self.selectedFormulaeViewController setFormulae:selectedFormulae];
+	}
+	else
+	{
+		[self.selectedFormulaView setHidden:YES];
 	}
 }
 

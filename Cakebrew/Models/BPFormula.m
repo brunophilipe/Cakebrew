@@ -221,6 +221,18 @@ NSString *const BPFormulaDidUpdateNotification = @"BPFormulaDidUpdateNotificatio
 		_needsInformation = NO;
 		return YES;
 	}
+
+	if ([output hasPrefix:@"Error"])
+	{
+		NSLog(@"Error parsing formula with name: %@", [self name]);
+
+		_needsInformation = NO;
+		[self setInformation:nil];
+		[self setLatestVersion:nil];
+		[self setVersion:nil];
+		[self setShortDescription:nil];
+		return YES;
+	}
 	
 	lines = [output componentsSeparatedByString:@"\n"];
 	
