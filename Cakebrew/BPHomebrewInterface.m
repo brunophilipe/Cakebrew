@@ -142,41 +142,7 @@ static NSString *cakebrewOutputIdentifier = @"+++++Cakebrew+++++";
 
 - (NSString *)getValidUserShellPath
 {
-	NSString *userShell = [[[NSProcessInfo processInfo] environment] objectForKey:@"SHELL"];
-	
-	// avoid executing stuff like /sbin/nologin as a shell
-	BOOL isValidShell = NO;
-	for (NSString *validShell in [[NSString stringWithContentsOfFile:@"/etc/shells" encoding:NSUTF8StringEncoding error:nil] componentsSeparatedByCharactersInSet:[NSCharacterSet newlineCharacterSet]])
-	{
-		if ([[validShell stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]] isEqualToString:userShell])
-		{
-			isValidShell = YES;
-			break;
-		}
-	}
-	
-	if (!isValidShell)
-	{
-		static NSAlert *alert = nil;
-		if (!alert)
-		{
-			alert = [NSAlert alertWithMessageText:NSLocalizedString(@"Message_Shell_Invalid_Title", nil)
-									defaultButton:NSLocalizedString(@"Generic_OK", nil)
-								  alternateButton:nil
-									  otherButton:nil
-						informativeTextWithFormat:NSLocalizedString(@"Message_Shell_Invalid_Body", nil), userShell];
-		}
-		[alert performSelectorOnMainThread:@selector(runModal) withObject:nil waitUntilDone:YES];
-		
-		NSLog(@"No valid shell found...");
-		return nil;
-	}
-	
-#ifdef DEBUG
-	NSLog(@"shell: %@", userShell);
-#endif
-	
-	return userShell;
+	return @"/bin/sh";
 }
 
 - (NSString *)getUserCellarPath
