@@ -14,7 +14,7 @@ Cakebrew was based on a project by [vincentsaluzzo](https://github.com/vincentsa
 
 ## Screenshots
 
-![Screenshot as of May 27th](https://www.cakebrew.com/assets/img/app-bg.png)
+![Screenshot](https://github.com/sam0hack/Cakebrew/blob/master/Screenshots/app-bg.png?raw=true)
 
 ## Problems using ZSH?
 
