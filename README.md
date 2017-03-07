@@ -18,7 +18,7 @@ Cakebrew was based on a project by [vincentsaluzzo](https://github.com/vincentsa
 
 ## Screenshots
 
-![Screenshot](https://www.cakebrew.com/assets/img/app-bg.png "Screenshot")
+![Screenshot](https://cakebrew.com/assets/img/app-bg.png "Screenshot")
 
 ## Download
 
