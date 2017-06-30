@@ -1,0 +1,15 @@
+nmap: stable 7.50 (bottled), HEAD
+Port scanning utility for large networks
+https://nmap.org/
+Conflicts with:
+  ndiff (because both install `ndiff` binaries)
+Not installed
+From: https://github.com/Homebrew/homebrew-core/blob/master/Formula/nmap.rb
+==> Dependencies
+Required: openssl ✘
+Optional: pygtk ✘
+==> Options
+--with-pygtk
+	Build Zenmap GUI
+--HEAD
+	Install HEAD version

@@ -36,6 +36,8 @@
 		info = [self fileContentForFileName:@"brewInfo_bison"];
 	} else if ([name isEqualToString:@"sbtenv"]) {
 		info = [self fileContentForFileName:@"brewInfo_sbtenv"];
+	} else if ([name isEqualToString:@"nmap"]) {
+		info = [self fileContentForFileName:@"brewInfo_nmap"];
 	}
 	
 	return info;
@@ -79,6 +81,7 @@ static BPCustomFormula *acmeFormula;
 static BPCustomFormula *bfgFormula;
 static BPCustomFormula *bisonFormula;
 static BPCustomFormula *sbtenvFormula;
+static BPCustomFormula *nmapFormula;
 
 @interface BPFormulaTests : XCTestCase {
 	BPFormula *formula;
@@ -117,6 +120,10 @@ static BPCustomFormula *sbtenvFormula;
 	if(!sbtenvFormula){
 		sbtenvFormula = [BPCustomFormula formulaWithName:@"sbtenv"];
 		[sbtenvFormula setNeedsInformation:YES];
+	}
+	if(!nmapFormula){
+		nmapFormula = [BPCustomFormula formulaWithName:@"nmap"];
+		[nmapFormula setNeedsInformation:YES];
 	}
 }
 
@@ -168,6 +175,8 @@ static BPCustomFormula *sbtenvFormula;
 	XCTAssertEqualObjects(bisonFormula.information, bisonOutput);
 	NSString *sbtenvOutput = [provider informationForFormulaName:@"sbtenv"];
 	XCTAssertEqualObjects(sbtenvFormula.information, sbtenvOutput);
+	NSString *nmapOutput = [provider informationForFormulaName:@"nmap"];
+	XCTAssertEqualObjects(nmapFormula.information, nmapOutput);
 }
 
 - (void)testFormulaWebsite

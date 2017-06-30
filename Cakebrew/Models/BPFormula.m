@@ -214,7 +214,7 @@ NSString *const BPFormulaDidUpdateNotification = @"BPFormulaDidUpdateNotificatio
 
 		NSString *information = [[self dataProvider] informationForFormulaName:self.name];
 
-		if ([information rangeOfString:NSLocalizedString(@"Homebrew_Task_Finished", nil)].location == NSNotFound)
+		if ([information rangeOfString:@"\n"].location == NSNotFound)
 		{
 			return NO;
 		}

@@ -25,6 +25,7 @@
 		15715F641C78053300AE0E66 /* BPBundleWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 15715F631C78053300AE0E66 /* BPBundleWindowController.m */; };
 		158370B918F2471500176C9C /* PXSourceList.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 158370B818F2471500176C9C /* PXSourceList.framework */; };
 		158370BA18F2472100176C9C /* PXSourceList.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 158370B818F2471500176C9C /* PXSourceList.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		1584884A1F0708F000BD2CD9 /* brewinfo_nmap.txt in Resources */ = {isa = PBXBuildFile; fileRef = 158488491F0708F000BD2CD9 /* brewinfo_nmap.txt */; };
 		1594D13C1B8A6D1A00F764FA /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 15D2CFAC18F202D000B6D9F1 /* QuartzCore.framework */; };
 		15A00B411B8406FB00528486 /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 15A00B401B8406FB00528486 /* Credits.rtf */; };
 		15B23A2C18F5003600714212 /* dsa_pub.pem in Resources */ = {isa = PBXBuildFile; fileRef = 15B23A2B18F5003600714212 /* dsa_pub.pem */; };
@@ -134,6 +135,7 @@
 		15715F681C78D3C800AE0E66 /* pt */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = pt; path = pt.lproj/BPBundleWindow.strings; sourceTree = "<group>"; };
 		15715F6A1C78D3CC00AE0E66 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/BPBundleWindow.strings; sourceTree = "<group>"; };
 		158370B818F2471500176C9C /* PXSourceList.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PXSourceList.framework; path = Cakebrew/Frameworks/PXSourceList.framework; sourceTree = "<group>"; };
+		158488491F0708F000BD2CD9 /* brewinfo_nmap.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = brewinfo_nmap.txt; sourceTree = "<group>"; };
 		15A00B3C1B84000600528486 /* pt */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = pt; path = pt.lproj/MainMenu.strings; sourceTree = "<group>"; };
 		15A00B3D1B84002E00528486 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		15A00B3E1B84003F00528486 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -502,6 +504,7 @@
 				D2BBAB651B87142F00F21332 /* brewInfo_ffmpeg.txt */,
 				D2BBAB661B87142F00F21332 /* brewInfo_mysql.txt */,
 				D2BBAB671B87142F00F21332 /* brewInfo_percona-server.txt */,
+				158488491F0708F000BD2CD9 /* brewinfo_nmap.txt */,
 				D261C9C21B852FA300409803 /* Supporting Files */,
 			);
 			path = CakebrewTests;
@@ -648,6 +651,7 @@
 				D2BBAB681B87142F00F21332 /* brewInfo_acme.txt in Resources */,
 				D2BBAB6A1B87142F00F21332 /* brewInfo_fakeformula.txt in Resources */,
 				D2BBAB6F1B87290B00F21332 /* brewInfo_bison.txt in Resources */,
+				1584884A1F0708F000BD2CD9 /* brewinfo_nmap.txt in Resources */,
 				D2BBAB711B87377D00F21332 /* brewInfo_sbtenv.txt in Resources */,
 				D2BBAB6C1B87142F00F21332 /* brewInfo_mysql.txt in Resources */,
 			);
