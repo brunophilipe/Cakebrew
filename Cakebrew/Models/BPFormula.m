@@ -211,7 +211,17 @@ NSString *const BPFormulaDidUpdateNotification = @"BPFormulaDidUpdateNotificatio
 			_needsInformation = NO;
 			return NO;
 		}
-		self.information = [[self dataProvider] informationForFormulaName:self.name];
+
+		NSString *information = [[self dataProvider] informationForFormulaName:self.name];
+
+		if ([information rangeOfString:NSLocalizedString(@"Homebrew_Task_Finished", nil)].location == NSNotFound)
+		{
+			return NO;
+		}
+		else
+		{
+			[self setInformation:information];
+		}
 	}
 	
 	output = self.information;
@@ -261,9 +271,31 @@ NSString *const BPFormulaDidUpdateNotification = @"BPFormulaDidUpdateNotificatio
 	line = [lines objectAtIndex:lineIndex];
 	if ([line rangeOfString:@"Conflicts with:"].location != NSNotFound)
 	{
-		[self setConflicts:[line substringFromIndex:16]];
-		lineIndex++;
-		line = [lines objectAtIndex:lineIndex];
+		if ([line isEqualToString:@"Conflicts with:"])
+		{
+			// One conflict per line
+			NSMutableArray<NSString *> *conflicts = [NSMutableArray new];
+
+			do
+			{
+				lineIndex++;
+				line = [lines objectAtIndex:lineIndex];
+
+				if ([line hasPrefix:@"  "])
+				{
+					[conflicts addObject:[line stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]]];
+				}
+			}
+			while ([line hasPrefix:@"  "]);
+
+			[self setConflicts:[conflicts componentsJoinedByString:@", "]];
+		}
+		else
+		{
+			[self setConflicts:[line substringFromIndex:16]];
+			lineIndex++;
+			line = [lines objectAtIndex:lineIndex];
+		}
 	}
 	
 	if (![line isEqualToString:@"Not installed"])
@@ -284,15 +316,21 @@ NSString *const BPFormulaDidUpdateNotification = @"BPFormulaDidUpdateNotificatio
 	if (range_deps.location != NSNotFound)
 	{
 		range_deps.location = range_deps.length+range_deps.location+1;
-		if (range_opts.location != NSNotFound) {
+
+		if (range_opts.location != NSNotFound)
+		{
 			range_deps.length = range_opts.location-range_deps.location;
-		} else if (range_cvts.location != NSNotFound) {
+		}
+		else if (range_cvts.location != NSNotFound)
+		{
 			range_deps.length = range_cvts.location-range_deps.location;
-		} else {
+		}
+		else
+		{
 			range_deps.length = [output length] - range_deps.location;
 		}
 		
-		NSMutableString __block *dependencies = nil;
+		NSMutableArray<NSString *> __block *dependencies = [NSMutableArray new];
 		
 		[output enumerateSubstringsInRange:range_deps
 								   options:NSStringEnumerationByLines usingBlock:^(NSString *substring,
@@ -300,17 +338,13 @@ NSString *const BPFormulaDidUpdateNotification = @"BPFormulaDidUpdateNotificatio
 																				   NSRange enclosingRange,
 																				   BOOL *stop)
 		 {
-			 if (!dependencies)
+			 if ([substring rangeOfString:NSLocalizedString(@"Homebrew_Task_Finished", nil)].location == NSNotFound)
 			 {
-				 dependencies = [NSMutableString stringWithString:substring];
-			 }
-			 else
-			 {
-				 [dependencies appendFormat:@"; %@", substring];
+				 [dependencies addObject:substring];
 			 }
 		 }];
 		
-		[self setDependencies:[dependencies copy]];
+		[self setDependencies:[dependencies componentsJoinedByString:@"; "]];
 	} else {
 		[self setDependencies:nil];
 	}
