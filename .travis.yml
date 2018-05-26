@@ -1,2 +1,2 @@
 language: objective-c
-script: xctool -project Cakebrew.xcodeproj -scheme CakebrewTests test
+script: xcodebuild clean build -project Cakebrew.xcodeproj -scheme CakebrewTests CODE_SIGNING_REQUIRED=NO test
