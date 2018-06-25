@@ -155,7 +155,7 @@
 "Message_Update_Formulae_Title" = "Mise à jour en cours des formules";
 
 /* (No Commment) */
-"Notification_Doctor" = "Outil de diagnostique";
+"Notification_Doctor" = "Outil de diagnostic";
 
 /* No comment provided by engineer. */
 "Notification_Update" = "Mettre à jour Homebrew";
@@ -170,7 +170,7 @@
 "Sidebar_Info_All" = "Formules disponibles avec Homebrew.";
 
 /* No comment provided by engineer. */
-"Sidebar_Info_Doctor" = "L'outil de diagnostique permet de détecter les erreurs les plus fréquentes.";
+"Sidebar_Info_Doctor" = "L'outil de diagnostic permet de détecter les erreurs les plus fréquentes.";
 
 /* No comment provided by engineer. */
 "Sidebar_Info_Installed" = "Formules déjà installées sur votre système.";
@@ -194,7 +194,7 @@
 "Sidebar_Item_All" = "Toutes les formules";
 
 /* No comment provided by engineer. */
-"Sidebar_Item_Doctor" = "Diagnostique";
+"Sidebar_Item_Doctor" = "Diagnostic";
 
 /* No comment provided by engineer. */
 "Sidebar_Item_Installed" = "Installées";
