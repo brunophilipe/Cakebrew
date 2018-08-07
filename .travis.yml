@@ -1,2 +1,3 @@
 language: objective-c
-script: xctool -project Cakebrew.xcodeproj -scheme CakebrewTests test
+script:
+  - xcodebuild -project Cakebrew.xcodeproj -scheme CakebrewTests build test | xcpretty
