@@ -1,0 +1,336 @@
+/* Class = "NSTextFieldCell"; title = "Text Cell"; ObjectID = "2Ce-cm-oqR"; */
+"2Ce-cm-oqR.title" = "Text Cell";
+
+/* Class = "NSMenuItem"; title = "Smart Copy/Paste"; ObjectID = "2P3-U9-uO0"; */
+"2P3-U9-uO0.title" = "Copier/coller intelligent";
+
+/* Class = "NSMenuItem"; title = "Smart Quotes"; ObjectID = "2Vq-Ue-Jgo"; */
+"2Vq-Ue-Jgo.title" = "Guillemets anglais";
+
+/* Class = "NSMenuItem"; title = "Jump to Selection"; ObjectID = "3gj-Tz-gwl"; */
+"3gj-Tz-gwl.title" = "Aller à la sélection";
+
+/* Class = "NSTextFieldCell"; title = "No selection"; ObjectID = "3xE-6a-fkA"; */
+"3xE-6a-fkA.title" = "Pas de sélection";
+
+/* Class = "NSMenuItem"; title = "Update Formula"; ObjectID = "4ab-Ns-Wry"; */
+"4ab-Ns-Wry.title" = "Mettre à jour la formule";
+
+/* Class = "NSMenuItem"; title = "Bring All to Front"; ObjectID = "5"; */
+"5.title" = "Tout ramener au premier plan";
+
+/* Class = "NSMenuItem"; title = "Transformations"; ObjectID = "5Ae-Ee-ok4"; */
+"5Ae-Ee-ok4.title" = "Transformations";
+
+/* Class = "NSMenuItem"; title = "Cut"; ObjectID = "5IY-wu-LBL"; */
+"5IY-wu-LBL.title" = "Couper";
+
+/* Class = "NSMenuItem"; title = "Update"; ObjectID = "8Vh-lk-gYe"; */
+"8Vh-lk-gYe.title" = "Mises à jour";
+
+/* Class = "NSMenuItem"; title = "Installed Formulae"; ObjectID = "8gP-gb-YtQ"; */
+"8gP-gb-YtQ.title" = "Formules installées";
+
+/* Class = "NSMenu"; title = "Find"; ObjectID = "8wr-BZ-YYu"; */
+"8wr-BZ-YYu.title" = "Rechercher";
+
+/* Class = "NSMenuItem"; title = "Formula Website"; ObjectID = "9Fv-tF-1qy"; */
+"9Fv-tF-1qy.title" = "Site web de la formule";
+
+/* Class = "NSMenuItem"; title = "Edit"; ObjectID = "9Xg-s6-Icq"; */
+"9Xg-s6-Icq.title" = "Éditer";
+
+/* Class = "NSMenuItem"; title = "Spelling and Grammar"; ObjectID = "9hc-sq-AFZ"; */
+"9hc-sq-AFZ.title" = "Orthographe et grammaire";
+
+/* Class = "NSMenuItem"; title = "Window"; ObjectID = "19"; */
+"19.title" = "Fenêtre";
+
+/* Class = "NSMenuItem"; title = "Minimize"; ObjectID = "23"; */
+"23.title" = "Placer dans le Dock";
+
+/* Class = "NSMenu"; title = "Window"; ObjectID = "24"; */
+"24.title" = "Fenêtre";
+
+/* Class = "NSMenu"; title = "AMainMenu"; ObjectID = "29"; */
+"29.title" = "AMainMenu";
+
+/* Class = "NSMenuItem"; title = "Cakebrew"; ObjectID = "56"; */
+"56.title" = "Cakebrew";
+
+/* Class = "NSMenu"; title = "Cakebrew"; ObjectID = "57"; */
+"57.title" = "Cakebrew";
+
+/* Class = "NSMenuItem"; title = "About Cakebrew"; ObjectID = "58"; */
+"58.title" = "À propos de Cakebrew";
+
+/* Class = "NSMenuItem"; title = "Preferences…"; ObjectID = "129"; */
+"129.title" = "Préférences…";
+
+/* Class = "NSMenu"; title = "Services"; ObjectID = "130"; */
+"130.title" = "Services";
+
+/* Class = "NSMenuItem"; title = "Services"; ObjectID = "131"; */
+"131.title" = "Services";
+
+/* Class = "NSMenuItem"; title = "Hide Cakebrew"; ObjectID = "134"; */
+"134.title" = "Masquer Cakebrew";
+
+/* Class = "NSMenuItem"; title = "Quit Cakebrew"; ObjectID = "136"; */
+"136.title" = "Quitter Cakebrew";
+
+/* Class = "NSMenuItem"; title = "Hide Others"; ObjectID = "145"; */
+"145.title" = "Masquer les autres";
+
+/* Class = "NSMenuItem"; title = "Show All"; ObjectID = "150"; */
+"150.title" = "Tout montrer";
+
+/* Class = "NSMenuItem"; title = "Zoom"; ObjectID = "239"; */
+"239.title" = "Zoom";
+
+/* Class = "NSWindow"; title = "Cakebrew"; ObjectID = "371"; */
+"371.title" = "Cakebrew";
+
+/* Class = "NSMenuItem"; title = "Help"; ObjectID = "490"; */
+"490.title" = "Aide";
+
+/* Class = "NSMenu"; title = "Help"; ObjectID = "491"; */
+"491.title" = "Aide";
+
+/* Class = "NSMenuItem"; title = "Cakebrew Help"; ObjectID = "492"; */
+"492.title" = "Aide Cakebrew";
+
+/* Class = "NSViewController"; title = "HomebrewController"; ObjectID = "547"; */
+"547.title" = "HomebrewController";
+
+/* Class = "NSTableColumn"; headerCell.title = "Name"; ObjectID = "A78-TI-Q8X"; */
+"A78-TI-Q8X.headerCell.title" = "Nom";
+
+/* Class = "NSTextFieldCell"; title = "Text Cell"; ObjectID = "BFf-kE-eTe"; */
+"BFf-kE-eTe.title" = "Text Cell";
+
+/* Class = "NSMenuItem"; title = "Text Replacement"; ObjectID = "BcF-eP-c6m"; */
+"BcF-eP-c6m.title" = "Remplacer le texte";
+
+/* Class = "NSMenuItem"; title = "Check Grammar With Spelling"; ObjectID = "Bu5-tT-t6q"; */
+"Bu5-tT-t6q.title" = "Vérifier la grammaire et l'orthographe";
+
+/* Class = "NSMenu"; title = "Transformations"; ObjectID = "Clj-ps-Iag"; */
+"Clj-ps-Iag.title" = "Transformations";
+
+/* Class = "NSMenuItem"; title = "Use Selection for Find"; ObjectID = "DNi-yY-5Ha"; */
+"DNi-yY-5Ha.title" = "Utiliser la sélection pour la recherche";
+
+/* Class = "NSMenuItem"; title = "Upgrade All Formulae"; ObjectID = "DdP-fd-ccO"; */
+"DdP-fd-ccO.title" = "Mettre à jour toutes les formules";
+
+/* Class = "NSMenuItem"; title = "Substitutions"; ObjectID = "Dki-FU-69n"; */
+"Dki-FU-69n.title" = "Substitutions";
+
+/* Class = "NSMenuItem"; title = "Search for Formula"; ObjectID = "DpP-yi-xdi"; */
+"DpP-yi-xdi.title" = "Rechercher une formule";
+
+/* Class = "NSMenuItem"; title = "Start Speaking"; ObjectID = "EBJ-Ce-8OO"; */
+"EBJ-Ce-8OO.title" = "Activer la fonctionnalité vocale";
+
+/* Class = "NSMenuItem"; title = "Upgrade Selected Formulae"; ObjectID = "Ep8-j6-m5Q"; */
+"Ep8-j6-m5Q.title" = "Installer les mises à jour pour les formules sélectionnée";
+
+/* Class = "NSMenu"; title = "Speech"; ObjectID = "Eud-wi-dvG"; */
+"Eud-wi-dvG.title" = "Fonction vocale";
+
+/* Class = "NSMenuItem"; title = "Capitalize"; ObjectID = "GVv-as-Pfq"; */
+"GVv-as-Pfq.title" = "Mettre une majuscule";
+
+/* Class = "NSMenuItem"; title = "Export Brew Installation…"; ObjectID = "Gbv-K1-deL"; */
+"Gbv-K1-deL.title" = "Exporter collection de formules";
+
+/* Class = "NSMenuItem"; title = "Undo"; ObjectID = "H1C-ip-FlF"; */
+"H1C-ip-FlF.title" = "Annuler";
+
+/* Class = "NSMenuItem"; title = "Update Formula"; ObjectID = "Hhd-b7-GOc"; */
+"Hhd-b7-GOc.title" = "Installer la mise à jour pour la formule";
+
+/* Class = "NSMenuItem"; title = "Redo"; ObjectID = "J92-AZ-XUi"; */
+"J92-AZ-XUi.title" = "Rétablir";
+
+/* Class = "NSMenuItem"; title = "Paste"; ObjectID = "JPI-0A-NvM"; */
+"JPI-0A-NvM.title" = "Coller";
+
+/* Class = "NSTableColumn"; headerCell.title = "Status"; ObjectID = "JRi-Nr-5hA"; */
+"JRi-Nr-5hA.headerCell.title" = "État";
+
+/* Class = "NSMenuItem"; title = "Outdated Formulae"; ObjectID = "KUc-5l-twA"; */
+"KUc-5l-twA.title" = "Formules en attente de mise à jour";
+
+/* Class = "NSTextFieldCell"; title = "HEADER CELL"; ObjectID = "KoT-TI-MgQ"; */
+"KoT-TI-MgQ.title" = "HEADER CELL";
+
+/* Class = "NSMenuItem"; title = "Import Brew Installation…"; ObjectID = "LU8-D3-Wwe"; */
+"LU8-D3-Wwe.title" = "Importer collection de formules";
+
+/* Class = "NSMenu"; title = "Edit"; ObjectID = "LYP-iZ-WcV"; */
+"LYP-iZ-WcV.title" = "Éditer";
+
+/* Class = "NSMenuItem"; title = "Install Formula"; ObjectID = "Lcb-tm-ATo"; */
+"Lcb-tm-ATo.title" = "Installer la formule";
+
+/* Class = "NSMenuItem"; title = "Leaves"; ObjectID = "M9N-PI-gBO"; */
+"M9N-PI-gBO.title" = "Feuilles";
+
+/* Class = "NSMenuItem"; title = "Show Substitutions"; ObjectID = "MQL-Vg-ECI"; */
+"MQL-Vg-ECI.title" = "Afficher les substitutions";
+
+/* Class = "NSMenuItem"; title = "Select All"; ObjectID = "MTR-Uj-kDH"; */
+"MTR-Uj-kDH.title" = "Tout sélectionner";
+
+/* Class = "NSMenuItem"; title = "Correct Spelling Automatically"; ObjectID = "NlA-Cw-rt3"; */
+"NlA-Cw-rt3.title" = "Corriger automatiquement l'orthographe";
+
+/* Class = "NSMenuItem"; title = "Formula"; ObjectID = "NmF-5a-a6b"; */
+"NmF-5a-a6b.title" = "Formule";
+
+/* Class = "NSMenuItem"; title = "Stop Speaking"; ObjectID = "NrN-pe-J7E"; */
+"NrN-pe-J7E.title" = "Désactiver la fonctionnalité vocale";
+
+/* Class = "NSMenuItem"; title = "Brew Cleanup…"; ObjectID = "OKR-gG-lsa"; */
+"OKR-gG-lsa.title" = "Nettoyage…";
+
+/* Class = "NSMenuItem"; title = "Find and Replace…"; ObjectID = "OSn-ju-y85"; */
+"OSn-ju-y85.title" = "Rechercher et remplacer…";
+
+/* Class = "NSMenuItem"; title = "Uninstall Formula"; ObjectID = "Tzv-5t-RhL"; */
+"Tzv-5t-RhL.title" = "Désinstaller la formule";
+
+/* Class = "NSTextFieldCell"; title = "Text Cell"; ObjectID = "UBt-HC-zPr"; */
+"UBt-HC-zPr.title" = "Text Cell";
+
+/* Class = "NSMenuItem"; title = "Check Spelling While Typing"; ObjectID = "UOm-zM-WGz"; */
+"UOm-zM-WGz.title" = "Vérifier l'orthographe pendant la saisie";
+
+/* Class = "NSMenuItem"; title = "Find Previous"; ObjectID = "UWA-Fh-fH5"; */
+"UWA-Fh-fH5.title" = "Rechercher le précédent";
+
+/* Class = "NSMenuItem"; title = "Find Next"; ObjectID = "Uzy-PF-4ct"; */
+"Uzy-PF-4ct.title" = "Rechercher le suivant";
+
+/* Class = "NSMenuItem"; title = "Install Formula with Options..."; ObjectID = "Vio-Nc-WTc"; */
+"Vio-Nc-WTc.title" = "Installer la formule avec options…";
+
+/* Class = "NSTextFieldCell"; title = "Text Cell"; ObjectID = "VzS-XQ-BoP"; */
+"VzS-XQ-BoP.title" = "Text Cell";
+
+/* Class = "NSTabViewItem"; label = "Doctor"; ObjectID = "WM9-6z-Jzl"; */
+"WM9-6z-Jzl.label" = "Diagnostique";
+
+/* Class = "NSMenu"; title = "Spelling"; ObjectID = "X7p-5G-5Dv"; */
+"X7p-5G-5Dv.title" = "Orthographe";
+
+/* Class = "NSMenuItem"; title = "Install Formula with Options…"; ObjectID = "X74-Yx-eRm"; */
+"X74-Yx-eRm.title" = "Installer la formule avec options…";
+
+/* Class = "NSMenuItem"; title = "Copy"; ObjectID = "XSL-d4-pFI"; */
+"XSL-d4-pFI.title" = "Copier";
+
+/* Class = "NSMenuItem"; title = "Make Upper Case"; ObjectID = "ZI1-yX-Bb1"; */
+"ZI1-yX-Bb1.title" = "Mettre en majuscules";
+
+/* Class = "NSMenuItem"; title = "View"; ObjectID = "ZNi-97-e1J"; */
+"ZNi-97-e1J.title" = "Présentation";
+
+/* Class = "NSMenuItem"; title = "Speech"; ObjectID = "Zen-la-cAG"; */
+"Zen-la-cAG.title" = "Fonction vocale";
+
+/* Class = "NSTabViewItem"; label = "Formulae"; ObjectID = "aFR-nx-bHM"; */
+"aFR-nx-bHM.label" = "Formules";
+
+/* Class = "NSMenuItem"; title = "Make Lower Case"; ObjectID = "aQ6-GZ-1Wd"; */
+"aQ6-GZ-1Wd.title" = "Mettre en minuscules";
+
+/* Class = "NSMenuItem"; title = "Tools"; ObjectID = "b3s-t3-YFx"; */
+"b3s-t3-YFx.title" = "Outils";
+
+/* Class = "NSTableColumn"; headerCell.title = "Latest Version"; ObjectID = "ba4-r8-kgo"; */
+"ba4-r8-kgo.headerCell.title" = "Dernière version";
+
+/* Class = "NSMenuItem"; title = "Smart Dashes"; ObjectID = "bv4-X8-jgK"; */
+"bv4-X8-jgK.title" = "Tirets intelligents";
+
+/* Class = "NSMenuItem"; title = "Show Spelling and Grammar"; ObjectID = "cbL-gM-Pkc"; */
+"cbL-gM-Pkc.title" = "Afficher orthographe et grammaire";
+
+/* Class = "NSMenuItem"; title = "Find"; ObjectID = "cdk-eL-aT2"; */
+"cdk-eL-aT2.title" = "Rechercher";
+
+/* Class = "NSMenuItem"; title = "Repositories"; ObjectID = "dXD-3s-NhA"; */
+"dXD-3s-NhA.title" = "Dépôts";
+
+/* Class = "NSMenu"; title = "Formula"; ObjectID = "dg5-kq-v1Y"; */
+"dg5-kq-v1Y.title" = "Formule";
+
+/* Class = "NSMenu"; title = "Substitutions"; ObjectID = "e0a-Xf-LW1"; */
+"e0a-Xf-LW1.title" = "Substitutions";
+
+/* Class = "NSMenuItem"; title = "Doctor"; ObjectID = "eI9-b4-Rmg"; */
+"eI9-b4-Rmg.title" = "Outil de diagnostique";
+
+/* Class = "NSMenuItem"; title = "More Information"; ObjectID = "eus-Jb-JjS"; */
+"eus-Jb-JjS.title" = "Plus d'informations";
+
+/* Class = "NSMenuItem"; title = "Install Formula"; ObjectID = "fhF-VX-squ"; */
+"fhF-VX-squ.title" = "Installer la formule";
+
+/* Class = "NSMenuItem"; title = "More Information"; ObjectID = "gxx-2S-F5T"; */
+"gxx-2S-F5T.title" = "Plus d'informations";
+
+/* Class = "NSMenuItem"; title = "Delete"; ObjectID = "h1A-B0-MNB"; */
+"h1A-B0-MNB.title" = "Supprimer";
+
+/* Class = "NSTableColumn"; headerCell.title = "Version"; ObjectID = "h5d-xc-Jih"; */
+"h5d-xc-Jih.headerCell.title" = "Version";
+
+/* Class = "NSMenuItem"; title = "Uninstall Formula"; ObjectID = "i3A-Nx-qPJ"; */
+"i3A-Nx-qPJ.title" = "Désinstaller la formule";
+
+/* Class = "NSMenu"; title = "Tools"; ObjectID = "lOM-6G-bAo"; */
+"lOM-6G-bAo.title" = "Outils";
+
+/* Class = "NSMenuItem"; title = "Smart Links"; ObjectID = "mB7-mH-abu"; */
+"mB7-mH-abu.title" = "Liens intelligents";
+
+/* Class = "NSMenu"; title = "View"; ObjectID = "mwc-hE-3i2"; */
+"mwc-hE-3i2.title" = "Présentation";
+
+/* Class = "NSMenuItem"; title = "Data Detectors"; ObjectID = "oBx-PH-cgq"; */
+"oBx-PH-cgq.title" = "Détecteurs de donnée";
+
+/* Class = "NSMenu"; title = "Formula"; ObjectID = "sBH-Ta-Jft"; */
+"sBH-Ta-Jft.title" = "Formule";
+
+/* Class = "NSMenuItem"; title = "Close"; ObjectID = "sTI-da-gJ4"; */
+"sTI-da-gJ4.title" = "Fermer";
+
+/* Class = "NSMenuItem"; title = "Visit Website"; ObjectID = "seZ-rp-Anf"; */
+"seZ-rp-Anf.title" = "Visiter le site web";
+
+/* Class = "NSTextFieldCell"; title = "Text Cell"; ObjectID = "uGY-87-ubc"; */
+"uGY-87-ubc.title" = "Text Cell";
+
+/* Class = "NSMenuItem"; title = "Check Document Now"; ObjectID = "ugl-Oh-kYV"; */
+"ugl-Oh-kYV.title" = "Vérifiez le document maintenant";
+
+/* Class = "NSMenuItem"; title = "Check for Updates…"; ObjectID = "v4F-qE-2u0"; */
+"v4F-qE-2u0.title" = "Rechercher les mises à jour…";
+
+/* Class = "NSMenuItem"; title = "Find…"; ObjectID = "yCR-di-3ZT"; */
+"yCR-di-3ZT.title" = "Rechercher…";
+
+/* Class = "NSTabViewItem"; label = "Update"; ObjectID = "yL4-oW-nIm"; */
+"yL4-oW-nIm.label" = "Mises à jour";
+
+/* Class = "NSTextFieldCell"; title = "Table View Cell"; ObjectID = "zVW-Ch-xYV"; */
+"zVW-Ch-xYV.title" = "Table View Cell";
+
+/* Class = "NSMenuItem"; title = "All Formulae"; ObjectID = "zam-2s-isx"; */
+"zam-2s-isx.title" = "Toutes les formules";
+
