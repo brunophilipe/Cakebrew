@@ -41,6 +41,11 @@ unichar SPACE_CHARACTER = 0x0020;
 	
 	//OUR superview is NSClipView
 	totalWidth = [[self superview] frame].size.width;
+
+	if (@available(macOS 11.0, *)) {
+		NSRect marginsFrame = [[[self superview] layoutMarginsGuide] frame];
+		totalWidth -= marginsFrame.origin.x * 2;
+	}
 	
 	switch (self.mode) {
 		case kBPListAll:
@@ -55,14 +60,14 @@ unichar SPACE_CHARACTER = 0x0020;
 		case kBPListInstalled:
 			titleWidth = (NSInteger)(totalWidth * 0.4);
 			[[self tableColumnWithIdentifier:kColumnIdentifierVersion] setHidden:NO];
-			[[self tableColumnWithIdentifier:kColumnIdentifierVersion] setWidth:(totalWidth-titleWidth)*0.95];
+			[[self tableColumnWithIdentifier:kColumnIdentifierVersion] setWidth:totalWidth*0.55];
 			[[self tableColumnWithIdentifier:kColumnIdentifierLatestVersion] setHidden:YES];
 			[[self tableColumnWithIdentifier:kColumnIdentifierStatus] setHidden:YES];
 			[self setAllowsMultipleSelection:NO];
 			break;
 			
 		case kBPListLeaves:
-			titleWidth = (NSInteger)(totalWidth * 0.99);
+			titleWidth = totalWidth - 1;
 			[[self tableColumnWithIdentifier:kColumnIdentifierVersion] setHidden:YES];
 			[[self tableColumnWithIdentifier:kColumnIdentifierLatestVersion] setHidden:YES];
 			[[self tableColumnWithIdentifier:kColumnIdentifierStatus] setHidden:YES];
@@ -89,7 +94,7 @@ unichar SPACE_CHARACTER = 0x0020;
 			break;
 			
 		case kBPListRepositories:
-			titleWidth = (NSInteger)(totalWidth * 0.99);
+			titleWidth = totalWidth - 1;
 			[[self tableColumnWithIdentifier:kColumnIdentifierVersion] setHidden:YES];
 			[[self tableColumnWithIdentifier:kColumnIdentifierLatestVersion] setHidden:YES];
 			[[self tableColumnWithIdentifier:kColumnIdentifierStatus] setHidden:YES];
@@ -101,7 +106,7 @@ unichar SPACE_CHARACTER = 0x0020;
 	}
 	
 	[[self tableColumnWithIdentifier:kColumnIdentifierName] setWidth:titleWidth];
-	[self setNeedsDisplay:YES];
+	[self setNeedsLayout:YES];
 }
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
