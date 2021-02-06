@@ -201,6 +201,9 @@ NSOpenSavePanelDelegate>
 	self.toolbar.delegate = self.toolbar;
 	self.toolbar.controller = self;
 	[[[self view] window] setToolbar:self.toolbar];
+	if (@available(macOS 11.0, *)) {
+		[self.toolbar setDisplayMode:NSToolbarDisplayModeIconOnly];
+	}
 	[self.toolbar lockItems];
 }
 

@@ -73,10 +73,9 @@ static NSString *kToolbarItemMultiActionIdentifier = @"toolbarItemMultiAction";
 						image:nil
 						label:nil
 					   action:nil];
-  
 	}
 	else
- {
+	{
 		[self reconfigureItem:moreInfoItem
 						image:[BPStyle toolbarImageForMoreInformation]
 						label:NSLocalizedString(@"Toolbar_More_Information", nil)
@@ -304,6 +303,7 @@ static NSString *kToolbarItemMultiActionIdentifier = @"toolbarItemMultiAction";
 	item.action = action;
 	item.target = self.controller;
 	item.autovalidates = YES;
+	item.toolTip = label;
 	return item;
 }
 
@@ -322,6 +322,7 @@ static NSString *kToolbarItemMultiActionIdentifier = @"toolbarItemMultiAction";
 	
 	item.label = label;
 	item.action = action;
+	item.toolTip = label;
 }
 
 - (void)makeSearchFieldFirstResponder

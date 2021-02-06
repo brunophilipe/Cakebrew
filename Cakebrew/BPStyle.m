@@ -67,8 +67,7 @@ static BOOL shouldUseFlatUserInterface;
 {
 	static NSImage *image;
 	if (!image) {
-		NSString *imageName = self.isFlat ? @"download_flat" : @"download.icns";
-		image = [NSImage imageNamed:imageName];
+		image = [self appropriateIconForToolbarWithName:@"download" orSymbol:@"plus.circle.fill"];
 	}
 	
 	return image;
@@ -78,8 +77,7 @@ static BOOL shouldUseFlatUserInterface;
 {
 	static NSImage *image;
 	if (!image) {
-		NSString *imageName = self.isFlat ? @"delete_flat" : @"delete.icns";
-		image = [NSImage imageNamed:imageName];
+		image = [self appropriateIconForToolbarWithName:@"delete" orSymbol:@"xmark.circle.fill"];
 	}
 	
 	return image;
@@ -88,8 +86,7 @@ static BOOL shouldUseFlatUserInterface;
 {
 	static NSImage *image;
 	if (!image) {
-		NSString *imageName = self.isFlat ? @"download_flat" : @"download.icns";
-		image = [NSImage imageNamed:imageName];
+		image = [self appropriateIconForToolbarWithName:@"download" orSymbol:@"download"];
 	}
 	
 	return image;
@@ -99,8 +96,7 @@ static BOOL shouldUseFlatUserInterface;
 {
 	static NSImage *image;
 	if (!image) {
-		NSString *imageName = self.isFlat ? @"delete_flat" : @"delete.icns";
-		image = [NSImage imageNamed:imageName];
+		image = [self appropriateIconForToolbarWithName:@"delete" orSymbol:@"xmark.circle.fill"];
 	}
 	
 	return image;
@@ -110,8 +106,7 @@ static BOOL shouldUseFlatUserInterface;
 {
 	static NSImage *image;
 	if (!image) {
-		NSString *imageName = self.isFlat ? @"reload_flat" : @"reload.icns";
-		image = [NSImage imageNamed:imageName];
+		image = [self appropriateIconForToolbarWithName:@"reload" orSymbol:@"arrow.triangle.2.circlepath.circle.fill"];
 	}
 	
 	return image;
@@ -121,8 +116,7 @@ static BOOL shouldUseFlatUserInterface;
 {
 	static NSImage *image;
 	if (!image) {
-		NSString *imageName = self.isFlat ? @"label_flat" : @"label.icns";
-		image = [NSImage imageNamed:imageName];
+		image = [self appropriateIconForToolbarWithName:@"label" orSymbol:@"info.circle.fill"];
 	}
 	
 	return image;
@@ -132,11 +126,21 @@ static BOOL shouldUseFlatUserInterface;
 {
 	static NSImage *image;
 	if (!image) {
-		NSString *imageName = self.isFlat ? @"globe_flat" : @"globe.icns";
-		image = [NSImage imageNamed:imageName];
+		image = [self appropriateIconForToolbarWithName:@"globe" orSymbol:@"globe"];
 	}
 	
 	return image;
+}
+
++ (NSImage *)appropriateIconForToolbarWithName:(NSString *)name orSymbol:(NSString *)symbol
+{
+	if (@available(macOS 11.0, *)) {
+		return [NSImage imageWithSystemSymbolName:symbol accessibilityDescription:name];
+	} else if ([self isFlat]) {
+		return [NSImage imageNamed:[NSString stringWithFormat:@"%@_flat", name]];
+	} else {
+		return [NSImage imageNamed:[NSString stringWithFormat:@"%@.icns", name]];
+	}
 }
 
 #pragma mark Popover
