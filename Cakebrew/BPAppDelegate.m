@@ -86,7 +86,7 @@ NSString *const kBP_HOMEBREW_WEBSITE = @"https://www.cakebrew.com";
 	[[[NSApplication sharedApplication] dockTile] setBadgeLabel:nil];
 }
 
-- (NSURL*)urlForApplicationSupportFolder
++ (NSURL*)urlForApplicationSupportFolder
 {
 	NSError *error = nil;
 	NSURL *path = [[NSFileManager defaultManager] URLForDirectory:NSApplicationSupportDirectory inDomain:NSUserDomainMask appropriateForURL:nil create:YES error:&error];
@@ -104,7 +104,7 @@ NSString *const kBP_HOMEBREW_WEBSITE = @"https://www.cakebrew.com";
 	return path;
 }
 
-- (NSURL*)urlForApplicationCachesFolder
++ (NSURL*)urlForApplicationCachesFolder
 {
 	NSError *error = nil;
 	NSURL *path = [[NSFileManager defaultManager] URLForDirectory:NSCachesDirectory inDomain:NSUserDomainMask appropriateForURL:nil create:YES error:&error];

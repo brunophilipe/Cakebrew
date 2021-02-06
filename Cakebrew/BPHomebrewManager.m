@@ -114,7 +114,7 @@ NSString *const kBPCacheDataKey	= @"BPCacheDataKey";
  */
 - (BOOL)loadAllFormulaeCaches
 {
-	NSURL *cachesFolder = [BPAppDelegateRef urlForApplicationCachesFolder];
+	NSURL *cachesFolder = [BPAppDelegate urlForApplicationCachesFolder];
 	NSURL *allFormulaeFile = [cachesFolder URLByAppendingPathComponent:@"allFormulae.cache.bin"];
 	BOOL shouldLoadCache = NO;
 	
@@ -153,7 +153,7 @@ NSString *const kBPCacheDataKey	= @"BPCacheDataKey";
 {
 	if (self.formulae_all)
 	{
-		NSURL *cachesFolder = [BPAppDelegateRef urlForApplicationCachesFolder];
+		NSURL *cachesFolder = [BPAppDelegate urlForApplicationCachesFolder];
 		if (cachesFolder)
 		{
 			NSURL *allFormulaeFile = [cachesFolder URLByAppendingPathComponent:@"allFormulae.cache.bin"];

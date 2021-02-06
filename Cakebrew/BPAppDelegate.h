@@ -33,8 +33,8 @@ extern NSString *const kBP_HOMEBREW_WEBSITE;
 
 @property (getter=isRunningBackgroundTask) BOOL runningBackgroundTask;
 
-- (NSURL*)urlForApplicationSupportFolder;
-- (NSURL*)urlForApplicationCachesFolder;
++ (NSURL*)urlForApplicationSupportFolder;
++ (NSURL*)urlForApplicationCachesFolder;
 
 - (IBAction)openWebsite:(id)sender;
 
