@@ -36,6 +36,7 @@
 #import "BPDisabledView.h"
 #import "BPBundleWindowController.h"
 #import "BPTask.h"
+#import "BPMainWindowController.h"
 
 typedef NS_ENUM(NSUInteger, HomeBrewTab) {
 	HomeBrewTabFormulae,
@@ -70,9 +71,10 @@ NSOpenSavePanelDelegate>
 @property (strong, nonatomic) BPDisabledView					*disabledView;
 @property (strong, nonatomic) BPLoadingView						*loadingView;
 
-@property (weak) IBOutlet NSSplitView			*formulaeSplitView;
-@property (weak) IBOutlet NSView				*selectedFormulaView;
-@property (weak) IBOutlet NSProgressIndicator	*backgroundActivityIndicator;
+@property (weak) IBOutlet NSSplitView				*formulaeSplitView;
+@property (weak) IBOutlet NSView					*selectedFormulaView;
+@property (weak) IBOutlet NSProgressIndicator		*backgroundActivityIndicator;
+@property (weak) IBOutlet BPMainWindowController	*mainWindowController;
 
 
 @end
@@ -138,6 +140,9 @@ NSOpenSavePanelDelegate>
 
 - (void)awakeFromNib
 {
+	[self.mainWindowController setUpViews];
+	[self.mainWindowController.splitViewController.view setHidden:YES];
+
 	self.formulaeDataSource = [[BPFormulaeDataSource alloc] initWithMode:kBPListAll];
 	self.tableView_formulae.dataSource = self.formulaeDataSource;
 	self.tableView_formulae.delegate = self;
@@ -186,9 +191,7 @@ NSOpenSavePanelDelegate>
 	[self.sidebarController setDelegate:self];
 	[self.sidebarController refreshSidebarBadges];
 	[self.sidebarController configureSidebarSettings];
-	
-	[self.splitView setHidden:YES];
-	
+
 	[self addToolbar];
 	[self addLoadingView];
 	
@@ -404,7 +407,7 @@ NSOpenSavePanelDelegate>
 		self.currentFormula = nil;
 		self.selectedFormulaeViewController.formulae = nil;
 		
-		[self.splitView			setHidden:NO];
+		[self.mainWindowController.splitViewController.view setHidden:NO];
 		[self.label_information setHidden:NO];
 		
 		[self.toolbar configureForMode:BPToolbarModeDefault];
@@ -439,7 +442,7 @@ NSOpenSavePanelDelegate>
 	{
 		[self addDisabledView];
 		[self.label_information setHidden:YES];
-		[self.splitView setHidden:YES];
+		[self.mainWindowController.splitViewController.view setHidden:YES];
 		[self.toolbar lockItems];
 		
 		NSAlert *alert = [NSAlert alertWithMessageText:NSLocalizedString(@"Generic_Error", nil)
@@ -470,7 +473,7 @@ NSOpenSavePanelDelegate>
 		[self.disabledView removeFromSuperview];
 		self.disabledView = nil;
 		[self.label_information setHidden:NO];
-		[self.splitView setHidden:NO];
+		[self.mainWindowController.splitViewController.view setHidden:NO];
 		
 		[self.toolbar unlockItems];
 		

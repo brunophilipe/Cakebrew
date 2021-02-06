@@ -52,6 +52,7 @@
 		15EC1B0025CE1ACC00C93861 /* PXSourceList.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 15EC1AF925CE1AA000C93861 /* PXSourceList.framework */; };
 		15EC1B0125CE1ACC00C93861 /* PXSourceList.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 15EC1AF925CE1AA000C93861 /* PXSourceList.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		15EC1B0725CED52C00C93861 /* BPWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = 15EC1B0625CED52C00C93861 /* BPWindow.m */; };
+		15EC1B0C25CEE4C200C93861 /* BPMainWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 15EC1B0B25CEE4C200C93861 /* BPMainWindowController.m */; };
 		1FE4FE59148E4CDD008EDE8B /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1FE4FE58148E4CDD008EDE8B /* Cocoa.framework */; };
 		1FE4FE63148E4CDD008EDE8B /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 1FE4FE61148E4CDD008EDE8B /* InfoPlist.strings */; };
 		1FE4FE65148E4CDD008EDE8B /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FE4FE64148E4CDD008EDE8B /* main.m */; };
@@ -214,6 +215,8 @@
 		15EC1AB025CE1AA000C93861 /* PXSourceList.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; path = PXSourceList.xcodeproj; sourceTree = "<group>"; };
 		15EC1B0525CED52C00C93861 /* BPWindow.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BPWindow.h; sourceTree = "<group>"; };
 		15EC1B0625CED52C00C93861 /* BPWindow.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BPWindow.m; sourceTree = "<group>"; };
+		15EC1B0A25CEE4C200C93861 /* BPMainWindowController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BPMainWindowController.h; sourceTree = "<group>"; };
+		15EC1B0B25CEE4C200C93861 /* BPMainWindowController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BPMainWindowController.m; sourceTree = "<group>"; };
 		15F3130D1C7A903500F22608 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/BPBundleWindow.strings"; sourceTree = "<group>"; };
 		15F3130E1C7A903500F22608 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/BPDoctorView.strings"; sourceTree = "<group>"; };
 		15F3130F1C7A903500F22608 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/BPFormulaOptionsWindow.strings"; sourceTree = "<group>"; };
@@ -365,6 +368,8 @@
 				15D28A2B1AE33301005C8A3E /* BPUpdateView.xib */,
 				150AEC4A1B3F999A00163767 /* BPUpdateViewController.h */,
 				150AEC4B1B3F999A00163767 /* BPUpdateViewController.m */,
+				15EC1B0A25CEE4C200C93861 /* BPMainWindowController.h */,
+				15EC1B0B25CEE4C200C93861 /* BPMainWindowController.m */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -790,6 +795,7 @@
 				D2F732F119190B75002B2512 /* NSString+URLValidation.m in Sources */,
 				15D2CFAB18F202B300B6D9F1 /* DCOAboutWindowController.m in Sources */,
 				D2A3A82D1B8C9F5200D05469 /* BPStyle.m in Sources */,
+				15EC1B0C25CEE4C200C93861 /* BPMainWindowController.m in Sources */,
 				150AEC511B3F999A00163767 /* BPInstallationWindowController.m in Sources */,
 				15715F641C78053300AE0E66 /* BPBundleWindowController.m in Sources */,
 				D2BBAB4B1B85EA7C00F21332 /* BPFormulaOption.m in Sources */,
@@ -1146,7 +1152,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				INFOPLIST_FILE = CakebrewTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
-				MACOSX_DEPLOYMENT_TARGET = 10.8;
+				MACOSX_DEPLOYMENT_TARGET = 10.15;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.hrubasko.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1175,7 +1181,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				INFOPLIST_FILE = CakebrewTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
-				MACOSX_DEPLOYMENT_TARGET = 10.8;
+				MACOSX_DEPLOYMENT_TARGET = 10.15;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.hrubasko.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";

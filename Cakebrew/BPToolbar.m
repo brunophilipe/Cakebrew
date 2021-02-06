@@ -182,12 +182,23 @@ static NSString *kToolbarItemMultiActionIdentifier = @"toolbarItemMultiAction";
 
 - (NSArray *)toolbarDefaultItemIdentifiers:(NSToolbar *)toolbar
 {
-	return @[kToolbarItemHomebrewUpdateIdentifier,
-			 NSToolbarFlexibleSpaceItemIdentifier,
-			 kToolbarItemMultiActionIdentifier,
-			 kToolbarItemInformationIdentifier,
-			 kToolbarItemSearchIdentifier,
-			 ];
+	if (@available(macOS 11.0, *)) {
+		return @[NSToolbarFlexibleSpaceItemIdentifier,
+				 kToolbarItemHomebrewUpdateIdentifier,
+				 NSToolbarSidebarTrackingSeparatorItemIdentifier,
+				 NSToolbarFlexibleSpaceItemIdentifier,
+				 kToolbarItemMultiActionIdentifier,
+				 kToolbarItemInformationIdentifier,
+				 kToolbarItemSearchIdentifier,
+		];
+	} else {
+		return @[kToolbarItemHomebrewUpdateIdentifier,
+				 NSToolbarFlexibleSpaceItemIdentifier,
+				 kToolbarItemMultiActionIdentifier,
+				 kToolbarItemInformationIdentifier,
+				 kToolbarItemSearchIdentifier,
+				 ];
+	}
 }
 
 - (NSArray *)toolbarAllowedItemIdentifiers:(NSToolbar *)toolbar
@@ -206,11 +217,20 @@ static NSString *kToolbarItemMultiActionIdentifier = @"toolbarItemMultiAction";
 	static NSArray *systemToolbarItems = nil;
 	if (!systemToolbarItems)
 	{
-		systemToolbarItems =  @[
-								NSToolbarSpaceItemIdentifier,
-								NSToolbarFlexibleSpaceItemIdentifier,
-								NSToolbarSeparatorItemIdentifier
-								];
+		if (@available(macOS 11.0, *)) {
+			systemToolbarItems =  @[
+				NSToolbarSpaceItemIdentifier,
+				NSToolbarFlexibleSpaceItemIdentifier,
+				NSToolbarSidebarTrackingSeparatorItemIdentifier,
+				NSToolbarSeparatorItemIdentifier
+			];
+		} else {
+			systemToolbarItems =  @[
+				NSToolbarSpaceItemIdentifier,
+				NSToolbarFlexibleSpaceItemIdentifier,
+				NSToolbarSeparatorItemIdentifier
+			];
+		}
 	}
 	return systemToolbarItems;
 }
