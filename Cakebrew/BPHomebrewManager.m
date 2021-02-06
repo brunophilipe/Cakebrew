@@ -79,7 +79,7 @@ NSString *const kBPCacheDataKey	= @"BPCacheDataKey";
 		[self setFormulae_outdated:[[BPHomebrewInterface sharedInterface] listMode:kBPListOutdated]];
 		[self setFormulae_repositories:[[BPHomebrewInterface sharedInterface] listMode:kBPListRepositories]];
 		
-		if (![self loadAllFormulaeCaches] || shouldRebuildCache) {
+		if (![self loadAllFormulaeCaches] || [[self formulae_all] count] <= 1 || shouldRebuildCache) {
 			[self setFormulae_all:[[BPHomebrewInterface sharedInterface] listMode:kBPListAll]];
 			[self storeAllFormulaeCaches];
 		}

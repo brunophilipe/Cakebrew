@@ -28,7 +28,7 @@ static BOOL shouldUseFlatUserInterface;
 
 + (void)load
 {
-	shouldUseFlatUserInterface =  [BPUtilities isRunningYosemiteOrLater];
+	shouldUseFlatUserInterface = [BPUtilities isRunningYosemiteOrLater];
 }
 
 + (BOOL)isFlat
