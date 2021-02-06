@@ -92,20 +92,20 @@ NSString *const kBPCacheDataKey	= @"BPCacheDataKey";
 
 - (void)updateSearchWithName:(NSString *)name
 {
-	NSMutableArray *array = [NSMutableArray array];
+	NSMutableArray *matches = [NSMutableArray array];
 	NSRange range;
 	
 	for (BPFormula *formula in _formulae_all) {
 		range = [[formula name] rangeOfString:name options:NSCaseInsensitiveSearch];
 		if (range.location != NSNotFound) {
-			[array addObject:formula];
+			[matches addObject:formula];
 		}
 	}
 	
-	_formulae_search = array;
-	
+	_formulae_search = matches;
+
 	dispatch_async(dispatch_get_main_queue(), ^{
-		[self.delegate homebrewManager:self didUpdateSearchResults:_formulae_search];
+		[self.delegate homebrewManager:self didUpdateSearchResults:matches];
 	});
 }
 
@@ -114,7 +114,7 @@ NSString *const kBPCacheDataKey	= @"BPCacheDataKey";
  */
 - (BOOL)loadAllFormulaeCaches
 {
-	NSURL *cachesFolder = [BPAppDelegateRef urlForApplicationCachesFolder];
+	NSURL *cachesFolder = [BPAppDelegate urlForApplicationCachesFolder];
 	NSURL *allFormulaeFile = [cachesFolder URLByAppendingPathComponent:@"allFormulae.cache.bin"];
 	BOOL shouldLoadCache = NO;
 	
@@ -153,7 +153,7 @@ NSString *const kBPCacheDataKey	= @"BPCacheDataKey";
 {
 	if (self.formulae_all)
 	{
-		NSURL *cachesFolder = [BPAppDelegateRef urlForApplicationCachesFolder];
+		NSURL *cachesFolder = [BPAppDelegate urlForApplicationCachesFolder];
 		if (cachesFolder)
 		{
 			NSURL *allFormulaeFile = [cachesFolder URLByAppendingPathComponent:@"allFormulae.cache.bin"];

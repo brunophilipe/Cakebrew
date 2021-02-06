@@ -315,12 +315,14 @@ static BPCustomFormula *nmapFormula;
 - (void)testFormulaNotificationUpdate
 {
 	BPCustomFormula *customFormula = [BPCustomFormula formulaWithName:@"acme"];
-	XCTestExpectation *expectation = [self expectationForNotification:BPFormulaDidUpdateNotification
-															   object:customFormula
-															  handler:^BOOL(NSNotification *notification){
-																  [expectation fulfill];
-																  return YES;
-															  }];
+	XCTestExpectation __block *expectation = [self expectationForNotification:BPFormulaDidUpdateNotification
+																	   object:customFormula
+																	  handler:^BOOL(NSNotification *notification)
+		{
+			[expectation fulfill];
+			return YES;
+		}];
+
 	[customFormula setNeedsInformation:YES];
 	[self waitForExpectationsWithTimeout:0.5 handler:nil];
 }

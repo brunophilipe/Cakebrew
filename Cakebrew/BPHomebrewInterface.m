@@ -543,7 +543,7 @@ static NSString *cakebrewOutputIdentifier = @"+++++Cakebrew+++++";
 
 - (instancetype)init
 {
-	return (BPHomebrewInterfaceListCallAll *)[super initWithArguments:@[@"search"]];
+	return (BPHomebrewInterfaceListCallAll *)[super initWithArguments:@[@"formulae"]];
 }
 
 @end

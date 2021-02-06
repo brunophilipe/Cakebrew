@@ -46,7 +46,8 @@
 	{
 		case kBPFormulaInfoTypeGeneral:
 		{
-			[self.formulaTitleLabel setStringValue:[NSString stringWithFormat:NSLocalizedString(@"Formula_Popover_Title", nil), [_formula name]]];
+			NSString *titleFormat = NSLocalizedString(@"Formula_Popover_Title", nil);
+			[self.formulaTitleLabel setStringValue:[NSString stringWithFormat:titleFormat, [formula name]]];
 
 			[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateView:)
 														 name:BPFormulaDidUpdateNotification
@@ -56,11 +57,12 @@
 				[self displayConsoleInformationForFormula];
 			});
 
-			[self.timedDispatch scheduleDispatchAfterTimeInterval:0.3
-														  inQueue:dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0)
-														  ofBlock:^{
-															  [_formula setNeedsInformation:YES];
-														  }];
+			dispatch_queue_t bgQueue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0);
+
+			[self.timedDispatch scheduleDispatchAfterTimeInterval:0.3 inQueue:bgQueue ofBlock:
+				^{
+					[formula setNeedsInformation:YES];
+				}];
 		}
 		break;
 
