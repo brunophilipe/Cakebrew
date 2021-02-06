@@ -538,7 +538,8 @@
 				1FE4FE51148E4CDD008EDE8B /* Frameworks */,
 				1FE4FE52148E4CDD008EDE8B /* Resources */,
 				1570BA6018EF9B0F001C3C5C /* CopyFiles */,
-				153AD45918F4A45E000D6FB5 /* ShellScript */,
+				153AD45918F4A45E000D6FB5 /* Bump Build */,
+				1555FD5F25CF4E5800E5D344 /* Fix Sparkle Hardened Runtime */,
 			);
 			buildRules = (
 			);
@@ -661,18 +662,37 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		153AD45918F4A45E000D6FB5 /* ShellScript */ = {
+		153AD45918F4A45E000D6FB5 /* Bump Build */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 12;
 			files = (
 			);
 			inputPaths = (
 			);
+			name = "Bump Build";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "/bin/sh \"Cakebrew/BumpBuild.sh\" \"${PROJECT_DIR}/${INFOPLIST_FILE}\"";
+			shellScript = "/bin/sh \"Cakebrew/BumpBuild.sh\" \"${PROJECT_DIR}/${INFOPLIST_FILE}\"\n";
+		};
+		1555FD5F25CF4E5800E5D344 /* Fix Sparkle Hardened Runtime */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Fix Sparkle Hardened Runtime";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "codesign --verbose --force --deep -o runtime \\\n--sign \"${EXPANDED_CODE_SIGN_IDENTITY_NAME}\" \\\n\"${BUILT_PRODUCTS_DIR}/${WRAPPER_NAME}/Contents/Frameworks/Sparkle.framework/Versions/A/Resources/AutoUpdate.app\"\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
