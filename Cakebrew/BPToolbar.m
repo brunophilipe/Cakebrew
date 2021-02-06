@@ -277,7 +277,11 @@ static NSString *kToolbarItemMultiActionIdentifier = @"toolbarItemMultiAction";
 	static NSToolbarItem* item = nil;
 	if (!item)
 	{
-		item = [[NSToolbarItem alloc] initWithItemIdentifier:kToolbarItemSearchIdentifier];
+		if (@available(macOS 11.0, *)) {
+			item = [[NSSearchToolbarItem alloc] initWithItemIdentifier:kToolbarItemSearchIdentifier];
+		} else {
+			item = [[NSToolbarItem alloc] initWithItemIdentifier:kToolbarItemSearchIdentifier];
+		}
 		item.label = NSLocalizedString(@"Toolbar_Search", nil);
 		item.paletteLabel = NSLocalizedString(@"Toolbar_Search", nil);
 		item.action = @selector(performSearchWithString:);
@@ -286,8 +290,12 @@ static NSString *kToolbarItemMultiActionIdentifier = @"toolbarItemMultiAction";
 		self.searchField.delegate = self;
 		self.searchField.continuous = YES;
 		[self.searchField setRecentsAutosaveName:@"RecentSearches"];
-		
-		[item setView:self.searchField];
+
+		if (@available(macOS 11.0, *)) {
+			[(NSSearchToolbarItem *)item setSearchField:self.searchField];
+		} else {
+			[item setView:self.searchField];
+		}
 	}
 	return item;
 }
