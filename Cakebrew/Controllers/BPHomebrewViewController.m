@@ -407,13 +407,13 @@ NSOpenSavePanelDelegate>
 		[self.toolbar configureForMode:BPToolbarModeDefault];
 		[self.toolbar unlockItems];
 		[self.formulaeDataSource refreshBackingArray];
-		[self.sidebarController refreshSidebarBadges];
-		
+
 		// Used after unlocking the app when inserting custom homebrew installation path
 		BOOL shouldReselectFirstRow = ([self.sidebarController.sidebar selectedRow] < 0);
-		
+
+		[self.sidebarController refreshSidebarBadges];
 		[self.sidebarController.sidebar reloadData];
-		
+
 		[self setEnableUpgradeFormulasMenu:([[BPHomebrewManager sharedManager] formulae_outdated].count > 0)];
 		
 		if (shouldReselectFirstRow)

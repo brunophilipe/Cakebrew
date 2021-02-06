@@ -140,6 +140,7 @@
 	if (sourceListItem.badgeValue.integerValue >= 0)
 	{
 		cellView.badgeView.badgeValue = (NSUInteger) sourceListItem.badgeValue.integerValue;
+		[cellView.badgeView setHidden:NO];
 	}
 	else
 	{
