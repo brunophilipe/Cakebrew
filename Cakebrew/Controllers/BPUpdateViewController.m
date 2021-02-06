@@ -60,9 +60,9 @@
 	
 	dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
 		[[BPHomebrewInterface sharedInterface] updateWithReturnBlock:^(NSString *output) {
-			[self.updateTextView performSelectorOnMainThread:@selector(setString:)
-												  withObject:[self.updateTextView.string stringByAppendingString:output]
-											   waitUntilDone:YES];
+			dispatch_async(dispatch_get_main_queue(), ^{
+				[self.updateTextView setString:[self.updateTextView.string stringByAppendingString:output]];
+			});
 		}];
 
 		dispatch_async(dispatch_get_main_queue(), ^{
