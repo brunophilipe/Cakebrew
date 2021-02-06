@@ -22,19 +22,20 @@
 #import "BPUtilities.h"
 
 NSInteger const OSX_YOSEMITE = 10;
+NSInteger const MACOS_BIGSUR = 11;
 
 @implementation BPUtilities
 
 + (BOOL)isRunningYosemiteOrLater
 {
-  if ([[NSProcessInfo processInfo] respondsToSelector:@selector(operatingSystemVersion)]) {
-	NSOperatingSystemVersion version = [[NSProcessInfo processInfo] operatingSystemVersion];
-	if(version.minorVersion >= OSX_YOSEMITE) {
-	  return YES;
+	if ([[NSProcessInfo processInfo] respondsToSelector:@selector(operatingSystemVersion)]) {
+		NSOperatingSystemVersion version = [[NSProcessInfo processInfo] operatingSystemVersion];
+		if (version.minorVersion >= OSX_YOSEMITE || version.majorVersion >= MACOS_BIGSUR) {
+			return YES;
+		}
 	}
-  }
-  
-  return NO;
+
+	return NO;
 }
 
 @end
