@@ -1,0 +1,3 @@
+[submodule "Dependencies/PXSourceList"]
+	path = Dependencies/PXSourceList
+	url = git@github.com:brunophilipe/PXSourceList.git

@@ -20,11 +20,11 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <PXSourceList/PXSourceList.h>
 #import "BPFormula.h"
 #import "BPFormulaeTableView.h"
 #import "BPFormulaPopoverViewController.h"
 #import "BPSideBarController.h"
-#import "PXSourceList.h"
 
 typedef NS_ENUM(NSUInteger, BPWindowOperation) {
 	kBPWindowOperationInstall,

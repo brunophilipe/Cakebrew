@@ -23,8 +23,6 @@
 		1570EFB01B2B91170075453A /* Sparkle.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 15B23A2818F4F21E00714212 /* Sparkle.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		15715F611C78050B00AE0E66 /* BPBundleWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 15715F5F1C78050B00AE0E66 /* BPBundleWindow.xib */; };
 		15715F641C78053300AE0E66 /* BPBundleWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 15715F631C78053300AE0E66 /* BPBundleWindowController.m */; };
-		158370B918F2471500176C9C /* PXSourceList.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 158370B818F2471500176C9C /* PXSourceList.framework */; };
-		158370BA18F2472100176C9C /* PXSourceList.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 158370B818F2471500176C9C /* PXSourceList.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		1584884A1F0708F000BD2CD9 /* brewinfo_nmap.txt in Resources */ = {isa = PBXBuildFile; fileRef = 158488491F0708F000BD2CD9 /* brewinfo_nmap.txt */; };
 		1594D13C1B8A6D1A00F764FA /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 15D2CFAC18F202D000B6D9F1 /* QuartzCore.framework */; };
 		15A00B411B8406FB00528486 /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 15A00B401B8406FB00528486 /* Credits.rtf */; };
@@ -51,6 +49,8 @@
 		15D5BEF218EBB3FB001DDED7 /* label.icns in Resources */ = {isa = PBXBuildFile; fileRef = 15D5BEEF18EBB3FB001DDED7 /* label.icns */; };
 		15D5BEF318EBB3FB001DDED7 /* plus.icns in Resources */ = {isa = PBXBuildFile; fileRef = 15D5BEF018EBB3FB001DDED7 /* plus.icns */; };
 		15D5BEF518EBB430001DDED7 /* search.icns in Resources */ = {isa = PBXBuildFile; fileRef = 15D5BEF418EBB430001DDED7 /* search.icns */; };
+		15EC1B0025CE1ACC00C93861 /* PXSourceList.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 15EC1AF925CE1AA000C93861 /* PXSourceList.framework */; };
+		15EC1B0125CE1ACC00C93861 /* PXSourceList.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 15EC1AF925CE1AA000C93861 /* PXSourceList.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		1FE4FE59148E4CDD008EDE8B /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1FE4FE58148E4CDD008EDE8B /* Cocoa.framework */; };
 		1FE4FE63148E4CDD008EDE8B /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 1FE4FE61148E4CDD008EDE8B /* InfoPlist.strings */; };
 		1FE4FE65148E4CDD008EDE8B /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FE4FE64148E4CDD008EDE8B /* main.m */; };
@@ -89,6 +89,30 @@
 		D2F732F119190B75002B2512 /* NSString+URLValidation.m in Sources */ = {isa = PBXBuildFile; fileRef = D2F732F019190B75002B2512 /* NSString+URLValidation.m */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		15EC1AF425CE1AA000C93861 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 15EC1AB025CE1AA000C93861 /* PXSourceList.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 8D1107320486CEB800E47090;
+			remoteInfo = CellBasedSourceList;
+		};
+		15EC1AF625CE1AA000C93861 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 15EC1AB025CE1AA000C93861 /* PXSourceList.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = D263123B186EF9F00036501C;
+			remoteInfo = ViewBasedSourceList;
+		};
+		15EC1AF825CE1AA000C93861 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 15EC1AB025CE1AA000C93861 /* PXSourceList.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 4CC5EA2A12DC81ED001F282E;
+			remoteInfo = PXSourceList;
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXCopyFilesBuildPhase section */
 		1570BA6018EF9B0F001C3C5C /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
@@ -96,8 +120,8 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				158370BA18F2472100176C9C /* PXSourceList.framework in CopyFiles */,
 				1570EFB01B2B91170075453A /* Sparkle.framework in CopyFiles */,
+				15EC1B0125CE1ACC00C93861 /* PXSourceList.framework in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -134,7 +158,6 @@
 		15715F661C78D3C600AE0E66 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/BPBundleWindow.strings; sourceTree = "<group>"; };
 		15715F681C78D3C800AE0E66 /* pt */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = pt; path = pt.lproj/BPBundleWindow.strings; sourceTree = "<group>"; };
 		15715F6A1C78D3CC00AE0E66 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/BPBundleWindow.strings; sourceTree = "<group>"; };
-		158370B818F2471500176C9C /* PXSourceList.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PXSourceList.framework; path = Cakebrew/Frameworks/PXSourceList.framework; sourceTree = "<group>"; };
 		158488491F0708F000BD2CD9 /* brewinfo_nmap.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = brewinfo_nmap.txt; sourceTree = "<group>"; };
 		15A00B3C1B84000600528486 /* pt */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = pt; path = pt.lproj/MainMenu.strings; sourceTree = "<group>"; };
 		15A00B3D1B84002E00528486 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
@@ -187,6 +210,7 @@
 		15D5BEEF18EBB3FB001DDED7 /* label.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = label.icns; sourceTree = "<group>"; };
 		15D5BEF018EBB3FB001DDED7 /* plus.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = plus.icns; sourceTree = "<group>"; };
 		15D5BEF418EBB430001DDED7 /* search.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = search.icns; sourceTree = "<group>"; };
+		15EC1AB025CE1AA000C93861 /* PXSourceList.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; path = PXSourceList.xcodeproj; sourceTree = "<group>"; };
 		15F3130D1C7A903500F22608 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/BPBundleWindow.strings"; sourceTree = "<group>"; };
 		15F3130E1C7A903500F22608 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/BPDoctorView.strings"; sourceTree = "<group>"; };
 		15F3130F1C7A903500F22608 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/BPFormulaOptionsWindow.strings"; sourceTree = "<group>"; };
@@ -271,7 +295,7 @@
 				D2CC8CA71B90F04C00F763DF /* Security.framework in Frameworks */,
 				15D2CFAD18F202D000B6D9F1 /* QuartzCore.framework in Frameworks */,
 				1FE4FE59148E4CDD008EDE8B /* Cocoa.framework in Frameworks */,
-				158370B918F2471500176C9C /* PXSourceList.framework in Frameworks */,
+				15EC1B0025CE1ACC00C93861 /* PXSourceList.framework in Frameworks */,
 				1570EFAF1B2B91170075453A /* Sparkle.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -408,11 +432,38 @@
 			name = Models;
 			sourceTree = "<group>";
 		};
+		15EC1AAD25CE1AA000C93861 /* Dependencies */ = {
+			isa = PBXGroup;
+			children = (
+				15EC1AAE25CE1AA000C93861 /* PXSourceList */,
+			);
+			path = Dependencies;
+			sourceTree = "<group>";
+		};
+		15EC1AAE25CE1AA000C93861 /* PXSourceList */ = {
+			isa = PBXGroup;
+			children = (
+				15EC1AB025CE1AA000C93861 /* PXSourceList.xcodeproj */,
+			);
+			path = PXSourceList;
+			sourceTree = "<group>";
+		};
+		15EC1AB125CE1AA000C93861 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				15EC1AF525CE1AA000C93861 /* PXSourceList.app */,
+				15EC1AF725CE1AA000C93861 /* ViewBasedSourceList.app */,
+				15EC1AF925CE1AA000C93861 /* PXSourceList.framework */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		1FE4FE49148E4CDD008EDE8B = {
 			isa = PBXGroup;
 			children = (
 				1FE4FE5E148E4CDD008EDE8B /* Cakebrew */,
 				D261C9C11B852FA300409803 /* CakebrewTests */,
+				15EC1AAD25CE1AA000C93861 /* Dependencies */,
 				1FE4FE57148E4CDD008EDE8B /* Frameworks */,
 				1FE4FE55148E4CDD008EDE8B /* Products */,
 			);
@@ -434,7 +485,6 @@
 			children = (
 				D2CC8CA61B90F04C00F763DF /* Security.framework */,
 				15B23A2818F4F21E00714212 /* Sparkle.framework */,
-				158370B818F2471500176C9C /* PXSourceList.framework */,
 				15D2CFAC18F202D000B6D9F1 /* QuartzCore.framework */,
 				1FE4FE58148E4CDD008EDE8B /* Cocoa.framework */,
 				1FE4FE5A148E4CDD008EDE8B /* Other Frameworks */,
@@ -601,6 +651,12 @@
 			mainGroup = 1FE4FE49148E4CDD008EDE8B;
 			productRefGroup = 1FE4FE55148E4CDD008EDE8B /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = 15EC1AB125CE1AA000C93861 /* Products */;
+					ProjectRef = 15EC1AB025CE1AA000C93861 /* PXSourceList.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				1FE4FE53148E4CDD008EDE8B /* Cakebrew */,
@@ -608,6 +664,30 @@
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		15EC1AF525CE1AA000C93861 /* PXSourceList.app */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.application;
+			path = PXSourceList.app;
+			remoteRef = 15EC1AF425CE1AA000C93861 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		15EC1AF725CE1AA000C93861 /* ViewBasedSourceList.app */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.application;
+			path = ViewBasedSourceList.app;
+			remoteRef = 15EC1AF625CE1AA000C93861 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		15EC1AF925CE1AA000C93861 /* PXSourceList.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = PXSourceList.framework;
+			remoteRef = 15EC1AF825CE1AA000C93861 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		1FE4FE52148E4CDD008EDE8B /* Resources */ = {
