@@ -141,7 +141,7 @@ NSOpenSavePanelDelegate>
 - (void)awakeFromNib
 {
 	[self.mainWindowController setUpViews];
-	[self.mainWindowController.splitViewController.view setHidden:YES];
+	[self.mainWindowController setContentViewHidden:YES];
 
 	self.formulaeDataSource = [[BPFormulaeDataSource alloc] initWithMode:kBPListAll];
 	self.tableView_formulae.dataSource = self.formulaeDataSource;
@@ -407,7 +407,7 @@ NSOpenSavePanelDelegate>
 		self.currentFormula = nil;
 		self.selectedFormulaeViewController.formulae = nil;
 		
-		[self.mainWindowController.splitViewController.view setHidden:NO];
+		[self.mainWindowController setContentViewHidden:NO];
 		[self.label_information setHidden:NO];
 		
 		[self.toolbar configureForMode:BPToolbarModeDefault];
@@ -442,7 +442,7 @@ NSOpenSavePanelDelegate>
 	{
 		[self addDisabledView];
 		[self.label_information setHidden:YES];
-		[self.mainWindowController.splitViewController.view setHidden:YES];
+		[self.mainWindowController setContentViewHidden:YES];
 		[self.toolbar lockItems];
 		
 		NSAlert *alert = [NSAlert alertWithMessageText:NSLocalizedString(@"Generic_Error", nil)
@@ -473,7 +473,7 @@ NSOpenSavePanelDelegate>
 		[self.disabledView removeFromSuperview];
 		self.disabledView = nil;
 		[self.label_information setHidden:NO];
-		[self.mainWindowController.splitViewController.view setHidden:NO];
+		[self.mainWindowController setContentViewHidden:NO];
 		
 		[self.toolbar unlockItems];
 		

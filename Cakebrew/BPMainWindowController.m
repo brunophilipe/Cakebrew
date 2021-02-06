@@ -40,6 +40,11 @@
 	]];
 }
 
+- (void)setContentViewHidden:(BOOL)hide
+{
+	[self.windowContentView setHidden:hide];
+}
+
 - (NSSplitViewItem *)makeSidebarSplitViewItem
 {
 	NSViewController *sidebarViewController = [[NSViewController alloc] initWithNibName:nil bundle:nil];

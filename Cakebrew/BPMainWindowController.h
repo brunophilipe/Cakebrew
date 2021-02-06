@@ -16,6 +16,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)setUpViews;
 
+- (void)setContentViewHidden:(BOOL)hide;
+
 @end
 
 NS_ASSUME_NONNULL_END
