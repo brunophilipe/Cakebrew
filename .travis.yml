@@ -1,2 +1,3 @@
 language: objective-c
+osx_image: xcode12.4
 script: xcodebuild clean build -project Cakebrew.xcodeproj -scheme CakebrewTests CODE_SIGNING_REQUIRED=NO test
