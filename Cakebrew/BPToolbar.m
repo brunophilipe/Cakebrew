@@ -49,6 +49,7 @@ static NSString *kToolbarItemMultiActionIdentifier = @"toolbarItemMultiAction";
 		_currentMode = BPToolbarModeInitial;
 		[self configureForMode:BPToolbarModeDefault];
 		[self lockItems];
+		[self setAllowsUserCustomization:YES];
 	}
 	return self;
 }

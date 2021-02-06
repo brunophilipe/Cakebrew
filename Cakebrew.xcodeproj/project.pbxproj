@@ -51,6 +51,7 @@
 		15D5BEF518EBB430001DDED7 /* search.icns in Resources */ = {isa = PBXBuildFile; fileRef = 15D5BEF418EBB430001DDED7 /* search.icns */; };
 		15EC1B0025CE1ACC00C93861 /* PXSourceList.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 15EC1AF925CE1AA000C93861 /* PXSourceList.framework */; };
 		15EC1B0125CE1ACC00C93861 /* PXSourceList.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 15EC1AF925CE1AA000C93861 /* PXSourceList.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		15EC1B0725CED52C00C93861 /* BPWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = 15EC1B0625CED52C00C93861 /* BPWindow.m */; };
 		1FE4FE59148E4CDD008EDE8B /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1FE4FE58148E4CDD008EDE8B /* Cocoa.framework */; };
 		1FE4FE63148E4CDD008EDE8B /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 1FE4FE61148E4CDD008EDE8B /* InfoPlist.strings */; };
 		1FE4FE65148E4CDD008EDE8B /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FE4FE64148E4CDD008EDE8B /* main.m */; };
@@ -211,6 +212,8 @@
 		15D5BEF018EBB3FB001DDED7 /* plus.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = plus.icns; sourceTree = "<group>"; };
 		15D5BEF418EBB430001DDED7 /* search.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = search.icns; sourceTree = "<group>"; };
 		15EC1AB025CE1AA000C93861 /* PXSourceList.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; path = PXSourceList.xcodeproj; sourceTree = "<group>"; };
+		15EC1B0525CED52C00C93861 /* BPWindow.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BPWindow.h; sourceTree = "<group>"; };
+		15EC1B0625CED52C00C93861 /* BPWindow.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BPWindow.m; sourceTree = "<group>"; };
 		15F3130D1C7A903500F22608 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/BPBundleWindow.strings"; sourceTree = "<group>"; };
 		15F3130E1C7A903500F22608 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/BPDoctorView.strings"; sourceTree = "<group>"; };
 		15F3130F1C7A903500F22608 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/BPFormulaOptionsWindow.strings"; sourceTree = "<group>"; };
@@ -511,6 +514,8 @@
 				D2A3A82A1B8C9F5200D05469 /* BPStyle.m */,
 				D2A3A82B1B8C9F5200D05469 /* BPUtilities.h */,
 				D2A3A82C1B8C9F5200D05469 /* BPUtilities.m */,
+				15EC1B0525CED52C00C93861 /* BPWindow.h */,
+				15EC1B0625CED52C00C93861 /* BPWindow.m */,
 				D2F732EE19190B75002B2512 /* Categories */,
 				15A974AB1968A3C900621C35 /* Controllers */,
 				15A974AC1968A3E800621C35 /* Homebrew */,
@@ -769,6 +774,7 @@
 				150AEC541B3F999A00163767 /* BPSideBarController.m in Sources */,
 				1570BA5618EE50BD001C3C5C /* BPFormula.m in Sources */,
 				15CEFC631AB335B2005CF54A /* BPLoadingView.m in Sources */,
+				15EC1B0725CED52C00C93861 /* BPWindow.m in Sources */,
 				D2C4278B1B8E055B001C1F80 /* BPDisabledView.m in Sources */,
 				1FE4FE65148E4CDD008EDE8B /* main.m in Sources */,
 				150AEC4E1B3F999A00163767 /* BPFormulaPopoverViewController.m in Sources */,
