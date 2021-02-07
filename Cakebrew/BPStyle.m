@@ -82,11 +82,12 @@ static BOOL shouldUseFlatUserInterface;
 	
 	return image;
 }
+
 + (NSImage *)toolbarImageForTap
 {
 	static NSImage *image;
 	if (!image) {
-		image = [self appropriateIconForToolbarWithName:@"download" orSymbol:@"download"];
+		image = [self appropriateIconForToolbarWithName:@"download" orSymbol:@"plus.circle.fill"];
 	}
 	
 	return image;
