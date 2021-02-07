@@ -10,6 +10,33 @@
 
 @implementation BPWindow
 
+- (instancetype)initWithContentRect:(NSRect)contentRect styleMask:(NSWindowStyleMask)style backing:(NSBackingStoreType)backingStoreType defer:(BOOL)flag
+{
+	self = [super initWithContentRect:contentRect styleMask:style backing:backingStoreType defer:flag];
+	if (self) {
+		[self sharedInit];
+	}
+	return self;
+}
+
+- (instancetype)initWithContentRect:(NSRect)contentRect styleMask:(NSWindowStyleMask)style backing:(NSBackingStoreType)backingStoreType defer:(BOOL)flag screen:(nullable NSScreen *)screen
+{
+	self = [super initWithContentRect:contentRect styleMask:style backing:backingStoreType defer:flag screen:screen];
+	if (self) {
+		[self sharedInit];
+	}
+	return self;
+}
+
+- (void)sharedInit
+{
+	if (@available(macOS 11.0, *)) {
+		NSWindowStyleMask mask = [self styleMask];
+		mask |= NSWindowStyleMaskFullSizeContentView;
+		[self setStyleMask:mask];
+	}
+}
+
 - (BOOL)validateMenuItem:(NSMenuItem *)menuItem
 {
 	if ([menuItem action] == @selector(runToolbarCustomizationPalette:)) {

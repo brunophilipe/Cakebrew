@@ -1,8 +1,10 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="9532" systemVersion="15D21" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="17701" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="9532"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="17701"/>
+        <capability name="NSView safe area layout guides" minToolsVersion="12.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="BPDoctorViewController">
@@ -18,90 +20,100 @@
             <rect key="frame" x="0.0" y="0.0" width="400" height="320"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="eDs-sG-t9C">
-                    <rect key="frame" x="6" y="293" width="197" height="19"/>
-                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Homebrew Doctor" id="UHp-GH-2qP">
-                        <font key="font" metaFont="system" size="16"/>
-                        <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
-                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
-                    </textFieldCell>
-                </textField>
-                <button horizontalHuggingPriority="252" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="zhN-hL-ggl">
-                    <rect key="frame" x="233" y="291" width="68" height="19"/>
-                    <buttonCell key="cell" type="roundRect" title="Clear Log" bezelStyle="roundedRect" alignment="center" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="AlR-6d-ju7">
-                        <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                        <font key="font" metaFont="cellTitle"/>
-                        <string key="keyEquivalent">k</string>
-                        <modifierMask key="keyEquivalentModifierMask" command="YES"/>
-                    </buttonCell>
-                    <connections>
-                        <action selector="clearLogDoctor:" target="-2" id="7cL-0n-PZC"/>
-                    </connections>
-                </button>
+                <stackView distribution="fill" orientation="horizontal" alignment="bottom" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="6iv-33-gaC">
+                    <rect key="frame" x="8" y="241" width="384" height="19"/>
+                    <subviews>
+                        <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="eDs-sG-t9C">
+                            <rect key="frame" x="-2" y="0.0" width="202" height="19"/>
+                            <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Homebrew Doctor" id="UHp-GH-2qP">
+                                <font key="font" metaFont="system" size="16"/>
+                                <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                            </textFieldCell>
+                        </textField>
+                        <progressIndicator wantsLayer="YES" horizontalHuggingPriority="750" verticalHuggingPriority="750" maxValue="100" displayedWhenStopped="NO" bezeled="NO" indeterminate="YES" controlSize="small" style="spinning" translatesAutoresizingMaskIntoConstraints="NO" id="meX-qn-Mcd">
+                            <rect key="frame" x="206" y="0.0" width="16" height="16"/>
+                        </progressIndicator>
+                        <button horizontalHuggingPriority="252" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="zhN-hL-ggl">
+                            <rect key="frame" x="230" y="-1" width="68" height="19"/>
+                            <buttonCell key="cell" type="roundRect" title="Clear Log" bezelStyle="roundedRect" alignment="center" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="AlR-6d-ju7">
+                                <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                <font key="font" metaFont="cellTitle"/>
+                                <string key="keyEquivalent">k</string>
+                                <modifierMask key="keyEquivalentModifierMask" command="YES"/>
+                            </buttonCell>
+                            <connections>
+                                <action selector="clearLogDoctor:" target="-2" id="7cL-0n-PZC"/>
+                            </connections>
+                        </button>
+                        <button horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="PFL-SR-FAj">
+                            <rect key="frame" x="306" y="-1" width="78" height="19"/>
+                            <buttonCell key="cell" type="roundRect" title="Run Doctor" bezelStyle="roundedRect" alignment="center" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="YyI-zq-THZ">
+                                <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                <font key="font" metaFont="cellTitle"/>
+                            </buttonCell>
+                            <connections>
+                                <action selector="runStopDoctor:" target="-2" id="n8v-h7-Ebz"/>
+                                <binding destination="-2" name="enabled" keyPath="isPerformingDoctor" id="elH-QR-oX8">
+                                    <dictionary key="options">
+                                        <string key="NSValueTransformerName">NSNegateBoolean</string>
+                                    </dictionary>
+                                </binding>
+                            </connections>
+                        </button>
+                    </subviews>
+                    <visibilityPriorities>
+                        <integer value="1000"/>
+                        <integer value="1000"/>
+                        <integer value="1000"/>
+                        <integer value="1000"/>
+                    </visibilityPriorities>
+                    <customSpacing>
+                        <real value="3.4028234663852886e+38"/>
+                        <real value="3.4028234663852886e+38"/>
+                        <real value="3.4028234663852886e+38"/>
+                        <real value="3.4028234663852886e+38"/>
+                    </customSpacing>
+                </stackView>
                 <scrollView horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" hasHorizontalScroller="NO" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DL2-Nl-eXU">
-                    <rect key="frame" x="-1" y="-1" width="402" height="286"/>
-                    <clipView key="contentView" id="6br-2h-BB7">
-                        <rect key="frame" x="1" y="1" width="400" height="284"/>
+                    <rect key="frame" x="-1" y="-1" width="402" height="234"/>
+                    <clipView key="contentView" drawsBackground="NO" id="6br-2h-BB7">
+                        <rect key="frame" x="1" y="1" width="400" height="232"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <textView editable="NO" importsGraphics="NO" richText="NO" findStyle="bar" incrementalSearchingEnabled="YES" verticallyResizable="YES" allowsNonContiguousLayout="YES" id="ZcW-pB-23F" customClass="BPAutoScrollTextView">
-                                <rect key="frame" x="0.0" y="0.0" width="400" height="284"/>
+                            <textView editable="NO" importsGraphics="NO" richText="NO" verticallyResizable="YES" findStyle="bar" incrementalSearchingEnabled="YES" allowsNonContiguousLayout="YES" id="ZcW-pB-23F" customClass="BPAutoScrollTextView">
+                                <rect key="frame" x="0.0" y="0.0" width="400" height="232"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <size key="minSize" width="400" height="284"/>
+                                <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                                <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                <size key="minSize" width="400" height="232"/>
                                 <size key="maxSize" width="463" height="10000000"/>
-                                <color key="insertionPointColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                                <size key="minSize" width="400" height="284"/>
-                                <size key="maxSize" width="463" height="10000000"/>
+                                <color key="insertionPointColor" name="textColor" catalog="System" colorSpace="catalog"/>
                             </textView>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </clipView>
-                    <scroller key="horizontalScroller" hidden="YES" verticalHuggingPriority="750" doubleValue="1" horizontal="YES" id="Ubi-zw-1Xy">
+                    <scroller key="horizontalScroller" hidden="YES" wantsLayer="YES" verticalHuggingPriority="750" doubleValue="1" horizontal="YES" id="Ubi-zw-1Xy">
                         <rect key="frame" x="-100" y="-100" width="87" height="18"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </scroller>
-                    <scroller key="verticalScroller" verticalHuggingPriority="750" doubleValue="1" horizontal="NO" id="WCB-Tg-m0k">
-                        <rect key="frame" x="385" y="1" width="16" height="284"/>
+                    <scroller key="verticalScroller" wantsLayer="YES" verticalHuggingPriority="750" doubleValue="1" horizontal="NO" id="WCB-Tg-m0k">
+                        <rect key="frame" x="385" y="1" width="16" height="232"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </scroller>
                 </scrollView>
-                <button horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="PFL-SR-FAj">
-                    <rect key="frame" x="309" y="291" width="78" height="19"/>
-                    <buttonCell key="cell" type="roundRect" title="Run Doctor" bezelStyle="roundedRect" alignment="center" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="YyI-zq-THZ">
-                        <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                        <font key="font" metaFont="cellTitle"/>
-                    </buttonCell>
-                    <connections>
-                        <action selector="runStopDoctor:" target="-2" id="n8v-h7-Ebz"/>
-                        <binding destination="-2" name="enabled" keyPath="isPerformingDoctor" id="elH-QR-oX8">
-                            <dictionary key="options">
-                                <string key="NSValueTransformerName">NSNegateBoolean</string>
-                            </dictionary>
-                        </binding>
-                    </connections>
-                </button>
-                <progressIndicator wantsLayer="YES" horizontalHuggingPriority="750" verticalHuggingPriority="750" maxValue="100" displayedWhenStopped="NO" bezeled="NO" indeterminate="YES" controlSize="small" style="spinning" translatesAutoresizingMaskIntoConstraints="NO" id="meX-qn-Mcd">
-                    <rect key="frame" x="209" y="293" width="16" height="16"/>
-                </progressIndicator>
             </subviews>
             <constraints>
-                <constraint firstItem="eDs-sG-t9C" firstAttribute="top" secondItem="a0h-tH-egU" secondAttribute="top" constant="8" id="0tn-Im-QU7"/>
-                <constraint firstItem="DL2-Nl-eXU" firstAttribute="top" relation="greaterThanOrEqual" secondItem="meX-qn-Mcd" secondAttribute="bottom" constant="8" id="25p-tw-aLk"/>
-                <constraint firstItem="DL2-Nl-eXU" firstAttribute="top" secondItem="PFL-SR-FAj" secondAttribute="bottom" constant="7" id="72L-LQ-tqC"/>
-                <constraint firstItem="PFL-SR-FAj" firstAttribute="leading" secondItem="zhN-hL-ggl" secondAttribute="trailing" constant="8" id="7mg-En-Hbq"/>
-                <constraint firstItem="zhN-hL-ggl" firstAttribute="top" secondItem="a0h-tH-egU" secondAttribute="top" constant="10" id="86O-Ma-y3p"/>
-                <constraint firstAttribute="trailing" secondItem="PFL-SR-FAj" secondAttribute="trailing" constant="13" id="8gb-vg-Klg"/>
-                <constraint firstItem="zhN-hL-ggl" firstAttribute="leading" secondItem="meX-qn-Mcd" secondAttribute="trailing" constant="8" id="N4C-Ly-LeJ"/>
-                <constraint firstItem="meX-qn-Mcd" firstAttribute="leading" secondItem="eDs-sG-t9C" secondAttribute="trailing" constant="8" id="PTt-dz-TVq"/>
-                <constraint firstItem="PFL-SR-FAj" firstAttribute="top" secondItem="a0h-tH-egU" secondAttribute="top" constant="10" id="TIG-Sz-6Nh"/>
-                <constraint firstAttribute="trailing" secondItem="DL2-Nl-eXU" secondAttribute="trailing" constant="-1" id="eel-HO-2xd"/>
-                <constraint firstAttribute="bottom" secondItem="DL2-Nl-eXU" secondAttribute="bottom" constant="-1" id="ha0-DR-XAs"/>
-                <constraint firstItem="DL2-Nl-eXU" firstAttribute="leading" secondItem="a0h-tH-egU" secondAttribute="leading" constant="-1" id="jBL-x9-KFL"/>
-                <constraint firstItem="DL2-Nl-eXU" firstAttribute="top" secondItem="zhN-hL-ggl" secondAttribute="bottom" constant="7" id="l7N-B9-YQc"/>
-                <constraint firstItem="meX-qn-Mcd" firstAttribute="top" relation="greaterThanOrEqual" secondItem="a0h-tH-egU" secondAttribute="top" constant="11" id="nIM-rX-TL6"/>
-                <constraint firstItem="eDs-sG-t9C" firstAttribute="leading" secondItem="a0h-tH-egU" secondAttribute="leading" constant="8" id="vmx-ob-Jc8"/>
+                <constraint firstItem="6iv-33-gaC" firstAttribute="top" secondItem="rYq-pc-gnn" secondAttribute="top" constant="8" id="4Gb-j5-sra"/>
+                <constraint firstItem="6iv-33-gaC" firstAttribute="leading" secondItem="rYq-pc-gnn" secondAttribute="leading" constant="8" id="a3v-Kz-kqT"/>
+                <constraint firstItem="rYq-pc-gnn" firstAttribute="trailing" secondItem="6iv-33-gaC" secondAttribute="trailing" constant="8" id="dKC-gI-59k"/>
+                <constraint firstItem="rYq-pc-gnn" firstAttribute="trailing" secondItem="DL2-Nl-eXU" secondAttribute="trailing" constant="-1" id="eel-HO-2xd"/>
+                <constraint firstItem="rYq-pc-gnn" firstAttribute="bottom" secondItem="DL2-Nl-eXU" secondAttribute="bottom" constant="-1" id="ha0-DR-XAs"/>
+                <constraint firstItem="DL2-Nl-eXU" firstAttribute="leading" secondItem="rYq-pc-gnn" secondAttribute="leading" constant="-1" id="jBL-x9-KFL"/>
+                <constraint firstItem="DL2-Nl-eXU" firstAttribute="top" secondItem="6iv-33-gaC" secondAttribute="bottom" constant="8" id="kdF-Hq-wGF"/>
             </constraints>
+            <viewLayoutGuide key="safeArea" id="rYq-pc-gnn"/>
+            <viewLayoutGuide key="layoutMargins" id="G6y-Vr-XSM"/>
+            <point key="canvasLocation" x="-193" y="154"/>
         </view>
     </objects>
 </document>
