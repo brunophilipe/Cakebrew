@@ -135,12 +135,12 @@ NSString *const kBP_HOMEBREW_WEBSITE = @"https://www.cakebrew.com";
 - (void)displayBackgroundWarning
 {
 	static NSAlert *alert= nil;
-	if (!alert)
-		alert = [NSAlert alertWithMessageText:NSLocalizedString(@"Message_BGTask_Title", nil)
-								defaultButton:NSLocalizedString(@"Generic_OK", nil)
-							  alternateButton:nil
-								  otherButton:nil
-					informativeTextWithFormat:NSLocalizedString(@"Message_BGTask_Body", nil)];
+	if (!alert) {
+		alert = [[NSAlert alloc] init];
+		[alert setMessageText:NSLocalizedString(@"Message_BGTask_Title", nil)];
+		[alert addButtonWithTitle:NSLocalizedString(@"Generic_OK", nil)];
+		[alert setInformativeText:NSLocalizedString(@"Message_BGTask_Body", nil)];
+	}
 
 	[alert runModal];
 }

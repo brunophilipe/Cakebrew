@@ -158,13 +158,11 @@ static NSString *cakebrewOutputIdentifier = @"+++++Cakebrew+++++";
 	if (!isValidShell)
 	{
 		static NSAlert *alert = nil;
-		if (!alert)
-		{
-			alert = [NSAlert alertWithMessageText:NSLocalizedString(@"Message_Shell_Invalid_Title", nil)
-									defaultButton:NSLocalizedString(@"Generic_OK", nil)
-								  alternateButton:nil
-									  otherButton:nil
-						informativeTextWithFormat:NSLocalizedString(@"Message_Shell_Invalid_Body", nil), userShell];
+		if (!alert) {
+			alert = [[NSAlert alloc] init];
+			[alert setMessageText:NSLocalizedString(@"Message_Shell_Invalid_Title", nil)];
+			[alert addButtonWithTitle:NSLocalizedString(@"Generic_OK", nil)];
+			[alert setInformativeText:[NSString stringWithFormat:NSLocalizedString(@"Message_Shell_Invalid_Body", nil), userShell]];
 		}
 		[alert performSelectorOnMainThread:@selector(runModal) withObject:nil waitUntilDone:YES];
 		
