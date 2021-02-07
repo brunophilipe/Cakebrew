@@ -38,10 +38,10 @@
 #import "BPTask.h"
 #import "BPMainWindowController.h"
 
-typedef NS_ENUM(NSUInteger, HomeBrewTab) {
-	HomeBrewTabFormulae,
-	HomeBrewTabDoctor,
-	HomeBrewTabUpdate
+typedef NS_ENUM(NSUInteger, BPContentTab) {
+	kBPContentTabFormulae,
+	kBPContentTabDoctor,
+	kBPContentTabUpdate
 };
 
 @interface BPHomebrewViewController () <NSTableViewDelegate,
@@ -144,30 +144,30 @@ NSOpenSavePanelDelegate>
 	[self.mainWindowController setContentViewHidden:YES];
 
 	self.formulaeDataSource = [[BPFormulaeDataSource alloc] initWithMode:kBPListAll];
-	self.tableView_formulae.dataSource = self.formulaeDataSource;
-	self.tableView_formulae.delegate = self;
-	[self.tableView_formulae accessibilitySetOverrideValue:NSLocalizedString(@"Formulae", nil) forAttribute:NSAccessibilityDescriptionAttribute];
+	self.formulaeTableView.dataSource = self.formulaeDataSource;
+	self.formulaeTableView.delegate = self;
+	[self.formulaeTableView accessibilitySetOverrideValue:NSLocalizedString(@"Formulae", nil) forAttribute:NSAccessibilityDescriptionAttribute];
 	
 	//link formulae tableview
 	NSView *formulaeView = self.formulaeSplitView;
-	if ([[self.tabView tabViewItems] count] > HomeBrewTabFormulae) {
-		NSTabViewItem *formulaeTab = [self.tabView tabViewItemAtIndex:HomeBrewTabFormulae];
+	if ([[self.tabView tabViewItems] count] > kBPContentTabFormulae) {
+		NSTabViewItem *formulaeTab = [self.tabView tabViewItemAtIndex:kBPContentTabFormulae];
 		[formulaeTab setView:formulaeView];
 	}
 	
 	//Creating view for update tab
 	self.updateViewController = [[BPUpdateViewController alloc] initWithNibName:nil bundle:nil];
 	NSView *updateView = [self.updateViewController view];
-	if ([[self.tabView tabViewItems] count] > HomeBrewTabUpdate) {
-		NSTabViewItem *updateTab = [self.tabView tabViewItemAtIndex:HomeBrewTabUpdate];
+	if ([[self.tabView tabViewItems] count] > kBPContentTabUpdate) {
+		NSTabViewItem *updateTab = [self.tabView tabViewItemAtIndex:kBPContentTabUpdate];
 		[updateTab setView:updateView];
 	}
 	
 	//Creating view for doctor tab
 	self.doctorViewController = [[BPDoctorViewController alloc] initWithNibName:nil bundle:nil];
 	NSView *doctorView = [self.doctorViewController view];
-	if ([[self.tabView tabViewItems] count] > HomeBrewTabDoctor) {
-		NSTabViewItem *doctorTab = [self.tabView tabViewItemAtIndex:HomeBrewTabDoctor];
+	if ([[self.tabView tabViewItems] count] > kBPContentTabDoctor) {
+		NSTabViewItem *doctorTab = [self.tabView tabViewItemAtIndex:kBPContentTabDoctor];
 		[doctorTab setView:doctorView];
 	}
 	
@@ -268,8 +268,8 @@ NSOpenSavePanelDelegate>
 - (void)updateInterfaceItems
 {
 	NSInteger selectedSidebarRow	= [self.sidebarController.sidebar selectedRow];
-	NSInteger selectedIndex			= [self.tableView_formulae selectedRow];
-	NSIndexSet *selectedRows		= [self.tableView_formulae selectedRowIndexes];
+	NSInteger selectedIndex			= [self.formulaeTableView selectedRow];
+	NSIndexSet *selectedRows		= [self.formulaeTableView selectedRowIndexes];
 	NSArray *selectedFormulae		= [self.formulaeDataSource formulasAtIndexSet:selectedRows];
 
 	CGFloat height = [self.formulaeSplitView bounds].size.height;
@@ -296,7 +296,7 @@ NSOpenSavePanelDelegate>
 	{
 		[self.toolbar configureForMode:BPToolbarModeDefault];
 	}
-	else if ([[self.tableView_formulae selectedRowIndexes] count] > 1)
+	else if ([[self.formulaeTableView selectedRowIndexes] count] > 1)
 	{
 		[self.toolbar configureForMode:BPToolbarModeUpdateMany];
 	}
@@ -336,10 +336,10 @@ NSOpenSavePanelDelegate>
 
 - (void)configureTableForListing:(BPListMode)mode
 {
-	[self.tableView_formulae deselectAll:nil];
+	[self.formulaeTableView deselectAll:nil];
 	[self.formulaeDataSource setMode:mode];
-	[self.tableView_formulae setMode:mode];
-	[self.tableView_formulae reloadData];
+	[self.formulaeTableView setMode:mode];
+	[self.formulaeTableView reloadData];
 	[self updateInterfaceItems];
 }
 
@@ -412,7 +412,7 @@ NSOpenSavePanelDelegate>
 	
 	if (self.isHomebrewInstalled)
 	{
-		[[self.tableView_formulae menu] cancelTracking];
+		[[self.formulaeTableView menu] cancelTracking];
 		
 		self.currentFormula = nil;
 		self.selectedFormulaeViewController.formulae = nil;
@@ -498,7 +498,7 @@ NSOpenSavePanelDelegate>
 	{
 		[popover close];
 	}
-	NSInteger selectedIndex = [self.tableView_formulae selectedRow];
+	NSInteger selectedIndex = [self.formulaeTableView selectedRow];
 	BPFormula *formula = [self selectedFormula];
 
 	if (!formula)
@@ -509,8 +509,8 @@ NSOpenSavePanelDelegate>
 	[self.formulaPopoverViewController setInfoType:type];
 	[self.formulaPopoverViewController setFormula:formula];
 
-	NSRect anchorRect = [self.tableView_formulae rectOfRow:selectedIndex];
-	anchorRect.origin = [self.scrollView_formulae convertPoint:anchorRect.origin fromView:self.tableView_formulae];
+	NSRect anchorRect = [self.formulaeTableView rectOfRow:selectedIndex];
+	anchorRect.origin = [self.scrollView_formulae convertPoint:anchorRect.origin fromView:self.formulaeTableView];
 
 	[popover showRelativeToRect:anchorRect
 						 ofView:self.scrollView_formulae
@@ -552,24 +552,23 @@ NSOpenSavePanelDelegate>
 
 - (void)sourceListSelectionDidChange
 {
-	NSUInteger tabIndex = HomeBrewTabFormulae;
+	BPContentTab tabIndex = kBPContentTabFormulae;
 	NSInteger selectedSidebarRow = [self.sidebarController.sidebar selectedRow];
 	
-	if ([self isSearching])
-	{
+	if ([self isSearching]) {
 		[self endSearchAndCleanup];
 	}
 	
-	if (selectedSidebarRow >= 0)
+	if (selectedSidebarRow >= 0) {
 		_lastSelectedSidebarIndex = selectedSidebarRow;
+	}
 	
-	[self.tableView_formulae deselectAll:nil];
+	[self.formulaeTableView deselectAll:nil];
 	[self setCurrentFormula:nil];
 	
 	[self updateInterfaceItems];
 	
-	switch (selectedSidebarRow)
-	{
+	switch (selectedSidebarRow) {
 		case FormulaeSideBarItemInstalled: // Installed Formulae
 			[self configureTableForListing:kBPListInstalled];
 			break;
@@ -591,11 +590,11 @@ NSOpenSavePanelDelegate>
 			break;
 			
 		case FormulaeSideBarItemDoctor: // Doctor
-			tabIndex = HomeBrewTabDoctor;
+			tabIndex = kBPContentTabDoctor;
 			break;
 			
 		case FormulaeSideBarItemUpdate: // Update Tool
-			tabIndex = HomeBrewTabUpdate;
+			tabIndex = kBPContentTabUpdate;
 			break;
 			
 		default:
@@ -611,7 +610,7 @@ NSOpenSavePanelDelegate>
 
 - (void)menuNeedsUpdate:(NSMenu *)menu
 {
-	[self.tableView_formulae selectRowIndexes:[NSIndexSet indexSetWithIndex:[self.tableView_formulae clickedRow]] byExtendingSelection:NO];
+	[self.formulaeTableView selectRowIndexes:[NSIndexSet indexSetWithIndex:[self.formulaeTableView clickedRow]] byExtendingSelection:NO];
 }
 
 #pragma mark - IBActions
@@ -888,13 +887,13 @@ NSOpenSavePanelDelegate>
 
 - (BPFormula *)selectedFormula
 {
-	NSInteger selectedIndex = [self.tableView_formulae selectedRow];
+	NSInteger selectedIndex = [self.formulaeTableView selectedRow];
 	return [self.formulaeDataSource formulaAtIndex:selectedIndex];
 }
 
 - (NSArray *)selectedFormulae
 {
-	NSIndexSet *selectedIndexes = [self.tableView_formulae selectedRowIndexes];
+	NSIndexSet *selectedIndexes = [self.formulaeTableView selectedRowIndexes];
 	return [self.formulaeDataSource formulasAtIndexSet:selectedIndexes];
 }
 

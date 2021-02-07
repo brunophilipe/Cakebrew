@@ -750,6 +750,7 @@ CA
             <connections>
                 <outlet property="backgroundActivityIndicator" destination="jbW-lv-A2U" id="NeH-Lc-JOD"/>
                 <outlet property="formulaeSplitView" destination="hkt-Ff-Ha2" id="PSG-Ga-xEa"/>
+                <outlet property="formulaeTableView" destination="swO-GD-dpc" id="pQg-F4-vgG"/>
                 <outlet property="label_information" destination="YBh-sI-Jkw" id="ya1-xd-GM6"/>
                 <outlet property="mainWindowController" destination="Nan-E3-hfy" id="IlX-dS-tL8"/>
                 <outlet property="menu_formula" destination="sBH-Ta-Jft" id="kCm-57-cUw"/>
@@ -757,7 +758,6 @@ CA
                 <outlet property="selectedFormulaView" destination="Nrf-M9-yac" id="l5Q-Fd-m5y"/>
                 <outlet property="sidebarController" destination="SGP-Ky-0Th" id="etb-bD-RB5"/>
                 <outlet property="tabView" destination="lYz-uI-q1s" id="ond-fK-EfG"/>
-                <outlet property="tableView_formulae" destination="swO-GD-dpc" id="pQg-F4-vgG"/>
                 <outlet property="view" destination="372" id="773"/>
             </connections>
         </viewController>
