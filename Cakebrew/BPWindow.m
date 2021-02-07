@@ -34,6 +34,8 @@
 		NSWindowStyleMask mask = [self styleMask];
 		mask |= NSWindowStyleMaskFullSizeContentView;
 		[self setStyleMask:mask];
+	} else {
+		[self setContentBorderThickness:22 forEdge:NSRectEdgeMinY];
 	}
 }
 

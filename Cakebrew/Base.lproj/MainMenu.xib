@@ -593,7 +593,6 @@ CA
                 <rect key="frame" x="0.0" y="0.0" width="826" height="439"/>
                 <autoresizingMask key="autoresizingMask"/>
             </view>
-            <contentBorderThickness minY="22"/>
             <point key="canvasLocation" x="461" y="273.5"/>
         </window>
         <menu title="Formula" id="dg5-kq-v1Y">
@@ -751,7 +750,7 @@ CA
             <connections>
                 <outlet property="backgroundActivityIndicator" destination="jbW-lv-A2U" id="NeH-Lc-JOD"/>
                 <outlet property="formulaeSplitView" destination="hkt-Ff-Ha2" id="PSG-Ga-xEa"/>
-                <outlet property="label_information" destination="BcM-h3-egW" id="xHk-a4-YrQ"/>
+                <outlet property="label_information" destination="YBh-sI-Jkw" id="ya1-xd-GM6"/>
                 <outlet property="mainWindowController" destination="Nan-E3-hfy" id="IlX-dS-tL8"/>
                 <outlet property="menu_formula" destination="sBH-Ta-Jft" id="kCm-57-cUw"/>
                 <outlet property="scrollView_formulae" destination="YpG-G5-bXX" id="oFo-5A-rfO"/>
@@ -878,23 +877,38 @@ CA
             <point key="canvasLocation" x="469" y="762"/>
         </splitView>
         <userDefaultsController representsSharedInstance="YES" id="Bum-pn-dFZ"/>
-        <customView id="du9-Lg-Fwn">
+        <customView placeholderIntrinsicWidth="826" placeholderIntrinsicHeight="439" translatesAutoresizingMaskIntoConstraints="NO" id="du9-Lg-Fwn">
             <rect key="frame" x="0.0" y="0.0" width="826" height="439"/>
-            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
             <subviews>
-                <progressIndicator wantsLayer="YES" horizontalHuggingPriority="750" verticalHuggingPriority="750" maxValue="100" displayedWhenStopped="NO" bezeled="NO" indeterminate="YES" controlSize="small" style="spinning" translatesAutoresizingMaskIntoConstraints="NO" id="jbW-lv-A2U">
-                    <rect key="frame" x="3" y="3" width="16" height="16"/>
-                </progressIndicator>
-                <textField hidden="YES" horizontalHuggingPriority="249" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="BcM-h3-egW">
-                    <rect key="frame" x="749" y="4" width="70" height="14"/>
-                    <textFieldCell key="cell" controlSize="small" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="right" title="No selection" id="O6N-2T-I2B">
-                        <font key="font" metaFont="smallSystem"/>
-                        <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
-                        <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                    </textFieldCell>
-                </textField>
-                <tabView drawsBackground="NO" type="noTabsNoBorder" initialItem="0TF-af-Tbu" translatesAutoresizingMaskIntoConstraints="NO" id="lYz-uI-q1s">
-                    <rect key="frame" x="-7" y="10" width="840" height="435"/>
+                <box verticalHuggingPriority="750" boxType="separator" translatesAutoresizingMaskIntoConstraints="NO" id="08Y-7c-3Hu">
+                    <rect key="frame" x="0.0" y="20" width="826" height="5"/>
+                </box>
+                <stackView distribution="fill" orientation="horizontal" alignment="top" horizontalStackHuggingPriority="250" verticalStackHuggingPriority="750" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="KBH-0Z-Fg0">
+                    <rect key="frame" x="6" y="3" width="812" height="16"/>
+                    <subviews>
+                        <progressIndicator wantsLayer="YES" horizontalHuggingPriority="750" verticalHuggingPriority="750" maxValue="100" displayedWhenStopped="NO" bezeled="NO" indeterminate="YES" controlSize="small" style="spinning" translatesAutoresizingMaskIntoConstraints="NO" id="jbW-lv-A2U">
+                            <rect key="frame" x="0.0" y="0.0" width="16" height="16"/>
+                        </progressIndicator>
+                        <textField horizontalHuggingPriority="251" verticalHuggingPriority="751" translatesAutoresizingMaskIntoConstraints="NO" id="YBh-sI-Jkw">
+                            <rect key="frame" x="22" y="2" width="792" height="14"/>
+                            <textFieldCell key="cell" lineBreakMode="clipping" alignment="right" title="Label" id="ezd-SJ-vXT">
+                                <font key="font" metaFont="system" size="11"/>
+                                <color key="textColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
+                                <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                            </textFieldCell>
+                        </textField>
+                    </subviews>
+                    <visibilityPriorities>
+                        <integer value="1000"/>
+                        <integer value="1000"/>
+                    </visibilityPriorities>
+                    <customSpacing>
+                        <real value="3.4028234663852886e+38"/>
+                        <real value="3.4028234663852886e+38"/>
+                    </customSpacing>
+                </stackView>
+                <tabView placeholderIntrinsicWidth="826" placeholderIntrinsicHeight="415" drawsBackground="NO" type="noTabsNoBorder" initialItem="0TF-af-Tbu" translatesAutoresizingMaskIntoConstraints="NO" id="lYz-uI-q1s">
+                    <rect key="frame" x="0.0" y="23" width="826" height="416"/>
                     <font key="font" metaFont="system"/>
                     <tabViewItems>
                         <tabViewItem label="Formulae" identifier="1" id="0TF-af-Tbu">
@@ -905,7 +919,7 @@ CA
                         </tabViewItem>
                         <tabViewItem label="Doctor" identifier="2" id="26r-2F-z12">
                             <view key="view" id="326-X6-SQt">
-                                <rect key="frame" x="0.0" y="0.0" width="826" height="419"/>
+                                <rect key="frame" x="0.0" y="0.0" width="826" height="416"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             </view>
                         </tabViewItem>
@@ -920,13 +934,14 @@ CA
             </subviews>
             <constraints>
                 <constraint firstItem="lYz-uI-q1s" firstAttribute="top" secondItem="du9-Lg-Fwn" secondAttribute="top" id="2Sb-gx-h6f"/>
-                <constraint firstItem="jbW-lv-A2U" firstAttribute="leading" secondItem="du9-Lg-Fwn" secondAttribute="leading" constant="3" id="9X6-hq-Nlj"/>
-                <constraint firstAttribute="bottom" secondItem="BcM-h3-egW" secondAttribute="bottom" constant="4" id="BrP-ki-L27"/>
+                <constraint firstItem="lYz-uI-q1s" firstAttribute="bottom" secondItem="08Y-7c-3Hu" secondAttribute="bottom" constant="-1" id="68d-gs-LGt"/>
+                <constraint firstAttribute="bottom" secondItem="KBH-0Z-Fg0" secondAttribute="bottom" constant="3" id="6j1-D9-quk"/>
                 <constraint firstItem="lYz-uI-q1s" firstAttribute="leading" secondItem="du9-Lg-Fwn" secondAttribute="leading" id="Bso-fS-rZ3"/>
-                <constraint firstAttribute="trailing" secondItem="BcM-h3-egW" secondAttribute="trailing" constant="9" id="Mta-M5-lk5"/>
-                <constraint firstItem="jbW-lv-A2U" firstAttribute="top" secondItem="lYz-uI-q1s" secondAttribute="bottom" constant="1" id="O4P-C1-eZs"/>
-                <constraint firstItem="BcM-h3-egW" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="du9-Lg-Fwn" secondAttribute="leading" constant="28" id="cAS-4O-lKD"/>
-                <constraint firstAttribute="bottom" secondItem="jbW-lv-A2U" secondAttribute="bottom" constant="3" id="oFZ-wL-hEj"/>
+                <constraint firstItem="lYz-uI-q1s" firstAttribute="bottom" secondItem="KBH-0Z-Fg0" secondAttribute="top" constant="-4" id="Rnr-sI-vMw"/>
+                <constraint firstAttribute="trailing" secondItem="08Y-7c-3Hu" secondAttribute="trailing" id="e6e-2c-NMo"/>
+                <constraint firstItem="KBH-0Z-Fg0" firstAttribute="leading" secondItem="du9-Lg-Fwn" secondAttribute="leading" constant="6" id="ecs-ov-KM7"/>
+                <constraint firstAttribute="trailing" secondItem="KBH-0Z-Fg0" secondAttribute="trailing" constant="8" id="x2d-VG-xSZ"/>
+                <constraint firstItem="08Y-7c-3Hu" firstAttribute="leading" secondItem="du9-Lg-Fwn" secondAttribute="leading" id="xj2-O2-zSU"/>
                 <constraint firstAttribute="trailing" secondItem="lYz-uI-q1s" secondAttribute="trailing" id="yEW-SB-Mx4"/>
             </constraints>
             <point key="canvasLocation" x="118" y="-308.5"/>
