@@ -35,44 +35,118 @@
 - (void)buildSidebarTree
 {
 	PXSourceListItem *item, *parent;
-	_rootSidebarCategory = [PXSourceListItem itemWithTitle:@"" identifier:@"root"];
+	_rootSidebarCategory = [PXSourceListItem itemWithTitle:@""
+												identifier:@"root"];
 	
-	parent = [PXSourceListItem itemWithTitle:NSLocalizedString(@"Sidebar_Group_Formulae", nil) identifier:@"group"];
-	[_rootSidebarCategory addChildItem:parent];  //FormulaeSideBarItemFormulaeCategory = 0,
+	parent = [PXSourceListItem itemWithTitle:NSLocalizedString(@"Sidebar_Group_Formulae", nil)
+								  identifier:@"group"];
+	[_rootSidebarCategory addChildItem:parent];
 	
-	_instaledFormulaeSidebarItem = [PXSourceListItem itemWithTitle:NSLocalizedString(@"Sidebar_Item_Installed", nil) identifier:@"item"];
-	_instaledFormulaeSidebarItem.icon = [NSImage imageNamed:@"installedTemplate"];
-	[parent addChildItem:_instaledFormulaeSidebarItem];  //FormulaeSideBarItemInstalled = 1,
+	_instaledFormulaeSidebarItem = [PXSourceListItem itemWithTitle:NSLocalizedString(@"Sidebar_Item_Installed", nil)
+														identifier:@"item"];
+	_instaledFormulaeSidebarItem.icon = [self installedSidebarIconImage];
+	[parent addChildItem:_instaledFormulaeSidebarItem];
 	
-	_outdatedFormulaeSidebarItem = [PXSourceListItem itemWithTitle:NSLocalizedString(@"Sidebar_Item_Outdated", nil) identifier:@"item"];
-	_outdatedFormulaeSidebarItem.icon = [NSImage imageNamed:@"outdatedTemplate"];
-	[parent addChildItem:_outdatedFormulaeSidebarItem]; //FormulaeSideBarItemOutdated = 2,
+	_outdatedFormulaeSidebarItem = [PXSourceListItem itemWithTitle:NSLocalizedString(@"Sidebar_Item_Outdated", nil)
+														identifier:@"item"];
+	_outdatedFormulaeSidebarItem.icon = [self outdatedSidebarIconImage];
+	[parent addChildItem:_outdatedFormulaeSidebarItem];
 	
-	_allFormulaeSidebarItem = [PXSourceListItem itemWithTitle:NSLocalizedString(@"Sidebar_Item_All", nil) identifier:@"item"];
-	_allFormulaeSidebarItem.icon = [NSImage imageNamed:@"allFormulaeTemplate"];
-	[parent addChildItem:_allFormulaeSidebarItem];  //FormulaeSideBarItemAll = 3,
+	_allFormulaeSidebarItem = [PXSourceListItem itemWithTitle:NSLocalizedString(@"Sidebar_Item_All", nil)
+												   identifier:@"item"];
+	_allFormulaeSidebarItem.icon = [self allFormulaeSidebarIconImage];
+	[parent addChildItem:_allFormulaeSidebarItem];
 	
-	_leavesFormulaeSidebarItem = [PXSourceListItem itemWithTitle:NSLocalizedString(@"Sidebar_Item_Leaves", nil) identifier:@"item"];
-	_leavesFormulaeSidebarItem.icon = [NSImage imageNamed:@"pinTemplate"];
-	[parent addChildItem:_leavesFormulaeSidebarItem];  //FormulaeSideBarItemLeaves = 4,
+	_leavesFormulaeSidebarItem = [PXSourceListItem itemWithTitle:NSLocalizedString(@"Sidebar_Item_Leaves", nil)
+													  identifier:@"item"];
+	_leavesFormulaeSidebarItem.icon = [self leavesSidebarIconImage];
+	[parent addChildItem:_leavesFormulaeSidebarItem];
 	
-	_repositoriesFormulaeSidebarItem = [PXSourceListItem itemWithTitle:NSLocalizedString(@"Sidebar_Item_Repos", nil) identifier:@"item"];
-	_repositoriesFormulaeSidebarItem.icon = [NSImage imageNamed:@"cloudTemplate"];
-	[parent addChildItem:_repositoriesFormulaeSidebarItem];  //FormulaeSideBarItemRepositories = 5,
+	_repositoriesFormulaeSidebarItem = [PXSourceListItem itemWithTitle:NSLocalizedString(@"Sidebar_Item_Repos", nil)
+															identifier:@"item"];
+	_repositoriesFormulaeSidebarItem.icon = [self repositoriesSidebarIconImage];
+	[parent addChildItem:_repositoriesFormulaeSidebarItem];
 	
-	parent = [PXSourceListItem itemWithTitle:NSLocalizedString(@"Sidebar_Group_Tools", nil) identifier:@"group"];
-	[_rootSidebarCategory addChildItem:parent];  //FormulaeSideBarItemToolsCategory = 6,
+	parent = [PXSourceListItem itemWithTitle:NSLocalizedString(@"Sidebar_Group_Tools", nil)
+								  identifier:@"group"];
+	[_rootSidebarCategory addChildItem:parent];
 	
-	item = [PXSourceListItem itemWithTitle:NSLocalizedString(@"Sidebar_Item_Doctor", nil) identifier:@"item"];
+	item = [PXSourceListItem itemWithTitle:NSLocalizedString(@"Sidebar_Item_Doctor", nil)
+								identifier:@"item"];
 	[item setBadgeValue:@(-1)];
-	[item setIcon:[NSImage imageNamed:@"doctorTemplate"]];
-	[parent addChildItem:item];  //FormulaeSideBarItemDoctor = 7,
+	[item setIcon:[self doctorSidebarIconImage]];
+	[parent addChildItem:item];
 	
-	item = [PXSourceListItem itemWithTitle:NSLocalizedString(@"Sidebar_Item_Update", nil) identifier:@"item"];
+	item = [PXSourceListItem itemWithTitle:NSLocalizedString(@"Sidebar_Item_Update", nil)
+								identifier:@"item"];
 	[item setBadgeValue:@(-1)];
-	[item setIcon:[NSImage imageNamed:@"updateTemplate"]];
-	[parent addChildItem:item];  //FormulaeSideBarItemUpdate = 8,
+	[item setIcon:[self updateSidebarIconImage]];
+	[parent addChildItem:item];
 }
+
+- (NSImage *)installedSidebarIconImage
+{
+	if (@available(macOS 11.0, *)) {
+		return [NSImage imageWithSystemSymbolName:@"checkmark.square" accessibilityDescription:@"installed"];
+	} else {
+		return [NSImage imageNamed:@"installedTemplate"];
+	}
+}
+
+- (NSImage *)outdatedSidebarIconImage
+{
+	if (@available(macOS 11.0, *)) {
+		return [NSImage imageWithSystemSymbolName:@"clock.arrow.circlepath" accessibilityDescription:@"outdated"];
+	} else {
+		return [NSImage imageNamed:@"outdatedTemplate"];
+	}
+}
+
+- (NSImage *)allFormulaeSidebarIconImage
+{
+	if (@available(macOS 11.0, *)) {
+		return [NSImage imageWithSystemSymbolName:@"books.vertical" accessibilityDescription:@"all formulae"];
+	} else {
+		return [NSImage imageNamed:@"allFormulaeTemplate"];
+	}
+}
+
+- (NSImage *)leavesSidebarIconImage
+{
+	if (@available(macOS 11.0, *)) {
+		return [NSImage imageWithSystemSymbolName:@"leaf" accessibilityDescription:@"leaves"];
+	} else {
+		return [NSImage imageNamed:@"pinTemplate"];
+	}
+}
+
+- (NSImage *)repositoriesSidebarIconImage
+{
+	if (@available(macOS 11.0, *)) {
+		return [NSImage imageWithSystemSymbolName:@"building.columns" accessibilityDescription:@"repositories"];
+	} else {
+		return [NSImage imageNamed:@"cloudTemplate"];
+	}
+}
+
+- (NSImage *)doctorSidebarIconImage
+{
+	if (@available(macOS 11.0, *)) {
+		return [NSImage imageWithSystemSymbolName:@"stethoscope" accessibilityDescription:@"homebrew doctor"];
+	} else {
+		return [NSImage imageNamed:@"doctorTemplate"];
+	}
+}
+
+- (NSImage *)updateSidebarIconImage
+{
+	if (@available(macOS 11.0, *)) {
+		return [NSImage imageWithSystemSymbolName:@"arrow.triangle.2.circlepath.circle" accessibilityDescription:@"homebrew update"];
+	} else {
+		return [NSImage imageNamed:@"updateTemplate"];
+	}
+}
+
 
 - (void)configureSidebarSettings
 {
@@ -147,8 +221,9 @@
 		[cellView.badgeView setHidden:YES];
 	}
 	
-	if (sourceListItem.icon)
+	if (sourceListItem.icon) {
 		[cellView.imageView setImage:sourceListItem.icon];
+	}
 	
 	[cellView.badgeView calcSize];
 	
