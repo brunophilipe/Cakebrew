@@ -150,7 +150,11 @@ static BOOL shouldUseFlatUserInterface;
 {
 	static NSColor *color;
 	if (!color) {
-		color = self.isFlat ? [NSColor blackColor] : [NSColor whiteColor];
+		if (@available(macOS 10.14, *)) {
+			color = [NSColor textColor];
+		} else {
+			color = [self isFlat] ? [NSColor blackColor] : [NSColor whiteColor];
+		}
 	}
 	
 	return color;
@@ -160,7 +164,11 @@ static BOOL shouldUseFlatUserInterface;
 {
 	static NSColor *color;
 	if (!color) {
-		color = self.isFlat ? [NSColor blackColor] : [NSColor whiteColor];
+		if (@available(macOS 10.14, *)) {
+			color = [NSColor textColor];
+		} else {
+			color = [self isFlat] ? [NSColor blackColor] : [NSColor whiteColor];
+		}
 	}
 	
 	return color;
