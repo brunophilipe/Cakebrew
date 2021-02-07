@@ -21,10 +21,10 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <stackView distribution="fill" orientation="horizontal" alignment="bottom" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="6iv-33-gaC">
-                    <rect key="frame" x="8" y="241" width="384" height="19"/>
+                    <rect key="frame" x="12" y="241" width="380" height="19"/>
                     <subviews>
                         <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="eDs-sG-t9C">
-                            <rect key="frame" x="-2" y="0.0" width="202" height="19"/>
+                            <rect key="frame" x="-2" y="0.0" width="198" height="19"/>
                             <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Homebrew Doctor" id="UHp-GH-2qP">
                                 <font key="font" metaFont="system" size="16"/>
                                 <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
@@ -32,10 +32,10 @@
                             </textFieldCell>
                         </textField>
                         <progressIndicator wantsLayer="YES" horizontalHuggingPriority="750" verticalHuggingPriority="750" maxValue="100" displayedWhenStopped="NO" bezeled="NO" indeterminate="YES" controlSize="small" style="spinning" translatesAutoresizingMaskIntoConstraints="NO" id="meX-qn-Mcd">
-                            <rect key="frame" x="206" y="0.0" width="16" height="16"/>
+                            <rect key="frame" x="202" y="0.0" width="16" height="16"/>
                         </progressIndicator>
                         <button horizontalHuggingPriority="252" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="zhN-hL-ggl">
-                            <rect key="frame" x="230" y="-1" width="68" height="19"/>
+                            <rect key="frame" x="226" y="-1" width="68" height="19"/>
                             <buttonCell key="cell" type="roundRect" title="Clear Log" bezelStyle="roundedRect" alignment="center" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="AlR-6d-ju7">
                                 <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                 <font key="font" metaFont="cellTitle"/>
@@ -47,7 +47,7 @@
                             </connections>
                         </button>
                         <button horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="PFL-SR-FAj">
-                            <rect key="frame" x="306" y="-1" width="78" height="19"/>
+                            <rect key="frame" x="302" y="-1" width="78" height="19"/>
                             <buttonCell key="cell" type="roundRect" title="Run Doctor" bezelStyle="roundedRect" alignment="center" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="YyI-zq-THZ">
                                 <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                 <font key="font" metaFont="cellTitle"/>
@@ -104,7 +104,7 @@
             </subviews>
             <constraints>
                 <constraint firstItem="6iv-33-gaC" firstAttribute="top" secondItem="rYq-pc-gnn" secondAttribute="top" constant="8" id="4Gb-j5-sra"/>
-                <constraint firstItem="6iv-33-gaC" firstAttribute="leading" secondItem="rYq-pc-gnn" secondAttribute="leading" constant="8" id="a3v-Kz-kqT"/>
+                <constraint firstItem="6iv-33-gaC" firstAttribute="leading" secondItem="rYq-pc-gnn" secondAttribute="leading" constant="12" id="a3v-Kz-kqT"/>
                 <constraint firstItem="rYq-pc-gnn" firstAttribute="trailing" secondItem="6iv-33-gaC" secondAttribute="trailing" constant="8" id="dKC-gI-59k"/>
                 <constraint firstItem="rYq-pc-gnn" firstAttribute="trailing" secondItem="DL2-Nl-eXU" secondAttribute="trailing" constant="-1" id="eel-HO-2xd"/>
                 <constraint firstItem="rYq-pc-gnn" firstAttribute="bottom" secondItem="DL2-Nl-eXU" secondAttribute="bottom" constant="-1" id="ha0-DR-XAs"/>
