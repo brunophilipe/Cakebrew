@@ -342,11 +342,14 @@ static NSString *kToolbarItemMultiActionIdentifier = @"toolbarItemMultiAction";
 		return YES;
 	};
 	
-	if (!image)
-	{
-	  item.image = [NSImage imageWithSize:NSMakeSize(32, 32) flipped:NO drawingHandler:staticBlock];
+	if (!image) {
+		if (@available(macOS 11.0, *)) {
+			item.image = nil;
+		} else {
+			item.image = [NSImage imageWithSize:NSMakeSize(32, 32) flipped:NO drawingHandler:staticBlock];
+		}
 	} else {
-	  item.image = image;
+		item.image = image;
 	}
 	
 	item.label = label;
