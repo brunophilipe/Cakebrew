@@ -262,7 +262,7 @@ static NSString *cakebrewOutputIdentifier = @"+++++Cakebrew+++++";
 	
 	int status = [task execute];
 	
-	NSString *taskDoneString = [NSString stringWithFormat:@"%@:(%d) %@ %@!",
+	NSString *taskDoneString = [NSString stringWithFormat:@"%@: (%d) %@ %@!",
 								NSLocalizedString(@"Homebrew_Task_Finished", nil),
 								status,
 								NSLocalizedString(@"Homebrew_Task_Finished_At", nil),
