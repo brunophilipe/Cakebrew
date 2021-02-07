@@ -22,7 +22,7 @@ Cakebrew was based on a project by [vincentsaluzzo](https://github.com/vincentsa
 
 ## Download
 
-[Download Now – Version 1.2.3](https://www.cakebrew.com/#download)
+[Download Now](https://www.cakebrew.com/#download)
 
 Alternatively, [it can be installed via homebrew cask](https://github.com/brunophilipe/Cakebrew/issues/148), with `brew cask install cakebrew`.
 
