@@ -10,9 +10,6 @@
 
 @interface BPMainWindowController ()
 
-@property (weak) IBOutlet NSScrollView *sidebarView;
-@property (weak) IBOutlet NSView *windowContentView;
-
 @property (strong) NSSplitViewController *splitViewController;
 
 @end

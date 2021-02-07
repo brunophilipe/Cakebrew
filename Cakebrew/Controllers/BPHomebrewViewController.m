@@ -212,40 +212,50 @@ NSOpenSavePanelDelegate>
 
 - (void)addDisabledView
 {
-	NSView *disabledView = [[BPDisabledView alloc] initWithFrame:NSZeroRect];
+	BPDisabledView *disabledView = [[BPDisabledView alloc] initWithFrame:NSZeroRect];
 	disabledView.translatesAutoresizingMaskIntoConstraints = NO;
 	[self.view addSubview:disabledView];
-	[self.view addConstraints:[NSLayoutConstraint
-							   constraintsWithVisualFormat:@"V:|-0-[view]-0-|"
-							   options:0
-							   metrics:nil
-							   views:@{@"view": disabledView}]];
-	
-	[self.view addConstraints:[NSLayoutConstraint
-							   constraintsWithVisualFormat:@"H:|-0-[view]-0-|"
-							   options:0
-							   metrics:nil
-							   views:@{@"view": disabledView}]];
-	self.disabledView = (BPDisabledView *)disabledView;
+
+	NSView *referenceView;
+
+	if (@available(macOS 11.0, *)) {
+		referenceView = self.mainWindowController.windowContentView;
+	} else {
+		referenceView = self.view;
+	}
+
+	[NSLayoutConstraint activateConstraints:@[
+		[referenceView.leftAnchor constraintEqualToAnchor:disabledView.leftAnchor],
+		[referenceView.rightAnchor constraintEqualToAnchor:disabledView.rightAnchor],
+		[referenceView.topAnchor constraintEqualToAnchor:disabledView.topAnchor],
+		[referenceView.bottomAnchor constraintEqualToAnchor:disabledView.bottomAnchor]
+	]];
+
+	[self setDisabledView:disabledView];
 }
 
 - (void)addLoadingView
 {
-	NSView *loadingView = [[BPLoadingView alloc] initWithFrame:NSZeroRect];
+	BPLoadingView *loadingView = [[BPLoadingView alloc] initWithFrame:NSZeroRect];
 	loadingView.translatesAutoresizingMaskIntoConstraints = NO;
 	[self.view addSubview:loadingView];
-	[self.view addConstraints:[NSLayoutConstraint
-							   constraintsWithVisualFormat:@"V:|-0-[view]-0-|"
-							   options:0
-							   metrics:nil
-							   views:@{@"view": loadingView}]];
-	
-	[self.view addConstraints:[NSLayoutConstraint
-							   constraintsWithVisualFormat:@"H:|-0-[view]-0-|"
-							   options:0
-							   metrics:nil
-							   views:@{@"view": loadingView}]];
-	self.loadingView = (BPLoadingView *)loadingView;
+
+	NSView *referenceView;
+
+	if (@available(macOS 11.0, *)) {
+		referenceView = self.mainWindowController.windowContentView;
+	} else {
+		referenceView = self.view;
+	}
+
+	[NSLayoutConstraint activateConstraints:@[
+		[referenceView.leftAnchor constraintEqualToAnchor:loadingView.leftAnchor],
+		[referenceView.rightAnchor constraintEqualToAnchor:loadingView.rightAnchor],
+		[referenceView.topAnchor constraintEqualToAnchor:loadingView.topAnchor],
+		[referenceView.bottomAnchor constraintEqualToAnchor:loadingView.bottomAnchor]
+	]];
+
+	[self setLoadingView:loadingView];
 }
 
 - (void)dealloc

@@ -12,6 +12,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface BPMainWindowController : NSWindowController
 
+@property (weak) IBOutlet NSScrollView *sidebarView;
+@property (weak) IBOutlet NSView *windowContentView;
+
 @property (readonly, strong) NSSplitViewController *splitViewController;
 
 - (void)setUpViews;
