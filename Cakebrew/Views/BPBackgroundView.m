@@ -13,8 +13,7 @@
 - (id)init
 {
 	self = [super init];
-	if (self)
-	{
+	if (self) {
 		[self setUp];
 	}
 	return self;
@@ -23,8 +22,7 @@
 - (id)initWithCoder:(NSCoder *)coder
 {
 	self = [super initWithCoder:coder];
-	if (self)
-	{
+	if (self) {
 		[self setUp];
 	}
 	return self;
@@ -33,8 +31,7 @@
 - (id)initWithFrame:(NSRect)frameRect
 {
 	self = [super initWithFrame:frameRect];
-	if (self)
-	{
+	if (self) {
 		[self setUp];
 	}
 	return self;
@@ -42,16 +39,13 @@
 
 - (void)setUp
 {
-	if (!self.backgroundColor)
-	{
+	if (!self.backgroundColor) {
 		[self setBackgroundColor:[NSColor controlColor]];
 		[self setWantsLayer:YES];
-
 	}
 }
 
-- (void)drawRect:(NSRect)dirtyRect
-{
+- (void)drawRect:(NSRect)dirtyRect {
 	[[self backgroundColor] setFill];
 	
 	NSRectFill(dirtyRect);

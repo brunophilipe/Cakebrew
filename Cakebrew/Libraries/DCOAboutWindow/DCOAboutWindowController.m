@@ -73,17 +73,12 @@
 
     // Set credits
     if(!self.appCredits) {
-        NSString *creditsPath = [[NSBundle mainBundle] pathForResource:@"Credits" ofType:@"rtf"];
-        self.appCredits = [[NSAttributedString alloc] initWithPath:creditsPath documentAttributes:nil];
+		[self loadAppCredits];
     }
 
     // Disable editing
     [self.creditsTextView setEditable:NO]; // Somehow IB checkboxes are not working
 //	  [self.creditsTextView setSelectable:NO]; // Somehow IB checkboxes are not working
-    
-    // Draw info view
-    self.infoView.wantsLayer = YES;
-    self.infoView.layer.backgroundColor = [NSColor whiteColor].CGColor;
     
     // Add border
     CALayer *bottomBorder = [CALayer layer];
@@ -91,6 +86,31 @@
     [bottomBorder setBorderWidth:1];
     bottomBorder.frame = CGRectMake(-1.f, .0f, CGRectGetWidth(self.infoView.frame) + 2.f, CGRectGetHeight(self.infoView.frame) + 1.f);
     [self.infoView.layer addSublayer:bottomBorder];
+}
+
+- (void)loadAppCredits
+{
+	NSURL *creditsURL = [[NSBundle mainBundle] URLForResource:@"Credits" withExtension:@"rtf"];
+	NSError *error = nil;
+	NSAttributedString *credits = [[NSAttributedString alloc] initWithURL:creditsURL
+																  options:@{}
+													   documentAttributes:nil
+																	error:&error];
+
+	if (!credits) {
+		return;
+	}
+
+	NSMutableAttributedString *mutableCredits = [credits mutableCopy];
+
+	[credits enumerateAttribute:NSForegroundColorAttributeName inRange:NSMakeRange(0, [credits length]) options:0
+					 usingBlock:^(id _Nullable value, NSRange range, BOOL * _Nonnull stop) {
+		if (value == nil && range.length > 0) {
+			[mutableCredits addAttribute:NSForegroundColorAttributeName value:[NSColor textColor] range:range];
+		}
+	}];
+
+	self.appCredits = mutableCredits;
 }
 
 #pragma mark - Getters/Setters
