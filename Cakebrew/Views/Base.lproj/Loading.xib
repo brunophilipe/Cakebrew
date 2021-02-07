@@ -1,8 +1,9 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="8191" systemVersion="15A284" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="17701" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="8191"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="17701"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="BPLoadingView">
@@ -20,13 +21,11 @@
                 <customView translatesAutoresizingMaskIntoConstraints="NO" id="rZy-gk-hed">
                     <rect key="frame" x="176" y="81" width="100" height="98"/>
                     <subviews>
-                        <progressIndicator wantsLayer="YES" canDrawConcurrently="YES" focusRingType="none" horizontalHuggingPriority="750" verticalHuggingPriority="750" maxValue="100" doubleValue="50" bezeled="NO" indeterminate="YES" style="spinning" translatesAutoresizingMaskIntoConstraints="NO" id="Ejq-6W-eVn">
+                        <progressIndicator wantsLayer="YES" focusRingType="none" horizontalHuggingPriority="750" verticalHuggingPriority="750" maxValue="100" doubleValue="50" bezeled="NO" indeterminate="YES" style="spinning" translatesAutoresizingMaskIntoConstraints="NO" id="Ejq-6W-eVn">
                             <rect key="frame" x="34" y="19" width="32" height="32"/>
-                            <animations/>
                         </progressIndicator>
                         <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="qpS-KK-9j3">
                             <rect key="frame" x="17" y="60" width="67" height="19"/>
-                            <animations/>
                             <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" title="Loading" id="tg9-w7-WfT">
                                 <font key="font" metaFont="systemBold" size="15"/>
                                 <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
@@ -42,17 +41,12 @@
                         <constraint firstItem="Ejq-6W-eVn" firstAttribute="top" secondItem="qpS-KK-9j3" secondAttribute="bottom" constant="9" id="mCG-2S-9Md"/>
                         <constraint firstAttribute="height" constant="98" id="srB-hD-1jF"/>
                     </constraints>
-                    <animations/>
                 </customView>
                 <customView translatesAutoresizingMaskIntoConstraints="NO" id="4fX-zD-cvD">
                     <rect key="frame" x="0.0" y="0.0" width="452" height="20"/>
                     <subviews>
                         <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="d0z-Oj-3aG">
                             <rect key="frame" x="389" y="4" width="56" height="14"/>
-                            <constraints>
-                                <constraint firstAttribute="width" relation="lessThanOrEqual" constant="115" id="YKk-c7-ae5"/>
-                            </constraints>
-                            <animations/>
                             <textFieldCell key="cell" controlSize="small" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="right" title="Loading..." id="O0A-7C-8R5">
                                 <font key="font" metaFont="smallSystem"/>
                                 <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
@@ -65,7 +59,6 @@
                         <constraint firstAttribute="trailing" secondItem="d0z-Oj-3aG" secondAttribute="trailing" constant="9" id="MKY-Mn-Y6p"/>
                         <constraint firstAttribute="height" constant="20" id="vxq-hZ-g9V"/>
                     </constraints>
-                    <animations/>
                 </customView>
             </subviews>
             <constraints>
@@ -75,7 +68,6 @@
                 <constraint firstAttribute="centerY" secondItem="rZy-gk-hed" secondAttribute="centerY" constant="-0.5" id="Yg1-Uw-NF4"/>
                 <constraint firstAttribute="trailing" secondItem="4fX-zD-cvD" secondAttribute="trailing" id="eYc-gX-boD"/>
             </constraints>
-            <animations/>
             <point key="canvasLocation" x="247" y="286.5"/>
         </customView>
     </objects>
