@@ -41,27 +41,27 @@
 {
 	switch (self.mode) {
 		case kBPListAll:
-			_formulaeArray = [[BPHomebrewManager sharedManager] formulae_all];
+			_formulaeArray = [[BPHomebrewManager sharedManager] allFormulae];
 			break;
 			
 		case kBPListInstalled:
-			_formulaeArray = [[BPHomebrewManager sharedManager] formulae_installed];
+			_formulaeArray = [[BPHomebrewManager sharedManager] installedFormulae];
 			break;
 			
 		case kBPListLeaves:
-			_formulaeArray = [[BPHomebrewManager sharedManager] formulae_leaves];
+			_formulaeArray = [[BPHomebrewManager sharedManager] leavesFormulae];
 			break;
 			
 		case kBPListOutdated:
-			_formulaeArray = [[BPHomebrewManager sharedManager] formulae_outdated];
+			_formulaeArray = [[BPHomebrewManager sharedManager] outdatedFormulae];
 			break;
 			
 		case kBPListSearch:
-			_formulaeArray = [[BPHomebrewManager sharedManager] formulae_search];
+			_formulaeArray = [[BPHomebrewManager sharedManager] searchFormulae];
 			break;
 			
 		case kBPListRepositories:
-			_formulaeArray = [[BPHomebrewManager sharedManager] formulae_repositories];
+			_formulaeArray = [[BPHomebrewManager sharedManager] repositoriesFormulae];
 			
 		default:
 			break;

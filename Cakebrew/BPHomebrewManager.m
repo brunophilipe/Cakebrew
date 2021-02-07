@@ -74,13 +74,13 @@ NSString *const kBPCacheDataKey	= @"BPCacheDataKey";
 	dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
 		[[BPHomebrewInterface sharedInterface] setDelegate:self];
 		
-		[self setFormulae_installed:[[BPHomebrewInterface sharedInterface] listMode:kBPListInstalled]];
-		[self setFormulae_leaves:[[BPHomebrewInterface sharedInterface] listMode:kBPListLeaves]];
-		[self setFormulae_outdated:[[BPHomebrewInterface sharedInterface] listMode:kBPListOutdated]];
-		[self setFormulae_repositories:[[BPHomebrewInterface sharedInterface] listMode:kBPListRepositories]];
+		[self setInstalledFormulae:[[BPHomebrewInterface sharedInterface] listMode:kBPListInstalled]];
+		[self setLeavesFormulae:[[BPHomebrewInterface sharedInterface] listMode:kBPListLeaves]];
+		[self setOutdatedFormulae:[[BPHomebrewInterface sharedInterface] listMode:kBPListOutdated]];
+		[self setRepositoriesFormulae:[[BPHomebrewInterface sharedInterface] listMode:kBPListRepositories]];
 		
-		if (![self loadAllFormulaeCaches] || [[self formulae_all] count] <= 1 || shouldRebuildCache) {
-			[self setFormulae_all:[[BPHomebrewInterface sharedInterface] listMode:kBPListAll]];
+		if (![self loadAllFormulaeCaches] || [[self allFormulae] count] <= 1 || shouldRebuildCache) {
+			[self setAllFormulae:[[BPHomebrewInterface sharedInterface] listMode:kBPListAll]];
 			[self storeAllFormulaeCaches];
 		}
 		
@@ -95,14 +95,14 @@ NSString *const kBPCacheDataKey	= @"BPCacheDataKey";
 	NSMutableArray *matches = [NSMutableArray array];
 	NSRange range;
 	
-	for (BPFormula *formula in _formulae_all) {
+	for (BPFormula *formula in _allFormulae) {
 		range = [[formula name] rangeOfString:name options:NSCaseInsensitiveSearch];
 		if (range.location != NSNotFound) {
 			[matches addObject:formula];
 		}
 	}
 	
-	_formulae_search = matches;
+	_searchFormulae = matches;
 
 	dispatch_async(dispatch_get_main_queue(), ^{
 		[self.delegate homebrewManager:self didUpdateSearchResults:matches];
@@ -136,7 +136,7 @@ NSString *const kBPCacheDataKey	= @"BPCacheDataKey";
 		if ([[NSFileManager defaultManager] fileExistsAtPath:allFormulaeFile.relativePath])
 		{
 			cacheDict = [NSKeyedUnarchiver unarchiveObjectWithFile:allFormulaeFile.relativePath];
-			self.formulae_all = [cacheDict objectForKey:kBPCacheDataKey];
+			self.allFormulae = [cacheDict objectForKey:kBPCacheDataKey];
 		}
 	}
 	else
@@ -146,12 +146,12 @@ NSString *const kBPCacheDataKey	= @"BPCacheDataKey";
 		[[NSUserDefaults standardUserDefaults] removeObjectForKey:kBPCacheLastUpdateKey];
 	}
 	
-	return self.formulae_all != nil;
+	return self.allFormulae != nil;
 }
 
 - (void)storeAllFormulaeCaches
 {
-	if (self.formulae_all)
+	if (self.allFormulae)
 	{
 		NSURL *cachesFolder = [BPAppDelegate urlForApplicationCachesFolder];
 		if (cachesFolder)
@@ -165,7 +165,7 @@ NSString *const kBPCacheDataKey	= @"BPCacheDataKey";
 																	 integerForKey:kBPCacheLastUpdateKey]];
 			}
 			
-			NSDictionary *cacheDict = @{kBPCacheDataKey: self.formulae_all};
+			NSDictionary *cacheDict = @{kBPCacheDataKey: self.allFormulae};
 			NSData *cacheData = [NSKeyedArchiver archivedDataWithRootObject:cacheDict];
 			
 			if ([[NSFileManager defaultManager] fileExistsAtPath:allFormulaeFile.relativePath])
@@ -207,9 +207,9 @@ NSString *const kBPCacheDataKey	= @"BPCacheDataKey";
 
 - (BPFormulaStatus)statusForFormula:(BPFormula*)formula
 {
-	if ([self searchForFormula:formula inArray:self.formulae_installed] >= 0)
+	if ([self searchForFormula:formula inArray:self.installedFormulae] >= 0)
 	{
-		if ([self searchForFormula:formula inArray:self.formulae_outdated] >= 0)
+		if ([self searchForFormula:formula inArray:self.outdatedFormulae] >= 0)
 		{
 			return kBPFormulaOutdated;
 		}

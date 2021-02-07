@@ -303,7 +303,7 @@ static NSString *cakebrewOutputIdentifier = @"+++++Cakebrew+++++";
 
 #pragma mark - Operations that return on finish
 
-- (NSArray*)listMode:(BPListMode)mode
+- (NSArray<BPFormula *> *)listMode:(BPListMode)mode
 {
 	BPHomebrewInterfaceListCall *listCall = nil;
 	
@@ -501,14 +501,14 @@ static NSString *cakebrewOutputIdentifier = @"+++++Cakebrew+++++";
 	return self;
 }
 
-- (NSArray *)parseData:(NSString *)data
+- (NSArray<BPFormula *> *)parseData:(NSString *)data
 {
-	NSMutableArray *array = [[data componentsSeparatedByString:@"\n"] mutableCopy];
-	[array removeLastObject];
+	NSMutableArray<NSString *> *dataLines = [[data componentsSeparatedByString:@"\n"] mutableCopy];
+	[dataLines removeLastObject];
 	
-	NSMutableArray *formulae = [NSMutableArray arrayWithCapacity:array.count];
+	NSMutableArray<BPFormula *> *formulae = [NSMutableArray arrayWithCapacity:dataLines.count];
 	
-	for (NSString *item in array) {
+	for (NSString *item in dataLines) {
 		BPFormula *formula = [self parseFormulaItem:item];
 		if (formula) {
 			[formulae addObject:formula];

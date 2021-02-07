@@ -420,7 +420,7 @@ NSOpenSavePanelDelegate>
 		[self.sidebarController refreshSidebarBadges];
 		[self.sidebarController.sidebar reloadData];
 
-		[self setEnableUpgradeFormulasMenu:([[BPHomebrewManager sharedManager] formulae_outdated].count > 0)];
+		[self setEnableUpgradeFormulasMenu:([[BPHomebrewManager sharedManager] outdatedFormulae].count > 0)];
 		
 		if (shouldReselectFirstRow)
 			[self.sidebarController.sidebar selectRowIndexes:[NSIndexSet indexSetWithIndex:FormulaeSideBarItemInstalled] byExtendingSelection:NO];
