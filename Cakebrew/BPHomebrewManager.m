@@ -138,7 +138,7 @@ NSString *const kBPCacheDataKey	= @"BPCacheDataKey";
 			NSData *data = [NSData dataWithContentsOfFile:allFormulaeFile.relativePath];
 			NSError *error = nil;
 
-			if (@available(macOS 11.0, *)) {
+			if (@available(macOS 10.13, *)) {
 				NSSet *classes = [NSSet setWithArray:@[[NSDictionary class], [NSMutableArray class], [BPFormula class]]];
 				cacheDict = [NSKeyedUnarchiver unarchivedObjectOfClasses:classes fromData:data error:&error];
 				if (error) {
@@ -179,7 +179,7 @@ NSString *const kBPCacheDataKey	= @"BPCacheDataKey";
 			NSDictionary *cacheDict = @{kBPCacheDataKey: self.allFormulae};
 			NSData *cacheData;
 
-			if (@available(macOS 11.0, *)) {
+			if (@available(macOS 10.13, *)) {
 				NSError *error = nil;
 				cacheData = [NSKeyedArchiver archivedDataWithRootObject:cacheDict
 												  requiringSecureCoding:YES
