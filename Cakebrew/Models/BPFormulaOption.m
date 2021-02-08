@@ -13,12 +13,17 @@ static NSString *const kBPFormulaOptionExplanationKey = @"formulaOptionExplanati
 
 @implementation BPFormulaOption
 
++ (BOOL)supportsSecureCoding
+{
+	return YES;
+}
+
 - (instancetype)initWithCoder:(NSCoder *)aDecoder
 {
 	self = [super init];
 	if (self) {
-		_name = [aDecoder valueForKey:kBPFormulaOptionNameKey];
-		_explanation = [aDecoder valueForKey:kBPFormulaOptionExplanationKey];
+		_name = [aDecoder decodeObjectOfClass:[NSString class] forKey:kBPFormulaOptionNameKey];
+		_explanation = [aDecoder decodeObjectOfClass:[NSString class] forKey:kBPFormulaOptionExplanationKey];
 	}
 	return self;
 }

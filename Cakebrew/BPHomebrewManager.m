@@ -135,7 +135,18 @@ NSString *const kBPCacheDataKey	= @"BPCacheDataKey";
 		
 		if ([[NSFileManager defaultManager] fileExistsAtPath:allFormulaeFile.relativePath])
 		{
-			cacheDict = [NSKeyedUnarchiver unarchiveObjectWithFile:allFormulaeFile.relativePath];
+			NSData *data = [NSData dataWithContentsOfFile:allFormulaeFile.relativePath];
+			NSError *error = nil;
+
+			if (@available(macOS 11.0, *)) {
+				NSSet *classes = [NSSet setWithArray:@[[NSDictionary class], [NSMutableArray class], [BPFormula class]]];
+				cacheDict = [NSKeyedUnarchiver unarchivedObjectOfClasses:classes fromData:data error:&error];
+				if (error) {
+					NSLog(@"Failed decoding data: %@", [error localizedDescription]);
+				}
+			} else {
+				cacheDict = [NSKeyedUnarchiver unarchiveObjectWithFile:allFormulaeFile.relativePath];
+			}
 			self.allFormulae = [cacheDict objectForKey:kBPCacheDataKey];
 		}
 	}
@@ -166,7 +177,20 @@ NSString *const kBPCacheDataKey	= @"BPCacheDataKey";
 			}
 			
 			NSDictionary *cacheDict = @{kBPCacheDataKey: self.allFormulae};
-			NSData *cacheData = [NSKeyedArchiver archivedDataWithRootObject:cacheDict];
+			NSData *cacheData;
+
+			if (@available(macOS 11.0, *)) {
+				NSError *error = nil;
+				cacheData = [NSKeyedArchiver archivedDataWithRootObject:cacheDict
+												  requiringSecureCoding:YES
+																  error:&error];
+
+				if (error) {
+					NSLog(@"Failed encoding data: %@", [error localizedDescription]);
+				}
+			} else {
+				cacheData = [NSKeyedArchiver archivedDataWithRootObject:cacheDict];
+			}
 			
 			if ([[NSFileManager defaultManager] fileExistsAtPath:allFormulaeFile.relativePath])
 			{

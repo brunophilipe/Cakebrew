@@ -29,7 +29,7 @@ extern NSString *const BPFormulaDidUpdateNotification;
 - (NSString *)informationForFormulaName:(NSString *)name;
 @end
 
-@interface BPFormula : NSObject <NSCoding, NSCopying>
+@interface BPFormula : NSObject <NSSecureCoding, NSCopying>
 
 @property (copy, readonly) NSString *name;
 @property (copy, readonly) NSString *version;

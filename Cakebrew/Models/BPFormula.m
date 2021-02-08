@@ -61,6 +61,11 @@ NSString *const BPFormulaDidUpdateNotification = @"BPFormulaDidUpdateNotificatio
 
 @implementation BPFormula
 
++ (BOOL)supportsSecureCoding
+{
+	return YES;
+}
+
 + (instancetype)formulaWithName:(NSString*)name version:(NSString*)version andLatestVersion:(NSString*)latestVersion
 {
 	BPFormula *formula = [[self alloc] init];
@@ -106,16 +111,18 @@ NSString *const BPFormulaDidUpdateNotification = @"BPFormulaDidUpdateNotificatio
 	self = [super init];
 	if (self)
 	{
-		self.name				= [aDecoder decodeObjectForKey:kBP_ENCODE_FORMULA_NAME];
-		self.version			= [aDecoder decodeObjectForKey:kBP_ENCODE_FORMULA_IVER];
-		self.latestVersion		= [aDecoder decodeObjectForKey:kBP_ENCODE_FORMULA_LVER];
-		self.installPath		= [aDecoder decodeObjectForKey:kBP_ENCODE_FORMULA_PATH];
-		self.website			= [aDecoder decodeObjectForKey:kBP_ENCODE_FORMULA_WURL];
-		self.dependencies		= [aDecoder decodeObjectForKey:kBP_ENCODE_FORMULA_DEPS];
-		self.conflicts			= [aDecoder decodeObjectForKey:kBP_ENCODE_FORMULA_CNFL];
-		self.shortDescription	= [aDecoder decodeObjectForKey:kBP_ENCODE_FORMULA_CNFL];
-		self.information		= [aDecoder decodeObjectForKey:kBP_ENCODE_FORMULA_INFO];
-		self.options			= [aDecoder decodeObjectForKey:kBP_ENCODE_FORMULA_OPTN];
+		self.name				= [aDecoder decodeObjectOfClass:[NSString class] forKey:kBP_ENCODE_FORMULA_NAME];
+		self.version			= [aDecoder decodeObjectOfClass:[NSString class] forKey:kBP_ENCODE_FORMULA_IVER];
+		self.latestVersion		= [aDecoder decodeObjectOfClass:[NSString class] forKey:kBP_ENCODE_FORMULA_LVER];
+		self.installPath		= [aDecoder decodeObjectOfClass:[NSString class] forKey:kBP_ENCODE_FORMULA_PATH];
+		self.website			= [aDecoder decodeObjectOfClass:[NSURL class] forKey:kBP_ENCODE_FORMULA_WURL];
+		self.dependencies		= [aDecoder decodeObjectOfClass:[NSString class] forKey:kBP_ENCODE_FORMULA_DEPS];
+		self.conflicts			= [aDecoder decodeObjectOfClass:[NSString class] forKey:kBP_ENCODE_FORMULA_CNFL];
+		self.shortDescription	= [aDecoder decodeObjectOfClass:[NSString class] forKey:kBP_ENCODE_FORMULA_CNFL];
+		self.information		= [aDecoder decodeObjectOfClass:[NSString class] forKey:kBP_ENCODE_FORMULA_INFO];
+
+		NSSet *optionsClasses = [NSSet setWithArray:@[[NSArray class], [BPFormulaOption class]]];
+		self.options			= [aDecoder decodeObjectOfClasses:optionsClasses forKey:kBP_ENCODE_FORMULA_OPTN];
 		[self commonInit];
 	}
 	return self;

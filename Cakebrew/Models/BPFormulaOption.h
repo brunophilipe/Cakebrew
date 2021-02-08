@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface BPFormulaOption : NSObject <NSCoding, NSCopying>
+@interface BPFormulaOption : NSObject <NSSecureCoding, NSCopying>
 
 @property (copy) NSString *explanation;
 @property (copy) NSString *name;
