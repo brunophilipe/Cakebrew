@@ -359,7 +359,14 @@ static NSString *kToolbarItemMultiActionIdentifier = @"toolbarItemMultiAction";
 
 - (void)makeSearchFieldFirstResponder
 {
-	NSView *searchView = [[self toolbarItemSearch] view];
+	NSView *searchView;
+
+	if (@available(macOS 11.0, *)) {
+		searchView = [(NSSearchToolbarItem *)[self toolbarItemSearch] searchField];
+	} else {
+		searchView = [[self toolbarItemSearch] view];
+	}
+
 	[[searchView window] makeFirstResponder:searchView];
 }
 
