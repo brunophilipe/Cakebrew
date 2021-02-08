@@ -128,7 +128,7 @@
                     <customView translatesAutoresizingMaskIntoConstraints="NO" id="Mcy-UW-ved">
                         <rect key="frame" x="0.0" y="0.0" width="560" height="50"/>
                         <subviews>
-                            <stackView distribution="fill" orientation="horizontal" alignment="top" spacing="12" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="hyE-Th-Um6">
+                            <stackView distribution="fill" orientation="horizontal" alignment="top" spacing="12" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" translatesAutoresizingMaskIntoConstraints="NO" id="hyE-Th-Um6">
                                 <rect key="frame" x="234" y="15" width="302" height="20"/>
                                 <subviews>
                                     <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="DNh-ZA-cca">
