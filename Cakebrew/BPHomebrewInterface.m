@@ -61,6 +61,7 @@ static NSString *cakebrewOutputIdentifier = @"+++++Cakebrew+++++";
 @property (strong) NSString *path_cellar;
 @property (strong) NSString *path_shell;
 @property (strong) NSMutableDictionary *tasks;
+@property (strong) dispatch_queue_t taskOperationsQueue;
 
 @end
 
@@ -82,6 +83,11 @@ static NSString *cakebrewOutputIdentifier = @"+++++Cakebrew+++++";
 	self = [super init];
 	if (self) {
 		_tasks = [[NSMutableDictionary alloc] init];
+
+		dispatch_queue_attr_t attributes = dispatch_queue_attr_make_with_qos_class(DISPATCH_QUEUE_CONCURRENT,
+																				   QOS_CLASS_USER_INITIATED, 1);
+
+		_taskOperationsQueue = dispatch_queue_create("com.brunophilipe.Cakebrew.BPHomebrewInterface.Tasks", attributes);
 	}
 	return self;
 }
@@ -230,11 +236,12 @@ static NSString *cakebrewOutputIdentifier = @"+++++Cakebrew+++++";
 
 - (BOOL)performBrewCommandWithArguments:(NSArray*)arguments dataReturnBlock:(void (^)(NSString*))block
 {
-	return [self performBrewCommandWithArguments:arguments wrapsSynchronousRequest:NO dataReturnBlock:block];
+	return [self performBrewCommandWithArguments:arguments wrapsSynchronousRequest:NO queue:nil dataReturnBlock:block];
 }
 
 - (BOOL)performBrewCommandWithArguments:(NSArray*)arguments
 				wrapsSynchronousRequest:(BOOL)isSynchronous
+								  queue:(dispatch_queue_t)queue
 						dataReturnBlock:(void (^)(NSString*))block
 {
 	arguments = [self formatArguments:arguments sendOutputId:isSynchronous];
@@ -247,6 +254,7 @@ static NSString *cakebrewOutputIdentifier = @"+++++Cakebrew+++++";
 	BPTask *task = [[BPTask alloc] initWithPath:self.path_shell arguments:arguments];
 	task.delegate = self;
 	task.updateBlock = block;
+	task.updateBlockQueue = queue;
 
 	[self.tasks setObject:task forKey:[NSString stringWithFormat:@"%p", task]];
 
@@ -290,16 +298,23 @@ static NSString *cakebrewOutputIdentifier = @"+++++Cakebrew+++++";
  */
 - (NSString*)performWrappedBrewCommandWithArguments:(NSArray*)arguments
 {
-	NSMutableString *output = [NSMutableString new];
-	
-	[self performBrewCommandWithArguments:arguments
-				  wrapsSynchronousRequest:YES
-						  dataReturnBlock:^(NSString *partialOutput)
-	{
-		[output appendString:partialOutput];
-	}];
-	
-	return [self removeLoginShellOutputFromString:output];
+	NSString __block *finalOutput = nil;
+
+	dispatch_sync(_taskOperationsQueue, ^{
+		NSMutableString *output = [NSMutableString new];
+
+		[self performBrewCommandWithArguments:arguments
+					  wrapsSynchronousRequest:YES
+										queue:_taskOperationsQueue
+							  dataReturnBlock:^(NSString *partialOutput)
+		{
+			[output appendString:partialOutput];
+		}];
+
+		finalOutput = [output copy];
+	});
+
+	return [self removeLoginShellOutputFromString:finalOutput];
 }
 
 #pragma mark - Operations that return on finish
