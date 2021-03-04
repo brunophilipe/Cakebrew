@@ -781,7 +781,7 @@ CA
                             <rect key="frame" x="0.0" y="0.0" width="396" height="264"/>
                             <clipView key="contentView" focusRingType="none" copiesOnScroll="NO" id="6nf-zO-0ou">
                                 <rect key="frame" x="0.0" y="0.0" width="396" height="264"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <autoresizingMask key="autoresizingMask"/>
                                 <subviews>
                                     <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" alternatingRowBackgroundColors="YES" columnReordering="NO" multipleSelection="NO" autosaveColumns="NO" headerView="pLZ-e2-9bs" id="swO-GD-dpc" customClass="BPFormulaeTableView">
                                         <rect key="frame" x="0.0" y="0.0" width="546" height="241"/>
@@ -892,7 +892,7 @@ CA
                         <textField horizontalHuggingPriority="251" verticalHuggingPriority="751" translatesAutoresizingMaskIntoConstraints="NO" id="YBh-sI-Jkw">
                             <rect key="frame" x="22" y="2" width="792" height="14"/>
                             <textFieldCell key="cell" lineBreakMode="clipping" alignment="right" title="Label" id="ezd-SJ-vXT">
-                                <font key="font" metaFont="system" size="11"/>
+                                <font key="font" metaFont="smallSystem"/>
                                 <color key="textColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
                                 <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                             </textFieldCell>
@@ -913,7 +913,7 @@ CA
                     <tabViewItems>
                         <tabViewItem label="Formulae" identifier="1" id="0TF-af-Tbu">
                             <view key="view" id="yzy-Le-CSE">
-                                <rect key="frame" x="0.0" y="0.0" width="826" height="419"/>
+                                <rect key="frame" x="0.0" y="0.0" width="826" height="416"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             </view>
                         </tabViewItem>
