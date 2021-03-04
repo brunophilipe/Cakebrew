@@ -41,6 +41,7 @@
 	}
 	
 	_formula = formula;
+	[_formulaTextView setString:@""];
 	
 	switch ([self infoType])
 	{
