@@ -205,10 +205,8 @@ NSString *const kDidEndBackgroundActivityNotification	= @"DidEndBackgroundActivi
 {
 	[self processStandardOutput];
 	[self processStandardError];
-	[[NSNotificationCenter defaultCenter] removeObserver:self
-													name:NSTaskDidTerminateNotification
-												  object:self.task];
-	
+
+	[[NSNotificationCenter defaultCenter] removeObserver:self];
 	[[NSNotificationCenter defaultCenter] removeObserver:outputHandlerObserver];
 	[[NSNotificationCenter defaultCenter] removeObserver:errorHandlerObserver];
 	
