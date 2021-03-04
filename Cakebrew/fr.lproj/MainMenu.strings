@@ -221,7 +221,7 @@
 "VzS-XQ-BoP.title" = "Text Cell";
 
 /* Class = "NSTabViewItem"; label = "Doctor"; ObjectID = "WM9-6z-Jzl"; */
-"WM9-6z-Jzl.label" = "Diagnostique";
+"WM9-6z-Jzl.label" = "Diagnostic";
 
 /* Class = "NSMenu"; title = "Spelling"; ObjectID = "X7p-5G-5Dv"; */
 "X7p-5G-5Dv.title" = "Orthographe";
@@ -272,7 +272,7 @@
 "e0a-Xf-LW1.title" = "Substitutions";
 
 /* Class = "NSMenuItem"; title = "Doctor"; ObjectID = "eI9-b4-Rmg"; */
-"eI9-b4-Rmg.title" = "Outil de diagnostique";
+"eI9-b4-Rmg.title" = "Outil de diagnostic";
 
 /* Class = "NSMenuItem"; title = "More Information"; ObjectID = "eus-Jb-JjS"; */
 "eus-Jb-JjS.title" = "Plus d'informations";
