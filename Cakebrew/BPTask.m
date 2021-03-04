@@ -195,7 +195,13 @@ NSString *const kDidEndBackgroundActivityNotification	= @"DidEndBackgroundActivi
 	[fileHandle waitForDataInBackgroundAndNotify];
 
 	if (data && data.length > 0) {
-		dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
+		dispatch_queue_t queue = [self updateBlockQueue];
+
+		if (queue == nil) {
+			queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0);
+		}
+
+		dispatch_async(queue, ^{
 			self.updateBlock([[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding]);
 		});
 	}

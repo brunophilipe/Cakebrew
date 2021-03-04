@@ -38,6 +38,7 @@ extern NSString * _Nonnull const kDidEndBackgroundActivityNotification;
 - (void)cleanup;
 
 @property (nonatomic, nullable, copy) void (^updateBlock)(NSString * _Nonnull);
+@property (nonatomic, nullable) dispatch_queue_t updateBlockQueue;
 @property (readonly, nonnull) NSString *output;
 @property (readonly, nonnull) NSString *error;
 @property (weak, nullable) id<BPTaskCompleted> delegate;
