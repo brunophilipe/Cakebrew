@@ -326,7 +326,11 @@ static NSString *kToolbarItemMultiActionIdentifier = @"toolbarItemMultiAction";
 									  action:(SEL)action
 {
 	NSToolbarItem *item = [[NSToolbarItem alloc] initWithItemIdentifier:identifier];
-	item.image = image;
+	if (@available(macOS 11.0, *)) {
+		item.view = [self makeImageViewForItemImage:image];
+	} else {
+		item.image = image;
+	}
 	item.label = label;
 	item.paletteLabel = label;
 	item.action = action;
@@ -338,23 +342,45 @@ static NSString *kToolbarItemMultiActionIdentifier = @"toolbarItemMultiAction";
 
 - (void)reconfigureItem:(NSToolbarItem *)item image:(NSImage *)image label:(NSString *)label action:(SEL)action
 {
+	assert([NSThread isMainThread]);
+
 	static BOOL (^staticBlock)(NSRect) = ^BOOL(NSRect dstRect) {
 		return YES;
 	};
 	
 	if (!image) {
 		if (@available(macOS 11.0, *)) {
-			item.image = nil;
+			item.view = nil;
 		} else {
 			item.image = [NSImage imageWithSize:NSMakeSize(32, 32) flipped:NO drawingHandler:staticBlock];
 		}
 	} else {
-		item.image = image;
+		if (@available(macOS 11.0, *)) {
+			item.view = [self makeImageViewForItemImage:image];
+		} else {
+			item.image = image;
+		}
 	}
-	
+
 	item.label = label;
 	item.action = action;
 	item.toolTip = label;
+}
+
+- (NSImageView *)makeImageViewForItemImage:(NSImage *)image
+{
+	if (image == nil) {
+		return nil;
+	}
+	NSImageView *imageView = [NSImageView imageViewWithImage:image];
+	[imageView setTranslatesAutoresizingMaskIntoConstraints:NO];
+	if (@available(macOS 11, *)) {
+		[imageView setSymbolConfiguration:[NSImageSymbolConfiguration configurationWithPointSize:24
+																						  weight:NSFontWeightMedium
+																						   scale:NSImageSymbolScaleMedium]];
+	}
+	[imageView setImageScaling:NSImageScaleProportionallyUpOrDown];
+	return imageView;
 }
 
 - (void)makeSearchFieldFirstResponder
