@@ -131,7 +131,7 @@ NSString *const kDidEndBackgroundActivityNotification	= @"DidEndBackgroundActivi
 
 - (void)processStandardOutput
 {
-	if(![self shouldUsePartialUpdates]) {
+	if (![self shouldUsePartialUpdates]) {
 		NSData *data = [outputFileHandle readDataToEndOfFile];
 		if ([data length]) {
 			self.output = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
@@ -183,13 +183,17 @@ NSString *const kDidEndBackgroundActivityNotification	= @"DidEndBackgroundActivi
 {
 	NSFileHandle *fileHandle = [notification object];
 	NSData *data = [fileHandle availableData];
+
 	if (fileHandle == outputFileHandle) {
 		[outputData appendData:data];
 	}
+
 	if (fileHandle == errorFileHandle) {
 		[errorData appendData:data];
 	}
+
 	[fileHandle waitForDataInBackgroundAndNotify];
+
 	if (data && data.length > 0) {
 		dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
 			self.updateBlock([[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding]);

@@ -233,7 +233,9 @@ static NSString *cakebrewOutputIdentifier = @"+++++Cakebrew+++++";
 	return [self performBrewCommandWithArguments:arguments wrapsSynchronousRequest:NO dataReturnBlock:block];
 }
 
-- (BOOL)performBrewCommandWithArguments:(NSArray*)arguments wrapsSynchronousRequest:(BOOL)isSynchronous dataReturnBlock:(void (^)(NSString*))block
+- (BOOL)performBrewCommandWithArguments:(NSArray*)arguments
+				wrapsSynchronousRequest:(BOOL)isSynchronous
+						dataReturnBlock:(void (^)(NSString*))block
 {
 	arguments = [self formatArguments:arguments sendOutputId:isSynchronous];
 	
@@ -244,9 +246,10 @@ static NSString *cakebrewOutputIdentifier = @"+++++Cakebrew+++++";
 	
 	BPTask *task = [[BPTask alloc] initWithPath:self.path_shell arguments:arguments];
 	task.delegate = self;
-	[self.tasks setObject:task forKey:[NSString stringWithFormat:@"%p", task]];
-	
 	task.updateBlock = block;
+
+	[self.tasks setObject:task forKey:[NSString stringWithFormat:@"%p", task]];
+
 
 #ifdef DEBUG
 	if (!isSynchronous)
@@ -304,34 +307,34 @@ static NSString *cakebrewOutputIdentifier = @"+++++Cakebrew+++++";
 - (NSArray<BPFormula *> *)listMode:(BPListMode)mode
 {
 	BPHomebrewInterfaceListCall *listCall = nil;
-	
+
 	switch (mode) {
 		case kBPListInstalled:
 			listCall = [[BPHomebrewInterfaceListCallInstalled alloc] init];
 			break;
-			
+
 		case kBPListAll:
 			listCall = [[BPHomebrewInterfaceListCallAll alloc] init];
 			break;
-			
+
 		case kBPListLeaves:
 			listCall = [[BPHomebrewInterfaceListCallLeaves alloc] init];
 			break;
-			
+
 		case kBPListOutdated:
 			listCall = [[BPHomebrewInterfaceListCallUpgradeable alloc] init];
 			break;
-			
+
 		case kBPListRepositories:
 			listCall = [[BPHomebrewInterfaceListCallRepositories alloc] init];
 			break;
-			
+
 		default:
 			return nil;
 	}
-	
+
 	NSString *string = [self performWrappedBrewCommandWithArguments:listCall.arguments];
-	
+
 	if (string)
 	{
 		return [listCall parseData:string];

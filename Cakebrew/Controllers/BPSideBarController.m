@@ -35,8 +35,7 @@
 - (void)buildSidebarTree
 {
 	PXSourceListItem *item, *parent;
-	_rootSidebarCategory = [PXSourceListItem itemWithTitle:@""
-												identifier:@"root"];
+	_rootSidebarCategory = [PXSourceListItem itemWithTitle:@"" identifier:@"root"];
 	
 	parent = [PXSourceListItem itemWithTitle:NSLocalizedString(@"Sidebar_Group_Formulae", nil)
 								  identifier:@"group"];
@@ -174,7 +173,7 @@
 	}
 }
 
-- (id)sourceList:(PXSourceList*)aSourceList child:(NSUInteger)index ofItem:(id)item
+- (id)sourceList:(PXSourceList*)sourceList child:(NSUInteger)index ofItem:(id)item
 {
 	if (!item) {
 		return [[self.rootSidebarCategory children] objectAtIndex:index];
@@ -183,7 +182,7 @@
 	}
 }
 
-- (BOOL)sourceList:(PXSourceList*)aSourceList isItemExpandable:(id)item
+- (BOOL)sourceList:(PXSourceList*)sourceList isItemExpandable:(id)item
 {
 	if (!item) {
 		return YES;
@@ -202,15 +201,16 @@
 - (NSView *)sourceList:(PXSourceList *)aSourceList viewForItem:(id)item
 {
 	PXSourceListTableCellView *cellView = nil;
-	
-	if ([[(PXSourceListItem*)item identifier] isEqualToString:@"group"])
+
+	if ([[(PXSourceListItem*)item identifier] isEqualToString:@"group"]) {
 		cellView = [aSourceList makeViewWithIdentifier:@"HeaderCell" owner:nil];
-	else
+	} else {
 		cellView = [aSourceList makeViewWithIdentifier:@"MainCell" owner:nil];
-	
+	}
+
 	PXSourceListItem *sourceListItem = item;
 	cellView.textField.stringValue = sourceListItem.title;
-	
+
 	if (sourceListItem.badgeValue.integerValue >= 0)
 	{
 		cellView.badgeView.badgeValue = (NSUInteger) sourceListItem.badgeValue.integerValue;
@@ -220,13 +220,13 @@
 	{
 		[cellView.badgeView setHidden:YES];
 	}
-	
+
 	if (sourceListItem.icon) {
 		[cellView.imageView setImage:sourceListItem.icon];
 	}
-	
+
 	[cellView.badgeView calcSize];
-	
+
 	return cellView;
 }
 

@@ -432,10 +432,11 @@ NSOpenSavePanelDelegate>
 
 		[self setEnableUpgradeFormulasMenu:([[BPHomebrewManager sharedManager] outdatedFormulae].count > 0)];
 		
-		if (shouldReselectFirstRow)
+		if (shouldReselectFirstRow) {
 			[self.sidebarController.sidebar selectRowIndexes:[NSIndexSet indexSetWithIndex:FormulaeSideBarItemInstalled] byExtendingSelection:NO];
-		else
+		} else {
 			[self.sidebarController.sidebar selectRowIndexes:[NSIndexSet indexSetWithIndex:(NSUInteger)_lastSelectedSidebarIndex] byExtendingSelection:NO];
+		}
 	}
 }
 
