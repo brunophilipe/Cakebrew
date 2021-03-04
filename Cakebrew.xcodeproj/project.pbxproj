@@ -161,6 +161,19 @@
 		1570BA3518EE0A66001C3C5C /* BPHomebrewManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BPHomebrewManager.m; sourceTree = "<group>"; };
 		1570BA5418EE50BD001C3C5C /* BPFormula.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BPFormula.h; path = Models/BPFormula.h; sourceTree = "<group>"; };
 		1570BA5518EE50BD001C3C5C /* BPFormula.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BPFormula.m; path = Models/BPFormula.m; sourceTree = "<group>"; };
+		1570E11C25F195BE0043560B /* it */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = it; path = it.lproj/BPBundleWindow.strings; sourceTree = "<group>"; };
+		1570E11D25F195BE0043560B /* it */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = it; path = it.lproj/BPDoctorView.strings; sourceTree = "<group>"; };
+		1570E11E25F195BE0043560B /* it */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = it; path = it.lproj/BPFormulaOptionsWindow.strings; sourceTree = "<group>"; };
+		1570E12225F195BE0043560B /* it */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = it; path = it.lproj/BPFormulaPopoverView.strings; sourceTree = "<group>"; };
+		1570E12325F195BE0043560B /* it */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = it; path = it.lproj/BPInstallationWindow.strings; sourceTree = "<group>"; };
+		1570E12425F195BE0043560B /* it */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = it; path = it.lproj/BPSelectedFormula.strings; sourceTree = "<group>"; };
+		1570E12525F195BE0043560B /* it */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = it; path = it.lproj/BPUpdateView.strings; sourceTree = "<group>"; };
+		1570E12625F195BE0043560B /* it */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = it; path = it.lproj/MainMenu.strings; sourceTree = "<group>"; };
+		1570E12925F195C40043560B /* it */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = it; path = it.lproj/DCOAboutWindow.strings; sourceTree = "<group>"; };
+		1570E12A25F195C40043560B /* it */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = it; path = it.lproj/Disabled.strings; sourceTree = "<group>"; };
+		1570E12B25F195C40043560B /* it */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = it; path = it.lproj/Loading.strings; sourceTree = "<group>"; };
+		1570E14225F1982C0043560B /* it */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = it; path = it.lproj/Localizable.strings; sourceTree = "<group>"; };
+		1570E14325F198410043560B /* it */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = it; path = it.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		15715F601C78050B00AE0E66 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/BPBundleWindow.xib; sourceTree = "<group>"; };
 		15715F621C78053300AE0E66 /* BPBundleWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BPBundleWindowController.h; sourceTree = "<group>"; };
 		15715F631C78053300AE0E66 /* BPBundleWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BPBundleWindowController.m; sourceTree = "<group>"; };
@@ -666,6 +679,7 @@
 				de,
 				fr,
 				"zh-Hans",
+				it,
 			);
 			mainGroup = 1FE4FE49148E4CDD008EDE8B;
 			productRefGroup = 1FE4FE55148E4CDD008EDE8B /* Products */;
@@ -869,6 +883,7 @@
 				15715F6A1C78D3CC00AE0E66 /* de */,
 				F752F5561C79875500C0DEFE /* fr */,
 				15F3130D1C7A903500F22608 /* zh-Hans */,
+				1570E11C25F195BE0043560B /* it */,
 			);
 			name = BPBundleWindow.xib;
 			sourceTree = "<group>";
@@ -881,6 +896,7 @@
 				15A00B451B84072700528486 /* de */,
 				F752F5541C79875500C0DEFE /* fr */,
 				15F313141C7A903500F22608 /* zh-Hans */,
+				1570E12925F195C40043560B /* it */,
 			);
 			name = DCOAboutWindow.xib;
 			sourceTree = "<group>";
@@ -893,6 +909,7 @@
 				15A00B461B84072700528486 /* de */,
 				F752F5551C79875500C0DEFE /* fr */,
 				15F3130E1C7A903500F22608 /* zh-Hans */,
+				1570E11D25F195BE0043560B /* it */,
 			);
 			name = BPDoctorView.xib;
 			sourceTree = "<group>";
@@ -905,6 +922,7 @@
 				15A00B471B84072700528486 /* de */,
 				F752F54B1C79875400C0DEFE /* fr */,
 				15F3130F1C7A903500F22608 /* zh-Hans */,
+				1570E11E25F195BE0043560B /* it */,
 			);
 			name = BPFormulaOptionsWindow.xib;
 			sourceTree = "<group>";
@@ -917,6 +935,7 @@
 				15A00B481B84072700528486 /* de */,
 				F752F5511C79875500C0DEFE /* fr */,
 				15F313101C7A903500F22608 /* zh-Hans */,
+				1570E12225F195BE0043560B /* it */,
 			);
 			name = BPFormulaPopoverView.xib;
 			sourceTree = "<group>";
@@ -929,6 +948,7 @@
 				15A00B491B84072700528486 /* de */,
 				F752F54F1C79875400C0DEFE /* fr */,
 				15F313111C7A903500F22608 /* zh-Hans */,
+				1570E12325F195BE0043560B /* it */,
 			);
 			name = BPInstallationWindow.xib;
 			sourceTree = "<group>";
@@ -941,6 +961,7 @@
 				15A00B4B1B84072700528486 /* de */,
 				F752F54C1C79875400C0DEFE /* fr */,
 				15F313121C7A903500F22608 /* zh-Hans */,
+				1570E12425F195BE0043560B /* it */,
 			);
 			name = BPSelectedFormula.xib;
 			sourceTree = "<group>";
@@ -953,6 +974,7 @@
 				15A00B4C1B84072700528486 /* de */,
 				F752F54D1C79875400C0DEFE /* fr */,
 				15F313131C7A903500F22608 /* zh-Hans */,
+				1570E12525F195BE0043560B /* it */,
 			);
 			name = BPUpdateView.xib;
 			sourceTree = "<group>";
@@ -965,6 +987,7 @@
 				15A00B421B84072700528486 /* de */,
 				F752F5501C79875400C0DEFE /* fr */,
 				15F313181C7A903500F22608 /* zh-Hans */,
+				1570E14225F1982C0043560B /* it */,
 			);
 			name = Localizable.strings;
 			sourceTree = "<group>";
@@ -977,6 +1000,7 @@
 				15A00B431B84072700528486 /* de */,
 				F752F54E1C79875400C0DEFE /* fr */,
 				15F313191C7A903500F22608 /* zh-Hans */,
+				1570E14325F198410043560B /* it */,
 			);
 			name = InfoPlist.strings;
 			sourceTree = "<group>";
@@ -989,6 +1013,7 @@
 				15A00B441B84072700528486 /* de */,
 				F752F5521C79875500C0DEFE /* fr */,
 				15F313151C7A903500F22608 /* zh-Hans */,
+				1570E12625F195BE0043560B /* it */,
 			);
 			name = MainMenu.xib;
 			sourceTree = "<group>";
@@ -1001,6 +1026,7 @@
 				D2C3E0371B8E15E4000D89BB /* de */,
 				F752F5531C79875500C0DEFE /* fr */,
 				15F313161C7A903500F22608 /* zh-Hans */,
+				1570E12A25F195C40043560B /* it */,
 			);
 			name = Disabled.xib;
 			path = Views;
@@ -1014,6 +1040,7 @@
 				D2C3E0331B8E15DC000D89BB /* de */,
 				F752F54A1C79875400C0DEFE /* fr */,
 				15F313171C7A903500F22608 /* zh-Hans */,
+				1570E12B25F195C40043560B /* it */,
 			);
 			name = Loading.xib;
 			path = Views;
