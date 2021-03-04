@@ -21,25 +21,25 @@
 
 #import <Foundation/Foundation.h>
 
-extern NSString *const kDidBeginBackgroundActivityNotification;
-extern NSString *const kDidEndBackgroundActivityNotification;
+extern NSString * _Nonnull const kDidBeginBackgroundActivityNotification;
+extern NSString * _Nonnull const kDidEndBackgroundActivityNotification;
 
 @class BPTask;
 
 @protocol BPTaskCompleted <NSObject>
-- (void)task:(BPTask *)task didFinishWithOutput:(NSString *)output error:(NSString *)error;
+- (void)task:(BPTask * _Nonnull)task didFinishWithOutput:(NSString * _Nonnull)output error:(NSString * _Nonnull)error;
 @end
 
 @interface BPTask : NSObject
 
-- (instancetype)initWithPath:(NSString *)path
-				   arguments:(NSArray *)arguments;
+- (_Nonnull instancetype)initWithPath:(NSString * _Nonnull)path
+							arguments:(NSArray * _Nonnull)arguments;
 - (int)execute;
 - (void)cleanup;
 
-@property (nonatomic, copy) void (^updateBlock)(NSString *);
-@property (readonly) NSString *output;
-@property (readonly) NSString *error;
-@property (weak) id<BPTaskCompleted> delegate;
+@property (nonatomic, nullable, copy) void (^updateBlock)(NSString * _Nonnull);
+@property (readonly, nonnull) NSString *output;
+@property (readonly, nonnull) NSString *error;
+@property (weak, nullable) id<BPTaskCompleted> delegate;
 
 @end
