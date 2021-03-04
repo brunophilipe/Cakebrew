@@ -182,7 +182,7 @@ NSString *const kDidEndBackgroundActivityNotification	= @"DidEndBackgroundActivi
 - (void)updatedFileHandle:(NSNotification*)notification
 {
 	NSFileHandle *fileHandle = [notification object];
-	NSData *data = [fileHandle availableData];
+	NSData *data = [fileHandle readDataToEndOfFile];
 
 	if (fileHandle == outputFileHandle) {
 		[outputData appendData:data];
