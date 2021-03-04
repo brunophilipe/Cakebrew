@@ -71,20 +71,33 @@ NSString *const kBPCacheDataKey	= @"BPCacheDataKey";
 
 - (void)reloadFromInterfaceRebuildingCache:(BOOL)shouldRebuildCache;
 {
+	NSUInteger previousCountOfAllFormulae = [self allFormulae].count;
+
 	dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
 		[[BPHomebrewInterface sharedInterface] setDelegate:self];
 		
-		[self setInstalledFormulae:[[BPHomebrewInterface sharedInterface] listMode:kBPListInstalled]];
-		[self setLeavesFormulae:[[BPHomebrewInterface sharedInterface] listMode:kBPListLeaves]];
-		[self setOutdatedFormulae:[[BPHomebrewInterface sharedInterface] listMode:kBPListOutdated]];
-		[self setRepositoriesFormulae:[[BPHomebrewInterface sharedInterface] listMode:kBPListRepositories]];
-		
-		if (![self loadAllFormulaeCaches] || [[self allFormulae] count] <= 1 || shouldRebuildCache) {
-			[self setAllFormulae:[[BPHomebrewInterface sharedInterface] listMode:kBPListAll]];
-			[self storeAllFormulaeCaches];
+		NSArray *installedFormulae = [[BPHomebrewInterface sharedInterface] listMode:kBPListInstalled];
+		NSArray *leavesFormulae = [[BPHomebrewInterface sharedInterface] listMode:kBPListLeaves];
+		NSArray *outdatedFormulae = [[BPHomebrewInterface sharedInterface] listMode:kBPListOutdated];
+		NSArray *repositoriesFormulae = [[BPHomebrewInterface sharedInterface] listMode:kBPListRepositories];
+		NSArray *allFormulae = nil;
+
+		if (![self loadAllFormulaeCaches] || previousCountOfAllFormulae <= 100 || shouldRebuildCache) {
+			allFormulae = [[BPHomebrewInterface sharedInterface] listMode:kBPListAll];
 		}
 		
 		dispatch_async(dispatch_get_main_queue(), ^{
+
+			if (allFormulae != nil) {
+				[self setAllFormulae:allFormulae];
+				[self storeAllFormulaeCaches];
+			}
+
+			[self setInstalledFormulae:installedFormulae];
+			[self setLeavesFormulae:leavesFormulae];
+			[self setOutdatedFormulae:outdatedFormulae];
+			[self setRepositoriesFormulae:repositoriesFormulae];
+
 			[self.delegate homebrewManagerFinishedUpdating:self];
 		});
 	});
