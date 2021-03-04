@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		150036EC25F1633900C69450 /* PXSourceList.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 15EC1AF925CE1AA000C93861 /* PXSourceList.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		150AEC4C1B3F999A00163767 /* BPDoctorViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 150AEC391B3F999A00163767 /* BPDoctorViewController.m */; };
 		150AEC4D1B3F999A00163767 /* BPFormulaOptionsWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 150AEC3B1B3F999A00163767 /* BPFormulaOptionsWindowController.m */; };
 		150AEC4E1B3F999A00163767 /* BPFormulaPopoverViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 150AEC3D1B3F999A00163767 /* BPFormulaPopoverViewController.m */; };
@@ -50,7 +51,6 @@
 		15D5BEF318EBB3FB001DDED7 /* plus.icns in Resources */ = {isa = PBXBuildFile; fileRef = 15D5BEF018EBB3FB001DDED7 /* plus.icns */; };
 		15D5BEF518EBB430001DDED7 /* search.icns in Resources */ = {isa = PBXBuildFile; fileRef = 15D5BEF418EBB430001DDED7 /* search.icns */; };
 		15EC1B0025CE1ACC00C93861 /* PXSourceList.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 15EC1AF925CE1AA000C93861 /* PXSourceList.framework */; };
-		15EC1B0125CE1ACC00C93861 /* PXSourceList.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 15EC1AF925CE1AA000C93861 /* PXSourceList.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		15EC1B0725CED52C00C93861 /* BPWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = 15EC1B0625CED52C00C93861 /* BPWindow.m */; };
 		15EC1B0C25CEE4C200C93861 /* BPMainWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 15EC1B0B25CEE4C200C93861 /* BPMainWindowController.m */; };
 		1FE4FE59148E4CDD008EDE8B /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1FE4FE58148E4CDD008EDE8B /* Cocoa.framework */; };
@@ -92,6 +92,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		150036EA25F1632C00C69450 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 15EC1AB025CE1AA000C93861 /* PXSourceList.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 4CC5EA2912DC81ED001F282E;
+			remoteInfo = PXSourceList;
+		};
 		15EC1AF425CE1AA000C93861 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 15EC1AB025CE1AA000C93861 /* PXSourceList.xcodeproj */;
@@ -122,8 +129,8 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				150036EC25F1633900C69450 /* PXSourceList.framework in CopyFiles */,
 				1570EFB01B2B91170075453A /* Sparkle.framework in CopyFiles */,
-				15EC1B0125CE1ACC00C93861 /* PXSourceList.framework in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -604,6 +611,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				150036EB25F1632C00C69450 /* PBXTargetDependency */,
 			);
 			name = Cakebrew;
 			productName = Cakebrew;
@@ -842,6 +850,14 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		150036EB25F1632C00C69450 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = PXSourceList;
+			targetProxy = 150036EA25F1632C00C69450 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		15715F5F1C78050B00AE0E66 /* BPBundleWindow.xib */ = {
