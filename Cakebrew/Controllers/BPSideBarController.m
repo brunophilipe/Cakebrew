@@ -86,7 +86,8 @@
 - (NSImage *)installedSidebarIconImage
 {
 	if (@available(macOS 11.0, *)) {
-		return [NSImage imageWithSystemSymbolName:@"checkmark.square" accessibilityDescription:@"installed"];
+		return [NSImage imageWithSystemSymbolName:@"checkmark.square"
+						 accessibilityDescription:NSLocalizedString(@"Sidebar_Item_Installed", nil)];
 	} else {
 		return [NSImage imageNamed:@"installedTemplate"];
 	}
@@ -95,7 +96,8 @@
 - (NSImage *)outdatedSidebarIconImage
 {
 	if (@available(macOS 11.0, *)) {
-		return [NSImage imageWithSystemSymbolName:@"clock.arrow.circlepath" accessibilityDescription:@"outdated"];
+		return [NSImage imageWithSystemSymbolName:@"clock.arrow.circlepath"
+						 accessibilityDescription:NSLocalizedString(@"Sidebar_Item_Outdated", nil)];
 	} else {
 		return [NSImage imageNamed:@"outdatedTemplate"];
 	}
@@ -104,7 +106,8 @@
 - (NSImage *)allFormulaeSidebarIconImage
 {
 	if (@available(macOS 11.0, *)) {
-		return [NSImage imageWithSystemSymbolName:@"books.vertical" accessibilityDescription:@"all formulae"];
+		return [NSImage imageWithSystemSymbolName:@"books.vertical"
+						 accessibilityDescription:NSLocalizedString(@"Sidebar_Item_All", nil)];
 	} else {
 		return [NSImage imageNamed:@"allFormulaeTemplate"];
 	}
@@ -113,7 +116,8 @@
 - (NSImage *)leavesSidebarIconImage
 {
 	if (@available(macOS 11.0, *)) {
-		return [NSImage imageWithSystemSymbolName:@"leaf" accessibilityDescription:@"leaves"];
+		return [NSImage imageWithSystemSymbolName:@"leaf"
+						 accessibilityDescription:NSLocalizedString(@"Sidebar_Item_Leaves", nil)];
 	} else {
 		return [NSImage imageNamed:@"pinTemplate"];
 	}
@@ -122,7 +126,8 @@
 - (NSImage *)repositoriesSidebarIconImage
 {
 	if (@available(macOS 11.0, *)) {
-		return [NSImage imageWithSystemSymbolName:@"building.columns" accessibilityDescription:@"repositories"];
+		return [NSImage imageWithSystemSymbolName:@"building.columns"
+						 accessibilityDescription:NSLocalizedString(@"Sidebar_Item_Repos", nil)];
 	} else {
 		return [NSImage imageNamed:@"cloudTemplate"];
 	}
@@ -131,7 +136,8 @@
 - (NSImage *)doctorSidebarIconImage
 {
 	if (@available(macOS 11.0, *)) {
-		return [NSImage imageWithSystemSymbolName:@"stethoscope" accessibilityDescription:@"homebrew doctor"];
+		return [NSImage imageWithSystemSymbolName:@"stethoscope"
+						 accessibilityDescription:NSLocalizedString(@"Sidebar_Item_Doctor", nil)];
 	} else {
 		return [NSImage imageNamed:@"doctorTemplate"];
 	}
@@ -140,7 +146,8 @@
 - (NSImage *)updateSidebarIconImage
 {
 	if (@available(macOS 11.0, *)) {
-		return [NSImage imageWithSystemSymbolName:@"arrow.triangle.2.circlepath.circle" accessibilityDescription:@"homebrew update"];
+		return [NSImage imageWithSystemSymbolName:@"arrow.triangle.2.circlepath.circle"
+						 accessibilityDescription:NSLocalizedString(@"Sidebar_Item_Update", nil)];
 	} else {
 		return [NSImage imageNamed:@"updateTemplate"];
 	}
@@ -150,7 +157,8 @@
 - (void)configureSidebarSettings
 {
 	[self.sidebar selectRowIndexes:[NSIndexSet indexSetWithIndex:FormulaeSideBarItemInstalled] byExtendingSelection:NO];
-	[self.sidebar accessibilitySetOverrideValue:NSLocalizedString(@"Sidebar_VoiceOver_Tools", nil) forAttribute:NSAccessibilityDescriptionAttribute];
+	[self.sidebar accessibilitySetOverrideValue:NSLocalizedString(@"Sidebar_VoiceOver_Tools", nil)
+								   forAttribute:NSAccessibilityDescriptionAttribute];
 }
 
 - (void)refreshSidebarBadges
