@@ -30,10 +30,18 @@
 	[windowContentView addSubview:splitControllerView];
 
 	[NSLayoutConstraint activateConstraints:@[
-		[[splitControllerView leadingAnchor] constraintEqualToAnchor:[windowContentView leadingAnchor]],
-		[[splitControllerView trailingAnchor] constraintEqualToAnchor:[windowContentView trailingAnchor]],
-		[[splitControllerView topAnchor] constraintEqualToAnchor:[windowContentView topAnchor]],
-		[[splitControllerView bottomAnchor] constraintEqualToAnchor:[windowContentView bottomAnchor]]
+		[NSLayoutConstraint constraintWithItem:splitControllerView attribute:NSLayoutAttributeLeading
+									 relatedBy:NSLayoutRelationEqual toItem:windowContentView
+									 attribute:NSLayoutAttributeLeading multiplier:1 constant:0],
+		[NSLayoutConstraint constraintWithItem:splitControllerView attribute:NSLayoutAttributeTrailing
+									 relatedBy:NSLayoutRelationEqual toItem:windowContentView
+									 attribute:NSLayoutAttributeTrailing multiplier:1 constant:0],
+		[NSLayoutConstraint constraintWithItem:splitControllerView attribute:NSLayoutAttributeTop
+									 relatedBy:NSLayoutRelationEqual toItem:windowContentView
+									 attribute:NSLayoutAttributeTop multiplier:1 constant:0],
+		[NSLayoutConstraint constraintWithItem:splitControllerView attribute:NSLayoutAttributeBottom
+									 relatedBy:NSLayoutRelationEqual toItem:windowContentView
+									 attribute:NSLayoutAttributeBottom multiplier:1 constant:0],
 	]];
 }
 

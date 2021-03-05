@@ -227,10 +227,18 @@ NSOpenSavePanelDelegate>
 	}
 
 	[NSLayoutConstraint activateConstraints:@[
-		[referenceView.leftAnchor constraintEqualToAnchor:disabledView.leftAnchor],
-		[referenceView.rightAnchor constraintEqualToAnchor:disabledView.rightAnchor],
-		[referenceView.topAnchor constraintEqualToAnchor:disabledView.topAnchor],
-		[referenceView.bottomAnchor constraintEqualToAnchor:disabledView.bottomAnchor]
+		[NSLayoutConstraint constraintWithItem:referenceView attribute:NSLayoutAttributeLeading
+									 relatedBy:NSLayoutRelationEqual toItem:disabledView
+									 attribute:NSLayoutAttributeLeading multiplier:1 constant:0],
+		[NSLayoutConstraint constraintWithItem:referenceView attribute:NSLayoutAttributeTrailing
+									 relatedBy:NSLayoutRelationEqual toItem:disabledView
+									 attribute:NSLayoutAttributeTrailing multiplier:1 constant:0],
+		[NSLayoutConstraint constraintWithItem:referenceView attribute:NSLayoutAttributeTop
+									 relatedBy:NSLayoutRelationEqual toItem:disabledView
+									 attribute:NSLayoutAttributeTop multiplier:1 constant:0],
+		[NSLayoutConstraint constraintWithItem:referenceView attribute:NSLayoutAttributeBottom
+									 relatedBy:NSLayoutRelationEqual toItem:disabledView
+									 attribute:NSLayoutAttributeBottom multiplier:1 constant:0],
 	]];
 
 	[self setDisabledView:disabledView];
@@ -251,10 +259,18 @@ NSOpenSavePanelDelegate>
 	}
 
 	[NSLayoutConstraint activateConstraints:@[
-		[referenceView.leftAnchor constraintEqualToAnchor:loadingView.leftAnchor],
-		[referenceView.rightAnchor constraintEqualToAnchor:loadingView.rightAnchor],
-		[referenceView.topAnchor constraintEqualToAnchor:loadingView.topAnchor],
-		[referenceView.bottomAnchor constraintEqualToAnchor:loadingView.bottomAnchor]
+		[NSLayoutConstraint constraintWithItem:referenceView attribute:NSLayoutAttributeLeading
+									 relatedBy:NSLayoutRelationEqual toItem:loadingView
+									 attribute:NSLayoutAttributeLeading multiplier:1 constant:0],
+		[NSLayoutConstraint constraintWithItem:referenceView attribute:NSLayoutAttributeTrailing
+									 relatedBy:NSLayoutRelationEqual toItem:loadingView
+									 attribute:NSLayoutAttributeTrailing multiplier:1 constant:0],
+		[NSLayoutConstraint constraintWithItem:referenceView attribute:NSLayoutAttributeTop
+									 relatedBy:NSLayoutRelationEqual toItem:loadingView
+									 attribute:NSLayoutAttributeTop multiplier:1 constant:0],
+		[NSLayoutConstraint constraintWithItem:referenceView attribute:NSLayoutAttributeBottom
+									 relatedBy:NSLayoutRelationEqual toItem:loadingView
+									 attribute:NSLayoutAttributeBottom multiplier:1 constant:0],
 	]];
 
 	[self setLoadingView:loadingView];
