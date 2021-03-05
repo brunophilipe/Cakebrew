@@ -300,12 +300,14 @@ static NSString *cakebrewOutputIdentifier = @"+++++Cakebrew+++++";
 {
 	NSString __block *finalOutput = nil;
 
-	dispatch_sync(_taskOperationsQueue, ^{
+	dispatch_queue_t queue = _taskOperationsQueue;
+
+	dispatch_sync(queue, ^{
 		NSMutableString *output = [NSMutableString new];
 
 		[self performBrewCommandWithArguments:arguments
 					  wrapsSynchronousRequest:YES
-										queue:_taskOperationsQueue
+										queue:queue
 							  dataReturnBlock:^(NSString *partialOutput)
 		{
 			[output appendString:partialOutput];
