@@ -6,8 +6,8 @@
 //  Copyright (c) 2014 Bruno Philipe. All rights reserved.
 //
 
-#import <PXSourceList/PXSourceList.h>
-#import <Foundation/Foundation.h>
+@import PXSourceList;
+@import Foundation;
 
 typedef NS_ENUM(NSUInteger, FormulaeSideBarItem)
 {

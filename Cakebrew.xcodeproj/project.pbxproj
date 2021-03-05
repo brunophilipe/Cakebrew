@@ -26,9 +26,9 @@
 		1584884A1F0708F000BD2CD9 /* brewinfo_nmap.txt in Resources */ = {isa = PBXBuildFile; fileRef = 158488491F0708F000BD2CD9 /* brewinfo_nmap.txt */; };
 		1594D13C1B8A6D1A00F764FA /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 15D2CFAC18F202D000B6D9F1 /* QuartzCore.framework */; };
 		15A00B411B8406FB00528486 /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 15A00B401B8406FB00528486 /* Credits.rtf */; };
+		15A89D2B25F2C5F1003D33F5 /* PXSourceList.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 15A89D2A25F2C5F1003D33F5 /* PXSourceList.framework */; };
+		15A89D2C25F2C5F1003D33F5 /* PXSourceList.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 15A89D2A25F2C5F1003D33F5 /* PXSourceList.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		15B23A2C18F5003600714212 /* dsa_pub.pem in Resources */ = {isa = PBXBuildFile; fileRef = 15B23A2B18F5003600714212 /* dsa_pub.pem */; };
-		15B5E51C25F1C5DA00A079ED /* PXSourceList.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 15B5E51B25F1C5DA00A079ED /* PXSourceList.framework */; };
-		15B5E51D25F1C5DA00A079ED /* PXSourceList.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 15B5E51B25F1C5DA00A079ED /* PXSourceList.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		15BBA18E1BD031C9002C0127 /* BPBackgroundView.m in Sources */ = {isa = PBXBuildFile; fileRef = 15BBA18D1BD031C9002C0127 /* BPBackgroundView.m */; };
 		15C34CBF19512DE100B92E36 /* BPAutoScrollTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 15C34CBE19512DE100B92E36 /* BPAutoScrollTextView.m */; };
 		15CEFC631AB335B2005CF54A /* BPLoadingView.m in Sources */ = {isa = PBXBuildFile; fileRef = 15CEFC621AB335B2005CF54A /* BPLoadingView.m */; };
@@ -99,7 +99,7 @@
 			dstSubfolderSpec = 10;
 			files = (
 				1570EFB01B2B91170075453A /* Sparkle.framework in CopyFiles */,
-				15B5E51D25F1C5DA00A079ED /* PXSourceList.framework in CopyFiles */,
+				15A89D2C25F2C5F1003D33F5 /* PXSourceList.framework in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -164,6 +164,7 @@
 		15A00B491B84072700528486 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/BPInstallationWindow.strings; sourceTree = "<group>"; };
 		15A00B4B1B84072700528486 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/BPSelectedFormula.strings; sourceTree = "<group>"; };
 		15A00B4C1B84072700528486 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/BPUpdateView.strings; sourceTree = "<group>"; };
+		15A89D2A25F2C5F1003D33F5 /* PXSourceList.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = PXSourceList.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		15B23A2818F4F21E00714212 /* Sparkle.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Sparkle.framework; path = Cakebrew/Frameworks/Sparkle.framework; sourceTree = "<group>"; };
 		15B23A2B18F5003600714212 /* dsa_pub.pem */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = dsa_pub.pem; sourceTree = "<group>"; };
 		15B5E51B25F1C5DA00A079ED /* PXSourceList.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = PXSourceList.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -290,7 +291,7 @@
 				D2CC8CA71B90F04C00F763DF /* Security.framework in Frameworks */,
 				15D2CFAD18F202D000B6D9F1 /* QuartzCore.framework in Frameworks */,
 				1FE4FE59148E4CDD008EDE8B /* Cocoa.framework in Frameworks */,
-				15B5E51C25F1C5DA00A079ED /* PXSourceList.framework in Frameworks */,
+				15A89D2B25F2C5F1003D33F5 /* PXSourceList.framework in Frameworks */,
 				1570EFAF1B2B91170075453A /* Sparkle.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -453,6 +454,7 @@
 		1FE4FE57148E4CDD008EDE8B /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				15A89D2A25F2C5F1003D33F5 /* PXSourceList.framework */,
 				15B5E51B25F1C5DA00A079ED /* PXSourceList.framework */,
 				D2CC8CA61B90F04C00F763DF /* Security.framework */,
 				15B23A2818F4F21E00714212 /* Sparkle.framework */,
