@@ -1064,6 +1064,7 @@
 				GCC_PREPROCESSOR_DEFINITIONS = "$(inherited)";
 				INFOPLIST_FILE = "Cakebrew/Cakebrew-Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.brunophilipe.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = Cakebrew;
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -1091,6 +1092,7 @@
 				GCC_PREFIX_HEADER = "Cakebrew/Cakebrew-Prefix.pch";
 				INFOPLIST_FILE = "Cakebrew/Cakebrew-Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.brunophilipe.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = Cakebrew;
 				PROVISIONING_PROFILE_SPECIFIER = "";
