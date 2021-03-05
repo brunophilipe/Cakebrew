@@ -84,8 +84,15 @@ static NSString *cakebrewOutputIdentifier = @"+++++Cakebrew+++++";
 	if (self) {
 		_tasks = [[NSMutableDictionary alloc] init];
 
-		dispatch_queue_attr_t attributes = dispatch_queue_attr_make_with_qos_class(DISPATCH_QUEUE_CONCURRENT,
-																				   QOS_CLASS_USER_INITIATED, 1);
+		dispatch_queue_attr_t attributes;
+
+		if (@available(macOS 10.10, *)) {
+			attributes = dispatch_queue_attr_make_with_qos_class(DISPATCH_QUEUE_CONCURRENT,
+																 QOS_CLASS_USER_INITIATED,
+																 -5);
+		} else {
+			attributes = DISPATCH_QUEUE_CONCURRENT;
+		}
 
 		_taskOperationsQueue = dispatch_queue_create("com.brunophilipe.Cakebrew.BPHomebrewInterface.Tasks", attributes);
 	}
