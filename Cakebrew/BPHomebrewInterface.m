@@ -188,7 +188,7 @@ static NSString *cakebrewOutputIdentifier = @"+++++Cakebrew+++++";
 	NSString __block *path = [[NSUserDefaults standardUserDefaults] objectForKey:@"BPBrewCellarPath"];
 	
 	if (!path) {
-		NSString *brew_config = [self performWrappedBrewCommandWithArguments:@[@"config"]];
+		NSString *brew_config = [self performSyncBrewCommandWithArguments:@[@"config"]];
 		
 		[brew_config enumerateLinesUsingBlock:^(NSString *line, BOOL *stop) {
 			if ([line hasPrefix:@"HOMEBREW_CELLAR"]) {
@@ -236,13 +236,13 @@ static NSString *cakebrewOutputIdentifier = @"+++++Cakebrew+++++";
 
 - (BOOL)performBrewCommandWithArguments:(NSArray*)arguments dataReturnBlock:(void (^)(NSString*))block
 {
-	return [self performBrewCommandWithArguments:arguments wrapsSynchronousRequest:NO queue:nil dataReturnBlock:block];
+	return [self performAsyncBrewCommandWithArguments:arguments wrapsSynchronousRequest:NO queue:nil dataReturnBlock:block];
 }
 
-- (BOOL)performBrewCommandWithArguments:(NSArray*)arguments
-				wrapsSynchronousRequest:(BOOL)isSynchronous
-								  queue:(dispatch_queue_t)queue
-						dataReturnBlock:(void (^)(NSString*))block
+- (BOOL)performAsyncBrewCommandWithArguments:(NSArray*)arguments
+					 wrapsSynchronousRequest:(BOOL)isSynchronous
+									   queue:(dispatch_queue_t)queue
+							 dataReturnBlock:(void (^)(NSString*))block
 {
 	arguments = [self formatArguments:arguments sendOutputId:isSynchronous];
 	
@@ -296,7 +296,7 @@ static NSString *cakebrewOutputIdentifier = @"+++++Cakebrew+++++";
  * Note: Synchronous tasks were deprecated and removed completely in Nov 1st, 2016 due to numerous bugs. All
  * "synchronous" tasks should use this method instead.
  */
-- (NSString*)performWrappedBrewCommandWithArguments:(NSArray*)arguments
+- (NSString*)performSyncBrewCommandWithArguments:(NSArray*)arguments
 {
 	NSString __block *finalOutput = nil;
 
@@ -305,11 +305,11 @@ static NSString *cakebrewOutputIdentifier = @"+++++Cakebrew+++++";
 	dispatch_sync(queue, ^{
 		NSMutableString *output = [NSMutableString new];
 
-		[self performBrewCommandWithArguments:arguments
-					  wrapsSynchronousRequest:YES
-										queue:queue
-							  dataReturnBlock:^(NSString *partialOutput)
-		{
+		[self performAsyncBrewCommandWithArguments:arguments
+						   wrapsSynchronousRequest:YES
+											 queue:queue
+								   dataReturnBlock:^(NSString *partialOutput)
+		 {
 			[output appendString:partialOutput];
 		}];
 
@@ -350,7 +350,7 @@ static NSString *cakebrewOutputIdentifier = @"+++++Cakebrew+++++";
 			return nil;
 	}
 
-	NSString *string = [self performWrappedBrewCommandWithArguments:listCall.arguments];
+	NSString *string = [self performSyncBrewCommandWithArguments:listCall.arguments];
 
 	if (string)
 	{
@@ -364,7 +364,7 @@ static NSString *cakebrewOutputIdentifier = @"+++++Cakebrew+++++";
 
 - (NSString *)informationForFormulaName:(NSString *)name;
 {
-	return [self performWrappedBrewCommandWithArguments:@[@"info", name]];
+	return [self performSyncBrewCommandWithArguments:@[@"info", name]];
 }
 
 - (NSString *)dependantsForFormulaName:(NSString *)name onlyInstalled:(BOOL)onlyInstalled
@@ -378,7 +378,7 @@ static NSString *cakebrewOutputIdentifier = @"+++++Cakebrew+++++";
 
 	[arguments addObject:name];
 
-	return [self performWrappedBrewCommandWithArguments:arguments];
+	return [self performSyncBrewCommandWithArguments:arguments];
 }
 
 - (NSString*)removeLoginShellOutputFromString:(NSString*)string {
@@ -456,10 +456,10 @@ static NSString *cakebrewOutputIdentifier = @"+++++Cakebrew+++++";
 
 - (NSError*)runBrewExportToolWithPath:(NSString*)path
 {
-	NSString *output = [self performWrappedBrewCommandWithArguments:@[@"bundle",
-																	  @"dump",
-																	  @"--force",
-																	  [NSString stringWithFormat:@"--file=%@", path]]];
+	NSString *output = [self performSyncBrewCommandWithArguments:@[@"bundle",
+																   @"dump",
+																   @"--force",
+																   [NSString stringWithFormat:@"--file=%@", path]]];
 	
 	[self sendDelegateFormulaeUpdatedCall];
 	
@@ -475,8 +475,8 @@ static NSString *cakebrewOutputIdentifier = @"+++++Cakebrew+++++";
 			if ([line hasPrefix:@"Error:"] || [line hasPrefix:@"fatal:"])
 			{
 				error = [NSError errorWithDomain:@"Cakebrew"
-								   code:2701
-							   userInfo:@{NSLocalizedDescriptionKey: line}];
+											code:2701
+										userInfo:@{NSLocalizedDescriptionKey: line}];
 				
 				*stop = YES;
 			}
