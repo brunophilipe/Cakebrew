@@ -327,14 +327,14 @@ static NSString *kToolbarItemMultiActionIdentifier = @"toolbarItemMultiAction";
 {
 	NSToolbarItem *item = [[NSToolbarItem alloc] initWithItemIdentifier:identifier];
 	if (@available(macOS 11.0, *)) {
-		item.view = [self makeImageViewForItemImage:image];
+		item.view = [self makeButtonForItemImage:image target:[self controller] action:action];
 	} else {
 		item.image = image;
+		item.target = [self controller];
 	}
 	item.label = label;
 	item.paletteLabel = label;
 	item.action = action;
-	item.target = self.controller;
 	item.autovalidates = YES;
 	item.toolTip = label;
 	return item;
@@ -354,33 +354,37 @@ static NSString *kToolbarItemMultiActionIdentifier = @"toolbarItemMultiAction";
 		} else {
 			item.image = [NSImage imageWithSize:NSMakeSize(32, 32) flipped:NO drawingHandler:staticBlock];
 		}
+
+		item.action = action;
 	} else {
 		if (@available(macOS 11.0, *)) {
-			item.view = [self makeImageViewForItemImage:image];
+			item.view = [self makeButtonForItemImage:image target:[self controller] action:action];
 		} else {
 			item.image = image;
+			item.action = action;
 		}
 	}
 
 	item.label = label;
-	item.action = action;
 	item.toolTip = label;
 }
 
-- (NSImageView *)makeImageViewForItemImage:(NSImage *)image
+- (NSButton *)makeButtonForItemImage:(NSImage *)image target:(id)target action:(SEL)action
 {
 	if (image == nil) {
 		return nil;
 	}
-	NSImageView *imageView = [NSImageView imageViewWithImage:image];
-	[imageView setTranslatesAutoresizingMaskIntoConstraints:NO];
+	NSButton *button = [NSButton buttonWithImage:image target:target action:action];
+	[button setBezelStyle:NSBezelStyleRegularSquare];
+	[button setBordered:NO];
+	[button setTranslatesAutoresizingMaskIntoConstraints:NO];
 	if (@available(macOS 11, *)) {
-		[imageView setSymbolConfiguration:[NSImageSymbolConfiguration configurationWithPointSize:24
+		[button setSymbolConfiguration:[NSImageSymbolConfiguration configurationWithPointSize:24
 																						  weight:NSFontWeightMedium
 																						   scale:NSImageSymbolScaleMedium]];
 	}
-	[imageView setImageScaling:NSImageScaleProportionallyUpOrDown];
-	return imageView;
+	[button setImageScaling:NSImageScaleProportionallyUpOrDown];
+	return button;
 }
 
 - (void)makeSearchFieldFirstResponder
