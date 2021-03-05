@@ -130,11 +130,13 @@ NSOpenSavePanelDelegate>
 {
 	if ([[notification name] isEqualToString:kDidBeginBackgroundActivityNotification])
 	{
-		[[self backgroundActivityIndicator] performSelectorOnMainThread:@selector(startAnimation:) withObject:self waitUntilDone:YES];
+		[[self backgroundActivityIndicator] performSelectorOnMainThread:@selector(startAnimation:)
+															 withObject:self waitUntilDone:YES];
 	}
 	else if ([[notification name] isEqualToString:kDidEndBackgroundActivityNotification])
 	{
-		[[self backgroundActivityIndicator] performSelectorOnMainThread:@selector(stopAnimation:) withObject:self waitUntilDone:YES];
+		[[self backgroundActivityIndicator] performSelectorOnMainThread:@selector(stopAnimation:)
+															 withObject:self waitUntilDone:YES];
 	}
 }
 
