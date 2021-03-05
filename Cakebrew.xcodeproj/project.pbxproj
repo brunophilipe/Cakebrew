@@ -597,7 +597,7 @@
 			isa = PBXProject;
 			attributes = {
 				CLASSPREFIX = BP;
-				LastUpgradeCheck = 1240;
+				LastUpgradeCheck = 1250;
 				ORGANIZATIONNAME = "Bruno Philipe";
 				TargetAttributes = {
 					1FE4FE53148E4CDD008EDE8B = {
@@ -611,10 +611,9 @@
 			};
 			buildConfigurationList = 1FE4FE4E148E4CDD008EDE8B /* Build configuration list for PBXProject "Cakebrew" */;
 			compatibilityVersion = "Xcode 3.2";
-			developmentRegion = English;
+			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
-				English,
 				en,
 				Base,
 				pt,
