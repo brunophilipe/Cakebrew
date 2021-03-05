@@ -57,11 +57,13 @@
 	[self.doctorTextView setString:@""];
 	self.isPerformingDoctor = YES;
 	[self.progressIndicator startAnimation:sender];
+
+	NSString *previousString = [self.doctorTextView string];
 	
 	dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
 		[[BPHomebrewInterface sharedInterface] runDoctorWithReturnBlock:^(NSString *output) {
 			[self.doctorTextView performSelectorOnMainThread:@selector(setString:)
-												  withObject:[self.doctorTextView.string stringByAppendingString:output]
+												  withObject:[previousString stringByAppendingString:output]
 											   waitUntilDone:YES];
 		}];
 		
