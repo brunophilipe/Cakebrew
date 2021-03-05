@@ -73,7 +73,7 @@ static NSString *cakebrewOutputIdentifier = @"+++++Cakebrew+++++";
 	{
 		static dispatch_once_t once;
 		static BPHomebrewInterface *instance;
-		dispatch_once(&once, ^ { instance = [[super allocWithZone:NULL] initUniqueInstance]; });
+		dispatch_once(&once, ^ { instance = [[BPHomebrewInterface alloc] initUniqueInstance]; });
 		return instance;
 	}
 }
@@ -89,16 +89,6 @@ static NSString *cakebrewOutputIdentifier = @"+++++Cakebrew+++++";
 
 		_taskOperationsQueue = dispatch_queue_create("com.brunophilipe.Cakebrew.BPHomebrewInterface.Tasks", attributes);
 	}
-	return self;
-}
-
-+ (instancetype)allocWithZone:(NSZone *)zone
-{
-	return [self sharedInterface];
-}
-
-- (instancetype)copyWithZone:(NSZone *)zone
-{
 	return self;
 }
 
