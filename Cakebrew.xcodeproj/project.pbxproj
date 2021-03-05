@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		150036EC25F1633900C69450 /* PXSourceList.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 15EC1AF925CE1AA000C93861 /* PXSourceList.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		150AEC4C1B3F999A00163767 /* BPDoctorViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 150AEC391B3F999A00163767 /* BPDoctorViewController.m */; };
 		150AEC4D1B3F999A00163767 /* BPFormulaOptionsWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 150AEC3B1B3F999A00163767 /* BPFormulaOptionsWindowController.m */; };
 		150AEC4E1B3F999A00163767 /* BPFormulaPopoverViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 150AEC3D1B3F999A00163767 /* BPFormulaPopoverViewController.m */; };
@@ -28,6 +27,8 @@
 		1594D13C1B8A6D1A00F764FA /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 15D2CFAC18F202D000B6D9F1 /* QuartzCore.framework */; };
 		15A00B411B8406FB00528486 /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 15A00B401B8406FB00528486 /* Credits.rtf */; };
 		15B23A2C18F5003600714212 /* dsa_pub.pem in Resources */ = {isa = PBXBuildFile; fileRef = 15B23A2B18F5003600714212 /* dsa_pub.pem */; };
+		15B5E51C25F1C5DA00A079ED /* PXSourceList.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 15B5E51B25F1C5DA00A079ED /* PXSourceList.framework */; };
+		15B5E51D25F1C5DA00A079ED /* PXSourceList.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 15B5E51B25F1C5DA00A079ED /* PXSourceList.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		15BBA18E1BD031C9002C0127 /* BPBackgroundView.m in Sources */ = {isa = PBXBuildFile; fileRef = 15BBA18D1BD031C9002C0127 /* BPBackgroundView.m */; };
 		15C34CBF19512DE100B92E36 /* BPAutoScrollTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 15C34CBE19512DE100B92E36 /* BPAutoScrollTextView.m */; };
 		15CEFC631AB335B2005CF54A /* BPLoadingView.m in Sources */ = {isa = PBXBuildFile; fileRef = 15CEFC621AB335B2005CF54A /* BPLoadingView.m */; };
@@ -50,7 +51,6 @@
 		15D5BEF218EBB3FB001DDED7 /* label.icns in Resources */ = {isa = PBXBuildFile; fileRef = 15D5BEEF18EBB3FB001DDED7 /* label.icns */; };
 		15D5BEF318EBB3FB001DDED7 /* plus.icns in Resources */ = {isa = PBXBuildFile; fileRef = 15D5BEF018EBB3FB001DDED7 /* plus.icns */; };
 		15D5BEF518EBB430001DDED7 /* search.icns in Resources */ = {isa = PBXBuildFile; fileRef = 15D5BEF418EBB430001DDED7 /* search.icns */; };
-		15EC1B0025CE1ACC00C93861 /* PXSourceList.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 15EC1AF925CE1AA000C93861 /* PXSourceList.framework */; };
 		15EC1B0725CED52C00C93861 /* BPWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = 15EC1B0625CED52C00C93861 /* BPWindow.m */; };
 		15EC1B0C25CEE4C200C93861 /* BPMainWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 15EC1B0B25CEE4C200C93861 /* BPMainWindowController.m */; };
 		1FE4FE59148E4CDD008EDE8B /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1FE4FE58148E4CDD008EDE8B /* Cocoa.framework */; };
@@ -91,37 +91,6 @@
 		D2F732F119190B75002B2512 /* NSString+URLValidation.m in Sources */ = {isa = PBXBuildFile; fileRef = D2F732F019190B75002B2512 /* NSString+URLValidation.m */; };
 /* End PBXBuildFile section */
 
-/* Begin PBXContainerItemProxy section */
-		150036EA25F1632C00C69450 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 15EC1AB025CE1AA000C93861 /* PXSourceList.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = 4CC5EA2912DC81ED001F282E;
-			remoteInfo = PXSourceList;
-		};
-		15EC1AF425CE1AA000C93861 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 15EC1AB025CE1AA000C93861 /* PXSourceList.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 8D1107320486CEB800E47090;
-			remoteInfo = CellBasedSourceList;
-		};
-		15EC1AF625CE1AA000C93861 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 15EC1AB025CE1AA000C93861 /* PXSourceList.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = D263123B186EF9F00036501C;
-			remoteInfo = ViewBasedSourceList;
-		};
-		15EC1AF825CE1AA000C93861 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 15EC1AB025CE1AA000C93861 /* PXSourceList.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 4CC5EA2A12DC81ED001F282E;
-			remoteInfo = PXSourceList;
-		};
-/* End PBXContainerItemProxy section */
-
 /* Begin PBXCopyFilesBuildPhase section */
 		1570BA6018EF9B0F001C3C5C /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
@@ -129,8 +98,8 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				150036EC25F1633900C69450 /* PXSourceList.framework in CopyFiles */,
 				1570EFB01B2B91170075453A /* Sparkle.framework in CopyFiles */,
+				15B5E51D25F1C5DA00A079ED /* PXSourceList.framework in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -197,6 +166,7 @@
 		15A00B4C1B84072700528486 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/BPUpdateView.strings; sourceTree = "<group>"; };
 		15B23A2818F4F21E00714212 /* Sparkle.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Sparkle.framework; path = Cakebrew/Frameworks/Sparkle.framework; sourceTree = "<group>"; };
 		15B23A2B18F5003600714212 /* dsa_pub.pem */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = dsa_pub.pem; sourceTree = "<group>"; };
+		15B5E51B25F1C5DA00A079ED /* PXSourceList.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = PXSourceList.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		15BBA18C1BD031C9002C0127 /* BPBackgroundView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BPBackgroundView.h; path = Views/BPBackgroundView.h; sourceTree = "<group>"; };
 		15BBA18D1BD031C9002C0127 /* BPBackgroundView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BPBackgroundView.m; path = Views/BPBackgroundView.m; sourceTree = "<group>"; };
 		15C34CBD19512DE100B92E36 /* BPAutoScrollTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BPAutoScrollTextView.h; path = Views/BPAutoScrollTextView.h; sourceTree = "<group>"; };
@@ -232,7 +202,6 @@
 		15D5BEEF18EBB3FB001DDED7 /* label.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = label.icns; sourceTree = "<group>"; };
 		15D5BEF018EBB3FB001DDED7 /* plus.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = plus.icns; sourceTree = "<group>"; };
 		15D5BEF418EBB430001DDED7 /* search.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = search.icns; sourceTree = "<group>"; };
-		15EC1AB025CE1AA000C93861 /* PXSourceList.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; path = PXSourceList.xcodeproj; sourceTree = "<group>"; };
 		15EC1B0525CED52C00C93861 /* BPWindow.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BPWindow.h; sourceTree = "<group>"; };
 		15EC1B0625CED52C00C93861 /* BPWindow.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BPWindow.m; sourceTree = "<group>"; };
 		15EC1B0A25CEE4C200C93861 /* BPMainWindowController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BPMainWindowController.h; sourceTree = "<group>"; };
@@ -321,7 +290,7 @@
 				D2CC8CA71B90F04C00F763DF /* Security.framework in Frameworks */,
 				15D2CFAD18F202D000B6D9F1 /* QuartzCore.framework in Frameworks */,
 				1FE4FE59148E4CDD008EDE8B /* Cocoa.framework in Frameworks */,
-				15EC1B0025CE1ACC00C93861 /* PXSourceList.framework in Frameworks */,
+				15B5E51C25F1C5DA00A079ED /* PXSourceList.framework in Frameworks */,
 				1570EFAF1B2B91170075453A /* Sparkle.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -460,38 +429,11 @@
 			name = Models;
 			sourceTree = "<group>";
 		};
-		15EC1AAD25CE1AA000C93861 /* Dependencies */ = {
-			isa = PBXGroup;
-			children = (
-				15EC1AAE25CE1AA000C93861 /* PXSourceList */,
-			);
-			path = Dependencies;
-			sourceTree = "<group>";
-		};
-		15EC1AAE25CE1AA000C93861 /* PXSourceList */ = {
-			isa = PBXGroup;
-			children = (
-				15EC1AB025CE1AA000C93861 /* PXSourceList.xcodeproj */,
-			);
-			path = PXSourceList;
-			sourceTree = "<group>";
-		};
-		15EC1AB125CE1AA000C93861 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				15EC1AF525CE1AA000C93861 /* PXSourceList.app */,
-				15EC1AF725CE1AA000C93861 /* ViewBasedSourceList.app */,
-				15EC1AF925CE1AA000C93861 /* PXSourceList.framework */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
 		1FE4FE49148E4CDD008EDE8B = {
 			isa = PBXGroup;
 			children = (
 				1FE4FE5E148E4CDD008EDE8B /* Cakebrew */,
 				D261C9C11B852FA300409803 /* CakebrewTests */,
-				15EC1AAD25CE1AA000C93861 /* Dependencies */,
 				1FE4FE57148E4CDD008EDE8B /* Frameworks */,
 				1FE4FE55148E4CDD008EDE8B /* Products */,
 			);
@@ -511,6 +453,7 @@
 		1FE4FE57148E4CDD008EDE8B /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				15B5E51B25F1C5DA00A079ED /* PXSourceList.framework */,
 				D2CC8CA61B90F04C00F763DF /* Security.framework */,
 				15B23A2818F4F21E00714212 /* Sparkle.framework */,
 				15D2CFAC18F202D000B6D9F1 /* QuartzCore.framework */,
@@ -624,7 +567,6 @@
 			buildRules = (
 			);
 			dependencies = (
-				150036EB25F1632C00C69450 /* PBXTargetDependency */,
 			);
 			name = Cakebrew;
 			productName = Cakebrew;
@@ -684,12 +626,6 @@
 			mainGroup = 1FE4FE49148E4CDD008EDE8B;
 			productRefGroup = 1FE4FE55148E4CDD008EDE8B /* Products */;
 			projectDirPath = "";
-			projectReferences = (
-				{
-					ProductGroup = 15EC1AB125CE1AA000C93861 /* Products */;
-					ProjectRef = 15EC1AB025CE1AA000C93861 /* PXSourceList.xcodeproj */;
-				},
-			);
 			projectRoot = "";
 			targets = (
 				1FE4FE53148E4CDD008EDE8B /* Cakebrew */,
@@ -697,30 +633,6 @@
 			);
 		};
 /* End PBXProject section */
-
-/* Begin PBXReferenceProxy section */
-		15EC1AF525CE1AA000C93861 /* PXSourceList.app */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.application;
-			path = PXSourceList.app;
-			remoteRef = 15EC1AF425CE1AA000C93861 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		15EC1AF725CE1AA000C93861 /* ViewBasedSourceList.app */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.application;
-			path = ViewBasedSourceList.app;
-			remoteRef = 15EC1AF625CE1AA000C93861 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		15EC1AF925CE1AA000C93861 /* PXSourceList.framework */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.framework;
-			path = PXSourceList.framework;
-			remoteRef = 15EC1AF825CE1AA000C93861 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		1FE4FE52148E4CDD008EDE8B /* Resources */ = {
@@ -864,14 +776,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXTargetDependency section */
-		150036EB25F1632C00C69450 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = PXSourceList;
-			targetProxy = 150036EA25F1632C00C69450 /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		15715F5F1C78050B00AE0E66 /* BPBundleWindow.xib */ = {
