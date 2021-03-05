@@ -532,6 +532,7 @@ NSOpenSavePanelDelegate>
 {
 	[self.toolbar.searchField setStringValue:@""];
 	[self setSearching:NO];
+	[self configureTableForListing:kBPListAll];
 	[self updateInfoLabelWithSidebarSelection];
 }
 
