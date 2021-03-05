@@ -46,13 +46,7 @@
 {
 	NSViewController *sidebarViewController = [[NSViewController alloc] initWithNibName:nil bundle:nil];
 	[sidebarViewController setView:[self sidebarView]];
-	NSSplitViewItem *sidebarSplitViewItem;
-
-	if (@available(macOS 11.0, *)) {
-		sidebarSplitViewItem = [NSSplitViewItem sidebarWithViewController:sidebarViewController];
-	} else {
-		sidebarSplitViewItem = [NSSplitViewItem splitViewItemWithViewController:sidebarViewController];
-	}
+	NSSplitViewItem *sidebarSplitViewItem = [NSSplitViewItem sidebarWithViewController:sidebarViewController];
 
 	return sidebarSplitViewItem;
 }
