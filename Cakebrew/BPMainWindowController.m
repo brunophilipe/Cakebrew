@@ -26,6 +26,9 @@
 	NSView *splitControllerView = [[self splitViewController] view];
 	NSView *windowContentView = [[self window] contentView];
 
+	NSAssert(splitControllerView, @"View should not be nil");
+	NSAssert(windowContentView, @"View should not be nil");
+
 	[splitControllerView setTranslatesAutoresizingMaskIntoConstraints:NO];
 	[windowContentView addSubview:splitControllerView];
 

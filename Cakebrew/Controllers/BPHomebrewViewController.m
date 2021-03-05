@@ -140,8 +140,10 @@ NSOpenSavePanelDelegate>
 	}
 }
 
-- (void)awakeFromNib
+- (void)viewDidLoad
 {
+	[super viewDidLoad];
+
 	[self.mainWindowController setUpViews];
 	[self.mainWindowController setContentViewHidden:YES];
 
