@@ -7,6 +7,7 @@
 //
 
 #import "BPMainWindowController.h"
+#import "NSLayoutConstraint+Shims.h"
 
 @interface BPMainWindowController ()
 
@@ -32,7 +33,7 @@
 	[splitControllerView setTranslatesAutoresizingMaskIntoConstraints:NO];
 	[windowContentView addSubview:splitControllerView];
 
-	[NSLayoutConstraint activateConstraints:@[
+	[NSLayoutConstraint activate:@[
 		[NSLayoutConstraint constraintWithItem:splitControllerView attribute:NSLayoutAttributeLeading
 									 relatedBy:NSLayoutRelationEqual toItem:windowContentView
 									 attribute:NSLayoutAttributeLeading multiplier:1 constant:0],

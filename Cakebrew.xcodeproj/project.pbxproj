@@ -28,6 +28,7 @@
 		15A00B411B8406FB00528486 /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 15A00B401B8406FB00528486 /* Credits.rtf */; };
 		15A89D2B25F2C5F1003D33F5 /* PXSourceList.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 15A89D2A25F2C5F1003D33F5 /* PXSourceList.framework */; };
 		15A89D2C25F2C5F1003D33F5 /* PXSourceList.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 15A89D2A25F2C5F1003D33F5 /* PXSourceList.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		15A89D3925F2F467003D33F5 /* NSLayoutConstraint+Shims.m in Sources */ = {isa = PBXBuildFile; fileRef = 15A89D3825F2F467003D33F5 /* NSLayoutConstraint+Shims.m */; };
 		15B23A2C18F5003600714212 /* dsa_pub.pem in Resources */ = {isa = PBXBuildFile; fileRef = 15B23A2B18F5003600714212 /* dsa_pub.pem */; };
 		15BBA18E1BD031C9002C0127 /* BPBackgroundView.m in Sources */ = {isa = PBXBuildFile; fileRef = 15BBA18D1BD031C9002C0127 /* BPBackgroundView.m */; };
 		15C34CBF19512DE100B92E36 /* BPAutoScrollTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 15C34CBE19512DE100B92E36 /* BPAutoScrollTextView.m */; };
@@ -165,6 +166,8 @@
 		15A00B4B1B84072700528486 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/BPSelectedFormula.strings; sourceTree = "<group>"; };
 		15A00B4C1B84072700528486 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/BPUpdateView.strings; sourceTree = "<group>"; };
 		15A89D2A25F2C5F1003D33F5 /* PXSourceList.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = PXSourceList.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		15A89D3725F2F467003D33F5 /* NSLayoutConstraint+Shims.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSLayoutConstraint+Shims.h"; sourceTree = "<group>"; };
+		15A89D3825F2F467003D33F5 /* NSLayoutConstraint+Shims.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSLayoutConstraint+Shims.m"; sourceTree = "<group>"; };
 		15B23A2818F4F21E00714212 /* Sparkle.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Sparkle.framework; path = Cakebrew/Frameworks/Sparkle.framework; sourceTree = "<group>"; };
 		15B23A2B18F5003600714212 /* dsa_pub.pem */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = dsa_pub.pem; sourceTree = "<group>"; };
 		15B5E51B25F1C5DA00A079ED /* PXSourceList.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = PXSourceList.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -548,6 +551,8 @@
 			children = (
 				D2F732EF19190B75002B2512 /* NSString+URLValidation.h */,
 				D2F732F019190B75002B2512 /* NSString+URLValidation.m */,
+				15A89D3725F2F467003D33F5 /* NSLayoutConstraint+Shims.h */,
+				15A89D3825F2F467003D33F5 /* NSLayoutConstraint+Shims.m */,
 			);
 			path = Categories;
 			sourceTree = "<group>";
@@ -730,6 +735,7 @@
 				15D28A121AE1BD27005C8A3E /* BPTimedDispatch.m in Sources */,
 				D2A3A82F1B8C9F5200D05469 /* BPUtilities.m in Sources */,
 				150AEC4D1B3F999A00163767 /* BPFormulaOptionsWindowController.m in Sources */,
+				15A89D3925F2F467003D33F5 /* NSLayoutConstraint+Shims.m in Sources */,
 				150AEC531B3F999A00163767 /* BPSelectedFormulaViewController.m in Sources */,
 				150AEC541B3F999A00163767 /* BPSideBarController.m in Sources */,
 				1570BA5618EE50BD001C3C5C /* BPFormula.m in Sources */,

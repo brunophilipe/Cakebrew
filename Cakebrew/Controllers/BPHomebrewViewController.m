@@ -37,6 +37,7 @@
 #import "BPBundleWindowController.h"
 #import "BPTask.h"
 #import "BPMainWindowController.h"
+#import "NSLayoutConstraint+Shims.h"
 
 typedef NS_ENUM(NSUInteger, BPContentTab) {
 	kBPContentTabFormulae,
@@ -228,7 +229,7 @@ NSOpenSavePanelDelegate>
 		referenceView = self.view;
 	}
 
-	[NSLayoutConstraint activateConstraints:@[
+	[NSLayoutConstraint activate:@[
 		[NSLayoutConstraint constraintWithItem:referenceView attribute:NSLayoutAttributeLeading
 									 relatedBy:NSLayoutRelationEqual toItem:disabledView
 									 attribute:NSLayoutAttributeLeading multiplier:1 constant:0],
@@ -260,7 +261,7 @@ NSOpenSavePanelDelegate>
 		referenceView = self.view;
 	}
 
-	[NSLayoutConstraint activateConstraints:@[
+	[NSLayoutConstraint activate:@[
 		[NSLayoutConstraint constraintWithItem:referenceView attribute:NSLayoutAttributeLeading
 									 relatedBy:NSLayoutRelationEqual toItem:loadingView
 									 attribute:NSLayoutAttributeLeading multiplier:1 constant:0],
