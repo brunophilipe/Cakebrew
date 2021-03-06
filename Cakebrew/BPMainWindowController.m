@@ -58,7 +58,15 @@
 {
 	NSViewController *sidebarViewController = [[NSViewController alloc] initWithNibName:nil bundle:nil];
 	[sidebarViewController setView:[self sidebarView]];
-	NSSplitViewItem *sidebarSplitViewItem = [NSSplitViewItem sidebarWithViewController:sidebarViewController];
+	NSSplitViewItem *sidebarSplitViewItem;
+
+	if (@available(macOS 10.11, *)) {
+		sidebarSplitViewItem = [NSSplitViewItem sidebarWithViewController:sidebarViewController];
+	} else {
+		sidebarSplitViewItem = [NSSplitViewItem splitViewItemWithViewController:sidebarViewController];
+		[sidebarSplitViewItem setCanCollapse:YES];
+		[sidebarSplitViewItem setHoldingPriority:NSLayoutPriorityDefaultLow + 100];
+	}
 
 	return sidebarSplitViewItem;
 }
