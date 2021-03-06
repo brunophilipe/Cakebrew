@@ -38,7 +38,7 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			bY3rkqi/NJtXtjpK3FbV2o0gxbQ=
+			Gyp0nPqNvS5KdfMw+6ieF0yUTnI=
 			</data>
 			<key>optional</key>
 			<true/>
@@ -302,10 +302,10 @@
 		<dict>
 			<key>cdhash</key>
 			<data>
-			DjLURkEJSn7UYtOtQrWmcqkcZDs=
+			jh9ahx0Bwss3hvQu1JPKKwKB2uY=
 			</data>
 			<key>requirement</key>
-			<string>cdhash H"b86c12f6314c3f352e232b054942e1947c75da10" or cdhash H"0e32d44641094a7ed462d3ad42b5a672a91c643b" or cdhash H"675cabd10d815c4d178c4c6326e0af222f1d7426" or cdhash H"b462100038bf1d5b1d11e3531ea8eb5786dc5485"</string>
+			<string>cdhash H"91334a53bd3a2de1236ba18aa2f7d0e9124cae29" or cdhash H"8e1f5a871d01c2cb3786f42ed493ca2b0281dae6" or cdhash H"9e66dacfbe2aebf8f84ab86013d5231f5bcadc2a" or cdhash H"e88d161bf83a7292f815398c384e1c5d15524a0c"</string>
 		</dict>
 		<key>Resources/AppIcon.icns</key>
 		<dict>
@@ -370,11 +370,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			bY3rkqi/NJtXtjpK3FbV2o0gxbQ=
+			Gyp0nPqNvS5KdfMw+6ieF0yUTnI=
 			</data>
 			<key>hash2</key>
 			<data>
-			RfJgT2b3STcLu71+1iU9ZcSXbfwMWG1EE1C7Wrf3xBk=
+			8q22yKUhfKJVOOXteUQZAVVkhfzPQKzoSJdnVNkDPo8=
 			</data>
 			<key>optional</key>
 			<true/>

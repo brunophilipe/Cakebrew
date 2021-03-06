@@ -6,15 +6,15 @@
 	<dict>
 		<key>Resources/Autoupdate.app/Contents/Info.plist</key>
 		<data>
-		R45UMp+w7LbVuG36DloKwfLoJaM=
+		rCqrrADBeugSVVxgyXmLis1yuZ0=
 		</data>
 		<key>Resources/Autoupdate.app/Contents/MacOS/Autoupdate</key>
 		<data>
-		NzBZdm1BgoT8g4PL1JjNhCYwHt8=
+		OiKZU2y31++N67wJ6jD7XQFfeeI=
 		</data>
 		<key>Resources/Autoupdate.app/Contents/MacOS/fileop</key>
 		<data>
-		C1GF36CF5GoorXqklAIQKay8iO0=
+		pnJrBIEspnOGamg9p3spJ6y3utQ=
 		</data>
 		<key>Resources/Autoupdate.app/Contents/PkgInfo</key>
 		<data>
@@ -59,7 +59,7 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			bY3rkqi/NJtXtjpK3FbV2o0gxbQ=
+			Gyp0nPqNvS5KdfMw+6ieF0yUTnI=
 			</data>
 			<key>optional</key>
 			<true/>
@@ -318,7 +318,7 @@
 		</dict>
 		<key>Resources/Autoupdate.app/Contents/_CodeSignature/CodeResources</key>
 		<data>
-		ElpY/VsYyfwOy35X43FJoszMlS4=
+		b7AFJMrAIkab6hGRKLaH/HMsomw=
 		</data>
 		<key>Resources/Base.lproj/SUAutomaticUpdateAlert.nib</key>
 		<data>
@@ -342,7 +342,7 @@
 		</data>
 		<key>Resources/Info.plist</key>
 		<data>
-		lqfvZX7BdCth1t/yx96HQPRS33o=
+		bF9uDOBe792xQLaTd9j6E1rjMKg=
 		</data>
 		<key>Resources/ReleaseNotesColorStyle.css</key>
 		<data>
@@ -423,7 +423,7 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			hlEXm4PIOeQuToWvTfBfPaB5Iig=
+			q7RtvrY0T4KQ49y6xP17YL/QVXw=
 			</data>
 			<key>optional</key>
 			<true/>
@@ -432,7 +432,7 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			Rb74dVr7AZOckQx4IVaJJ5weBcw=
+			G9Wgf14zMhU2alRSZvqclMmlTCA=
 			</data>
 			<key>optional</key>
 			<true/>
@@ -441,7 +441,7 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			LqYD4QEWHG2Ihs5XwusgLec8jw4=
+			0bfdX1GCu06merNrM2hv/B0EuBo=
 			</data>
 			<key>optional</key>
 			<true/>
@@ -450,7 +450,7 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			bY3rkqi/NJtXtjpK3FbV2o0gxbQ=
+			Gyp0nPqNvS5KdfMw+6ieF0yUTnI=
 			</data>
 			<key>optional</key>
 			<true/>
@@ -1602,11 +1602,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			fnO4CYQzL4CTyIDuPtOZCahxmiM=
+			hUNhH96Bj0MbSvKXj4f0isWzHRg=
 			</data>
 			<key>hash2</key>
 			<data>
-			aLg9V/oBq9jzc5O3/foVHg5YcDSHSV4KA97k8Zwlg98=
+			Rc6NU8sWFXMeMimSvY/YSrtrVxA/wdbJk8C/4MnJuOY=
 			</data>
 		</dict>
 		<key>Headers/SUUpdaterDelegate.h</key>
@@ -1679,33 +1679,33 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			R45UMp+w7LbVuG36DloKwfLoJaM=
+			rCqrrADBeugSVVxgyXmLis1yuZ0=
 			</data>
 			<key>hash2</key>
 			<data>
-			oTqI0UUdcD8qKJstOfIlC2HYi5qYDb/N1G/Cyg+k+po=
+			GxEuujiONdPVHnClc4SYn28VJ1cEoPgVtxMNO1Ut+6c=
 			</data>
 		</dict>
 		<key>Resources/Autoupdate.app/Contents/MacOS/Autoupdate</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			NzBZdm1BgoT8g4PL1JjNhCYwHt8=
+			OiKZU2y31++N67wJ6jD7XQFfeeI=
 			</data>
 			<key>hash2</key>
 			<data>
-			+Z77nGBQJELds/h7Jlll9O2Q4QRjQr4c/UpwXLutV38=
+			WvpIY3JDKZ1QRLU93i/EbTl+7bW8RG9zZ7NhDDhN0RI=
 			</data>
 		</dict>
 		<key>Resources/Autoupdate.app/Contents/MacOS/fileop</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			C1GF36CF5GoorXqklAIQKay8iO0=
+			pnJrBIEspnOGamg9p3spJ6y3utQ=
 			</data>
 			<key>hash2</key>
 			<data>
-			V4nUhL3F4BNzE6oqmuMrBlY/E/vnRWXB4BeUzRW35Vs=
+			I0qc96wJSmqEM0tJNCQYkvCK5B1Y14uZfmdC6HC+IMg=
 			</data>
 		</dict>
 		<key>Resources/Autoupdate.app/Contents/PkgInfo</key>
@@ -1784,11 +1784,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			bY3rkqi/NJtXtjpK3FbV2o0gxbQ=
+			Gyp0nPqNvS5KdfMw+6ieF0yUTnI=
 			</data>
 			<key>hash2</key>
 			<data>
-			RfJgT2b3STcLu71+1iU9ZcSXbfwMWG1EE1C7Wrf3xBk=
+			8q22yKUhfKJVOOXteUQZAVVkhfzPQKzoSJdnVNkDPo8=
 			</data>
 			<key>optional</key>
 			<true/>
@@ -2161,11 +2161,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			ElpY/VsYyfwOy35X43FJoszMlS4=
+			b7AFJMrAIkab6hGRKLaH/HMsomw=
 			</data>
 			<key>hash2</key>
 			<data>
-			ubghFYTd1if5KM1dDjOMSe0xVyslzB+IPaCaRSlW3nI=
+			ii6MnYh9U37/ai9mMXtVIlrFxzBBWKp/BOtNrmcf77w=
 			</data>
 		</dict>
 		<key>Resources/Base.lproj/SUAutomaticUpdateAlert.nib</key>
@@ -2227,11 +2227,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			lqfvZX7BdCth1t/yx96HQPRS33o=
+			bF9uDOBe792xQLaTd9j6E1rjMKg=
 			</data>
 			<key>hash2</key>
 			<data>
-			nixtPuf8qCmvK1SLdJYNf4rCCRf1Sc+bltPUfoU7LH0=
+			quiThnL+2hi5bkM0iLGAU3je8KEa+N7RJzQZoCYALBk=
 			</data>
 		</dict>
 		<key>Resources/ReleaseNotesColorStyle.css</key>
@@ -2362,11 +2362,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			hlEXm4PIOeQuToWvTfBfPaB5Iig=
+			q7RtvrY0T4KQ49y6xP17YL/QVXw=
 			</data>
 			<key>hash2</key>
 			<data>
-			JN6UXE8cLAVHF62ikrKvV+lK01Pn6Xit9qIe/4D/Oo4=
+			GoRT5lNBly37VKkTK0WanCxNNTXEQtfaPzwAu+2UCRs=
 			</data>
 			<key>optional</key>
 			<true/>
@@ -2375,11 +2375,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			Rb74dVr7AZOckQx4IVaJJ5weBcw=
+			G9Wgf14zMhU2alRSZvqclMmlTCA=
 			</data>
 			<key>hash2</key>
 			<data>
-			TXLxGie1ELKr0vQLT+mrCdtXXNmEJW/6lfx+vlmomvw=
+			qSoDl0PIYv+OrSxtJfUYk9xeQihmzfaxAf+egKyw4y4=
 			</data>
 			<key>optional</key>
 			<true/>
@@ -2388,11 +2388,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			LqYD4QEWHG2Ihs5XwusgLec8jw4=
+			0bfdX1GCu06merNrM2hv/B0EuBo=
 			</data>
 			<key>hash2</key>
 			<data>
-			817/OKuYOBL8GtmoEbxO1E25HKoeOaqHo6dRsTtAiQ8=
+			barrqGmYXYFWJPBZIln+S1LTAEm0ZVAzD9DFF5l3+oo=
 			</data>
 			<key>optional</key>
 			<true/>
@@ -2401,11 +2401,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			bY3rkqi/NJtXtjpK3FbV2o0gxbQ=
+			Gyp0nPqNvS5KdfMw+6ieF0yUTnI=
 			</data>
 			<key>hash2</key>
 			<data>
-			RfJgT2b3STcLu71+1iU9ZcSXbfwMWG1EE1C7Wrf3xBk=
+			8q22yKUhfKJVOOXteUQZAVVkhfzPQKzoSJdnVNkDPo8=
 			</data>
 			<key>optional</key>
 			<true/>
