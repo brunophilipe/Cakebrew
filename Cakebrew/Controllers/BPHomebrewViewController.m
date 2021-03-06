@@ -151,7 +151,7 @@ NSOpenSavePanelDelegate>
 	self.formulaeDataSource = [[BPFormulaeDataSource alloc] initWithMode:kBPListAll];
 	self.formulaeTableView.dataSource = self.formulaeDataSource;
 	self.formulaeTableView.delegate = self;
-	[self.formulaeTableView accessibilitySetOverrideValue:NSLocalizedString(@"Formulae", nil) forAttribute:NSAccessibilityDescriptionAttribute];
+	[self.formulaeTableView setAccessibilityLabel:NSLocalizedString(@"Formulae", nil)];
 	
 	//link formulae tableview
 	NSView *formulaeView = self.formulaeSplitView;
@@ -476,26 +476,25 @@ NSOpenSavePanelDelegate>
 		[self.label_information setHidden:YES];
 		[self.mainWindowController setContentViewHidden:YES];
 		[self.toolbar lockItems];
-		
-		NSAlert *alert = [NSAlert alertWithMessageText:NSLocalizedString(@"Generic_Error", nil)
-										 defaultButton:NSLocalizedString(@"Message_No_Homebrew_Title", nil)
-									   alternateButton:NSLocalizedString(@"Generic_Cancel", nil)
-										   otherButton:nil
-							 informativeTextWithFormat:NSLocalizedString(@"Message_No_Homebrew_Body", nil)];
-		
+
+		NSAlert *alert = [[NSAlert alloc] init];
+		[alert setMessageText:NSLocalizedString(@"Generic_Error", nil)];
+		[alert addButtonWithTitle:NSLocalizedString(@"Message_No_Homebrew_Title", nil)];
+		[alert addButtonWithTitle:NSLocalizedString(@"Generic_Cancel", nil)];
+		[alert setInformativeText:NSLocalizedString(@"Message_No_Homebrew_Body", nil)];
 		[alert.window setTitle:NSLocalizedString(@"Cakebrew", nil)];
 		
 		NSURL *brew_URL = [NSURL URLWithString:@"http://brew.sh"];
 		
 		if ([alert respondsToSelector:@selector(beginSheetModalForWindow:completionHandler:)]) {
 			[alert beginSheetModalForWindow:_appDelegate.window completionHandler:^(NSModalResponse returnCode) {
-				if (returnCode == NSAlertDefaultReturn) {
+				if (returnCode == NSAlertFirstButtonReturn) {
 					[[NSWorkspace sharedWorkspace] openURL:brew_URL];
 				}
 			}];
 		} else {
 			NSModalResponse returnCode = [alert runModal];
-			if (returnCode == NSAlertDefaultReturn) {
+			if (returnCode == NSAlertFirstButtonReturn) {
 				[[NSWorkspace sharedWorkspace] openURL:brew_URL];
 			}
 		}
@@ -666,14 +665,17 @@ NSOpenSavePanelDelegate>
 	if (!formula) {
 		return;
 	}
-	NSAlert *alert = [NSAlert alertWithMessageText:NSLocalizedString(@"Generic_Attention", nil)
-									 defaultButton:NSLocalizedString(@"Generic_Yes", nil)
-								   alternateButton:NSLocalizedString(@"Generic_Cancel", nil)
-									   otherButton:nil
-						 informativeTextWithFormat:NSLocalizedString(@"Confirmation_Install_Formula", nil),formula.name];
+
+	NSAlert *alert = [[NSAlert alloc] init];
+	[alert setMessageText:NSLocalizedString(@"Generic_Attention", nil)];
+	[alert addButtonWithTitle:NSLocalizedString(@"Generic_Yes", nil)];
+	[alert addButtonWithTitle:NSLocalizedString(@"Generic_Cancel", nil)];
+	[alert setInformativeText:[NSString stringWithFormat:NSLocalizedString(@"Confirmation_Install_Formula", nil),
+							   formula.name]];
+
 	[alert.window setTitle:NSLocalizedString(@"Cakebrew", nil)];
 	
-	if ([alert runModal] == NSAlertDefaultReturn) {
+	if ([alert runModal] == NSAlertFirstButtonReturn) {
 		self.operationWindowController = [BPInstallationWindowController runWithOperation:kBPWindowOperationInstall
 																				 formulae:@[formula]
 																				  options:nil];
@@ -701,14 +703,17 @@ NSOpenSavePanelDelegate>
 	if (!formula) {
 		return;
 	}
-	NSAlert *alert = [NSAlert alertWithMessageText:NSLocalizedString(@"Generic_Attention", nil)
-									 defaultButton:NSLocalizedString(@"Generic_Yes", nil)
-								   alternateButton:NSLocalizedString(@"Generic_Cancel", nil)
-									   otherButton:nil
-						 informativeTextWithFormat:NSLocalizedString(@"Confirmation_Uninstall_Formula", nil),formula.name];
+
+	NSAlert *alert = [[NSAlert alloc] init];
+	[alert setMessageText:NSLocalizedString(@"Generic_Attention", nil)];
+	[alert addButtonWithTitle:NSLocalizedString(@"Generic_Yes", nil)];
+	[alert addButtonWithTitle:NSLocalizedString(@"Generic_Cancel", nil)];
+	[alert setInformativeText:[NSString stringWithFormat:NSLocalizedString(@"Confirmation_Uninstall_Formula", nil),
+							   formula.name]];
+
 	[alert.window setTitle:NSLocalizedString(@"Cakebrew", nil)];
 	
-	if ([alert runModal] == NSAlertDefaultReturn) {
+	if ([alert runModal] == NSAlertFirstButtonReturn) {
 		self.operationWindowController = [BPInstallationWindowController runWithOperation:kBPWindowOperationUninstall
 																				 formulae:@[formula]
 																				  options:nil];
@@ -724,15 +729,15 @@ NSOpenSavePanelDelegate>
 	}
 	NSString *formulaNames = [[self selectedFormulaNames] componentsJoinedByString:@", "];
 	
-	
-	NSAlert *alert = [NSAlert alertWithMessageText:NSLocalizedString(@"Message_Update_Formulae_Title", nil)
-									 defaultButton:NSLocalizedString(@"Generic_Yes", nil)
-								   alternateButton:NSLocalizedString(@"Generic_Cancel", nil)
-									   otherButton:nil
-						 informativeTextWithFormat:NSLocalizedString(@"Message_Update_Formulae_Body", nil), formulaNames];
-	
+	NSAlert *alert = [[NSAlert alloc] init];
+	[alert setMessageText:NSLocalizedString(@"Message_Update_Formulae_Title", nil)];
+	[alert addButtonWithTitle:NSLocalizedString(@"Generic_Yes", nil)];
+	[alert addButtonWithTitle:NSLocalizedString(@"Generic_Cancel", nil)];
+	[alert setInformativeText:[NSString stringWithFormat:NSLocalizedString(@"Message_Update_Formulae_Body", nil),
+							   formulaNames]];
+
 	[alert.window setTitle:NSLocalizedString(@"Cakebrew", nil)];
-	if ([alert runModal] == NSAlertDefaultReturn)
+	if ([alert runModal] == NSAlertFirstButtonReturn)
 	{
 		self.operationWindowController = [BPInstallationWindowController runWithOperation:kBPWindowOperationUpgrade
 																				 formulae:selectedFormulae
@@ -744,16 +749,15 @@ NSOpenSavePanelDelegate>
 - (IBAction)upgradeAllOutdatedFormulae:(id)sender
 {
 	[self checkForBackgroundTask];
-	
-	NSAlert *alert = [NSAlert alertWithMessageText:NSLocalizedString(@"Message_Update_All_Outdated_Title", nil)
-									 defaultButton:NSLocalizedString(@"Generic_Yes", nil)
-								   alternateButton:NSLocalizedString(@"Generic_Cancel", nil)
-									   otherButton:nil
-						 informativeTextWithFormat:NSLocalizedString(@"Message_Update_All_Outdated_Body", nil)];
-	
+
+	NSAlert *alert = [[NSAlert alloc] init];
+	[alert setMessageText:NSLocalizedString(@"Message_Update_All_Outdated_Title", nil)];
+	[alert addButtonWithTitle:NSLocalizedString(@"Generic_Yes", nil)];
+	[alert addButtonWithTitle:NSLocalizedString(@"Generic_Cancel", nil)];
+	[alert setInformativeText:NSLocalizedString(@"Message_Update_All_Outdated_Body", nil)];
 	[alert.window setTitle:NSLocalizedString(@"Cakebrew", nil)];
 	
-	if ([alert runModal] == NSAlertDefaultReturn)
+	if ([alert runModal] == NSAlertFirstButtonReturn)
 	{
 		self.operationWindowController = [BPInstallationWindowController runWithOperation:kBPWindowOperationUpgrade
 																				 formulae:nil
@@ -764,19 +768,19 @@ NSOpenSavePanelDelegate>
 - (IBAction)tapRepository:(id)sender
 {
 	[self checkForBackgroundTask];
-	NSAlert *alert = [NSAlert alertWithMessageText:NSLocalizedString(@"Message_Tap_Title", nil)
-									 defaultButton:NSLocalizedString(@"Generic_OK", nil)
-								   alternateButton:NSLocalizedString(@"Generic_Cancel", nil)
-									   otherButton:nil
-						 informativeTextWithFormat:NSLocalizedString(@"Message_Tap_Body", nil)];
-	
+
+	NSAlert *alert = [[NSAlert alloc] init];
+	[alert setMessageText:NSLocalizedString(@"Message_Tap_Title", nil)];
+	[alert addButtonWithTitle:NSLocalizedString(@"Generic_OK", nil)];
+	[alert addButtonWithTitle:NSLocalizedString(@"Generic_Cancel", nil)];
+	[alert setInformativeText:NSLocalizedString(@"Message_Tap_Body", nil)];
 	[alert.window setTitle:NSLocalizedString(@"Cakebrew", nil)];
 	
 	NSTextField *input = [[NSTextField alloc] initWithFrame:NSMakeRect(0,0,200,24)];
 	[alert setAccessoryView:input];
 	
 	NSInteger returnValue = [alert runModal];
-	if (returnValue == NSAlertDefaultReturn)
+	if (returnValue == NSAlertFirstButtonReturn)
 	{
 		NSString* name = [input stringValue];
 		if ([name length] <= 0)
@@ -799,16 +803,15 @@ NSOpenSavePanelDelegate>
 	{
 		return;
 	}
-	
-	NSAlert *alert = [NSAlert alertWithMessageText:NSLocalizedString(@"Message_Untap_Title", nil)
-									 defaultButton:NSLocalizedString(@"Generic_OK", nil)
-								   alternateButton:NSLocalizedString(@"Generic_Cancel", nil)
-									   otherButton:nil
-						 informativeTextWithFormat:NSLocalizedString(@"Message_Untap_Body", nil), formula.name];
-	
+
+	NSAlert *alert = [[NSAlert alloc] init];
+	[alert setMessageText:NSLocalizedString(@"Message_Untap_Title", nil)];
+	[alert addButtonWithTitle:NSLocalizedString(@"Generic_OK", nil)];
+	[alert addButtonWithTitle:NSLocalizedString(@"Generic_Cancel", nil)];
+	[alert setInformativeText:[NSString stringWithFormat:NSLocalizedString(@"Message_Untap_Body", nil), formula.name]];
 	[alert.window setTitle:NSLocalizedString(@"Cakebrew", nil)];
 	
-	if ([alert runModal] == NSAlertDefaultReturn)
+	if ([alert runModal] == NSAlertFirstButtonReturn)
 	{
 		self.operationWindowController = [BPInstallationWindowController runWithOperation:kBPWindowOperationUntap
 																				 formulae:@[formula]

@@ -87,20 +87,9 @@
 
 - (void)startSheetOnMainWindow
 {
-	if ([[NSApp mainWindow] respondsToSelector:@selector(beginSheet:completionHandler:)])
-	{
-		[[NSApp mainWindow] beginSheet:self.window completionHandler:^(NSModalResponse returnCode) {
-			[BPAppDelegateRef setRunningBackgroundTask:NO];
-		 }];
-	}
-	else
-	{
-		[[NSApplication sharedApplication] beginSheet:self.window
-									   modalForWindow:[NSApp mainWindow]
-										modalDelegate:self
-									   didEndSelector:@selector(windowOperationSheetDidEnd:returnCode:contextInfo:)
-										  contextInfo:NULL];
-	}
+	[[NSApp mainWindow] beginSheet:self.window completionHandler:^(NSModalResponse returnCode) {
+		[BPAppDelegateRef setRunningBackgroundTask:NO];
+	}];
 }
 
 - (void)runImportOperationWithFile:(NSURL*)fileURL

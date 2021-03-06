@@ -157,8 +157,7 @@
 - (void)configureSidebarSettings
 {
 	[self.sidebar selectRowIndexes:[NSIndexSet indexSetWithIndex:FormulaeSideBarItemInstalled] byExtendingSelection:NO];
-	[self.sidebar accessibilitySetOverrideValue:NSLocalizedString(@"Sidebar_VoiceOver_Tools", nil)
-								   forAttribute:NSAccessibilityDescriptionAttribute];
+	[self.sidebar setAccessibilityLabel:NSLocalizedString(@"Sidebar_VoiceOver_Tools", nil)];
 }
 
 - (void)refreshSidebarBadges
