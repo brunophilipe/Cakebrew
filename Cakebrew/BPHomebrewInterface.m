@@ -160,15 +160,20 @@ static NSString *cakebrewOutputIdentifier = @"+++++Cakebrew+++++";
 	
 	if (!isValidShell)
 	{
-		static NSAlert *alert = nil;
-		if (!alert) {
-			alert = [[NSAlert alloc] init];
-			[alert setMessageText:NSLocalizedString(@"Message_Shell_Invalid_Title", nil)];
-			[alert addButtonWithTitle:NSLocalizedString(@"Generic_OK", nil)];
-			[alert setInformativeText:[NSString stringWithFormat:NSLocalizedString(@"Message_Shell_Invalid_Body", nil), userShell]];
-		}
-		[alert performSelectorOnMainThread:@selector(runModal) withObject:nil waitUntilDone:YES];
-		
+	    static NSAlert *alert = nil;
+	    dispatch_group_t waitForFinish = dispatch_group_create();
+	    dispatch_group_enter(waitForFinish);
+	    dispatch_async(dispatch_get_main_queue(), ^{
+		  if (!alert) {
+			  alert = [[NSAlert alloc] init];
+			  [alert setMessageText:NSLocalizedString(@"Message_Shell_Invalid_Title", nil)];
+			  [alert addButtonWithTitle:NSLocalizedString(@"Generic_OK", nil)];
+			  [alert setInformativeText:[NSString stringWithFormat:NSLocalizedString(@"Message_Shell_Invalid_Body", nil), userShell]];
+		  }
+		  [alert runModal];
+		  dispatch_group_leave(waitForFinish);
+	    });
+	    dispatch_group_wait(waitForFinish, DISPATCH_TIME_FOREVER);
 		NSLog(@"No valid shell found...");
 		return nil;
 	}
