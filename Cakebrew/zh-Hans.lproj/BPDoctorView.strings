@@ -2,8 +2,8 @@
 "AlR-6d-ju7.title" = "清除日志";
 
 /* Class = "NSTextFieldCell"; title = "Homebrew Doctor"; ObjectID = "UHp-GH-2qP"; */
-"UHp-GH-2qP.title" = "Homebrew医生";
+"UHp-GH-2qP.title" = "Homebrew 诊断";
 
 /* Class = "NSButtonCell"; title = "Run Doctor"; ObjectID = "YyI-zq-THZ"; */
-"YyI-zq-THZ.title" = "运行医生";
+"YyI-zq-THZ.title" = "运行诊断";
 
