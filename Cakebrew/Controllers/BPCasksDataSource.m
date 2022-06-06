@@ -1,24 +1,21 @@
 //
-//  BPFormulaeDataSource.m
+//  BPCasksDataSource.m
 //  Cakebrew
 //
-//  Created by Marek Hrusovsky on 04/09/14.
-//  Copyright (c) 2014 Bruno Philipe. All rights reserved.
-//
 
-#import "BPFormulaeDataSource.h"
+#import "BPCasksDataSource.h"
 #import "BPHomebrewManager.h"
 #import "BPFormulaeTableView.h"
 
-@interface BPFormulaeDataSource()
-@property (nonatomic, strong) NSArray *formulaeArray;
+@interface BPCasksDataSource()
+@property (nonatomic, strong) NSArray *CasksArray;
 @end
 
-@implementation BPFormulaeDataSource
+@implementation BPCasksDataSource
 
 - (instancetype)init
 {
-	return [self initWithMode:kBPListAllFormulae];
+	return [self initWithMode:kBPListAllCasks];
 }
 
 - (instancetype)initWithMode:(BPListMode)aMode
@@ -40,28 +37,21 @@
 - (void)refreshBackingArray
 {
 	switch (self.mode) {
-		case kBPListAllFormulae:
-			_formulaeArray = [[BPHomebrewManager sharedManager] allFormulae];
+		case kBPListAllCasks:
+			_CasksArray = [[BPHomebrewManager sharedManager] allCasks];
 			break;
 			
-		case kBPListInstalledFormulae:
-			_formulaeArray = [[BPHomebrewManager sharedManager] installedFormulae];
+		case kBPListInstalledCasks:
+			_CasksArray = [[BPHomebrewManager sharedManager] installedCasks];
 			break;
 			
-		case kBPListLeaves:
-			_formulaeArray = [[BPHomebrewManager sharedManager] leavesFormulae];
+		case kBPListOutdatedCasks:
+			_CasksArray = [[BPHomebrewManager sharedManager] outdatedCasks];
 			break;
 			
-		case kBPListOutdatedFormulae:
-			_formulaeArray = [[BPHomebrewManager sharedManager] outdatedFormulae];
+		case kBPListSearchCasks:
+			_CasksArray = [[BPHomebrewManager sharedManager] searchCasks];
 			break;
-			
-		case kBPListSearchFormulae:
-			_formulaeArray = [[BPHomebrewManager sharedManager] searchFormulae];
-			break;
-			
-		case kBPListRepositories:
-			_formulaeArray = [[BPHomebrewManager sharedManager] repositoriesFormulae];
 			
 		default:
 			break;
@@ -73,30 +63,30 @@
 
 - (NSInteger)numberOfRowsInTableView:(NSTableView *)aTableView
 {
-	return [self.formulaeArray count];
+	return [self.CasksArray count];
 }
 
-- (BPFormula *)formulaAtIndex:(NSInteger)index
+- (BPFormula *)caskAtIndex:(NSInteger)index
 {
-	if ([self.formulaeArray count] > index && index >= 0) {
-		return [self.formulaeArray objectAtIndex:index];
+	if ([self.CasksArray count] > index && index >= 0) {
+		return [self.CasksArray objectAtIndex:index];
 	}
 	return nil;
 }
 
-- (NSArray *)formulasAtIndexSet:(NSIndexSet *)indexSet
+- (NSArray *)casksAtIndexSet:(NSIndexSet *)indexSet
 {
-	if (indexSet.count > 0 && [self.formulaeArray count] > indexSet.lastIndex) {
-		return [self.formulaeArray objectsAtIndexes:indexSet];
+	if (indexSet.count > 0 && [self.CasksArray count] > indexSet.lastIndex) {
+		return [self.CasksArray objectsAtIndexes:indexSet];
 	}
 	return nil;
 }
 
 - (id)tableView:(NSTableView *)tableView objectValueForTableColumn:(NSTableColumn *)tableColumn row:(NSInteger)row {
 	// the return value is typed as (id) because it will return a string in all cases with the exception of the
-	if(self.formulaeArray) {
+	if(self.CasksArray) {
 		NSString *columnIdentifer = [tableColumn identifier];
-		id element = [self.formulaeArray objectAtIndex:(NSUInteger)row];
+		id element = [self.CasksArray objectAtIndex:(NSUInteger)row];
 		
 		// Compare each column identifier and set the return value to
 		// the Person field value appropriate for the column.
@@ -120,7 +110,7 @@
 			}
 		} else if ([columnIdentifer isEqualToString:kColumnIdentifierStatus]) {
 			if ([element isKindOfClass:[BPFormula class]]) {
-				switch ([[BPHomebrewManager sharedManager] statusForFormula:element]) {
+				switch ([[BPHomebrewManager sharedManager] statusForCask:element]) {
 					case kBPFormulaInstalled:
 						return NSLocalizedString(@"Formula_Status_Installed", nil);
 						

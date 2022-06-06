@@ -10,8 +10,8 @@
 /* Class = "NSTextFieldCell"; title = "No selection"; ObjectID = "3xE-6a-fkA"; */
 "3xE-6a-fkA.title" = "Nichts ausgewählt";
 
-/* Class = "NSMenuItem"; title = "Update Formula"; ObjectID = "4ab-Ns-Wry"; */
-"4ab-Ns-Wry.title" = "Formel aktualisieren";
+/* Class = "NSMenuItem"; title = "Update"; ObjectID = "4ab-Ns-Wry"; */
+"4ab-Ns-Wry.title" = "Aktualisieren";
 
 /* Class = "NSMenuItem"; title = "Bring All to Front"; ObjectID = "5"; */
 "5.title" = "Alle nach vorne bringen";
@@ -136,8 +136,8 @@
 /* Class = "NSMenuItem"; title = "Undo"; ObjectID = "H1C-ip-FlF"; */
 "H1C-ip-FlF.title" = "Widerrufen";
 
-/* Class = "NSMenuItem"; title = "Update Formula"; ObjectID = "Hhd-b7-GOc"; */
-"Hhd-b7-GOc.title" = "Formel aktualisieren";
+/* Class = "NSMenuItem"; title = "Update"; ObjectID = "Hhd-b7-GOc"; */
+"Hhd-b7-GOc.title" = "Aktualisieren";
 
 /* Class = "NSMenuItem"; title = "Redo"; ObjectID = "J92-AZ-XUi"; */
 "J92-AZ-XUi.title" = "Wiederholen";
@@ -157,8 +157,8 @@
 /* Class = "NSMenu"; title = "Edit"; ObjectID = "LYP-iZ-WcV"; */
 "LYP-iZ-WcV.title" = "Bearbeiten";
 
-/* Class = "NSMenuItem"; title = "Install Formula"; ObjectID = "Lcb-tm-ATo"; */
-"Lcb-tm-ATo.title" = "Formel installieren";
+/* Class = "NSMenuItem"; title = "Install"; ObjectID = "Lcb-tm-ATo"; */
+"Lcb-tm-ATo.title" = "Formel";
 
 /* Class = "NSMenuItem"; title = "Leaves"; ObjectID = "M9N-PI-gBO"; */
 "M9N-PI-gBO.title" = "Blätter";
@@ -184,8 +184,8 @@
 /* Class = "NSMenuItem"; title = "Find and Replace…"; ObjectID = "OSn-ju-y85"; */
 "OSn-ju-y85.title" = "Suchen und Ersetzen…";
 
-/* Class = "NSMenuItem"; title = "Uninstall Formula"; ObjectID = "Tzv-5t-RhL"; */
-"Tzv-5t-RhL.title" = "Formel deinstallieren";
+/* Class = "NSMenuItem"; title = "Uninstall"; ObjectID = "Tzv-5t-RhL"; */
+"Tzv-5t-RhL.title" = "Deinstallieren";
 
 /* Class = "NSMenuItem"; title = "Check Spelling While Typing"; ObjectID = "UOm-zM-WGz"; */
 "UOm-zM-WGz.title" = "Rechtschreibung während der Eingabe prüfen";
@@ -256,8 +256,8 @@
 /* Class = "NSMenuItem"; title = "More Information"; ObjectID = "eus-Jb-JjS"; */
 "eus-Jb-JjS.title" = "Weitere Informationen";
 
-/* Class = "NSMenuItem"; title = "Install Formula"; ObjectID = "fhF-VX-squ"; */
-"fhF-VX-squ.title" = "Formel installieren";
+/* Class = "NSMenuItem"; title = "Install"; ObjectID = "fhF-VX-squ"; */
+"fhF-VX-squ.title" = "Installieren";
 
 /* Class = "NSMenuItem"; title = "More Information"; ObjectID = "gxx-2S-F5T"; */
 "gxx-2S-F5T.title" = "Weitere Informationen";
@@ -268,8 +268,8 @@
 /* Class = "NSTableColumn"; headerCell.title = "Version"; ObjectID = "h5d-xc-Jih"; */
 "h5d-xc-Jih.headerCell.title" = "Version";
 
-/* Class = "NSMenuItem"; title = "Uninstall Formula"; ObjectID = "i3A-Nx-qPJ"; */
-"i3A-Nx-qPJ.title" = "Formel deinstallieren";
+/* Class = "NSMenuItem"; title = "Uninstall"; ObjectID = "i3A-Nx-qPJ"; */
+"i3A-Nx-qPJ.title" = "Deinstallieren";
 
 /* Class = "NSMenu"; title = "Tools"; ObjectID = "lOM-6G-bAo"; */
 "lOM-6G-bAo.title" = "Tools";

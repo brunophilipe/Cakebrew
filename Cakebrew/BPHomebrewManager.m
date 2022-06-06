@@ -72,32 +72,45 @@ NSString *const kBPCacheDataKey	= @"BPCacheDataKey";
 - (void)reloadFromInterfaceRebuildingCache:(BOOL)shouldRebuildCache;
 {
 	NSUInteger previousCountOfAllFormulae = [self allFormulae].count;
+	NSUInteger previousCountOfAllCasks = [self allCasks].count;
 
 	dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
 		[[BPHomebrewInterface sharedInterface] setDelegate:self];
 		
-		NSArray *installedFormulae = [[BPHomebrewInterface sharedInterface] listMode:kBPListInstalled];
+		NSArray *installedFormulae = [[BPHomebrewInterface sharedInterface] listMode:kBPListInstalledFormulae];
 		NSArray *leavesFormulae = [[BPHomebrewInterface sharedInterface] listMode:kBPListLeaves];
-		NSArray *outdatedFormulae = [[BPHomebrewInterface sharedInterface] listMode:kBPListOutdated];
+		NSArray *outdatedFormulae = [[BPHomebrewInterface sharedInterface] listMode:kBPListOutdatedFormulae];
 		NSArray *repositoriesFormulae = [[BPHomebrewInterface sharedInterface] listMode:kBPListRepositories];
+
+		NSArray *installedCasks = [[BPHomebrewInterface sharedInterface] listMode:kBPListInstalledCasks];
+		NSArray *outdatedCasks = [[BPHomebrewInterface sharedInterface] listMode:kBPListOutdatedCasks];
+		
 		NSArray *allFormulae = nil;
+		NSArray *allCasks = nil;
 
 		if (![self loadAllFormulaeCaches] || previousCountOfAllFormulae <= 100 || shouldRebuildCache) {
-			allFormulae = [[BPHomebrewInterface sharedInterface] listMode:kBPListAll];
+			allFormulae = [[BPHomebrewInterface sharedInterface] listMode:kBPListAllFormulae];
 		}
 		
-		dispatch_async(dispatch_get_main_queue(), ^{
+		if (![self loadAllCasksCaches] || previousCountOfAllCasks <= 10 || shouldRebuildCache) {
+			allCasks = [[BPHomebrewInterface sharedInterface] listMode:kBPListAllCasks];
+		}
 
+		dispatch_async(dispatch_get_main_queue(), ^{
 			if (allFormulae != nil) {
 				[self setAllFormulae:allFormulae];
 				[self storeAllFormulaeCaches];
 			}
-
+			if (allCasks != nil) {
+				[self setAllCasks:allCasks];
+				[self storeAllCasksCaches];
+			}
 			[self setInstalledFormulae:installedFormulae];
 			[self setLeavesFormulae:leavesFormulae];
 			[self setOutdatedFormulae:outdatedFormulae];
 			[self setRepositoriesFormulae:repositoriesFormulae];
-
+			[self setInstalledCasks:installedCasks];
+			[self setOutdatedCasks:outdatedCasks];
 			[self.delegate homebrewManagerFinishedUpdating:self];
 		});
 	});
@@ -122,65 +135,82 @@ NSString *const kBPCacheDataKey	= @"BPCacheDataKey";
 	});
 }
 
+- (BOOL)loadAllFormulaeCaches
+{
+	return [self loadCache:@"allFormulae.cache.bin" array:self.allFormulae];
+}
+
+- (BOOL)loadAllCasksCaches
+{
+	return [self loadCache:@"allCasks.cache.bin" array:self.allCasks];
+}
+
 /**
  Returns `YES` if cache exists, was created less than 24 hours ago and was loaded successfully. Otherwise returns `NO`.
  */
-- (BOOL)loadAllFormulaeCaches
+- (BOOL)loadCache:(NSString*)fileName array:(NSArray<BPFormula*>*)cache
 {
-	NSURL *cachesFolder = [BPAppDelegate urlForApplicationCachesFolder];
-	NSURL *allFormulaeFile = [cachesFolder URLByAppendingPathComponent:@"allFormulae.cache.bin"];
-	BOOL shouldLoadCache = NO;
-	
-	if ([[NSUserDefaults standardUserDefaults] objectForKey:kBPCacheLastUpdateKey])
-	{
-		NSDate *storageDate = [NSDate dateWithTimeIntervalSince1970:[[NSUserDefaults standardUserDefaults]
-																	 integerForKey:kBPCacheLastUpdateKey]];
-		
-		if ([[NSDate date] timeIntervalSinceDate:storageDate] <= 3600*24)
-		{
-			shouldLoadCache = YES;
-		}
-	}
-	
-	if (shouldLoadCache && allFormulaeFile)
-	{
-		NSDictionary *cacheDict = nil;
-		
-		if ([[NSFileManager defaultManager] fileExistsAtPath:allFormulaeFile.relativePath])
-		{
-			NSData *data = [NSData dataWithContentsOfFile:allFormulaeFile.relativePath];
-			NSError *error = nil;
+   NSURL *cachesFolder = [BPAppDelegate urlForApplicationCachesFolder];
+   NSURL *allFile = [cachesFolder URLByAppendingPathComponent:fileName];
+   BOOL shouldLoadCache = NO;
+   
+   if ([[NSUserDefaults standardUserDefaults] objectForKey:kBPCacheLastUpdateKey])
+   {
+	   NSDate *storageDate = [NSDate dateWithTimeIntervalSince1970:[[NSUserDefaults standardUserDefaults]
+																	integerForKey:kBPCacheLastUpdateKey]];
+	   
+	   if ([[NSDate date] timeIntervalSinceDate:storageDate] <= 3600*24)
+	   {
+		   shouldLoadCache = YES;
+	   }
+   }
+   
+   if (shouldLoadCache && allFile)
+   {
+	   NSDictionary *cacheDict = nil;
+	   
+	   if ([[NSFileManager defaultManager] fileExistsAtPath:allFile.relativePath])
+	   {
+		   NSData *data = [NSData dataWithContentsOfFile:allFile.relativePath];
+		   NSError *error = nil;
 
-			if (@available(macOS 10.13, *)) {
-				NSSet *classes = [NSSet setWithArray:@[[NSDictionary class], [NSMutableArray class], [BPFormula class]]];
-				cacheDict = [NSKeyedUnarchiver unarchivedObjectOfClasses:classes fromData:data error:&error];
-				if (error) {
-					NSLog(@"Failed decoding data: %@", [error localizedDescription]);
-				}
-			} else {
-				cacheDict = [NSKeyedUnarchiver unarchiveObjectWithFile:allFormulaeFile.relativePath];
-			}
-			self.allFormulae = [cacheDict objectForKey:kBPCacheDataKey];
-		}
-	}
-	else
-	{
-		// Delete all cache data
-		[[NSFileManager defaultManager] removeItemAtURL:allFormulaeFile error:nil];
-		[[NSUserDefaults standardUserDefaults] removeObjectForKey:kBPCacheLastUpdateKey];
-	}
-	
-	return self.allFormulae != nil;
+		   if (@available(macOS 10.13, *)) {
+			   NSSet *classes = [NSSet setWithArray:@[[NSDictionary class], [NSMutableArray class], [BPFormula class]]];
+			   cacheDict = [NSKeyedUnarchiver unarchivedObjectOfClasses:classes fromData:data error:&error];
+			   if (error) {
+				   NSLog(@"Failed decoding data: %@", [error localizedDescription]);
+			   }
+		   } else {
+			   cacheDict = [NSKeyedUnarchiver unarchiveObjectWithFile:allFile.relativePath];
+		   }
+		   cache = [cacheDict objectForKey:kBPCacheDataKey];
+	   }
+   } else {
+	   // Delete all cache data
+	   [[NSFileManager defaultManager] removeItemAtURL:allFile error:nil];
+	   [[NSUserDefaults standardUserDefaults] removeObjectForKey:kBPCacheLastUpdateKey];
+   }
+   return cache != nil;
 }
 
 - (void)storeAllFormulaeCaches
 {
-	if (self.allFormulae)
+	[self storeCache:@"allFormulae.cache.bin" array:self.allFormulae];
+}
+
+- (void)storeAllCasksCaches
+{
+	[self storeCache:@"allCasks.cache.bin" array:self.allCasks];
+}
+
+- (void)storeCache:(NSString*)fileName array:(NSArray<BPFormula*>*)cache
+{
+	if (self.allCasks)
 	{
 		NSURL *cachesFolder = [BPAppDelegate urlForApplicationCachesFolder];
 		if (cachesFolder)
 		{
-			NSURL *allFormulaeFile = [cachesFolder URLByAppendingPathComponent:@"allFormulae.cache.bin"];
+			NSURL *allFile = [cachesFolder URLByAppendingPathComponent:fileName];
 			NSDate *storageDate = [NSDate date];
 			
 			if ([[NSUserDefaults standardUserDefaults] objectForKey:kBPCacheLastUpdateKey])
@@ -189,7 +219,7 @@ NSString *const kBPCacheDataKey	= @"BPCacheDataKey";
 																	 integerForKey:kBPCacheLastUpdateKey]];
 			}
 			
-			NSDictionary *cacheDict = @{kBPCacheDataKey: self.allFormulae};
+			NSDictionary *cacheDict = @{kBPCacheDataKey: cache};
 			NSData *cacheData;
 
 			if (@available(macOS 10.13, *)) {
@@ -205,21 +235,19 @@ NSString *const kBPCacheDataKey	= @"BPCacheDataKey";
 				cacheData = [NSKeyedArchiver archivedDataWithRootObject:cacheDict];
 			}
 			
-			if ([[NSFileManager defaultManager] fileExistsAtPath:allFormulaeFile.relativePath])
+			if ([[NSFileManager defaultManager] fileExistsAtPath:allFile.relativePath])
 			{
-				[cacheData writeToURL:allFormulaeFile atomically:YES];
+				[cacheData writeToURL:allFile atomically:YES];
 			}
 			else
 			{
-				[[NSFileManager defaultManager] createFileAtPath:allFormulaeFile.relativePath
+				[[NSFileManager defaultManager] createFileAtPath:allFile.relativePath
 														contents:cacheData attributes:nil];
 			}
 			
 			[[NSUserDefaults standardUserDefaults] setInteger:[storageDate timeIntervalSince1970]
 													   forKey:kBPCacheLastUpdateKey];
-		}
-		else
-		{
+		} else {
 			NSLog(@"Could not store cache file. BPAppDelegate function returned nil!");
 		}
 	}
@@ -242,21 +270,27 @@ NSString *const kBPCacheDataKey	= @"BPCacheDataKey";
 	return -1;
 }
 
-- (BPFormulaStatus)statusForFormula:(BPFormula*)formula
-{
-	if ([self searchForFormula:formula inArray:self.installedFormulae] >= 0)
-	{
+- (BPFormulaStatus)statusForFormula:(BPFormula*)formula {
+	if ([self searchForFormula:formula inArray:self.installedFormulae] >= 0) {
 		if ([self searchForFormula:formula inArray:self.outdatedFormulae] >= 0)
 		{
 			return kBPFormulaOutdated;
-		}
-		else
-		{
+		} else {
 			return kBPFormulaInstalled;
 		}
+	} else {
+		return kBPFormulaNotInstalled;
 	}
-	else
-	{
+}
+
+- (BPFormulaStatus)statusForCask:(BPFormula*)formula {
+	if ([self searchForFormula:formula inArray:self.installedCasks] >= 0) {
+		if ([self searchForFormula:formula inArray:self.outdatedCasks] >= 0) {
+			return kBPFormulaOutdated;
+		} else {
+			return kBPFormulaInstalled;
+		}
+	} else {
 		return kBPFormulaNotInstalled;
 	}
 }

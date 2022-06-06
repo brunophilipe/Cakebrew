@@ -22,6 +22,8 @@
 #import "BPHomebrewInterface.h"
 #import "BPTask.h"
 
+NSString *brewPath = @"";
+
 #define kDEBUG_WARNING @"\
 User Shell: %@\n\
 Command: %@\n\
@@ -41,17 +43,27 @@ static NSString *cakebrewOutputIdentifier = @"+++++Cakebrew+++++";
 
 @end
 
-@interface BPHomebrewInterfaceListCallInstalled : BPHomebrewInterfaceListCall
+@interface BPHomebrewInterfaceListCallInstalledFormulae : BPHomebrewInterfaceListCall
 @end
 
-@interface BPHomebrewInterfaceListCallAll : BPHomebrewInterfaceListCall
+@interface BPHomebrewInterfaceListCallInstalledCasks : BPHomebrewInterfaceListCall
+@end
+
+@interface BPHomebrewInterfaceListCallAllFormulae : BPHomebrewInterfaceListCall
+@end
+
+@interface BPHomebrewInterfaceListCallAllCasks : BPHomebrewInterfaceListCall
+@end
+
+@interface BPHomebrewInterfaceListCallUpgradeableFormulae : BPHomebrewInterfaceListCall
+@end
+
+@interface BPHomebrewInterfaceListCallUpgradeableCasks : BPHomebrewInterfaceListCall
 @end
 
 @interface BPHomebrewInterfaceListCallLeaves : BPHomebrewInterfaceListCall
 @end
 
-@interface BPHomebrewInterfaceListCallUpgradeable : BPHomebrewInterfaceListCall
-@end
 
 @interface BPHomebrewInterfaceListCallRepositories: BPHomebrewInterfaceListCall
 @end
@@ -116,10 +128,11 @@ static NSString *cakebrewOutputIdentifier = @"+++++Cakebrew+++++";
 	
 	NSString *output = [task output];
 	output = [self removeLoginShellOutputFromString:output];
-#ifdef DEBUG
-	NSLog(@"brew: %@", output);
-#endif
-	
+	output = [self removeNewLineFromString:output];
+	brewPath = output;
+//	#ifdef DEBUG
+//		NSLog(@"brew: %@", output);
+//	#endif
 	return output.length != 0;
 }
 
@@ -135,8 +148,7 @@ static NSString *cakebrewOutputIdentifier = @"+++++Cakebrew+++++";
 		else
 		{
 			[self setPath_cellar:[self getUserCellarPath]];
-			
-			NSLog(@"cellar: %@", self.path_cellar);
+//			NSLog(@"cellar: %@", self.path_cellar);
 		}
 	}
 }
@@ -172,11 +184,9 @@ static NSString *cakebrewOutputIdentifier = @"+++++Cakebrew+++++";
 		NSLog(@"No valid shell found...");
 		return nil;
 	}
-	
-#ifdef DEBUG
-	NSLog(@"shell: %@", userShell);
-#endif
-	
+//	#ifdef DEBUG
+//		NSLog(@"shell: %@", userShell);
+//	#endif
 	return userShell;
 }
 
@@ -203,12 +213,11 @@ static NSString *cakebrewOutputIdentifier = @"+++++Cakebrew+++++";
 {
 	NSString *command = nil;
 	if (sendOutputID) {
-		command = [NSString stringWithFormat:@"echo \"%@\";brew %@", cakebrewOutputIdentifier, [extraArguments componentsJoinedByString:@" "]];
+		command = [NSString stringWithFormat:@"echo \"%@\";%@ %@", cakebrewOutputIdentifier, brewPath, [extraArguments componentsJoinedByString:@" "]];
 	} else {
-		command = [NSString stringWithFormat:@"brew %@", [extraArguments componentsJoinedByString:@" "]];
+		command = [NSString stringWithFormat:@"%@ %@", brewPath, [extraArguments componentsJoinedByString:@" "]];
 	}
 	NSArray *arguments = @[@"-l", @"-c", command];
-	
 	return arguments;
 }
 
@@ -233,7 +242,8 @@ static NSString *cakebrewOutputIdentifier = @"+++++Cakebrew+++++";
 
 - (BOOL)performBrewCommandWithArguments:(NSArray*)arguments dataReturnBlock:(void (^)(NSString*))block
 {
-	return [self performAsyncBrewCommandWithArguments:arguments wrapsSynchronousRequest:NO queue:nil dataReturnBlock:block];
+	return [self performSyncBrewCommandWithArguments:arguments dataReturnBlock:block wrapRequest:false];
+	//return [self performAsyncBrewCommandWithArguments:arguments wrapsSynchronousRequest:NO queue:nil dataReturnBlock:block];
 }
 
 - (BOOL)performAsyncBrewCommandWithArguments:(NSArray*)arguments
@@ -281,39 +291,39 @@ static NSString *cakebrewOutputIdentifier = @"+++++Cakebrew+++++";
 	return status == 0;
 }
 
+- (BOOL)performSyncBrewCommandWithArguments:(NSArray*)arguments
+							 dataReturnBlock:(void (^)(NSString*))block
+								wrapRequest:(BOOL)wrap
+{
+	arguments = [self formatArguments:arguments sendOutputId:wrap];
+	BPTask *task = [[BPTask alloc] initWithPath:self.path_shell arguments:arguments];
+	int status =  [task execute];
+	NSString *output = [task output];
+	if (wrap) {
+		output = [self removeLoginShellOutputFromString:output];
+	}
+	block(output);
+	return status == 0;
+}
+
 - (BOOL)isRunningBackgroundTask
 {
 	return [[self.tasks allKeys] count] > 0;
 }
 
-/**
- * This method performs a brew command in an asynchronous mode so that long chunks of data can be returned,
- * but to the callee it behaves like a synchronous call.
- *
- * Note: Synchronous tasks were deprecated and removed completely in Nov 1st, 2016 due to numerous bugs. All
- * "synchronous" tasks should use this method instead.
- */
+
 - (NSString*)performSyncBrewCommandWithArguments:(NSArray*)arguments
 {
-	NSString __block *finalOutput = nil;
-
-	dispatch_queue_t queue = _taskOperationsQueue;
-
-	dispatch_sync(queue, ^{
-		NSMutableString *output = [NSMutableString new];
-
-		[self performAsyncBrewCommandWithArguments:arguments
-						   wrapsSynchronousRequest:YES
-											 queue:queue
-								   dataReturnBlock:^(NSString *partialOutput)
-		 {
-			[output appendString:partialOutput];
-		}];
-
-		finalOutput = [output copy];
-	});
-
-	return [self removeLoginShellOutputFromString:finalOutput];
+	NSString __block *outputValue;
+	void (^displayTerminalOutput)(NSString *outputValue) = ^(NSString *output) {
+		if (outputValue) {
+			outputValue = [outputValue stringByAppendingString:output];
+		} else {
+			outputValue = output;
+		}
+	};
+	[self performBrewCommandWithArguments:arguments dataReturnBlock:displayTerminalOutput];
+	return [self removeLoginShellOutputFromString:outputValue];
 }
 
 #pragma mark - Operations that return on finish
@@ -323,20 +333,32 @@ static NSString *cakebrewOutputIdentifier = @"+++++Cakebrew+++++";
 	BPHomebrewInterfaceListCall *listCall = nil;
 
 	switch (mode) {
-		case kBPListInstalled:
-			listCall = [[BPHomebrewInterfaceListCallInstalled alloc] init];
+		case kBPListInstalledFormulae:
+			listCall = [[BPHomebrewInterfaceListCallInstalledFormulae alloc] init];
+			break;
+			
+		case kBPListInstalledCasks:
+			listCall = [[BPHomebrewInterfaceListCallInstalledCasks alloc] init];
+			break;
+			
+		case kBPListAllFormulae:
+			listCall = [[BPHomebrewInterfaceListCallAllFormulae alloc] init];
+			break;
+			
+		case kBPListAllCasks:
+			listCall = [[BPHomebrewInterfaceListCallAllCasks alloc] init];
 			break;
 
-		case kBPListAll:
-			listCall = [[BPHomebrewInterfaceListCallAll alloc] init];
+		case kBPListOutdatedFormulae:
+			listCall = [[BPHomebrewInterfaceListCallUpgradeableFormulae alloc] init];
 			break;
-
+			
+		case kBPListOutdatedCasks:
+			listCall = [[BPHomebrewInterfaceListCallUpgradeableCasks alloc] init];
+			break;
+			
 		case kBPListLeaves:
 			listCall = [[BPHomebrewInterfaceListCallLeaves alloc] init];
-			break;
-
-		case kBPListOutdated:
-			listCall = [[BPHomebrewInterfaceListCallUpgradeable alloc] init];
 			break;
 
 		case kBPListRepositories:
@@ -387,7 +409,13 @@ static NSString *cakebrewOutputIdentifier = @"+++++Cakebrew+++++";
 			return string;
 		}
 	}
-	//If all else fails...
+	return nil;
+}
+
+- (NSString*)removeNewLineFromString:(NSString*)string {
+	if (string) {
+		return [string stringByReplacingOccurrencesOfString:@"\n" withString:@""];
+	}
 	return nil;
 }
 
@@ -539,11 +567,11 @@ static NSString *cakebrewOutputIdentifier = @"+++++Cakebrew+++++";
 
 @end
 
-@implementation BPHomebrewInterfaceListCallInstalled
+@implementation BPHomebrewInterfaceListCallInstalledFormulae
 
 - (instancetype)init
 {
-	return (BPHomebrewInterfaceListCallInstalled *)[super initWithArguments:@[@"list", @"--versions"]];
+	return (BPHomebrewInterfaceListCallInstalledFormulae *)[super initWithArguments:@[@"list", @"--versions", @"--formulae"]];
 }
 
 - (BPFormula *)parseFormulaItem:(NSString *)item
@@ -554,29 +582,44 @@ static NSString *cakebrewOutputIdentifier = @"+++++Cakebrew+++++";
 
 @end
 
-@implementation BPHomebrewInterfaceListCallAll
+@implementation BPHomebrewInterfaceListCallInstalledCasks
 
 - (instancetype)init
 {
-	return (BPHomebrewInterfaceListCallAll *)[super initWithArguments:@[@"formulae"]];
+	return (BPHomebrewInterfaceListCallInstalledCasks *)[super initWithArguments:@[@"list", @"--versions", @"--casks"]];
+}
+
+- (BPFormula *)parseFormulaItem:(NSString *)item
+{
+	NSArray *aux = [item componentsSeparatedByString:@" "];
+	return [BPFormula formulaWithName:[aux firstObject] andVersion:[aux lastObject]];
 }
 
 @end
 
-@implementation BPHomebrewInterfaceListCallLeaves
+@implementation BPHomebrewInterfaceListCallAllFormulae
 
 - (instancetype)init
 {
-	return (BPHomebrewInterfaceListCallLeaves *)[super initWithArguments:@[@"leaves"]];
+	return (BPHomebrewInterfaceListCallAllFormulae *)[super initWithArguments:@[@"formulae"]];
 }
 
 @end
 
-@implementation BPHomebrewInterfaceListCallUpgradeable
+@implementation BPHomebrewInterfaceListCallAllCasks
 
 - (instancetype)init
 {
-	return (BPHomebrewInterfaceListCallUpgradeable *)[super initWithArguments:@[@"outdated", @"--verbose"]];
+	return (BPHomebrewInterfaceListCallAllCasks *)[super initWithArguments:@[@"casks"]];
+}
+
+@end
+
+@implementation BPHomebrewInterfaceListCallUpgradeableFormulae
+
+- (instancetype)init
+{
+	return (BPHomebrewInterfaceListCallUpgradeableFormulae *)[super initWithArguments:@[@"outdated", @"--verbose", @"--formulae"]];
 }
 
 - (BPFormula *)parseFormulaItem:(NSString *)item
@@ -610,6 +653,57 @@ static NSString *cakebrewOutputIdentifier = @"+++++Cakebrew+++++";
 }
 
 @end
+
+
+@implementation BPHomebrewInterfaceListCallUpgradeableCasks
+
+- (instancetype)init
+{
+	return (BPHomebrewInterfaceListCallUpgradeableCasks *)[super initWithArguments:@[@"outdated", @"--verbose", @"--casks"]];
+}
+
+- (BPFormula *)parseFormulaItem:(NSString *)item
+{
+	static NSString *regexString = @"(\\S+)\\s\\(((.*, )*(.*))\\) < (\\S+)";
+	
+	BPFormula __block *formula = nil;
+	NSError *error = nil;
+	NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:regexString options:NSRegularExpressionCaseInsensitive error:&error];
+	
+	[regex enumerateMatchesInString:item options:0 range:NSMakeRange(0, [item length]) usingBlock:
+	 ^(NSTextCheckingResult *result, NSMatchingFlags flags, BOOL *stop)
+	 {
+		if (result.resultType == NSTextCheckingTypeRegularExpression && [result numberOfRanges] >= 4)
+		{
+			NSString *formulaName = [item substringWithRange:[result rangeAtIndex:1]];
+			NSString *installedVersion = [item substringWithRange:[result rangeAtIndex:[result numberOfRanges] - 2]];
+			NSString *latestVersion = [item substringWithRange:[result rangeAtIndex:[result numberOfRanges] - 1]];
+
+			formula = [BPFormula formulaWithName:formulaName
+										 version:installedVersion
+								andLatestVersion:latestVersion];
+		}
+	}];
+	
+	if (!formula) {
+		formula = [BPFormula formulaWithName:item];
+	}
+	
+	return formula;
+}
+
+@end
+
+
+@implementation BPHomebrewInterfaceListCallLeaves
+
+- (instancetype)init
+{
+	return (BPHomebrewInterfaceListCallLeaves *)[super initWithArguments:@[@"leaves"]];
+}
+
+@end
+
 
 @implementation BPHomebrewInterfaceListCallRepositories
 

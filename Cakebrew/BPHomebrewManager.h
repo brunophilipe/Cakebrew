@@ -27,7 +27,7 @@
 typedef NS_ENUM(NSInteger, BPFormulaStatus) {
 	kBPFormulaNotInstalled,
 	kBPFormulaInstalled,
-	kBPFormulaOutdated,
+	kBPFormulaOutdated
 };
 
 @protocol BPHomebrewManagerDelegate <NSObject>
@@ -47,6 +47,11 @@ typedef NS_ENUM(NSInteger, BPFormulaStatus) {
 @property (strong) NSArray<BPFormula*> *searchFormulae;
 @property (strong) NSArray<BPFormula*> *repositoriesFormulae;
 
+@property (strong) NSArray<BPFormula*> *installedCasks;
+@property (strong) NSArray<BPFormula*> *outdatedCasks;
+@property (strong) NSArray<BPFormula*> *allCasks;
+@property (strong) NSArray<BPFormula*> *searchCasks;
+
 @property (weak) id<BPHomebrewManagerDelegate> delegate;
 
 + (instancetype)sharedManager;
@@ -58,6 +63,7 @@ typedef NS_ENUM(NSInteger, BPFormulaStatus) {
 - (void)updateSearchWithName:(NSString *)name;
 
 - (BPFormulaStatus)statusForFormula:(BPFormula*)formula;
+- (BPFormulaStatus)statusForCask:(BPFormula*)formula;
 
 - (void)cleanUp;
 

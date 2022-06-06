@@ -36,6 +36,8 @@ NSString *const kDidEndBackgroundActivityNotification	= @"DidEndBackgroundActivi
 	NSFileHandle *errorFileHandle;
 	NSMutableData *outputData;
 	NSMutableData *errorData;
+	int someAsyncOut;
+	int someAsyncErr;
 	NSObject *outputHandlerObserver;
 	NSObject *errorHandlerObserver;
 	void (^operationUpdateBlock)(NSString*);
@@ -59,6 +61,13 @@ NSString *const kDidEndBackgroundActivityNotification	= @"DidEndBackgroundActivi
 	self = [super init];
 	if (self)
 	{
+		someAsyncOut = 0;
+		someAsyncErr = 0;
+		#ifdef DEBUG
+			if (![self shouldUsePartialUpdates]) {
+				NSLog(@"cmd: %@ %@", path, [arguments componentsJoinedByString:@" "]);
+			}
+		#endif
 		_task = [self taskWithPath:path arguments:arguments];
 		[[NSNotificationCenter defaultCenter] addObserver:self
 												 selector:@selector(taskDidTerminate:)
@@ -157,24 +166,33 @@ NSString *const kDidEndBackgroundActivityNotification	= @"DidEndBackgroundActivi
 		}
 	}
 }
-
+/**
+ * waitUntilExit makes sure that we stay in the same run loop (thread); needed for notifications
+ */
 - (int)execute
 {
 	[self configureStandardOutput];
-	[self configureStandardError];
 	[self configureOutputFileHandle];
+	[self configureStandardError];
 	[self configureErrorFileHandle];
 	[self beginActivity];
 	@try {
 		[self.task launch];
-		[self.task waitUntilExit]; //this makes sure that we stay in the same run loop (thread); needed for notifications
-		
-		return [self.task terminationStatus];
+		[self.task waitUntilExit];
+		if (![self shouldUsePartialUpdates]) {
+//			#ifdef DEBUG
+//				NSLog(@"\tcode = %d", [self.task terminationStatus]);
+//				NSLog(@"\tout  = %@", self.output);
+//				NSLog(@"\terr  = %@", self.error);
+//			#endif
+			return [self.task terminationStatus];
+		} else {
+			return 0;
+		}
 	}
 	@catch (NSException *exception) {
 		NSLog(@"Exception: %@", exception);
 		[self cleanup];
-		
 		return -1;
 	}
 }
@@ -183,35 +201,53 @@ NSString *const kDidEndBackgroundActivityNotification	= @"DidEndBackgroundActivi
 {
 	NSFileHandle *fileHandle = [notification object];
 	NSData *data = [fileHandle readDataToEndOfFile];
-
+	
 	if (fileHandle == outputFileHandle) {
 		[outputData appendData:data];
+		someAsyncOut += data.length + 1;
 	}
 
 	if (fileHandle == errorFileHandle) {
 		[errorData appendData:data];
+		someAsyncErr += data.length + 1;
 	}
 
-	[fileHandle waitForDataInBackgroundAndNotify];
-
-	if (data && data.length > 0) {
+	if (someAsyncOut > 0 && someAsyncErr > 0 ) {
 		dispatch_queue_t queue = [self updateBlockQueue];
 
 		if (queue == nil) {
 			queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0);
 		}
 
+		[self processStandardOutput];
+		[self processStandardError];
+		#ifdef DEBUG
+			NSLog(@"async cmd: %@ %@",  [self.task launchPath], [[self.task arguments] componentsJoinedByString:@" "]);
+			NSLog(@"\tcode = %d", [self.task terminationStatus]);
+			NSLog(@"\tout  = %@", self.output);
+			NSLog(@"\terr  = %@", self.error);
+		#endif
 		dispatch_async(queue, ^{
-			self.updateBlock([[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding]);
+			self.updateBlock(self.output);
 		});
+		[self taskDidTerminateH];
 	}
 }
 
 - (void)taskDidTerminate:(NSNotification *)notification
 {
+	if ([self shouldUsePartialUpdates]) {
+		if (someAsyncOut < 1 || someAsyncErr < 1) {
+			return;
+		}
+	}
 	[self processStandardOutput];
 	[self processStandardError];
+	[self taskDidTerminateH];
+}
 
+- (void)taskDidTerminateH
+{
 	[[NSNotificationCenter defaultCenter] removeObserver:self];
 	[[NSNotificationCenter defaultCenter] removeObserver:outputHandlerObserver];
 	[[NSNotificationCenter defaultCenter] removeObserver:errorHandlerObserver];

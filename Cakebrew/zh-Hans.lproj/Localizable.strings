@@ -160,6 +160,8 @@
 /* No comment provided by engineer. */
 "Sidebar_Group_Tools" = "工具";
 
+"Sidebar_Group_Casks" = "Casks";
+
 /* No comment provided by engineer. */
 "Sidebar_Info_All" = "这是所有Homebrew可供安装的formulae.";
 
@@ -168,6 +170,10 @@
 
 /* No comment provided by engineer. */
 "Sidebar_Info_Installed" = "这些formulae已经安装在你的系统中.";
+
+"Sidebar_Info_Installed_Casks" = "这些casks已经安装在你的系统中.";
+"Sidebar_Info_Outdated_Casks" = "这些casks已经安装，但有一个可用的更新.";
+"Sidebar_Info_All_Casks" = "这是所有Homebrew可供安装的casks.";
 
 /* No comment provided by engineer. */
 "Sidebar_Info_Leaves" = "这些formulae没有依赖其他的formulae.";
@@ -185,19 +191,18 @@
 "Sidebar_Info_Update" = "更新Homebrew标书拉取最新的可用formulae信息";
 
 /* No comment provided by engineer. */
-"Sidebar_Item_All" = "全部Formulae";
-
-/* No comment provided by engineer. */
 "Sidebar_Item_Doctor" = "医生";
 
-/* No comment provided by engineer. */
-"Sidebar_Item_Installed" = "已安装";
+"Sidebar_Item_Installed" = "已安装 Formulae";
+"Sidebar_Item_Outdated" = "过期 Formulae";
+"Sidebar_Item_All" = "全部 Formulae";
+
+"Sidebar_Item_Installed_Casks" = "已安装 Casks";
+"Sidebar_Item_Outdated_Casks" = "过期 Casks";
+"Sidebar_Item_All_Casks" = "全部 Casks";
 
 /* No comment provided by engineer. */
 "Sidebar_Item_Leaves" = "树叶";
-
-/* No comment provided by engineer. */
-"Sidebar_Item_Outdated" = "过期";
 
 /* No comment provided by engineer. */
 "Sidebar_Item_Repos" = "仓库";
@@ -212,7 +217,7 @@
 "Toolbar_Homebrew_Update" = "更新Homebrew";
 
 /* No comment provided by engineer. */
-"Toolbar_Install_Formula" = "安装Formula";
+"Toolbar_Install_Formula" = "安装";
 
 /* No comment provided by engineer. */
 "Toolbar_More_Information" = "更多信息";
@@ -224,13 +229,13 @@
 "Toolbar_Tap_Repo" = "Tap Repository";
 
 /* No comment provided by engineer. */
-"Toolbar_Uninstall_Formula" = "卸载Formula";
+"Toolbar_Uninstall_Formula" = "卸载";
 
 /* No comment provided by engineer. */
 "Toolbar_Untap_Repo" = "Untap Repository";
 
 /* No comment provided by engineer. */
-"Toolbar_Update_Formula" = "更新Formula";
+"Toolbar_Update_Formula" = "更新";
 
 /* No comment provided by engineer. */
 "Toolbar_Update_Selected" = "更新所选";

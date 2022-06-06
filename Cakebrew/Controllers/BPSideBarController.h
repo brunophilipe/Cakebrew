@@ -16,10 +16,17 @@ typedef NS_ENUM(NSUInteger, FormulaeSideBarItem)
 	FormulaeSideBarItemOutdated = 2,
 	FormulaeSideBarItemAll = 3,
 	FormulaeSideBarItemLeaves = 4,
-	FormulaeSideBarItemRepositories = 5,
-	FormulaeSideBarItemToolsCategory = 6,
-	FormulaeSideBarItemDoctor = 7,
-	FormulaeSideBarItemUpdate = 8,
+	
+	FormulaeSideBarItemCasksCategory = 5,
+	CasksSideBarItemInstalled = 6,
+	CasksSideBarItemOutdated = 7,
+	CasksSideBarItemAll = 8,
+	
+	FormulaeSideBarItemToolsCategory = 9,
+	FormulaeSideBarItemRepositories = 10,
+	FormulaeSideBarItemDoctor = 11,
+	FormulaeSideBarItemUpdate = 12,
+	
 };
 
 @protocol BPSideBarControllerDelegate <NSObject>

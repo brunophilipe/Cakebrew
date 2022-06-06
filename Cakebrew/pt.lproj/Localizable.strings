@@ -170,6 +170,8 @@
 /* No comment provided by engineer. */
 "Sidebar_Group_Tools" = "Ferramentas";
 
+"Sidebar_Group_Casks" = "Casks";
+
 /* No comment provided by engineer. */
 "Sidebar_Info_All" = "Estas são todas as fórmulas disponíveis para instalação com o Homebrew.";
 
@@ -178,6 +180,10 @@
 
 /* No comment provided by engineer. */
 "Sidebar_Info_Installed" = "Estas fórmulas estão atualmente instaladas em seu sistema.";
+
+"Sidebar_Info_Installed_Casks" = "Estas casks estão atualmente instaladas em seu sistema.";
+"Sidebar_Info_Outdated_Casks" = "Estas casks estão instaladas, Mas possuem atualizações disponíveis.";
+"Sidebar_Info_All_Casks" = "Estas são todas as casks disponíveis para instalação com o Homebrew.";
 
 /* No comment provided by engineer. */
 "Sidebar_Info_Leaves" = "Estas fórmulas não são dependência de nenhuma outra fórmula instalada.";
@@ -195,19 +201,18 @@
 "Sidebar_Info_Update" = "Atualizar o Homebrew significa baixar a lista de fórmulas disponíveis mais recente.";
 
 /* No comment provided by engineer. */
-"Sidebar_Item_All" = "Todas";
-
-/* No comment provided by engineer. */
 "Sidebar_Item_Doctor" = "Doutor";
 
-/* No comment provided by engineer. */
-"Sidebar_Item_Installed" = "Instaladas";
+"Sidebar_Item_Installed" = "Instaladas Formulae";
+"Sidebar_Item_Outdated" = "Desatualizadas Formulae";
+"Sidebar_Item_All" = "Todas Formulae";
+
+"Sidebar_Item_Installed_Casks" = "Instaladas Casks";
+"Sidebar_Item_Outdated_Casks" = "Desatualizadas Casks";
+"Sidebar_Item_All_Casks" = "Todas Casks";
 
 /* No comment provided by engineer. */
 "Sidebar_Item_Leaves" = "Folhas";
-
-/* No comment provided by engineer. */
-"Sidebar_Item_Outdated" = "Desatualizadas";
 
 /* No comment provided by engineer. */
 "Sidebar_Item_Repos" = "Repositórios";
@@ -222,7 +227,7 @@
 "Toolbar_Homebrew_Update" = "Atualizar Homebrew";
 
 /* No comment provided by engineer. */
-"Toolbar_Install_Formula" = "Instalar Fórmula";
+"Toolbar_Install_Formula" = "Instalar";
 
 /* No comment provided by engineer. */
 "Toolbar_More_Information" = "Mais Informações";
@@ -234,13 +239,13 @@
 "Toolbar_Tap_Repo" = "Adicionar Repositório";
 
 /* No comment provided by engineer. */
-"Toolbar_Uninstall_Formula" = "Desinstalar Fórmula";
+"Toolbar_Uninstall_Formula" = "Desinstalar";
 
 /* No comment provided by engineer. */
 "Toolbar_Untap_Repo" = "remover Repositório";
 
 /* No comment provided by engineer. */
-"Toolbar_Update_Formula" = "Atualizar Fórmula";
+"Toolbar_Update_Formula" = "Atualizar";
 
 /* No comment provided by engineer. */
 "Toolbar_Update_Selected" = "Atualizar Selecionadas";
