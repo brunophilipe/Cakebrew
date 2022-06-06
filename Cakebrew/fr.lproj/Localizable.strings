@@ -166,6 +166,8 @@
 /* No comment provided by engineer. */
 "Sidebar_Group_Tools" = "Outils";
 
+"Sidebar_Group_Casks" = "Casks";
+
 /* No comment provided by engineer. */
 "Sidebar_Info_All" = "Formules disponibles avec Homebrew.";
 
@@ -174,6 +176,10 @@
 
 /* No comment provided by engineer. */
 "Sidebar_Info_Installed" = "Formules déjà installées sur votre système.";
+
+"Sidebar_Info_Installed_Casks" = "Casks déjà installées sur votre système.";
+"Sidebar_Info_Outdated_Casks" = "Casks déjà installées, mais une mise à jour est disponible.";
+"Sidebar_Info_All_Casks" = "Casks disponibles avec Homebrew.";
 
 /* No comment provided by engineer. */
 "Sidebar_Info_Leaves" = "Formules qui ne sont utilisées par aucune autre formule.";
@@ -191,19 +197,18 @@
 "Sidebar_Info_Update" = "Mettre à jour Hombrew permet de mettre à jour les informations de toutes les formules disponibles.";
 
 /* No comment provided by engineer. */
-"Sidebar_Item_All" = "Toutes les formules";
-
-/* No comment provided by engineer. */
 "Sidebar_Item_Doctor" = "Diagnostic";
 
-/* No comment provided by engineer. */
-"Sidebar_Item_Installed" = "Installées";
+"Sidebar_Item_Installed" = "Installées Formulae";
+"Sidebar_Item_Outdated" = "Suranné Formulae";
+"Sidebar_Item_All" = "Toutes Formulae";
+
+"Sidebar_Item_Installed_Casks" = "Installées Casks";
+"Sidebar_Item_Outdated_Casks" = "Suranné Casks";
+"Sidebar_Item_All_Casks" = "Toutes Casks";
 
 /* No comment provided by engineer. */
 "Sidebar_Item_Leaves" = "Feuilles";
-
-/* No comment provided by engineer. */
-"Sidebar_Item_Outdated" = "En attente de mise à jour";
 
 /* No comment provided by engineer. */
 "Sidebar_Item_Repos" = "Dépôts";
@@ -218,7 +223,7 @@
 "Toolbar_Homebrew_Update" = "Mettre à jour Homebrew";
 
 /* No comment provided by engineer. */
-"Toolbar_Install_Formula" = "Installer une formule";
+"Toolbar_Install_Formula" = "Installer";
 
 /* No comment provided by engineer. */
 "Toolbar_More_Information" = "Plus d'informations";
@@ -230,13 +235,13 @@
 "Toolbar_Tap_Repo" = "Ajouter un dépôt";
 
 /* No comment provided by engineer. */
-"Toolbar_Uninstall_Formula" = "Désinstaller une formule";
+"Toolbar_Uninstall_Formula" = "Désinstaller";
 
 /* No comment provided by engineer. */
 "Toolbar_Untap_Repo" = "Supprimer un dépôt";
 
 /* No comment provided by engineer. */
-"Toolbar_Update_Formula" = "Mettre à jour une formule";
+"Toolbar_Update_Formula" = "Mettre à jour";
 
 /* No comment provided by engineer. */
 "Toolbar_Update_Selected" = "Mettre à jour les formules sélectionnées";

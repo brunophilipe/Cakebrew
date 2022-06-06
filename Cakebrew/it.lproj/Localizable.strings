@@ -166,6 +166,8 @@
 /* No comment provided by engineer. */
 "Sidebar_Group_Tools" = "Strumenti";
 
+"Sidebar_Group_Casks" = "Casks";
+
 /* No comment provided by engineer. */
 "Sidebar_Info_All" = "Formule disponibili con Hoembrew";
 
@@ -173,7 +175,11 @@
 "Sidebar_Info_Doctor" = "Lo strumento diagnostico permette di trovare gli errori piçu frequenti..";
 
 /* No comment provided by engineer. */
-"Sidebar_Info_Installed" = "Formula giá installate nel sistema";
+"Sidebar_Info_Installed" = "Formule giá installate nel sistema";
+
+"Sidebar_Info_Installed_Casks" = "Casks giá installate nel sistema";
+"Sidebar_Info_Outdated_Casks" = "Casks installate, ma con un aggiornamento disponibile.";
+"Sidebar_Info_All_Casks" = "Casks disponibili con Hoembrew";
 
 /* No comment provided by engineer. */
 "Sidebar_Info_Leaves" = "Formule che non dipendono da nessun'altra formula.";
@@ -191,19 +197,18 @@
 "Sidebar_Info_Update" = "Aggiornare Homebrew significa avere a disposizione le ultime info sulle formule installate";
 
 /* No comment provided by engineer. */
-"Sidebar_Item_All" = "Tutte le formule";
-
-/* No comment provided by engineer. */
 "Sidebar_Item_Doctor" = "Doctor";
 
-/* No comment provided by engineer. */
-"Sidebar_Item_Installed" = "Installate";
+"Sidebar_Item_Installed" = "Installate Formulae";
+"Sidebar_Item_Outdated" = "Sorpassato Formulae";
+"Sidebar_Item_All" = "Tutte Formulae";
+
+"Sidebar_Item_Installed_Casks" = "Installate Casks";
+"Sidebar_Item_Outdated_Casks" = "Sorpassato Casks";
+"Sidebar_Item_All_Casks" = "Tutte Casks";
 
 /* No comment provided by engineer. */
 "Sidebar_Item_Leaves" = "Foglie";
-
-/* No comment provided by engineer. */
-"Sidebar_Item_Outdated" = "In attesa di aggiornamento";
 
 /* No comment provided by engineer. */
 "Sidebar_Item_Repos" = "Repos";
@@ -218,7 +223,7 @@
 "Toolbar_Homebrew_Update" = "Aggiornare Homebrew";
 
 /* No comment provided by engineer. */
-"Toolbar_Install_Formula" = "Installare formula";
+"Toolbar_Install_Formula" = "Installare";
 
 /* No comment provided by engineer. */
 "Toolbar_More_Information" = "Maggiori informazioni";
@@ -230,13 +235,13 @@
 "Toolbar_Tap_Repo" = "Aggiungere un repo";
 
 /* No comment provided by engineer. */
-"Toolbar_Uninstall_Formula" = "Disinstallare una formula";
+"Toolbar_Uninstall_Formula" = "Disinstallare";
 
 /* No comment provided by engineer. */
 "Toolbar_Untap_Repo" = "Rimuovere un repo";
 
 /* No comment provided by engineer. */
-"Toolbar_Update_Formula" = "Aggiornare una formula";
+"Toolbar_Update_Formula" = "Aggiornare";
 
 /* No comment provided by engineer. */
 "Toolbar_Update_Selected" = "Aggiornare le formule selezionate";

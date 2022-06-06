@@ -19,16 +19,24 @@
 //	along with this program.  If not, see <http://www.gnu.org/licenses/>.
 //
 
-#import "BPHomebrewViewController.h"
+
 #import "BPFormula.h"
+#import "BPFormulaOptionsWindowController.h"
+#import "BPFormulaeDataSource.h"
+#import "BPSelectedFormulaViewController.h"
+
+
+//#import "BPCask.h"
+//#import "BPCaskOptionsWindowController.h"
+#import "BPCasksDataSource.h"
+//#import "BPSelectedCaskViewController.h"
+
+#import "BPHomebrewViewController.h"
 #import "BPHomebrewManager.h"
 #import "BPHomebrewInterface.h"
-#import "BPFormulaOptionsWindowController.h"
 #import "BPInstallationWindowController.h"
 #import "BPUpdateViewController.h"
 #import "BPDoctorViewController.h"
-#import "BPFormulaeDataSource.h"
-#import "BPSelectedFormulaViewController.h"
 #import "BPToolbar.h"
 #import "BPAppDelegate.h"
 #import "BPStyle.h"
@@ -41,6 +49,7 @@
 
 typedef NS_ENUM(NSUInteger, BPContentTab) {
 	kBPContentTabFormulae,
+	kBPContentTabCasks,
 	kBPContentTabDoctor,
 	kBPContentTabUpdate
 };
@@ -62,6 +71,7 @@ NSOpenSavePanelDelegate>
 
 
 @property (strong, nonatomic) BPFormulaeDataSource				*formulaeDataSource;
+@property (strong, nonatomic) BPCasksDataSource					*casksDataSource;
 @property (strong, nonatomic) BPFormulaOptionsWindowController	*formulaOptionsWindowController;
 @property (strong, nonatomic) NSWindowController				*operationWindowController;
 @property (strong, nonatomic) BPUpdateViewController			*updateViewController;
@@ -148,16 +158,26 @@ NSOpenSavePanelDelegate>
 	[self.mainWindowController setUpViews];
 	[self.mainWindowController setContentViewHidden:YES];
 
-	self.formulaeDataSource = [[BPFormulaeDataSource alloc] initWithMode:kBPListAll];
+	self.formulaeDataSource = [[BPFormulaeDataSource alloc] initWithMode:kBPListAllFormulae];
 	self.formulaeTableView.dataSource = self.formulaeDataSource;
 	self.formulaeTableView.delegate = self;
 	[self.formulaeTableView setAccessibilityLabel:NSLocalizedString(@"Formulae", nil)];
+		
 	
 	//link formulae tableview
 	NSView *formulaeView = self.formulaeSplitView;
 	if ([[self.tabView tabViewItems] count] > kBPContentTabFormulae) {
 		NSTabViewItem *formulaeTab = [self.tabView tabViewItemAtIndex:kBPContentTabFormulae];
 		[formulaeTab setView:formulaeView];
+	}
+	
+	self.casksDataSource = [[BPCasksDataSource alloc] initWithMode:kBPListAllCasks];
+	
+	//link casks tableview
+	NSView *casksView = self.formulaeSplitView;
+	if ([[self.tabView tabViewItems] count] > kBPContentTabCasks) {
+		NSTabViewItem *casksTab = [self.tabView tabViewItemAtIndex:kBPContentTabCasks];
+		[casksTab setView:casksView];
 	}
 	
 	//Creating view for update tab
@@ -292,65 +312,62 @@ NSOpenSavePanelDelegate>
 	NSInteger selectedIndex			= [self.formulaeTableView selectedRow];
 	NSIndexSet *selectedRows		= [self.formulaeTableView selectedRowIndexes];
 	NSArray *selectedFormulae		= [self.formulaeDataSource formulasAtIndexSet:selectedRows];
+	NSArray *selectedCasks			= [self.casksDataSource casksAtIndexSet:selectedRows];
 
 	CGFloat height = [self.formulaeSplitView bounds].size.height;
 	CGFloat preferedHeightOfSelectedFormulaView = 120.f;
 	[self.formulaeSplitView setPosition:height - preferedHeightOfSelectedFormulaView
 					   ofDividerAtIndex:0];
 
-	BOOL showFormulaInfo = YES;
-	
-	if (selectedSidebarRow == FormulaeSideBarItemRepositories) // Repositories (Taps) sidebaritem
-	{
-		showFormulaInfo = false;
-
+	BOOL showFormulaInfo = false;
+	if (selectedSidebarRow == FormulaeSideBarItemRepositories) {
 		[self.toolbar configureForMode:BPToolbarModeTap];
-
-		
 		if (selectedIndex != -1) {
 			[self.toolbar configureForMode:BPToolbarModeUntap];
 		} else {
 			[self.toolbar configureForMode:BPToolbarModeTap];
 		}
-	}
-	else if (selectedIndex == -1 || selectedSidebarRow > FormulaeSideBarItemToolsCategory)
-	{
+	} else if (selectedSidebarRow == FormulaeSideBarItemDoctor) {
 		[self.toolbar configureForMode:BPToolbarModeDefault];
-	}
-	else if ([[self.formulaeTableView selectedRowIndexes] count] > 1)
-	{
-		[self.toolbar configureForMode:BPToolbarModeUpdateMany];
-	}
-	else
-	{
-		BPFormula *formula = [self .formulaeDataSource formulaAtIndex:selectedIndex];
-
-		switch ([[BPHomebrewManager sharedManager] statusForFormula:formula]) {
+	} else if (selectedSidebarRow == FormulaeSideBarItemUpdate) {
+		[self.toolbar configureForMode:BPToolbarModeDefault];
+	} else {
+		showFormulaInfo = true;
+		BPFormula *formula;
+		BPFormulaStatus status;
+		if (selectedSidebarRow > FormulaeSideBarItemCasksCategory) {
+			self.formulaeTableView.dataSource = self.casksDataSource;
+			[self.formulaeTableView setAccessibilityLabel:NSLocalizedString(@"Casks", nil)];
+			formula = [self.casksDataSource caskAtIndex:selectedIndex];
+			[self.selectedFormulaeViewController setFormulae:selectedCasks];
+			status = [[BPHomebrewManager sharedManager] statusForFormula:formula];
+		} else {
+			self.formulaeTableView.dataSource = self.formulaeDataSource;
+			[self.formulaeTableView setAccessibilityLabel:NSLocalizedString(@"Formulae", nil)];
+			formula = [self.formulaeDataSource formulaAtIndex:selectedIndex];
+			[self.selectedFormulaeViewController setFormulae:selectedFormulae];
+			status = [[BPHomebrewManager sharedManager] statusForCask:formula];
+		}
+		switch (status) {
 			case kBPFormulaInstalled:
+			//case kBPCaskInstalled:
 				[self.toolbar configureForMode:BPToolbarModeUninstall];
 				break;
 				
 			case kBPFormulaOutdated:
-				if (selectedSidebarRow == FormulaeSideBarItemOutdated) {
-					[self.toolbar configureForMode:BPToolbarModeUpdateSingle];
-				} else {
-					[self.toolbar configureForMode:BPToolbarModeUninstall];
-				}
+			//case kBPCaskOutdated:
+				[self.toolbar configureForMode:BPToolbarModeUpdateSingle];
 				break;
 				
 			case kBPFormulaNotInstalled:
+			//case kBPCaskNotInstalled:
 				[self.toolbar configureForMode:BPToolbarModeInstall];
 				break;
 		}
 	}
-
-	if (showFormulaInfo)
-	{
+	if (showFormulaInfo) {
 		[self.selectedFormulaView setHidden:NO];
-		[self.selectedFormulaeViewController setFormulae:selectedFormulae];
-	}
-	else
-	{
+	} else {
 		[self.selectedFormulaView setHidden:YES];
 	}
 }
@@ -359,6 +376,7 @@ NSOpenSavePanelDelegate>
 {
 	[self.formulaeTableView deselectAll:nil];
 	[self.formulaeDataSource setMode:mode];
+	[self.casksDataSource setMode:mode];
 	[self.formulaeTableView setMode:mode];
 	[self.formulaeTableView reloadData];
 	[self updateInterfaceItems];
@@ -408,6 +426,18 @@ NSOpenSavePanelDelegate>
 				message = NSLocalizedString(@"Sidebar_Info_Update", nil);
 				break;
 				
+			case CasksSideBarItemInstalled: // Installed Casks
+				message = NSLocalizedString(@"Sidebar_Info_Installed_Casks", nil);
+				break;
+				
+			case CasksSideBarItemOutdated: // Outdated Casks
+				message = NSLocalizedString(@"Sidebar_Info_Outdated_Casks", nil);
+				break;
+				
+			case CasksSideBarItemAll: // All Casks
+				message = NSLocalizedString(@"Sidebar_Info_All_Casks", nil);
+				break;
+				
 			default:
 				break;
 		}
@@ -444,6 +474,7 @@ NSOpenSavePanelDelegate>
 		[self.toolbar configureForMode:BPToolbarModeDefault];
 		[self.toolbar unlockItems];
 		[self.formulaeDataSource refreshBackingArray];
+		[self.casksDataSource refreshBackingArray];
 
 		// Used after unlocking the app when inserting custom homebrew installation path
 		BOOL shouldReselectFirstRow = ([self.sidebarController.sidebar selectedRow] < 0);
@@ -545,14 +576,14 @@ NSOpenSavePanelDelegate>
 	[self.sidebarController.sidebar selectRowIndexes:[NSIndexSet indexSetWithIndex:FormulaeSideBarItemAll]
 								byExtendingSelection:NO];
 	[self setSearching:YES];
-	[self configureTableForListing:kBPListSearch];
+	[self configureTableForListing:kBPListSearchFormulae];
 }
 
 - (void)endSearchAndCleanup
 {
 	[self.toolbar.searchField setStringValue:@""];
 	[self setSearching:NO];
-	[self configureTableForListing:kBPListAll];
+	[self configureTableForListing:kBPListAllFormulae];
 	[self updateInfoLabelWithSidebarSelection];
 }
 
@@ -574,7 +605,7 @@ NSOpenSavePanelDelegate>
 
 - (void)sourceListSelectionDidChange
 {
-	BPContentTab tabIndex = kBPContentTabFormulae;
+	BPContentTab tabIndex;
 	NSInteger selectedSidebarRow = [self.sidebarController.sidebar selectedRow];
 	
 	if ([self isSearching]) {
@@ -592,22 +623,27 @@ NSOpenSavePanelDelegate>
 	
 	switch (selectedSidebarRow) {
 		case FormulaeSideBarItemInstalled: // Installed Formulae
-			[self configureTableForListing:kBPListInstalled];
+			tabIndex = kBPContentTabFormulae;
+			[self configureTableForListing:kBPListInstalledFormulae];
 			break;
 			
 		case FormulaeSideBarItemOutdated: // Outdated Formulae
-			[self configureTableForListing:kBPListOutdated];
+			tabIndex = kBPContentTabFormulae;
+			[self configureTableForListing:kBPListOutdatedFormulae];
 			break;
 			
 		case FormulaeSideBarItemAll: // All Formulae
-			[self configureTableForListing:kBPListAll];
+			tabIndex = kBPContentTabFormulae;
+			[self configureTableForListing:kBPListAllFormulae];
 			break;
 			
 		case FormulaeSideBarItemLeaves:	// Leaves
+			tabIndex = kBPContentTabFormulae;
 			[self configureTableForListing:kBPListLeaves];
 			break;
 			
 		case FormulaeSideBarItemRepositories: // Repositories
+			tabIndex = kBPContentTabFormulae;
 			[self configureTableForListing:kBPListRepositories];
 			break;
 			
@@ -618,8 +654,24 @@ NSOpenSavePanelDelegate>
 		case FormulaeSideBarItemUpdate: // Update Tool
 			tabIndex = kBPContentTabUpdate;
 			break;
+
+		case CasksSideBarItemInstalled: // Installed Casks
+			tabIndex = kBPContentTabCasks;
+			[self configureTableForListing:kBPListInstalledCasks];
+			break;
+			
+		case CasksSideBarItemOutdated: // Outdated Casks
+			tabIndex = kBPContentTabCasks;
+			[self configureTableForListing:kBPListOutdatedCasks];
+			break;
+			
+		case CasksSideBarItemAll: // All Casks
+			tabIndex = kBPContentTabCasks;
+			[self configureTableForListing:kBPListAllCasks];
+			break;
 			
 		default:
+			tabIndex = kBPContentTabFormulae;
 			break;
 	}
 	
@@ -741,6 +793,31 @@ NSOpenSavePanelDelegate>
 	{
 		self.operationWindowController = [BPInstallationWindowController runWithOperation:kBPWindowOperationUpgrade
 																				 formulae:selectedFormulae
+																				  options:nil];
+	}
+}
+
+- (IBAction)upgradeSelectedCasks:(id)sender
+{
+	[self checkForBackgroundTask];
+	NSArray *selectedCasks = [self selectedCasks];
+	if (![selectedCasks count]) {
+		return;
+	}
+	NSString *formulaNames = [[self selectedCaskNames] componentsJoinedByString:@", "];
+	
+	NSAlert *alert = [[NSAlert alloc] init];
+	[alert setMessageText:NSLocalizedString(@"Message_Update_Formulae_Title", nil)];
+	[alert addButtonWithTitle:NSLocalizedString(@"Generic_Yes", nil)];
+	[alert addButtonWithTitle:NSLocalizedString(@"Generic_Cancel", nil)];
+	[alert setInformativeText:[NSString stringWithFormat:NSLocalizedString(@"Message_Update_Formulae_Body", nil),
+							   formulaNames]];
+
+	[alert.window setTitle:NSLocalizedString(@"Cakebrew", nil)];
+	if ([alert runModal] == NSAlertFirstButtonReturn)
+	{
+		self.operationWindowController = [BPInstallationWindowController runWithOperation:kBPWindowOperationUpgrade
+																				 formulae:selectedCasks
 																				  options:nil];
 	}
 }
@@ -914,7 +991,11 @@ NSOpenSavePanelDelegate>
 - (BPFormula *)selectedFormula
 {
 	NSInteger selectedIndex = [self.formulaeTableView selectedRow];
-	return [self.formulaeDataSource formulaAtIndex:selectedIndex];
+	if (self.formulaeTableView.dataSource == self.casksDataSource) {
+		return [self.casksDataSource caskAtIndex:selectedIndex];
+	} else {
+		return [self.formulaeDataSource formulaAtIndex:selectedIndex];
+	}
 }
 
 - (NSArray *)selectedFormulae
@@ -926,6 +1007,24 @@ NSOpenSavePanelDelegate>
 - (NSArray *)selectedFormulaNames
 {
 	NSArray *formulas = [self selectedFormulae];
+	return [formulas valueForKeyPath:@"@unionOfObjects.name"];
+}
+
+- (BPFormula *)selectedCask
+{
+	NSInteger selectedIndex = [self.formulaeTableView selectedRow];
+	return [self.casksDataSource caskAtIndex:selectedIndex];
+}
+
+- (NSArray *)selectedCasks
+{
+	NSIndexSet *selectedIndexes = [self.formulaeTableView selectedRowIndexes];
+	return [self.casksDataSource casksAtIndexSet:selectedIndexes];
+}
+
+- (NSArray *)selectedCaskNames
+{
+	NSArray *formulas = [self selectedCasks];
 	return [formulas valueForKeyPath:@"@unionOfObjects.name"];
 }
 

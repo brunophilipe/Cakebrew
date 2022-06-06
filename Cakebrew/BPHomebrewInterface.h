@@ -24,12 +24,18 @@
 #import "BPFormula.h"
 
 typedef NS_ENUM(NSInteger, BPListMode) {
-	kBPListAll,
-	kBPListInstalled,
+	kBPListAllFormulae,
+	kBPListInstalledFormulae,
 	kBPListLeaves,
-	kBPListOutdated,
-	kBPListSearch, /* Don't call -[BPHomebrewInterface listMode:] with this parameter. */
-	kBPListRepositories
+	kBPListOutdatedFormulae,
+	kBPListSearchFormulae, /* Don't call -[BPHomebrewInterface listMode:] with this parameter. */
+	kBPListRepositories,
+	
+	kBPListAllCasks,
+	kBPListInstalledCasks,
+	kBPListOutdatedCasks,
+	kBPListSearchCasks
+
 };
 
 @protocol BPHomebrewInterfaceDelegate <NSObject>

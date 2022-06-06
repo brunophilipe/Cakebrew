@@ -19,6 +19,10 @@
 @property (strong, nonatomic) PXSourceListItem *leavesFormulaeSidebarItem;
 @property (strong, nonatomic) PXSourceListItem *repositoriesFormulaeSidebarItem;
 
+@property (strong, nonatomic) PXSourceListItem *instaledCasksSidebarItem;
+@property (strong, nonatomic) PXSourceListItem *outdatedCasksSidebarItem;
+@property (strong, nonatomic) PXSourceListItem *allCasksSidebarItem;
+
 @end
 
 @implementation BPSideBarController
@@ -61,14 +65,35 @@
 	_leavesFormulaeSidebarItem.icon = [self leavesSidebarIconImage];
 	[parent addChildItem:_leavesFormulaeSidebarItem];
 	
-	_repositoriesFormulaeSidebarItem = [PXSourceListItem itemWithTitle:NSLocalizedString(@"Sidebar_Item_Repos", nil)
-															identifier:@"item"];
-	_repositoriesFormulaeSidebarItem.icon = [self repositoriesSidebarIconImage];
-	[parent addChildItem:_repositoriesFormulaeSidebarItem];
+	
+	parent = [PXSourceListItem itemWithTitle:NSLocalizedString(@"Sidebar_Group_Casks", nil)
+								  identifier:@"group"];
+	[_rootSidebarCategory addChildItem:parent];
+	
+	_instaledCasksSidebarItem = [PXSourceListItem itemWithTitle:NSLocalizedString(@"Sidebar_Item_Installed_Casks", nil)
+														identifier:@"item"];
+	_instaledCasksSidebarItem.icon = [self installedSidebarIconImage];
+	[parent addChildItem:_instaledCasksSidebarItem];
+	
+	_outdatedCasksSidebarItem = [PXSourceListItem itemWithTitle:NSLocalizedString(@"Sidebar_Item_Outdated_Casks", nil)
+														identifier:@"item"];
+	_outdatedCasksSidebarItem.icon = [self outdatedSidebarIconImage];
+	[parent addChildItem:_outdatedCasksSidebarItem];
+	
+	_allCasksSidebarItem = [PXSourceListItem itemWithTitle:NSLocalizedString(@"Sidebar_Item_All_Casks", nil)
+												   identifier:@"item"];
+	_allCasksSidebarItem.icon = [self allFormulaeSidebarIconImage];
+	[parent addChildItem:_allCasksSidebarItem];
+	
 	
 	parent = [PXSourceListItem itemWithTitle:NSLocalizedString(@"Sidebar_Group_Tools", nil)
 								  identifier:@"group"];
 	[_rootSidebarCategory addChildItem:parent];
+	
+	_repositoriesFormulaeSidebarItem = [PXSourceListItem itemWithTitle:NSLocalizedString(@"Sidebar_Item_Repos", nil)
+															identifier:@"item"];
+	_repositoriesFormulaeSidebarItem.icon = [self repositoriesSidebarIconImage];
+	[parent addChildItem:_repositoriesFormulaeSidebarItem];
 	
 	item = [PXSourceListItem itemWithTitle:NSLocalizedString(@"Sidebar_Item_Doctor", nil)
 								identifier:@"item"];
@@ -167,6 +192,11 @@
 	self.allFormulaeSidebarItem.badgeValue			= @([[[BPHomebrewManager sharedManager] allFormulae] count]);
 	self.leavesFormulaeSidebarItem.badgeValue		= @([[[BPHomebrewManager sharedManager] leavesFormulae] count]);
 	self.repositoriesFormulaeSidebarItem.badgeValue = @([[[BPHomebrewManager sharedManager] repositoriesFormulae] count]);
+	
+	self.instaledCasksSidebarItem.badgeValue		= @([[[BPHomebrewManager sharedManager] installedCasks] count]);
+	self.outdatedCasksSidebarItem.badgeValue		= @([[[BPHomebrewManager sharedManager] outdatedCasks] count]);
+	self.allCasksSidebarItem.badgeValue				= @([[[BPHomebrewManager sharedManager] allCasks] count]);
+	
 }
 
 #pragma mark - PXSourceList Data Source

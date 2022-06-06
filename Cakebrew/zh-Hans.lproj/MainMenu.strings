@@ -10,8 +10,8 @@
 /* Class = "NSTextFieldCell"; title = "No selection"; ObjectID = "3xE-6a-fkA"; */
 "3xE-6a-fkA.title" = "未选择";
 
-/* Class = "NSMenuItem"; title = "Update Formula"; ObjectID = "4ab-Ns-Wry"; */
-"4ab-Ns-Wry.title" = "更新Formula";
+/* Class = "NSMenuItem"; title = "Update"; ObjectID = "4ab-Ns-Wry"; */
+"4ab-Ns-Wry.title" = "更新";
 
 /* Class = "NSMenuItem"; title = "Bring All to Front"; ObjectID = "5"; */
 "5.title" = "前置全部窗口";
@@ -133,8 +133,8 @@
 /* Class = "NSMenuItem"; title = "Undo"; ObjectID = "H1C-ip-FlF"; */
 "H1C-ip-FlF.title" = "撤销";
 
-/* Class = "NSMenuItem"; title = "Update Formula"; ObjectID = "Hhd-b7-GOc"; */
-"Hhd-b7-GOc.title" = "更新Formula";
+/* Class = "NSMenuItem"; title = "Update"; ObjectID = "Hhd-b7-GOc"; */
+"Hhd-b7-GOc.title" = "更新";
 
 /* Class = "NSMenuItem"; title = "Redo"; ObjectID = "J92-AZ-XUi"; */
 "J92-AZ-XUi.title" = "重做";
@@ -151,8 +151,8 @@
 /* Class = "NSMenu"; title = "Edit"; ObjectID = "LYP-iZ-WcV"; */
 "LYP-iZ-WcV.title" = "编辑";
 
-/* Class = "NSMenuItem"; title = "Install Formula"; ObjectID = "Lcb-tm-ATo"; */
-"Lcb-tm-ATo.title" = "安装Formula";
+/* Class = "NSMenuItem"; title = "Install"; ObjectID = "Lcb-tm-ATo"; */
+"Lcb-tm-ATo.title" = "安装";
 
 /* Class = "NSMenuItem"; title = "Leaves"; ObjectID = "M9N-PI-gBO"; */
 "M9N-PI-gBO.title" = "树叶";
@@ -178,8 +178,8 @@
 /* Class = "NSMenuItem"; title = "Find and Replace…"; ObjectID = "OSn-ju-y85"; */
 "OSn-ju-y85.title" = "查找与替换…";
 
-/* Class = "NSMenuItem"; title = "Uninstall Formula"; ObjectID = "Tzv-5t-RhL"; */
-"Tzv-5t-RhL.title" = "卸载Formula";
+/* Class = "NSMenuItem"; title = "Uninstall"; ObjectID = "Tzv-5t-RhL"; */
+"Tzv-5t-RhL.title" = "卸载";
 
 /* Class = "NSMenuItem"; title = "Check Spelling While Typing"; ObjectID = "UOm-zM-WGz"; */
 "UOm-zM-WGz.title" = "键入时检查拼写";
@@ -250,8 +250,8 @@
 /* Class = "NSMenuItem"; title = "More Information"; ObjectID = "eus-Jb-JjS"; */
 "eus-Jb-JjS.title" = "更多信息";
 
-/* Class = "NSMenuItem"; title = "Install Formula"; ObjectID = "fhF-VX-squ"; */
-"fhF-VX-squ.title" = "安装Formula";
+/* Class = "NSMenuItem"; title = "Install"; ObjectID = "fhF-VX-squ"; */
+"fhF-VX-squ.title" = "安装";
 
 /* Class = "NSMenuItem"; title = "More Information"; ObjectID = "gxx-2S-F5T"; */
 "gxx-2S-F5T.title" = "更多信息";
@@ -262,8 +262,8 @@
 /* Class = "NSTableColumn"; headerCell.title = "Version"; ObjectID = "h5d-xc-Jih"; */
 "h5d-xc-Jih.headerCell.title" = "版本";
 
-/* Class = "NSMenuItem"; title = "Uninstall Formula"; ObjectID = "i3A-Nx-qPJ"; */
-"i3A-Nx-qPJ.title" = "卸载Formula";
+/* Class = "NSMenuItem"; title = "Uninstall"; ObjectID = "i3A-Nx-qPJ"; */
+"i3A-Nx-qPJ.title" = "卸载";
 
 /* Class = "NSMenu"; title = "Tools"; ObjectID = "lOM-6G-bAo"; */
 "lOM-6G-bAo.title" = "工具";

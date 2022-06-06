@@ -56,9 +56,9 @@
 "Homebrew_Task_Finished_At" = "at";
 "Homebrew_AppNap_Task_Reason" = "Running Homebrew task";
 
-"Toolbar_Install_Formula" = "Install Formula";
-"Toolbar_Uninstall_Formula" = "Uninstall Formula";
-"Toolbar_Update_Formula" = "Update Formula";
+"Toolbar_Install_Formula" = "Install";
+"Toolbar_Uninstall_Formula" = "Uninstall";
+"Toolbar_Update_Formula" = "Update";
 "Toolbar_Tap_Repo" = "Tap Repository";
 "Toolbar_Untap_Repo" = "Untap Repository";
 "Toolbar_Update_Selected" = "Update Selected";
@@ -69,6 +69,11 @@
 "Sidebar_Info_Installed" = "These are the formulae already installed in your system.";
 "Sidebar_Info_Outdated" = "These formulae are already installed, but have an update available.";
 "Sidebar_Info_All" = "These are all the formulae available for installation with Homebrew.";
+
+"Sidebar_Info_Installed_Casks" = "These are the casks already installed in your system.";
+"Sidebar_Info_Outdated_Casks" = "These casks are already installed, but have an update available.";
+"Sidebar_Info_All_Casks" = "These are all the casks available for installation with Homebrew.";
+
 "Sidebar_Info_Leaves" = "These formulae are not dependencies of any other formulae.";
 "Sidebar_Info_Repos" = "These are the repositories you have tapped.";
 "Sidebar_Info_Doctor" = "The doctor is a Homebrew feature that detects the most common causes of errors.";
@@ -91,10 +96,16 @@
 
 "Sidebar_Group_Formulae" = "Formulae";
 "Sidebar_Group_Tools" = "Tools";
+"Sidebar_Group_Casks" = "Casks";
 
 "Sidebar_Item_Installed" = "Installed";
 "Sidebar_Item_Outdated" = "Outdated";
-"Sidebar_Item_All" = "All Formulae";
+"Sidebar_Item_All" = "All";
+
+"Sidebar_Item_Installed_Casks" = "Installed";
+"Sidebar_Item_Outdated_Casks" = "Outdated";
+"Sidebar_Item_All_Casks" = "All";
+
 "Sidebar_Item_Leaves" = "Leaves";
 "Sidebar_Item_Repos" = "Repositories";
 "Sidebar_Item_Doctor" = "Doctor";

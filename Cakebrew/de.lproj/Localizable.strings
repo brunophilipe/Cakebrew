@@ -166,6 +166,8 @@
 /* No comment provided by engineer. */
 "Sidebar_Group_Tools" = "Werkzeuge";
 
+"Sidebar_Group_Casks" = "Casks";
+
 /* No comment provided by engineer. */
 "Sidebar_Info_All" = "Hier finden Sie alle Formeln, welche über Homebrew installiert werden können.";
 
@@ -174,6 +176,10 @@
 
 /* No comment provided by engineer. */
 "Sidebar_Info_Installed" = "Diese Formeln sind bereits auf Ihrem System installiert.";
+
+"Sidebar_Info_Installed_Casks" = "Diese casks sind bereits auf Ihrem System installiert.";
+"Sidebar_Info_Outdated_Casks" = "Diese casks sind bereits installiert, haben aber ein Update verfügbar.";
+"Sidebar_Info_All_Casks" =  "Hier finden Sie alle casks, welche über Homebrew installiert werden können.";
 
 /* No comment provided by engineer. */
 "Sidebar_Info_Leaves" = "Keine andere Formel ist von einer dieser Formeln abhängig.";
@@ -191,19 +197,18 @@
 "Sidebar_Info_Update" = "Bei einem Update ermittelt Homebrew die aktuellsten Informationen für die verfügbaren Formeln.";
 
 /* No comment provided by engineer. */
-"Sidebar_Item_All" = "Alle Formeln";
-
-/* No comment provided by engineer. */
 "Sidebar_Item_Doctor" = "Doctor";
 
-/* No comment provided by engineer. */
-"Sidebar_Item_Installed" = "Installiert";
+"Sidebar_Item_Installed" = "Installiert Formeln";
+"Sidebar_Item_Outdated" = "Veraltet Formeln";
+"Sidebar_Item_All" = "Alle Formeln";
+
+"Sidebar_Item_Installed_Casks" = "Installiert Casks";
+"Sidebar_Item_Outdated_Casks" = "Veraltet Casks";
+"Sidebar_Item_All_Casks" = "Alle Casks";
 
 /* No comment provided by engineer. */
 "Sidebar_Item_Leaves" = "Blätter";
-
-/* No comment provided by engineer. */
-"Sidebar_Item_Outdated" = "Veraltet";
 
 /* No comment provided by engineer. */
 "Sidebar_Item_Repos" = "Repositorys";
@@ -218,7 +223,7 @@
 "Toolbar_Homebrew_Update" = "Homebrew aktualisieren";
 
 /* No comment provided by engineer. */
-"Toolbar_Install_Formula" = "Formel installieren";
+"Toolbar_Install_Formula" = "installieren";
 
 /* No comment provided by engineer. */
 "Toolbar_More_Information" = "Weitere Informationen";
@@ -230,13 +235,13 @@
 "Toolbar_Tap_Repo" = "Repository tappen";
 
 /* No comment provided by engineer. */
-"Toolbar_Uninstall_Formula" = "Formel deinstallieren";
+"Toolbar_Uninstall_Formula" = "deinstallieren";
 
 /* No comment provided by engineer. */
 "Toolbar_Untap_Repo" = "Repository untappen";
 
 /* No comment provided by engineer. */
-"Toolbar_Update_Formula" = "Formel aktualisieren";
+"Toolbar_Update_Formula" = "aktualisieren";
 
 /* No comment provided by engineer. */
 "Toolbar_Update_Selected" = "Ausgewählte Formeln aktualisieren";

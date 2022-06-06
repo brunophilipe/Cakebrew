@@ -395,12 +395,14 @@ NSString *const BPFormulaDidUpdateNotification = @"BPFormulaDidUpdateNotificatio
 
 - (BOOL)isInstalled
 {
-	return [[BPHomebrewManager sharedManager] statusForFormula:self] != kBPFormulaNotInstalled;
+	return [[BPHomebrewManager sharedManager] statusForFormula:self] != kBPFormulaNotInstalled
+	|| [[BPHomebrewManager sharedManager] statusForCask:self] != kBPFormulaNotInstalled;
 }
 
 - (BOOL)isOutdated
 {
-	return [[BPHomebrewManager sharedManager] statusForFormula:self] == kBPFormulaOutdated;
+	return [[BPHomebrewManager sharedManager] statusForFormula:self] == kBPFormulaOutdated
+	|| [[BPHomebrewManager sharedManager] statusForCask:self] != kBPFormulaOutdated;
 }
 
 - (NSString*)description

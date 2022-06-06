@@ -60,6 +60,7 @@
 		1FE4FE6C148E4CDD008EDE8B /* BPAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FE4FE6B148E4CDD008EDE8B /* BPAppDelegate.m */; };
 		1FE4FE6F148E4CDD008EDE8B /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1FE4FE6D148E4CDD008EDE8B /* MainMenu.xib */; };
 		1FE4FE77148E4D43008EDE8B /* BPHomebrewInterface.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FE4FE76148E4D43008EDE8B /* BPHomebrewInterface.m */; };
+		222DC89E284CE05B0094E825 /* BPCasksDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 222DC89D284CE05B0094E825 /* BPCasksDataSource.m */; };
 		D212A5881B853069003000ED /* BPFormulaTests.m in Sources */ = {isa = PBXBuildFile; fileRef = D212A5871B853069003000ED /* BPFormulaTests.m */; };
 		D212A5891B853132003000ED /* BPFormula.m in Sources */ = {isa = PBXBuildFile; fileRef = 1570BA5518EE50BD001C3C5C /* BPFormula.m */; };
 		D228335A1BA71B9900E44C82 /* BPTask.m in Sources */ = {isa = PBXBuildFile; fileRef = D23620E01B8B3094006D293D /* BPTask.m */; };
@@ -91,6 +92,51 @@
 		D2CC8CA71B90F04C00F763DF /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D2CC8CA61B90F04C00F763DF /* Security.framework */; };
 		D2F732F119190B75002B2512 /* NSString+URLValidation.m in Sources */ = {isa = PBXBuildFile; fileRef = D2F732F019190B75002B2512 /* NSString+URLValidation.m */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		228C518A284CD267004E87EA /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 228C5183284CD267004E87EA /* PXSourceList.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 8D1107320486CEB800E47090;
+			remoteInfo = CellBasedSourceList;
+		};
+		228C518C284CD267004E87EA /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 228C5183284CD267004E87EA /* PXSourceList.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = D263123B186EF9F00036501C;
+			remoteInfo = ViewBasedSourceList;
+		};
+		228C518E284CD267004E87EA /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 228C5183284CD267004E87EA /* PXSourceList.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 4CC5EA2A12DC81ED001F282E;
+			remoteInfo = PXSourceList;
+		};
+		228C5197284CD26D004E87EA /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 228C5190284CD26D004E87EA /* PXSourceList.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 8D1107320486CEB800E47090;
+			remoteInfo = CellBasedSourceList;
+		};
+		228C5199284CD26D004E87EA /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 228C5190284CD26D004E87EA /* PXSourceList.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = D263123B186EF9F00036501C;
+			remoteInfo = ViewBasedSourceList;
+		};
+		228C519B284CD26D004E87EA /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 228C5190284CD26D004E87EA /* PXSourceList.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 4CC5EA2A12DC81ED001F282E;
+			remoteInfo = PXSourceList;
+		};
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
 		1570BA6018EF9B0F001C3C5C /* CopyFiles */ = {
@@ -235,6 +281,11 @@
 		1FE4FE6B148E4CDD008EDE8B /* BPAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BPAppDelegate.m; sourceTree = "<group>"; };
 		1FE4FE75148E4D43008EDE8B /* BPHomebrewInterface.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BPHomebrewInterface.h; sourceTree = "<group>"; };
 		1FE4FE76148E4D43008EDE8B /* BPHomebrewInterface.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BPHomebrewInterface.m; sourceTree = "<group>"; };
+		222DC894284CDF900094E825 /* BPCasksDataSource.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BPCasksDataSource.h; sourceTree = "<group>"; };
+		222DC89D284CE05B0094E825 /* BPCasksDataSource.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = BPCasksDataSource.m; path = Controllers/BPCasksDataSource.m; sourceTree = "<group>"; };
+		228C5183284CD267004E87EA /* PXSourceList.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = PXSourceList.xcodeproj; path = Dependencies/PXSourceList/PXSourceList.xcodeproj; sourceTree = "<group>"; };
+		228C5190284CD26D004E87EA /* PXSourceList.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = PXSourceList.xcodeproj; path = Dependencies/PXSourceList/PXSourceList.xcodeproj; sourceTree = "<group>"; };
+		228C519D284CD322004E87EA /* PXSourceList */ = {isa = PBXFileReference; lastKnownFileType = folder; name = PXSourceList; path = Dependencies/PXSourceList; sourceTree = "<group>"; };
 		D212A5871B853069003000ED /* BPFormulaTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BPFormulaTests.m; sourceTree = "<group>"; };
 		D23620DF1B8B3094006D293D /* BPTask.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BPTask.h; sourceTree = "<group>"; };
 		D23620E01B8B3094006D293D /* BPTask.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BPTask.m; sourceTree = "<group>"; };
@@ -363,6 +414,8 @@
 				150AEC4B1B3F999A00163767 /* BPUpdateViewController.m */,
 				15EC1B0A25CEE4C200C93861 /* BPMainWindowController.h */,
 				15EC1B0B25CEE4C200C93861 /* BPMainWindowController.m */,
+				222DC894284CDF900094E825 /* BPCasksDataSource.h */,
+				222DC89D284CE05B0094E825 /* BPCasksDataSource.m */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -436,6 +489,9 @@
 		1FE4FE49148E4CDD008EDE8B = {
 			isa = PBXGroup;
 			children = (
+				228C519D284CD322004E87EA /* PXSourceList */,
+				228C5183284CD267004E87EA /* PXSourceList.xcodeproj */,
+				228C5190284CD26D004E87EA /* PXSourceList.xcodeproj */,
 				1FE4FE5E148E4CDD008EDE8B /* Cakebrew */,
 				D261C9C11B852FA300409803 /* CakebrewTests */,
 				1FE4FE57148E4CDD008EDE8B /* Frameworks */,
@@ -518,6 +574,26 @@
 				1529086A1927C05B00206767 /* .travis.yml */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		228C5184284CD267004E87EA /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				228C518B284CD267004E87EA /* PXSourceList.app */,
+				228C518D284CD267004E87EA /* ViewBasedSourceList.app */,
+				228C518F284CD267004E87EA /* PXSourceList.framework */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		228C5191284CD26D004E87EA /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				228C5198284CD26D004E87EA /* PXSourceList.app */,
+				228C519A284CD26D004E87EA /* ViewBasedSourceList.app */,
+				228C519C284CD26D004E87EA /* PXSourceList.framework */,
+			);
+			name = Products;
 			sourceTree = "<group>";
 		};
 		D261C9C11B852FA300409803 /* CakebrewTests */ = {
@@ -607,7 +683,7 @@
 				ORGANIZATIONNAME = "Bruno Philipe";
 				TargetAttributes = {
 					1FE4FE53148E4CDD008EDE8B = {
-						DevelopmentTeam = R85D3K8ATT;
+						DevelopmentTeam = NCC257H8F7;
 						ProvisioningStyle = Automatic;
 					};
 					D261C9BF1B852FA300409803 = {
@@ -631,6 +707,16 @@
 			mainGroup = 1FE4FE49148E4CDD008EDE8B;
 			productRefGroup = 1FE4FE55148E4CDD008EDE8B /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = 228C5191284CD26D004E87EA /* Products */;
+					ProjectRef = 228C5190284CD26D004E87EA /* PXSourceList.xcodeproj */;
+				},
+				{
+					ProductGroup = 228C5184284CD267004E87EA /* Products */;
+					ProjectRef = 228C5183284CD267004E87EA /* PXSourceList.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				1FE4FE53148E4CDD008EDE8B /* Cakebrew */,
@@ -638,6 +724,51 @@
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		228C518B284CD267004E87EA /* PXSourceList.app */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.application;
+			path = PXSourceList.app;
+			remoteRef = 228C518A284CD267004E87EA /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		228C518D284CD267004E87EA /* ViewBasedSourceList.app */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.application;
+			path = ViewBasedSourceList.app;
+			remoteRef = 228C518C284CD267004E87EA /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		228C518F284CD267004E87EA /* PXSourceList.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = PXSourceList.framework;
+			remoteRef = 228C518E284CD267004E87EA /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		228C5198284CD26D004E87EA /* PXSourceList.app */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.application;
+			path = PXSourceList.app;
+			remoteRef = 228C5197284CD26D004E87EA /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		228C519A284CD26D004E87EA /* ViewBasedSourceList.app */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.application;
+			path = ViewBasedSourceList.app;
+			remoteRef = 228C5199284CD26D004E87EA /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		228C519C284CD26D004E87EA /* PXSourceList.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = PXSourceList.framework;
+			remoteRef = 228C519B284CD26D004E87EA /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		1FE4FE52148E4CDD008EDE8B /* Resources */ = {
@@ -716,6 +847,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				222DC89E284CE05B0094E825 /* BPCasksDataSource.m in Sources */,
 				15BBA18E1BD031C9002C0127 /* BPBackgroundView.m in Sources */,
 				15D28A121AE1BD27005C8A3E /* BPTimedDispatch.m in Sources */,
 				D2A3A82F1B8C9F5200D05469 /* BPUtilities.m in Sources */,
@@ -1047,8 +1179,8 @@
 				CODE_SIGN_IDENTITY = "Mac Developer";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 594;
-				DEVELOPMENT_TEAM = R85D3K8ATT;
+				CURRENT_PROJECT_VERSION = 595;
+				DEVELOPMENT_TEAM = NCC257H8F7;
 				ENABLE_HARDENED_RUNTIME = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1059,6 +1191,8 @@
 				GCC_PREPROCESSOR_DEFINITIONS = "$(inherited)";
 				INFOPLIST_FILE = "Cakebrew/Cakebrew-Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 11.3;
+				MARKETING_VERSION = 1.4;
 				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.brunophilipe.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = Cakebrew;
@@ -1078,8 +1212,8 @@
 				CODE_SIGN_IDENTITY = "Mac Developer";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 594;
-				DEVELOPMENT_TEAM = R85D3K8ATT;
+				CURRENT_PROJECT_VERSION = 595;
+				DEVELOPMENT_TEAM = NCC257H8F7;
 				ENABLE_HARDENED_RUNTIME = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1089,6 +1223,8 @@
 				GCC_PREFIX_HEADER = "Cakebrew/Cakebrew-Prefix.pch";
 				INFOPLIST_FILE = "Cakebrew/Cakebrew-Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 11.3;
+				MARKETING_VERSION = 1.4;
 				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.brunophilipe.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = Cakebrew;
