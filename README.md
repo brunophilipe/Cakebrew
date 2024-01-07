@@ -1,6 +1,6 @@
 # Cakebrew
 
-The Homebrew GUI App for OS X
+The Homebrew GUI App for macOS
 
 [![Build Status](https://travis-ci.org/brunophilipe/Cakebrew.svg?branch=dev)](https://travis-ci.org/brunophilipe/Cakebrew)
 
